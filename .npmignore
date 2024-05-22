@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+package-lock.json
+
+# build
+tsconfig.json
+webpack.config.ts
+
+# documentation
+/docs

@@ -1,0 +1,72 @@
+{
+    "name": "@dvmstudios/reactylon",
+    "version": "0.0.1",
+    "description": "Framework to work on Babylon.js with React",
+    "main": "./build/index.js",
+    "types": "./build/index.d.ts",
+    "repository": {
+        "url": ""
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "generate-jsx-elements": "ts-node scripts/generate-jsx-elements.ts",
+        "init": "npm ci",
+        "prepare": "husky",
+        "start": "webpack serve",
+        "build": "webpack --env environment=PROD",
+        "release": "commit-and-tag-version && git push --follow-tags && bash scripts/publish.sh"
+    },
+    "keywords": [],
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "tsc-files --noEmit",
+            "prettier --write"
+        ]
+    },
+    "commit-and-tag-version": {
+        "writerOpts": {
+            "commitsSort": false
+        }
+    },
+    "dependencies": {
+        "acorn": "^8.11.3",
+        "lodash.isequal": "^4.5.0",
+        "react-reconciler": "^0.29.2"
+    },
+    "peerDependencies": {
+        "@babylonjs/core": "^7.5.0",
+        "@babylonjs/inspector": "^7.5.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/lodash.isequal": "^4.5.8",
+        "@babel/core": "^7.17.3",
+        "@babel/preset-env": "^7.24.3",
+        "@babel/preset-typescript": "^7.24.1",
+        "@babel/register": "^7.23.7",
+        "@types/acorn": "^6.0.0",
+        "@types/node": "^20.11.30",
+        "@types/react": "^18.0.23",
+        "@types/react-dom": "^18.0.7",
+        "@types/react-reconciler": "^0.28.8",
+        "@types/webpack": "^5.28.5",
+        "clean-webpack-plugin": "^4.0.0",
+        "ts-loader": "^9.4.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.3",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.0.4",
+        "commit-and-tag-version": "^12.2.0",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2",
+        "prettier": "3.2.5"
+    },
+    "engines": {
+        "node": "20.11.1",
+        "npm": "10.2.4"
+    },
+    "author": "Simone Dev",
+    "license": "ISC"
+}
