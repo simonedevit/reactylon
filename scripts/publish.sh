@@ -4,6 +4,9 @@ sed -e 's#"main": "./build/index.js"#"main": "./index.js"#' -e 's#"types": "./bu
 # copy CHANGELOG.md file
 cp CHANGELOG.md ./build/CHANGELOG.md
 
+# copy CHANGELOG.md file
+cp .npmrc ./build/.npmrc
+
 # copy the npmignore file to exclude stuff from publishing
 cp .npmignore ./build/.npmignore
 
