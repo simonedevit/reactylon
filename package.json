@@ -5,8 +5,9 @@
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
     "repository": {
-        "url": ""
-    },
+        "type": "git",
+        "url": "git+https://dvmstudios@dev.azure.com/dvmstudios/webxr/_git/reactylon"
+      },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "generate-jsx-elements": "ts-node scripts/generate-jsx-elements.ts",
