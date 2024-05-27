@@ -22,4 +22,5 @@ type WithoutPrivateAttributes<T> = {
 export type BabylonProps<Props> = Partial<WithoutPrivateAttributes<Pick<Props, WritableKeys<Props>>>> & {
     name: string;
     scene?: Scene;
+    children?: React.ReactNode;
 };

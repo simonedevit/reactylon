@@ -50,7 +50,7 @@ export const Scene: React.FC<SceneProps> = ({ sceneOptions, onSceneReady, isReac
         rootContainer.current = {
             scene: scene.current,
             rootInstance: {
-                children: [],
+                elements: [],
                 // customProps: {},
                 hostInstance: scene.current,
                 metadata: {

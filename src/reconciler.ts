@@ -10,14 +10,23 @@ import isEqual from 'lodash.isequal';
 //https://github.com/facebook/react/tree/main/packages/react-reconciler
 //https://github.com/facebook/react/blob/main/packages/react-art/src/ReactFiberConfigART.js
 
+// elements = Babylon children, "children" already taken by React (should i call babylonChildren)
+
 function addChild(parentInstance, child) {
     // Append the child to the parent element
     if (parentInstance) {
         if (!child) {
             console.error('undefined child', parentInstance)
         } else {
-            // doubly linking child to parent
-            parentInstance.children.push(child);
+            if (!parentInstance.elements){
+                parentInstance.elements = []
+            }
+            parentInstance.elements.push(child);
+            if (child instanceof Babylon.Material){
+                //TODO: handle multi material
+                parentInstance.material = child;
+            }
+            // FIXME: should i add the parent also?
             //child.parent = parentInstance;
         }
     }
@@ -109,7 +118,8 @@ const reconciler = ReactReconciler({
     */
     appendInitialChild(parentInstance, child) {
         // Log information about appending initial child to parent
-        console.log("Appending initial child to parent:", child);
+        console.log("Appending initial child to parent - partentInstance", parentInstance);
+        console.log("Appending initial child to parent - child", child);
         addChild(parentInstance, child);
     },
 
@@ -229,31 +239,37 @@ const reconciler = ReactReconciler({
     */
     appendChildToContainer(container, child) {
         // Log information about appending child to container
-        console.log("Appending child to container:", child);
-        /* if (child) {
+        console.log("Appending child to container:", child.name);
+        if (child) {
             if (container.rootInstance) {
-              // doubly link child to root
-              container.rootInstance.children.push(child)
-              // FIXME: comment to work, but why?
+              container.rootInstance.elements.push(child)
+              // FIXME: should i add the parent also?
               // child.parent = container.rootInstance
             } else {
               console.log('addend child with no root (createPortal only?)')
               addChild(container.rootInstance as unknown as CreatedInstance<any>, child)
             }
           }    
-          */
     },
 
     /*
     * This method should mutate the parentInstance and place the child before beforeChild in the list of its children.For example, in the DOM this would translate to a parentInstance.insertBefore(child, beforeChild) call.
     * Note that React uses this method both for insertions and for reordering nodes.Similar to DOM, it is expected that you can call insertBefore to reposition an existing child.Do not mutate any other parts of the tree from it.
     */
-    // insertBefore(parentInstance, child, beforeChild) { },
+    insertBefore(parentInstance, child, beforeChild) { 
+        console.log('insertBefore - parentInstance', parentInstance);
+        const index = parentInstance.elements.findIndex(item => item.uniqueId === beforeChild.uniqueId);
+        parentInstance.elements.splice(index, 0, child);
+    },
 
     /*
     * Same as insertBefore, but for when a node is attached to the root container.This is useful if attaching to the root has a slightly different implementation, or if the root container nodes are of a different type than the rest of the tree.
     */
-    // insertInContainerBefore(container, child, beforeChild) { },
+    insertInContainerBefore(container, child, beforeChild) {
+        console.log('insertInContainerBefore - container', container);
+        const index = container.rootInstance.elements.findIndex(item => item.uniqueId === beforeChild.uniqueId);
+        container.rootInstance.elements.splice(index, 0, child);
+     },
 
     /*
     * This method should mutate the parentInstance to remove the child from the list of its children.
@@ -262,7 +278,9 @@ const reconciler = ReactReconciler({
     removeChild(parentInstance, child) {
         console.log('removeChild - parentInstance', parentInstance);
         console.log('removeChild - child', child);
-        child.dispose();
+        const index = parentInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
+        parentInstance.elements.splice(index, 1);
+        child.dispose(false, true);
     },
 
     /*
@@ -271,7 +289,9 @@ const reconciler = ReactReconciler({
     removeChildFromContainer(container, child) {
         console.log('removeChildFromContainer - container', container);
         console.log('removeChildFromContainer - child', child);
-        child.dispose();
+        const index = container.rootInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
+        container.rootInstance.elements.splice(index, 1);
+        child.dispose(false, true);
     },
 
     /*
@@ -311,7 +331,7 @@ const reconciler = ReactReconciler({
         //FIXME: oldProps always !== newProps so how can i optimize equality process? Immutable data structure? Shallow comparison on what?
         const areSameProps = isEqual(oldProps, newProps);
         if (areSameProps) {
-            console.log('prepareUpdate - no changes')
+            console.log(`prepareUpdate ${type} - no changes`)
             // no need to update
             return null;
         }
@@ -328,6 +348,7 @@ const reconciler = ReactReconciler({
     
     */
     commitUpdate(instance, updatePayload, type, prevProps, nextProps, internalHandle) {
+        console.log(`commitUpdate ${type}`);
         Object.entries(updatePayload).forEach(([key, value]) => {
             instance[key] = value;
         })
