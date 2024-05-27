@@ -1,13 +1,13 @@
 {
     "name": "@dvmstudios/reactylon",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Framework to work on Babylon.js with React",
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
     "repository": {
         "type": "git",
         "url": "git+https://dvmstudios@dev.azure.com/dvmstudios/webxr/_git/reactylon"
-      },
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "generate-jsx-elements": "ts-node scripts/generate-jsx-elements.ts",
