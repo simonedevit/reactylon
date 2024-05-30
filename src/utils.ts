@@ -1,3 +1,4 @@
+import { Vector3 } from '@babylonjs/core';
 import { parse } from 'acorn';
 
 export function capitalizeFirstLetter(str: string): string {
@@ -5,29 +6,28 @@ export function capitalizeFirstLetter(str: string): string {
 }
 
 // FIXME: test with other parameters
-export const getClassConstructorParams = <T>(cls: { new(...args: any[]): T }) => {
+export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }) => {
     const ast = parse(cls.toString(), {
-        ecmaVersion: 2020
-    })
-    //@ts-ignore
-    return ast.body[0].body.body
+        ecmaVersion: 2020,
+    });
+    return (
         //@ts-ignore
-        .find(x => {
-            return x.type === 'MethodDefinition'
-                && x.kind === 'constructor'
-        })
-        .value
-        //@ts-ignore
-        .params.map(x => x.name)
-}
-
+        ast.body[0].body.body
+            //@ts-ignore
+            .find(x => {
+                return x.type === 'MethodDefinition' && x.kind === 'constructor';
+            })
+            .value //@ts-ignore
+            .params.map(x => x.name)
+    );
+};
 
 //FIXME: add strong typing
 export const getFunctionParams = (fn: (...args: any[]) => void) => {
     //@ts-ignore
     const ast = parse(fn, {
         ecmaVersion: 2020,
-    })
+    });
 
     function traverse(node: any) {
         if (node.type === 'FunctionDeclaration' || node.type === 'FunctionExpression') {
@@ -63,7 +63,7 @@ export const getFunctionParams = (fn: (...args: any[]) => void) => {
     // Recursively traverse the AST
     const parameters = traverse(ast.body[0]);
     return (parameters || []).filter((param: any) => param !== null); // Remove null values
-}
+};
 
 // Helper functions for destructuring and rest parameters
 function getDestructuredParameterName(pattern: any) {
@@ -80,4 +80,11 @@ function getRestParameterName(argument: any) {
         return argument.name;
     }
     return null; // Unknown rest parameter type
+}
+
+export function isEqualCustomizer(objValue: unknown, objOther: unknown) {
+    if (objValue instanceof Vector3 && objOther instanceof Vector3) {
+        return objValue.equals(objOther);
+    }
+    return undefined;
 }

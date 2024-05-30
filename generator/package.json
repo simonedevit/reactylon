@@ -1,0 +1,17 @@
+{
+    "name": "@dvmstudios/reactylon-generator",
+    "private": true,
+    "type": "module",    
+    "description": "Internal tool to auto-generate JSX elements",
+    "scripts": {
+        "generate": "node --loader ts-node/esm index.ts",
+        "generate:debug": "node --inspect-brk --loader ts-node/esm index.ts"
+    },
+    "keywords": [],
+    "engines": {
+        "node": "20.11.1",
+        "npm": "10.2.4"
+    },
+    "author": "Simone Dev",
+    "license": "ISC"
+}

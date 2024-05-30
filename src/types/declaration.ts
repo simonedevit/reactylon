@@ -1,35 +1,25 @@
-
 //@ts-nocheck
-import { type BabylonProps } from './types';
+import { type BabylonProps, type ExcludeReadonlyAndPrivate } from './types';
 import { AbstractActionManager } from '@babylonjs/core/Actions/abstractActionManager';
 import { Action } from '@babylonjs/core/Actions/action';
 import { ActionEvent } from '@babylonjs/core/Actions/actionEvent';
 import { ActionManager } from '@babylonjs/core/Actions/actionManager';
 import { Condition } from '@babylonjs/core/Actions/condition';
-import { DirectActions } from '@babylonjs/core/Actions/directActions';
-import { DirectAudioActions } from '@babylonjs/core/Actions/directAudioActions';
 import { InterpolateValueAction } from '@babylonjs/core/Actions/interpolateValueAction';
 import { Animatable } from '@babylonjs/core/Animations/animatable';
-import { Animatable } from '@babylonjs/core/Animations/animatable.interface';
 import { Animation } from '@babylonjs/core/Animations/animation';
 import { AnimationEvent } from '@babylonjs/core/Animations/animationEvent';
 import { AnimationGroup } from '@babylonjs/core/Animations/animationGroup';
 import { AnimationGroupMask } from '@babylonjs/core/Animations/animationGroupMask';
-import { AnimationKey } from '@babylonjs/core/Animations/animationKey';
 import { AnimationPropertiesOverride } from '@babylonjs/core/Animations/animationPropertiesOverride';
 import { AnimationRange } from '@babylonjs/core/Animations/animationRange';
-import { Easing } from '@babylonjs/core/Animations/easing';
 import { PathCursor } from '@babylonjs/core/Animations/pathCursor';
 import { RuntimeAnimation } from '@babylonjs/core/Animations/runtimeAnimation';
-import { IAudioEngine } from '@babylonjs/core/Audio/Interfaces/IAudioEngine';
-import { IAudioEngineOptions } from '@babylonjs/core/Audio/Interfaces/IAudioEngineOptions';
-import { ISoundOptions } from '@babylonjs/core/Audio/Interfaces/ISoundOptions';
 import { Analyser } from '@babylonjs/core/Audio/analyser';
 import { AudioEngine } from '@babylonjs/core/Audio/audioEngine';
 import { AudioSceneComponent } from '@babylonjs/core/Audio/audioSceneComponent';
 import { Sound } from '@babylonjs/core/Audio/sound';
 import { SoundTrack } from '@babylonjs/core/Audio/soundTrack';
-import { Weightedsound } from '@babylonjs/core/Audio/weightedsound';
 import { BakedVertexAnimationManager } from '@babylonjs/core/BakedVertexAnimation/bakedVertexAnimationManager';
 import { VertexAnimationBaker } from '@babylonjs/core/BakedVertexAnimation/vertexAnimationBaker';
 import { AutoRotationBehavior } from '@babylonjs/core/Behaviors/Cameras/autoRotationBehavior';
@@ -44,12 +34,10 @@ import { MultiPointerScaleBehavior } from '@babylonjs/core/Behaviors/Meshes/mult
 import { PointerDragBehavior } from '@babylonjs/core/Behaviors/Meshes/pointerDragBehavior';
 import { SixDofDragBehavior } from '@babylonjs/core/Behaviors/Meshes/sixDofDragBehavior';
 import { SurfaceMagnetismBehavior } from '@babylonjs/core/Behaviors/Meshes/surfaceMagnetismBehavior';
-import { Behavior } from '@babylonjs/core/Behaviors/behavior';
 import { Bone } from '@babylonjs/core/Bones/bone';
 import { BoneIKController } from '@babylonjs/core/Bones/boneIKController';
 import { BoneLookController } from '@babylonjs/core/Bones/boneLookController';
 import { Skeleton } from '@babylonjs/core/Bones/skeleton';
-import { Buffer } from '@babylonjs/core/Buffers/buffer.align';
 import { Buffer } from '@babylonjs/core/Buffers/buffer';
 import { DataBuffer } from '@babylonjs/core/Buffers/dataBuffer';
 import { StorageBuffer } from '@babylonjs/core/Buffers/storageBuffer';
@@ -71,10 +59,6 @@ import { FreeCameraKeyboardMoveInput } from '@babylonjs/core/Cameras/Inputs/free
 import { FreeCameraMouseInput } from '@babylonjs/core/Cameras/Inputs/freeCameraMouseInput';
 import { FreeCameraMouseWheelInput } from '@babylonjs/core/Cameras/Inputs/freeCameraMouseWheelInput';
 import { FreeCameraTouchInput } from '@babylonjs/core/Cameras/Inputs/freeCameraTouchInput';
-import { FreeCameraVirtualJoystickInput } from '@babylonjs/core/Cameras/Inputs/freeCameraVirtualJoystickInput';
-import { StereoscopicAnaglyphRigMode } from '@babylonjs/core/Cameras/RigModes/stereoscopicAnaglyphRigMode';
-import { StereoscopicRigMode } from '@babylonjs/core/Cameras/RigModes/stereoscopicRigMode';
-import { VrRigMode } from '@babylonjs/core/Cameras/RigModes/vrRigMode';
 import { AnaglyphArcRotateCamera } from '@babylonjs/core/Cameras/Stereoscopic/anaglyphArcRotateCamera';
 import { AnaglyphFreeCamera } from '@babylonjs/core/Cameras/Stereoscopic/anaglyphFreeCamera';
 import { AnaglyphGamepadCamera } from '@babylonjs/core/Cameras/Stereoscopic/anaglyphGamepadCamera';
@@ -84,11 +68,6 @@ import { StereoscopicFreeCamera } from '@babylonjs/core/Cameras/Stereoscopic/ste
 import { StereoscopicGamepadCamera } from '@babylonjs/core/Cameras/Stereoscopic/stereoscopicGamepadCamera';
 import { StereoscopicScreenUniversalCamera } from '@babylonjs/core/Cameras/Stereoscopic/stereoscopicScreenUniversalCamera';
 import { StereoscopicUniversalCamera } from '@babylonjs/core/Cameras/Stereoscopic/stereoscopicUniversalCamera';
-import { VrCameraMetrics } from '@babylonjs/core/Cameras/VR/vrCameraMetrics';
-import { VrDeviceOrientationArcRotateCamera } from '@babylonjs/core/Cameras/VR/vrDeviceOrientationArcRotateCamera';
-import { VrDeviceOrientationFreeCamera } from '@babylonjs/core/Cameras/VR/vrDeviceOrientationFreeCamera';
-import { VrDeviceOrientationGamepadCamera } from '@babylonjs/core/Cameras/VR/vrDeviceOrientationGamepadCamera';
-import { VrExperienceHelper } from '@babylonjs/core/Cameras/VR/vrExperienceHelper';
 import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera';
 import { ArcRotateCameraInputsManager } from '@babylonjs/core/Cameras/arcRotateCameraInputsManager';
 import { Camera } from '@babylonjs/core/Cameras/camera';
@@ -106,13 +85,8 @@ import { TouchCamera } from '@babylonjs/core/Cameras/touchCamera';
 import { UniversalCamera } from '@babylonjs/core/Cameras/universalCamera';
 import { VirtualJoysticksCamera } from '@babylonjs/core/Cameras/virtualJoysticksCamera';
 import { Collider } from '@babylonjs/core/Collisions/collider';
-import { CollisionCoordinator } from '@babylonjs/core/Collisions/collisionCoordinator';
 import { IntersectionInfo } from '@babylonjs/core/Collisions/intersectionInfo';
-import { MeshCollisionData } from '@babylonjs/core/Collisions/meshCollisionData';
 import { PickingInfo } from '@babylonjs/core/Collisions/pickingInfo';
-import { CompatibilityOptions } from '@babylonjs/core/Compat/compatibilityOptions';
-import { IComputeContext } from '@babylonjs/core/Compute/IComputeContext';
-import { IComputePipelineContext } from '@babylonjs/core/Compute/IComputePipelineContext';
 import { ComputeEffect } from '@babylonjs/core/Compute/computeEffect';
 import { ComputeShader } from '@babylonjs/core/Compute/computeShader';
 import { Octree } from '@babylonjs/core/Culling/Octrees/octree';
@@ -122,7 +96,6 @@ import { BoundingBox } from '@babylonjs/core/Culling/boundingBox';
 import { BoundingInfo } from '@babylonjs/core/Culling/boundingInfo';
 import { BoundingSphere } from '@babylonjs/core/Culling/boundingSphere';
 import { Ray } from '@babylonjs/core/Culling/ray';
-import { ISkeletonViewer } from '@babylonjs/core/Debug/ISkeletonViewer';
 import { AxesViewer } from '@babylonjs/core/Debug/axesViewer';
 import { BoneAxesViewer } from '@babylonjs/core/Debug/boneAxesViewer';
 import { DebugLayer } from '@babylonjs/core/Debug/debugLayer';
@@ -130,138 +103,31 @@ import { DirectionalLightFrustumViewer } from '@babylonjs/core/Debug/directional
 import { PhysicsViewer } from '@babylonjs/core/Debug/physicsViewer';
 import { RayHelper } from '@babylonjs/core/Debug/rayHelper';
 import { SkeletonViewer } from '@babylonjs/core/Debug/skeletonViewer';
-import { NodeDecorator } from '@babylonjs/core/Decorators/nodeDecorator';
-import { DeviceEnums } from '@babylonjs/core/DeviceInput/InputDevices/deviceEnums';
 import { DeviceSource } from '@babylonjs/core/DeviceInput/InputDevices/deviceSource';
 import { DeviceSourceManager } from '@babylonjs/core/DeviceInput/InputDevices/deviceSourceManager';
-import { DeviceTypes } from '@babylonjs/core/DeviceInput/InputDevices/deviceTypes';
-import { EventFactory } from '@babylonjs/core/DeviceInput/eventFactory';
-import { InputInterfaces } from '@babylonjs/core/DeviceInput/inputInterfaces';
 import { InternalDeviceSourceManager } from '@babylonjs/core/DeviceInput/internalDeviceSourceManager';
 import { NativeDeviceInputSystem } from '@babylonjs/core/DeviceInput/nativeDeviceInputSystem';
 import { WebDeviceInputSystem } from '@babylonjs/core/DeviceInput/webDeviceInputSystem';
-import { AbstractEngine } from '@babylonjs/core/Engines/AbstractEngine/abstractEngine.alpha';
-import { AbstractEngine } from '@babylonjs/core/Engines/AbstractEngine/abstractEngine.cubeTexture';
-import { AbstractEngine } from '@babylonjs/core/Engines/AbstractEngine/abstractEngine.dom';
-import { AbstractEngine } from '@babylonjs/core/Engines/AbstractEngine/abstractEngine.loadingScreen';
-import { AbstractEngine } from '@babylonjs/core/Engines/AbstractEngine/abstractEngine.query';
-import { AbstractEngine } from '@babylonjs/core/Engines/AbstractEngine/abstractEngine.renderPass';
-import { AbstractEngine } from '@babylonjs/core/Engines/AbstractEngine/abstractEngine.states';
-import { AbstractEngine } from '@babylonjs/core/Engines/AbstractEngine/abstractEngine.texture';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.alpha';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.computeShader';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.cubeTexture';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.debugging';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.dynamicBuffer';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.dynamicTexture';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.multiRender';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.multiview';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.query';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.rawTexture';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.readTexture';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.renderTarget';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.renderTargetCube';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.textureSelector';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.transformFeedback';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.uniformBuffer';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.videoTexture';
-import { Engine } from '@babylonjs/core/Engines/Extensions/engine.views';
-import { ICanvas } from '@babylonjs/core/Engines/ICanvas';
-import { IDrawContext } from '@babylonjs/core/Engines/IDrawContext';
-import { IMaterialContext } from '@babylonjs/core/Engines/IMaterialContext';
-import { IPipelineContext } from '@babylonjs/core/Engines/IPipelineContext';
 import { NativeDataStream } from '@babylonjs/core/Engines/Native/nativeDataStream';
 import { NativeHardwareTexture } from '@babylonjs/core/Engines/Native/nativeHardwareTexture';
-import { NativeHelpers } from '@babylonjs/core/Engines/Native/nativeHelpers';
-import { NativeInterfaces } from '@babylonjs/core/Engines/Native/nativeInterfaces';
 import { NativePipelineContext } from '@babylonjs/core/Engines/Native/nativePipelineContext';
 import { NativeRenderTargetWrapper } from '@babylonjs/core/Engines/Native/nativeRenderTargetWrapper';
+import { NativeShaderProcessingContext } from '@babylonjs/core/Engines/Native/nativeShaderProcessingContext';
 import { ValidatedNativeDataStream } from '@babylonjs/core/Engines/Native/validatedNativeDataStream';
-import { ShaderDefineAndOperator } from '@babylonjs/core/Engines/Processors/Expressions/Operators/shaderDefineAndOperator';
 import { ShaderDefineArithmeticOperator } from '@babylonjs/core/Engines/Processors/Expressions/Operators/shaderDefineArithmeticOperator';
 import { ShaderDefineIsDefinedOperator } from '@babylonjs/core/Engines/Processors/Expressions/Operators/shaderDefineIsDefinedOperator';
-import { ShaderDefineOrOperator } from '@babylonjs/core/Engines/Processors/Expressions/Operators/shaderDefineOrOperator';
-import { ShaderDefineExpression } from '@babylonjs/core/Engines/Processors/Expressions/shaderDefineExpression';
-import { IShaderProcessor } from '@babylonjs/core/Engines/Processors/iShaderProcessor';
-import { ShaderCodeConditionNode } from '@babylonjs/core/Engines/Processors/shaderCodeConditionNode';
 import { ShaderCodeCursor } from '@babylonjs/core/Engines/Processors/shaderCodeCursor';
 import { ShaderCodeInliner } from '@babylonjs/core/Engines/Processors/shaderCodeInliner';
 import { ShaderCodeNode } from '@babylonjs/core/Engines/Processors/shaderCodeNode';
-import { ShaderCodeTestNode } from '@babylonjs/core/Engines/Processors/shaderCodeTestNode';
-import { ShaderProcessingOptions } from '@babylonjs/core/Engines/Processors/shaderProcessingOptions';
-import { ShaderProcessor } from '@babylonjs/core/Engines/Processors/shaderProcessor';
-import { WebGL2ShaderProcessors } from '@babylonjs/core/Engines/WebGL/webGL2ShaderProcessors';
 import { WebGLHardwareTexture } from '@babylonjs/core/Engines/WebGL/webGLHardwareTexture';
 import { WebGLPipelineContext } from '@babylonjs/core/Engines/WebGL/webGLPipelineContext';
 import { WebGLRenderTargetWrapper } from '@babylonjs/core/Engines/WebGL/webGLRenderTargetWrapper';
-import { WebGLShaderProcessors } from '@babylonjs/core/Engines/WebGL/webGLShaderProcessors';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.alpha';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.computeShader';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.cubeTexture';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.debugging';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.dynamicTexture';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.multiRender';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.query';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.rawTexture';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.readTexture';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.renderTarget';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.renderTargetCube';
-import { Engine } from '@babylonjs/core/Engines/WebGPU/Extensions/engine.videoTexture';
-import { WebgpuBufferManager } from '@babylonjs/core/Engines/WebGPU/webgpuBufferManager';
-import { WebgpuBundleList } from '@babylonjs/core/Engines/WebGPU/webgpuBundleList';
-import { WebgpuCacheBindGroups } from '@babylonjs/core/Engines/WebGPU/webgpuCacheBindGroups';
-import { WebgpuCacheRenderPipeline } from '@babylonjs/core/Engines/WebGPU/webgpuCacheRenderPipeline';
-import { WebgpuCacheRenderPipelineString } from '@babylonjs/core/Engines/WebGPU/webgpuCacheRenderPipelineString';
-import { WebgpuCacheRenderPipelineTree } from '@babylonjs/core/Engines/WebGPU/webgpuCacheRenderPipelineTree';
-import { WebgpuCacheSampler } from '@babylonjs/core/Engines/WebGPU/webgpuCacheSampler';
-import { WebgpuClearQuad } from '@babylonjs/core/Engines/WebGPU/webgpuClearQuad';
-import { WebgpuComputeContext } from '@babylonjs/core/Engines/WebGPU/webgpuComputeContext';
-import { WebgpuComputePipelineContext } from '@babylonjs/core/Engines/WebGPU/webgpuComputePipelineContext';
-import { WebgpuConstants } from '@babylonjs/core/Engines/WebGPU/webgpuConstants';
-import { WebgpuDepthCullingState } from '@babylonjs/core/Engines/WebGPU/webgpuDepthCullingState';
-import { WebgpuDrawContext } from '@babylonjs/core/Engines/WebGPU/webgpuDrawContext';
-import { WebgpuExternalTexture } from '@babylonjs/core/Engines/WebGPU/webgpuExternalTexture';
-import { WebgpuHardwareTexture } from '@babylonjs/core/Engines/WebGPU/webgpuHardwareTexture';
-import { WebgpuMaterialContext } from '@babylonjs/core/Engines/WebGPU/webgpuMaterialContext';
-import { WebgpuOcclusionQuery } from '@babylonjs/core/Engines/WebGPU/webgpuOcclusionQuery';
-import { WebgpuPerfCounter } from '@babylonjs/core/Engines/WebGPU/webgpuPerfCounter';
-import { WebgpuPipelineContext } from '@babylonjs/core/Engines/WebGPU/webgpuPipelineContext';
-import { WebgpuQuerySet } from '@babylonjs/core/Engines/WebGPU/webgpuQuerySet';
-import { WebgpuRenderTargetWrapper } from '@babylonjs/core/Engines/WebGPU/webgpuRenderTargetWrapper';
-import { WebgpuShaderProcessingContext } from '@babylonjs/core/Engines/WebGPU/webgpuShaderProcessingContext';
-import { WebgpuShaderProcessor } from '@babylonjs/core/Engines/WebGPU/webgpuShaderProcessor';
-import { WebgpuShaderProcessorsGLSL } from '@babylonjs/core/Engines/WebGPU/webgpuShaderProcessorsGLSL';
-import { WebgpuShaderProcessorsWGSL } from '@babylonjs/core/Engines/WebGPU/webgpuShaderProcessorsWGSL';
-import { WebgpuSnapshotRendering } from '@babylonjs/core/Engines/WebGPU/webgpuSnapshotRendering';
-import { WebgpuStencilStateComposer } from '@babylonjs/core/Engines/WebGPU/webgpuStencilStateComposer';
-import { WebgpuTextureHelper } from '@babylonjs/core/Engines/WebGPU/webgpuTextureHelper';
-import { WebgpuTextureManager } from '@babylonjs/core/Engines/WebGPU/webgpuTextureManager';
-import { WebgpuTimestampQuery } from '@babylonjs/core/Engines/WebGPU/webgpuTimestampQuery';
-import { WebgpuTintWASM } from '@babylonjs/core/Engines/WebGPU/webgpuTintWASM';
 import { AbstractEngine } from '@babylonjs/core/Engines/abstractEngine';
-import { AbstractEngine } from '@babylonjs/core/Engines/abstractEngine.functions';
-import { Constants } from '@babylonjs/core/Engines/constants';
-import { Engine } from '@babylonjs/core/Engines/engine.common';
 import { Engine } from '@babylonjs/core/Engines/engine';
-import { EngineCapabilities } from '@babylonjs/core/Engines/engineCapabilities';
-import { EngineFactory } from '@babylonjs/core/Engines/engineFactory';
-import { EngineFeatures } from '@babylonjs/core/Engines/engineFeatures';
-import { EngineStore } from '@babylonjs/core/Engines/engineStore';
-import { InstancingAttributeInfo } from '@babylonjs/core/Engines/instancingAttributeInfo';
 import { NativeEngine } from '@babylonjs/core/Engines/nativeEngine';
 import { NullEngine } from '@babylonjs/core/Engines/nullEngine';
-import { PerformanceConfigurator } from '@babylonjs/core/Engines/performanceConfigurator';
 import { RenderTargetWrapper } from '@babylonjs/core/Engines/renderTargetWrapper';
-import { ShaderStore } from '@babylonjs/core/Engines/shaderStore';
 import { ThinEngine } from '@babylonjs/core/Engines/thinEngine';
-import { ThinEngine } from '@babylonjs/core/Engines/thinEngine.functions';
-import { WebgpuEngine } from '@babylonjs/core/Engines/webgpuEngine';
-import { ClipboardEvents } from '@babylonjs/core/Events/clipboardEvents';
-import { DeviceInputEvents } from '@babylonjs/core/Events/deviceInputEvents';
-import { KeyboardEvents } from '@babylonjs/core/Events/keyboardEvents';
-import { PointerEvents } from '@babylonjs/core/Events/pointerEvents';
-import { FlowGraphLogicBlocks } from '@babylonjs/core/FlowGraph/Blocks/Data/Logic/flowGraphLogicBlocks';
-import { FlowGraphMathBlocks } from '@babylonjs/core/FlowGraph/Blocks/Data/Math/flowGraphMathBlocks';
 import { FlowGraphBinaryOperationBlock } from '@babylonjs/core/FlowGraph/Blocks/Data/flowGraphBinaryOperationBlock';
 import { FlowGraphCachedOperationBlock } from '@babylonjs/core/FlowGraph/Blocks/Data/flowGraphCachedOperationBlock';
 import { FlowGraphConditionalDataBlock } from '@babylonjs/core/FlowGraph/Blocks/Data/flowGraphConditionalDataBlock';
@@ -274,8 +140,6 @@ import { FlowGraphTernaryOperationBlock } from '@babylonjs/core/FlowGraph/Blocks
 import { FlowGraphUnaryOperationBlock } from '@babylonjs/core/FlowGraph/Blocks/Data/flowGraphUnaryOperationBlock';
 import { FlowGraphMeshPickEventBlock } from '@babylonjs/core/FlowGraph/Blocks/Event/flowGraphMeshPickEventBlock';
 import { FlowGraphReceiveCustomEventBlock } from '@babylonjs/core/FlowGraph/Blocks/Event/flowGraphReceiveCustomEventBlock';
-import { FlowGraphSceneReadyEventBlock } from '@babylonjs/core/FlowGraph/Blocks/Event/flowGraphSceneReadyEventBlock';
-import { FlowGraphSceneTickEventBlock } from '@babylonjs/core/FlowGraph/Blocks/Event/flowGraphSceneTickEventBlock';
 import { FlowGraphPauseAnimationBlock } from '@babylonjs/core/FlowGraph/Blocks/Execution/Animation/flowGraphPauseAnimationBlock';
 import { FlowGraphPlayAnimationBlock } from '@babylonjs/core/FlowGraph/Blocks/Execution/Animation/flowGraphPlayAnimationBlock';
 import { FlowGraphStopAnimationBlock } from '@babylonjs/core/FlowGraph/Blocks/Execution/Animation/flowGraphStopAnimationBlock';
@@ -306,22 +170,13 @@ import { FlowGraphContext } from '@babylonjs/core/FlowGraph/flowGraphContext';
 import { FlowGraphContextLogger } from '@babylonjs/core/FlowGraph/flowGraphContextLogger';
 import { FlowGraphCoordinator } from '@babylonjs/core/FlowGraph/flowGraphCoordinator';
 import { FlowGraphDataConnection } from '@babylonjs/core/FlowGraph/flowGraphDataConnection';
-import { FlowGraphEventBlock } from '@babylonjs/core/FlowGraph/flowGraphEventBlock';
 import { FlowGraphExecutionBlock } from '@babylonjs/core/FlowGraph/flowGraphExecutionBlock';
 import { FlowGraphExecutionBlockWithOutSignal } from '@babylonjs/core/FlowGraph/flowGraphExecutionBlockWithOutSignal';
 import { FlowGraphInteger } from '@babylonjs/core/FlowGraph/flowGraphInteger';
 import { FlowGraphPathConverter } from '@babylonjs/core/FlowGraph/flowGraphPathConverter';
 import { FlowGraphPathConverterComponent } from '@babylonjs/core/FlowGraph/flowGraphPathConverterComponent';
-import { FlowGraphRichTypes } from '@babylonjs/core/FlowGraph/flowGraphRichTypes';
-import { FlowGraphSignalConnection } from '@babylonjs/core/FlowGraph/flowGraphSignalConnection';
-import { Serialization } from '@babylonjs/core/FlowGraph/serialization';
-import { TypeDefinitions } from '@babylonjs/core/FlowGraph/typeDefinitions';
-import { Utils } from '@babylonjs/core/FlowGraph/utils';
-import { DualShockGamepad } from '@babylonjs/core/Gamepads/dualShockGamepad';
 import { Gamepad } from '@babylonjs/core/Gamepads/gamepad';
 import { GamepadManager } from '@babylonjs/core/Gamepads/gamepadManager';
-import { GamepadSceneComponent } from '@babylonjs/core/Gamepads/gamepadSceneComponent';
-import { XboxGamepad } from '@babylonjs/core/Gamepads/xboxGamepad';
 import { AxisDragGizmo } from '@babylonjs/core/Gizmos/axisDragGizmo';
 import { AxisScaleGizmo } from '@babylonjs/core/Gizmos/axisScaleGizmo';
 import { BoundingBoxGizmo } from '@babylonjs/core/Gizmos/boundingBoxGizmo';
@@ -335,23 +190,16 @@ import { PositionGizmo } from '@babylonjs/core/Gizmos/positionGizmo';
 import { RotationGizmo } from '@babylonjs/core/Gizmos/rotationGizmo';
 import { ScaleGizmo } from '@babylonjs/core/Gizmos/scaleGizmo';
 import { EnvironmentHelper } from '@babylonjs/core/Helpers/environmentHelper';
-import { PhotoDome } from '@babylonjs/core/Helpers/photoDome';
-import { SceneHelpers } from '@babylonjs/core/Helpers/sceneHelpers';
 import { TextureDome } from '@babylonjs/core/Helpers/textureDome';
-import { VideoDome } from '@babylonjs/core/Helpers/videoDome';
-import { IAccessibilityTag } from '@babylonjs/core/IAccessibilityTag';
 import { PointerPickingConfiguration } from '@babylonjs/core/Inputs/pointerPickingConfiguration';
-import { Scene } from '@babylonjs/core/Inputs/scene.inputManager';
 import { EngineInstrumentation } from '@babylonjs/core/Instrumentation/engineInstrumentation';
 import { SceneInstrumentation } from '@babylonjs/core/Instrumentation/sceneInstrumentation';
-import { TimeToken } from '@babylonjs/core/Instrumentation/timeToken';
 import { EffectLayer } from '@babylonjs/core/Layers/effectLayer';
 import { EffectLayerSceneComponent } from '@babylonjs/core/Layers/effectLayerSceneComponent';
 import { GlowLayer } from '@babylonjs/core/Layers/glowLayer';
 import { HighlightLayer } from '@babylonjs/core/Layers/highlightLayer';
 import { Layer } from '@babylonjs/core/Layers/layer';
 import { LayerSceneComponent } from '@babylonjs/core/Layers/layerSceneComponent';
-import { Legacy } from '@babylonjs/core/Legacy/legacy';
 import { LensFlare } from '@babylonjs/core/LensFlares/lensFlare';
 import { LensFlareSystem } from '@babylonjs/core/LensFlares/lensFlareSystem';
 import { LensFlareSystemSceneComponent } from '@babylonjs/core/LensFlares/lensFlareSystemSceneComponent';
@@ -361,18 +209,11 @@ import { ShadowGeneratorSceneComponent } from '@babylonjs/core/Lights/Shadows/sh
 import { DirectionalLight } from '@babylonjs/core/Lights/directionalLight';
 import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight';
 import { Light } from '@babylonjs/core/Lights/light';
-import { LightConstants } from '@babylonjs/core/Lights/lightConstants';
 import { PointLight } from '@babylonjs/core/Lights/pointLight';
 import { ShadowLight } from '@babylonjs/core/Lights/shadowLight';
 import { SpotLight } from '@babylonjs/core/Lights/spotLight';
-import { BabylonFileLoader } from '@babylonjs/core/Loading/Plugins/babylonFileLoader';
-import { LoadingScreen } from '@babylonjs/core/Loading/loadingScreen';
-import { SceneLoader } from '@babylonjs/core/Loading/sceneLoader';
-import { SceneLoaderFlags } from '@babylonjs/core/Loading/sceneLoaderFlags';
 import { BackgroundMaterial } from '@babylonjs/core/Materials/Background/backgroundMaterial';
 import { GaussianSplattingMaterial } from '@babylonjs/core/Materials/GaussianSplatting/gaussianSplattingMaterial';
-import { GreasedLineMaterialDefaults } from '@babylonjs/core/Materials/GreasedLine/greasedLineMaterialDefaults';
-import { GreasedLineMaterialInterfaces } from '@babylonjs/core/Materials/GreasedLine/greasedLineMaterialInterfaces';
 import { GreasedLinePluginMaterial } from '@babylonjs/core/Materials/GreasedLine/greasedLinePluginMaterial';
 import { GreasedLineSimpleMaterial } from '@babylonjs/core/Materials/GreasedLine/greasedLineSimpleMaterial';
 import { ClipPlanesBlock } from '@babylonjs/core/Materials/Node/Blocks/Dual/clipPlanesBlock';
@@ -399,13 +240,11 @@ import { ScreenSizeBlock } from '@babylonjs/core/Materials/Node/Blocks/Fragment/
 import { ScreenSpaceBlock } from '@babylonjs/core/Materials/Node/Blocks/Fragment/screenSpaceBlock';
 import { ShadowMapBlock } from '@babylonjs/core/Materials/Node/Blocks/Fragment/shadowMapBlock';
 import { TwirlBlock } from '@babylonjs/core/Materials/Node/Blocks/Fragment/twirlBlock';
-import { AnimatedInputBlockTypes } from '@babylonjs/core/Materials/Node/Blocks/Input/animatedInputBlockTypes';
 import { InputBlock } from '@babylonjs/core/Materials/Node/Blocks/Input/inputBlock';
 import { PrePassTextureBlock } from '@babylonjs/core/Materials/Node/Blocks/Input/prePassTextureBlock';
 import { AnisotropyBlock } from '@babylonjs/core/Materials/Node/Blocks/PBR/anisotropyBlock';
 import { ClearCoatBlock } from '@babylonjs/core/Materials/Node/Blocks/PBR/clearCoatBlock';
 import { IridescenceBlock } from '@babylonjs/core/Materials/Node/Blocks/PBR/iridescenceBlock';
-import { PbrMetallicRoughnessBlock } from '@babylonjs/core/Materials/Node/Blocks/PBR/pbrMetallicRoughnessBlock';
 import { ReflectionBlock } from '@babylonjs/core/Materials/Node/Blocks/PBR/reflectionBlock';
 import { RefractionBlock } from '@babylonjs/core/Materials/Node/Blocks/PBR/refractionBlock';
 import { SheenBlock } from '@babylonjs/core/Materials/Node/Blocks/PBR/sheenBlock';
@@ -413,8 +252,6 @@ import { SubSurfaceBlock } from '@babylonjs/core/Materials/Node/Blocks/PBR/subSu
 import { ParticleBlendMultiplyBlock } from '@babylonjs/core/Materials/Node/Blocks/Particle/particleBlendMultiplyBlock';
 import { ParticleRampGradientBlock } from '@babylonjs/core/Materials/Node/Blocks/Particle/particleRampGradientBlock';
 import { ParticleTextureBlock } from '@babylonjs/core/Materials/Node/Blocks/Particle/particleTextureBlock';
-import { TeleportInBlock } from '@babylonjs/core/Materials/Node/Blocks/Teleport/teleportInBlock';
-import { TeleportOutBlock } from '@babylonjs/core/Materials/Node/Blocks/Teleport/teleportOutBlock';
 import { BonesBlock } from '@babylonjs/core/Materials/Node/Blocks/Vertex/bonesBlock';
 import { InstancesBlock } from '@babylonjs/core/Materials/Node/Blocks/Vertex/instancesBlock';
 import { LightInformationBlock } from '@babylonjs/core/Materials/Node/Blocks/Vertex/lightInformationBlock';
@@ -477,58 +314,25 @@ import { ViewDirectionBlock } from '@babylonjs/core/Materials/Node/Blocks/viewDi
 import { VoronoiNoiseBlock } from '@babylonjs/core/Materials/Node/Blocks/voronoiNoiseBlock';
 import { WaveBlock } from '@babylonjs/core/Materials/Node/Blocks/waveBlock';
 import { WorleyNoise3DBlock } from '@babylonjs/core/Materials/Node/Blocks/worleyNoise3DBlock';
-import { NodeMaterialBlockConnectionPointMode } from '@babylonjs/core/Materials/Node/Enums/nodeMaterialBlockConnectionPointMode';
-import { NodeMaterialBlockConnectionPointTypes } from '@babylonjs/core/Materials/Node/Enums/nodeMaterialBlockConnectionPointTypes';
-import { NodeMaterialBlockTargets } from '@babylonjs/core/Materials/Node/Enums/nodeMaterialBlockTargets';
-import { NodeMaterialModes } from '@babylonjs/core/Materials/Node/Enums/nodeMaterialModes';
-import { NodeMaterialSystemValues } from '@babylonjs/core/Materials/Node/Enums/nodeMaterialSystemValues';
-import { NodeMaterialOptimizer } from '@babylonjs/core/Materials/Node/Optimizers/nodeMaterialOptimizer';
 import { NodeMaterial } from '@babylonjs/core/Materials/Node/nodeMaterial';
 import { NodeMaterialBlock } from '@babylonjs/core/Materials/Node/nodeMaterialBlock';
-import { NodeMaterialBlockConnectionPoint } from '@babylonjs/core/Materials/Node/nodeMaterialBlockConnectionPoint';
 import { NodeMaterialBuildState } from '@babylonjs/core/Materials/Node/nodeMaterialBuildState';
 import { NodeMaterialBuildStateSharedData } from '@babylonjs/core/Materials/Node/nodeMaterialBuildStateSharedData';
 import { NodeMaterialConnectionPointCustomObject } from '@babylonjs/core/Materials/Node/nodeMaterialConnectionPointCustomObject';
 import { OcclusionMaterial } from '@babylonjs/core/Materials/Occlusion/occlusionMaterial';
-import { PbrAnisotropicConfiguration } from '@babylonjs/core/Materials/PBR/pbrAnisotropicConfiguration';
-import { PbrBRDFConfiguration } from '@babylonjs/core/Materials/PBR/pbrBRDFConfiguration';
-import { PbrBaseMaterial } from '@babylonjs/core/Materials/PBR/pbrBaseMaterial';
-import { PbrBaseSimpleMaterial } from '@babylonjs/core/Materials/PBR/pbrBaseSimpleMaterial';
-import { PbrClearCoatConfiguration } from '@babylonjs/core/Materials/PBR/pbrClearCoatConfiguration';
-import { PbrIridescenceConfiguration } from '@babylonjs/core/Materials/PBR/pbrIridescenceConfiguration';
-import { PbrMaterial } from '@babylonjs/core/Materials/PBR/pbrMaterial';
-import { PbrMaterial } from '@babylonjs/core/Materials/PBR/pbrMaterial.decalMap';
-import { PbrMetallicRoughnessMaterial } from '@babylonjs/core/Materials/PBR/pbrMetallicRoughnessMaterial';
-import { PbrSheenConfiguration } from '@babylonjs/core/Materials/PBR/pbrSheenConfiguration';
-import { PbrSpecularGlossinessMaterial } from '@babylonjs/core/Materials/PBR/pbrSpecularGlossinessMaterial';
-import { PbrSubSurfaceConfiguration } from '@babylonjs/core/Materials/PBR/pbrSubSurfaceConfiguration';
-import { HdrFiltering } from '@babylonjs/core/Materials/Textures/Filtering/hdrFiltering';
-import { BasisTextureLoader } from '@babylonjs/core/Materials/Textures/Loaders/basisTextureLoader';
-import { DdsTextureLoader } from '@babylonjs/core/Materials/Textures/Loaders/ddsTextureLoader';
-import { EnvTextureLoader } from '@babylonjs/core/Materials/Textures/Loaders/envTextureLoader';
-import { HdrTextureLoader } from '@babylonjs/core/Materials/Textures/Loaders/hdrTextureLoader';
-import { KtxTextureLoader } from '@babylonjs/core/Materials/Textures/Loaders/ktxTextureLoader';
-import { TgaTextureLoader } from '@babylonjs/core/Materials/Textures/Loaders/tgaTextureLoader';
 import { MultiviewRenderTarget } from '@babylonjs/core/Materials/Textures/MultiviewRenderTarget';
-import { Frame } from '@babylonjs/core/Materials/Textures/Packer/frame';
-import { Packer } from '@babylonjs/core/Materials/Textures/Packer/packer';
 import { CustomProceduralTexture } from '@babylonjs/core/Materials/Textures/Procedurals/customProceduralTexture';
 import { NoiseProceduralTexture } from '@babylonjs/core/Materials/Textures/Procedurals/noiseProceduralTexture';
 import { ProceduralTexture } from '@babylonjs/core/Materials/Textures/Procedurals/proceduralTexture';
 import { ProceduralTextureSceneComponent } from '@babylonjs/core/Materials/Textures/Procedurals/proceduralTextureSceneComponent';
 import { BaseTexture } from '@babylonjs/core/Materials/Textures/baseTexture';
-import { BaseTexture } from '@babylonjs/core/Materials/Textures/baseTexture.polynomial';
 import { ColorGradingTexture } from '@babylonjs/core/Materials/Textures/colorGradingTexture';
 import { CubeTexture } from '@babylonjs/core/Materials/Textures/cubeTexture';
 import { DynamicTexture } from '@babylonjs/core/Materials/Textures/dynamicTexture';
 import { EquiRectangularCubeTexture } from '@babylonjs/core/Materials/Textures/equiRectangularCubeTexture';
 import { ExternalTexture } from '@babylonjs/core/Materials/Textures/externalTexture';
-import { HardwareTextureWrapper } from '@babylonjs/core/Materials/Textures/hardwareTextureWrapper';
-import { HdrCubeTexture } from '@babylonjs/core/Materials/Textures/hdrCubeTexture';
 import { HtmlElementTexture } from '@babylonjs/core/Materials/Textures/htmlElementTexture';
 import { InternalTexture } from '@babylonjs/core/Materials/Textures/internalTexture';
-import { InternalTextureLoader } from '@babylonjs/core/Materials/Textures/internalTextureLoader';
-import { Ktx2decoderTypes } from '@babylonjs/core/Materials/Textures/ktx2decoderTypes';
 import { MirrorTexture } from '@babylonjs/core/Materials/Textures/mirrorTexture';
 import { MultiRenderTarget } from '@babylonjs/core/Materials/Textures/multiRenderTarget';
 import { PrePassRenderTarget } from '@babylonjs/core/Materials/Textures/prePassRenderTarget';
@@ -539,77 +343,34 @@ import { RawTexture3D } from '@babylonjs/core/Materials/Textures/rawTexture3D';
 import { RefractionTexture } from '@babylonjs/core/Materials/Textures/refractionTexture';
 import { RenderTargetTexture } from '@babylonjs/core/Materials/Textures/renderTargetTexture';
 import { Texture } from '@babylonjs/core/Materials/Textures/texture';
-import { TextureCreationOptions } from '@babylonjs/core/Materials/Textures/textureCreationOptions';
 import { TextureSampler } from '@babylonjs/core/Materials/Textures/textureSampler';
 import { ThinRenderTargetTexture } from '@babylonjs/core/Materials/Textures/thinRenderTargetTexture';
 import { ThinTexture } from '@babylonjs/core/Materials/Textures/thinTexture';
 import { VideoTexture } from '@babylonjs/core/Materials/Textures/videoTexture';
-import { ClipPlaneMaterialHelper } from '@babylonjs/core/Materials/clipPlaneMaterialHelper';
 import { ColorCurves } from '@babylonjs/core/Materials/colorCurves';
-import { ColorCurves } from '@babylonjs/core/Materials/colorCurves.functions';
 import { DrawWrapper } from '@babylonjs/core/Materials/drawWrapper';
-import { DrawWrapper } from '@babylonjs/core/Materials/drawWrapper.functions';
 import { Effect } from '@babylonjs/core/Materials/effect';
-import { Effect } from '@babylonjs/core/Materials/effect.functions';
-import { Effect } from '@babylonjs/core/Materials/effect.webgl.functions';
 import { EffectFallbacks } from '@babylonjs/core/Materials/effectFallbacks';
 import { EffectRenderer } from '@babylonjs/core/Materials/effectRenderer';
 import { FresnelParameters } from '@babylonjs/core/Materials/fresnelParameters';
-import { IEffectFallbacks } from '@babylonjs/core/Materials/iEffectFallbacks';
 import { ImageProcessingConfiguration } from '@babylonjs/core/Materials/imageProcessingConfiguration';
-import { ImageProcessingConfiguration } from '@babylonjs/core/Materials/imageProcessingConfiguration.defines';
-import { ImageProcessingConfiguration } from '@babylonjs/core/Materials/imageProcessingConfiguration.functions';
 import { Material } from '@babylonjs/core/Materials/material';
-import { Material } from '@babylonjs/core/Materials/material.decalMap';
-import { Material } from '@babylonjs/core/Materials/material.decalMapConfiguration';
-import { Material } from '@babylonjs/core/Materials/material.detailMapConfiguration';
 import { MaterialDefines } from '@babylonjs/core/Materials/materialDefines';
-import { MaterialFlags } from '@babylonjs/core/Materials/materialFlags';
-import { MaterialHelper } from '@babylonjs/core/Materials/materialHelper';
-import { MaterialHelper } from '@babylonjs/core/Materials/materialHelper.functions';
 import { MaterialPluginBase } from '@babylonjs/core/Materials/materialPluginBase';
-import { MaterialPluginEvent } from '@babylonjs/core/Materials/materialPluginEvent';
-import { MaterialPluginFactoryExport } from '@babylonjs/core/Materials/materialPluginFactoryExport';
 import { MaterialPluginManager } from '@babylonjs/core/Materials/materialPluginManager';
 import { MaterialStencilState } from '@babylonjs/core/Materials/materialStencilState';
 import { MeshDebugPluginMaterial } from '@babylonjs/core/Materials/meshDebugPluginMaterial';
 import { MultiMaterial } from '@babylonjs/core/Materials/multiMaterial';
 import { PrePassConfiguration } from '@babylonjs/core/Materials/prePassConfiguration';
 import { PushMaterial } from '@babylonjs/core/Materials/pushMaterial';
-import { ShaderLanguage } from '@babylonjs/core/Materials/shaderLanguage';
 import { ShaderMaterial } from '@babylonjs/core/Materials/shaderMaterial';
 import { ShadowDepthWrapper } from '@babylonjs/core/Materials/shadowDepthWrapper';
 import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
-import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial.decalMap';
 import { UniformBuffer } from '@babylonjs/core/Materials/uniformBuffer';
 import { UniformBufferEffectCommonAccessor } from '@babylonjs/core/Materials/uniformBufferEffectCommonAccessor';
 import { Halton2DSequence } from '@babylonjs/core/Maths/halton2DSequence';
-import { Math } from '@babylonjs/core/Maths/math.axis';
-import { Math } from '@babylonjs/core/Maths/math.color';
-import { Math } from '@babylonjs/core/Maths/math.constants';
-import { Math } from '@babylonjs/core/Maths/math';
-import { Math } from '@babylonjs/core/Maths/math.frustum';
-import { Math } from '@babylonjs/core/Maths/math.functions';
-import { Math } from '@babylonjs/core/Maths/math.isovector';
-import { Math } from '@babylonjs/core/Maths/math.like';
-import { Math } from '@babylonjs/core/Maths/math.path';
-import { Math } from '@babylonjs/core/Maths/math.plane';
-import { Math } from '@babylonjs/core/Maths/math.polar';
-import { Math } from '@babylonjs/core/Maths/math.scalar';
-import { Math } from '@babylonjs/core/Maths/math.scalar.functions';
-import { Math } from '@babylonjs/core/Maths/math.size';
-import { Math } from '@babylonjs/core/Maths/math.vector';
-import { Math } from '@babylonjs/core/Maths/math.vector.functions';
-import { Math } from '@babylonjs/core/Maths/math.vertexFormat';
-import { Math } from '@babylonjs/core/Maths/math.viewport';
 import { SphericalPolynomial } from '@babylonjs/core/Maths/sphericalPolynomial';
-import { Tensor } from '@babylonjs/core/Maths/tensor';
-import { GeodesicBuilder } from '@babylonjs/core/Meshes/Builders/geodesicBuilder';
-import { GoldbergBuilder } from '@babylonjs/core/Meshes/Builders/goldbergBuilder';
-import { GreasedLineBuilder } from '@babylonjs/core/Meshes/Builders/greasedLineBuilder';
-import { TextBuilder } from '@babylonjs/core/Meshes/Builders/textBuilder';
 import { DracoCompression } from '@babylonjs/core/Meshes/Compression/dracoCompression';
-import { DracoCompressionWorker } from '@babylonjs/core/Meshes/Compression/dracoCompressionWorker';
 import { MeshoptCompression } from '@babylonjs/core/Meshes/Compression/meshoptCompression';
 import { GaussianSplattingMesh } from '@babylonjs/core/Meshes/GaussianSplatting/gaussianSplattingMesh';
 import { GreasedLineBaseMesh } from '@babylonjs/core/Meshes/GreasedLine/greasedLineBaseMesh';
@@ -689,29 +450,18 @@ import { NoiseBlock } from '@babylonjs/core/Meshes/Node/Blocks/noiseBlock';
 import { NormalizeVectorBlock } from '@babylonjs/core/Meshes/Node/Blocks/normalizeVectorBlock';
 import { RandomBlock } from '@babylonjs/core/Meshes/Node/Blocks/randomBlock';
 import { VectorConverterBlock } from '@babylonjs/core/Meshes/Node/Blocks/vectorConverterBlock';
-import { NodeGeometryConnectionPointTypes } from '@babylonjs/core/Meshes/Node/Enums/nodeGeometryConnectionPointTypes';
-import { NodeGeometryContextualSources } from '@babylonjs/core/Meshes/Node/Enums/nodeGeometryContextualSources';
-import { NodeGeometryExecutionContext } from '@babylonjs/core/Meshes/Node/Interfaces/nodeGeometryExecutionContext';
-import { NodeGeometryInstancingContext } from '@babylonjs/core/Meshes/Node/Interfaces/nodeGeometryInstancingContext';
-import { NodeGeometryTextureData } from '@babylonjs/core/Meshes/Node/Interfaces/nodeGeometryTextureData';
 import { NodeGeometry } from '@babylonjs/core/Meshes/Node/nodeGeometry';
 import { NodeGeometryBlock } from '@babylonjs/core/Meshes/Node/nodeGeometryBlock';
-import { NodeGeometryBlockConnectionPoint } from '@babylonjs/core/Meshes/Node/nodeGeometryBlockConnectionPoint';
 import { NodeGeometryBuildState } from '@babylonjs/core/Meshes/Node/nodeGeometryBuildState';
 import { WebGLDataBuffer } from '@babylonjs/core/Meshes/WebGL/webGLDataBuffer';
-import { WebgpuDataBuffer } from '@babylonjs/core/Meshes/WebGPU/webgpuDataBuffer';
 import { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh';
-import { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh.decalMap';
 import { Buffer } from '@babylonjs/core/Meshes/buffer';
-import { Csg } from '@babylonjs/core/Meshes/csg';
-import { GeodesicMesh } from '@babylonjs/core/Meshes/geodesicMesh';
 import { Geometry } from '@babylonjs/core/Meshes/geometry';
 import { GoldbergMesh } from '@babylonjs/core/Meshes/goldbergMesh';
 import { GroundMesh } from '@babylonjs/core/Meshes/groundMesh';
 import { InstancedMesh } from '@babylonjs/core/Meshes/instancedMesh';
 import { LinesMesh } from '@babylonjs/core/Meshes/linesMesh';
 import { Mesh } from '@babylonjs/core/Meshes/mesh';
-import { Mesh } from '@babylonjs/core/Meshes/mesh.vertexData';
 import { CreateBox } from '@babylonjs/core/Meshes/Builders';
 import { CreateTiledBox } from '@babylonjs/core/Meshes/Builders';
 import { CreateSphere } from '@babylonjs/core/Meshes/Builders';
@@ -742,107 +492,40 @@ import { CreateDecal } from '@babylonjs/core/Meshes/Builders';
 import { CreateCapsule } from '@babylonjs/core/Meshes/Builders';
 import { CreateText } from '@babylonjs/core/Meshes/Builders';
 import { MeshLODLevel } from '@babylonjs/core/Meshes/meshLODLevel';
-import { MeshSimplification } from '@babylonjs/core/Meshes/meshSimplification';
-import { MeshSimplificationSceneComponent } from '@babylonjs/core/Meshes/meshSimplificationSceneComponent';
 import { MeshUVSpaceRenderer } from '@babylonjs/core/Meshes/meshUVSpaceRenderer';
-import { PolygonMesh } from '@babylonjs/core/Meshes/polygonMesh';
 import { SubMesh } from '@babylonjs/core/Meshes/subMesh';
-import { SubMesh } from '@babylonjs/core/Meshes/subMesh.project';
-import { ThinInstanceMesh } from '@babylonjs/core/Meshes/thinInstanceMesh';
 import { TrailMesh } from '@babylonjs/core/Meshes/trailMesh';
 import { TransformNode } from '@babylonjs/core/Meshes/transformNode';
-import { CubemapToSphericalPolynomial } from '@babylonjs/core/Misc/HighDynamicRange/cubemapToSphericalPolynomial';
-import { Hdr } from '@babylonjs/core/Misc/HighDynamicRange/hdr';
-import { PanoramaToCubemap } from '@babylonjs/core/Misc/HighDynamicRange/panoramaToCubemap';
 import { DynamicFloat32Array } from '@babylonjs/core/Misc/PerformanceViewer/dynamicFloat32Array';
-import { PerformanceViewerCollectionStrategies } from '@babylonjs/core/Misc/PerformanceViewer/performanceViewerCollectionStrategies';
 import { PerformanceViewerCollector } from '@babylonjs/core/Misc/PerformanceViewer/performanceViewerCollector';
-import { PerformanceViewerSceneExtension } from '@babylonjs/core/Misc/PerformanceViewer/performanceViewerSceneExtension';
-import { AndOrNotEvaluator } from '@babylonjs/core/Misc/andOrNotEvaluator';
-import { ArrayTools } from '@babylonjs/core/Misc/arrayTools';
 import { AssetsManager } from '@babylonjs/core/Misc/assetsManager';
-import { Basis } from '@babylonjs/core/Misc/basis';
-import { BasisWorker } from '@babylonjs/core/Misc/basisWorker';
-import { BrdfTextureTools } from '@babylonjs/core/Misc/brdfTextureTools';
-import { CodeStringParsingTools } from '@babylonjs/core/Misc/codeStringParsingTools';
 import { CopyTextureToTexture } from '@babylonjs/core/Misc/copyTextureToTexture';
-import { CopyTools } from '@babylonjs/core/Misc/copyTools';
-import { Coroutine } from '@babylonjs/core/Misc/coroutine';
-import { CustomAnimationFrameRequester } from '@babylonjs/core/Misc/customAnimationFrameRequester';
 import { DataReader } from '@babylonjs/core/Misc/dataReader';
-import { DataStorage } from '@babylonjs/core/Misc/dataStorage';
-import { Dds } from '@babylonjs/core/Misc/dds';
-import { Decorators } from '@babylonjs/core/Misc/decorators';
-import { Decorators } from '@babylonjs/core/Misc/decorators.functions';
-import { Decorators } from '@babylonjs/core/Misc/decorators.serialization';
-import { DeepCopier } from '@babylonjs/core/Misc/deepCopier';
 import { Deferred } from '@babylonjs/core/Misc/deferred';
 import { DepthReducer } from '@babylonjs/core/Misc/depthReducer';
-import { DevTools } from '@babylonjs/core/Misc/devTools';
-import { DomManagement } from '@babylonjs/core/Misc/domManagement';
-import { DumpTools } from '@babylonjs/core/Misc/dumpTools';
-import { EnvironmentTextureTools } from '@babylonjs/core/Misc/environmentTextureTools';
-import { EquirectangularCapture } from '@babylonjs/core/Misc/equirectangularCapture';
-import { Error } from '@babylonjs/core/Misc/error';
-import { FileRequest } from '@babylonjs/core/Misc/fileRequest';
-import { FileTools } from '@babylonjs/core/Misc/fileTools';
 import { FilesInput } from '@babylonjs/core/Misc/filesInput';
-import { FilesInputStore } from '@babylonjs/core/Misc/filesInputStore';
-import { Gradients } from '@babylonjs/core/Misc/gradients';
-import { GreasedLineTools } from '@babylonjs/core/Misc/greasedLineTools';
-import { Guid } from '@babylonjs/core/Misc/guid';
-import { IInspectable } from '@babylonjs/core/Misc/iInspectable';
-import { InstantiationTools } from '@babylonjs/core/Misc/instantiationTools';
-import { IClipPlanesHolder } from '@babylonjs/core/Misc/interfaces/iClipPlanesHolder';
-import { IPerfViewer } from '@babylonjs/core/Misc/interfaces/iPerfViewer';
-import { IWebRequest } from '@babylonjs/core/Misc/interfaces/iWebRequest';
-import { ScreenshotSize } from '@babylonjs/core/Misc/interfaces/screenshotSize';
 import { KhronosTextureContainer } from '@babylonjs/core/Misc/khronosTextureContainer';
 import { KhronosTextureContainer2 } from '@babylonjs/core/Misc/khronosTextureContainer2';
-import { KhronosTextureContainer2Worker } from '@babylonjs/core/Misc/khronosTextureContainer2Worker';
-import { Logger } from '@babylonjs/core/Misc/logger';
 import { MeshExploder } from '@babylonjs/core/Misc/meshExploder';
 import { MinMaxReducer } from '@babylonjs/core/Misc/minMaxReducer';
 import { Observable } from '@babylonjs/core/Misc/observable';
-import { Observable } from '@babylonjs/core/Misc/observable.extensions';
-import { ObservableCoroutine } from '@babylonjs/core/Misc/observableCoroutine';
 import { PerfCounter } from '@babylonjs/core/Misc/perfCounter';
 import { PerformanceMonitor } from '@babylonjs/core/Misc/performanceMonitor';
-import { PivotTools } from '@babylonjs/core/Misc/pivotTools';
-import { PrecisionDate } from '@babylonjs/core/Misc/precisionDate';
 import { PressureObserverWrapper } from '@babylonjs/core/Misc/pressureObserverWrapper';
 import { Reflector } from '@babylonjs/core/Misc/reflector';
-import { RetryStrategy } from '@babylonjs/core/Misc/retryStrategy';
-import { RgbdTextureTools } from '@babylonjs/core/Misc/rgbdTextureTools';
 import { SceneOptimizer } from '@babylonjs/core/Misc/sceneOptimizer';
 import { SceneRecorder } from '@babylonjs/core/Misc/sceneRecorder';
-import { SceneSerializer } from '@babylonjs/core/Misc/sceneSerializer';
-import { ScreenshotTools } from '@babylonjs/core/Misc/screenshotTools';
 import { SmartArray } from '@babylonjs/core/Misc/smartArray';
 import { StringDictionary } from '@babylonjs/core/Misc/stringDictionary';
-import { StringTools } from '@babylonjs/core/Misc/stringTools';
-import { Tags } from '@babylonjs/core/Misc/tags';
-import { TextureTools } from '@babylonjs/core/Misc/textureTools';
-import { Tga } from '@babylonjs/core/Misc/tga';
-import { Timer } from '@babylonjs/core/Misc/timer';
-import { TimingTools } from '@babylonjs/core/Misc/timingTools';
-import { Tools } from '@babylonjs/core/Misc/tools';
-import { Tools } from '@babylonjs/core/Misc/tools.functions';
 import { TrajectoryClassifier } from '@babylonjs/core/Misc/trajectoryClassifier';
-import { TypeStore } from '@babylonjs/core/Misc/typeStore';
-import { UniqueIdGenerator } from '@babylonjs/core/Misc/uniqueIdGenerator';
 import { VideoRecorder } from '@babylonjs/core/Misc/videoRecorder';
 import { VirtualJoystick } from '@babylonjs/core/Misc/virtualJoystick';
 import { WebRequest } from '@babylonjs/core/Misc/webRequest';
 import { WorkerPool } from '@babylonjs/core/Misc/workerPool';
 import { MorphTarget } from '@babylonjs/core/Morph/morphTarget';
 import { MorphTargetManager } from '@babylonjs/core/Morph/morphTargetManager';
-import { INavigationEngine } from '@babylonjs/core/Navigation/INavigationEngine';
 import { RecastJSPlugin } from '@babylonjs/core/Navigation/Plugins/recastJSPlugin';
-import { ObjectModelInterfaces } from '@babylonjs/core/ObjectModel/objectModelInterfaces';
-import { IOfflineProvider } from '@babylonjs/core/Offline/IOfflineProvider';
 import { Database } from '@babylonjs/core/Offline/database';
-import { IParticleEmitterType } from '@babylonjs/core/Particles/EmitterTypes/IParticleEmitterType';
 import { BoxParticleEmitter } from '@babylonjs/core/Particles/EmitterTypes/boxParticleEmitter';
 import { ConeParticleEmitter } from '@babylonjs/core/Particles/EmitterTypes/coneParticleEmitter';
 import { CustomParticleEmitter } from '@babylonjs/core/Particles/EmitterTypes/customParticleEmitter';
@@ -851,66 +534,44 @@ import { HemisphericParticleEmitter } from '@babylonjs/core/Particles/EmitterTyp
 import { MeshParticleEmitter } from '@babylonjs/core/Particles/EmitterTypes/meshParticleEmitter';
 import { PointParticleEmitter } from '@babylonjs/core/Particles/EmitterTypes/pointParticleEmitter';
 import { SphereParticleEmitter } from '@babylonjs/core/Particles/EmitterTypes/sphereParticleEmitter';
-import { IGPUParticleSystemPlatform } from '@babylonjs/core/Particles/IGPUParticleSystemPlatform';
-import { IParticleSystem } from '@babylonjs/core/Particles/IParticleSystem';
 import { BaseParticleSystem } from '@babylonjs/core/Particles/baseParticleSystem';
 import { CloudPoint } from '@babylonjs/core/Particles/cloudPoint';
 import { ComputeShaderParticleSystem } from '@babylonjs/core/Particles/computeShaderParticleSystem';
-import { GpuParticleSystem } from '@babylonjs/core/Particles/gpuParticleSystem';
 import { Particle } from '@babylonjs/core/Particles/particle';
-import { ParticleHelper } from '@babylonjs/core/Particles/particleHelper';
 import { ParticleSystem } from '@babylonjs/core/Particles/particleSystem';
-import { ParticleSystem } from '@babylonjs/core/Particles/particleSystem.functions';
-import { ParticleSystemComponent } from '@babylonjs/core/Particles/particleSystemComponent';
 import { ParticleSystemSet } from '@babylonjs/core/Particles/particleSystemSet';
 import { PointsCloudSystem } from '@babylonjs/core/Particles/pointsCloudSystem';
 import { SolidParticle } from '@babylonjs/core/Particles/solidParticle';
 import { SolidParticleSystem } from '@babylonjs/core/Particles/solidParticleSystem';
 import { SubEmitter } from '@babylonjs/core/Particles/subEmitter';
 import { ThinParticleSystem } from '@babylonjs/core/Particles/thinParticleSystem';
-import { Webgl2ParticleSystem } from '@babylonjs/core/Particles/webgl2ParticleSystem';
-import { IPhysicsEngine } from '@babylonjs/core/Physics/IPhysicsEngine';
 import { AmmoJSPlugin } from '@babylonjs/core/Physics/Plugins/ammoJSPlugin';
 import { CannonJSPlugin } from '@babylonjs/core/Physics/Plugins/cannonJSPlugin';
 import { OimoJSPlugin } from '@babylonjs/core/Physics/Plugins/oimoJSPlugin';
 import { CastingResult } from '@babylonjs/core/Physics/castingResult';
-import { JoinedPhysicsEngineComponent } from '@babylonjs/core/Physics/joinedPhysicsEngineComponent';
 import { PhysicsEngine } from '@babylonjs/core/Physics/physicsEngine';
-import { PhysicsEngineComponent } from '@babylonjs/core/Physics/physicsEngineComponent';
 import { PhysicsHelper } from '@babylonjs/core/Physics/physicsHelper';
 import { PhysicsImpostor } from '@babylonjs/core/Physics/physicsImpostor';
 import { PhysicsJoint } from '@babylonjs/core/Physics/physicsJoint';
-import { PhysicsPointProximityQuery } from '@babylonjs/core/Physics/physicsPointProximityQuery';
 import { PhysicsRaycastResult } from '@babylonjs/core/Physics/physicsRaycastResult';
-import { PhysicsShapeCastQuery } from '@babylonjs/core/Physics/physicsShapeCastQuery';
-import { PhysicsShapeProximityCastQuery } from '@babylonjs/core/Physics/physicsShapeProximityCastQuery';
 import { ProximityCastResult } from '@babylonjs/core/Physics/proximityCastResult';
 import { ShapeCastResult } from '@babylonjs/core/Physics/shapeCastResult';
-import { IPhysicsEnginePlugin } from '@babylonjs/core/Physics/v1/IPhysicsEnginePlugin';
 import { AmmoJSPlugin } from '@babylonjs/core/Physics/v1/Plugins/ammoJSPlugin';
 import { CannonJSPlugin } from '@babylonjs/core/Physics/v1/Plugins/cannonJSPlugin';
 import { OimoJSPlugin } from '@babylonjs/core/Physics/v1/Plugins/oimoJSPlugin';
 import { PhysicsEngine } from '@babylonjs/core/Physics/v1/physicsEngine';
-import { PhysicsEngineComponent } from '@babylonjs/core/Physics/v1/physicsEngineComponent';
 import { PhysicsImpostor } from '@babylonjs/core/Physics/v1/physicsImpostor';
 import { PhysicsJoint } from '@babylonjs/core/Physics/v1/physicsJoint';
-import { IPhysicsEnginePlugin } from '@babylonjs/core/Physics/v2/IPhysicsEnginePlugin';
 import { HavokPlugin } from '@babylonjs/core/Physics/v2/Plugins/havokPlugin';
 import { PhysicsAggregate } from '@babylonjs/core/Physics/v2/physicsAggregate';
 import { PhysicsBody } from '@babylonjs/core/Physics/v2/physicsBody';
 import { PhysicsConstraint } from '@babylonjs/core/Physics/v2/physicsConstraint';
 import { PhysicsEngine } from '@babylonjs/core/Physics/v2/physicsEngine';
-import { PhysicsEngineComponent } from '@babylonjs/core/Physics/v2/physicsEngineComponent';
-import { PhysicsMaterial } from '@babylonjs/core/Physics/v2/physicsMaterial';
 import { PhysicsShape } from '@babylonjs/core/Physics/v2/physicsShape';
 import { Ragdoll } from '@babylonjs/core/Physics/v2/ragdoll';
 import { DefaultRenderingPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/defaultRenderingPipeline';
 import { LensRenderingPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/lensRenderingPipeline';
-import { Ssao2RenderingPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/ssao2RenderingPipeline';
-import { SsaoRenderingPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/ssaoRenderingPipeline';
-import { SsrRenderingPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/ssrRenderingPipeline';
 import { StandardRenderingPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/standardRenderingPipeline';
-import { TaaRenderingPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/taaRenderingPipeline';
 import { PostProcessRenderEffect } from '@babylonjs/core/PostProcesses/RenderPipeline/postProcessRenderEffect';
 import { PostProcessRenderPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/postProcessRenderPipeline';
 import { PostProcessRenderPipelineManager } from '@babylonjs/core/PostProcesses/RenderPipeline/postProcessRenderPipelineManager';
@@ -940,16 +601,13 @@ import { PostProcess } from '@babylonjs/core/PostProcesses/postProcess';
 import { PostProcessManager } from '@babylonjs/core/PostProcesses/postProcessManager';
 import { RefractionPostProcess } from '@babylonjs/core/PostProcesses/refractionPostProcess';
 import { ScreenSpaceCurvaturePostProcess } from '@babylonjs/core/PostProcesses/screenSpaceCurvaturePostProcess';
+import { ScreenSpaceReflectionPostProcess } from '@babylonjs/core/PostProcesses/screenSpaceReflectionPostProcess';
 import { SharpenPostProcess } from '@babylonjs/core/PostProcesses/sharpenPostProcess';
 import { StereoscopicInterlacePostProcess } from '@babylonjs/core/PostProcesses/stereoscopicInterlacePostProcess';
 import { SubSurfaceScatteringPostProcess } from '@babylonjs/core/PostProcesses/subSurfaceScatteringPostProcess';
 import { TonemapPostProcess } from '@babylonjs/core/PostProcesses/tonemapPostProcess';
 import { VolumetricLightScatteringPostProcess } from '@babylonjs/core/PostProcesses/volumetricLightScatteringPostProcess';
-import { VrDistortionCorrectionPostProcess } from '@babylonjs/core/PostProcesses/vrDistortionCorrectionPostProcess';
-import { VrMultiviewToSingleviewPostProcess } from '@babylonjs/core/PostProcesses/vrMultiviewToSingleviewPostProcess';
 import { ReflectionProbe } from '@babylonjs/core/Probes/reflectionProbe';
-import { GiRSM } from '@babylonjs/core/Rendering/GlobalIllumination/giRSM';
-import { GiRSMManager } from '@babylonjs/core/Rendering/GlobalIllumination/giRSMManager';
 import { BoundingBoxRenderer } from '@babylonjs/core/Rendering/boundingBoxRenderer';
 import { DepthPeelingRenderer } from '@babylonjs/core/Rendering/depthPeelingRenderer';
 import { DepthPeelingSceneComponent } from '@babylonjs/core/Rendering/depthPeelingSceneComponent';
@@ -967,7 +625,6 @@ import { GeometryBufferRenderer } from '@babylonjs/core/Rendering/geometryBuffer
 import { GeometryBufferRendererSceneComponent } from '@babylonjs/core/Rendering/geometryBufferRendererSceneComponent';
 import { MotionBlurConfiguration } from '@babylonjs/core/Rendering/motionBlurConfiguration';
 import { OutlineRenderer } from '@babylonjs/core/Rendering/outlineRenderer';
-import { PrePassEffectConfiguration } from '@babylonjs/core/Rendering/prePassEffectConfiguration';
 import { PrePassRenderer } from '@babylonjs/core/Rendering/prePassRenderer';
 import { PrePassRendererSceneComponent } from '@babylonjs/core/Rendering/prePassRendererSceneComponent';
 import { ReflectiveShadowMap } from '@babylonjs/core/Rendering/reflectiveShadowMap';
@@ -975,298 +632,9 @@ import { RenderingGroup } from '@babylonjs/core/Rendering/renderingGroup';
 import { RenderingManager } from '@babylonjs/core/Rendering/renderingManager';
 import { ScreenSpaceReflections2Configuration } from '@babylonjs/core/Rendering/screenSpaceReflections2Configuration';
 import { ScreenSpaceReflectionsConfiguration } from '@babylonjs/core/Rendering/screenSpaceReflectionsConfiguration';
-import { Ssao2Configuration } from '@babylonjs/core/Rendering/ssao2Configuration';
 import { SubSurfaceConfiguration } from '@babylonjs/core/Rendering/subSurfaceConfiguration';
 import { SubSurfaceSceneComponent } from '@babylonjs/core/Rendering/subSurfaceSceneComponent';
 import { UtilityLayerRenderer } from '@babylonjs/core/Rendering/utilityLayerRenderer';
-import { BackgroundFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/backgroundFragmentDeclaration';
-import { BackgroundUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/backgroundUboDeclaration';
-import { BackgroundVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/backgroundVertexDeclaration';
-import { BakedVertexAnimation } from '@babylonjs/core/Shaders/ShadersInclude/bakedVertexAnimation';
-import { BakedVertexAnimationDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/bakedVertexAnimationDeclaration';
-import { BayerDitherFunctions } from '@babylonjs/core/Shaders/ShadersInclude/bayerDitherFunctions';
-import { BonesDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/bonesDeclaration';
-import { BonesVertex } from '@babylonjs/core/Shaders/ShadersInclude/bonesVertex';
-import { BoundingBoxRendererFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/boundingBoxRendererFragmentDeclaration';
-import { BoundingBoxRendererUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/boundingBoxRendererUboDeclaration';
-import { BoundingBoxRendererVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/boundingBoxRendererVertexDeclaration';
-import { BumpFragment } from '@babylonjs/core/Shaders/ShadersInclude/bumpFragment';
-import { BumpFragmentFunctions } from '@babylonjs/core/Shaders/ShadersInclude/bumpFragmentFunctions';
-import { BumpFragmentMainFunctions } from '@babylonjs/core/Shaders/ShadersInclude/bumpFragmentMainFunctions';
-import { BumpVertex } from '@babylonjs/core/Shaders/ShadersInclude/bumpVertex';
-import { BumpVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/bumpVertexDeclaration';
-import { ClipPlaneFragment } from '@babylonjs/core/Shaders/ShadersInclude/clipPlaneFragment';
-import { ClipPlaneFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/clipPlaneFragmentDeclaration';
-import { ClipPlaneFragmentDeclaration2 } from '@babylonjs/core/Shaders/ShadersInclude/clipPlaneFragmentDeclaration2';
-import { ClipPlaneVertex } from '@babylonjs/core/Shaders/ShadersInclude/clipPlaneVertex';
-import { ClipPlaneVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/clipPlaneVertexDeclaration';
-import { ClipPlaneVertexDeclaration2 } from '@babylonjs/core/Shaders/ShadersInclude/clipPlaneVertexDeclaration2';
-import { DecalFragment } from '@babylonjs/core/Shaders/ShadersInclude/decalFragment';
-import { DecalFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/decalFragmentDeclaration';
-import { DecalVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/decalVertexDeclaration';
-import { DefaultFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/defaultFragmentDeclaration';
-import { DefaultUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/defaultUboDeclaration';
-import { DefaultVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/defaultVertexDeclaration';
-import { DepthPrePass } from '@babylonjs/core/Shaders/ShadersInclude/depthPrePass';
-import { DiffusionProfile } from '@babylonjs/core/Shaders/ShadersInclude/diffusionProfile';
-import { Fibonacci } from '@babylonjs/core/Shaders/ShadersInclude/fibonacci';
-import { FogFragment } from '@babylonjs/core/Shaders/ShadersInclude/fogFragment';
-import { FogFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/fogFragmentDeclaration';
-import { FogVertex } from '@babylonjs/core/Shaders/ShadersInclude/fogVertex';
-import { FogVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/fogVertexDeclaration';
-import { FresnelFunction } from '@babylonjs/core/Shaders/ShadersInclude/fresnelFunction';
-import { GaussianSplattingUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/gaussianSplattingUboDeclaration';
-import { GaussianSplattingVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/gaussianSplattingVertexDeclaration';
-import { GeometryUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/geometryUboDeclaration';
-import { GeometryVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/geometryVertexDeclaration';
-import { HarmonicsFunctions } from '@babylonjs/core/Shaders/ShadersInclude/harmonicsFunctions';
-import { HdrFilteringFunctions } from '@babylonjs/core/Shaders/ShadersInclude/hdrFilteringFunctions';
-import { HelperFunctions } from '@babylonjs/core/Shaders/ShadersInclude/helperFunctions';
-import { ImageProcessingCompatibility } from '@babylonjs/core/Shaders/ShadersInclude/imageProcessingCompatibility';
-import { ImageProcessingDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/imageProcessingDeclaration';
-import { ImageProcessingFunctions } from '@babylonjs/core/Shaders/ShadersInclude/imageProcessingFunctions';
-import { ImportanceSampling } from '@babylonjs/core/Shaders/ShadersInclude/importanceSampling';
-import { InstancesDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/instancesDeclaration';
-import { InstancesVertex } from '@babylonjs/core/Shaders/ShadersInclude/instancesVertex';
-import { KernelBlurFragment } from '@babylonjs/core/Shaders/ShadersInclude/kernelBlurFragment';
-import { KernelBlurFragment2 } from '@babylonjs/core/Shaders/ShadersInclude/kernelBlurFragment2';
-import { KernelBlurVaryingDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/kernelBlurVaryingDeclaration';
-import { KernelBlurVertex } from '@babylonjs/core/Shaders/ShadersInclude/kernelBlurVertex';
-import { LightFragment } from '@babylonjs/core/Shaders/ShadersInclude/lightFragment';
-import { LightFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/lightFragmentDeclaration';
-import { LightUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/lightUboDeclaration';
-import { LightVxFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/lightVxFragmentDeclaration';
-import { LightVxUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/lightVxUboDeclaration';
-import { LightsFragmentFunctions } from '@babylonjs/core/Shaders/ShadersInclude/lightsFragmentFunctions';
-import { LogDepthDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/logDepthDeclaration';
-import { LogDepthFragment } from '@babylonjs/core/Shaders/ShadersInclude/logDepthFragment';
-import { LogDepthVertex } from '@babylonjs/core/Shaders/ShadersInclude/logDepthVertex';
-import { MainUVVaryingDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/mainUVVaryingDeclaration';
-import { MeshFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/meshFragmentDeclaration';
-import { MeshUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/meshUboDeclaration';
-import { MeshVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/meshVertexDeclaration';
-import { MorphTargetsVertex } from '@babylonjs/core/Shaders/ShadersInclude/morphTargetsVertex';
-import { MorphTargetsVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/morphTargetsVertexDeclaration';
-import { MorphTargetsVertexGlobal } from '@babylonjs/core/Shaders/ShadersInclude/morphTargetsVertexGlobal';
-import { MorphTargetsVertexGlobalDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/morphTargetsVertexGlobalDeclaration';
-import { MrtFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/mrtFragmentDeclaration';
-import { OitDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/oitDeclaration';
-import { OitFragment } from '@babylonjs/core/Shaders/ShadersInclude/oitFragment';
-import { PackingFunctions } from '@babylonjs/core/Shaders/ShadersInclude/packingFunctions';
-import { PbrBRDFFunctions } from '@babylonjs/core/Shaders/ShadersInclude/pbrBRDFFunctions';
-import { PbrBlockAlbedoOpacity } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockAlbedoOpacity';
-import { PbrBlockAlphaFresnel } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockAlphaFresnel';
-import { PbrBlockAmbientOcclusion } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockAmbientOcclusion';
-import { PbrBlockAnisotropic } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockAnisotropic';
-import { PbrBlockClearcoat } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockClearcoat';
-import { PbrBlockDirectLighting } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockDirectLighting';
-import { PbrBlockFinalColorComposition } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockFinalColorComposition';
-import { PbrBlockFinalLitComponents } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockFinalLitComponents';
-import { PbrBlockFinalUnlitComponents } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockFinalUnlitComponents';
-import { PbrBlockGeometryInfo } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockGeometryInfo';
-import { PbrBlockImageProcessing } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockImageProcessing';
-import { PbrBlockIridescence } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockIridescence';
-import { PbrBlockLightmapInit } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockLightmapInit';
-import { PbrBlockNormalFinal } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockNormalFinal';
-import { PbrBlockNormalGeometric } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockNormalGeometric';
-import { PbrBlockReflectance } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockReflectance';
-import { PbrBlockReflectance0 } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockReflectance0';
-import { PbrBlockReflection } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockReflection';
-import { PbrBlockReflectivity } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockReflectivity';
-import { PbrBlockSheen } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockSheen';
-import { PbrBlockSubSurface } from '@babylonjs/core/Shaders/ShadersInclude/pbrBlockSubSurface';
-import { PbrDebug } from '@babylonjs/core/Shaders/ShadersInclude/pbrDebug';
-import { PbrDirectLightingFalloffFunctions } from '@babylonjs/core/Shaders/ShadersInclude/pbrDirectLightingFalloffFunctions';
-import { PbrDirectLightingFunctions } from '@babylonjs/core/Shaders/ShadersInclude/pbrDirectLightingFunctions';
-import { PbrDirectLightingSetupFunctions } from '@babylonjs/core/Shaders/ShadersInclude/pbrDirectLightingSetupFunctions';
-import { PbrFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/pbrFragmentDeclaration';
-import { PbrFragmentExtraDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/pbrFragmentExtraDeclaration';
-import { PbrFragmentSamplersDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/pbrFragmentSamplersDeclaration';
-import { PbrHelperFunctions } from '@babylonjs/core/Shaders/ShadersInclude/pbrHelperFunctions';
-import { PbrIBLFunctions } from '@babylonjs/core/Shaders/ShadersInclude/pbrIBLFunctions';
-import { PbrUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/pbrUboDeclaration';
-import { PbrVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/pbrVertexDeclaration';
-import { PointCloudVertex } from '@babylonjs/core/Shaders/ShadersInclude/pointCloudVertex';
-import { PointCloudVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/pointCloudVertexDeclaration';
-import { PrePassDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/prePassDeclaration';
-import { PrePassVertex } from '@babylonjs/core/Shaders/ShadersInclude/prePassVertex';
-import { PrePassVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/prePassVertexDeclaration';
-import { ReflectionFunction } from '@babylonjs/core/Shaders/ShadersInclude/reflectionFunction';
-import { SamplerFragmentAlternateDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/samplerFragmentAlternateDeclaration';
-import { SamplerFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/samplerFragmentDeclaration';
-import { SamplerVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/samplerVertexDeclaration';
-import { SamplerVertexImplementation } from '@babylonjs/core/Shaders/ShadersInclude/samplerVertexImplementation';
-import { SceneFragmentDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/sceneFragmentDeclaration';
-import { SceneUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/sceneUboDeclaration';
-import { SceneVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/sceneVertexDeclaration';
-import { ScreenSpaceRayTrace } from '@babylonjs/core/Shaders/ShadersInclude/screenSpaceRayTrace';
-import { ShadowMapFragment } from '@babylonjs/core/Shaders/ShadersInclude/shadowMapFragment';
-import { ShadowMapFragmentExtraDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/shadowMapFragmentExtraDeclaration';
-import { ShadowMapFragmentSoftTransparentShadow } from '@babylonjs/core/Shaders/ShadersInclude/shadowMapFragmentSoftTransparentShadow';
-import { ShadowMapUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/shadowMapUboDeclaration';
-import { ShadowMapVertexDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/shadowMapVertexDeclaration';
-import { ShadowMapVertexExtraDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/shadowMapVertexExtraDeclaration';
-import { ShadowMapVertexMetric } from '@babylonjs/core/Shaders/ShadersInclude/shadowMapVertexMetric';
-import { ShadowMapVertexNormalBias } from '@babylonjs/core/Shaders/ShadersInclude/shadowMapVertexNormalBias';
-import { ShadowsFragmentFunctions } from '@babylonjs/core/Shaders/ShadersInclude/shadowsFragmentFunctions';
-import { ShadowsVertex } from '@babylonjs/core/Shaders/ShadersInclude/shadowsVertex';
-import { SubSurfaceScatteringFunctions } from '@babylonjs/core/Shaders/ShadersInclude/subSurfaceScatteringFunctions';
-import { UvAttributeDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/uvAttributeDeclaration';
-import { UvVariableDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/uvVariableDeclaration';
-import { VertexColorMixing } from '@babylonjs/core/Shaders/ShadersInclude/vertexColorMixing';
-import { Anaglyph } from '@babylonjs/core/Shaders/anaglyph.fragment';
-import { Background } from '@babylonjs/core/Shaders/background.fragment';
-import { Background } from '@babylonjs/core/Shaders/background.vertex';
-import { BilateralBlur } from '@babylonjs/core/Shaders/bilateralBlur.fragment';
-import { BilateralBlurQuality } from '@babylonjs/core/Shaders/bilateralBlurQuality.fragment';
-import { BlackAndWhite } from '@babylonjs/core/Shaders/blackAndWhite.fragment';
-import { BloomMerge } from '@babylonjs/core/Shaders/bloomMerge.fragment';
-import { Blur } from '@babylonjs/core/Shaders/blur.fragment';
-import { BoundingBoxRenderer } from '@babylonjs/core/Shaders/boundingBoxRenderer.fragment';
-import { BoundingBoxRenderer } from '@babylonjs/core/Shaders/boundingBoxRenderer.vertex';
-import { ChromaticAberration } from '@babylonjs/core/Shaders/chromaticAberration.fragment';
-import { CircleOfConfusion } from '@babylonjs/core/Shaders/circleOfConfusion.fragment';
-import { Color } from '@babylonjs/core/Shaders/color.fragment';
-import { Color } from '@babylonjs/core/Shaders/color.vertex';
-import { ColorCorrection } from '@babylonjs/core/Shaders/colorCorrection.fragment';
-import { Convolution } from '@babylonjs/core/Shaders/convolution.fragment';
-import { CopyTextureToTexture } from '@babylonjs/core/Shaders/copyTextureToTexture.fragment';
-import { Default } from '@babylonjs/core/Shaders/default.fragment';
-import { Default } from '@babylonjs/core/Shaders/default.vertex';
-import { Depth } from '@babylonjs/core/Shaders/depth.fragment';
-import { Depth } from '@babylonjs/core/Shaders/depth.vertex';
-import { DepthBoxBlur } from '@babylonjs/core/Shaders/depthBoxBlur.fragment';
-import { DepthOfField } from '@babylonjs/core/Shaders/depthOfField.fragment';
-import { DepthOfFieldMerge } from '@babylonjs/core/Shaders/depthOfFieldMerge.fragment';
-import { DisplayPass } from '@babylonjs/core/Shaders/displayPass.fragment';
-import { EquirectangularPanorama } from '@babylonjs/core/Shaders/equirectangularPanorama.fragment';
-import { ExtractHighlights } from '@babylonjs/core/Shaders/extractHighlights.fragment';
-import { Filter } from '@babylonjs/core/Shaders/filter.fragment';
-import { FluidRenderingBilateralBlur } from '@babylonjs/core/Shaders/fluidRenderingBilateralBlur.fragment';
-import { FluidRenderingParticleDepth } from '@babylonjs/core/Shaders/fluidRenderingParticleDepth.fragment';
-import { FluidRenderingParticleDepth } from '@babylonjs/core/Shaders/fluidRenderingParticleDepth.vertex';
-import { FluidRenderingParticleDiffuse } from '@babylonjs/core/Shaders/fluidRenderingParticleDiffuse.fragment';
-import { FluidRenderingParticleDiffuse } from '@babylonjs/core/Shaders/fluidRenderingParticleDiffuse.vertex';
-import { FluidRenderingParticleThickness } from '@babylonjs/core/Shaders/fluidRenderingParticleThickness.fragment';
-import { FluidRenderingParticleThickness } from '@babylonjs/core/Shaders/fluidRenderingParticleThickness.vertex';
-import { FluidRenderingRender } from '@babylonjs/core/Shaders/fluidRenderingRender.fragment';
-import { FluidRenderingStandardBlur } from '@babylonjs/core/Shaders/fluidRenderingStandardBlur.fragment';
-import { Fxaa } from '@babylonjs/core/Shaders/fxaa.fragment';
-import { Fxaa } from '@babylonjs/core/Shaders/fxaa.vertex';
-import { GaussianSplatting } from '@babylonjs/core/Shaders/gaussianSplatting.fragment';
-import { GaussianSplatting } from '@babylonjs/core/Shaders/gaussianSplatting.vertex';
-import { Geometry } from '@babylonjs/core/Shaders/geometry.fragment';
-import { Geometry } from '@babylonjs/core/Shaders/geometry.vertex';
-import { GlowBlurPostProcess } from '@babylonjs/core/Shaders/glowBlurPostProcess.fragment';
-import { GlowMapGeneration } from '@babylonjs/core/Shaders/glowMapGeneration.fragment';
-import { GlowMapGeneration } from '@babylonjs/core/Shaders/glowMapGeneration.vertex';
-import { GlowMapMerge } from '@babylonjs/core/Shaders/glowMapMerge.fragment';
-import { GlowMapMerge } from '@babylonjs/core/Shaders/glowMapMerge.vertex';
-import { GpuRenderParticles } from '@babylonjs/core/Shaders/gpuRenderParticles.fragment';
-import { GpuRenderParticles } from '@babylonjs/core/Shaders/gpuRenderParticles.vertex';
-import { GpuUpdateParticles } from '@babylonjs/core/Shaders/gpuUpdateParticles.fragment';
-import { GpuUpdateParticles } from '@babylonjs/core/Shaders/gpuUpdateParticles.vertex';
-import { Grain } from '@babylonjs/core/Shaders/grain.fragment';
-import { GreasedLine } from '@babylonjs/core/Shaders/greasedLine.fragment';
-import { GreasedLine } from '@babylonjs/core/Shaders/greasedLine.vertex';
-import { HdrFiltering } from '@babylonjs/core/Shaders/hdrFiltering.fragment';
-import { HdrFiltering } from '@babylonjs/core/Shaders/hdrFiltering.vertex';
-import { Highlights } from '@babylonjs/core/Shaders/highlights.fragment';
-import { ImageProcessing } from '@babylonjs/core/Shaders/imageProcessing.fragment';
-import { KernelBlur } from '@babylonjs/core/Shaders/kernelBlur.fragment';
-import { KernelBlur } from '@babylonjs/core/Shaders/kernelBlur.vertex';
-import { Layer } from '@babylonjs/core/Shaders/layer.fragment';
-import { Layer } from '@babylonjs/core/Shaders/layer.vertex';
-import { LensFlare } from '@babylonjs/core/Shaders/lensFlare.fragment';
-import { LensFlare } from '@babylonjs/core/Shaders/lensFlare.vertex';
-import { LensHighlights } from '@babylonjs/core/Shaders/lensHighlights.fragment';
-import { Line } from '@babylonjs/core/Shaders/line.fragment';
-import { Line } from '@babylonjs/core/Shaders/line.vertex';
-import { Lod } from '@babylonjs/core/Shaders/lod.fragment';
-import { LodCube } from '@babylonjs/core/Shaders/lodCube.fragment';
-import { MeshUVSpaceRenderer } from '@babylonjs/core/Shaders/meshUVSpaceRenderer.fragment';
-import { MeshUVSpaceRenderer } from '@babylonjs/core/Shaders/meshUVSpaceRenderer.vertex';
-import { MeshUVSpaceRendererFinaliser } from '@babylonjs/core/Shaders/meshUVSpaceRendererFinaliser.fragment';
-import { MeshUVSpaceRendererFinaliser } from '@babylonjs/core/Shaders/meshUVSpaceRendererFinaliser.vertex';
-import { MeshUVSpaceRendererMasker } from '@babylonjs/core/Shaders/meshUVSpaceRendererMasker.fragment';
-import { MeshUVSpaceRendererMasker } from '@babylonjs/core/Shaders/meshUVSpaceRendererMasker.vertex';
-import { MinmaxRedux } from '@babylonjs/core/Shaders/minmaxRedux.fragment';
-import { MotionBlur } from '@babylonjs/core/Shaders/motionBlur.fragment';
-import { Noise } from '@babylonjs/core/Shaders/noise.fragment';
-import { OitBackBlend } from '@babylonjs/core/Shaders/oitBackBlend.fragment';
-import { OitFinal } from '@babylonjs/core/Shaders/oitFinal.fragment';
-import { Outline } from '@babylonjs/core/Shaders/outline.fragment';
-import { Outline } from '@babylonjs/core/Shaders/outline.vertex';
-import { Particles } from '@babylonjs/core/Shaders/particles.fragment';
-import { Particles } from '@babylonjs/core/Shaders/particles.vertex';
-import { Pass } from '@babylonjs/core/Shaders/pass.fragment';
-import { PassCube } from '@babylonjs/core/Shaders/passCube.fragment';
-import { Pbr } from '@babylonjs/core/Shaders/pbr.fragment';
-import { Pbr } from '@babylonjs/core/Shaders/pbr.vertex';
-import { Postprocess } from '@babylonjs/core/Shaders/postprocess.vertex';
-import { Procedural } from '@babylonjs/core/Shaders/procedural.vertex';
-import { Refraction } from '@babylonjs/core/Shaders/refraction.fragment';
-import { RgbdDecode } from '@babylonjs/core/Shaders/rgbdDecode.fragment';
-import { RgbdEncode } from '@babylonjs/core/Shaders/rgbdEncode.fragment';
-import { RsmFullGlobalIllumination } from '@babylonjs/core/Shaders/rsmFullGlobalIllumination.fragment';
-import { RsmGlobalIllumination } from '@babylonjs/core/Shaders/rsmGlobalIllumination.fragment';
-import { ScreenSpaceCurvature } from '@babylonjs/core/Shaders/screenSpaceCurvature.fragment';
-import { ScreenSpaceReflection } from '@babylonjs/core/Shaders/screenSpaceReflection.fragment';
-import { ScreenSpaceReflection2 } from '@babylonjs/core/Shaders/screenSpaceReflection2.fragment';
-import { ScreenSpaceReflection2Blur } from '@babylonjs/core/Shaders/screenSpaceReflection2Blur.fragment';
-import { ScreenSpaceReflection2BlurCombiner } from '@babylonjs/core/Shaders/screenSpaceReflection2BlurCombiner.fragment';
-import { ShadowMap } from '@babylonjs/core/Shaders/shadowMap.fragment';
-import { ShadowMap } from '@babylonjs/core/Shaders/shadowMap.vertex';
-import { Sharpen } from '@babylonjs/core/Shaders/sharpen.fragment';
-import { SpriteMap } from '@babylonjs/core/Shaders/spriteMap.fragment';
-import { SpriteMap } from '@babylonjs/core/Shaders/spriteMap.vertex';
-import { Sprites } from '@babylonjs/core/Shaders/sprites.fragment';
-import { Sprites } from '@babylonjs/core/Shaders/sprites.vertex';
-import { Ssao } from '@babylonjs/core/Shaders/ssao.fragment';
-import { Ssao2 } from '@babylonjs/core/Shaders/ssao2.fragment';
-import { SsaoCombine } from '@babylonjs/core/Shaders/ssaoCombine.fragment';
-import { Standard } from '@babylonjs/core/Shaders/standard.fragment';
-import { StereoscopicInterlace } from '@babylonjs/core/Shaders/stereoscopicInterlace.fragment';
-import { SubSurfaceScattering } from '@babylonjs/core/Shaders/subSurfaceScattering.fragment';
-import { Taa } from '@babylonjs/core/Shaders/taa.fragment';
-import { Tonemap } from '@babylonjs/core/Shaders/tonemap.fragment';
-import { Velocity } from '@babylonjs/core/Shaders/velocity.fragment';
-import { Velocity } from '@babylonjs/core/Shaders/velocity.vertex';
-import { VolumetricLightScattering } from '@babylonjs/core/Shaders/volumetricLightScattering.fragment';
-import { VolumetricLightScatteringPass } from '@babylonjs/core/Shaders/volumetricLightScatteringPass.fragment';
-import { VolumetricLightScatteringPass } from '@babylonjs/core/Shaders/volumetricLightScatteringPass.vertex';
-import { VrDistortionCorrection } from '@babylonjs/core/Shaders/vrDistortionCorrection.fragment';
-import { VrMultiviewToSingleview } from '@babylonjs/core/Shaders/vrMultiviewToSingleview.fragment';
-import { BakedVertexAnimation } from '@babylonjs/core/ShadersWGSL/ShadersInclude/bakedVertexAnimation';
-import { BakedVertexAnimationDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/bakedVertexAnimationDeclaration';
-import { BonesDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/bonesDeclaration';
-import { BonesVertex } from '@babylonjs/core/ShadersWGSL/ShadersInclude/bonesVertex';
-import { ClipPlaneFragment } from '@babylonjs/core/ShadersWGSL/ShadersInclude/clipPlaneFragment';
-import { ClipPlaneFragmentDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/clipPlaneFragmentDeclaration';
-import { ClipPlaneVertex } from '@babylonjs/core/ShadersWGSL/ShadersInclude/clipPlaneVertex';
-import { ClipPlaneVertexDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/clipPlaneVertexDeclaration';
-import { FogFragmentDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/fogFragmentDeclaration';
-import { FresnelFunction } from '@babylonjs/core/ShadersWGSL/ShadersInclude/fresnelFunction';
-import { HelperFunctions } from '@babylonjs/core/ShadersWGSL/ShadersInclude/helperFunctions';
-import { InstancesDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/instancesDeclaration';
-import { InstancesVertex } from '@babylonjs/core/ShadersWGSL/ShadersInclude/instancesVertex';
-import { LightFragment } from '@babylonjs/core/ShadersWGSL/ShadersInclude/lightFragment';
-import { LightUboDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/lightUboDeclaration';
-import { LightVxUboDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/lightVxUboDeclaration';
-import { LightsFragmentFunctions } from '@babylonjs/core/ShadersWGSL/ShadersInclude/lightsFragmentFunctions';
-import { MeshUboDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/meshUboDeclaration';
-import { MorphTargetsVertex } from '@babylonjs/core/ShadersWGSL/ShadersInclude/morphTargetsVertex';
-import { MorphTargetsVertexDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/morphTargetsVertexDeclaration';
-import { MorphTargetsVertexGlobal } from '@babylonjs/core/ShadersWGSL/ShadersInclude/morphTargetsVertexGlobal';
-import { MorphTargetsVertexGlobalDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/morphTargetsVertexGlobalDeclaration';
-import { SceneUboDeclaration } from '@babylonjs/core/ShadersWGSL/ShadersInclude/sceneUboDeclaration';
-import { ShadowsFragmentFunctions } from '@babylonjs/core/ShadersWGSL/ShadersInclude/shadowsFragmentFunctions';
-import { ShadowsVertex } from '@babylonjs/core/ShadersWGSL/ShadersInclude/shadowsVertex';
-import { ClearQuad } from '@babylonjs/core/ShadersWGSL/clearQuad.fragment';
-import { ClearQuad } from '@babylonjs/core/ShadersWGSL/clearQuad.vertex';
-import { GpuUpdateParticles } from '@babylonjs/core/ShadersWGSL/gpuUpdateParticles.compute';
-import { Postprocess } from '@babylonjs/core/ShadersWGSL/postprocess.vertex';
-import { ISprites } from '@babylonjs/core/Sprites/ISprites';
 import { Sprite } from '@babylonjs/core/Sprites/sprite';
 import { SpriteManager } from '@babylonjs/core/Sprites/spriteManager';
 import { SpriteMap } from '@babylonjs/core/Sprites/spriteMap';
@@ -1274,21 +642,15 @@ import { SpritePackedManager } from '@babylonjs/core/Sprites/spritePackedManager
 import { SpriteRenderer } from '@babylonjs/core/Sprites/spriteRenderer';
 import { SpriteSceneComponent } from '@babylonjs/core/Sprites/spriteSceneComponent';
 import { ThinSprite } from '@babylonjs/core/Sprites/thinSprite';
-import { IStencilState } from '@babylonjs/core/States/IStencilState';
-import { AlphaCullingState } from '@babylonjs/core/States/alphaCullingState';
 import { DepthCullingState } from '@babylonjs/core/States/depthCullingState';
 import { StencilState } from '@babylonjs/core/States/stencilState';
 import { StencilStateComposer } from '@babylonjs/core/States/stencilStateComposer';
-import { WebXRCompositionLayer } from '@babylonjs/core/XR/features/Layers/WebXRCompositionLayer';
-import { WebXRProjectionLayer } from '@babylonjs/core/XR/features/Layers/WebXRProjectionLayer';
 import { WebXRAbstractFeature } from '@babylonjs/core/XR/features/WebXRAbstractFeature';
 import { WebXRAnchorSystem } from '@babylonjs/core/XR/features/WebXRAnchorSystem';
 import { WebXRBackgroundRemover } from '@babylonjs/core/XR/features/WebXRBackgroundRemover';
 import { WebXRControllerMovement } from '@babylonjs/core/XR/features/WebXRControllerMovement';
 import { WebXRControllerPhysics } from '@babylonjs/core/XR/features/WebXRControllerPhysics';
 import { WebXRControllerPointerSelection } from '@babylonjs/core/XR/features/WebXRControllerPointerSelection';
-import { WebXRControllerTeleportation } from '@babylonjs/core/XR/features/WebXRControllerTeleportation';
-import { WebXRDOMOverlay } from '@babylonjs/core/XR/features/WebXRDOMOverlay';
 import { WebXRDepthSensing } from '@babylonjs/core/XR/features/WebXRDepthSensing';
 import { WebXREyeTracking } from '@babylonjs/core/XR/features/WebXREyeTracking';
 import { WebXRFeaturePointSystem } from '@babylonjs/core/XR/features/WebXRFeaturePointSystem';
@@ -1307,10 +669,8 @@ import { WebXRWalkingLocomotion } from '@babylonjs/core/XR/features/WebXRWalking
 import { WebXRAbstractMotionController } from '@babylonjs/core/XR/motionController/webXRAbstractMotionController';
 import { WebXRControllerComponent } from '@babylonjs/core/XR/motionController/webXRControllerComponent';
 import { WebXRGenericHandController } from '@babylonjs/core/XR/motionController/webXRGenericHandController';
-import { WebXRGenericMotionController } from '@babylonjs/core/XR/motionController/webXRGenericMotionController';
 import { WebXRHTCViveMotionController } from '@babylonjs/core/XR/motionController/webXRHTCViveMotionController';
 import { WebXRMicrosoftMixedRealityController } from '@babylonjs/core/XR/motionController/webXRMicrosoftMixedRealityController';
-import { WebXRMotionControllerManager } from '@babylonjs/core/XR/motionController/webXRMotionControllerManager';
 import { WebXROculusTouchMotionController } from '@babylonjs/core/XR/motionController/webXROculusTouchMotionController';
 import { WebXRProfiledMotionController } from '@babylonjs/core/XR/motionController/webXRProfiledMotionController';
 import { NativeXRFrame } from '@babylonjs/core/XR/native/nativeXRFrame';
@@ -1324,1349 +684,6734 @@ import { WebXRInput } from '@babylonjs/core/XR/webXRInput';
 import { WebXRInputSource } from '@babylonjs/core/XR/webXRInputSource';
 import { WebXRLayerWrapper } from '@babylonjs/core/XR/webXRLayerWrapper';
 import { WebXRManagedOutputCanvas } from '@babylonjs/core/XR/webXRManagedOutputCanvas';
-import { WebXRRenderTargetTextureProvider } from '@babylonjs/core/XR/webXRRenderTargetTextureProvider';
 import { WebXRSessionManager } from '@babylonjs/core/XR/webXRSessionManager';
-import { WebXRTypes } from '@babylonjs/core/XR/webXRTypes';
-import { WebXRWebGLLayer } from '@babylonjs/core/XR/webXRWebGLLayer';
 import { AbstractScene } from '@babylonjs/core/abstractScene';
 import { AssetContainer } from '@babylonjs/core/assetContainer';
 import { Node } from '@babylonjs/core/node';
 import { Scene } from '@babylonjs/core/scene';
-import { SceneComponent } from '@babylonjs/core/sceneComponent';
-import { Types } from '@babylonjs/core/types';
 
 export interface JSXElements {
-  abstractActionManager: React.DetailedHTMLProps<BabylonProps<AbstractActionManager>, any>;
-  action: React.DetailedHTMLProps<BabylonProps<Action>, any>;
-  actionEvent: React.DetailedHTMLProps<BabylonProps<ActionEvent>, any>;
-  actionManager: React.DetailedHTMLProps<BabylonProps<ActionManager>, any>;
-  condition: React.DetailedHTMLProps<BabylonProps<Condition>, any>;
-  directActions: React.DetailedHTMLProps<BabylonProps<DirectActions>, any>;
-  directAudioActions: React.DetailedHTMLProps<BabylonProps<DirectAudioActions>, any>;
-  interpolateValueAction: React.DetailedHTMLProps<BabylonProps<InterpolateValueAction>, any>;
-  animatable: React.DetailedHTMLProps<BabylonProps<Animatable>, any>;
-  animatable: React.DetailedHTMLProps<BabylonProps<Animatable>, any>;
-  animation: React.DetailedHTMLProps<BabylonProps<Animation>, any>;
-  animationEvent: React.DetailedHTMLProps<BabylonProps<AnimationEvent>, any>;
-  animationGroup: React.DetailedHTMLProps<BabylonProps<AnimationGroup>, any>;
-  animationGroupMask: React.DetailedHTMLProps<BabylonProps<AnimationGroupMask>, any>;
-  animationKey: React.DetailedHTMLProps<BabylonProps<AnimationKey>, any>;
-  animationPropertiesOverride: React.DetailedHTMLProps<BabylonProps<AnimationPropertiesOverride>, any>;
-  animationRange: React.DetailedHTMLProps<BabylonProps<AnimationRange>, any>;
-  easing: React.DetailedHTMLProps<BabylonProps<Easing>, any>;
-  pathCursor: React.DetailedHTMLProps<BabylonProps<PathCursor>, any>;
-  runtimeAnimation: React.DetailedHTMLProps<BabylonProps<RuntimeAnimation>, any>;
-  IAudioEngine: React.DetailedHTMLProps<BabylonProps<IAudioEngine>, any>;
-  IAudioEngineOptions: React.DetailedHTMLProps<BabylonProps<IAudioEngineOptions>, any>;
-  ISoundOptions: React.DetailedHTMLProps<BabylonProps<ISoundOptions>, any>;
-  analyser: React.DetailedHTMLProps<BabylonProps<Analyser>, any>;
-  audioEngine: React.DetailedHTMLProps<BabylonProps<AudioEngine>, any>;
-  audioSceneComponent: React.DetailedHTMLProps<BabylonProps<AudioSceneComponent>, any>;
-  sound: React.DetailedHTMLProps<BabylonProps<Sound>, any>;
-  soundTrack: React.DetailedHTMLProps<BabylonProps<SoundTrack>, any>;
-  weightedsound: React.DetailedHTMLProps<BabylonProps<Weightedsound>, any>;
-  bakedVertexAnimationManager: React.DetailedHTMLProps<BabylonProps<BakedVertexAnimationManager>, any>;
-  vertexAnimationBaker: React.DetailedHTMLProps<BabylonProps<VertexAnimationBaker>, any>;
-  autoRotationBehavior: React.DetailedHTMLProps<BabylonProps<AutoRotationBehavior>, any>;
-  bouncingBehavior: React.DetailedHTMLProps<BabylonProps<BouncingBehavior>, any>;
-  framingBehavior: React.DetailedHTMLProps<BabylonProps<FramingBehavior>, any>;
-  attachToBoxBehavior: React.DetailedHTMLProps<BabylonProps<AttachToBoxBehavior>, any>;
-  baseSixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<BaseSixDofDragBehavior>, any>;
-  fadeInOutBehavior: React.DetailedHTMLProps<BabylonProps<FadeInOutBehavior>, any>;
-  followBehavior: React.DetailedHTMLProps<BabylonProps<FollowBehavior>, any>;
-  handConstraintBehavior: React.DetailedHTMLProps<BabylonProps<HandConstraintBehavior>, any>;
-  multiPointerScaleBehavior: React.DetailedHTMLProps<BabylonProps<MultiPointerScaleBehavior>, any>;
-  pointerDragBehavior: React.DetailedHTMLProps<BabylonProps<PointerDragBehavior>, any>;
-  sixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<SixDofDragBehavior>, any>;
-  surfaceMagnetismBehavior: React.DetailedHTMLProps<BabylonProps<SurfaceMagnetismBehavior>, any>;
-  behavior: React.DetailedHTMLProps<BabylonProps<Behavior>, any>;
-  bone: React.DetailedHTMLProps<BabylonProps<Bone>, any>;
-  boneIKController: React.DetailedHTMLProps<BabylonProps<BoneIKController>, any>;
-  boneLookController: React.DetailedHTMLProps<BabylonProps<BoneLookController>, any>;
-  skeleton: React.DetailedHTMLProps<BabylonProps<Skeleton>, any>;
-  buffer: React.DetailedHTMLProps<BabylonProps<Buffer>, any>;
-  buffer: React.DetailedHTMLProps<BabylonProps<Buffer>, any>;
-  dataBuffer: React.DetailedHTMLProps<BabylonProps<DataBuffer>, any>;
-  storageBuffer: React.DetailedHTMLProps<BabylonProps<StorageBuffer>, any>;
-  BaseCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<BaseCameraMouseWheelInput>, any>;
-  BaseCameraPointersInput: React.DetailedHTMLProps<BabylonProps<BaseCameraPointersInput>, any>;
-  arcRotateCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ArcRotateCameraGamepadInput>, any>;
-  arcRotateCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ArcRotateCameraKeyboardMoveInput>, any>;
-  arcRotateCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ArcRotateCameraMouseWheelInput>, any>;
-  arcRotateCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ArcRotateCameraPointersInput>, any>;
-  arcRotateCameraVRDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<ArcRotateCameraVRDeviceOrientationInput>, any>;
-  flyCameraKeyboardInput: React.DetailedHTMLProps<BabylonProps<FlyCameraKeyboardInput>, any>;
-  flyCameraMouseInput: React.DetailedHTMLProps<BabylonProps<FlyCameraMouseInput>, any>;
-  followCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<FollowCameraKeyboardMoveInput>, any>;
-  followCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<FollowCameraMouseWheelInput>, any>;
-  followCameraPointersInput: React.DetailedHTMLProps<BabylonProps<FollowCameraPointersInput>, any>;
-  freeCameraDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<FreeCameraDeviceOrientationInput>, any>;
-  freeCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<FreeCameraGamepadInput>, any>;
-  freeCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<FreeCameraKeyboardMoveInput>, any>;
-  freeCameraMouseInput: React.DetailedHTMLProps<BabylonProps<FreeCameraMouseInput>, any>;
-  freeCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<FreeCameraMouseWheelInput>, any>;
-  freeCameraTouchInput: React.DetailedHTMLProps<BabylonProps<FreeCameraTouchInput>, any>;
-  freeCameraVirtualJoystickInput: React.DetailedHTMLProps<BabylonProps<FreeCameraVirtualJoystickInput>, any>;
-  stereoscopicAnaglyphRigMode: React.DetailedHTMLProps<BabylonProps<StereoscopicAnaglyphRigMode>, any>;
-  stereoscopicRigMode: React.DetailedHTMLProps<BabylonProps<StereoscopicRigMode>, any>;
-  vrRigMode: React.DetailedHTMLProps<BabylonProps<VrRigMode>, any>;
-  anaglyphArcRotateCamera: React.DetailedHTMLProps<BabylonProps<AnaglyphArcRotateCamera>, any>;
-  anaglyphFreeCamera: React.DetailedHTMLProps<BabylonProps<AnaglyphFreeCamera>, any>;
-  anaglyphGamepadCamera: React.DetailedHTMLProps<BabylonProps<AnaglyphGamepadCamera>, any>;
-  anaglyphUniversalCamera: React.DetailedHTMLProps<BabylonProps<AnaglyphUniversalCamera>, any>;
-  stereoscopicArcRotateCamera: React.DetailedHTMLProps<BabylonProps<StereoscopicArcRotateCamera>, any>;
-  stereoscopicFreeCamera: React.DetailedHTMLProps<BabylonProps<StereoscopicFreeCamera>, any>;
-  stereoscopicGamepadCamera: React.DetailedHTMLProps<BabylonProps<StereoscopicGamepadCamera>, any>;
-  stereoscopicScreenUniversalCamera: React.DetailedHTMLProps<BabylonProps<StereoscopicScreenUniversalCamera>, any>;
-  stereoscopicUniversalCamera: React.DetailedHTMLProps<BabylonProps<StereoscopicUniversalCamera>, any>;
-  vrCameraMetrics: React.DetailedHTMLProps<BabylonProps<VrCameraMetrics>, any>;
-  vrDeviceOrientationArcRotateCamera: React.DetailedHTMLProps<BabylonProps<VrDeviceOrientationArcRotateCamera>, any>;
-  vrDeviceOrientationFreeCamera: React.DetailedHTMLProps<BabylonProps<VrDeviceOrientationFreeCamera>, any>;
-  vrDeviceOrientationGamepadCamera: React.DetailedHTMLProps<BabylonProps<VrDeviceOrientationGamepadCamera>, any>;
-  vrExperienceHelper: React.DetailedHTMLProps<BabylonProps<VrExperienceHelper>, any>;
-  arcRotateCamera: React.DetailedHTMLProps<BabylonProps<ArcRotateCamera>, any>;
-  arcRotateCameraInputsManager: React.DetailedHTMLProps<BabylonProps<ArcRotateCameraInputsManager>, any>;
-  camera: React.DetailedHTMLProps<BabylonProps<Camera>, any>;
-  cameraInputsManager: React.DetailedHTMLProps<BabylonProps<CameraInputsManager>, any>;
-  deviceOrientationCamera: React.DetailedHTMLProps<BabylonProps<DeviceOrientationCamera>, any>;
-  flyCamera: React.DetailedHTMLProps<BabylonProps<FlyCamera>, any>;
-  flyCameraInputsManager: React.DetailedHTMLProps<BabylonProps<FlyCameraInputsManager>, any>;
-  followCamera: React.DetailedHTMLProps<BabylonProps<FollowCamera>, any>;
-  followCameraInputsManager: React.DetailedHTMLProps<BabylonProps<FollowCameraInputsManager>, any>;
-  freeCamera: React.DetailedHTMLProps<BabylonProps<FreeCamera>, any>;
-  freeCameraInputsManager: React.DetailedHTMLProps<BabylonProps<FreeCameraInputsManager>, any>;
-  gamepadCamera: React.DetailedHTMLProps<BabylonProps<GamepadCamera>, any>;
-  targetCamera: React.DetailedHTMLProps<BabylonProps<TargetCamera>, any>;
-  touchCamera: React.DetailedHTMLProps<BabylonProps<TouchCamera>, any>;
-  universalCamera: React.DetailedHTMLProps<BabylonProps<UniversalCamera>, any>;
-  virtualJoysticksCamera: React.DetailedHTMLProps<BabylonProps<VirtualJoysticksCamera>, any>;
-  collider: React.DetailedHTMLProps<BabylonProps<Collider>, any>;
-  collisionCoordinator: React.DetailedHTMLProps<BabylonProps<CollisionCoordinator>, any>;
-  intersectionInfo: React.DetailedHTMLProps<BabylonProps<IntersectionInfo>, any>;
-  meshCollisionData: React.DetailedHTMLProps<BabylonProps<MeshCollisionData>, any>;
-  pickingInfo: React.DetailedHTMLProps<BabylonProps<PickingInfo>, any>;
-  compatibilityOptions: React.DetailedHTMLProps<BabylonProps<CompatibilityOptions>, any>;
-  IComputeContext: React.DetailedHTMLProps<BabylonProps<IComputeContext>, any>;
-  IComputePipelineContext: React.DetailedHTMLProps<BabylonProps<IComputePipelineContext>, any>;
-  computeEffect: React.DetailedHTMLProps<BabylonProps<ComputeEffect>, any>;
-  computeShader: React.DetailedHTMLProps<BabylonProps<ComputeShader>, any>;
-  octree: React.DetailedHTMLProps<BabylonProps<Octree>, any>;
-  octreeBlock: React.DetailedHTMLProps<BabylonProps<OctreeBlock>, any>;
-  octreeSceneComponent: React.DetailedHTMLProps<BabylonProps<OctreeSceneComponent>, any>;
-  boundingBox: React.DetailedHTMLProps<BabylonProps<BoundingBox>, any>;
-  boundingInfo: React.DetailedHTMLProps<BabylonProps<BoundingInfo>, any>;
-  boundingSphere: React.DetailedHTMLProps<BabylonProps<BoundingSphere>, any>;
-  ray: React.DetailedHTMLProps<BabylonProps<Ray>, any>;
-  ISkeletonViewer: React.DetailedHTMLProps<BabylonProps<ISkeletonViewer>, any>;
-  axesViewer: React.DetailedHTMLProps<BabylonProps<AxesViewer>, any>;
-  boneAxesViewer: React.DetailedHTMLProps<BabylonProps<BoneAxesViewer>, any>;
-  debugLayer: React.DetailedHTMLProps<BabylonProps<DebugLayer>, any>;
-  directionalLightFrustumViewer: React.DetailedHTMLProps<BabylonProps<DirectionalLightFrustumViewer>, any>;
-  physicsViewer: React.DetailedHTMLProps<BabylonProps<PhysicsViewer>, any>;
-  rayHelper: React.DetailedHTMLProps<BabylonProps<RayHelper>, any>;
-  skeletonViewer: React.DetailedHTMLProps<BabylonProps<SkeletonViewer>, any>;
-  nodeDecorator: React.DetailedHTMLProps<BabylonProps<NodeDecorator>, any>;
-  deviceEnums: React.DetailedHTMLProps<BabylonProps<DeviceEnums>, any>;
-  deviceSource: React.DetailedHTMLProps<BabylonProps<DeviceSource>, any>;
-  deviceSourceManager: React.DetailedHTMLProps<BabylonProps<DeviceSourceManager>, any>;
-  deviceTypes: React.DetailedHTMLProps<BabylonProps<DeviceTypes>, any>;
-  eventFactory: React.DetailedHTMLProps<BabylonProps<EventFactory>, any>;
-  inputInterfaces: React.DetailedHTMLProps<BabylonProps<InputInterfaces>, any>;
-  internalDeviceSourceManager: React.DetailedHTMLProps<BabylonProps<InternalDeviceSourceManager>, any>;
-  nativeDeviceInputSystem: React.DetailedHTMLProps<BabylonProps<NativeDeviceInputSystem>, any>;
-  webDeviceInputSystem: React.DetailedHTMLProps<BabylonProps<WebDeviceInputSystem>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  ICanvas: React.DetailedHTMLProps<BabylonProps<ICanvas>, any>;
-  IDrawContext: React.DetailedHTMLProps<BabylonProps<IDrawContext>, any>;
-  IMaterialContext: React.DetailedHTMLProps<BabylonProps<IMaterialContext>, any>;
-  IPipelineContext: React.DetailedHTMLProps<BabylonProps<IPipelineContext>, any>;
-  nativeDataStream: React.DetailedHTMLProps<BabylonProps<NativeDataStream>, any>;
-  nativeHardwareTexture: React.DetailedHTMLProps<BabylonProps<NativeHardwareTexture>, any>;
-  nativeHelpers: React.DetailedHTMLProps<BabylonProps<NativeHelpers>, any>;
-  nativeInterfaces: React.DetailedHTMLProps<BabylonProps<NativeInterfaces>, any>;
-  nativePipelineContext: React.DetailedHTMLProps<BabylonProps<NativePipelineContext>, any>;
-  nativeRenderTargetWrapper: React.DetailedHTMLProps<BabylonProps<NativeRenderTargetWrapper>, any>;
-  validatedNativeDataStream: React.DetailedHTMLProps<BabylonProps<ValidatedNativeDataStream>, any>;
-  shaderDefineAndOperator: React.DetailedHTMLProps<BabylonProps<ShaderDefineAndOperator>, any>;
-  shaderDefineArithmeticOperator: React.DetailedHTMLProps<BabylonProps<ShaderDefineArithmeticOperator>, any>;
-  shaderDefineIsDefinedOperator: React.DetailedHTMLProps<BabylonProps<ShaderDefineIsDefinedOperator>, any>;
-  shaderDefineOrOperator: React.DetailedHTMLProps<BabylonProps<ShaderDefineOrOperator>, any>;
-  shaderDefineExpression: React.DetailedHTMLProps<BabylonProps<ShaderDefineExpression>, any>;
-  iShaderProcessor: React.DetailedHTMLProps<BabylonProps<IShaderProcessor>, any>;
-  shaderCodeConditionNode: React.DetailedHTMLProps<BabylonProps<ShaderCodeConditionNode>, any>;
-  shaderCodeCursor: React.DetailedHTMLProps<BabylonProps<ShaderCodeCursor>, any>;
-  shaderCodeInliner: React.DetailedHTMLProps<BabylonProps<ShaderCodeInliner>, any>;
-  shaderCodeNode: React.DetailedHTMLProps<BabylonProps<ShaderCodeNode>, any>;
-  shaderCodeTestNode: React.DetailedHTMLProps<BabylonProps<ShaderCodeTestNode>, any>;
-  shaderProcessingOptions: React.DetailedHTMLProps<BabylonProps<ShaderProcessingOptions>, any>;
-  shaderProcessor: React.DetailedHTMLProps<BabylonProps<ShaderProcessor>, any>;
-  webGL2ShaderProcessors: React.DetailedHTMLProps<BabylonProps<WebGL2ShaderProcessors>, any>;
-  webGLHardwareTexture: React.DetailedHTMLProps<BabylonProps<WebGLHardwareTexture>, any>;
-  webGLPipelineContext: React.DetailedHTMLProps<BabylonProps<WebGLPipelineContext>, any>;
-  webGLRenderTargetWrapper: React.DetailedHTMLProps<BabylonProps<WebGLRenderTargetWrapper>, any>;
-  webGLShaderProcessors: React.DetailedHTMLProps<BabylonProps<WebGLShaderProcessors>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  webgpuBufferManager: React.DetailedHTMLProps<BabylonProps<WebgpuBufferManager>, any>;
-  webgpuBundleList: React.DetailedHTMLProps<BabylonProps<WebgpuBundleList>, any>;
-  webgpuCacheBindGroups: React.DetailedHTMLProps<BabylonProps<WebgpuCacheBindGroups>, any>;
-  webgpuCacheRenderPipeline: React.DetailedHTMLProps<BabylonProps<WebgpuCacheRenderPipeline>, any>;
-  webgpuCacheRenderPipelineString: React.DetailedHTMLProps<BabylonProps<WebgpuCacheRenderPipelineString>, any>;
-  webgpuCacheRenderPipelineTree: React.DetailedHTMLProps<BabylonProps<WebgpuCacheRenderPipelineTree>, any>;
-  webgpuCacheSampler: React.DetailedHTMLProps<BabylonProps<WebgpuCacheSampler>, any>;
-  webgpuClearQuad: React.DetailedHTMLProps<BabylonProps<WebgpuClearQuad>, any>;
-  webgpuComputeContext: React.DetailedHTMLProps<BabylonProps<WebgpuComputeContext>, any>;
-  webgpuComputePipelineContext: React.DetailedHTMLProps<BabylonProps<WebgpuComputePipelineContext>, any>;
-  webgpuConstants: React.DetailedHTMLProps<BabylonProps<WebgpuConstants>, any>;
-  webgpuDepthCullingState: React.DetailedHTMLProps<BabylonProps<WebgpuDepthCullingState>, any>;
-  webgpuDrawContext: React.DetailedHTMLProps<BabylonProps<WebgpuDrawContext>, any>;
-  webgpuExternalTexture: React.DetailedHTMLProps<BabylonProps<WebgpuExternalTexture>, any>;
-  webgpuHardwareTexture: React.DetailedHTMLProps<BabylonProps<WebgpuHardwareTexture>, any>;
-  webgpuMaterialContext: React.DetailedHTMLProps<BabylonProps<WebgpuMaterialContext>, any>;
-  webgpuOcclusionQuery: React.DetailedHTMLProps<BabylonProps<WebgpuOcclusionQuery>, any>;
-  webgpuPerfCounter: React.DetailedHTMLProps<BabylonProps<WebgpuPerfCounter>, any>;
-  webgpuPipelineContext: React.DetailedHTMLProps<BabylonProps<WebgpuPipelineContext>, any>;
-  webgpuQuerySet: React.DetailedHTMLProps<BabylonProps<WebgpuQuerySet>, any>;
-  webgpuRenderTargetWrapper: React.DetailedHTMLProps<BabylonProps<WebgpuRenderTargetWrapper>, any>;
-  webgpuShaderProcessingContext: React.DetailedHTMLProps<BabylonProps<WebgpuShaderProcessingContext>, any>;
-  webgpuShaderProcessor: React.DetailedHTMLProps<BabylonProps<WebgpuShaderProcessor>, any>;
-  webgpuShaderProcessorsGLSL: React.DetailedHTMLProps<BabylonProps<WebgpuShaderProcessorsGLSL>, any>;
-  webgpuShaderProcessorsWGSL: React.DetailedHTMLProps<BabylonProps<WebgpuShaderProcessorsWGSL>, any>;
-  webgpuSnapshotRendering: React.DetailedHTMLProps<BabylonProps<WebgpuSnapshotRendering>, any>;
-  webgpuStencilStateComposer: React.DetailedHTMLProps<BabylonProps<WebgpuStencilStateComposer>, any>;
-  webgpuTextureHelper: React.DetailedHTMLProps<BabylonProps<WebgpuTextureHelper>, any>;
-  webgpuTextureManager: React.DetailedHTMLProps<BabylonProps<WebgpuTextureManager>, any>;
-  webgpuTimestampQuery: React.DetailedHTMLProps<BabylonProps<WebgpuTimestampQuery>, any>;
-  webgpuTintWASM: React.DetailedHTMLProps<BabylonProps<WebgpuTintWASM>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  abstractEngine: React.DetailedHTMLProps<BabylonProps<AbstractEngine>, any>;
-  constants: React.DetailedHTMLProps<BabylonProps<Constants>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engine: React.DetailedHTMLProps<BabylonProps<Engine>, any>;
-  engineCapabilities: React.DetailedHTMLProps<BabylonProps<EngineCapabilities>, any>;
-  engineFactory: React.DetailedHTMLProps<BabylonProps<EngineFactory>, any>;
-  engineFeatures: React.DetailedHTMLProps<BabylonProps<EngineFeatures>, any>;
-  engineStore: React.DetailedHTMLProps<BabylonProps<EngineStore>, any>;
-  instancingAttributeInfo: React.DetailedHTMLProps<BabylonProps<InstancingAttributeInfo>, any>;
-  nativeEngine: React.DetailedHTMLProps<BabylonProps<NativeEngine>, any>;
-  nullEngine: React.DetailedHTMLProps<BabylonProps<NullEngine>, any>;
-  performanceConfigurator: React.DetailedHTMLProps<BabylonProps<PerformanceConfigurator>, any>;
-  renderTargetWrapper: React.DetailedHTMLProps<BabylonProps<RenderTargetWrapper>, any>;
-  shaderStore: React.DetailedHTMLProps<BabylonProps<ShaderStore>, any>;
-  thinEngine: React.DetailedHTMLProps<BabylonProps<ThinEngine>, any>;
-  thinEngine: React.DetailedHTMLProps<BabylonProps<ThinEngine>, any>;
-  webgpuEngine: React.DetailedHTMLProps<BabylonProps<WebgpuEngine>, any>;
-  clipboardEvents: React.DetailedHTMLProps<BabylonProps<ClipboardEvents>, any>;
-  deviceInputEvents: React.DetailedHTMLProps<BabylonProps<DeviceInputEvents>, any>;
-  keyboardEvents: React.DetailedHTMLProps<BabylonProps<KeyboardEvents>, any>;
-  pointerEvents: React.DetailedHTMLProps<BabylonProps<PointerEvents>, any>;
-  flowGraphLogicBlocks: React.DetailedHTMLProps<BabylonProps<FlowGraphLogicBlocks>, any>;
-  flowGraphMathBlocks: React.DetailedHTMLProps<BabylonProps<FlowGraphMathBlocks>, any>;
-  flowGraphBinaryOperationBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphBinaryOperationBlock>, any>;
-  flowGraphCachedOperationBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphCachedOperationBlock>, any>;
-  flowGraphConditionalDataBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphConditionalDataBlock>, any>;
-  flowGraphConstantBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphConstantBlock>, any>;
-  flowGraphConstantOperationBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphConstantOperationBlock>, any>;
-  flowGraphCoordinateTransformBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphCoordinateTransformBlock>, any>;
-  flowGraphGetPropertyBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphGetPropertyBlock>, any>;
-  flowGraphGetVariableBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphGetVariableBlock>, any>;
-  flowGraphTernaryOperationBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphTernaryOperationBlock>, any>;
-  flowGraphUnaryOperationBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphUnaryOperationBlock>, any>;
-  flowGraphMeshPickEventBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphMeshPickEventBlock>, any>;
-  flowGraphReceiveCustomEventBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphReceiveCustomEventBlock>, any>;
-  flowGraphSceneReadyEventBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphSceneReadyEventBlock>, any>;
-  flowGraphSceneTickEventBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphSceneTickEventBlock>, any>;
-  flowGraphPauseAnimationBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphPauseAnimationBlock>, any>;
-  flowGraphPlayAnimationBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphPlayAnimationBlock>, any>;
-  flowGraphStopAnimationBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphStopAnimationBlock>, any>;
-  flowGraphPlayAudioBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphPlayAudioBlock>, any>;
-  flowGraphStopAudioBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphStopAudioBlock>, any>;
-  flowGraphBranchBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphBranchBlock>, any>;
-  flowGraphCounterBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphCounterBlock>, any>;
-  flowGraphDebounceBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphDebounceBlock>, any>;
-  flowGraphDoNBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphDoNBlock>, any>;
-  flowGraphFlipFlopBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphFlipFlopBlock>, any>;
-  flowGraphForLoopBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphForLoopBlock>, any>;
-  flowGraphMultiGateBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphMultiGateBlock>, any>;
-  flowGraphSequenceBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphSequenceBlock>, any>;
-  flowGraphSwitchBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphSwitchBlock>, any>;
-  flowGraphThrottleBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphThrottleBlock>, any>;
-  flowGraphTimerBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphTimerBlock>, any>;
-  flowGraphWaitAllBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphWaitAllBlock>, any>;
-  flowGraphWhileLoopBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphWhileLoopBlock>, any>;
-  flowGraphConsoleLogBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphConsoleLogBlock>, any>;
-  flowGraphSendCustomEventBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphSendCustomEventBlock>, any>;
-  flowGraphSetPropertyBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphSetPropertyBlock>, any>;
-  flowGraphSetVariableBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphSetVariableBlock>, any>;
-  flowGraph: React.DetailedHTMLProps<BabylonProps<FlowGraph>, any>;
-  flowGraphAsyncExecutionBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphAsyncExecutionBlock>, any>;
-  flowGraphBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphBlock>, any>;
-  flowGraphConnection: React.DetailedHTMLProps<BabylonProps<FlowGraphConnection>, any>;
-  flowGraphContext: React.DetailedHTMLProps<BabylonProps<FlowGraphContext>, any>;
-  flowGraphContextLogger: React.DetailedHTMLProps<BabylonProps<FlowGraphContextLogger>, any>;
-  flowGraphCoordinator: React.DetailedHTMLProps<BabylonProps<FlowGraphCoordinator>, any>;
-  flowGraphDataConnection: React.DetailedHTMLProps<BabylonProps<FlowGraphDataConnection>, any>;
-  flowGraphEventBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphEventBlock>, any>;
-  flowGraphExecutionBlock: React.DetailedHTMLProps<BabylonProps<FlowGraphExecutionBlock>, any>;
-  flowGraphExecutionBlockWithOutSignal: React.DetailedHTMLProps<BabylonProps<FlowGraphExecutionBlockWithOutSignal>, any>;
-  flowGraphInteger: React.DetailedHTMLProps<BabylonProps<FlowGraphInteger>, any>;
-  flowGraphPathConverter: React.DetailedHTMLProps<BabylonProps<FlowGraphPathConverter>, any>;
-  flowGraphPathConverterComponent: React.DetailedHTMLProps<BabylonProps<FlowGraphPathConverterComponent>, any>;
-  flowGraphRichTypes: React.DetailedHTMLProps<BabylonProps<FlowGraphRichTypes>, any>;
-  flowGraphSignalConnection: React.DetailedHTMLProps<BabylonProps<FlowGraphSignalConnection>, any>;
-  serialization: React.DetailedHTMLProps<BabylonProps<Serialization>, any>;
-  typeDefinitions: React.DetailedHTMLProps<BabylonProps<TypeDefinitions>, any>;
-  utils: React.DetailedHTMLProps<BabylonProps<Utils>, any>;
-  dualShockGamepad: React.DetailedHTMLProps<BabylonProps<DualShockGamepad>, any>;
-  gamepad: React.DetailedHTMLProps<BabylonProps<Gamepad>, any>;
-  gamepadManager: React.DetailedHTMLProps<BabylonProps<GamepadManager>, any>;
-  gamepadSceneComponent: React.DetailedHTMLProps<BabylonProps<GamepadSceneComponent>, any>;
-  xboxGamepad: React.DetailedHTMLProps<BabylonProps<XboxGamepad>, any>;
-  axisDragGizmo: React.DetailedHTMLProps<BabylonProps<AxisDragGizmo>, any>;
-  axisScaleGizmo: React.DetailedHTMLProps<BabylonProps<AxisScaleGizmo>, any>;
-  boundingBoxGizmo: React.DetailedHTMLProps<BabylonProps<BoundingBoxGizmo>, any>;
-  cameraGizmo: React.DetailedHTMLProps<BabylonProps<CameraGizmo>, any>;
-  gizmo: React.DetailedHTMLProps<BabylonProps<Gizmo>, any>;
-  gizmoManager: React.DetailedHTMLProps<BabylonProps<GizmoManager>, any>;
-  lightGizmo: React.DetailedHTMLProps<BabylonProps<LightGizmo>, any>;
-  planeDragGizmo: React.DetailedHTMLProps<BabylonProps<PlaneDragGizmo>, any>;
-  planeRotationGizmo: React.DetailedHTMLProps<BabylonProps<PlaneRotationGizmo>, any>;
-  positionGizmo: React.DetailedHTMLProps<BabylonProps<PositionGizmo>, any>;
-  rotationGizmo: React.DetailedHTMLProps<BabylonProps<RotationGizmo>, any>;
-  scaleGizmo: React.DetailedHTMLProps<BabylonProps<ScaleGizmo>, any>;
-  environmentHelper: React.DetailedHTMLProps<BabylonProps<EnvironmentHelper>, any>;
-  photoDome: React.DetailedHTMLProps<BabylonProps<PhotoDome>, any>;
-  sceneHelpers: React.DetailedHTMLProps<BabylonProps<SceneHelpers>, any>;
-  textureDome: React.DetailedHTMLProps<BabylonProps<TextureDome>, any>;
-  videoDome: React.DetailedHTMLProps<BabylonProps<VideoDome>, any>;
-  IAccessibilityTag: React.DetailedHTMLProps<BabylonProps<IAccessibilityTag>, any>;
-  pointerPickingConfiguration: React.DetailedHTMLProps<BabylonProps<PointerPickingConfiguration>, any>;
-  scene: React.DetailedHTMLProps<BabylonProps<Scene>, any>;
-  engineInstrumentation: React.DetailedHTMLProps<BabylonProps<EngineInstrumentation>, any>;
-  sceneInstrumentation: React.DetailedHTMLProps<BabylonProps<SceneInstrumentation>, any>;
-  timeToken: React.DetailedHTMLProps<BabylonProps<TimeToken>, any>;
-  effectLayer: React.DetailedHTMLProps<BabylonProps<EffectLayer>, any>;
-  effectLayerSceneComponent: React.DetailedHTMLProps<BabylonProps<EffectLayerSceneComponent>, any>;
-  glowLayer: React.DetailedHTMLProps<BabylonProps<GlowLayer>, any>;
-  highlightLayer: React.DetailedHTMLProps<BabylonProps<HighlightLayer>, any>;
-  layer: React.DetailedHTMLProps<BabylonProps<Layer>, any>;
-  layerSceneComponent: React.DetailedHTMLProps<BabylonProps<LayerSceneComponent>, any>;
-  legacy: React.DetailedHTMLProps<BabylonProps<Legacy>, any>;
-  lensFlare: React.DetailedHTMLProps<BabylonProps<LensFlare>, any>;
-  lensFlareSystem: React.DetailedHTMLProps<BabylonProps<LensFlareSystem>, any>;
-  lensFlareSystemSceneComponent: React.DetailedHTMLProps<BabylonProps<LensFlareSystemSceneComponent>, any>;
-  cascadedShadowGenerator: React.DetailedHTMLProps<BabylonProps<CascadedShadowGenerator>, any>;
-  shadowGenerator: React.DetailedHTMLProps<BabylonProps<ShadowGenerator>, any>;
-  shadowGeneratorSceneComponent: React.DetailedHTMLProps<BabylonProps<ShadowGeneratorSceneComponent>, any>;
-  directionalLight: React.DetailedHTMLProps<BabylonProps<DirectionalLight>, any>;
-  hemisphericLight: React.DetailedHTMLProps<BabylonProps<HemisphericLight>, any>;
-  light: React.DetailedHTMLProps<BabylonProps<Light>, any>;
-  lightConstants: React.DetailedHTMLProps<BabylonProps<LightConstants>, any>;
-  pointLight: React.DetailedHTMLProps<BabylonProps<PointLight>, any>;
-  shadowLight: React.DetailedHTMLProps<BabylonProps<ShadowLight>, any>;
-  spotLight: React.DetailedHTMLProps<BabylonProps<SpotLight>, any>;
-  babylonFileLoader: React.DetailedHTMLProps<BabylonProps<BabylonFileLoader>, any>;
-  loadingScreen: React.DetailedHTMLProps<BabylonProps<LoadingScreen>, any>;
-  sceneLoader: React.DetailedHTMLProps<BabylonProps<SceneLoader>, any>;
-  sceneLoaderFlags: React.DetailedHTMLProps<BabylonProps<SceneLoaderFlags>, any>;
-  backgroundMaterial: React.DetailedHTMLProps<BabylonProps<BackgroundMaterial>, any>;
-  gaussianSplattingMaterial: React.DetailedHTMLProps<BabylonProps<GaussianSplattingMaterial>, any>;
-  greasedLineMaterialDefaults: React.DetailedHTMLProps<BabylonProps<GreasedLineMaterialDefaults>, any>;
-  greasedLineMaterialInterfaces: React.DetailedHTMLProps<BabylonProps<GreasedLineMaterialInterfaces>, any>;
-  greasedLinePluginMaterial: React.DetailedHTMLProps<BabylonProps<GreasedLinePluginMaterial>, any>;
-  greasedLineSimpleMaterial: React.DetailedHTMLProps<BabylonProps<GreasedLineSimpleMaterial>, any>;
-  clipPlanesBlock: React.DetailedHTMLProps<BabylonProps<ClipPlanesBlock>, any>;
-  currentScreenBlock: React.DetailedHTMLProps<BabylonProps<CurrentScreenBlock>, any>;
-  fogBlock: React.DetailedHTMLProps<BabylonProps<FogBlock>, any>;
-  imageSourceBlock: React.DetailedHTMLProps<BabylonProps<ImageSourceBlock>, any>;
-  lightBlock: React.DetailedHTMLProps<BabylonProps<LightBlock>, any>;
-  reflectionTextureBaseBlock: React.DetailedHTMLProps<BabylonProps<ReflectionTextureBaseBlock>, any>;
-  reflectionTextureBlock: React.DetailedHTMLProps<BabylonProps<ReflectionTextureBlock>, any>;
-  sceneDepthBlock: React.DetailedHTMLProps<BabylonProps<SceneDepthBlock>, any>;
-  textureBlock: React.DetailedHTMLProps<BabylonProps<TextureBlock>, any>;
-  TBNBlock: React.DetailedHTMLProps<BabylonProps<TBNBlock>, any>;
-  derivativeBlock: React.DetailedHTMLProps<BabylonProps<DerivativeBlock>, any>;
-  discardBlock: React.DetailedHTMLProps<BabylonProps<DiscardBlock>, any>;
-  fragCoordBlock: React.DetailedHTMLProps<BabylonProps<FragCoordBlock>, any>;
-  fragDepthBlock: React.DetailedHTMLProps<BabylonProps<FragDepthBlock>, any>;
-  fragmentOutputBlock: React.DetailedHTMLProps<BabylonProps<FragmentOutputBlock>, any>;
-  frontFacingBlock: React.DetailedHTMLProps<BabylonProps<FrontFacingBlock>, any>;
-  heightToNormalBlock: React.DetailedHTMLProps<BabylonProps<HeightToNormalBlock>, any>;
-  imageProcessingBlock: React.DetailedHTMLProps<BabylonProps<ImageProcessingBlock>, any>;
-  perturbNormalBlock: React.DetailedHTMLProps<BabylonProps<PerturbNormalBlock>, any>;
-  prePassOutputBlock: React.DetailedHTMLProps<BabylonProps<PrePassOutputBlock>, any>;
-  screenSizeBlock: React.DetailedHTMLProps<BabylonProps<ScreenSizeBlock>, any>;
-  screenSpaceBlock: React.DetailedHTMLProps<BabylonProps<ScreenSpaceBlock>, any>;
-  shadowMapBlock: React.DetailedHTMLProps<BabylonProps<ShadowMapBlock>, any>;
-  twirlBlock: React.DetailedHTMLProps<BabylonProps<TwirlBlock>, any>;
-  animatedInputBlockTypes: React.DetailedHTMLProps<BabylonProps<AnimatedInputBlockTypes>, any>;
-  inputBlock: React.DetailedHTMLProps<BabylonProps<InputBlock>, any>;
-  prePassTextureBlock: React.DetailedHTMLProps<BabylonProps<PrePassTextureBlock>, any>;
-  anisotropyBlock: React.DetailedHTMLProps<BabylonProps<AnisotropyBlock>, any>;
-  clearCoatBlock: React.DetailedHTMLProps<BabylonProps<ClearCoatBlock>, any>;
-  iridescenceBlock: React.DetailedHTMLProps<BabylonProps<IridescenceBlock>, any>;
-  pbrMetallicRoughnessBlock: React.DetailedHTMLProps<BabylonProps<PbrMetallicRoughnessBlock>, any>;
-  reflectionBlock: React.DetailedHTMLProps<BabylonProps<ReflectionBlock>, any>;
-  refractionBlock: React.DetailedHTMLProps<BabylonProps<RefractionBlock>, any>;
-  sheenBlock: React.DetailedHTMLProps<BabylonProps<SheenBlock>, any>;
-  subSurfaceBlock: React.DetailedHTMLProps<BabylonProps<SubSurfaceBlock>, any>;
-  particleBlendMultiplyBlock: React.DetailedHTMLProps<BabylonProps<ParticleBlendMultiplyBlock>, any>;
-  particleRampGradientBlock: React.DetailedHTMLProps<BabylonProps<ParticleRampGradientBlock>, any>;
-  particleTextureBlock: React.DetailedHTMLProps<BabylonProps<ParticleTextureBlock>, any>;
-  teleportInBlock: React.DetailedHTMLProps<BabylonProps<TeleportInBlock>, any>;
-  teleportOutBlock: React.DetailedHTMLProps<BabylonProps<TeleportOutBlock>, any>;
-  bonesBlock: React.DetailedHTMLProps<BabylonProps<BonesBlock>, any>;
-  instancesBlock: React.DetailedHTMLProps<BabylonProps<InstancesBlock>, any>;
-  lightInformationBlock: React.DetailedHTMLProps<BabylonProps<LightInformationBlock>, any>;
-  morphTargetsBlock: React.DetailedHTMLProps<BabylonProps<MorphTargetsBlock>, any>;
-  vertexOutputBlock: React.DetailedHTMLProps<BabylonProps<VertexOutputBlock>, any>;
-  addBlock: React.DetailedHTMLProps<BabylonProps<AddBlock>, any>;
-  arcTan2Block: React.DetailedHTMLProps<BabylonProps<ArcTan2Block>, any>;
-  baseMathBlock: React.DetailedHTMLProps<BabylonProps<BaseMathBlock>, any>;
-  biPlanarBlock: React.DetailedHTMLProps<BabylonProps<BiPlanarBlock>, any>;
-  clampBlock: React.DetailedHTMLProps<BabylonProps<ClampBlock>, any>;
-  cloudBlock: React.DetailedHTMLProps<BabylonProps<CloudBlock>, any>;
-  colorMergerBlock: React.DetailedHTMLProps<BabylonProps<ColorMergerBlock>, any>;
-  colorSplitterBlock: React.DetailedHTMLProps<BabylonProps<ColorSplitterBlock>, any>;
-  conditionalBlock: React.DetailedHTMLProps<BabylonProps<ConditionalBlock>, any>;
-  crossBlock: React.DetailedHTMLProps<BabylonProps<CrossBlock>, any>;
-  curveBlock: React.DetailedHTMLProps<BabylonProps<CurveBlock>, any>;
-  customBlock: React.DetailedHTMLProps<BabylonProps<CustomBlock>, any>;
-  desaturateBlock: React.DetailedHTMLProps<BabylonProps<DesaturateBlock>, any>;
-  distanceBlock: React.DetailedHTMLProps<BabylonProps<DistanceBlock>, any>;
-  divideBlock: React.DetailedHTMLProps<BabylonProps<DivideBlock>, any>;
-  dotBlock: React.DetailedHTMLProps<BabylonProps<DotBlock>, any>;
-  elbowBlock: React.DetailedHTMLProps<BabylonProps<ElbowBlock>, any>;
-  fresnelBlock: React.DetailedHTMLProps<BabylonProps<FresnelBlock>, any>;
-  gradientBlock: React.DetailedHTMLProps<BabylonProps<GradientBlock>, any>;
-  lengthBlock: React.DetailedHTMLProps<BabylonProps<LengthBlock>, any>;
-  lerpBlock: React.DetailedHTMLProps<BabylonProps<LerpBlock>, any>;
-  matrixBuilderBlock: React.DetailedHTMLProps<BabylonProps<MatrixBuilderBlock>, any>;
-  matrixDeterminantBlock: React.DetailedHTMLProps<BabylonProps<MatrixDeterminantBlock>, any>;
-  matrixTransposeBlock: React.DetailedHTMLProps<BabylonProps<MatrixTransposeBlock>, any>;
-  maxBlock: React.DetailedHTMLProps<BabylonProps<MaxBlock>, any>;
-  meshAttributeExistsBlock: React.DetailedHTMLProps<BabylonProps<MeshAttributeExistsBlock>, any>;
-  minBlock: React.DetailedHTMLProps<BabylonProps<MinBlock>, any>;
-  modBlock: React.DetailedHTMLProps<BabylonProps<ModBlock>, any>;
-  multiplyBlock: React.DetailedHTMLProps<BabylonProps<MultiplyBlock>, any>;
-  nLerpBlock: React.DetailedHTMLProps<BabylonProps<NLerpBlock>, any>;
-  negateBlock: React.DetailedHTMLProps<BabylonProps<NegateBlock>, any>;
-  normalBlendBlock: React.DetailedHTMLProps<BabylonProps<NormalBlendBlock>, any>;
-  normalizeBlock: React.DetailedHTMLProps<BabylonProps<NormalizeBlock>, any>;
-  oneMinusBlock: React.DetailedHTMLProps<BabylonProps<OneMinusBlock>, any>;
-  posterizeBlock: React.DetailedHTMLProps<BabylonProps<PosterizeBlock>, any>;
-  powBlock: React.DetailedHTMLProps<BabylonProps<PowBlock>, any>;
-  randomNumberBlock: React.DetailedHTMLProps<BabylonProps<RandomNumberBlock>, any>;
-  reciprocalBlock: React.DetailedHTMLProps<BabylonProps<ReciprocalBlock>, any>;
-  reflectBlock: React.DetailedHTMLProps<BabylonProps<ReflectBlock>, any>;
-  refractBlock: React.DetailedHTMLProps<BabylonProps<RefractBlock>, any>;
-  remapBlock: React.DetailedHTMLProps<BabylonProps<RemapBlock>, any>;
-  replaceColorBlock: React.DetailedHTMLProps<BabylonProps<ReplaceColorBlock>, any>;
-  rotate2dBlock: React.DetailedHTMLProps<BabylonProps<Rotate2dBlock>, any>;
-  scaleBlock: React.DetailedHTMLProps<BabylonProps<ScaleBlock>, any>;
-  simplexPerlin3DBlock: React.DetailedHTMLProps<BabylonProps<SimplexPerlin3DBlock>, any>;
-  smoothStepBlock: React.DetailedHTMLProps<BabylonProps<SmoothStepBlock>, any>;
-  stepBlock: React.DetailedHTMLProps<BabylonProps<StepBlock>, any>;
-  subtractBlock: React.DetailedHTMLProps<BabylonProps<SubtractBlock>, any>;
-  transformBlock: React.DetailedHTMLProps<BabylonProps<TransformBlock>, any>;
-  triPlanarBlock: React.DetailedHTMLProps<BabylonProps<TriPlanarBlock>, any>;
-  trigonometryBlock: React.DetailedHTMLProps<BabylonProps<TrigonometryBlock>, any>;
-  vectorMergerBlock: React.DetailedHTMLProps<BabylonProps<VectorMergerBlock>, any>;
-  vectorSplitterBlock: React.DetailedHTMLProps<BabylonProps<VectorSplitterBlock>, any>;
-  viewDirectionBlock: React.DetailedHTMLProps<BabylonProps<ViewDirectionBlock>, any>;
-  voronoiNoiseBlock: React.DetailedHTMLProps<BabylonProps<VoronoiNoiseBlock>, any>;
-  waveBlock: React.DetailedHTMLProps<BabylonProps<WaveBlock>, any>;
-  worleyNoise3DBlock: React.DetailedHTMLProps<BabylonProps<WorleyNoise3DBlock>, any>;
-  nodeMaterialBlockConnectionPointMode: React.DetailedHTMLProps<BabylonProps<NodeMaterialBlockConnectionPointMode>, any>;
-  nodeMaterialBlockConnectionPointTypes: React.DetailedHTMLProps<BabylonProps<NodeMaterialBlockConnectionPointTypes>, any>;
-  nodeMaterialBlockTargets: React.DetailedHTMLProps<BabylonProps<NodeMaterialBlockTargets>, any>;
-  nodeMaterialModes: React.DetailedHTMLProps<BabylonProps<NodeMaterialModes>, any>;
-  nodeMaterialSystemValues: React.DetailedHTMLProps<BabylonProps<NodeMaterialSystemValues>, any>;
-  nodeMaterialOptimizer: React.DetailedHTMLProps<BabylonProps<NodeMaterialOptimizer>, any>;
-  nodeMaterial: React.DetailedHTMLProps<BabylonProps<NodeMaterial>, any>;
-  nodeMaterialBlock: React.DetailedHTMLProps<BabylonProps<NodeMaterialBlock>, any>;
-  nodeMaterialBlockConnectionPoint: React.DetailedHTMLProps<BabylonProps<NodeMaterialBlockConnectionPoint>, any>;
-  nodeMaterialBuildState: React.DetailedHTMLProps<BabylonProps<NodeMaterialBuildState>, any>;
-  nodeMaterialBuildStateSharedData: React.DetailedHTMLProps<BabylonProps<NodeMaterialBuildStateSharedData>, any>;
-  nodeMaterialConnectionPointCustomObject: React.DetailedHTMLProps<BabylonProps<NodeMaterialConnectionPointCustomObject>, any>;
-  occlusionMaterial: React.DetailedHTMLProps<BabylonProps<OcclusionMaterial>, any>;
-  pbrAnisotropicConfiguration: React.DetailedHTMLProps<BabylonProps<PbrAnisotropicConfiguration>, any>;
-  pbrBRDFConfiguration: React.DetailedHTMLProps<BabylonProps<PbrBRDFConfiguration>, any>;
-  pbrBaseMaterial: React.DetailedHTMLProps<BabylonProps<PbrBaseMaterial>, any>;
-  pbrBaseSimpleMaterial: React.DetailedHTMLProps<BabylonProps<PbrBaseSimpleMaterial>, any>;
-  pbrClearCoatConfiguration: React.DetailedHTMLProps<BabylonProps<PbrClearCoatConfiguration>, any>;
-  pbrIridescenceConfiguration: React.DetailedHTMLProps<BabylonProps<PbrIridescenceConfiguration>, any>;
-  pbrMaterial: React.DetailedHTMLProps<BabylonProps<PbrMaterial>, any>;
-  pbrMaterial: React.DetailedHTMLProps<BabylonProps<PbrMaterial>, any>;
-  pbrMetallicRoughnessMaterial: React.DetailedHTMLProps<BabylonProps<PbrMetallicRoughnessMaterial>, any>;
-  pbrSheenConfiguration: React.DetailedHTMLProps<BabylonProps<PbrSheenConfiguration>, any>;
-  pbrSpecularGlossinessMaterial: React.DetailedHTMLProps<BabylonProps<PbrSpecularGlossinessMaterial>, any>;
-  pbrSubSurfaceConfiguration: React.DetailedHTMLProps<BabylonProps<PbrSubSurfaceConfiguration>, any>;
-  hdrFiltering: React.DetailedHTMLProps<BabylonProps<HdrFiltering>, any>;
-  basisTextureLoader: React.DetailedHTMLProps<BabylonProps<BasisTextureLoader>, any>;
-  ddsTextureLoader: React.DetailedHTMLProps<BabylonProps<DdsTextureLoader>, any>;
-  envTextureLoader: React.DetailedHTMLProps<BabylonProps<EnvTextureLoader>, any>;
-  hdrTextureLoader: React.DetailedHTMLProps<BabylonProps<HdrTextureLoader>, any>;
-  ktxTextureLoader: React.DetailedHTMLProps<BabylonProps<KtxTextureLoader>, any>;
-  tgaTextureLoader: React.DetailedHTMLProps<BabylonProps<TgaTextureLoader>, any>;
-  MultiviewRenderTarget: React.DetailedHTMLProps<BabylonProps<MultiviewRenderTarget>, any>;
-  frame: React.DetailedHTMLProps<BabylonProps<Frame>, any>;
-  packer: React.DetailedHTMLProps<BabylonProps<Packer>, any>;
-  customProceduralTexture: React.DetailedHTMLProps<BabylonProps<CustomProceduralTexture>, any>;
-  noiseProceduralTexture: React.DetailedHTMLProps<BabylonProps<NoiseProceduralTexture>, any>;
-  proceduralTexture: React.DetailedHTMLProps<BabylonProps<ProceduralTexture>, any>;
-  proceduralTextureSceneComponent: React.DetailedHTMLProps<BabylonProps<ProceduralTextureSceneComponent>, any>;
-  baseTexture: React.DetailedHTMLProps<BabylonProps<BaseTexture>, any>;
-  baseTexture: React.DetailedHTMLProps<BabylonProps<BaseTexture>, any>;
-  colorGradingTexture: React.DetailedHTMLProps<BabylonProps<ColorGradingTexture>, any>;
-  cubeTexture: React.DetailedHTMLProps<BabylonProps<CubeTexture>, any>;
-  dynamicTexture: React.DetailedHTMLProps<BabylonProps<DynamicTexture>, any>;
-  equiRectangularCubeTexture: React.DetailedHTMLProps<BabylonProps<EquiRectangularCubeTexture>, any>;
-  externalTexture: React.DetailedHTMLProps<BabylonProps<ExternalTexture>, any>;
-  hardwareTextureWrapper: React.DetailedHTMLProps<BabylonProps<HardwareTextureWrapper>, any>;
-  hdrCubeTexture: React.DetailedHTMLProps<BabylonProps<HdrCubeTexture>, any>;
-  htmlElementTexture: React.DetailedHTMLProps<BabylonProps<HtmlElementTexture>, any>;
-  internalTexture: React.DetailedHTMLProps<BabylonProps<InternalTexture>, any>;
-  internalTextureLoader: React.DetailedHTMLProps<BabylonProps<InternalTextureLoader>, any>;
-  ktx2decoderTypes: React.DetailedHTMLProps<BabylonProps<Ktx2decoderTypes>, any>;
-  mirrorTexture: React.DetailedHTMLProps<BabylonProps<MirrorTexture>, any>;
-  multiRenderTarget: React.DetailedHTMLProps<BabylonProps<MultiRenderTarget>, any>;
-  prePassRenderTarget: React.DetailedHTMLProps<BabylonProps<PrePassRenderTarget>, any>;
-  rawCubeTexture: React.DetailedHTMLProps<BabylonProps<RawCubeTexture>, any>;
-  rawTexture: React.DetailedHTMLProps<BabylonProps<RawTexture>, any>;
-  rawTexture2DArray: React.DetailedHTMLProps<BabylonProps<RawTexture2DArray>, any>;
-  rawTexture3D: React.DetailedHTMLProps<BabylonProps<RawTexture3D>, any>;
-  refractionTexture: React.DetailedHTMLProps<BabylonProps<RefractionTexture>, any>;
-  renderTargetTexture: React.DetailedHTMLProps<BabylonProps<RenderTargetTexture>, any>;
-  texture: React.DetailedHTMLProps<BabylonProps<Texture>, any>;
-  textureCreationOptions: React.DetailedHTMLProps<BabylonProps<TextureCreationOptions>, any>;
-  textureSampler: React.DetailedHTMLProps<BabylonProps<TextureSampler>, any>;
-  thinRenderTargetTexture: React.DetailedHTMLProps<BabylonProps<ThinRenderTargetTexture>, any>;
-  thinTexture: React.DetailedHTMLProps<BabylonProps<ThinTexture>, any>;
-  videoTexture: React.DetailedHTMLProps<BabylonProps<VideoTexture>, any>;
-  clipPlaneMaterialHelper: React.DetailedHTMLProps<BabylonProps<ClipPlaneMaterialHelper>, any>;
-  colorCurves: React.DetailedHTMLProps<BabylonProps<ColorCurves>, any>;
-  colorCurves: React.DetailedHTMLProps<BabylonProps<ColorCurves>, any>;
-  drawWrapper: React.DetailedHTMLProps<BabylonProps<DrawWrapper>, any>;
-  drawWrapper: React.DetailedHTMLProps<BabylonProps<DrawWrapper>, any>;
-  effect: React.DetailedHTMLProps<BabylonProps<Effect>, any>;
-  effect: React.DetailedHTMLProps<BabylonProps<Effect>, any>;
-  effect: React.DetailedHTMLProps<BabylonProps<Effect>, any>;
-  effectFallbacks: React.DetailedHTMLProps<BabylonProps<EffectFallbacks>, any>;
-  effectRenderer: React.DetailedHTMLProps<BabylonProps<EffectRenderer>, any>;
-  fresnelParameters: React.DetailedHTMLProps<BabylonProps<FresnelParameters>, any>;
-  iEffectFallbacks: React.DetailedHTMLProps<BabylonProps<IEffectFallbacks>, any>;
-  imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ImageProcessingConfiguration>, any>;
-  imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ImageProcessingConfiguration>, any>;
-  imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ImageProcessingConfiguration>, any>;
-  material: React.DetailedHTMLProps<BabylonProps<Material>, any>;
-  material: React.DetailedHTMLProps<BabylonProps<Material>, any>;
-  material: React.DetailedHTMLProps<BabylonProps<Material>, any>;
-  material: React.DetailedHTMLProps<BabylonProps<Material>, any>;
-  materialDefines: React.DetailedHTMLProps<BabylonProps<MaterialDefines>, any>;
-  materialFlags: React.DetailedHTMLProps<BabylonProps<MaterialFlags>, any>;
-  materialHelper: React.DetailedHTMLProps<BabylonProps<MaterialHelper>, any>;
-  materialHelper: React.DetailedHTMLProps<BabylonProps<MaterialHelper>, any>;
-  materialPluginBase: React.DetailedHTMLProps<BabylonProps<MaterialPluginBase>, any>;
-  materialPluginEvent: React.DetailedHTMLProps<BabylonProps<MaterialPluginEvent>, any>;
-  materialPluginFactoryExport: React.DetailedHTMLProps<BabylonProps<MaterialPluginFactoryExport>, any>;
-  materialPluginManager: React.DetailedHTMLProps<BabylonProps<MaterialPluginManager>, any>;
-  materialStencilState: React.DetailedHTMLProps<BabylonProps<MaterialStencilState>, any>;
-  meshDebugPluginMaterial: React.DetailedHTMLProps<BabylonProps<MeshDebugPluginMaterial>, any>;
-  multiMaterial: React.DetailedHTMLProps<BabylonProps<MultiMaterial>, any>;
-  prePassConfiguration: React.DetailedHTMLProps<BabylonProps<PrePassConfiguration>, any>;
-  pushMaterial: React.DetailedHTMLProps<BabylonProps<PushMaterial>, any>;
-  shaderLanguage: React.DetailedHTMLProps<BabylonProps<ShaderLanguage>, any>;
-  shaderMaterial: React.DetailedHTMLProps<BabylonProps<ShaderMaterial>, any>;
-  shadowDepthWrapper: React.DetailedHTMLProps<BabylonProps<ShadowDepthWrapper>, any>;
-  standardMaterial: React.DetailedHTMLProps<BabylonProps<StandardMaterial>, any>;
-  standardMaterial: React.DetailedHTMLProps<BabylonProps<StandardMaterial>, any>;
-  uniformBuffer: React.DetailedHTMLProps<BabylonProps<UniformBuffer>, any>;
-  uniformBufferEffectCommonAccessor: React.DetailedHTMLProps<BabylonProps<UniformBufferEffectCommonAccessor>, any>;
-  halton2DSequence: React.DetailedHTMLProps<BabylonProps<Halton2DSequence>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  math: React.DetailedHTMLProps<BabylonProps<Math>, any>;
-  sphericalPolynomial: React.DetailedHTMLProps<BabylonProps<SphericalPolynomial>, any>;
-  tensor: React.DetailedHTMLProps<BabylonProps<Tensor>, any>;
-  geodesicBuilder: React.DetailedHTMLProps<BabylonProps<GeodesicBuilder>, any>;
-  goldbergBuilder: React.DetailedHTMLProps<BabylonProps<GoldbergBuilder>, any>;
-  greasedLineBuilder: React.DetailedHTMLProps<BabylonProps<GreasedLineBuilder>, any>;
-  textBuilder: React.DetailedHTMLProps<BabylonProps<TextBuilder>, any>;
-  dracoCompression: React.DetailedHTMLProps<BabylonProps<DracoCompression>, any>;
-  dracoCompressionWorker: React.DetailedHTMLProps<BabylonProps<DracoCompressionWorker>, any>;
-  meshoptCompression: React.DetailedHTMLProps<BabylonProps<MeshoptCompression>, any>;
-  gaussianSplattingMesh: React.DetailedHTMLProps<BabylonProps<GaussianSplattingMesh>, any>;
-  greasedLineBaseMesh: React.DetailedHTMLProps<BabylonProps<GreasedLineBaseMesh>, any>;
-  greasedLineMesh: React.DetailedHTMLProps<BabylonProps<GreasedLineMesh>, any>;
-  greasedLineRibbonMesh: React.DetailedHTMLProps<BabylonProps<GreasedLineRibbonMesh>, any>;
-  instantiateBaseBlock: React.DetailedHTMLProps<BabylonProps<InstantiateBaseBlock>, any>;
-  instantiateBlock: React.DetailedHTMLProps<BabylonProps<InstantiateBlock>, any>;
-  instantiateLinearBlock: React.DetailedHTMLProps<BabylonProps<InstantiateLinearBlock>, any>;
-  instantiateOnFacesBlock: React.DetailedHTMLProps<BabylonProps<InstantiateOnFacesBlock>, any>;
-  instantiateOnVerticesBlock: React.DetailedHTMLProps<BabylonProps<InstantiateOnVerticesBlock>, any>;
-  instantiateOnVolumeBlock: React.DetailedHTMLProps<BabylonProps<InstantiateOnVolumeBlock>, any>;
-  instantiateRadialBlock: React.DetailedHTMLProps<BabylonProps<InstantiateRadialBlock>, any>;
-  alignBlock: React.DetailedHTMLProps<BabylonProps<AlignBlock>, any>;
-  rotationXBlock: React.DetailedHTMLProps<BabylonProps<RotationXBlock>, any>;
-  rotationYBlock: React.DetailedHTMLProps<BabylonProps<RotationYBlock>, any>;
-  rotationZBlock: React.DetailedHTMLProps<BabylonProps<RotationZBlock>, any>;
-  scalingBlock: React.DetailedHTMLProps<BabylonProps<ScalingBlock>, any>;
-  translationBlock: React.DetailedHTMLProps<BabylonProps<TranslationBlock>, any>;
-  setColorsBlock: React.DetailedHTMLProps<BabylonProps<SetColorsBlock>, any>;
-  setMaterialIDBlock: React.DetailedHTMLProps<BabylonProps<SetMaterialIDBlock>, any>;
-  setNormalsBlock: React.DetailedHTMLProps<BabylonProps<SetNormalsBlock>, any>;
-  setPositionsBlock: React.DetailedHTMLProps<BabylonProps<SetPositionsBlock>, any>;
-  setTangentsBlock: React.DetailedHTMLProps<BabylonProps<SetTangentsBlock>, any>;
-  setUVsBlock: React.DetailedHTMLProps<BabylonProps<SetUVsBlock>, any>;
-  boxBlock: React.DetailedHTMLProps<BabylonProps<BoxBlock>, any>;
-  capsuleBlock: React.DetailedHTMLProps<BabylonProps<CapsuleBlock>, any>;
-  cylinderBlock: React.DetailedHTMLProps<BabylonProps<CylinderBlock>, any>;
-  discBlock: React.DetailedHTMLProps<BabylonProps<DiscBlock>, any>;
-  gridBlock: React.DetailedHTMLProps<BabylonProps<GridBlock>, any>;
-  icoSphereBlock: React.DetailedHTMLProps<BabylonProps<IcoSphereBlock>, any>;
-  meshBlock: React.DetailedHTMLProps<BabylonProps<MeshBlock>, any>;
-  nullBlock: React.DetailedHTMLProps<BabylonProps<NullBlock>, any>;
-  planeBlock: React.DetailedHTMLProps<BabylonProps<PlaneBlock>, any>;
-  sphereBlock: React.DetailedHTMLProps<BabylonProps<SphereBlock>, any>;
-  torusBlock: React.DetailedHTMLProps<BabylonProps<TorusBlock>, any>;
-  teleportInBlock: React.DetailedHTMLProps<BabylonProps<TeleportInBlock>, any>;
-  teleportOutBlock: React.DetailedHTMLProps<BabylonProps<TeleportOutBlock>, any>;
-  geometryTextureBlock: React.DetailedHTMLProps<BabylonProps<GeometryTextureBlock>, any>;
-  geometryTextureFetchBlock: React.DetailedHTMLProps<BabylonProps<GeometryTextureFetchBlock>, any>;
-  booleanGeometryBlock: React.DetailedHTMLProps<BabylonProps<BooleanGeometryBlock>, any>;
-  boundingBlock: React.DetailedHTMLProps<BabylonProps<BoundingBlock>, any>;
-  computeNormalsBlock: React.DetailedHTMLProps<BabylonProps<ComputeNormalsBlock>, any>;
-  conditionBlock: React.DetailedHTMLProps<BabylonProps<ConditionBlock>, any>;
-  debugBlock: React.DetailedHTMLProps<BabylonProps<DebugBlock>, any>;
-  geometryArcTan2Block: React.DetailedHTMLProps<BabylonProps<GeometryArcTan2Block>, any>;
-  geometryClampBlock: React.DetailedHTMLProps<BabylonProps<GeometryClampBlock>, any>;
-  geometryCollectionBlock: React.DetailedHTMLProps<BabylonProps<GeometryCollectionBlock>, any>;
-  geometryCrossBlock: React.DetailedHTMLProps<BabylonProps<GeometryCrossBlock>, any>;
-  geometryCurveBlock: React.DetailedHTMLProps<BabylonProps<GeometryCurveBlock>, any>;
-  geometryDesaturateBlock: React.DetailedHTMLProps<BabylonProps<GeometryDesaturateBlock>, any>;
-  geometryDistanceBlock: React.DetailedHTMLProps<BabylonProps<GeometryDistanceBlock>, any>;
-  geometryDotBlock: React.DetailedHTMLProps<BabylonProps<GeometryDotBlock>, any>;
-  geometryElbowBlock: React.DetailedHTMLProps<BabylonProps<GeometryElbowBlock>, any>;
-  geometryInfoBlock: React.DetailedHTMLProps<BabylonProps<GeometryInfoBlock>, any>;
-  geometryInputBlock: React.DetailedHTMLProps<BabylonProps<GeometryInputBlock>, any>;
-  geometryLengthBlock: React.DetailedHTMLProps<BabylonProps<GeometryLengthBlock>, any>;
-  geometryLerpBlock: React.DetailedHTMLProps<BabylonProps<GeometryLerpBlock>, any>;
-  geometryModBlock: React.DetailedHTMLProps<BabylonProps<GeometryModBlock>, any>;
-  geometryNLerpBlock: React.DetailedHTMLProps<BabylonProps<GeometryNLerpBlock>, any>;
-  geometryOptimizeBlock: React.DetailedHTMLProps<BabylonProps<GeometryOptimizeBlock>, any>;
-  geometryOutputBlock: React.DetailedHTMLProps<BabylonProps<GeometryOutputBlock>, any>;
-  geometryPosterizeBlock: React.DetailedHTMLProps<BabylonProps<GeometryPosterizeBlock>, any>;
-  geometryPowBlock: React.DetailedHTMLProps<BabylonProps<GeometryPowBlock>, any>;
-  geometryReplaceColorBlock: React.DetailedHTMLProps<BabylonProps<GeometryReplaceColorBlock>, any>;
-  geometryRotate2dBlock: React.DetailedHTMLProps<BabylonProps<GeometryRotate2dBlock>, any>;
-  geometrySmoothStepBlock: React.DetailedHTMLProps<BabylonProps<GeometrySmoothStepBlock>, any>;
-  geometryStepBlock: React.DetailedHTMLProps<BabylonProps<GeometryStepBlock>, any>;
-  geometryTransformBlock: React.DetailedHTMLProps<BabylonProps<GeometryTransformBlock>, any>;
-  geometryTrigonometryBlock: React.DetailedHTMLProps<BabylonProps<GeometryTrigonometryBlock>, any>;
-  intFloatConverterBlock: React.DetailedHTMLProps<BabylonProps<IntFloatConverterBlock>, any>;
-  mapRangeBlock: React.DetailedHTMLProps<BabylonProps<MapRangeBlock>, any>;
-  mappingBlock: React.DetailedHTMLProps<BabylonProps<MappingBlock>, any>;
-  mathBlock: React.DetailedHTMLProps<BabylonProps<MathBlock>, any>;
-  matrixComposeBlock: React.DetailedHTMLProps<BabylonProps<MatrixComposeBlock>, any>;
-  mergeGeometryBlock: React.DetailedHTMLProps<BabylonProps<MergeGeometryBlock>, any>;
-  noiseBlock: React.DetailedHTMLProps<BabylonProps<NoiseBlock>, any>;
-  normalizeVectorBlock: React.DetailedHTMLProps<BabylonProps<NormalizeVectorBlock>, any>;
-  randomBlock: React.DetailedHTMLProps<BabylonProps<RandomBlock>, any>;
-  vectorConverterBlock: React.DetailedHTMLProps<BabylonProps<VectorConverterBlock>, any>;
-  nodeGeometryConnectionPointTypes: React.DetailedHTMLProps<BabylonProps<NodeGeometryConnectionPointTypes>, any>;
-  nodeGeometryContextualSources: React.DetailedHTMLProps<BabylonProps<NodeGeometryContextualSources>, any>;
-  nodeGeometryExecutionContext: React.DetailedHTMLProps<BabylonProps<NodeGeometryExecutionContext>, any>;
-  nodeGeometryInstancingContext: React.DetailedHTMLProps<BabylonProps<NodeGeometryInstancingContext>, any>;
-  nodeGeometryTextureData: React.DetailedHTMLProps<BabylonProps<NodeGeometryTextureData>, any>;
-  nodeGeometry: React.DetailedHTMLProps<BabylonProps<NodeGeometry>, any>;
-  nodeGeometryBlock: React.DetailedHTMLProps<BabylonProps<NodeGeometryBlock>, any>;
-  nodeGeometryBlockConnectionPoint: React.DetailedHTMLProps<BabylonProps<NodeGeometryBlockConnectionPoint>, any>;
-  nodeGeometryBuildState: React.DetailedHTMLProps<BabylonProps<NodeGeometryBuildState>, any>;
-  webGLDataBuffer: React.DetailedHTMLProps<BabylonProps<WebGLDataBuffer>, any>;
-  webgpuDataBuffer: React.DetailedHTMLProps<BabylonProps<WebgpuDataBuffer>, any>;
-  abstractMesh: React.DetailedHTMLProps<BabylonProps<AbstractMesh>, any>;
-  abstractMesh: React.DetailedHTMLProps<BabylonProps<AbstractMesh>, any>;
-  buffer: React.DetailedHTMLProps<BabylonProps<Buffer>, any>;
-  csg: React.DetailedHTMLProps<BabylonProps<Csg>, any>;
-  geodesicMesh: React.DetailedHTMLProps<BabylonProps<GeodesicMesh>, any>;
-  geometry: React.DetailedHTMLProps<BabylonProps<Geometry>, any>;
-  goldbergMesh: React.DetailedHTMLProps<BabylonProps<GoldbergMesh>, any>;
-  groundMesh: React.DetailedHTMLProps<BabylonProps<GroundMesh>, any>;
-  instancedMesh: React.DetailedHTMLProps<BabylonProps<InstancedMesh>, any>;
-  linesMesh: React.DetailedHTMLProps<BabylonProps<LinesMesh>, any>;
-  mesh: React.DetailedHTMLProps<BabylonProps<Mesh>, any>;
-  mesh: React.DetailedHTMLProps<BabylonProps<Mesh>, any>;
-  box: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateBox>[1]} & ReturnType<typeof CreateBox>>, any>;
-  tiledBox: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateTiledBox>[1]} & ReturnType<typeof CreateTiledBox>>, any>;
-  sphere: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateSphere>[1]} & ReturnType<typeof CreateSphere>>, any>;
-  disc: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateDisc>[1]} & ReturnType<typeof CreateDisc>>, any>;
-  icoSphere: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateIcoSphere>[1]} & ReturnType<typeof CreateIcoSphere>>, any>;
-  ribbon: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateRibbon>[1]} & ReturnType<typeof CreateRibbon>>, any>;
-  cylinder: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateCylinder>[1]} & ReturnType<typeof CreateCylinder>>, any>;
-  torus: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateTorus>[1]} & ReturnType<typeof CreateTorus>>, any>;
-  torusKnot: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateTorusKnot>[1]} & ReturnType<typeof CreateTorusKnot>>, any>;
-  lineSystem: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateLineSystem>[1]} & ReturnType<typeof CreateLineSystem>>, any>;
-  lines: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateLines>[1]} & ReturnType<typeof CreateLines>>, any>;
-  dashedLines: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateDashedLines>[1]} & ReturnType<typeof CreateDashedLines>>, any>;
-  extrudeShape: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof ExtrudeShape>[1]} & ReturnType<typeof ExtrudeShape>>, any>;
-  extrudeShapeCustom: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof ExtrudeShapeCustom>[1]} & ReturnType<typeof ExtrudeShapeCustom>>, any>;
-  lathe: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateLathe>[1]} & ReturnType<typeof CreateLathe>>, any>;
-  tiledPlane: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateTiledPlane>[1]} & ReturnType<typeof CreateTiledPlane>>, any>;
-  plane: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreatePlane>[1]} & ReturnType<typeof CreatePlane>>, any>;
-  ground: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateGround>[1]} & ReturnType<typeof CreateGround>>, any>;
-  tiledGround: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateTiledGround>[1]} & ReturnType<typeof CreateTiledGround>>, any>;
-  groundFromHeightMap: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateGroundFromHeightMap>[1]} & ReturnType<typeof CreateGroundFromHeightMap>>, any>;
-  polygon: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreatePolygon>[1]} & ReturnType<typeof CreatePolygon>>, any>;
-  extrudePolygon: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof ExtrudePolygon>[1]} & ReturnType<typeof ExtrudePolygon>>, any>;
-  tube: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateTube>[1]} & ReturnType<typeof CreateTube>>, any>;
-  polyhedron: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreatePolyhedron>[1]} & ReturnType<typeof CreatePolyhedron>>, any>;
-  geodesic: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateGeodesic>[1]} & ReturnType<typeof CreateGeodesic>>, any>;
-  goldberg: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateGoldberg>[1]} & ReturnType<typeof CreateGoldberg>>, any>;
-  decal: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateDecal>[1]} & ReturnType<typeof CreateDecal>>, any>;
-  capsule: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateCapsule>[1]} & ReturnType<typeof CreateCapsule>>, any>;
-  text: React.DetailedHTMLProps<BabylonProps<{options: Parameters<typeof CreateText>[1]} & ReturnType<typeof CreateText>>, any>;
-  meshLODLevel: React.DetailedHTMLProps<BabylonProps<MeshLODLevel>, any>;
-  meshSimplification: React.DetailedHTMLProps<BabylonProps<MeshSimplification>, any>;
-  meshSimplificationSceneComponent: React.DetailedHTMLProps<BabylonProps<MeshSimplificationSceneComponent>, any>;
-  meshUVSpaceRenderer: React.DetailedHTMLProps<BabylonProps<MeshUVSpaceRenderer>, any>;
-  polygonMesh: React.DetailedHTMLProps<BabylonProps<PolygonMesh>, any>;
-  subMesh: React.DetailedHTMLProps<BabylonProps<SubMesh>, any>;
-  subMesh: React.DetailedHTMLProps<BabylonProps<SubMesh>, any>;
-  thinInstanceMesh: React.DetailedHTMLProps<BabylonProps<ThinInstanceMesh>, any>;
-  trailMesh: React.DetailedHTMLProps<BabylonProps<TrailMesh>, any>;
-  transformNode: React.DetailedHTMLProps<BabylonProps<TransformNode>, any>;
-  cubemapToSphericalPolynomial: React.DetailedHTMLProps<BabylonProps<CubemapToSphericalPolynomial>, any>;
-  hdr: React.DetailedHTMLProps<BabylonProps<Hdr>, any>;
-  panoramaToCubemap: React.DetailedHTMLProps<BabylonProps<PanoramaToCubemap>, any>;
-  dynamicFloat32Array: React.DetailedHTMLProps<BabylonProps<DynamicFloat32Array>, any>;
-  performanceViewerCollectionStrategies: React.DetailedHTMLProps<BabylonProps<PerformanceViewerCollectionStrategies>, any>;
-  performanceViewerCollector: React.DetailedHTMLProps<BabylonProps<PerformanceViewerCollector>, any>;
-  performanceViewerSceneExtension: React.DetailedHTMLProps<BabylonProps<PerformanceViewerSceneExtension>, any>;
-  andOrNotEvaluator: React.DetailedHTMLProps<BabylonProps<AndOrNotEvaluator>, any>;
-  arrayTools: React.DetailedHTMLProps<BabylonProps<ArrayTools>, any>;
-  assetsManager: React.DetailedHTMLProps<BabylonProps<AssetsManager>, any>;
-  basis: React.DetailedHTMLProps<BabylonProps<Basis>, any>;
-  basisWorker: React.DetailedHTMLProps<BabylonProps<BasisWorker>, any>;
-  brdfTextureTools: React.DetailedHTMLProps<BabylonProps<BrdfTextureTools>, any>;
-  codeStringParsingTools: React.DetailedHTMLProps<BabylonProps<CodeStringParsingTools>, any>;
-  copyTextureToTexture: React.DetailedHTMLProps<BabylonProps<CopyTextureToTexture>, any>;
-  copyTools: React.DetailedHTMLProps<BabylonProps<typeof CopyTools>, any>;
-  coroutine: React.DetailedHTMLProps<BabylonProps<Coroutine>, any>;
-  customAnimationFrameRequester: React.DetailedHTMLProps<BabylonProps<CustomAnimationFrameRequester>, any>;
-  dataReader: React.DetailedHTMLProps<BabylonProps<DataReader>, any>;
-  dataStorage: React.DetailedHTMLProps<BabylonProps<DataStorage>, any>;
-  dds: React.DetailedHTMLProps<BabylonProps<Dds>, any>;
-  decorators: React.DetailedHTMLProps<BabylonProps<Decorators>, any>;
-  decorators: React.DetailedHTMLProps<BabylonProps<Decorators>, any>;
-  decorators: React.DetailedHTMLProps<BabylonProps<Decorators>, any>;
-  deepCopier: React.DetailedHTMLProps<BabylonProps<DeepCopier>, any>;
-  deferred: React.DetailedHTMLProps<BabylonProps<Deferred>, any>;
-  depthReducer: React.DetailedHTMLProps<BabylonProps<DepthReducer>, any>;
-  devTools: React.DetailedHTMLProps<BabylonProps<DevTools>, any>;
-  domManagement: React.DetailedHTMLProps<BabylonProps<typeof DomManagement>, any>;
-  dumpTools: React.DetailedHTMLProps<BabylonProps<DumpTools>, any>;
-  environmentTextureTools: React.DetailedHTMLProps<BabylonProps<typeof EnvironmentTextureTools>, any>;
-  equirectangularCapture: React.DetailedHTMLProps<BabylonProps<EquirectangularCapture>, any>;
-  error: React.DetailedHTMLProps<BabylonProps<Error>, any>;
-  fileRequest: React.DetailedHTMLProps<BabylonProps<FileRequest>, any>;
-  fileTools: React.DetailedHTMLProps<BabylonProps<typeof FileTools>, any>;
-  filesInput: React.DetailedHTMLProps<BabylonProps<FilesInput>, any>;
-  filesInputStore: React.DetailedHTMLProps<BabylonProps<FilesInputStore>, any>;
-  gradients: React.DetailedHTMLProps<BabylonProps<Gradients>, any>;
-  greasedLineTools: React.DetailedHTMLProps<BabylonProps<GreasedLineTools>, any>;
-  guid: React.DetailedHTMLProps<BabylonProps<Guid>, any>;
-  iInspectable: React.DetailedHTMLProps<BabylonProps<IInspectable>, any>;
-  instantiationTools: React.DetailedHTMLProps<BabylonProps<InstantiationTools>, any>;
-  iClipPlanesHolder: React.DetailedHTMLProps<BabylonProps<IClipPlanesHolder>, any>;
-  iPerfViewer: React.DetailedHTMLProps<BabylonProps<IPerfViewer>, any>;
-  iWebRequest: React.DetailedHTMLProps<BabylonProps<IWebRequest>, any>;
-  screenshotSize: React.DetailedHTMLProps<BabylonProps<ScreenshotSize>, any>;
-  khronosTextureContainer: React.DetailedHTMLProps<BabylonProps<KhronosTextureContainer>, any>;
-  khronosTextureContainer2: React.DetailedHTMLProps<BabylonProps<KhronosTextureContainer2>, any>;
-  khronosTextureContainer2Worker: React.DetailedHTMLProps<BabylonProps<KhronosTextureContainer2Worker>, any>;
-  logger: React.DetailedHTMLProps<BabylonProps<Logger>, any>;
-  meshExploder: React.DetailedHTMLProps<BabylonProps<MeshExploder>, any>;
-  minMaxReducer: React.DetailedHTMLProps<BabylonProps<MinMaxReducer>, any>;
-  observable: React.DetailedHTMLProps<BabylonProps<Observable>, any>;
-  observable: React.DetailedHTMLProps<BabylonProps<Observable>, any>;
-  observableCoroutine: React.DetailedHTMLProps<BabylonProps<ObservableCoroutine>, any>;
-  perfCounter: React.DetailedHTMLProps<BabylonProps<PerfCounter>, any>;
-  performanceMonitor: React.DetailedHTMLProps<BabylonProps<PerformanceMonitor>, any>;
-  pivotTools: React.DetailedHTMLProps<BabylonProps<PivotTools>, any>;
-  precisionDate: React.DetailedHTMLProps<BabylonProps<PrecisionDate>, any>;
-  pressureObserverWrapper: React.DetailedHTMLProps<BabylonProps<PressureObserverWrapper>, any>;
-  reflector: React.DetailedHTMLProps<BabylonProps<Reflector>, any>;
-  retryStrategy: React.DetailedHTMLProps<BabylonProps<RetryStrategy>, any>;
-  rgbdTextureTools: React.DetailedHTMLProps<BabylonProps<RgbdTextureTools>, any>;
-  sceneOptimizer: React.DetailedHTMLProps<BabylonProps<SceneOptimizer>, any>;
-  sceneRecorder: React.DetailedHTMLProps<BabylonProps<SceneRecorder>, any>;
-  sceneSerializer: React.DetailedHTMLProps<BabylonProps<SceneSerializer>, any>;
-  screenshotTools: React.DetailedHTMLProps<BabylonProps<typeof ScreenshotTools>, any>;
-  smartArray: React.DetailedHTMLProps<BabylonProps<SmartArray>, any>;
-  stringDictionary: React.DetailedHTMLProps<BabylonProps<StringDictionary>, any>;
-  stringTools: React.DetailedHTMLProps<BabylonProps<typeof StringTools>, any>;
-  tags: React.DetailedHTMLProps<BabylonProps<Tags>, any>;
-  textureTools: React.DetailedHTMLProps<BabylonProps<typeof TextureTools>, any>;
-  tga: React.DetailedHTMLProps<BabylonProps<Tga>, any>;
-  timer: React.DetailedHTMLProps<BabylonProps<Timer>, any>;
-  timingTools: React.DetailedHTMLProps<BabylonProps<TimingTools>, any>;
-  tools: React.DetailedHTMLProps<BabylonProps<Tools>, any>;
-  tools: React.DetailedHTMLProps<BabylonProps<Tools>, any>;
-  trajectoryClassifier: React.DetailedHTMLProps<BabylonProps<TrajectoryClassifier>, any>;
-  typeStore: React.DetailedHTMLProps<BabylonProps<TypeStore>, any>;
-  uniqueIdGenerator: React.DetailedHTMLProps<BabylonProps<UniqueIdGenerator>, any>;
-  videoRecorder: React.DetailedHTMLProps<BabylonProps<VideoRecorder>, any>;
-  virtualJoystick: React.DetailedHTMLProps<BabylonProps<VirtualJoystick>, any>;
-  webRequest: React.DetailedHTMLProps<BabylonProps<WebRequest>, any>;
-  workerPool: React.DetailedHTMLProps<BabylonProps<WorkerPool>, any>;
-  morphTarget: React.DetailedHTMLProps<BabylonProps<MorphTarget>, any>;
-  morphTargetManager: React.DetailedHTMLProps<BabylonProps<MorphTargetManager>, any>;
-  INavigationEngine: React.DetailedHTMLProps<BabylonProps<INavigationEngine>, any>;
-  recastJSPlugin: React.DetailedHTMLProps<BabylonProps<RecastJSPlugin>, any>;
-  objectModelInterfaces: React.DetailedHTMLProps<BabylonProps<ObjectModelInterfaces>, any>;
-  IOfflineProvider: React.DetailedHTMLProps<BabylonProps<IOfflineProvider>, any>;
-  database: React.DetailedHTMLProps<BabylonProps<Database>, any>;
-  IParticleEmitterType: React.DetailedHTMLProps<BabylonProps<IParticleEmitterType>, any>;
-  boxParticleEmitter: React.DetailedHTMLProps<BabylonProps<BoxParticleEmitter>, any>;
-  coneParticleEmitter: React.DetailedHTMLProps<BabylonProps<ConeParticleEmitter>, any>;
-  customParticleEmitter: React.DetailedHTMLProps<BabylonProps<CustomParticleEmitter>, any>;
-  cylinderParticleEmitter: React.DetailedHTMLProps<BabylonProps<CylinderParticleEmitter>, any>;
-  hemisphericParticleEmitter: React.DetailedHTMLProps<BabylonProps<HemisphericParticleEmitter>, any>;
-  meshParticleEmitter: React.DetailedHTMLProps<BabylonProps<MeshParticleEmitter>, any>;
-  pointParticleEmitter: React.DetailedHTMLProps<BabylonProps<PointParticleEmitter>, any>;
-  sphereParticleEmitter: React.DetailedHTMLProps<BabylonProps<SphereParticleEmitter>, any>;
-  IGPUParticleSystemPlatform: React.DetailedHTMLProps<BabylonProps<IGPUParticleSystemPlatform>, any>;
-  IParticleSystem: React.DetailedHTMLProps<BabylonProps<IParticleSystem>, any>;
-  baseParticleSystem: React.DetailedHTMLProps<BabylonProps<BaseParticleSystem>, any>;
-  cloudPoint: React.DetailedHTMLProps<BabylonProps<CloudPoint>, any>;
-  computeShaderParticleSystem: React.DetailedHTMLProps<BabylonProps<ComputeShaderParticleSystem>, any>;
-  gpuParticleSystem: React.DetailedHTMLProps<BabylonProps<GpuParticleSystem>, any>;
-  particle: React.DetailedHTMLProps<BabylonProps<Particle>, any>;
-  particleHelper: React.DetailedHTMLProps<BabylonProps<ParticleHelper>, any>;
-  particleSystem: React.DetailedHTMLProps<BabylonProps<ParticleSystem>, any>;
-  particleSystem: React.DetailedHTMLProps<BabylonProps<ParticleSystem>, any>;
-  particleSystemComponent: React.DetailedHTMLProps<BabylonProps<ParticleSystemComponent>, any>;
-  particleSystemSet: React.DetailedHTMLProps<BabylonProps<ParticleSystemSet>, any>;
-  pointsCloudSystem: React.DetailedHTMLProps<BabylonProps<PointsCloudSystem>, any>;
-  solidParticle: React.DetailedHTMLProps<BabylonProps<SolidParticle>, any>;
-  solidParticleSystem: React.DetailedHTMLProps<BabylonProps<SolidParticleSystem>, any>;
-  subEmitter: React.DetailedHTMLProps<BabylonProps<SubEmitter>, any>;
-  thinParticleSystem: React.DetailedHTMLProps<BabylonProps<ThinParticleSystem>, any>;
-  webgl2ParticleSystem: React.DetailedHTMLProps<BabylonProps<Webgl2ParticleSystem>, any>;
-  IPhysicsEngine: React.DetailedHTMLProps<BabylonProps<IPhysicsEngine>, any>;
-  ammoJSPlugin: React.DetailedHTMLProps<BabylonProps<AmmoJSPlugin>, any>;
-  cannonJSPlugin: React.DetailedHTMLProps<BabylonProps<CannonJSPlugin>, any>;
-  oimoJSPlugin: React.DetailedHTMLProps<BabylonProps<OimoJSPlugin>, any>;
-  castingResult: React.DetailedHTMLProps<BabylonProps<CastingResult>, any>;
-  joinedPhysicsEngineComponent: React.DetailedHTMLProps<BabylonProps<JoinedPhysicsEngineComponent>, any>;
-  physicsEngine: React.DetailedHTMLProps<BabylonProps<PhysicsEngine>, any>;
-  physicsEngineComponent: React.DetailedHTMLProps<BabylonProps<PhysicsEngineComponent>, any>;
-  physicsHelper: React.DetailedHTMLProps<BabylonProps<PhysicsHelper>, any>;
-  physicsImpostor: React.DetailedHTMLProps<BabylonProps<PhysicsImpostor>, any>;
-  physicsJoint: React.DetailedHTMLProps<BabylonProps<PhysicsJoint>, any>;
-  physicsPointProximityQuery: React.DetailedHTMLProps<BabylonProps<PhysicsPointProximityQuery>, any>;
-  physicsRaycastResult: React.DetailedHTMLProps<BabylonProps<PhysicsRaycastResult>, any>;
-  physicsShapeCastQuery: React.DetailedHTMLProps<BabylonProps<PhysicsShapeCastQuery>, any>;
-  physicsShapeProximityCastQuery: React.DetailedHTMLProps<BabylonProps<PhysicsShapeProximityCastQuery>, any>;
-  proximityCastResult: React.DetailedHTMLProps<BabylonProps<ProximityCastResult>, any>;
-  shapeCastResult: React.DetailedHTMLProps<BabylonProps<ShapeCastResult>, any>;
-  IPhysicsEnginePlugin: React.DetailedHTMLProps<BabylonProps<IPhysicsEnginePlugin>, any>;
-  ammoJSPlugin: React.DetailedHTMLProps<BabylonProps<AmmoJSPlugin>, any>;
-  cannonJSPlugin: React.DetailedHTMLProps<BabylonProps<CannonJSPlugin>, any>;
-  oimoJSPlugin: React.DetailedHTMLProps<BabylonProps<OimoJSPlugin>, any>;
-  physicsEngine: React.DetailedHTMLProps<BabylonProps<PhysicsEngine>, any>;
-  physicsEngineComponent: React.DetailedHTMLProps<BabylonProps<PhysicsEngineComponent>, any>;
-  physicsImpostor: React.DetailedHTMLProps<BabylonProps<PhysicsImpostor>, any>;
-  physicsJoint: React.DetailedHTMLProps<BabylonProps<PhysicsJoint>, any>;
-  IPhysicsEnginePlugin: React.DetailedHTMLProps<BabylonProps<IPhysicsEnginePlugin>, any>;
-  havokPlugin: React.DetailedHTMLProps<BabylonProps<HavokPlugin>, any>;
-  physicsAggregate: React.DetailedHTMLProps<BabylonProps<PhysicsAggregate>, any>;
-  physicsBody: React.DetailedHTMLProps<BabylonProps<PhysicsBody>, any>;
-  physicsConstraint: React.DetailedHTMLProps<BabylonProps<PhysicsConstraint>, any>;
-  physicsEngine: React.DetailedHTMLProps<BabylonProps<PhysicsEngine>, any>;
-  physicsEngineComponent: React.DetailedHTMLProps<BabylonProps<PhysicsEngineComponent>, any>;
-  physicsMaterial: React.DetailedHTMLProps<BabylonProps<PhysicsMaterial>, any>;
-  physicsShape: React.DetailedHTMLProps<BabylonProps<PhysicsShape>, any>;
-  ragdoll: React.DetailedHTMLProps<BabylonProps<Ragdoll>, any>;
-  defaultRenderingPipeline: React.DetailedHTMLProps<BabylonProps<DefaultRenderingPipeline>, any>;
-  lensRenderingPipeline: React.DetailedHTMLProps<BabylonProps<LensRenderingPipeline>, any>;
-  ssao2RenderingPipeline: React.DetailedHTMLProps<BabylonProps<Ssao2RenderingPipeline>, any>;
-  ssaoRenderingPipeline: React.DetailedHTMLProps<BabylonProps<SsaoRenderingPipeline>, any>;
-  ssrRenderingPipeline: React.DetailedHTMLProps<BabylonProps<SsrRenderingPipeline>, any>;
-  standardRenderingPipeline: React.DetailedHTMLProps<BabylonProps<StandardRenderingPipeline>, any>;
-  taaRenderingPipeline: React.DetailedHTMLProps<BabylonProps<TaaRenderingPipeline>, any>;
-  postProcessRenderEffect: React.DetailedHTMLProps<BabylonProps<PostProcessRenderEffect>, any>;
-  postProcessRenderPipeline: React.DetailedHTMLProps<BabylonProps<PostProcessRenderPipeline>, any>;
-  postProcessRenderPipelineManager: React.DetailedHTMLProps<BabylonProps<PostProcessRenderPipelineManager>, any>;
-  postProcessRenderPipelineManagerSceneComponent: React.DetailedHTMLProps<BabylonProps<PostProcessRenderPipelineManagerSceneComponent>, any>;
-  anaglyphPostProcess: React.DetailedHTMLProps<BabylonProps<AnaglyphPostProcess>, any>;
-  blackAndWhitePostProcess: React.DetailedHTMLProps<BabylonProps<BlackAndWhitePostProcess>, any>;
-  bloomEffect: React.DetailedHTMLProps<BabylonProps<BloomEffect>, any>;
-  bloomMergePostProcess: React.DetailedHTMLProps<BabylonProps<BloomMergePostProcess>, any>;
-  blurPostProcess: React.DetailedHTMLProps<BabylonProps<BlurPostProcess>, any>;
-  chromaticAberrationPostProcess: React.DetailedHTMLProps<BabylonProps<ChromaticAberrationPostProcess>, any>;
-  circleOfConfusionPostProcess: React.DetailedHTMLProps<BabylonProps<CircleOfConfusionPostProcess>, any>;
-  colorCorrectionPostProcess: React.DetailedHTMLProps<BabylonProps<ColorCorrectionPostProcess>, any>;
-  convolutionPostProcess: React.DetailedHTMLProps<BabylonProps<ConvolutionPostProcess>, any>;
-  depthOfFieldBlurPostProcess: React.DetailedHTMLProps<BabylonProps<DepthOfFieldBlurPostProcess>, any>;
-  depthOfFieldEffect: React.DetailedHTMLProps<BabylonProps<DepthOfFieldEffect>, any>;
-  depthOfFieldMergePostProcess: React.DetailedHTMLProps<BabylonProps<DepthOfFieldMergePostProcess>, any>;
-  displayPassPostProcess: React.DetailedHTMLProps<BabylonProps<DisplayPassPostProcess>, any>;
-  extractHighlightsPostProcess: React.DetailedHTMLProps<BabylonProps<ExtractHighlightsPostProcess>, any>;
-  filterPostProcess: React.DetailedHTMLProps<BabylonProps<FilterPostProcess>, any>;
-  fxaaPostProcess: React.DetailedHTMLProps<BabylonProps<FxaaPostProcess>, any>;
-  grainPostProcess: React.DetailedHTMLProps<BabylonProps<GrainPostProcess>, any>;
-  highlightsPostProcess: React.DetailedHTMLProps<BabylonProps<HighlightsPostProcess>, any>;
-  imageProcessingPostProcess: React.DetailedHTMLProps<BabylonProps<ImageProcessingPostProcess>, any>;
-  motionBlurPostProcess: React.DetailedHTMLProps<BabylonProps<MotionBlurPostProcess>, any>;
-  passPostProcess: React.DetailedHTMLProps<BabylonProps<PassPostProcess>, any>;
-  postProcess: React.DetailedHTMLProps<BabylonProps<PostProcess>, any>;
-  postProcessManager: React.DetailedHTMLProps<BabylonProps<PostProcessManager>, any>;
-  refractionPostProcess: React.DetailedHTMLProps<BabylonProps<RefractionPostProcess>, any>;
-  screenSpaceCurvaturePostProcess: React.DetailedHTMLProps<BabylonProps<ScreenSpaceCurvaturePostProcess>, any>;
-  sharpenPostProcess: React.DetailedHTMLProps<BabylonProps<SharpenPostProcess>, any>;
-  stereoscopicInterlacePostProcess: React.DetailedHTMLProps<BabylonProps<StereoscopicInterlacePostProcess>, any>;
-  subSurfaceScatteringPostProcess: React.DetailedHTMLProps<BabylonProps<SubSurfaceScatteringPostProcess>, any>;
-  tonemapPostProcess: React.DetailedHTMLProps<BabylonProps<TonemapPostProcess>, any>;
-  volumetricLightScatteringPostProcess: React.DetailedHTMLProps<BabylonProps<VolumetricLightScatteringPostProcess>, any>;
-  vrDistortionCorrectionPostProcess: React.DetailedHTMLProps<BabylonProps<VrDistortionCorrectionPostProcess>, any>;
-  vrMultiviewToSingleviewPostProcess: React.DetailedHTMLProps<BabylonProps<VrMultiviewToSingleviewPostProcess>, any>;
-  reflectionProbe: React.DetailedHTMLProps<BabylonProps<ReflectionProbe>, any>;
-  giRSM: React.DetailedHTMLProps<BabylonProps<GiRSM>, any>;
-  giRSMManager: React.DetailedHTMLProps<BabylonProps<GiRSMManager>, any>;
-  boundingBoxRenderer: React.DetailedHTMLProps<BabylonProps<BoundingBoxRenderer>, any>;
-  depthPeelingRenderer: React.DetailedHTMLProps<BabylonProps<DepthPeelingRenderer>, any>;
-  depthPeelingSceneComponent: React.DetailedHTMLProps<BabylonProps<DepthPeelingSceneComponent>, any>;
-  depthRenderer: React.DetailedHTMLProps<BabylonProps<DepthRenderer>, any>;
-  depthRendererSceneComponent: React.DetailedHTMLProps<BabylonProps<DepthRendererSceneComponent>, any>;
-  edgesRenderer: React.DetailedHTMLProps<BabylonProps<EdgesRenderer>, any>;
-  fluidRenderer: React.DetailedHTMLProps<BabylonProps<FluidRenderer>, any>;
-  fluidRenderingDepthTextureCopy: React.DetailedHTMLProps<BabylonProps<FluidRenderingDepthTextureCopy>, any>;
-  fluidRenderingObject: React.DetailedHTMLProps<BabylonProps<FluidRenderingObject>, any>;
-  fluidRenderingObjectCustomParticles: React.DetailedHTMLProps<BabylonProps<FluidRenderingObjectCustomParticles>, any>;
-  fluidRenderingObjectParticleSystem: React.DetailedHTMLProps<BabylonProps<FluidRenderingObjectParticleSystem>, any>;
-  fluidRenderingTargetRenderer: React.DetailedHTMLProps<BabylonProps<FluidRenderingTargetRenderer>, any>;
-  fluidRenderingTextures: React.DetailedHTMLProps<BabylonProps<FluidRenderingTextures>, any>;
-  geometryBufferRenderer: React.DetailedHTMLProps<BabylonProps<GeometryBufferRenderer>, any>;
-  geometryBufferRendererSceneComponent: React.DetailedHTMLProps<BabylonProps<GeometryBufferRendererSceneComponent>, any>;
-  motionBlurConfiguration: React.DetailedHTMLProps<BabylonProps<MotionBlurConfiguration>, any>;
-  outlineRenderer: React.DetailedHTMLProps<BabylonProps<OutlineRenderer>, any>;
-  prePassEffectConfiguration: React.DetailedHTMLProps<BabylonProps<PrePassEffectConfiguration>, any>;
-  prePassRenderer: React.DetailedHTMLProps<BabylonProps<PrePassRenderer>, any>;
-  prePassRendererSceneComponent: React.DetailedHTMLProps<BabylonProps<PrePassRendererSceneComponent>, any>;
-  reflectiveShadowMap: React.DetailedHTMLProps<BabylonProps<ReflectiveShadowMap>, any>;
-  renderingGroup: React.DetailedHTMLProps<BabylonProps<RenderingGroup>, any>;
-  renderingManager: React.DetailedHTMLProps<BabylonProps<RenderingManager>, any>;
-  screenSpaceReflections2Configuration: React.DetailedHTMLProps<BabylonProps<ScreenSpaceReflections2Configuration>, any>;
-  screenSpaceReflectionsConfiguration: React.DetailedHTMLProps<BabylonProps<ScreenSpaceReflectionsConfiguration>, any>;
-  ssao2Configuration: React.DetailedHTMLProps<BabylonProps<Ssao2Configuration>, any>;
-  subSurfaceConfiguration: React.DetailedHTMLProps<BabylonProps<SubSurfaceConfiguration>, any>;
-  subSurfaceSceneComponent: React.DetailedHTMLProps<BabylonProps<SubSurfaceSceneComponent>, any>;
-  utilityLayerRenderer: React.DetailedHTMLProps<BabylonProps<UtilityLayerRenderer>, any>;
-  backgroundFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<BackgroundFragmentDeclaration>, any>;
-  backgroundUboDeclaration: React.DetailedHTMLProps<BabylonProps<BackgroundUboDeclaration>, any>;
-  backgroundVertexDeclaration: React.DetailedHTMLProps<BabylonProps<BackgroundVertexDeclaration>, any>;
-  bakedVertexAnimation: React.DetailedHTMLProps<BabylonProps<BakedVertexAnimation>, any>;
-  bakedVertexAnimationDeclaration: React.DetailedHTMLProps<BabylonProps<BakedVertexAnimationDeclaration>, any>;
-  bayerDitherFunctions: React.DetailedHTMLProps<BabylonProps<BayerDitherFunctions>, any>;
-  bonesDeclaration: React.DetailedHTMLProps<BabylonProps<BonesDeclaration>, any>;
-  bonesVertex: React.DetailedHTMLProps<BabylonProps<BonesVertex>, any>;
-  boundingBoxRendererFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<BoundingBoxRendererFragmentDeclaration>, any>;
-  boundingBoxRendererUboDeclaration: React.DetailedHTMLProps<BabylonProps<BoundingBoxRendererUboDeclaration>, any>;
-  boundingBoxRendererVertexDeclaration: React.DetailedHTMLProps<BabylonProps<BoundingBoxRendererVertexDeclaration>, any>;
-  bumpFragment: React.DetailedHTMLProps<BabylonProps<BumpFragment>, any>;
-  bumpFragmentFunctions: React.DetailedHTMLProps<BabylonProps<BumpFragmentFunctions>, any>;
-  bumpFragmentMainFunctions: React.DetailedHTMLProps<BabylonProps<BumpFragmentMainFunctions>, any>;
-  bumpVertex: React.DetailedHTMLProps<BabylonProps<BumpVertex>, any>;
-  bumpVertexDeclaration: React.DetailedHTMLProps<BabylonProps<BumpVertexDeclaration>, any>;
-  clipPlaneFragment: React.DetailedHTMLProps<BabylonProps<ClipPlaneFragment>, any>;
-  clipPlaneFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<ClipPlaneFragmentDeclaration>, any>;
-  clipPlaneFragmentDeclaration2: React.DetailedHTMLProps<BabylonProps<ClipPlaneFragmentDeclaration2>, any>;
-  clipPlaneVertex: React.DetailedHTMLProps<BabylonProps<ClipPlaneVertex>, any>;
-  clipPlaneVertexDeclaration: React.DetailedHTMLProps<BabylonProps<ClipPlaneVertexDeclaration>, any>;
-  clipPlaneVertexDeclaration2: React.DetailedHTMLProps<BabylonProps<ClipPlaneVertexDeclaration2>, any>;
-  decalFragment: React.DetailedHTMLProps<BabylonProps<DecalFragment>, any>;
-  decalFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<DecalFragmentDeclaration>, any>;
-  decalVertexDeclaration: React.DetailedHTMLProps<BabylonProps<DecalVertexDeclaration>, any>;
-  defaultFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<DefaultFragmentDeclaration>, any>;
-  defaultUboDeclaration: React.DetailedHTMLProps<BabylonProps<DefaultUboDeclaration>, any>;
-  defaultVertexDeclaration: React.DetailedHTMLProps<BabylonProps<DefaultVertexDeclaration>, any>;
-  depthPrePass: React.DetailedHTMLProps<BabylonProps<DepthPrePass>, any>;
-  diffusionProfile: React.DetailedHTMLProps<BabylonProps<DiffusionProfile>, any>;
-  fibonacci: React.DetailedHTMLProps<BabylonProps<Fibonacci>, any>;
-  fogFragment: React.DetailedHTMLProps<BabylonProps<FogFragment>, any>;
-  fogFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<FogFragmentDeclaration>, any>;
-  fogVertex: React.DetailedHTMLProps<BabylonProps<FogVertex>, any>;
-  fogVertexDeclaration: React.DetailedHTMLProps<BabylonProps<FogVertexDeclaration>, any>;
-  fresnelFunction: React.DetailedHTMLProps<BabylonProps<FresnelFunction>, any>;
-  gaussianSplattingUboDeclaration: React.DetailedHTMLProps<BabylonProps<GaussianSplattingUboDeclaration>, any>;
-  gaussianSplattingVertexDeclaration: React.DetailedHTMLProps<BabylonProps<GaussianSplattingVertexDeclaration>, any>;
-  geometryUboDeclaration: React.DetailedHTMLProps<BabylonProps<GeometryUboDeclaration>, any>;
-  geometryVertexDeclaration: React.DetailedHTMLProps<BabylonProps<GeometryVertexDeclaration>, any>;
-  harmonicsFunctions: React.DetailedHTMLProps<BabylonProps<HarmonicsFunctions>, any>;
-  hdrFilteringFunctions: React.DetailedHTMLProps<BabylonProps<HdrFilteringFunctions>, any>;
-  helperFunctions: React.DetailedHTMLProps<BabylonProps<HelperFunctions>, any>;
-  imageProcessingCompatibility: React.DetailedHTMLProps<BabylonProps<ImageProcessingCompatibility>, any>;
-  imageProcessingDeclaration: React.DetailedHTMLProps<BabylonProps<ImageProcessingDeclaration>, any>;
-  imageProcessingFunctions: React.DetailedHTMLProps<BabylonProps<ImageProcessingFunctions>, any>;
-  importanceSampling: React.DetailedHTMLProps<BabylonProps<ImportanceSampling>, any>;
-  instancesDeclaration: React.DetailedHTMLProps<BabylonProps<InstancesDeclaration>, any>;
-  instancesVertex: React.DetailedHTMLProps<BabylonProps<InstancesVertex>, any>;
-  kernelBlurFragment: React.DetailedHTMLProps<BabylonProps<KernelBlurFragment>, any>;
-  kernelBlurFragment2: React.DetailedHTMLProps<BabylonProps<KernelBlurFragment2>, any>;
-  kernelBlurVaryingDeclaration: React.DetailedHTMLProps<BabylonProps<KernelBlurVaryingDeclaration>, any>;
-  kernelBlurVertex: React.DetailedHTMLProps<BabylonProps<KernelBlurVertex>, any>;
-  lightFragment: React.DetailedHTMLProps<BabylonProps<LightFragment>, any>;
-  lightFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<LightFragmentDeclaration>, any>;
-  lightUboDeclaration: React.DetailedHTMLProps<BabylonProps<LightUboDeclaration>, any>;
-  lightVxFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<LightVxFragmentDeclaration>, any>;
-  lightVxUboDeclaration: React.DetailedHTMLProps<BabylonProps<LightVxUboDeclaration>, any>;
-  lightsFragmentFunctions: React.DetailedHTMLProps<BabylonProps<LightsFragmentFunctions>, any>;
-  logDepthDeclaration: React.DetailedHTMLProps<BabylonProps<LogDepthDeclaration>, any>;
-  logDepthFragment: React.DetailedHTMLProps<BabylonProps<LogDepthFragment>, any>;
-  logDepthVertex: React.DetailedHTMLProps<BabylonProps<LogDepthVertex>, any>;
-  mainUVVaryingDeclaration: React.DetailedHTMLProps<BabylonProps<MainUVVaryingDeclaration>, any>;
-  meshFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<MeshFragmentDeclaration>, any>;
-  meshUboDeclaration: React.DetailedHTMLProps<BabylonProps<MeshUboDeclaration>, any>;
-  meshVertexDeclaration: React.DetailedHTMLProps<BabylonProps<MeshVertexDeclaration>, any>;
-  morphTargetsVertex: React.DetailedHTMLProps<BabylonProps<MorphTargetsVertex>, any>;
-  morphTargetsVertexDeclaration: React.DetailedHTMLProps<BabylonProps<MorphTargetsVertexDeclaration>, any>;
-  morphTargetsVertexGlobal: React.DetailedHTMLProps<BabylonProps<MorphTargetsVertexGlobal>, any>;
-  morphTargetsVertexGlobalDeclaration: React.DetailedHTMLProps<BabylonProps<MorphTargetsVertexGlobalDeclaration>, any>;
-  mrtFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<MrtFragmentDeclaration>, any>;
-  oitDeclaration: React.DetailedHTMLProps<BabylonProps<OitDeclaration>, any>;
-  oitFragment: React.DetailedHTMLProps<BabylonProps<OitFragment>, any>;
-  packingFunctions: React.DetailedHTMLProps<BabylonProps<PackingFunctions>, any>;
-  pbrBRDFFunctions: React.DetailedHTMLProps<BabylonProps<PbrBRDFFunctions>, any>;
-  pbrBlockAlbedoOpacity: React.DetailedHTMLProps<BabylonProps<PbrBlockAlbedoOpacity>, any>;
-  pbrBlockAlphaFresnel: React.DetailedHTMLProps<BabylonProps<PbrBlockAlphaFresnel>, any>;
-  pbrBlockAmbientOcclusion: React.DetailedHTMLProps<BabylonProps<PbrBlockAmbientOcclusion>, any>;
-  pbrBlockAnisotropic: React.DetailedHTMLProps<BabylonProps<PbrBlockAnisotropic>, any>;
-  pbrBlockClearcoat: React.DetailedHTMLProps<BabylonProps<PbrBlockClearcoat>, any>;
-  pbrBlockDirectLighting: React.DetailedHTMLProps<BabylonProps<PbrBlockDirectLighting>, any>;
-  pbrBlockFinalColorComposition: React.DetailedHTMLProps<BabylonProps<PbrBlockFinalColorComposition>, any>;
-  pbrBlockFinalLitComponents: React.DetailedHTMLProps<BabylonProps<PbrBlockFinalLitComponents>, any>;
-  pbrBlockFinalUnlitComponents: React.DetailedHTMLProps<BabylonProps<PbrBlockFinalUnlitComponents>, any>;
-  pbrBlockGeometryInfo: React.DetailedHTMLProps<BabylonProps<PbrBlockGeometryInfo>, any>;
-  pbrBlockImageProcessing: React.DetailedHTMLProps<BabylonProps<PbrBlockImageProcessing>, any>;
-  pbrBlockIridescence: React.DetailedHTMLProps<BabylonProps<PbrBlockIridescence>, any>;
-  pbrBlockLightmapInit: React.DetailedHTMLProps<BabylonProps<PbrBlockLightmapInit>, any>;
-  pbrBlockNormalFinal: React.DetailedHTMLProps<BabylonProps<PbrBlockNormalFinal>, any>;
-  pbrBlockNormalGeometric: React.DetailedHTMLProps<BabylonProps<PbrBlockNormalGeometric>, any>;
-  pbrBlockReflectance: React.DetailedHTMLProps<BabylonProps<PbrBlockReflectance>, any>;
-  pbrBlockReflectance0: React.DetailedHTMLProps<BabylonProps<PbrBlockReflectance0>, any>;
-  pbrBlockReflection: React.DetailedHTMLProps<BabylonProps<PbrBlockReflection>, any>;
-  pbrBlockReflectivity: React.DetailedHTMLProps<BabylonProps<PbrBlockReflectivity>, any>;
-  pbrBlockSheen: React.DetailedHTMLProps<BabylonProps<PbrBlockSheen>, any>;
-  pbrBlockSubSurface: React.DetailedHTMLProps<BabylonProps<PbrBlockSubSurface>, any>;
-  pbrDebug: React.DetailedHTMLProps<BabylonProps<PbrDebug>, any>;
-  pbrDirectLightingFalloffFunctions: React.DetailedHTMLProps<BabylonProps<PbrDirectLightingFalloffFunctions>, any>;
-  pbrDirectLightingFunctions: React.DetailedHTMLProps<BabylonProps<PbrDirectLightingFunctions>, any>;
-  pbrDirectLightingSetupFunctions: React.DetailedHTMLProps<BabylonProps<PbrDirectLightingSetupFunctions>, any>;
-  pbrFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<PbrFragmentDeclaration>, any>;
-  pbrFragmentExtraDeclaration: React.DetailedHTMLProps<BabylonProps<PbrFragmentExtraDeclaration>, any>;
-  pbrFragmentSamplersDeclaration: React.DetailedHTMLProps<BabylonProps<PbrFragmentSamplersDeclaration>, any>;
-  pbrHelperFunctions: React.DetailedHTMLProps<BabylonProps<PbrHelperFunctions>, any>;
-  pbrIBLFunctions: React.DetailedHTMLProps<BabylonProps<PbrIBLFunctions>, any>;
-  pbrUboDeclaration: React.DetailedHTMLProps<BabylonProps<PbrUboDeclaration>, any>;
-  pbrVertexDeclaration: React.DetailedHTMLProps<BabylonProps<PbrVertexDeclaration>, any>;
-  pointCloudVertex: React.DetailedHTMLProps<BabylonProps<PointCloudVertex>, any>;
-  pointCloudVertexDeclaration: React.DetailedHTMLProps<BabylonProps<PointCloudVertexDeclaration>, any>;
-  prePassDeclaration: React.DetailedHTMLProps<BabylonProps<PrePassDeclaration>, any>;
-  prePassVertex: React.DetailedHTMLProps<BabylonProps<PrePassVertex>, any>;
-  prePassVertexDeclaration: React.DetailedHTMLProps<BabylonProps<PrePassVertexDeclaration>, any>;
-  reflectionFunction: React.DetailedHTMLProps<BabylonProps<ReflectionFunction>, any>;
-  samplerFragmentAlternateDeclaration: React.DetailedHTMLProps<BabylonProps<SamplerFragmentAlternateDeclaration>, any>;
-  samplerFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<SamplerFragmentDeclaration>, any>;
-  samplerVertexDeclaration: React.DetailedHTMLProps<BabylonProps<SamplerVertexDeclaration>, any>;
-  samplerVertexImplementation: React.DetailedHTMLProps<BabylonProps<SamplerVertexImplementation>, any>;
-  sceneFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<SceneFragmentDeclaration>, any>;
-  sceneUboDeclaration: React.DetailedHTMLProps<BabylonProps<SceneUboDeclaration>, any>;
-  sceneVertexDeclaration: React.DetailedHTMLProps<BabylonProps<SceneVertexDeclaration>, any>;
-  screenSpaceRayTrace: React.DetailedHTMLProps<BabylonProps<ScreenSpaceRayTrace>, any>;
-  shadowMapFragment: React.DetailedHTMLProps<BabylonProps<ShadowMapFragment>, any>;
-  shadowMapFragmentExtraDeclaration: React.DetailedHTMLProps<BabylonProps<ShadowMapFragmentExtraDeclaration>, any>;
-  shadowMapFragmentSoftTransparentShadow: React.DetailedHTMLProps<BabylonProps<ShadowMapFragmentSoftTransparentShadow>, any>;
-  shadowMapUboDeclaration: React.DetailedHTMLProps<BabylonProps<ShadowMapUboDeclaration>, any>;
-  shadowMapVertexDeclaration: React.DetailedHTMLProps<BabylonProps<ShadowMapVertexDeclaration>, any>;
-  shadowMapVertexExtraDeclaration: React.DetailedHTMLProps<BabylonProps<ShadowMapVertexExtraDeclaration>, any>;
-  shadowMapVertexMetric: React.DetailedHTMLProps<BabylonProps<ShadowMapVertexMetric>, any>;
-  shadowMapVertexNormalBias: React.DetailedHTMLProps<BabylonProps<ShadowMapVertexNormalBias>, any>;
-  shadowsFragmentFunctions: React.DetailedHTMLProps<BabylonProps<ShadowsFragmentFunctions>, any>;
-  shadowsVertex: React.DetailedHTMLProps<BabylonProps<ShadowsVertex>, any>;
-  subSurfaceScatteringFunctions: React.DetailedHTMLProps<BabylonProps<SubSurfaceScatteringFunctions>, any>;
-  uvAttributeDeclaration: React.DetailedHTMLProps<BabylonProps<UvAttributeDeclaration>, any>;
-  uvVariableDeclaration: React.DetailedHTMLProps<BabylonProps<UvVariableDeclaration>, any>;
-  vertexColorMixing: React.DetailedHTMLProps<BabylonProps<VertexColorMixing>, any>;
-  anaglyph: React.DetailedHTMLProps<BabylonProps<Anaglyph>, any>;
-  background: React.DetailedHTMLProps<BabylonProps<Background>, any>;
-  background: React.DetailedHTMLProps<BabylonProps<Background>, any>;
-  bilateralBlur: React.DetailedHTMLProps<BabylonProps<BilateralBlur>, any>;
-  bilateralBlurQuality: React.DetailedHTMLProps<BabylonProps<BilateralBlurQuality>, any>;
-  blackAndWhite: React.DetailedHTMLProps<BabylonProps<BlackAndWhite>, any>;
-  bloomMerge: React.DetailedHTMLProps<BabylonProps<BloomMerge>, any>;
-  blur: React.DetailedHTMLProps<BabylonProps<Blur>, any>;
-  boundingBoxRenderer: React.DetailedHTMLProps<BabylonProps<BoundingBoxRenderer>, any>;
-  boundingBoxRenderer: React.DetailedHTMLProps<BabylonProps<BoundingBoxRenderer>, any>;
-  chromaticAberration: React.DetailedHTMLProps<BabylonProps<ChromaticAberration>, any>;
-  circleOfConfusion: React.DetailedHTMLProps<BabylonProps<CircleOfConfusion>, any>;
-  color: React.DetailedHTMLProps<BabylonProps<Color>, any>;
-  color: React.DetailedHTMLProps<BabylonProps<Color>, any>;
-  colorCorrection: React.DetailedHTMLProps<BabylonProps<ColorCorrection>, any>;
-  convolution: React.DetailedHTMLProps<BabylonProps<Convolution>, any>;
-  copyTextureToTexture: React.DetailedHTMLProps<BabylonProps<CopyTextureToTexture>, any>;
-  default: React.DetailedHTMLProps<BabylonProps<Default>, any>;
-  default: React.DetailedHTMLProps<BabylonProps<Default>, any>;
-  depth: React.DetailedHTMLProps<BabylonProps<Depth>, any>;
-  depth: React.DetailedHTMLProps<BabylonProps<Depth>, any>;
-  depthBoxBlur: React.DetailedHTMLProps<BabylonProps<DepthBoxBlur>, any>;
-  depthOfField: React.DetailedHTMLProps<BabylonProps<DepthOfField>, any>;
-  depthOfFieldMerge: React.DetailedHTMLProps<BabylonProps<DepthOfFieldMerge>, any>;
-  displayPass: React.DetailedHTMLProps<BabylonProps<DisplayPass>, any>;
-  equirectangularPanorama: React.DetailedHTMLProps<BabylonProps<EquirectangularPanorama>, any>;
-  extractHighlights: React.DetailedHTMLProps<BabylonProps<ExtractHighlights>, any>;
-  filter: React.DetailedHTMLProps<BabylonProps<Filter>, any>;
-  fluidRenderingBilateralBlur: React.DetailedHTMLProps<BabylonProps<FluidRenderingBilateralBlur>, any>;
-  fluidRenderingParticleDepth: React.DetailedHTMLProps<BabylonProps<FluidRenderingParticleDepth>, any>;
-  fluidRenderingParticleDepth: React.DetailedHTMLProps<BabylonProps<FluidRenderingParticleDepth>, any>;
-  fluidRenderingParticleDiffuse: React.DetailedHTMLProps<BabylonProps<FluidRenderingParticleDiffuse>, any>;
-  fluidRenderingParticleDiffuse: React.DetailedHTMLProps<BabylonProps<FluidRenderingParticleDiffuse>, any>;
-  fluidRenderingParticleThickness: React.DetailedHTMLProps<BabylonProps<FluidRenderingParticleThickness>, any>;
-  fluidRenderingParticleThickness: React.DetailedHTMLProps<BabylonProps<FluidRenderingParticleThickness>, any>;
-  fluidRenderingRender: React.DetailedHTMLProps<BabylonProps<FluidRenderingRender>, any>;
-  fluidRenderingStandardBlur: React.DetailedHTMLProps<BabylonProps<FluidRenderingStandardBlur>, any>;
-  fxaa: React.DetailedHTMLProps<BabylonProps<Fxaa>, any>;
-  fxaa: React.DetailedHTMLProps<BabylonProps<Fxaa>, any>;
-  gaussianSplatting: React.DetailedHTMLProps<BabylonProps<GaussianSplatting>, any>;
-  gaussianSplatting: React.DetailedHTMLProps<BabylonProps<GaussianSplatting>, any>;
-  geometry: React.DetailedHTMLProps<BabylonProps<Geometry>, any>;
-  geometry: React.DetailedHTMLProps<BabylonProps<Geometry>, any>;
-  glowBlurPostProcess: React.DetailedHTMLProps<BabylonProps<GlowBlurPostProcess>, any>;
-  glowMapGeneration: React.DetailedHTMLProps<BabylonProps<GlowMapGeneration>, any>;
-  glowMapGeneration: React.DetailedHTMLProps<BabylonProps<GlowMapGeneration>, any>;
-  glowMapMerge: React.DetailedHTMLProps<BabylonProps<GlowMapMerge>, any>;
-  glowMapMerge: React.DetailedHTMLProps<BabylonProps<GlowMapMerge>, any>;
-  gpuRenderParticles: React.DetailedHTMLProps<BabylonProps<GpuRenderParticles>, any>;
-  gpuRenderParticles: React.DetailedHTMLProps<BabylonProps<GpuRenderParticles>, any>;
-  gpuUpdateParticles: React.DetailedHTMLProps<BabylonProps<GpuUpdateParticles>, any>;
-  gpuUpdateParticles: React.DetailedHTMLProps<BabylonProps<GpuUpdateParticles>, any>;
-  grain: React.DetailedHTMLProps<BabylonProps<Grain>, any>;
-  greasedLine: React.DetailedHTMLProps<BabylonProps<GreasedLine>, any>;
-  greasedLine: React.DetailedHTMLProps<BabylonProps<GreasedLine>, any>;
-  hdrFiltering: React.DetailedHTMLProps<BabylonProps<HdrFiltering>, any>;
-  hdrFiltering: React.DetailedHTMLProps<BabylonProps<HdrFiltering>, any>;
-  highlights: React.DetailedHTMLProps<BabylonProps<Highlights>, any>;
-  imageProcessing: React.DetailedHTMLProps<BabylonProps<ImageProcessing>, any>;
-  kernelBlur: React.DetailedHTMLProps<BabylonProps<KernelBlur>, any>;
-  kernelBlur: React.DetailedHTMLProps<BabylonProps<KernelBlur>, any>;
-  layer: React.DetailedHTMLProps<BabylonProps<Layer>, any>;
-  layer: React.DetailedHTMLProps<BabylonProps<Layer>, any>;
-  lensFlare: React.DetailedHTMLProps<BabylonProps<LensFlare>, any>;
-  lensFlare: React.DetailedHTMLProps<BabylonProps<LensFlare>, any>;
-  lensHighlights: React.DetailedHTMLProps<BabylonProps<LensHighlights>, any>;
-  line: React.DetailedHTMLProps<BabylonProps<Line>, any>;
-  line: React.DetailedHTMLProps<BabylonProps<Line>, any>;
-  lod: React.DetailedHTMLProps<BabylonProps<Lod>, any>;
-  lodCube: React.DetailedHTMLProps<BabylonProps<LodCube>, any>;
-  meshUVSpaceRenderer: React.DetailedHTMLProps<BabylonProps<MeshUVSpaceRenderer>, any>;
-  meshUVSpaceRenderer: React.DetailedHTMLProps<BabylonProps<MeshUVSpaceRenderer>, any>;
-  meshUVSpaceRendererFinaliser: React.DetailedHTMLProps<BabylonProps<MeshUVSpaceRendererFinaliser>, any>;
-  meshUVSpaceRendererFinaliser: React.DetailedHTMLProps<BabylonProps<MeshUVSpaceRendererFinaliser>, any>;
-  meshUVSpaceRendererMasker: React.DetailedHTMLProps<BabylonProps<MeshUVSpaceRendererMasker>, any>;
-  meshUVSpaceRendererMasker: React.DetailedHTMLProps<BabylonProps<MeshUVSpaceRendererMasker>, any>;
-  minmaxRedux: React.DetailedHTMLProps<BabylonProps<MinmaxRedux>, any>;
-  motionBlur: React.DetailedHTMLProps<BabylonProps<MotionBlur>, any>;
-  noise: React.DetailedHTMLProps<BabylonProps<Noise>, any>;
-  oitBackBlend: React.DetailedHTMLProps<BabylonProps<OitBackBlend>, any>;
-  oitFinal: React.DetailedHTMLProps<BabylonProps<OitFinal>, any>;
-  outline: React.DetailedHTMLProps<BabylonProps<Outline>, any>;
-  outline: React.DetailedHTMLProps<BabylonProps<Outline>, any>;
-  particles: React.DetailedHTMLProps<BabylonProps<Particles>, any>;
-  particles: React.DetailedHTMLProps<BabylonProps<Particles>, any>;
-  pass: React.DetailedHTMLProps<BabylonProps<Pass>, any>;
-  passCube: React.DetailedHTMLProps<BabylonProps<PassCube>, any>;
-  pbr: React.DetailedHTMLProps<BabylonProps<Pbr>, any>;
-  pbr: React.DetailedHTMLProps<BabylonProps<Pbr>, any>;
-  postprocess: React.DetailedHTMLProps<BabylonProps<Postprocess>, any>;
-  procedural: React.DetailedHTMLProps<BabylonProps<Procedural>, any>;
-  refraction: React.DetailedHTMLProps<BabylonProps<Refraction>, any>;
-  rgbdDecode: React.DetailedHTMLProps<BabylonProps<RgbdDecode>, any>;
-  rgbdEncode: React.DetailedHTMLProps<BabylonProps<RgbdEncode>, any>;
-  rsmFullGlobalIllumination: React.DetailedHTMLProps<BabylonProps<RsmFullGlobalIllumination>, any>;
-  rsmGlobalIllumination: React.DetailedHTMLProps<BabylonProps<RsmGlobalIllumination>, any>;
-  screenSpaceCurvature: React.DetailedHTMLProps<BabylonProps<ScreenSpaceCurvature>, any>;
-  screenSpaceReflection: React.DetailedHTMLProps<BabylonProps<ScreenSpaceReflection>, any>;
-  screenSpaceReflection2: React.DetailedHTMLProps<BabylonProps<ScreenSpaceReflection2>, any>;
-  screenSpaceReflection2Blur: React.DetailedHTMLProps<BabylonProps<ScreenSpaceReflection2Blur>, any>;
-  screenSpaceReflection2BlurCombiner: React.DetailedHTMLProps<BabylonProps<ScreenSpaceReflection2BlurCombiner>, any>;
-  shadowMap: React.DetailedHTMLProps<BabylonProps<ShadowMap>, any>;
-  shadowMap: React.DetailedHTMLProps<BabylonProps<ShadowMap>, any>;
-  sharpen: React.DetailedHTMLProps<BabylonProps<Sharpen>, any>;
-  spriteMap: React.DetailedHTMLProps<BabylonProps<SpriteMap>, any>;
-  spriteMap: React.DetailedHTMLProps<BabylonProps<SpriteMap>, any>;
-  sprites: React.DetailedHTMLProps<BabylonProps<Sprites>, any>;
-  sprites: React.DetailedHTMLProps<BabylonProps<Sprites>, any>;
-  ssao: React.DetailedHTMLProps<BabylonProps<Ssao>, any>;
-  ssao2: React.DetailedHTMLProps<BabylonProps<Ssao2>, any>;
-  ssaoCombine: React.DetailedHTMLProps<BabylonProps<SsaoCombine>, any>;
-  standard: React.DetailedHTMLProps<BabylonProps<Standard>, any>;
-  stereoscopicInterlace: React.DetailedHTMLProps<BabylonProps<StereoscopicInterlace>, any>;
-  subSurfaceScattering: React.DetailedHTMLProps<BabylonProps<SubSurfaceScattering>, any>;
-  taa: React.DetailedHTMLProps<BabylonProps<Taa>, any>;
-  tonemap: React.DetailedHTMLProps<BabylonProps<Tonemap>, any>;
-  velocity: React.DetailedHTMLProps<BabylonProps<Velocity>, any>;
-  velocity: React.DetailedHTMLProps<BabylonProps<Velocity>, any>;
-  volumetricLightScattering: React.DetailedHTMLProps<BabylonProps<VolumetricLightScattering>, any>;
-  volumetricLightScatteringPass: React.DetailedHTMLProps<BabylonProps<VolumetricLightScatteringPass>, any>;
-  volumetricLightScatteringPass: React.DetailedHTMLProps<BabylonProps<VolumetricLightScatteringPass>, any>;
-  vrDistortionCorrection: React.DetailedHTMLProps<BabylonProps<VrDistortionCorrection>, any>;
-  vrMultiviewToSingleview: React.DetailedHTMLProps<BabylonProps<VrMultiviewToSingleview>, any>;
-  bakedVertexAnimation: React.DetailedHTMLProps<BabylonProps<BakedVertexAnimation>, any>;
-  bakedVertexAnimationDeclaration: React.DetailedHTMLProps<BabylonProps<BakedVertexAnimationDeclaration>, any>;
-  bonesDeclaration: React.DetailedHTMLProps<BabylonProps<BonesDeclaration>, any>;
-  bonesVertex: React.DetailedHTMLProps<BabylonProps<BonesVertex>, any>;
-  clipPlaneFragment: React.DetailedHTMLProps<BabylonProps<ClipPlaneFragment>, any>;
-  clipPlaneFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<ClipPlaneFragmentDeclaration>, any>;
-  clipPlaneVertex: React.DetailedHTMLProps<BabylonProps<ClipPlaneVertex>, any>;
-  clipPlaneVertexDeclaration: React.DetailedHTMLProps<BabylonProps<ClipPlaneVertexDeclaration>, any>;
-  fogFragmentDeclaration: React.DetailedHTMLProps<BabylonProps<FogFragmentDeclaration>, any>;
-  fresnelFunction: React.DetailedHTMLProps<BabylonProps<FresnelFunction>, any>;
-  helperFunctions: React.DetailedHTMLProps<BabylonProps<HelperFunctions>, any>;
-  instancesDeclaration: React.DetailedHTMLProps<BabylonProps<InstancesDeclaration>, any>;
-  instancesVertex: React.DetailedHTMLProps<BabylonProps<InstancesVertex>, any>;
-  lightFragment: React.DetailedHTMLProps<BabylonProps<LightFragment>, any>;
-  lightUboDeclaration: React.DetailedHTMLProps<BabylonProps<LightUboDeclaration>, any>;
-  lightVxUboDeclaration: React.DetailedHTMLProps<BabylonProps<LightVxUboDeclaration>, any>;
-  lightsFragmentFunctions: React.DetailedHTMLProps<BabylonProps<LightsFragmentFunctions>, any>;
-  meshUboDeclaration: React.DetailedHTMLProps<BabylonProps<MeshUboDeclaration>, any>;
-  morphTargetsVertex: React.DetailedHTMLProps<BabylonProps<MorphTargetsVertex>, any>;
-  morphTargetsVertexDeclaration: React.DetailedHTMLProps<BabylonProps<MorphTargetsVertexDeclaration>, any>;
-  morphTargetsVertexGlobal: React.DetailedHTMLProps<BabylonProps<MorphTargetsVertexGlobal>, any>;
-  morphTargetsVertexGlobalDeclaration: React.DetailedHTMLProps<BabylonProps<MorphTargetsVertexGlobalDeclaration>, any>;
-  sceneUboDeclaration: React.DetailedHTMLProps<BabylonProps<SceneUboDeclaration>, any>;
-  shadowsFragmentFunctions: React.DetailedHTMLProps<BabylonProps<ShadowsFragmentFunctions>, any>;
-  shadowsVertex: React.DetailedHTMLProps<BabylonProps<ShadowsVertex>, any>;
-  clearQuad: React.DetailedHTMLProps<BabylonProps<ClearQuad>, any>;
-  clearQuad: React.DetailedHTMLProps<BabylonProps<ClearQuad>, any>;
-  gpuUpdateParticles: React.DetailedHTMLProps<BabylonProps<GpuUpdateParticles>, any>;
-  postprocess: React.DetailedHTMLProps<BabylonProps<Postprocess>, any>;
-  ISprites: React.DetailedHTMLProps<BabylonProps<ISprites>, any>;
-  sprite: React.DetailedHTMLProps<BabylonProps<Sprite>, any>;
-  spriteManager: React.DetailedHTMLProps<BabylonProps<SpriteManager>, any>;
-  spriteMap: React.DetailedHTMLProps<BabylonProps<SpriteMap>, any>;
-  spritePackedManager: React.DetailedHTMLProps<BabylonProps<SpritePackedManager>, any>;
-  spriteRenderer: React.DetailedHTMLProps<BabylonProps<SpriteRenderer>, any>;
-  spriteSceneComponent: React.DetailedHTMLProps<BabylonProps<SpriteSceneComponent>, any>;
-  thinSprite: React.DetailedHTMLProps<BabylonProps<ThinSprite>, any>;
-  IStencilState: React.DetailedHTMLProps<BabylonProps<IStencilState>, any>;
-  alphaCullingState: React.DetailedHTMLProps<BabylonProps<AlphaCullingState>, any>;
-  depthCullingState: React.DetailedHTMLProps<BabylonProps<DepthCullingState>, any>;
-  stencilState: React.DetailedHTMLProps<BabylonProps<StencilState>, any>;
-  stencilStateComposer: React.DetailedHTMLProps<BabylonProps<StencilStateComposer>, any>;
-  WebXRCompositionLayer: React.DetailedHTMLProps<BabylonProps<WebXRCompositionLayer>, any>;
-  WebXRProjectionLayer: React.DetailedHTMLProps<BabylonProps<WebXRProjectionLayer>, any>;
-  WebXRAbstractFeature: React.DetailedHTMLProps<BabylonProps<WebXRAbstractFeature>, any>;
-  WebXRAnchorSystem: React.DetailedHTMLProps<BabylonProps<WebXRAnchorSystem>, any>;
-  WebXRBackgroundRemover: React.DetailedHTMLProps<BabylonProps<WebXRBackgroundRemover>, any>;
-  WebXRControllerMovement: React.DetailedHTMLProps<BabylonProps<WebXRControllerMovement>, any>;
-  WebXRControllerPhysics: React.DetailedHTMLProps<BabylonProps<WebXRControllerPhysics>, any>;
-  WebXRControllerPointerSelection: React.DetailedHTMLProps<BabylonProps<WebXRControllerPointerSelection>, any>;
-  WebXRControllerTeleportation: React.DetailedHTMLProps<BabylonProps<WebXRControllerTeleportation>, any>;
-  WebXRDOMOverlay: React.DetailedHTMLProps<BabylonProps<WebXRDOMOverlay>, any>;
-  WebXRDepthSensing: React.DetailedHTMLProps<BabylonProps<WebXRDepthSensing>, any>;
-  WebXREyeTracking: React.DetailedHTMLProps<BabylonProps<WebXREyeTracking>, any>;
-  WebXRFeaturePointSystem: React.DetailedHTMLProps<BabylonProps<WebXRFeaturePointSystem>, any>;
-  WebXRHandTracking: React.DetailedHTMLProps<BabylonProps<WebXRHandTracking>, any>;
-  WebXRHitTest: React.DetailedHTMLProps<BabylonProps<WebXRHitTest>, any>;
-  WebXRHitTestLegacy: React.DetailedHTMLProps<BabylonProps<WebXRHitTestLegacy>, any>;
-  WebXRImageTracking: React.DetailedHTMLProps<BabylonProps<WebXRImageTracking>, any>;
-  WebXRLayers: React.DetailedHTMLProps<BabylonProps<WebXRLayers>, any>;
-  WebXRLightEstimation: React.DetailedHTMLProps<BabylonProps<WebXRLightEstimation>, any>;
-  WebXRMeshDetector: React.DetailedHTMLProps<BabylonProps<WebXRMeshDetector>, any>;
-  WebXRNearInteraction: React.DetailedHTMLProps<BabylonProps<WebXRNearInteraction>, any>;
-  WebXRPlaneDetector: React.DetailedHTMLProps<BabylonProps<WebXRPlaneDetector>, any>;
-  WebXRRawCameraAccess: React.DetailedHTMLProps<BabylonProps<WebXRRawCameraAccess>, any>;
-  WebXRSpaceWarp: React.DetailedHTMLProps<BabylonProps<WebXRSpaceWarp>, any>;
-  WebXRWalkingLocomotion: React.DetailedHTMLProps<BabylonProps<WebXRWalkingLocomotion>, any>;
-  webXRAbstractMotionController: React.DetailedHTMLProps<BabylonProps<WebXRAbstractMotionController>, any>;
-  webXRControllerComponent: React.DetailedHTMLProps<BabylonProps<WebXRControllerComponent>, any>;
-  webXRGenericHandController: React.DetailedHTMLProps<BabylonProps<WebXRGenericHandController>, any>;
-  webXRGenericMotionController: React.DetailedHTMLProps<BabylonProps<WebXRGenericMotionController>, any>;
-  webXRHTCViveMotionController: React.DetailedHTMLProps<BabylonProps<WebXRHTCViveMotionController>, any>;
-  webXRMicrosoftMixedRealityController: React.DetailedHTMLProps<BabylonProps<WebXRMicrosoftMixedRealityController>, any>;
-  webXRMotionControllerManager: React.DetailedHTMLProps<BabylonProps<WebXRMotionControllerManager>, any>;
-  webXROculusTouchMotionController: React.DetailedHTMLProps<BabylonProps<WebXROculusTouchMotionController>, any>;
-  webXRProfiledMotionController: React.DetailedHTMLProps<BabylonProps<WebXRProfiledMotionController>, any>;
-  nativeXRFrame: React.DetailedHTMLProps<BabylonProps<NativeXRFrame>, any>;
-  nativeXRRenderTarget: React.DetailedHTMLProps<BabylonProps<NativeXRRenderTarget>, any>;
-  webXRCamera: React.DetailedHTMLProps<BabylonProps<WebXRCamera>, any>;
-  webXRDefaultExperience: React.DetailedHTMLProps<BabylonProps<WebXRDefaultExperience>, any>;
-  webXREnterExitUI: React.DetailedHTMLProps<BabylonProps<WebXREnterExitUI>, any>;
-  webXRExperienceHelper: React.DetailedHTMLProps<BabylonProps<WebXRExperienceHelper>, any>;
-  webXRFeaturesManager: React.DetailedHTMLProps<BabylonProps<WebXRFeaturesManager>, any>;
-  webXRInput: React.DetailedHTMLProps<BabylonProps<WebXRInput>, any>;
-  webXRInputSource: React.DetailedHTMLProps<BabylonProps<WebXRInputSource>, any>;
-  webXRLayerWrapper: React.DetailedHTMLProps<BabylonProps<WebXRLayerWrapper>, any>;
-  webXRManagedOutputCanvas: React.DetailedHTMLProps<BabylonProps<WebXRManagedOutputCanvas>, any>;
-  webXRRenderTargetTextureProvider: React.DetailedHTMLProps<BabylonProps<WebXRRenderTargetTextureProvider>, any>;
-  webXRSessionManager: React.DetailedHTMLProps<BabylonProps<WebXRSessionManager>, any>;
-  webXRTypes: React.DetailedHTMLProps<BabylonProps<WebXRTypes>, any>;
-  webXRWebGLLayer: React.DetailedHTMLProps<BabylonProps<WebXRWebGLLayer>, any>;
-  abstractScene: React.DetailedHTMLProps<BabylonProps<AbstractScene>, any>;
-  assetContainer: React.DetailedHTMLProps<BabylonProps<AssetContainer>, any>;
-  node: React.DetailedHTMLProps<BabylonProps<Node>, any>;
-  scene: React.DetailedHTMLProps<BabylonProps<Scene>, any>;
-  sceneComponent: React.DetailedHTMLProps<BabylonProps<SceneComponent>, any>;
-  types: React.DetailedHTMLProps<BabylonProps<Types>, any>;
+    abstractActionManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractActionManager>>, any>;
+    action: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Action>,
+            {
+                triggerOptions: ConstructorParameters<typeof Action>[0];
+                condition: ConstructorParameters<typeof Action>[1];
+            }
+        >,
+        any
+    >;
+    actionEvent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ActionEvent>,
+            {
+                source: ConstructorParameters<typeof ActionEvent>[0];
+                pointerX: ConstructorParameters<typeof ActionEvent>[1];
+                pointerY: ConstructorParameters<typeof ActionEvent>[2];
+                meshUnderPointer: ConstructorParameters<typeof ActionEvent>[3];
+                sourceEvent: ConstructorParameters<typeof ActionEvent>[4];
+                additionalData: ConstructorParameters<typeof ActionEvent>[5];
+            }
+        >,
+        any
+    >;
+    actionManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ActionManager>,
+            {
+                scene: ConstructorParameters<typeof ActionManager>[0];
+            }
+        >,
+        any
+    >;
+    condition: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Condition>,
+            {
+                actionManager: ConstructorParameters<typeof Condition>[0];
+            }
+        >,
+        any
+    >;
+    interpolateValueAction: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InterpolateValueAction>,
+            {
+                triggerOptions: ConstructorParameters<typeof InterpolateValueAction>[0];
+                target: ConstructorParameters<typeof InterpolateValueAction>[1];
+                propertyPath: ConstructorParameters<typeof InterpolateValueAction>[2];
+                value: ConstructorParameters<typeof InterpolateValueAction>[3];
+                duration: ConstructorParameters<typeof InterpolateValueAction>[4];
+                condition: ConstructorParameters<typeof InterpolateValueAction>[5];
+                stopOtherAnimations: ConstructorParameters<typeof InterpolateValueAction>[6];
+                onInterpolationDone: ConstructorParameters<typeof InterpolateValueAction>[7];
+            }
+        >,
+        any
+    >;
+    animatable: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Animatable>,
+            {
+                scene: ConstructorParameters<typeof Animatable>[0];
+                target: ConstructorParameters<typeof Animatable>[1];
+                fromFrame: ConstructorParameters<typeof Animatable>[2];
+                toFrame: ConstructorParameters<typeof Animatable>[3];
+                loopAnimation: ConstructorParameters<typeof Animatable>[4];
+                speedRatio: ConstructorParameters<typeof Animatable>[5];
+                onAnimationEnd: ConstructorParameters<typeof Animatable>[6];
+                animations: ConstructorParameters<typeof Animatable>[7];
+                onAnimationLoop: ConstructorParameters<typeof Animatable>[8];
+                isAdditive: ConstructorParameters<typeof Animatable>[9];
+                playOrder: ConstructorParameters<typeof Animatable>[10];
+            }
+        >,
+        any
+    >;
+    animation: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Animation & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Animation>[0];
+                targetProperty: ConstructorParameters<typeof Animation>[1];
+                framePerSecond: ConstructorParameters<typeof Animation>[2];
+                dataType: ConstructorParameters<typeof Animation>[3];
+                loopMode: ConstructorParameters<typeof Animation>[4];
+                enableBlending: ConstructorParameters<typeof Animation>[5];
+            }
+        >,
+        any
+    >;
+    animationEvent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnimationEvent>,
+            {
+                frame: ConstructorParameters<typeof AnimationEvent>[0];
+                action: ConstructorParameters<typeof AnimationEvent>[1];
+                onlyOnce: ConstructorParameters<typeof AnimationEvent>[2];
+            }
+        >,
+        any
+    >;
+    animationGroup: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnimationGroup & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AnimationGroup>[0];
+                scene: ConstructorParameters<typeof AnimationGroup>[1];
+                weight: ConstructorParameters<typeof AnimationGroup>[2];
+                playOrder: ConstructorParameters<typeof AnimationGroup>[3];
+            }
+        >,
+        any
+    >;
+    animationGroupMask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnimationGroupMask>,
+            {
+                names: ConstructorParameters<typeof AnimationGroupMask>[0];
+                mode: ConstructorParameters<typeof AnimationGroupMask>[1];
+            }
+        >,
+        any
+    >;
+    animationPropertiesOverride: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AnimationPropertiesOverride>>, any>;
+    animationRange: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnimationRange & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AnimationRange>[0];
+                from: ConstructorParameters<typeof AnimationRange>[1];
+                to: ConstructorParameters<typeof AnimationRange>[2];
+            }
+        >,
+        any
+    >;
+    pathCursor: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PathCursor>,
+            {
+                _path: ConstructorParameters<typeof PathCursor>[0];
+            }
+        >,
+        any
+    >;
+    runtimeAnimation: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RuntimeAnimation>,
+            {
+                target: ConstructorParameters<typeof RuntimeAnimation>[0];
+                animation: ConstructorParameters<typeof RuntimeAnimation>[1];
+                scene: ConstructorParameters<typeof RuntimeAnimation>[2];
+                host: ConstructorParameters<typeof RuntimeAnimation>[3];
+            }
+        >,
+        any
+    >;
+    analyser: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Analyser>,
+            {
+                scene: ConstructorParameters<typeof Analyser>[0];
+            }
+        >,
+        any
+    >;
+    audioEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AudioEngine>,
+            {
+                hostElement: ConstructorParameters<typeof AudioEngine>[0];
+                audioContext: ConstructorParameters<typeof AudioEngine>[1];
+                audioDestination: ConstructorParameters<typeof AudioEngine>[2];
+            }
+        >,
+        any
+    >;
+    audioSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AudioSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof AudioSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    sound: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Sound & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Sound>[0];
+                urlOrArrayBuffer: ConstructorParameters<typeof Sound>[1];
+                scene: ConstructorParameters<typeof Sound>[2];
+                readyToPlayCallback: ConstructorParameters<typeof Sound>[3];
+                options: ConstructorParameters<typeof Sound>[4];
+            }
+        >,
+        any
+    >;
+    soundTrack: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SoundTrack>,
+            {
+                scene: ConstructorParameters<typeof SoundTrack>[0];
+                options: ConstructorParameters<typeof SoundTrack>[1];
+            }
+        >,
+        any
+    >;
+    bakedVertexAnimationManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BakedVertexAnimationManager & { cloneBy: string }>,
+            {
+                scene: ConstructorParameters<typeof BakedVertexAnimationManager>[0];
+            }
+        >,
+        any
+    >;
+    vertexAnimationBaker: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VertexAnimationBaker>,
+            {
+                scene: ConstructorParameters<typeof VertexAnimationBaker>[0];
+                meshOrSkeleton: ConstructorParameters<typeof VertexAnimationBaker>[1];
+            }
+        >,
+        any
+    >;
+    autoRotationBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AutoRotationBehavior>>, any>;
+    bouncingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BouncingBehavior>>, any>;
+    framingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FramingBehavior>>, any>;
+    attachToBoxBehavior: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AttachToBoxBehavior>,
+            {
+                _ui: ConstructorParameters<typeof AttachToBoxBehavior>[0];
+            }
+        >,
+        any
+    >;
+    baseSixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseSixDofDragBehavior>>, any>;
+    fadeInOutBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FadeInOutBehavior>>, any>;
+    followBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowBehavior>>, any>;
+    handConstraintBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HandConstraintBehavior>>, any>;
+    multiPointerScaleBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MultiPointerScaleBehavior>>, any>;
+    pointerDragBehavior: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PointerDragBehavior>,
+            {
+                options: ConstructorParameters<typeof PointerDragBehavior>[0];
+            }
+        >,
+        any
+    >;
+    sixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SixDofDragBehavior>>, any>;
+    surfaceMagnetismBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SurfaceMagnetismBehavior>>, any>;
+    bone: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Bone & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Bone>[0];
+                skeleton: ConstructorParameters<typeof Bone>[1];
+                parentBone: ConstructorParameters<typeof Bone>[2];
+                localMatrix: ConstructorParameters<typeof Bone>[3];
+                restMatrix: ConstructorParameters<typeof Bone>[4];
+                bindMatrix: ConstructorParameters<typeof Bone>[5];
+                index: ConstructorParameters<typeof Bone>[6];
+            }
+        >,
+        any
+    >;
+    boneIKController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoneIKController>,
+            {
+                mesh: ConstructorParameters<typeof BoneIKController>[0];
+                bone: ConstructorParameters<typeof BoneIKController>[1];
+                options: ConstructorParameters<typeof BoneIKController>[2];
+            }
+        >,
+        any
+    >;
+    boneLookController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoneLookController>,
+            {
+                mesh: ConstructorParameters<typeof BoneLookController>[0];
+                bone: ConstructorParameters<typeof BoneLookController>[1];
+                target: ConstructorParameters<typeof BoneLookController>[2];
+                options: ConstructorParameters<typeof BoneLookController>[3];
+            }
+        >,
+        any
+    >;
+    skeleton: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Skeleton & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Skeleton>[0];
+                id: ConstructorParameters<typeof Skeleton>[1];
+                scene: ConstructorParameters<typeof Skeleton>[2];
+            }
+        >,
+        any
+    >;
+    buffer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Buffer>,
+            {
+                engine: ConstructorParameters<typeof Buffer>[0];
+                data: ConstructorParameters<typeof Buffer>[1];
+                updatable: ConstructorParameters<typeof Buffer>[2];
+                stride: ConstructorParameters<typeof Buffer>[3];
+                postponeInternalCreation: ConstructorParameters<typeof Buffer>[4];
+                instanced: ConstructorParameters<typeof Buffer>[5];
+                useBytes: ConstructorParameters<typeof Buffer>[6];
+                divisor: ConstructorParameters<typeof Buffer>[7];
+                label: ConstructorParameters<typeof Buffer>[8];
+            }
+        >,
+        any
+    >;
+    dataBuffer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DataBuffer>>, any>;
+    storageBuffer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StorageBuffer>,
+            {
+                engine: ConstructorParameters<typeof StorageBuffer>[0];
+                size: ConstructorParameters<typeof StorageBuffer>[1];
+                creationFlags: ConstructorParameters<typeof StorageBuffer>[2];
+                label: ConstructorParameters<typeof StorageBuffer>[3];
+            }
+        >,
+        any
+    >;
+    BaseCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraMouseWheelInput>>, any>;
+    BaseCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraPointersInput>>, any>;
+    arcRotateCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraGamepadInput>>, any>;
+    arcRotateCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraKeyboardMoveInput>>, any>;
+    arcRotateCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraMouseWheelInput>>, any>;
+    arcRotateCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraPointersInput>>, any>;
+    arcRotateCameraVRDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraVRDeviceOrientationInput>>, any>;
+    flyCameraKeyboardInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraKeyboardInput>>, any>;
+    flyCameraMouseInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraMouseInput>>, any>;
+    followCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraKeyboardMoveInput>>, any>;
+    followCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraMouseWheelInput>>, any>;
+    followCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraPointersInput>>, any>;
+    freeCameraDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraDeviceOrientationInput>>, any>;
+    freeCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraGamepadInput>>, any>;
+    freeCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraKeyboardMoveInput>>, any>;
+    freeCameraMouseInput: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FreeCameraMouseInput>,
+            {
+                touchEnabled: ConstructorParameters<typeof FreeCameraMouseInput>[0];
+            }
+        >,
+        any
+    >;
+    freeCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraMouseWheelInput>>, any>;
+    freeCameraTouchInput: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FreeCameraTouchInput>,
+            {
+                allowMouse: ConstructorParameters<typeof FreeCameraTouchInput>[0];
+            }
+        >,
+        any
+    >;
+    anaglyphArcRotateCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnaglyphArcRotateCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AnaglyphArcRotateCamera>[0];
+                alpha: ConstructorParameters<typeof AnaglyphArcRotateCamera>[1];
+                beta: ConstructorParameters<typeof AnaglyphArcRotateCamera>[2];
+                radius: ConstructorParameters<typeof AnaglyphArcRotateCamera>[3];
+                target: ConstructorParameters<typeof AnaglyphArcRotateCamera>[4];
+                interaxialDistance: ConstructorParameters<typeof AnaglyphArcRotateCamera>[5];
+                scene: ConstructorParameters<typeof AnaglyphArcRotateCamera>[6];
+            }
+        >,
+        any
+    >;
+    anaglyphFreeCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnaglyphFreeCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AnaglyphFreeCamera>[0];
+                position: ConstructorParameters<typeof AnaglyphFreeCamera>[1];
+                interaxialDistance: ConstructorParameters<typeof AnaglyphFreeCamera>[2];
+                scene: ConstructorParameters<typeof AnaglyphFreeCamera>[3];
+            }
+        >,
+        any
+    >;
+    anaglyphGamepadCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnaglyphGamepadCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AnaglyphGamepadCamera>[0];
+                position: ConstructorParameters<typeof AnaglyphGamepadCamera>[1];
+                interaxialDistance: ConstructorParameters<typeof AnaglyphGamepadCamera>[2];
+                scene: ConstructorParameters<typeof AnaglyphGamepadCamera>[3];
+            }
+        >,
+        any
+    >;
+    anaglyphUniversalCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnaglyphUniversalCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AnaglyphUniversalCamera>[0];
+                position: ConstructorParameters<typeof AnaglyphUniversalCamera>[1];
+                interaxialDistance: ConstructorParameters<typeof AnaglyphUniversalCamera>[2];
+                scene: ConstructorParameters<typeof AnaglyphUniversalCamera>[3];
+            }
+        >,
+        any
+    >;
+    stereoscopicArcRotateCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StereoscopicArcRotateCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof StereoscopicArcRotateCamera>[0];
+                alpha: ConstructorParameters<typeof StereoscopicArcRotateCamera>[1];
+                beta: ConstructorParameters<typeof StereoscopicArcRotateCamera>[2];
+                radius: ConstructorParameters<typeof StereoscopicArcRotateCamera>[3];
+                target: ConstructorParameters<typeof StereoscopicArcRotateCamera>[4];
+                interaxialDistance: ConstructorParameters<typeof StereoscopicArcRotateCamera>[5];
+                isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicArcRotateCamera>[6];
+                scene: ConstructorParameters<typeof StereoscopicArcRotateCamera>[7];
+            }
+        >,
+        any
+    >;
+    stereoscopicFreeCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StereoscopicFreeCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof StereoscopicFreeCamera>[0];
+                position: ConstructorParameters<typeof StereoscopicFreeCamera>[1];
+                interaxialDistance: ConstructorParameters<typeof StereoscopicFreeCamera>[2];
+                isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicFreeCamera>[3];
+                scene: ConstructorParameters<typeof StereoscopicFreeCamera>[4];
+            }
+        >,
+        any
+    >;
+    stereoscopicGamepadCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StereoscopicGamepadCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof StereoscopicGamepadCamera>[0];
+                position: ConstructorParameters<typeof StereoscopicGamepadCamera>[1];
+                interaxialDistance: ConstructorParameters<typeof StereoscopicGamepadCamera>[2];
+                isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicGamepadCamera>[3];
+                scene: ConstructorParameters<typeof StereoscopicGamepadCamera>[4];
+            }
+        >,
+        any
+    >;
+    stereoscopicScreenUniversalCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StereoscopicScreenUniversalCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[0];
+                position: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[1];
+                scene: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[2];
+                distanceToProjectionPlane: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[3];
+                distanceBetweenEyes: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[4];
+            }
+        >,
+        any
+    >;
+    stereoscopicUniversalCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StereoscopicUniversalCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof StereoscopicUniversalCamera>[0];
+                position: ConstructorParameters<typeof StereoscopicUniversalCamera>[1];
+                interaxialDistance: ConstructorParameters<typeof StereoscopicUniversalCamera>[2];
+                isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicUniversalCamera>[3];
+                scene: ConstructorParameters<typeof StereoscopicUniversalCamera>[4];
+            }
+        >,
+        any
+    >;
+    arcRotateCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ArcRotateCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ArcRotateCamera>[0];
+                alpha: ConstructorParameters<typeof ArcRotateCamera>[1];
+                beta: ConstructorParameters<typeof ArcRotateCamera>[2];
+                radius: ConstructorParameters<typeof ArcRotateCamera>[3];
+                target: ConstructorParameters<typeof ArcRotateCamera>[4];
+                scene: ConstructorParameters<typeof ArcRotateCamera>[5];
+                setActiveOnSceneIfNoneActive: ConstructorParameters<typeof ArcRotateCamera>[6];
+            }
+        >,
+        any
+    >;
+    arcRotateCameraInputsManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ArcRotateCameraInputsManager>,
+            {
+                camera: ConstructorParameters<typeof ArcRotateCameraInputsManager>[0];
+            }
+        >,
+        any
+    >;
+    camera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Camera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Camera>[0];
+                position: ConstructorParameters<typeof Camera>[1];
+                scene: ConstructorParameters<typeof Camera>[2];
+                setActiveOnSceneIfNoneActive: ConstructorParameters<typeof Camera>[3];
+            }
+        >,
+        any
+    >;
+    cameraInputsManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CameraInputsManager>,
+            {
+                camera: ConstructorParameters<typeof CameraInputsManager>[0];
+            }
+        >,
+        any
+    >;
+    deviceOrientationCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DeviceOrientationCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DeviceOrientationCamera>[0];
+                position: ConstructorParameters<typeof DeviceOrientationCamera>[1];
+                scene: ConstructorParameters<typeof DeviceOrientationCamera>[2];
+            }
+        >,
+        any
+    >;
+    flyCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlyCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FlyCamera>[0];
+                position: ConstructorParameters<typeof FlyCamera>[1];
+                scene: ConstructorParameters<typeof FlyCamera>[2];
+                setActiveOnSceneIfNoneActive: ConstructorParameters<typeof FlyCamera>[3];
+            }
+        >,
+        any
+    >;
+    flyCameraInputsManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlyCameraInputsManager>,
+            {
+                camera: ConstructorParameters<typeof FlyCameraInputsManager>[0];
+            }
+        >,
+        any
+    >;
+    followCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FollowCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FollowCamera>[0];
+                position: ConstructorParameters<typeof FollowCamera>[1];
+                scene: ConstructorParameters<typeof FollowCamera>[2];
+                lockedTarget: ConstructorParameters<typeof FollowCamera>[3];
+            }
+        >,
+        any
+    >;
+    followCameraInputsManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FollowCameraInputsManager>,
+            {
+                camera: ConstructorParameters<typeof FollowCameraInputsManager>[0];
+            }
+        >,
+        any
+    >;
+    freeCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FreeCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FreeCamera>[0];
+                position: ConstructorParameters<typeof FreeCamera>[1];
+                scene: ConstructorParameters<typeof FreeCamera>[2];
+                setActiveOnSceneIfNoneActive: ConstructorParameters<typeof FreeCamera>[3];
+            }
+        >,
+        any
+    >;
+    freeCameraInputsManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FreeCameraInputsManager>,
+            {
+                camera: ConstructorParameters<typeof FreeCameraInputsManager>[0];
+            }
+        >,
+        any
+    >;
+    gamepadCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GamepadCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GamepadCamera>[0];
+                position: ConstructorParameters<typeof GamepadCamera>[1];
+                scene: ConstructorParameters<typeof GamepadCamera>[2];
+            }
+        >,
+        any
+    >;
+    targetCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TargetCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TargetCamera>[0];
+                position: ConstructorParameters<typeof TargetCamera>[1];
+                scene: ConstructorParameters<typeof TargetCamera>[2];
+                setActiveOnSceneIfNoneActive: ConstructorParameters<typeof TargetCamera>[3];
+            }
+        >,
+        any
+    >;
+    touchCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TouchCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TouchCamera>[0];
+                position: ConstructorParameters<typeof TouchCamera>[1];
+                scene: ConstructorParameters<typeof TouchCamera>[2];
+            }
+        >,
+        any
+    >;
+    universalCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<UniversalCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof UniversalCamera>[0];
+                position: ConstructorParameters<typeof UniversalCamera>[1];
+                scene: ConstructorParameters<typeof UniversalCamera>[2];
+            }
+        >,
+        any
+    >;
+    virtualJoysticksCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VirtualJoysticksCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof VirtualJoysticksCamera>[0];
+                position: ConstructorParameters<typeof VirtualJoysticksCamera>[1];
+                scene: ConstructorParameters<typeof VirtualJoysticksCamera>[2];
+            }
+        >,
+        any
+    >;
+    collider: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Collider>>, any>;
+    intersectionInfo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<IntersectionInfo>,
+            {
+                bu: ConstructorParameters<typeof IntersectionInfo>[0];
+                bv: ConstructorParameters<typeof IntersectionInfo>[1];
+                distance: ConstructorParameters<typeof IntersectionInfo>[2];
+            }
+        >,
+        any
+    >;
+    pickingInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PickingInfo>>, any>;
+    computeEffect: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ComputeEffect>,
+            {
+                baseName: ConstructorParameters<typeof ComputeEffect>[0];
+                options: ConstructorParameters<typeof ComputeEffect>[1];
+                engine: ConstructorParameters<typeof ComputeEffect>[2];
+                key: ConstructorParameters<typeof ComputeEffect>[3];
+            }
+        >,
+        any
+    >;
+    computeShader: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ComputeShader>,
+            {
+                name: ConstructorParameters<typeof ComputeShader>[0];
+                engine: ConstructorParameters<typeof ComputeShader>[1];
+                shaderPath: ConstructorParameters<typeof ComputeShader>[2];
+                options: ConstructorParameters<typeof ComputeShader>[3];
+            }
+        >,
+        any
+    >;
+    octree: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Octree>,
+            {
+                creationFunc: ConstructorParameters<typeof Octree>[0];
+                maxBlockCapacity: ConstructorParameters<typeof Octree>[1];
+                maxDepth: ConstructorParameters<typeof Octree>[2];
+            }
+        >,
+        any
+    >;
+    octreeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<OctreeBlock>,
+            {
+                minPoint: ConstructorParameters<typeof OctreeBlock>[0];
+                maxPoint: ConstructorParameters<typeof OctreeBlock>[1];
+                capacity: ConstructorParameters<typeof OctreeBlock>[2];
+                depth: ConstructorParameters<typeof OctreeBlock>[3];
+                maxDepth: ConstructorParameters<typeof OctreeBlock>[4];
+                creationFunc: ConstructorParameters<typeof OctreeBlock>[5];
+            }
+        >,
+        any
+    >;
+    octreeSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<OctreeSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof OctreeSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    boundingBox: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoundingBox>,
+            {
+                min: ConstructorParameters<typeof BoundingBox>[0];
+                max: ConstructorParameters<typeof BoundingBox>[1];
+                worldMatrix: ConstructorParameters<typeof BoundingBox>[2];
+            }
+        >,
+        any
+    >;
+    boundingInfo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoundingInfo>,
+            {
+                minimum: ConstructorParameters<typeof BoundingInfo>[0];
+                maximum: ConstructorParameters<typeof BoundingInfo>[1];
+                worldMatrix: ConstructorParameters<typeof BoundingInfo>[2];
+            }
+        >,
+        any
+    >;
+    boundingSphere: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoundingSphere>,
+            {
+                min: ConstructorParameters<typeof BoundingSphere>[0];
+                max: ConstructorParameters<typeof BoundingSphere>[1];
+                worldMatrix: ConstructorParameters<typeof BoundingSphere>[2];
+            }
+        >,
+        any
+    >;
+    ray: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Ray & { cloneBy: string }>,
+            {
+                origin: ConstructorParameters<typeof Ray>[0];
+                direction: ConstructorParameters<typeof Ray>[1];
+                length: ConstructorParameters<typeof Ray>[2];
+                epsilon: ConstructorParameters<typeof Ray>[3];
+            }
+        >,
+        any
+    >;
+    axesViewer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AxesViewer>,
+            {
+                scene: ConstructorParameters<typeof AxesViewer>[0];
+                scaleLines: ConstructorParameters<typeof AxesViewer>[1];
+                renderingGroupId: ConstructorParameters<typeof AxesViewer>[2];
+                xAxis: ConstructorParameters<typeof AxesViewer>[3];
+                yAxis: ConstructorParameters<typeof AxesViewer>[4];
+                zAxis: ConstructorParameters<typeof AxesViewer>[5];
+                lineThickness: ConstructorParameters<typeof AxesViewer>[6];
+            }
+        >,
+        any
+    >;
+    boneAxesViewer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoneAxesViewer>,
+            {
+                scene: ConstructorParameters<typeof BoneAxesViewer>[0];
+                bone: ConstructorParameters<typeof BoneAxesViewer>[1];
+                mesh: ConstructorParameters<typeof BoneAxesViewer>[2];
+                scaleLines: ConstructorParameters<typeof BoneAxesViewer>[3];
+            }
+        >,
+        any
+    >;
+    debugLayer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DebugLayer>,
+            {
+                scene: ConstructorParameters<typeof DebugLayer>[0];
+            }
+        >,
+        any
+    >;
+    directionalLightFrustumViewer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DirectionalLightFrustumViewer>,
+            {
+                light: ConstructorParameters<typeof DirectionalLightFrustumViewer>[0];
+                camera: ConstructorParameters<typeof DirectionalLightFrustumViewer>[1];
+            }
+        >,
+        any
+    >;
+    physicsViewer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsViewer>,
+            {
+                scene: ConstructorParameters<typeof PhysicsViewer>[0];
+            }
+        >,
+        any
+    >;
+    rayHelper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RayHelper>,
+            {
+                ray: ConstructorParameters<typeof RayHelper>[0];
+            }
+        >,
+        any
+    >;
+    skeletonViewer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SkeletonViewer>,
+            {
+                skeleton: ConstructorParameters<typeof SkeletonViewer>[0];
+                mesh: ConstructorParameters<typeof SkeletonViewer>[1];
+                scene: ConstructorParameters<typeof SkeletonViewer>[2];
+                autoUpdateBonesMatrices: ConstructorParameters<typeof SkeletonViewer>[3];
+                renderingGroupId: ConstructorParameters<typeof SkeletonViewer>[4];
+                options: ConstructorParameters<typeof SkeletonViewer>[5];
+            }
+        >,
+        any
+    >;
+    deviceSource: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DeviceSource>,
+            {
+                deviceInputSystem: ConstructorParameters<typeof DeviceSource>[0];
+                deviceType: ConstructorParameters<typeof DeviceSource>[1];
+                deviceSlot: ConstructorParameters<typeof DeviceSource>[2];
+            }
+        >,
+        any
+    >;
+    deviceSourceManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DeviceSourceManager>,
+            {
+                engine: ConstructorParameters<typeof DeviceSourceManager>[0];
+            }
+        >,
+        any
+    >;
+    internalDeviceSourceManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InternalDeviceSourceManager>,
+            {
+                engine: ConstructorParameters<typeof InternalDeviceSourceManager>[0];
+            }
+        >,
+        any
+    >;
+    nativeDeviceInputSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NativeDeviceInputSystem>,
+            {
+                onDeviceConnected: ConstructorParameters<typeof NativeDeviceInputSystem>[0];
+                onDeviceDisconnected: ConstructorParameters<typeof NativeDeviceInputSystem>[1];
+                onInputChanged: ConstructorParameters<typeof NativeDeviceInputSystem>[2];
+            }
+        >,
+        any
+    >;
+    webDeviceInputSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebDeviceInputSystem>,
+            {
+                engine: ConstructorParameters<typeof WebDeviceInputSystem>[0];
+                onDeviceConnected: ConstructorParameters<typeof WebDeviceInputSystem>[1];
+                onDeviceDisconnected: ConstructorParameters<typeof WebDeviceInputSystem>[2];
+                onInputChanged: ConstructorParameters<typeof WebDeviceInputSystem>[3];
+            }
+        >,
+        any
+    >;
+    nativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NativeDataStream>>, any>;
+    nativeHardwareTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NativeHardwareTexture>,
+            {
+                existingTexture: ConstructorParameters<typeof NativeHardwareTexture>[0];
+                engine: ConstructorParameters<typeof NativeHardwareTexture>[1];
+            }
+        >,
+        any
+    >;
+    nativePipelineContext: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NativePipelineContext>,
+            {
+                engine: ConstructorParameters<typeof NativePipelineContext>[0];
+                isAsync: ConstructorParameters<typeof NativePipelineContext>[1];
+                shaderProcessingContext: ConstructorParameters<typeof NativePipelineContext>[2];
+            }
+        >,
+        any
+    >;
+    nativeRenderTargetWrapper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NativeRenderTargetWrapper>,
+            {
+                isMulti: ConstructorParameters<typeof NativeRenderTargetWrapper>[0];
+                isCube: ConstructorParameters<typeof NativeRenderTargetWrapper>[1];
+                size: ConstructorParameters<typeof NativeRenderTargetWrapper>[2];
+                engine: ConstructorParameters<typeof NativeRenderTargetWrapper>[3];
+            }
+        >,
+        any
+    >;
+    nativeShaderProcessingContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NativeShaderProcessingContext>>, any>;
+    validatedNativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ValidatedNativeDataStream>>, any>;
+    shaderDefineArithmeticOperator: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ShaderDefineArithmeticOperator>,
+            {
+                define: ConstructorParameters<typeof ShaderDefineArithmeticOperator>[0];
+                operand: ConstructorParameters<typeof ShaderDefineArithmeticOperator>[1];
+                testValue: ConstructorParameters<typeof ShaderDefineArithmeticOperator>[2];
+            }
+        >,
+        any
+    >;
+    shaderDefineIsDefinedOperator: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ShaderDefineIsDefinedOperator>,
+            {
+                define: ConstructorParameters<typeof ShaderDefineIsDefinedOperator>[0];
+                not: ConstructorParameters<typeof ShaderDefineIsDefinedOperator>[1];
+            }
+        >,
+        any
+    >;
+    shaderCodeCursor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShaderCodeCursor>>, any>;
+    shaderCodeInliner: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ShaderCodeInliner>,
+            {
+                sourceCode: ConstructorParameters<typeof ShaderCodeInliner>[0];
+                numMaxIterations: ConstructorParameters<typeof ShaderCodeInliner>[1];
+            }
+        >,
+        any
+    >;
+    shaderCodeNode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShaderCodeNode>>, any>;
+    webGLHardwareTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebGLHardwareTexture>,
+            {
+                existingTexture: ConstructorParameters<typeof WebGLHardwareTexture>[0];
+                context: ConstructorParameters<typeof WebGLHardwareTexture>[1];
+            }
+        >,
+        any
+    >;
+    webGLPipelineContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGLPipelineContext>>, any>;
+    webGLRenderTargetWrapper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebGLRenderTargetWrapper>,
+            {
+                isMulti: ConstructorParameters<typeof WebGLRenderTargetWrapper>[0];
+                isCube: ConstructorParameters<typeof WebGLRenderTargetWrapper>[1];
+                size: ConstructorParameters<typeof WebGLRenderTargetWrapper>[2];
+                engine: ConstructorParameters<typeof WebGLRenderTargetWrapper>[3];
+                context: ConstructorParameters<typeof WebGLRenderTargetWrapper>[4];
+            }
+        >,
+        any
+    >;
+    abstractEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AbstractEngine>,
+            {
+                antialias: ConstructorParameters<typeof AbstractEngine>[0];
+                options: ConstructorParameters<typeof AbstractEngine>[1];
+                adaptToDeviceRatio: ConstructorParameters<typeof AbstractEngine>[2];
+            }
+        >,
+        any
+    >;
+    engine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Engine>,
+            {
+                canvasOrContext: ConstructorParameters<typeof Engine>[0];
+                antialias: ConstructorParameters<typeof Engine>[1];
+                options: ConstructorParameters<typeof Engine>[2];
+                adaptToDeviceRatio: ConstructorParameters<typeof Engine>[3];
+            }
+        >,
+        any
+    >;
+    nativeEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NativeEngine>,
+            {
+                options: ConstructorParameters<typeof NativeEngine>[0];
+            }
+        >,
+        any
+    >;
+    nullEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NullEngine>,
+            {
+                options: ConstructorParameters<typeof NullEngine>[0];
+            }
+        >,
+        any
+    >;
+    renderTargetWrapper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RenderTargetWrapper>,
+            {
+                isMulti: ConstructorParameters<typeof RenderTargetWrapper>[0];
+                isCube: ConstructorParameters<typeof RenderTargetWrapper>[1];
+                size: ConstructorParameters<typeof RenderTargetWrapper>[2];
+                engine: ConstructorParameters<typeof RenderTargetWrapper>[3];
+                label: ConstructorParameters<typeof RenderTargetWrapper>[4];
+            }
+        >,
+        any
+    >;
+    thinEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinEngine>,
+            {
+                canvasOrContext: ConstructorParameters<typeof ThinEngine>[0];
+                antialias: ConstructorParameters<typeof ThinEngine>[1];
+                options: ConstructorParameters<typeof ThinEngine>[2];
+                adaptToDeviceRatio: ConstructorParameters<typeof ThinEngine>[3];
+            }
+        >,
+        any
+    >;
+    flowGraphBinaryOperationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphBinaryOperationBlock>,
+            {
+                leftRichType: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[0];
+                rightRichType: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[1];
+                resultRichType: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[2];
+                _operation: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[3];
+                _className: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[4];
+                config: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[5];
+            }
+        >,
+        any
+    >;
+    flowGraphCachedOperationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCachedOperationBlock>,
+            {
+                outputRichType: ConstructorParameters<typeof FlowGraphCachedOperationBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphCachedOperationBlock>[1];
+            }
+        >,
+        any
+    >;
+    flowGraphConditionalDataBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphConditionalDataBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphConditionalDataBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphConstantBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphConstantBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphConstantBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphConstantOperationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphConstantOperationBlock>,
+            {
+                richType: ConstructorParameters<typeof FlowGraphConstantOperationBlock>[0];
+                _operation: ConstructorParameters<typeof FlowGraphConstantOperationBlock>[1];
+                _className: ConstructorParameters<typeof FlowGraphConstantOperationBlock>[2];
+                config: ConstructorParameters<typeof FlowGraphConstantOperationBlock>[3];
+            }
+        >,
+        any
+    >;
+    flowGraphCoordinateTransformBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCoordinateTransformBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCoordinateTransformBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphGetPropertyBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphGetPropertyBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphGetPropertyBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphGetVariableBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphGetVariableBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphGetVariableBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphTernaryOperationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphTernaryOperationBlock>,
+            {
+                t1Type: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[0];
+                t2Type: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[1];
+                t3Type: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[2];
+                resultRichType: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[3];
+                _operation: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[4];
+                _className: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[5];
+                config: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[6];
+            }
+        >,
+        any
+    >;
+    flowGraphUnaryOperationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphUnaryOperationBlock>,
+            {
+                inputRichType: ConstructorParameters<typeof FlowGraphUnaryOperationBlock>[0];
+                resultRichType: ConstructorParameters<typeof FlowGraphUnaryOperationBlock>[1];
+                _operation: ConstructorParameters<typeof FlowGraphUnaryOperationBlock>[2];
+                _className: ConstructorParameters<typeof FlowGraphUnaryOperationBlock>[3];
+                config: ConstructorParameters<typeof FlowGraphUnaryOperationBlock>[4];
+            }
+        >,
+        any
+    >;
+    flowGraphMeshPickEventBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphMeshPickEventBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphMeshPickEventBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphReceiveCustomEventBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphReceiveCustomEventBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphReceiveCustomEventBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphPauseAnimationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPauseAnimationBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphPauseAnimationBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphPlayAnimationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPlayAnimationBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphPlayAnimationBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphStopAnimationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphStopAnimationBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphStopAnimationBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphPlayAudioBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPlayAudioBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphPlayAudioBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphStopAudioBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphStopAudioBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphStopAudioBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphBranchBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphBranchBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphBranchBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphCounterBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCounterBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCounterBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphDebounceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphDebounceBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphDebounceBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphDoNBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphDoNBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphDoNBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphFlipFlopBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphFlipFlopBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphFlipFlopBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphForLoopBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphForLoopBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphForLoopBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphMultiGateBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphMultiGateBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphMultiGateBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphSequenceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphSequenceBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphSequenceBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphSwitchBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphSwitchBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphSwitchBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphThrottleBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphThrottleBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphThrottleBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphTimerBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphTimerBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphTimerBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphWaitAllBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphWaitAllBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphWaitAllBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphWhileLoopBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphWhileLoopBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphWhileLoopBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphConsoleLogBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphConsoleLogBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphConsoleLogBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphSendCustomEventBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphSendCustomEventBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphSendCustomEventBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphSetPropertyBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphSetPropertyBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphSetPropertyBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphSetVariableBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphSetVariableBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphSetVariableBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraph: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraph>,
+            {
+                params: ConstructorParameters<typeof FlowGraph>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphAsyncExecutionBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphAsyncExecutionBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphAsyncExecutionBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphConnection: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphConnection>,
+            {
+                name: ConstructorParameters<typeof FlowGraphConnection>[0];
+                _connectionType: ConstructorParameters<typeof FlowGraphConnection>[1];
+                _ownerBlock: ConstructorParameters<typeof FlowGraphConnection>[2];
+            }
+        >,
+        any
+    >;
+    flowGraphContext: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphContext>,
+            {
+                params: ConstructorParameters<typeof FlowGraphContext>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphContextLogger: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphContextLogger>,
+            {
+                _context: ConstructorParameters<typeof FlowGraphContextLogger>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphCoordinator: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCoordinator>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCoordinator>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphDataConnection: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphDataConnection>,
+            {
+                name: ConstructorParameters<typeof FlowGraphDataConnection>[0];
+                connectionType: ConstructorParameters<typeof FlowGraphDataConnection>[1];
+                ownerBlock: ConstructorParameters<typeof FlowGraphDataConnection>[2];
+                richType: ConstructorParameters<typeof FlowGraphDataConnection>[3];
+            }
+        >,
+        any
+    >;
+    flowGraphExecutionBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphExecutionBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphExecutionBlock>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphExecutionBlockWithOutSignal: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphExecutionBlockWithOutSignal>,
+            {
+                config: ConstructorParameters<typeof FlowGraphExecutionBlockWithOutSignal>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphInteger: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphInteger>,
+            {
+                value: ConstructorParameters<typeof FlowGraphInteger>[0];
+            }
+        >,
+        any
+    >;
+    flowGraphPathConverter: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPathConverter>,
+            {
+                _context: ConstructorParameters<typeof FlowGraphPathConverter>[0];
+                _separator: ConstructorParameters<typeof FlowGraphPathConverter>[1];
+            }
+        >,
+        any
+    >;
+    flowGraphPathConverterComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPathConverterComponent>,
+            {
+                path: ConstructorParameters<typeof FlowGraphPathConverterComponent>[0];
+                ownerBlock: ConstructorParameters<typeof FlowGraphPathConverterComponent>[1];
+            }
+        >,
+        any
+    >;
+    gamepad: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Gamepad>,
+            {
+                id: ConstructorParameters<typeof Gamepad>[0];
+                index: ConstructorParameters<typeof Gamepad>[1];
+                browserGamepad: ConstructorParameters<typeof Gamepad>[2];
+                leftStickX: ConstructorParameters<typeof Gamepad>[3];
+                leftStickY: ConstructorParameters<typeof Gamepad>[4];
+                rightStickX: ConstructorParameters<typeof Gamepad>[5];
+                rightStickY: ConstructorParameters<typeof Gamepad>[6];
+            }
+        >,
+        any
+    >;
+    gamepadManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GamepadManager>,
+            {
+                _scene: ConstructorParameters<typeof GamepadManager>[0];
+            }
+        >,
+        any
+    >;
+    axisDragGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AxisDragGizmo>,
+            {
+                dragAxis: ConstructorParameters<typeof AxisDragGizmo>[0];
+                color: ConstructorParameters<typeof AxisDragGizmo>[1];
+                gizmoLayer: ConstructorParameters<typeof AxisDragGizmo>[2];
+                parent: ConstructorParameters<typeof AxisDragGizmo>[3];
+                thickness: ConstructorParameters<typeof AxisDragGizmo>[4];
+                hoverColor: ConstructorParameters<typeof AxisDragGizmo>[5];
+                disableColor: ConstructorParameters<typeof AxisDragGizmo>[6];
+            }
+        >,
+        any
+    >;
+    axisScaleGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AxisScaleGizmo>,
+            {
+                dragAxis: ConstructorParameters<typeof AxisScaleGizmo>[0];
+                color: ConstructorParameters<typeof AxisScaleGizmo>[1];
+                gizmoLayer: ConstructorParameters<typeof AxisScaleGizmo>[2];
+                parent: ConstructorParameters<typeof AxisScaleGizmo>[3];
+                thickness: ConstructorParameters<typeof AxisScaleGizmo>[4];
+                hoverColor: ConstructorParameters<typeof AxisScaleGizmo>[5];
+                disableColor: ConstructorParameters<typeof AxisScaleGizmo>[6];
+            }
+        >,
+        any
+    >;
+    boundingBoxGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoundingBoxGizmo>,
+            {
+                color: ConstructorParameters<typeof BoundingBoxGizmo>[0];
+                gizmoLayer: ConstructorParameters<typeof BoundingBoxGizmo>[1];
+            }
+        >,
+        any
+    >;
+    cameraGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CameraGizmo>,
+            {
+                gizmoLayer: ConstructorParameters<typeof CameraGizmo>[0];
+                gizmoColor: ConstructorParameters<typeof CameraGizmo>[1];
+                frustumLinesColor: ConstructorParameters<typeof CameraGizmo>[2];
+            }
+        >,
+        any
+    >;
+    gizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Gizmo>,
+            {
+                gizmoLayer: ConstructorParameters<typeof Gizmo>[0];
+            }
+        >,
+        any
+    >;
+    gizmoManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GizmoManager>,
+            {
+                _scene: ConstructorParameters<typeof GizmoManager>[0];
+                thickness: ConstructorParameters<typeof GizmoManager>[1];
+                utilityLayer: ConstructorParameters<typeof GizmoManager>[2];
+                keepDepthUtilityLayer: ConstructorParameters<typeof GizmoManager>[3];
+            }
+        >,
+        any
+    >;
+    lightGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LightGizmo>,
+            {
+                gizmoLayer: ConstructorParameters<typeof LightGizmo>[0];
+            }
+        >,
+        any
+    >;
+    planeDragGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PlaneDragGizmo>,
+            {
+                dragPlaneNormal: ConstructorParameters<typeof PlaneDragGizmo>[0];
+                color: ConstructorParameters<typeof PlaneDragGizmo>[1];
+                gizmoLayer: ConstructorParameters<typeof PlaneDragGizmo>[2];
+                parent: ConstructorParameters<typeof PlaneDragGizmo>[3];
+                hoverColor: ConstructorParameters<typeof PlaneDragGizmo>[4];
+                disableColor: ConstructorParameters<typeof PlaneDragGizmo>[5];
+            }
+        >,
+        any
+    >;
+    planeRotationGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PlaneRotationGizmo>,
+            {
+                planeNormal: ConstructorParameters<typeof PlaneRotationGizmo>[0];
+                color: ConstructorParameters<typeof PlaneRotationGizmo>[1];
+                gizmoLayer: ConstructorParameters<typeof PlaneRotationGizmo>[2];
+                tessellation: ConstructorParameters<typeof PlaneRotationGizmo>[3];
+                parent: ConstructorParameters<typeof PlaneRotationGizmo>[4];
+                useEulerRotation: ConstructorParameters<typeof PlaneRotationGizmo>[5];
+                thickness: ConstructorParameters<typeof PlaneRotationGizmo>[6];
+                hoverColor: ConstructorParameters<typeof PlaneRotationGizmo>[7];
+                disableColor: ConstructorParameters<typeof PlaneRotationGizmo>[8];
+            }
+        >,
+        any
+    >;
+    positionGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PositionGizmo>,
+            {
+                gizmoLayer: ConstructorParameters<typeof PositionGizmo>[0];
+                thickness: ConstructorParameters<typeof PositionGizmo>[1];
+                gizmoManager: ConstructorParameters<typeof PositionGizmo>[2];
+                options: ConstructorParameters<typeof PositionGizmo>[3];
+            }
+        >,
+        any
+    >;
+    rotationGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RotationGizmo>,
+            {
+                gizmoLayer: ConstructorParameters<typeof RotationGizmo>[0];
+                tessellation: ConstructorParameters<typeof RotationGizmo>[1];
+                useEulerRotation: ConstructorParameters<typeof RotationGizmo>[2];
+                thickness: ConstructorParameters<typeof RotationGizmo>[3];
+                gizmoManager: ConstructorParameters<typeof RotationGizmo>[4];
+                options: ConstructorParameters<typeof RotationGizmo>[5];
+            }
+        >,
+        any
+    >;
+    scaleGizmo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ScaleGizmo>,
+            {
+                gizmoLayer: ConstructorParameters<typeof ScaleGizmo>[0];
+                thickness: ConstructorParameters<typeof ScaleGizmo>[1];
+                gizmoManager: ConstructorParameters<typeof ScaleGizmo>[2];
+                options: ConstructorParameters<typeof ScaleGizmo>[3];
+            }
+        >,
+        any
+    >;
+    environmentHelper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<EnvironmentHelper>,
+            {
+                options: ConstructorParameters<typeof EnvironmentHelper>[0];
+                scene: ConstructorParameters<typeof EnvironmentHelper>[1];
+            }
+        >,
+        any
+    >;
+    textureDome: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TextureDome & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TextureDome>[0];
+                textureUrlOrElement: ConstructorParameters<typeof TextureDome>[1];
+                options: ConstructorParameters<typeof TextureDome>[2];
+                scene: ConstructorParameters<typeof TextureDome>[3];
+                onError: ConstructorParameters<typeof TextureDome>[4];
+            }
+        >,
+        any
+    >;
+    pointerPickingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PointerPickingConfiguration>>, any>;
+    engineInstrumentation: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<EngineInstrumentation>,
+            {
+                engine: ConstructorParameters<typeof EngineInstrumentation>[0];
+            }
+        >,
+        any
+    >;
+    sceneInstrumentation: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SceneInstrumentation>,
+            {
+                scene: ConstructorParameters<typeof SceneInstrumentation>[0];
+            }
+        >,
+        any
+    >;
+    effectLayer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<EffectLayer>,
+            {
+                name: ConstructorParameters<typeof EffectLayer>[0];
+                scene: ConstructorParameters<typeof EffectLayer>[1];
+            }
+        >,
+        any
+    >;
+    effectLayerSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<EffectLayerSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof EffectLayerSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    glowLayer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GlowLayer>,
+            {
+                name: ConstructorParameters<typeof GlowLayer>[0];
+                scene: ConstructorParameters<typeof GlowLayer>[1];
+                options: ConstructorParameters<typeof GlowLayer>[2];
+            }
+        >,
+        any
+    >;
+    highlightLayer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<HighlightLayer>,
+            {
+                name: ConstructorParameters<typeof HighlightLayer>[0];
+                scene: ConstructorParameters<typeof HighlightLayer>[1];
+                options: ConstructorParameters<typeof HighlightLayer>[2];
+            }
+        >,
+        any
+    >;
+    layer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Layer>,
+            {
+                name: ConstructorParameters<typeof Layer>[0];
+                imgUrl: ConstructorParameters<typeof Layer>[1];
+                scene: ConstructorParameters<typeof Layer>[2];
+                isBackground: ConstructorParameters<typeof Layer>[3];
+                color: ConstructorParameters<typeof Layer>[4];
+            }
+        >,
+        any
+    >;
+    layerSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LayerSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof LayerSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    lensFlare: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LensFlare>,
+            {
+                size: ConstructorParameters<typeof LensFlare>[0];
+                position: ConstructorParameters<typeof LensFlare>[1];
+                color: ConstructorParameters<typeof LensFlare>[2];
+                imgUrl: ConstructorParameters<typeof LensFlare>[3];
+                system: ConstructorParameters<typeof LensFlare>[4];
+            }
+        >,
+        any
+    >;
+    lensFlareSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LensFlareSystem>,
+            {
+                name: ConstructorParameters<typeof LensFlareSystem>[0];
+                emitter: ConstructorParameters<typeof LensFlareSystem>[1];
+                scene: ConstructorParameters<typeof LensFlareSystem>[2];
+            }
+        >,
+        any
+    >;
+    lensFlareSystemSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LensFlareSystemSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof LensFlareSystemSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    cascadedShadowGenerator: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CascadedShadowGenerator>,
+            {
+                mapSize: ConstructorParameters<typeof CascadedShadowGenerator>[0];
+                light: ConstructorParameters<typeof CascadedShadowGenerator>[1];
+                usefulFloatFirst: ConstructorParameters<typeof CascadedShadowGenerator>[2];
+                camera: ConstructorParameters<typeof CascadedShadowGenerator>[3];
+                useRedTextureType: ConstructorParameters<typeof CascadedShadowGenerator>[4];
+            }
+        >,
+        any
+    >;
+    shadowGenerator: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ShadowGenerator>,
+            {
+                mapSize: ConstructorParameters<typeof ShadowGenerator>[0];
+                light: ConstructorParameters<typeof ShadowGenerator>[1];
+                usefullFloatFirst: ConstructorParameters<typeof ShadowGenerator>[2];
+                camera: ConstructorParameters<typeof ShadowGenerator>[3];
+                useRedTextureType: ConstructorParameters<typeof ShadowGenerator>[4];
+            }
+        >,
+        any
+    >;
+    shadowGeneratorSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ShadowGeneratorSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof ShadowGeneratorSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    directionalLight: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DirectionalLight & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DirectionalLight>[0];
+                direction: ConstructorParameters<typeof DirectionalLight>[1];
+                scene: ConstructorParameters<typeof DirectionalLight>[2];
+            }
+        >,
+        any
+    >;
+    hemisphericLight: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<HemisphericLight & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof HemisphericLight>[0];
+                direction: ConstructorParameters<typeof HemisphericLight>[1];
+                scene: ConstructorParameters<typeof HemisphericLight>[2];
+            }
+        >,
+        any
+    >;
+    light: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Light & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Light>[0];
+                scene: ConstructorParameters<typeof Light>[1];
+            }
+        >,
+        any
+    >;
+    pointLight: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PointLight & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PointLight>[0];
+                position: ConstructorParameters<typeof PointLight>[1];
+                scene: ConstructorParameters<typeof PointLight>[2];
+            }
+        >,
+        any
+    >;
+    shadowLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShadowLight & { cloneBy: string }>>, any>;
+    spotLight: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SpotLight & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SpotLight>[0];
+                position: ConstructorParameters<typeof SpotLight>[1];
+                direction: ConstructorParameters<typeof SpotLight>[2];
+                angle: ConstructorParameters<typeof SpotLight>[3];
+                exponent: ConstructorParameters<typeof SpotLight>[4];
+                scene: ConstructorParameters<typeof SpotLight>[5];
+            }
+        >,
+        any
+    >;
+    backgroundMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BackgroundMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BackgroundMaterial>[0];
+                scene: ConstructorParameters<typeof BackgroundMaterial>[1];
+            }
+        >,
+        any
+    >;
+    gaussianSplattingMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GaussianSplattingMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GaussianSplattingMaterial>[0];
+                scene: ConstructorParameters<typeof GaussianSplattingMaterial>[1];
+            }
+        >,
+        any
+    >;
+    greasedLinePluginMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GreasedLinePluginMaterial>,
+            {
+                material: ConstructorParameters<typeof GreasedLinePluginMaterial>[0];
+                scene: ConstructorParameters<typeof GreasedLinePluginMaterial>[1];
+                options: ConstructorParameters<typeof GreasedLinePluginMaterial>[2];
+            }
+        >,
+        any
+    >;
+    greasedLineSimpleMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GreasedLineSimpleMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GreasedLineSimpleMaterial>[0];
+                scene: ConstructorParameters<typeof GreasedLineSimpleMaterial>[1];
+                options: ConstructorParameters<typeof GreasedLineSimpleMaterial>[2];
+            }
+        >,
+        any
+    >;
+    clipPlanesBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ClipPlanesBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ClipPlanesBlock>[0];
+            }
+        >,
+        any
+    >;
+    currentScreenBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CurrentScreenBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CurrentScreenBlock>[0];
+            }
+        >,
+        any
+    >;
+    fogBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FogBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FogBlock>[0];
+            }
+        >,
+        any
+    >;
+    imageSourceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ImageSourceBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ImageSourceBlock>[0];
+            }
+        >,
+        any
+    >;
+    lightBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LightBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof LightBlock>[0];
+            }
+        >,
+        any
+    >;
+    reflectionTextureBaseBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReflectionTextureBaseBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ReflectionTextureBaseBlock>[0];
+            }
+        >,
+        any
+    >;
+    reflectionTextureBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReflectionTextureBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ReflectionTextureBlock>[0];
+            }
+        >,
+        any
+    >;
+    sceneDepthBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SceneDepthBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SceneDepthBlock>[0];
+            }
+        >,
+        any
+    >;
+    textureBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TextureBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TextureBlock>[0];
+                fragmentOnly: ConstructorParameters<typeof TextureBlock>[1];
+            }
+        >,
+        any
+    >;
+    TBNBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TBNBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TBNBlock>[0];
+            }
+        >,
+        any
+    >;
+    derivativeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DerivativeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DerivativeBlock>[0];
+            }
+        >,
+        any
+    >;
+    discardBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DiscardBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DiscardBlock>[0];
+            }
+        >,
+        any
+    >;
+    fragCoordBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FragCoordBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FragCoordBlock>[0];
+            }
+        >,
+        any
+    >;
+    fragDepthBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FragDepthBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FragDepthBlock>[0];
+            }
+        >,
+        any
+    >;
+    fragmentOutputBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FragmentOutputBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FragmentOutputBlock>[0];
+            }
+        >,
+        any
+    >;
+    frontFacingBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrontFacingBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FrontFacingBlock>[0];
+            }
+        >,
+        any
+    >;
+    heightToNormalBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<HeightToNormalBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof HeightToNormalBlock>[0];
+            }
+        >,
+        any
+    >;
+    imageProcessingBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ImageProcessingBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ImageProcessingBlock>[0];
+            }
+        >,
+        any
+    >;
+    perturbNormalBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PerturbNormalBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PerturbNormalBlock>[0];
+            }
+        >,
+        any
+    >;
+    prePassOutputBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PrePassOutputBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PrePassOutputBlock>[0];
+            }
+        >,
+        any
+    >;
+    screenSizeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ScreenSizeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ScreenSizeBlock>[0];
+            }
+        >,
+        any
+    >;
+    screenSpaceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ScreenSpaceBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ScreenSpaceBlock>[0];
+            }
+        >,
+        any
+    >;
+    shadowMapBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ShadowMapBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ShadowMapBlock>[0];
+            }
+        >,
+        any
+    >;
+    twirlBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TwirlBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TwirlBlock>[0];
+            }
+        >,
+        any
+    >;
+    inputBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InputBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InputBlock>[0];
+                target: ConstructorParameters<typeof InputBlock>[1];
+                type: ConstructorParameters<typeof InputBlock>[2];
+            }
+        >,
+        any
+    >;
+    prePassTextureBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PrePassTextureBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PrePassTextureBlock>[0];
+                target: ConstructorParameters<typeof PrePassTextureBlock>[1];
+            }
+        >,
+        any
+    >;
+    anisotropyBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnisotropyBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AnisotropyBlock>[0];
+            }
+        >,
+        any
+    >;
+    clearCoatBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ClearCoatBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ClearCoatBlock>[0];
+            }
+        >,
+        any
+    >;
+    iridescenceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<IridescenceBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof IridescenceBlock>[0];
+            }
+        >,
+        any
+    >;
+    reflectionBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReflectionBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ReflectionBlock>[0];
+            }
+        >,
+        any
+    >;
+    refractionBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RefractionBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RefractionBlock>[0];
+            }
+        >,
+        any
+    >;
+    sheenBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SheenBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SheenBlock>[0];
+            }
+        >,
+        any
+    >;
+    subSurfaceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SubSurfaceBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SubSurfaceBlock>[0];
+            }
+        >,
+        any
+    >;
+    particleBlendMultiplyBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ParticleBlendMultiplyBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ParticleBlendMultiplyBlock>[0];
+            }
+        >,
+        any
+    >;
+    particleRampGradientBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ParticleRampGradientBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ParticleRampGradientBlock>[0];
+            }
+        >,
+        any
+    >;
+    particleTextureBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ParticleTextureBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ParticleTextureBlock>[0];
+            }
+        >,
+        any
+    >;
+    bonesBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BonesBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BonesBlock>[0];
+            }
+        >,
+        any
+    >;
+    instancesBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstancesBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstancesBlock>[0];
+            }
+        >,
+        any
+    >;
+    lightInformationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LightInformationBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof LightInformationBlock>[0];
+            }
+        >,
+        any
+    >;
+    morphTargetsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MorphTargetsBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MorphTargetsBlock>[0];
+            }
+        >,
+        any
+    >;
+    vertexOutputBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VertexOutputBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof VertexOutputBlock>[0];
+            }
+        >,
+        any
+    >;
+    addBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AddBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AddBlock>[0];
+            }
+        >,
+        any
+    >;
+    arcTan2Block: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ArcTan2Block & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ArcTan2Block>[0];
+            }
+        >,
+        any
+    >;
+    baseMathBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BaseMathBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BaseMathBlock>[0];
+            }
+        >,
+        any
+    >;
+    biPlanarBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BiPlanarBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BiPlanarBlock>[0];
+            }
+        >,
+        any
+    >;
+    clampBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ClampBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ClampBlock>[0];
+            }
+        >,
+        any
+    >;
+    cloudBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CloudBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CloudBlock>[0];
+            }
+        >,
+        any
+    >;
+    colorMergerBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ColorMergerBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ColorMergerBlock>[0];
+            }
+        >,
+        any
+    >;
+    colorSplitterBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ColorSplitterBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ColorSplitterBlock>[0];
+            }
+        >,
+        any
+    >;
+    conditionalBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ConditionalBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ConditionalBlock>[0];
+            }
+        >,
+        any
+    >;
+    crossBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CrossBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CrossBlock>[0];
+            }
+        >,
+        any
+    >;
+    curveBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CurveBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CurveBlock>[0];
+            }
+        >,
+        any
+    >;
+    customBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CustomBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CustomBlock>[0];
+            }
+        >,
+        any
+    >;
+    desaturateBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DesaturateBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DesaturateBlock>[0];
+            }
+        >,
+        any
+    >;
+    distanceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DistanceBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DistanceBlock>[0];
+            }
+        >,
+        any
+    >;
+    divideBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DivideBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DivideBlock>[0];
+            }
+        >,
+        any
+    >;
+    dotBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DotBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DotBlock>[0];
+            }
+        >,
+        any
+    >;
+    elbowBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ElbowBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ElbowBlock>[0];
+            }
+        >,
+        any
+    >;
+    fresnelBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FresnelBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FresnelBlock>[0];
+            }
+        >,
+        any
+    >;
+    gradientBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GradientBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GradientBlock>[0];
+            }
+        >,
+        any
+    >;
+    lengthBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LengthBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof LengthBlock>[0];
+            }
+        >,
+        any
+    >;
+    lerpBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LerpBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof LerpBlock>[0];
+            }
+        >,
+        any
+    >;
+    matrixBuilderBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MatrixBuilderBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MatrixBuilderBlock>[0];
+            }
+        >,
+        any
+    >;
+    matrixDeterminantBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MatrixDeterminantBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MatrixDeterminantBlock>[0];
+            }
+        >,
+        any
+    >;
+    matrixTransposeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MatrixTransposeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MatrixTransposeBlock>[0];
+            }
+        >,
+        any
+    >;
+    maxBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MaxBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MaxBlock>[0];
+            }
+        >,
+        any
+    >;
+    meshAttributeExistsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MeshAttributeExistsBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MeshAttributeExistsBlock>[0];
+            }
+        >,
+        any
+    >;
+    minBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MinBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MinBlock>[0];
+            }
+        >,
+        any
+    >;
+    modBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ModBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ModBlock>[0];
+            }
+        >,
+        any
+    >;
+    multiplyBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MultiplyBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MultiplyBlock>[0];
+            }
+        >,
+        any
+    >;
+    nLerpBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NLerpBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NLerpBlock>[0];
+            }
+        >,
+        any
+    >;
+    negateBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NegateBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NegateBlock>[0];
+            }
+        >,
+        any
+    >;
+    normalBlendBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NormalBlendBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NormalBlendBlock>[0];
+            }
+        >,
+        any
+    >;
+    normalizeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NormalizeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NormalizeBlock>[0];
+            }
+        >,
+        any
+    >;
+    oneMinusBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<OneMinusBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof OneMinusBlock>[0];
+            }
+        >,
+        any
+    >;
+    posterizeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PosterizeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PosterizeBlock>[0];
+            }
+        >,
+        any
+    >;
+    powBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PowBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PowBlock>[0];
+            }
+        >,
+        any
+    >;
+    randomNumberBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RandomNumberBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RandomNumberBlock>[0];
+            }
+        >,
+        any
+    >;
+    reciprocalBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReciprocalBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ReciprocalBlock>[0];
+            }
+        >,
+        any
+    >;
+    reflectBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReflectBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ReflectBlock>[0];
+            }
+        >,
+        any
+    >;
+    refractBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RefractBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RefractBlock>[0];
+            }
+        >,
+        any
+    >;
+    remapBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RemapBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RemapBlock>[0];
+            }
+        >,
+        any
+    >;
+    replaceColorBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReplaceColorBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ReplaceColorBlock>[0];
+            }
+        >,
+        any
+    >;
+    rotate2dBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Rotate2dBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Rotate2dBlock>[0];
+            }
+        >,
+        any
+    >;
+    scaleBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ScaleBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ScaleBlock>[0];
+            }
+        >,
+        any
+    >;
+    simplexPerlin3DBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SimplexPerlin3DBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SimplexPerlin3DBlock>[0];
+            }
+        >,
+        any
+    >;
+    smoothStepBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SmoothStepBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SmoothStepBlock>[0];
+            }
+        >,
+        any
+    >;
+    stepBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StepBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof StepBlock>[0];
+            }
+        >,
+        any
+    >;
+    subtractBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SubtractBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SubtractBlock>[0];
+            }
+        >,
+        any
+    >;
+    transformBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TransformBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TransformBlock>[0];
+            }
+        >,
+        any
+    >;
+    triPlanarBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TriPlanarBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TriPlanarBlock>[0];
+                hideSourceZ: ConstructorParameters<typeof TriPlanarBlock>[1];
+            }
+        >,
+        any
+    >;
+    trigonometryBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TrigonometryBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TrigonometryBlock>[0];
+            }
+        >,
+        any
+    >;
+    vectorMergerBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VectorMergerBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof VectorMergerBlock>[0];
+            }
+        >,
+        any
+    >;
+    vectorSplitterBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VectorSplitterBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof VectorSplitterBlock>[0];
+            }
+        >,
+        any
+    >;
+    viewDirectionBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ViewDirectionBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ViewDirectionBlock>[0];
+            }
+        >,
+        any
+    >;
+    voronoiNoiseBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VoronoiNoiseBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof VoronoiNoiseBlock>[0];
+            }
+        >,
+        any
+    >;
+    waveBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WaveBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof WaveBlock>[0];
+            }
+        >,
+        any
+    >;
+    worleyNoise3DBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WorleyNoise3DBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof WorleyNoise3DBlock>[0];
+            }
+        >,
+        any
+    >;
+    nodeMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NodeMaterial>[0];
+                scene: ConstructorParameters<typeof NodeMaterial>[1];
+                options: ConstructorParameters<typeof NodeMaterial>[2];
+            }
+        >,
+        any
+    >;
+    nodeMaterialBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeMaterialBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NodeMaterialBlock>[0];
+                target: ConstructorParameters<typeof NodeMaterialBlock>[1];
+                isFinalMerger: ConstructorParameters<typeof NodeMaterialBlock>[2];
+            }
+        >,
+        any
+    >;
+    nodeMaterialBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeMaterialBuildState>>, any>;
+    nodeMaterialBuildStateSharedData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeMaterialBuildStateSharedData>>, any>;
+    nodeMaterialConnectionPointCustomObject: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeMaterialConnectionPointCustomObject>,
+            {
+                name: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[0];
+                ownerBlock: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[1];
+                direction: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[2];
+                _blockType: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[3];
+                _blockName: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[4];
+            }
+        >,
+        any
+    >;
+    occlusionMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<OcclusionMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof OcclusionMaterial>[0];
+                scene: ConstructorParameters<typeof OcclusionMaterial>[1];
+            }
+        >,
+        any
+    >;
+    MultiviewRenderTarget: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MultiviewRenderTarget & { cloneBy: string }>,
+            {
+                scene: ConstructorParameters<typeof MultiviewRenderTarget>[0];
+                size: ConstructorParameters<typeof MultiviewRenderTarget>[1];
+            }
+        >,
+        any
+    >;
+    customProceduralTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CustomProceduralTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CustomProceduralTexture>[0];
+                texturePath: ConstructorParameters<typeof CustomProceduralTexture>[1];
+                size: ConstructorParameters<typeof CustomProceduralTexture>[2];
+                scene: ConstructorParameters<typeof CustomProceduralTexture>[3];
+                fallbackTexture: ConstructorParameters<typeof CustomProceduralTexture>[4];
+                generateMipMaps: ConstructorParameters<typeof CustomProceduralTexture>[5];
+                skipJson: ConstructorParameters<typeof CustomProceduralTexture>[6];
+            }
+        >,
+        any
+    >;
+    noiseProceduralTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NoiseProceduralTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NoiseProceduralTexture>[0];
+                size: ConstructorParameters<typeof NoiseProceduralTexture>[1];
+                scene: ConstructorParameters<typeof NoiseProceduralTexture>[2];
+                fallbackTexture: ConstructorParameters<typeof NoiseProceduralTexture>[3];
+                generateMipMaps: ConstructorParameters<typeof NoiseProceduralTexture>[4];
+            }
+        >,
+        any
+    >;
+    proceduralTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ProceduralTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ProceduralTexture>[0];
+                size: ConstructorParameters<typeof ProceduralTexture>[1];
+                fragment: ConstructorParameters<typeof ProceduralTexture>[2];
+                scene: ConstructorParameters<typeof ProceduralTexture>[3];
+                fallbackTexture: ConstructorParameters<typeof ProceduralTexture>[4];
+                generateMipMaps: ConstructorParameters<typeof ProceduralTexture>[5];
+                isCube: ConstructorParameters<typeof ProceduralTexture>[6];
+                textureType: ConstructorParameters<typeof ProceduralTexture>[7];
+            }
+        >,
+        any
+    >;
+    proceduralTextureSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ProceduralTextureSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof ProceduralTextureSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    baseTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BaseTexture & { cloneBy: string }>,
+            {
+                sceneOrEngine: ConstructorParameters<typeof BaseTexture>[0];
+                internalTexture: ConstructorParameters<typeof BaseTexture>[1];
+            }
+        >,
+        any
+    >;
+    colorGradingTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ColorGradingTexture & { cloneBy: string }>,
+            {
+                url: ConstructorParameters<typeof ColorGradingTexture>[0];
+                sceneOrEngine: ConstructorParameters<typeof ColorGradingTexture>[1];
+                onLoad: ConstructorParameters<typeof ColorGradingTexture>[2];
+            }
+        >,
+        any
+    >;
+    cubeTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CubeTexture & { cloneBy: string }>,
+            {
+                rootUrl: ConstructorParameters<typeof CubeTexture>[0];
+                sceneOrEngine: ConstructorParameters<typeof CubeTexture>[1];
+                extensions: ConstructorParameters<typeof CubeTexture>[2];
+                noMipmap: ConstructorParameters<typeof CubeTexture>[3];
+                files: ConstructorParameters<typeof CubeTexture>[4];
+                onLoad: ConstructorParameters<typeof CubeTexture>[5];
+                onError: ConstructorParameters<typeof CubeTexture>[6];
+                format: ConstructorParameters<typeof CubeTexture>[7];
+                prefiltered: ConstructorParameters<typeof CubeTexture>[8];
+                forcedExtension: ConstructorParameters<typeof CubeTexture>[9];
+                createPolynomials: ConstructorParameters<typeof CubeTexture>[10];
+                lodScale: ConstructorParameters<typeof CubeTexture>[11];
+                lodOffset: ConstructorParameters<typeof CubeTexture>[12];
+                loaderOptions: ConstructorParameters<typeof CubeTexture>[13];
+                useSRGBBuffer: ConstructorParameters<typeof CubeTexture>[14];
+            }
+        >,
+        any
+    >;
+    dynamicTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DynamicTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DynamicTexture>[0];
+                options: ConstructorParameters<typeof DynamicTexture>[1];
+                scene: ConstructorParameters<typeof DynamicTexture>[2];
+                generateMipMaps: ConstructorParameters<typeof DynamicTexture>[3];
+                samplingMode: ConstructorParameters<typeof DynamicTexture>[4];
+                format: ConstructorParameters<typeof DynamicTexture>[5];
+                invertY: ConstructorParameters<typeof DynamicTexture>[6];
+            }
+        >,
+        any
+    >;
+    equiRectangularCubeTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<EquiRectangularCubeTexture & { cloneBy: string }>,
+            {
+                url: ConstructorParameters<typeof EquiRectangularCubeTexture>[0];
+                scene: ConstructorParameters<typeof EquiRectangularCubeTexture>[1];
+                size: ConstructorParameters<typeof EquiRectangularCubeTexture>[2];
+                noMipmap: ConstructorParameters<typeof EquiRectangularCubeTexture>[3];
+                gammaSpace: ConstructorParameters<typeof EquiRectangularCubeTexture>[4];
+                onLoad: ConstructorParameters<typeof EquiRectangularCubeTexture>[5];
+                onError: ConstructorParameters<typeof EquiRectangularCubeTexture>[6];
+                supersample: ConstructorParameters<typeof EquiRectangularCubeTexture>[7];
+            }
+        >,
+        any
+    >;
+    externalTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ExternalTexture>,
+            {
+                video: ConstructorParameters<typeof ExternalTexture>[0];
+            }
+        >,
+        any
+    >;
+    htmlElementTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<HtmlElementTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof HtmlElementTexture>[0];
+                element: ConstructorParameters<typeof HtmlElementTexture>[1];
+                options: ConstructorParameters<typeof HtmlElementTexture>[2];
+            }
+        >,
+        any
+    >;
+    internalTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InternalTexture>,
+            {
+                engine: ConstructorParameters<typeof InternalTexture>[0];
+                source: ConstructorParameters<typeof InternalTexture>[1];
+                delayAllocation: ConstructorParameters<typeof InternalTexture>[2];
+            }
+        >,
+        any
+    >;
+    mirrorTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MirrorTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MirrorTexture>[0];
+                size: ConstructorParameters<typeof MirrorTexture>[1];
+                scene: ConstructorParameters<typeof MirrorTexture>[2];
+                generateMipMaps: ConstructorParameters<typeof MirrorTexture>[3];
+                type: ConstructorParameters<typeof MirrorTexture>[4];
+                samplingMode: ConstructorParameters<typeof MirrorTexture>[5];
+                generateDepthBuffer: ConstructorParameters<typeof MirrorTexture>[6];
+            }
+        >,
+        any
+    >;
+    multiRenderTarget: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MultiRenderTarget & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MultiRenderTarget>[0];
+                size: ConstructorParameters<typeof MultiRenderTarget>[1];
+                count: ConstructorParameters<typeof MultiRenderTarget>[2];
+                scene: ConstructorParameters<typeof MultiRenderTarget>[3];
+                options: ConstructorParameters<typeof MultiRenderTarget>[4];
+                textureNames: ConstructorParameters<typeof MultiRenderTarget>[5];
+            }
+        >,
+        any
+    >;
+    prePassRenderTarget: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PrePassRenderTarget & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PrePassRenderTarget>[0];
+                renderTargetTexture: ConstructorParameters<typeof PrePassRenderTarget>[1];
+                size: ConstructorParameters<typeof PrePassRenderTarget>[2];
+                count: ConstructorParameters<typeof PrePassRenderTarget>[3];
+                scene: ConstructorParameters<typeof PrePassRenderTarget>[4];
+                options: ConstructorParameters<typeof PrePassRenderTarget>[5];
+            }
+        >,
+        any
+    >;
+    rawCubeTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RawCubeTexture & { cloneBy: string }>,
+            {
+                scene: ConstructorParameters<typeof RawCubeTexture>[0];
+                data: ConstructorParameters<typeof RawCubeTexture>[1];
+                size: ConstructorParameters<typeof RawCubeTexture>[2];
+                format: ConstructorParameters<typeof RawCubeTexture>[3];
+                type: ConstructorParameters<typeof RawCubeTexture>[4];
+                generateMipMaps: ConstructorParameters<typeof RawCubeTexture>[5];
+                invertY: ConstructorParameters<typeof RawCubeTexture>[6];
+                samplingMode: ConstructorParameters<typeof RawCubeTexture>[7];
+                compression: ConstructorParameters<typeof RawCubeTexture>[8];
+            }
+        >,
+        any
+    >;
+    rawTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RawTexture & { cloneBy: string }>,
+            {
+                data: ConstructorParameters<typeof RawTexture>[0];
+                width: ConstructorParameters<typeof RawTexture>[1];
+                height: ConstructorParameters<typeof RawTexture>[2];
+                format: ConstructorParameters<typeof RawTexture>[3];
+                sceneOrEngine: ConstructorParameters<typeof RawTexture>[4];
+                generateMipMaps: ConstructorParameters<typeof RawTexture>[5];
+                invertY: ConstructorParameters<typeof RawTexture>[6];
+                samplingMode: ConstructorParameters<typeof RawTexture>[7];
+                type: ConstructorParameters<typeof RawTexture>[8];
+                creationFlags: ConstructorParameters<typeof RawTexture>[9];
+                useSRGBBuffer: ConstructorParameters<typeof RawTexture>[10];
+            }
+        >,
+        any
+    >;
+    rawTexture2DArray: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RawTexture2DArray & { cloneBy: string }>,
+            {
+                data: ConstructorParameters<typeof RawTexture2DArray>[0];
+                width: ConstructorParameters<typeof RawTexture2DArray>[1];
+                height: ConstructorParameters<typeof RawTexture2DArray>[2];
+                depth: ConstructorParameters<typeof RawTexture2DArray>[3];
+                format: ConstructorParameters<typeof RawTexture2DArray>[4];
+                scene: ConstructorParameters<typeof RawTexture2DArray>[5];
+                generateMipMaps: ConstructorParameters<typeof RawTexture2DArray>[6];
+                invertY: ConstructorParameters<typeof RawTexture2DArray>[7];
+                samplingMode: ConstructorParameters<typeof RawTexture2DArray>[8];
+                textureType: ConstructorParameters<typeof RawTexture2DArray>[9];
+                creationFlags: ConstructorParameters<typeof RawTexture2DArray>[10];
+            }
+        >,
+        any
+    >;
+    rawTexture3D: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RawTexture3D & { cloneBy: string }>,
+            {
+                data: ConstructorParameters<typeof RawTexture3D>[0];
+                width: ConstructorParameters<typeof RawTexture3D>[1];
+                height: ConstructorParameters<typeof RawTexture3D>[2];
+                depth: ConstructorParameters<typeof RawTexture3D>[3];
+                format: ConstructorParameters<typeof RawTexture3D>[4];
+                scene: ConstructorParameters<typeof RawTexture3D>[5];
+                generateMipMaps: ConstructorParameters<typeof RawTexture3D>[6];
+                invertY: ConstructorParameters<typeof RawTexture3D>[7];
+                samplingMode: ConstructorParameters<typeof RawTexture3D>[8];
+                textureType: ConstructorParameters<typeof RawTexture3D>[9];
+                creationFlags: ConstructorParameters<typeof RawTexture3D>[10];
+            }
+        >,
+        any
+    >;
+    refractionTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RefractionTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RefractionTexture>[0];
+                size: ConstructorParameters<typeof RefractionTexture>[1];
+                scene: ConstructorParameters<typeof RefractionTexture>[2];
+                generateMipMaps: ConstructorParameters<typeof RefractionTexture>[3];
+            }
+        >,
+        any
+    >;
+    renderTargetTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RenderTargetTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RenderTargetTexture>[0];
+                size: ConstructorParameters<typeof RenderTargetTexture>[1];
+                scene: ConstructorParameters<typeof RenderTargetTexture>[2];
+                generateMipMaps: ConstructorParameters<typeof RenderTargetTexture>[3];
+                doNotChangeAspectRatio: ConstructorParameters<typeof RenderTargetTexture>[4];
+                type: ConstructorParameters<typeof RenderTargetTexture>[5];
+                isCube: ConstructorParameters<typeof RenderTargetTexture>[6];
+                samplingMode: ConstructorParameters<typeof RenderTargetTexture>[7];
+                generateDepthBuffer: ConstructorParameters<typeof RenderTargetTexture>[8];
+                generateStencilBuffer: ConstructorParameters<typeof RenderTargetTexture>[9];
+                isMulti: ConstructorParameters<typeof RenderTargetTexture>[10];
+                format: ConstructorParameters<typeof RenderTargetTexture>[11];
+                delayAllocation: ConstructorParameters<typeof RenderTargetTexture>[12];
+                samples: ConstructorParameters<typeof RenderTargetTexture>[13];
+                creationFlags: ConstructorParameters<typeof RenderTargetTexture>[14];
+                noColorAttachment: ConstructorParameters<typeof RenderTargetTexture>[15];
+                useSRGBBuffer: ConstructorParameters<typeof RenderTargetTexture>[16];
+            }
+        >,
+        any
+    >;
+    texture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Texture & { cloneBy: string }>,
+            {
+                url: ConstructorParameters<typeof Texture>[0];
+                sceneOrEngine: ConstructorParameters<typeof Texture>[1];
+                noMipmapOrOptions: ConstructorParameters<typeof Texture>[2];
+                invertY: ConstructorParameters<typeof Texture>[3];
+                samplingMode: ConstructorParameters<typeof Texture>[4];
+                onLoad: ConstructorParameters<typeof Texture>[5];
+                onError: ConstructorParameters<typeof Texture>[6];
+                buffer: ConstructorParameters<typeof Texture>[7];
+                deleteBuffer: ConstructorParameters<typeof Texture>[8];
+                format: ConstructorParameters<typeof Texture>[9];
+                mimeType: ConstructorParameters<typeof Texture>[10];
+                loaderOptions: ConstructorParameters<typeof Texture>[11];
+                creationFlags: ConstructorParameters<typeof Texture>[12];
+                forcedExtension: ConstructorParameters<typeof Texture>[13];
+            }
+        >,
+        any
+    >;
+    textureSampler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextureSampler>>, any>;
+    thinRenderTargetTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinRenderTargetTexture>,
+            {
+                engine: ConstructorParameters<typeof ThinRenderTargetTexture>[0];
+                size: ConstructorParameters<typeof ThinRenderTargetTexture>[1];
+                options: ConstructorParameters<typeof ThinRenderTargetTexture>[2];
+            }
+        >,
+        any
+    >;
+    thinTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinTexture>,
+            {
+                internalTexture: ConstructorParameters<typeof ThinTexture>[0];
+            }
+        >,
+        any
+    >;
+    videoTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VideoTexture & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof VideoTexture>[0];
+                src: ConstructorParameters<typeof VideoTexture>[1];
+                scene: ConstructorParameters<typeof VideoTexture>[2];
+                generateMipMaps: ConstructorParameters<typeof VideoTexture>[3];
+                invertY: ConstructorParameters<typeof VideoTexture>[4];
+                samplingMode: ConstructorParameters<typeof VideoTexture>[5];
+                settings: ConstructorParameters<typeof VideoTexture>[6];
+                onError: ConstructorParameters<typeof VideoTexture>[7];
+                format: ConstructorParameters<typeof VideoTexture>[8];
+            }
+        >,
+        any
+    >;
+    colorCurves: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ColorCurves & { cloneBy: string }>>, any>;
+    drawWrapper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DrawWrapper>,
+            {
+                engine: ConstructorParameters<typeof DrawWrapper>[0];
+                createMaterialContext: ConstructorParameters<typeof DrawWrapper>[1];
+            }
+        >,
+        any
+    >;
+    effect: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Effect>,
+            {
+                baseName: ConstructorParameters<typeof Effect>[0];
+                attributesNamesOrOptions: ConstructorParameters<typeof Effect>[1];
+                uniformsNamesOrEngine: ConstructorParameters<typeof Effect>[2];
+                samplers: ConstructorParameters<typeof Effect>[3];
+                engine: ConstructorParameters<typeof Effect>[4];
+                defines: ConstructorParameters<typeof Effect>[5];
+                fallbacks: ConstructorParameters<typeof Effect>[6];
+                onCompiled: ConstructorParameters<typeof Effect>[7];
+                onError: ConstructorParameters<typeof Effect>[8];
+                indexParameters: ConstructorParameters<typeof Effect>[9];
+                key: ConstructorParameters<typeof Effect>[10];
+                shaderLanguage: ConstructorParameters<typeof Effect>[11];
+            }
+        >,
+        any
+    >;
+    effectFallbacks: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EffectFallbacks>>, any>;
+    effectRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<EffectRenderer>,
+            {
+                engine: ConstructorParameters<typeof EffectRenderer>[0];
+                options: ConstructorParameters<typeof EffectRenderer>[1];
+            }
+        >,
+        any
+    >;
+    fresnelParameters: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FresnelParameters & { cloneBy: string }>,
+            {
+                options: ConstructorParameters<typeof FresnelParameters>[0];
+            }
+        >,
+        any
+    >;
+    imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ImageProcessingConfiguration & { cloneBy: string }>>, any>;
+    material: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Material & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Material>[0];
+                scene: ConstructorParameters<typeof Material>[1];
+                doNotAdd: ConstructorParameters<typeof Material>[2];
+            }
+        >,
+        any
+    >;
+    materialDefines: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MaterialDefines>,
+            {
+                externalProperties: ConstructorParameters<typeof MaterialDefines>[0];
+            }
+        >,
+        any
+    >;
+    materialPluginBase: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MaterialPluginBase>,
+            {
+                material: ConstructorParameters<typeof MaterialPluginBase>[0];
+                name: ConstructorParameters<typeof MaterialPluginBase>[1];
+                priority: ConstructorParameters<typeof MaterialPluginBase>[2];
+                defines: ConstructorParameters<typeof MaterialPluginBase>[3];
+                addToPluginList: ConstructorParameters<typeof MaterialPluginBase>[4];
+                enable: ConstructorParameters<typeof MaterialPluginBase>[5];
+                resolveIncludes: ConstructorParameters<typeof MaterialPluginBase>[6];
+            }
+        >,
+        any
+    >;
+    materialPluginManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MaterialPluginManager>,
+            {
+                material: ConstructorParameters<typeof MaterialPluginManager>[0];
+            }
+        >,
+        any
+    >;
+    materialStencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialStencilState>>, any>;
+    meshDebugPluginMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MeshDebugPluginMaterial>,
+            {
+                material: ConstructorParameters<typeof MeshDebugPluginMaterial>[0];
+                options: ConstructorParameters<typeof MeshDebugPluginMaterial>[1];
+            }
+        >,
+        any
+    >;
+    multiMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MultiMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MultiMaterial>[0];
+                scene: ConstructorParameters<typeof MultiMaterial>[1];
+            }
+        >,
+        any
+    >;
+    prePassConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PrePassConfiguration>>, any>;
+    pushMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PushMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PushMaterial>[0];
+                scene: ConstructorParameters<typeof PushMaterial>[1];
+                storeEffectOnSubMeshes: ConstructorParameters<typeof PushMaterial>[2];
+            }
+        >,
+        any
+    >;
+    shaderMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ShaderMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ShaderMaterial>[0];
+                scene: ConstructorParameters<typeof ShaderMaterial>[1];
+                shaderPath: ConstructorParameters<typeof ShaderMaterial>[2];
+                options: ConstructorParameters<typeof ShaderMaterial>[3];
+                storeEffectOnSubMeshes: ConstructorParameters<typeof ShaderMaterial>[4];
+            }
+        >,
+        any
+    >;
+    shadowDepthWrapper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ShadowDepthWrapper>,
+            {
+                baseMaterial: ConstructorParameters<typeof ShadowDepthWrapper>[0];
+                scene: ConstructorParameters<typeof ShadowDepthWrapper>[1];
+                options: ConstructorParameters<typeof ShadowDepthWrapper>[2];
+            }
+        >,
+        any
+    >;
+    standardMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StandardMaterial & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof StandardMaterial>[0];
+                scene: ConstructorParameters<typeof StandardMaterial>[1];
+            }
+        >,
+        any
+    >;
+    uniformBuffer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<UniformBuffer>,
+            {
+                engine: ConstructorParameters<typeof UniformBuffer>[0];
+                data: ConstructorParameters<typeof UniformBuffer>[1];
+                dynamic: ConstructorParameters<typeof UniformBuffer>[2];
+                name: ConstructorParameters<typeof UniformBuffer>[3];
+                forceNoUniformBuffer: ConstructorParameters<typeof UniformBuffer>[4];
+            }
+        >,
+        any
+    >;
+    uniformBufferEffectCommonAccessor: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<UniformBufferEffectCommonAccessor>,
+            {
+                uboOrEffect: ConstructorParameters<typeof UniformBufferEffectCommonAccessor>[0];
+            }
+        >,
+        any
+    >;
+    halton2DSequence: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Halton2DSequence>,
+            {
+                numSamples: ConstructorParameters<typeof Halton2DSequence>[0];
+                baseX: ConstructorParameters<typeof Halton2DSequence>[1];
+                baseY: ConstructorParameters<typeof Halton2DSequence>[2];
+                width: ConstructorParameters<typeof Halton2DSequence>[3];
+                height: ConstructorParameters<typeof Halton2DSequence>[4];
+            }
+        >,
+        any
+    >;
+    sphericalPolynomial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalPolynomial>>, any>;
+    dracoCompression: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DracoCompression>,
+            {
+                numWorkers: ConstructorParameters<typeof DracoCompression>[0];
+            }
+        >,
+        any
+    >;
+    meshoptCompression: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MeshoptCompression>>, any>;
+    gaussianSplattingMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GaussianSplattingMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GaussianSplattingMesh>[0];
+                url: ConstructorParameters<typeof GaussianSplattingMesh>[1];
+                scene: ConstructorParameters<typeof GaussianSplattingMesh>[2];
+            }
+        >,
+        any
+    >;
+    greasedLineBaseMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GreasedLineBaseMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GreasedLineBaseMesh>[0];
+                scene: ConstructorParameters<typeof GreasedLineBaseMesh>[1];
+                _options: ConstructorParameters<typeof GreasedLineBaseMesh>[2];
+            }
+        >,
+        any
+    >;
+    greasedLineMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GreasedLineMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GreasedLineMesh>[0];
+                scene: ConstructorParameters<typeof GreasedLineMesh>[1];
+                _options: ConstructorParameters<typeof GreasedLineMesh>[2];
+            }
+        >,
+        any
+    >;
+    greasedLineRibbonMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GreasedLineRibbonMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GreasedLineRibbonMesh>[0];
+                scene: ConstructorParameters<typeof GreasedLineRibbonMesh>[1];
+                _options: ConstructorParameters<typeof GreasedLineRibbonMesh>[2];
+                _pathOptions: ConstructorParameters<typeof GreasedLineRibbonMesh>[3];
+            }
+        >,
+        any
+    >;
+    instantiateBaseBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstantiateBaseBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstantiateBaseBlock>[0];
+            }
+        >,
+        any
+    >;
+    instantiateBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstantiateBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstantiateBlock>[0];
+            }
+        >,
+        any
+    >;
+    instantiateLinearBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstantiateLinearBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstantiateLinearBlock>[0];
+            }
+        >,
+        any
+    >;
+    instantiateOnFacesBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstantiateOnFacesBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstantiateOnFacesBlock>[0];
+            }
+        >,
+        any
+    >;
+    instantiateOnVerticesBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstantiateOnVerticesBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstantiateOnVerticesBlock>[0];
+            }
+        >,
+        any
+    >;
+    instantiateOnVolumeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstantiateOnVolumeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstantiateOnVolumeBlock>[0];
+            }
+        >,
+        any
+    >;
+    instantiateRadialBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstantiateRadialBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstantiateRadialBlock>[0];
+            }
+        >,
+        any
+    >;
+    alignBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AlignBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AlignBlock>[0];
+            }
+        >,
+        any
+    >;
+    rotationXBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RotationXBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RotationXBlock>[0];
+            }
+        >,
+        any
+    >;
+    rotationYBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RotationYBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RotationYBlock>[0];
+            }
+        >,
+        any
+    >;
+    rotationZBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RotationZBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RotationZBlock>[0];
+            }
+        >,
+        any
+    >;
+    scalingBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ScalingBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ScalingBlock>[0];
+            }
+        >,
+        any
+    >;
+    translationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TranslationBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TranslationBlock>[0];
+            }
+        >,
+        any
+    >;
+    setColorsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SetColorsBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SetColorsBlock>[0];
+            }
+        >,
+        any
+    >;
+    setMaterialIDBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SetMaterialIDBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SetMaterialIDBlock>[0];
+            }
+        >,
+        any
+    >;
+    setNormalsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SetNormalsBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SetNormalsBlock>[0];
+            }
+        >,
+        any
+    >;
+    setPositionsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SetPositionsBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SetPositionsBlock>[0];
+            }
+        >,
+        any
+    >;
+    setTangentsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SetTangentsBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SetTangentsBlock>[0];
+            }
+        >,
+        any
+    >;
+    setUVsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SetUVsBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SetUVsBlock>[0];
+            }
+        >,
+        any
+    >;
+    boxBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoxBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BoxBlock>[0];
+            }
+        >,
+        any
+    >;
+    capsuleBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CapsuleBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CapsuleBlock>[0];
+            }
+        >,
+        any
+    >;
+    cylinderBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CylinderBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CylinderBlock>[0];
+            }
+        >,
+        any
+    >;
+    discBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DiscBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DiscBlock>[0];
+            }
+        >,
+        any
+    >;
+    gridBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GridBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GridBlock>[0];
+            }
+        >,
+        any
+    >;
+    icoSphereBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<IcoSphereBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof IcoSphereBlock>[0];
+            }
+        >,
+        any
+    >;
+    meshBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MeshBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MeshBlock>[0];
+            }
+        >,
+        any
+    >;
+    nullBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NullBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NullBlock>[0];
+            }
+        >,
+        any
+    >;
+    planeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PlaneBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PlaneBlock>[0];
+            }
+        >,
+        any
+    >;
+    sphereBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SphereBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SphereBlock>[0];
+            }
+        >,
+        any
+    >;
+    torusBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TorusBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TorusBlock>[0];
+            }
+        >,
+        any
+    >;
+    teleportInBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TeleportInBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TeleportInBlock>[0];
+            }
+        >,
+        any
+    >;
+    teleportOutBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TeleportOutBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TeleportOutBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryTextureBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryTextureBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryTextureBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryTextureFetchBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryTextureFetchBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryTextureFetchBlock>[0];
+            }
+        >,
+        any
+    >;
+    booleanGeometryBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BooleanGeometryBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BooleanGeometryBlock>[0];
+            }
+        >,
+        any
+    >;
+    boundingBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoundingBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BoundingBlock>[0];
+            }
+        >,
+        any
+    >;
+    computeNormalsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ComputeNormalsBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ComputeNormalsBlock>[0];
+            }
+        >,
+        any
+    >;
+    conditionBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ConditionBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ConditionBlock>[0];
+            }
+        >,
+        any
+    >;
+    debugBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DebugBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DebugBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryArcTan2Block: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryArcTan2Block & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryArcTan2Block>[0];
+            }
+        >,
+        any
+    >;
+    geometryClampBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryClampBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryClampBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryCollectionBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryCollectionBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryCollectionBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryCrossBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryCrossBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryCrossBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryCurveBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryCurveBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryCurveBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryDesaturateBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryDesaturateBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryDesaturateBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryDistanceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryDistanceBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryDistanceBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryDotBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryDotBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryDotBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryElbowBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryElbowBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryElbowBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryInfoBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryInfoBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryInfoBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryInputBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryInputBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryInputBlock>[0];
+                type: ConstructorParameters<typeof GeometryInputBlock>[1];
+            }
+        >,
+        any
+    >;
+    geometryLengthBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryLengthBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryLengthBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryLerpBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryLerpBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryLerpBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryModBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryModBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryModBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryNLerpBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryNLerpBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryNLerpBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryOptimizeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryOptimizeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryOptimizeBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryOutputBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryOutputBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryOutputBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryPosterizeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryPosterizeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryPosterizeBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryPowBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryPowBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryPowBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryReplaceColorBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryReplaceColorBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryReplaceColorBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryRotate2dBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryRotate2dBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryRotate2dBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometrySmoothStepBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometrySmoothStepBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometrySmoothStepBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryStepBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryStepBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryStepBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryTransformBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryTransformBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryTransformBlock>[0];
+            }
+        >,
+        any
+    >;
+    geometryTrigonometryBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryTrigonometryBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GeometryTrigonometryBlock>[0];
+            }
+        >,
+        any
+    >;
+    intFloatConverterBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<IntFloatConverterBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof IntFloatConverterBlock>[0];
+            }
+        >,
+        any
+    >;
+    mapRangeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MapRangeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MapRangeBlock>[0];
+            }
+        >,
+        any
+    >;
+    mappingBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MappingBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MappingBlock>[0];
+            }
+        >,
+        any
+    >;
+    mathBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MathBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MathBlock>[0];
+            }
+        >,
+        any
+    >;
+    matrixComposeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MatrixComposeBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MatrixComposeBlock>[0];
+            }
+        >,
+        any
+    >;
+    mergeGeometryBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MergeGeometryBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MergeGeometryBlock>[0];
+            }
+        >,
+        any
+    >;
+    noiseBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NoiseBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NoiseBlock>[0];
+            }
+        >,
+        any
+    >;
+    normalizeVectorBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NormalizeVectorBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NormalizeVectorBlock>[0];
+            }
+        >,
+        any
+    >;
+    randomBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RandomBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RandomBlock>[0];
+            }
+        >,
+        any
+    >;
+    vectorConverterBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VectorConverterBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof VectorConverterBlock>[0];
+            }
+        >,
+        any
+    >;
+    nodeGeometry: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeGeometry & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NodeGeometry>[0];
+            }
+        >,
+        any
+    >;
+    nodeGeometryBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeGeometryBlock & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof NodeGeometryBlock>[0];
+            }
+        >,
+        any
+    >;
+    nodeGeometryBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeGeometryBuildState>>, any>;
+    webGLDataBuffer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebGLDataBuffer>,
+            {
+                resource: ConstructorParameters<typeof WebGLDataBuffer>[0];
+            }
+        >,
+        any
+    >;
+    abstractMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AbstractMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AbstractMesh>[0];
+                scene: ConstructorParameters<typeof AbstractMesh>[1];
+            }
+        >,
+        any
+    >;
+    buffer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Buffer>,
+            {
+                engine: ConstructorParameters<typeof Buffer>[0];
+                data: ConstructorParameters<typeof Buffer>[1];
+                updatable: ConstructorParameters<typeof Buffer>[2];
+                stride: ConstructorParameters<typeof Buffer>[3];
+                postponeInternalCreation: ConstructorParameters<typeof Buffer>[4];
+                instanced: ConstructorParameters<typeof Buffer>[5];
+                useBytes: ConstructorParameters<typeof Buffer>[6];
+                divisor: ConstructorParameters<typeof Buffer>[7];
+                label: ConstructorParameters<typeof Buffer>[8];
+            }
+        >,
+        any
+    >;
+    geometry: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Geometry>,
+            {
+                id: ConstructorParameters<typeof Geometry>[0];
+                scene: ConstructorParameters<typeof Geometry>[1];
+                vertexData: ConstructorParameters<typeof Geometry>[2];
+                updatable: ConstructorParameters<typeof Geometry>[3];
+                mesh: ConstructorParameters<typeof Geometry>[4];
+            }
+        >,
+        any
+    >;
+    goldbergMesh: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GoldbergMesh & { cloneBy: string }>>, any>;
+    groundMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GroundMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GroundMesh>[0];
+                scene: ConstructorParameters<typeof GroundMesh>[1];
+            }
+        >,
+        any
+    >;
+    instancedMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<InstancedMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof InstancedMesh>[0];
+                source: ConstructorParameters<typeof InstancedMesh>[1];
+            }
+        >,
+        any
+    >;
+    linesMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LinesMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof LinesMesh>[0];
+                scene: ConstructorParameters<typeof LinesMesh>[1];
+                parent: ConstructorParameters<typeof LinesMesh>[2];
+                source: ConstructorParameters<typeof LinesMesh>[3];
+                doNotCloneChildren: ConstructorParameters<typeof LinesMesh>[4];
+                useVertexColor: ConstructorParameters<typeof LinesMesh>[5];
+                useVertexAlpha: ConstructorParameters<typeof LinesMesh>[6];
+                material: ConstructorParameters<typeof LinesMesh>[7];
+            }
+        >,
+        any
+    >;
+    mesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Mesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Mesh>[0];
+                scene: ConstructorParameters<typeof Mesh>[1];
+                parent: ConstructorParameters<typeof Mesh>[2];
+                source: ConstructorParameters<typeof Mesh>[3];
+                doNotCloneChildren: ConstructorParameters<typeof Mesh>[4];
+                clonePhysicsImpostor: ConstructorParameters<typeof Mesh>[5];
+            }
+        >,
+        any
+    >;
+    box: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateBox> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateBox>[0];
+                options: Parameters<typeof CreateBox>[1];
+                scene: Parameters<typeof CreateBox>[2];
+            }
+        >,
+        any
+    >;
+    tiledBox: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledBox> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateTiledBox>[0];
+                options: Parameters<typeof CreateTiledBox>[1];
+                scene: Parameters<typeof CreateTiledBox>[2];
+            }
+        >,
+        any
+    >;
+    sphere: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateSphere> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateSphere>[0];
+                options: Parameters<typeof CreateSphere>[1];
+                scene: Parameters<typeof CreateSphere>[2];
+            }
+        >,
+        any
+    >;
+    disc: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDisc> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateDisc>[0];
+                options: Parameters<typeof CreateDisc>[1];
+                scene: Parameters<typeof CreateDisc>[2];
+            }
+        >,
+        any
+    >;
+    icoSphere: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateIcoSphere> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateIcoSphere>[0];
+                options: Parameters<typeof CreateIcoSphere>[1];
+                scene: Parameters<typeof CreateIcoSphere>[2];
+            }
+        >,
+        any
+    >;
+    ribbon: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateRibbon> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateRibbon>[0];
+                options: Parameters<typeof CreateRibbon>[1];
+                scene: Parameters<typeof CreateRibbon>[2];
+            }
+        >,
+        any
+    >;
+    cylinder: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateCylinder> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateCylinder>[0];
+                options: Parameters<typeof CreateCylinder>[1];
+                scene: Parameters<typeof CreateCylinder>[2];
+            }
+        >,
+        any
+    >;
+    torus: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTorus> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateTorus>[0];
+                options: Parameters<typeof CreateTorus>[1];
+                scene: Parameters<typeof CreateTorus>[2];
+            }
+        >,
+        any
+    >;
+    torusKnot: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTorusKnot> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateTorusKnot>[0];
+                options: Parameters<typeof CreateTorusKnot>[1];
+                scene: Parameters<typeof CreateTorusKnot>[2];
+            }
+        >,
+        any
+    >;
+    lineSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLineSystem> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateLineSystem>[0];
+                options: Parameters<typeof CreateLineSystem>[1];
+                scene: Parameters<typeof CreateLineSystem>[2];
+            }
+        >,
+        any
+    >;
+    lines: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLines> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateLines>[0];
+                options: Parameters<typeof CreateLines>[1];
+                scene: Parameters<typeof CreateLines>[2];
+            }
+        >,
+        any
+    >;
+    dashedLines: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDashedLines> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateDashedLines>[0];
+                options: Parameters<typeof CreateDashedLines>[1];
+                scene: Parameters<typeof CreateDashedLines>[2];
+            }
+        >,
+        any
+    >;
+    extrudeShape: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShape> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof ExtrudeShape>[0];
+                options: Parameters<typeof ExtrudeShape>[1];
+                scene: Parameters<typeof ExtrudeShape>[2];
+            }
+        >,
+        any
+    >;
+    extrudeShapeCustom: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShapeCustom> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof ExtrudeShapeCustom>[0];
+                options: Parameters<typeof ExtrudeShapeCustom>[1];
+                scene: Parameters<typeof ExtrudeShapeCustom>[2];
+            }
+        >,
+        any
+    >;
+    lathe: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLathe> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateLathe>[0];
+                options: Parameters<typeof CreateLathe>[1];
+                scene: Parameters<typeof CreateLathe>[2];
+            }
+        >,
+        any
+    >;
+    tiledPlane: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledPlane> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateTiledPlane>[0];
+                options: Parameters<typeof CreateTiledPlane>[1];
+                scene: Parameters<typeof CreateTiledPlane>[2];
+            }
+        >,
+        any
+    >;
+    plane: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePlane> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreatePlane>[0];
+                options: Parameters<typeof CreatePlane>[1];
+                scene: Parameters<typeof CreatePlane>[2];
+            }
+        >,
+        any
+    >;
+    ground: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGround> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateGround>[0];
+                options: Parameters<typeof CreateGround>[1];
+                scene: Parameters<typeof CreateGround>[2];
+            }
+        >,
+        any
+    >;
+    tiledGround: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledGround> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateTiledGround>[0];
+                options: Parameters<typeof CreateTiledGround>[1];
+                scene: Parameters<typeof CreateTiledGround>[2];
+            }
+        >,
+        any
+    >;
+    groundFromHeightMap: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGroundFromHeightMap> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateGroundFromHeightMap>[0];
+                url: Parameters<typeof CreateGroundFromHeightMap>[1];
+                options: Parameters<typeof CreateGroundFromHeightMap>[2];
+                scene: Parameters<typeof CreateGroundFromHeightMap>[3];
+            }
+        >,
+        any
+    >;
+    polygon: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePolygon> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreatePolygon>[0];
+                options: Parameters<typeof CreatePolygon>[1];
+                scene: Parameters<typeof CreatePolygon>[2];
+                earcutInjection: Parameters<typeof CreatePolygon>[3];
+            }
+        >,
+        any
+    >;
+    extrudePolygon: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudePolygon> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof ExtrudePolygon>[0];
+                options: Parameters<typeof ExtrudePolygon>[1];
+                scene: Parameters<typeof ExtrudePolygon>[2];
+                earcutInjection: Parameters<typeof ExtrudePolygon>[3];
+            }
+        >,
+        any
+    >;
+    tube: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTube> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateTube>[0];
+                options: Parameters<typeof CreateTube>[1];
+                scene: Parameters<typeof CreateTube>[2];
+            }
+        >,
+        any
+    >;
+    polyhedron: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePolyhedron> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreatePolyhedron>[0];
+                options: Parameters<typeof CreatePolyhedron>[1];
+                scene: Parameters<typeof CreatePolyhedron>[2];
+            }
+        >,
+        any
+    >;
+    geodesic: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGeodesic> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateGeodesic>[0];
+                options: Parameters<typeof CreateGeodesic>[1];
+                scene: Parameters<typeof CreateGeodesic>[2];
+            }
+        >,
+        any
+    >;
+    goldberg: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGoldberg> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateGoldberg>[0];
+                options: Parameters<typeof CreateGoldberg>[1];
+                scene: Parameters<typeof CreateGoldberg>[2];
+            }
+        >,
+        any
+    >;
+    decal: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDecal> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateDecal>[0];
+                sourceMesh: Parameters<typeof CreateDecal>[1];
+                options: Parameters<typeof CreateDecal>[2];
+            }
+        >,
+        any
+    >;
+    capsule: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateCapsule> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateCapsule>[0];
+                options: Parameters<typeof CreateCapsule>[1];
+                scene: Parameters<typeof CreateCapsule>[2];
+            }
+        >,
+        any
+    >;
+    text: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateText> & { cloneBy: string }>,
+            {
+                name: Parameters<typeof CreateText>[0];
+                text: Parameters<typeof CreateText>[1];
+                fontData: Parameters<typeof CreateText>[2];
+                options: Parameters<typeof CreateText>[3];
+                scene: Parameters<typeof CreateText>[4];
+                earcutInjection: Parameters<typeof CreateText>[5];
+            }
+        >,
+        any
+    >;
+    meshLODLevel: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MeshLODLevel>,
+            {
+                distanceOrScreenCoverage: ConstructorParameters<typeof MeshLODLevel>[0];
+                mesh: ConstructorParameters<typeof MeshLODLevel>[1];
+            }
+        >,
+        any
+    >;
+    meshUVSpaceRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MeshUVSpaceRenderer>,
+            {
+                mesh: ConstructorParameters<typeof MeshUVSpaceRenderer>[0];
+                scene: ConstructorParameters<typeof MeshUVSpaceRenderer>[1];
+                options: ConstructorParameters<typeof MeshUVSpaceRenderer>[2];
+            }
+        >,
+        any
+    >;
+    subMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SubMesh & { cloneBy: string }>,
+            {
+                materialIndex: ConstructorParameters<typeof SubMesh>[0];
+                verticesStart: ConstructorParameters<typeof SubMesh>[1];
+                verticesCount: ConstructorParameters<typeof SubMesh>[2];
+                indexStart: ConstructorParameters<typeof SubMesh>[3];
+                indexCount: ConstructorParameters<typeof SubMesh>[4];
+                mesh: ConstructorParameters<typeof SubMesh>[5];
+                renderingMesh: ConstructorParameters<typeof SubMesh>[6];
+                createBoundingBox: ConstructorParameters<typeof SubMesh>[7];
+                addToMesh: ConstructorParameters<typeof SubMesh>[8];
+            }
+        >,
+        any
+    >;
+    trailMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TrailMesh & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TrailMesh>[0];
+                generator: ConstructorParameters<typeof TrailMesh>[1];
+                scene: ConstructorParameters<typeof TrailMesh>[2];
+                diameter: ConstructorParameters<typeof TrailMesh>[3];
+                length: ConstructorParameters<typeof TrailMesh>[4];
+                autoStart: ConstructorParameters<typeof TrailMesh>[5];
+            }
+        >,
+        any
+    >;
+    transformNode: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TransformNode & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TransformNode>[0];
+                scene: ConstructorParameters<typeof TransformNode>[1];
+                isPure: ConstructorParameters<typeof TransformNode>[2];
+            }
+        >,
+        any
+    >;
+    dynamicFloat32Array: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DynamicFloat32Array>,
+            {
+                itemCapacity: ConstructorParameters<typeof DynamicFloat32Array>[0];
+            }
+        >,
+        any
+    >;
+    performanceViewerCollector: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PerformanceViewerCollector>,
+            {
+                _scene: ConstructorParameters<typeof PerformanceViewerCollector>[0];
+                _enabledStrategyCallbacks: ConstructorParameters<typeof PerformanceViewerCollector>[1];
+            }
+        >,
+        any
+    >;
+    assetsManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AssetsManager>,
+            {
+                scene: ConstructorParameters<typeof AssetsManager>[0];
+            }
+        >,
+        any
+    >;
+    copyTextureToTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CopyTextureToTexture>,
+            {
+                engine: ConstructorParameters<typeof CopyTextureToTexture>[0];
+                isDepthTexture: ConstructorParameters<typeof CopyTextureToTexture>[1];
+            }
+        >,
+        any
+    >;
+    dataReader: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DataReader>,
+            {
+                buffer: ConstructorParameters<typeof DataReader>[0];
+            }
+        >,
+        any
+    >;
+    deferred: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Deferred>>, any>;
+    depthReducer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthReducer>,
+            {
+                camera: ConstructorParameters<typeof DepthReducer>[0];
+            }
+        >,
+        any
+    >;
+    filesInput: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FilesInput>,
+            {
+                engine: ConstructorParameters<typeof FilesInput>[0];
+                scene: ConstructorParameters<typeof FilesInput>[1];
+                sceneLoadedCallback: ConstructorParameters<typeof FilesInput>[2];
+                progressCallback: ConstructorParameters<typeof FilesInput>[3];
+                additionalRenderLoopLogicCallback: ConstructorParameters<typeof FilesInput>[4];
+                textureLoadingCallback: ConstructorParameters<typeof FilesInput>[5];
+                startingProcessingFilesCallback: ConstructorParameters<typeof FilesInput>[6];
+                onReloadCallback: ConstructorParameters<typeof FilesInput>[7];
+                errorCallback: ConstructorParameters<typeof FilesInput>[8];
+                useAppend: ConstructorParameters<typeof FilesInput>[9];
+            }
+        >,
+        any
+    >;
+    khronosTextureContainer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<KhronosTextureContainer>,
+            {
+                data: ConstructorParameters<typeof KhronosTextureContainer>[0];
+                facesExpected: ConstructorParameters<typeof KhronosTextureContainer>[1];
+            }
+        >,
+        any
+    >;
+    khronosTextureContainer2: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<KhronosTextureContainer2>,
+            {
+                engine: ConstructorParameters<typeof KhronosTextureContainer2>[0];
+                numWorkersOrOptions: ConstructorParameters<typeof KhronosTextureContainer2>[1];
+            }
+        >,
+        any
+    >;
+    meshExploder: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MeshExploder>,
+            {
+                meshes: ConstructorParameters<typeof MeshExploder>[0];
+                centerMesh: ConstructorParameters<typeof MeshExploder>[1];
+            }
+        >,
+        any
+    >;
+    minMaxReducer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MinMaxReducer>,
+            {
+                camera: ConstructorParameters<typeof MinMaxReducer>[0];
+            }
+        >,
+        any
+    >;
+    observable: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Observable & { cloneBy: string }>,
+            {
+                onObserverAdded: ConstructorParameters<typeof Observable>[0];
+                notifyIfTriggered: ConstructorParameters<typeof Observable>[1];
+            }
+        >,
+        any
+    >;
+    perfCounter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PerfCounter>>, any>;
+    performanceMonitor: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PerformanceMonitor>,
+            {
+                frameSampleSize: ConstructorParameters<typeof PerformanceMonitor>[0];
+            }
+        >,
+        any
+    >;
+    pressureObserverWrapper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PressureObserverWrapper>,
+            {
+                options: ConstructorParameters<typeof PressureObserverWrapper>[0];
+            }
+        >,
+        any
+    >;
+    reflector: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Reflector>,
+            {
+                scene: ConstructorParameters<typeof Reflector>[0];
+                hostname: ConstructorParameters<typeof Reflector>[1];
+                port: ConstructorParameters<typeof Reflector>[2];
+            }
+        >,
+        any
+    >;
+    sceneOptimizer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SceneOptimizer>,
+            {
+                scene: ConstructorParameters<typeof SceneOptimizer>[0];
+                options: ConstructorParameters<typeof SceneOptimizer>[1];
+                autoGeneratePriorities: ConstructorParameters<typeof SceneOptimizer>[2];
+                improvementMode: ConstructorParameters<typeof SceneOptimizer>[3];
+            }
+        >,
+        any
+    >;
+    sceneRecorder: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SceneRecorder>>, any>;
+    smartArray: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SmartArray>,
+            {
+                capacity: ConstructorParameters<typeof SmartArray>[0];
+            }
+        >,
+        any
+    >;
+    stringDictionary: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StringDictionary>>, any>;
+    trajectoryClassifier: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TrajectoryClassifier>>, any>;
+    videoRecorder: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VideoRecorder>,
+            {
+                engine: ConstructorParameters<typeof VideoRecorder>[0];
+                options: ConstructorParameters<typeof VideoRecorder>[1];
+            }
+        >,
+        any
+    >;
+    virtualJoystick: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VirtualJoystick>,
+            {
+                leftJoystick: ConstructorParameters<typeof VirtualJoystick>[0];
+                customizations: ConstructorParameters<typeof VirtualJoystick>[1];
+            }
+        >,
+        any
+    >;
+    webRequest: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebRequest>>, any>;
+    workerPool: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WorkerPool>,
+            {
+                workers: ConstructorParameters<typeof WorkerPool>[0];
+            }
+        >,
+        any
+    >;
+    morphTarget: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MorphTarget & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MorphTarget>[0];
+                influence: ConstructorParameters<typeof MorphTarget>[1];
+                scene: ConstructorParameters<typeof MorphTarget>[2];
+            }
+        >,
+        any
+    >;
+    morphTargetManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MorphTargetManager & { cloneBy: string }>,
+            {
+                scene: ConstructorParameters<typeof MorphTargetManager>[0];
+            }
+        >,
+        any
+    >;
+    recastJSPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RecastJSPlugin>,
+            {
+                recastInjection: ConstructorParameters<typeof RecastJSPlugin>[0];
+            }
+        >,
+        any
+    >;
+    database: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Database>,
+            {
+                urlToScene: ConstructorParameters<typeof Database>[0];
+                callbackManifestChecked: ConstructorParameters<typeof Database>[1];
+                disableManifestCheck: ConstructorParameters<typeof Database>[2];
+            }
+        >,
+        any
+    >;
+    boxParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BoxParticleEmitter & { cloneBy: string }>>, any>;
+    coneParticleEmitter: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ConeParticleEmitter & { cloneBy: string }>,
+            {
+                radius: ConstructorParameters<typeof ConeParticleEmitter>[0];
+                angle: ConstructorParameters<typeof ConeParticleEmitter>[1];
+                directionRandomizer: ConstructorParameters<typeof ConeParticleEmitter>[2];
+            }
+        >,
+        any
+    >;
+    customParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CustomParticleEmitter & { cloneBy: string }>>, any>;
+    cylinderParticleEmitter: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CylinderParticleEmitter & { cloneBy: string }>,
+            {
+                radius: ConstructorParameters<typeof CylinderParticleEmitter>[0];
+                height: ConstructorParameters<typeof CylinderParticleEmitter>[1];
+                radiusRange: ConstructorParameters<typeof CylinderParticleEmitter>[2];
+                directionRandomizer: ConstructorParameters<typeof CylinderParticleEmitter>[3];
+            }
+        >,
+        any
+    >;
+    hemisphericParticleEmitter: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<HemisphericParticleEmitter & { cloneBy: string }>,
+            {
+                radius: ConstructorParameters<typeof HemisphericParticleEmitter>[0];
+                radiusRange: ConstructorParameters<typeof HemisphericParticleEmitter>[1];
+                directionRandomizer: ConstructorParameters<typeof HemisphericParticleEmitter>[2];
+            }
+        >,
+        any
+    >;
+    meshParticleEmitter: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MeshParticleEmitter & { cloneBy: string }>,
+            {
+                mesh: ConstructorParameters<typeof MeshParticleEmitter>[0];
+            }
+        >,
+        any
+    >;
+    pointParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PointParticleEmitter & { cloneBy: string }>>, any>;
+    sphereParticleEmitter: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SphereParticleEmitter & { cloneBy: string }>,
+            {
+                radius: ConstructorParameters<typeof SphereParticleEmitter>[0];
+                radiusRange: ConstructorParameters<typeof SphereParticleEmitter>[1];
+                directionRandomizer: ConstructorParameters<typeof SphereParticleEmitter>[2];
+            }
+        >,
+        any
+    >;
+    baseParticleSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BaseParticleSystem>,
+            {
+                name: ConstructorParameters<typeof BaseParticleSystem>[0];
+            }
+        >,
+        any
+    >;
+    cloudPoint: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CloudPoint>,
+            {
+                particleIndex: ConstructorParameters<typeof CloudPoint>[0];
+                group: ConstructorParameters<typeof CloudPoint>[1];
+                groupId: ConstructorParameters<typeof CloudPoint>[2];
+                idxInGroup: ConstructorParameters<typeof CloudPoint>[3];
+                pcs: ConstructorParameters<typeof CloudPoint>[4];
+            }
+        >,
+        any
+    >;
+    computeShaderParticleSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ComputeShaderParticleSystem>,
+            {
+                parent: ConstructorParameters<typeof ComputeShaderParticleSystem>[0];
+                engine: ConstructorParameters<typeof ComputeShaderParticleSystem>[1];
+            }
+        >,
+        any
+    >;
+    particle: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Particle>,
+            {
+                particleSystem: ConstructorParameters<typeof Particle>[0];
+            }
+        >,
+        any
+    >;
+    particleSystem: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystem & { cloneBy: string }>>, any>;
+    particleSystemSet: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystemSet>>, any>;
+    pointsCloudSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PointsCloudSystem>,
+            {
+                name: ConstructorParameters<typeof PointsCloudSystem>[0];
+                pointSize: ConstructorParameters<typeof PointsCloudSystem>[1];
+                scene: ConstructorParameters<typeof PointsCloudSystem>[2];
+                options: ConstructorParameters<typeof PointsCloudSystem>[3];
+            }
+        >,
+        any
+    >;
+    solidParticle: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SolidParticle>,
+            {
+                particleIndex: ConstructorParameters<typeof SolidParticle>[0];
+                particleId: ConstructorParameters<typeof SolidParticle>[1];
+                positionIndex: ConstructorParameters<typeof SolidParticle>[2];
+                indiceIndex: ConstructorParameters<typeof SolidParticle>[3];
+                model: ConstructorParameters<typeof SolidParticle>[4];
+                shapeId: ConstructorParameters<typeof SolidParticle>[5];
+                idxInShape: ConstructorParameters<typeof SolidParticle>[6];
+                sps: ConstructorParameters<typeof SolidParticle>[7];
+                modelBoundingInfo: ConstructorParameters<typeof SolidParticle>[8];
+                materialIndex: ConstructorParameters<typeof SolidParticle>[9];
+            }
+        >,
+        any
+    >;
+    solidParticleSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SolidParticleSystem>,
+            {
+                name: ConstructorParameters<typeof SolidParticleSystem>[0];
+                scene: ConstructorParameters<typeof SolidParticleSystem>[1];
+                options: ConstructorParameters<typeof SolidParticleSystem>[2];
+            }
+        >,
+        any
+    >;
+    subEmitter: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SubEmitter & { cloneBy: string }>,
+            {
+                particleSystem: ConstructorParameters<typeof SubEmitter>[0];
+            }
+        >,
+        any
+    >;
+    thinParticleSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinParticleSystem & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ThinParticleSystem>[0];
+                capacity: ConstructorParameters<typeof ThinParticleSystem>[1];
+                sceneOrEngine: ConstructorParameters<typeof ThinParticleSystem>[2];
+                customEffect: ConstructorParameters<typeof ThinParticleSystem>[3];
+                isAnimationSheetEnabled: ConstructorParameters<typeof ThinParticleSystem>[4];
+                epsilon: ConstructorParameters<typeof ThinParticleSystem>[5];
+            }
+        >,
+        any
+    >;
+    ammoJSPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AmmoJSPlugin>,
+            {
+                _useDeltaForWorldStep: ConstructorParameters<typeof AmmoJSPlugin>[0];
+                ammoInjection: ConstructorParameters<typeof AmmoJSPlugin>[1];
+                overlappingPairCache: ConstructorParameters<typeof AmmoJSPlugin>[2];
+            }
+        >,
+        any
+    >;
+    cannonJSPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CannonJSPlugin>,
+            {
+                _useDeltaForWorldStep: ConstructorParameters<typeof CannonJSPlugin>[0];
+                iterations: ConstructorParameters<typeof CannonJSPlugin>[1];
+                cannonInjection: ConstructorParameters<typeof CannonJSPlugin>[2];
+            }
+        >,
+        any
+    >;
+    oimoJSPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<OimoJSPlugin>,
+            {
+                _useDeltaForWorldStep: ConstructorParameters<typeof OimoJSPlugin>[0];
+                iterations: ConstructorParameters<typeof OimoJSPlugin>[1];
+                oimoInjection: ConstructorParameters<typeof OimoJSPlugin>[2];
+            }
+        >,
+        any
+    >;
+    castingResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CastingResult>>, any>;
+    physicsEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsEngine>,
+            {
+                gravity: ConstructorParameters<typeof PhysicsEngine>[0];
+                _physicsPlugin: ConstructorParameters<typeof PhysicsEngine>[1];
+            }
+        >,
+        any
+    >;
+    physicsHelper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsHelper>,
+            {
+                scene: ConstructorParameters<typeof PhysicsHelper>[0];
+            }
+        >,
+        any
+    >;
+    physicsImpostor: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsImpostor & { cloneBy: string }>,
+            {
+                object: ConstructorParameters<typeof PhysicsImpostor>[0];
+                type: ConstructorParameters<typeof PhysicsImpostor>[1];
+                _options: ConstructorParameters<typeof PhysicsImpostor>[2];
+                _scene: ConstructorParameters<typeof PhysicsImpostor>[3];
+            }
+        >,
+        any
+    >;
+    physicsJoint: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsJoint>,
+            {
+                type: ConstructorParameters<typeof PhysicsJoint>[0];
+                jointData: ConstructorParameters<typeof PhysicsJoint>[1];
+            }
+        >,
+        any
+    >;
+    physicsRaycastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsRaycastResult>>, any>;
+    proximityCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ProximityCastResult>>, any>;
+    shapeCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShapeCastResult>>, any>;
+    ammoJSPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AmmoJSPlugin>,
+            {
+                _useDeltaForWorldStep: ConstructorParameters<typeof AmmoJSPlugin>[0];
+                ammoInjection: ConstructorParameters<typeof AmmoJSPlugin>[1];
+                overlappingPairCache: ConstructorParameters<typeof AmmoJSPlugin>[2];
+            }
+        >,
+        any
+    >;
+    cannonJSPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CannonJSPlugin>,
+            {
+                _useDeltaForWorldStep: ConstructorParameters<typeof CannonJSPlugin>[0];
+                iterations: ConstructorParameters<typeof CannonJSPlugin>[1];
+                cannonInjection: ConstructorParameters<typeof CannonJSPlugin>[2];
+            }
+        >,
+        any
+    >;
+    oimoJSPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<OimoJSPlugin>,
+            {
+                _useDeltaForWorldStep: ConstructorParameters<typeof OimoJSPlugin>[0];
+                iterations: ConstructorParameters<typeof OimoJSPlugin>[1];
+                oimoInjection: ConstructorParameters<typeof OimoJSPlugin>[2];
+            }
+        >,
+        any
+    >;
+    physicsEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsEngine>,
+            {
+                gravity: ConstructorParameters<typeof PhysicsEngine>[0];
+                _physicsPlugin: ConstructorParameters<typeof PhysicsEngine>[1];
+            }
+        >,
+        any
+    >;
+    physicsImpostor: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsImpostor & { cloneBy: string }>,
+            {
+                object: ConstructorParameters<typeof PhysicsImpostor>[0];
+                type: ConstructorParameters<typeof PhysicsImpostor>[1];
+                _options: ConstructorParameters<typeof PhysicsImpostor>[2];
+                _scene: ConstructorParameters<typeof PhysicsImpostor>[3];
+            }
+        >,
+        any
+    >;
+    physicsJoint: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsJoint>,
+            {
+                type: ConstructorParameters<typeof PhysicsJoint>[0];
+                jointData: ConstructorParameters<typeof PhysicsJoint>[1];
+            }
+        >,
+        any
+    >;
+    havokPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<HavokPlugin>,
+            {
+                _useDeltaForWorldStep: ConstructorParameters<typeof HavokPlugin>[0];
+                hpInjection: ConstructorParameters<typeof HavokPlugin>[1];
+            }
+        >,
+        any
+    >;
+    physicsAggregate: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsAggregate>,
+            {
+                transformNode: ConstructorParameters<typeof PhysicsAggregate>[0];
+                type: ConstructorParameters<typeof PhysicsAggregate>[1];
+                _options: ConstructorParameters<typeof PhysicsAggregate>[2];
+                _scene: ConstructorParameters<typeof PhysicsAggregate>[3];
+            }
+        >,
+        any
+    >;
+    physicsBody: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsBody & { cloneBy: string }>,
+            {
+                transformNode: ConstructorParameters<typeof PhysicsBody>[0];
+                motionType: ConstructorParameters<typeof PhysicsBody>[1];
+                startsAsleep: ConstructorParameters<typeof PhysicsBody>[2];
+                scene: ConstructorParameters<typeof PhysicsBody>[3];
+            }
+        >,
+        any
+    >;
+    physicsConstraint: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsConstraint>,
+            {
+                type: ConstructorParameters<typeof PhysicsConstraint>[0];
+                options: ConstructorParameters<typeof PhysicsConstraint>[1];
+                scene: ConstructorParameters<typeof PhysicsConstraint>[2];
+            }
+        >,
+        any
+    >;
+    physicsEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsEngine>,
+            {
+                gravity: ConstructorParameters<typeof PhysicsEngine>[0];
+                _physicsPlugin: ConstructorParameters<typeof PhysicsEngine>[1];
+            }
+        >,
+        any
+    >;
+    physicsShape: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsShape>,
+            {
+                options: ConstructorParameters<typeof PhysicsShape>[0];
+                scene: ConstructorParameters<typeof PhysicsShape>[1];
+            }
+        >,
+        any
+    >;
+    ragdoll: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Ragdoll>,
+            {
+                skeleton: ConstructorParameters<typeof Ragdoll>[0];
+                rootTransformNode: ConstructorParameters<typeof Ragdoll>[1];
+                config: ConstructorParameters<typeof Ragdoll>[2];
+            }
+        >,
+        any
+    >;
+    defaultRenderingPipeline: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DefaultRenderingPipeline>,
+            {
+                name: ConstructorParameters<typeof DefaultRenderingPipeline>[0];
+                hdr: ConstructorParameters<typeof DefaultRenderingPipeline>[1];
+                scene: ConstructorParameters<typeof DefaultRenderingPipeline>[2];
+                cameras: ConstructorParameters<typeof DefaultRenderingPipeline>[3];
+                automaticBuild: ConstructorParameters<typeof DefaultRenderingPipeline>[4];
+            }
+        >,
+        any
+    >;
+    lensRenderingPipeline: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LensRenderingPipeline>,
+            {
+                name: ConstructorParameters<typeof LensRenderingPipeline>[0];
+                parameters: ConstructorParameters<typeof LensRenderingPipeline>[1];
+                scene: ConstructorParameters<typeof LensRenderingPipeline>[2];
+                ratio: ConstructorParameters<typeof LensRenderingPipeline>[3];
+                cameras: ConstructorParameters<typeof LensRenderingPipeline>[4];
+            }
+        >,
+        any
+    >;
+    standardRenderingPipeline: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StandardRenderingPipeline>,
+            {
+                name: ConstructorParameters<typeof StandardRenderingPipeline>[0];
+                scene: ConstructorParameters<typeof StandardRenderingPipeline>[1];
+                ratio: ConstructorParameters<typeof StandardRenderingPipeline>[2];
+                originalPostProcess: ConstructorParameters<typeof StandardRenderingPipeline>[3];
+                cameras: ConstructorParameters<typeof StandardRenderingPipeline>[4];
+            }
+        >,
+        any
+    >;
+    postProcessRenderEffect: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PostProcessRenderEffect>,
+            {
+                engine: ConstructorParameters<typeof PostProcessRenderEffect>[0];
+                name: ConstructorParameters<typeof PostProcessRenderEffect>[1];
+                getPostProcesses: ConstructorParameters<typeof PostProcessRenderEffect>[2];
+                singleInstance: ConstructorParameters<typeof PostProcessRenderEffect>[3];
+            }
+        >,
+        any
+    >;
+    postProcessRenderPipeline: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PostProcessRenderPipeline>,
+            {
+                _engine: ConstructorParameters<typeof PostProcessRenderPipeline>[0];
+                name: ConstructorParameters<typeof PostProcessRenderPipeline>[1];
+            }
+        >,
+        any
+    >;
+    postProcessRenderPipelineManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PostProcessRenderPipelineManager>>, any>;
+    postProcessRenderPipelineManagerSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PostProcessRenderPipelineManagerSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof PostProcessRenderPipelineManagerSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    anaglyphPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AnaglyphPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof AnaglyphPostProcess>[0];
+                options: ConstructorParameters<typeof AnaglyphPostProcess>[1];
+                rigCameras: ConstructorParameters<typeof AnaglyphPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof AnaglyphPostProcess>[3];
+                engine: ConstructorParameters<typeof AnaglyphPostProcess>[4];
+                reusable: ConstructorParameters<typeof AnaglyphPostProcess>[5];
+            }
+        >,
+        any
+    >;
+    blackAndWhitePostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BlackAndWhitePostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BlackAndWhitePostProcess>[0];
+                options: ConstructorParameters<typeof BlackAndWhitePostProcess>[1];
+                camera: ConstructorParameters<typeof BlackAndWhitePostProcess>[2];
+                samplingMode: ConstructorParameters<typeof BlackAndWhitePostProcess>[3];
+                engine: ConstructorParameters<typeof BlackAndWhitePostProcess>[4];
+                reusable: ConstructorParameters<typeof BlackAndWhitePostProcess>[5];
+            }
+        >,
+        any
+    >;
+    bloomEffect: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BloomEffect>,
+            {
+                scene: ConstructorParameters<typeof BloomEffect>[0];
+                _bloomScale: ConstructorParameters<typeof BloomEffect>[1];
+                bloomWeight: ConstructorParameters<typeof BloomEffect>[2];
+                bloomKernel: ConstructorParameters<typeof BloomEffect>[3];
+                pipelineTextureType: ConstructorParameters<typeof BloomEffect>[4];
+                blockCompilation: ConstructorParameters<typeof BloomEffect>[5];
+            }
+        >,
+        any
+    >;
+    bloomMergePostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BloomMergePostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BloomMergePostProcess>[0];
+                originalFromInput: ConstructorParameters<typeof BloomMergePostProcess>[1];
+                blurred: ConstructorParameters<typeof BloomMergePostProcess>[2];
+                weight: ConstructorParameters<typeof BloomMergePostProcess>[3];
+                options: ConstructorParameters<typeof BloomMergePostProcess>[4];
+                camera: ConstructorParameters<typeof BloomMergePostProcess>[5];
+                samplingMode: ConstructorParameters<typeof BloomMergePostProcess>[6];
+                engine: ConstructorParameters<typeof BloomMergePostProcess>[7];
+                reusable: ConstructorParameters<typeof BloomMergePostProcess>[8];
+                textureType: ConstructorParameters<typeof BloomMergePostProcess>[9];
+                blockCompilation: ConstructorParameters<typeof BloomMergePostProcess>[10];
+            }
+        >,
+        any
+    >;
+    blurPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BlurPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof BlurPostProcess>[0];
+                direction: ConstructorParameters<typeof BlurPostProcess>[1];
+                kernel: ConstructorParameters<typeof BlurPostProcess>[2];
+                options: ConstructorParameters<typeof BlurPostProcess>[3];
+                camera: ConstructorParameters<typeof BlurPostProcess>[4];
+                samplingMode: ConstructorParameters<typeof BlurPostProcess>[5];
+                engine: ConstructorParameters<typeof BlurPostProcess>[6];
+                reusable: ConstructorParameters<typeof BlurPostProcess>[7];
+                textureType: ConstructorParameters<typeof BlurPostProcess>[8];
+                defines: ConstructorParameters<typeof BlurPostProcess>[9];
+                _blockCompilation: ConstructorParameters<typeof BlurPostProcess>[10];
+                textureFormat: ConstructorParameters<typeof BlurPostProcess>[11];
+            }
+        >,
+        any
+    >;
+    chromaticAberrationPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ChromaticAberrationPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ChromaticAberrationPostProcess>[0];
+                screenWidth: ConstructorParameters<typeof ChromaticAberrationPostProcess>[1];
+                screenHeight: ConstructorParameters<typeof ChromaticAberrationPostProcess>[2];
+                options: ConstructorParameters<typeof ChromaticAberrationPostProcess>[3];
+                camera: ConstructorParameters<typeof ChromaticAberrationPostProcess>[4];
+                samplingMode: ConstructorParameters<typeof ChromaticAberrationPostProcess>[5];
+                engine: ConstructorParameters<typeof ChromaticAberrationPostProcess>[6];
+                reusable: ConstructorParameters<typeof ChromaticAberrationPostProcess>[7];
+                textureType: ConstructorParameters<typeof ChromaticAberrationPostProcess>[8];
+                blockCompilation: ConstructorParameters<typeof ChromaticAberrationPostProcess>[9];
+            }
+        >,
+        any
+    >;
+    circleOfConfusionPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CircleOfConfusionPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof CircleOfConfusionPostProcess>[0];
+                depthTexture: ConstructorParameters<typeof CircleOfConfusionPostProcess>[1];
+                options: ConstructorParameters<typeof CircleOfConfusionPostProcess>[2];
+                camera: ConstructorParameters<typeof CircleOfConfusionPostProcess>[3];
+                samplingMode: ConstructorParameters<typeof CircleOfConfusionPostProcess>[4];
+                engine: ConstructorParameters<typeof CircleOfConfusionPostProcess>[5];
+                reusable: ConstructorParameters<typeof CircleOfConfusionPostProcess>[6];
+                textureType: ConstructorParameters<typeof CircleOfConfusionPostProcess>[7];
+                blockCompilation: ConstructorParameters<typeof CircleOfConfusionPostProcess>[8];
+            }
+        >,
+        any
+    >;
+    colorCorrectionPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ColorCorrectionPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ColorCorrectionPostProcess>[0];
+                colorTableUrl: ConstructorParameters<typeof ColorCorrectionPostProcess>[1];
+                options: ConstructorParameters<typeof ColorCorrectionPostProcess>[2];
+                camera: ConstructorParameters<typeof ColorCorrectionPostProcess>[3];
+                samplingMode: ConstructorParameters<typeof ColorCorrectionPostProcess>[4];
+                engine: ConstructorParameters<typeof ColorCorrectionPostProcess>[5];
+                reusable: ConstructorParameters<typeof ColorCorrectionPostProcess>[6];
+            }
+        >,
+        any
+    >;
+    convolutionPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ConvolutionPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ConvolutionPostProcess>[0];
+                kernel: ConstructorParameters<typeof ConvolutionPostProcess>[1];
+                options: ConstructorParameters<typeof ConvolutionPostProcess>[2];
+                camera: ConstructorParameters<typeof ConvolutionPostProcess>[3];
+                samplingMode: ConstructorParameters<typeof ConvolutionPostProcess>[4];
+                engine: ConstructorParameters<typeof ConvolutionPostProcess>[5];
+                reusable: ConstructorParameters<typeof ConvolutionPostProcess>[6];
+                textureType: ConstructorParameters<typeof ConvolutionPostProcess>[7];
+            }
+        >,
+        any
+    >;
+    depthOfFieldBlurPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthOfFieldBlurPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[0];
+                scene: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[1];
+                direction: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[2];
+                kernel: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[3];
+                options: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[4];
+                camera: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[5];
+                circleOfConfusion: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[6];
+                imageToBlur: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[7];
+                samplingMode: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[8];
+                engine: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[9];
+                reusable: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[10];
+                textureType: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[11];
+                blockCompilation: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[12];
+                textureFormat: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[13];
+            }
+        >,
+        any
+    >;
+    depthOfFieldEffect: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthOfFieldEffect>,
+            {
+                scene: ConstructorParameters<typeof DepthOfFieldEffect>[0];
+                depthTexture: ConstructorParameters<typeof DepthOfFieldEffect>[1];
+                blurLevel: ConstructorParameters<typeof DepthOfFieldEffect>[2];
+                pipelineTextureType: ConstructorParameters<typeof DepthOfFieldEffect>[3];
+                blockCompilation: ConstructorParameters<typeof DepthOfFieldEffect>[4];
+            }
+        >,
+        any
+    >;
+    depthOfFieldMergePostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthOfFieldMergePostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[0];
+                originalFromInput: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[1];
+                circleOfConfusion: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[2];
+                _blurSteps: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[3];
+                options: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[4];
+                camera: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[5];
+                samplingMode: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[6];
+                engine: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[7];
+                reusable: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[8];
+                textureType: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[9];
+                blockCompilation: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[10];
+            }
+        >,
+        any
+    >;
+    displayPassPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DisplayPassPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof DisplayPassPostProcess>[0];
+                options: ConstructorParameters<typeof DisplayPassPostProcess>[1];
+                camera: ConstructorParameters<typeof DisplayPassPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof DisplayPassPostProcess>[3];
+                engine: ConstructorParameters<typeof DisplayPassPostProcess>[4];
+                reusable: ConstructorParameters<typeof DisplayPassPostProcess>[5];
+            }
+        >,
+        any
+    >;
+    extractHighlightsPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ExtractHighlightsPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ExtractHighlightsPostProcess>[0];
+                options: ConstructorParameters<typeof ExtractHighlightsPostProcess>[1];
+                camera: ConstructorParameters<typeof ExtractHighlightsPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof ExtractHighlightsPostProcess>[3];
+                engine: ConstructorParameters<typeof ExtractHighlightsPostProcess>[4];
+                reusable: ConstructorParameters<typeof ExtractHighlightsPostProcess>[5];
+                textureType: ConstructorParameters<typeof ExtractHighlightsPostProcess>[6];
+                blockCompilation: ConstructorParameters<typeof ExtractHighlightsPostProcess>[7];
+            }
+        >,
+        any
+    >;
+    filterPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FilterPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FilterPostProcess>[0];
+                kernelMatrix: ConstructorParameters<typeof FilterPostProcess>[1];
+                options: ConstructorParameters<typeof FilterPostProcess>[2];
+                camera: ConstructorParameters<typeof FilterPostProcess>[3];
+                samplingMode: ConstructorParameters<typeof FilterPostProcess>[4];
+                engine: ConstructorParameters<typeof FilterPostProcess>[5];
+                reusable: ConstructorParameters<typeof FilterPostProcess>[6];
+            }
+        >,
+        any
+    >;
+    fxaaPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FxaaPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof FxaaPostProcess>[0];
+                options: ConstructorParameters<typeof FxaaPostProcess>[1];
+                camera: ConstructorParameters<typeof FxaaPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof FxaaPostProcess>[3];
+                engine: ConstructorParameters<typeof FxaaPostProcess>[4];
+                reusable: ConstructorParameters<typeof FxaaPostProcess>[5];
+                textureType: ConstructorParameters<typeof FxaaPostProcess>[6];
+            }
+        >,
+        any
+    >;
+    grainPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GrainPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof GrainPostProcess>[0];
+                options: ConstructorParameters<typeof GrainPostProcess>[1];
+                camera: ConstructorParameters<typeof GrainPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof GrainPostProcess>[3];
+                engine: ConstructorParameters<typeof GrainPostProcess>[4];
+                reusable: ConstructorParameters<typeof GrainPostProcess>[5];
+                textureType: ConstructorParameters<typeof GrainPostProcess>[6];
+                blockCompilation: ConstructorParameters<typeof GrainPostProcess>[7];
+            }
+        >,
+        any
+    >;
+    highlightsPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<HighlightsPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof HighlightsPostProcess>[0];
+                options: ConstructorParameters<typeof HighlightsPostProcess>[1];
+                camera: ConstructorParameters<typeof HighlightsPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof HighlightsPostProcess>[3];
+                engine: ConstructorParameters<typeof HighlightsPostProcess>[4];
+                reusable: ConstructorParameters<typeof HighlightsPostProcess>[5];
+                textureType: ConstructorParameters<typeof HighlightsPostProcess>[6];
+            }
+        >,
+        any
+    >;
+    imageProcessingPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ImageProcessingPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ImageProcessingPostProcess>[0];
+                options: ConstructorParameters<typeof ImageProcessingPostProcess>[1];
+                camera: ConstructorParameters<typeof ImageProcessingPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof ImageProcessingPostProcess>[3];
+                engine: ConstructorParameters<typeof ImageProcessingPostProcess>[4];
+                reusable: ConstructorParameters<typeof ImageProcessingPostProcess>[5];
+                textureType: ConstructorParameters<typeof ImageProcessingPostProcess>[6];
+                imageProcessingConfiguration: ConstructorParameters<typeof ImageProcessingPostProcess>[7];
+            }
+        >,
+        any
+    >;
+    motionBlurPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MotionBlurPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof MotionBlurPostProcess>[0];
+                scene: ConstructorParameters<typeof MotionBlurPostProcess>[1];
+                options: ConstructorParameters<typeof MotionBlurPostProcess>[2];
+                camera: ConstructorParameters<typeof MotionBlurPostProcess>[3];
+                samplingMode: ConstructorParameters<typeof MotionBlurPostProcess>[4];
+                engine: ConstructorParameters<typeof MotionBlurPostProcess>[5];
+                reusable: ConstructorParameters<typeof MotionBlurPostProcess>[6];
+                textureType: ConstructorParameters<typeof MotionBlurPostProcess>[7];
+                blockCompilation: ConstructorParameters<typeof MotionBlurPostProcess>[8];
+                forceGeometryBuffer: ConstructorParameters<typeof MotionBlurPostProcess>[9];
+            }
+        >,
+        any
+    >;
+    passPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PassPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PassPostProcess>[0];
+                options: ConstructorParameters<typeof PassPostProcess>[1];
+                camera: ConstructorParameters<typeof PassPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof PassPostProcess>[3];
+                engine: ConstructorParameters<typeof PassPostProcess>[4];
+                reusable: ConstructorParameters<typeof PassPostProcess>[5];
+                textureType: ConstructorParameters<typeof PassPostProcess>[6];
+                blockCompilation: ConstructorParameters<typeof PassPostProcess>[7];
+            }
+        >,
+        any
+    >;
+    postProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof PostProcess>[0];
+                fragmentUrl: ConstructorParameters<typeof PostProcess>[1];
+                parameters: ConstructorParameters<typeof PostProcess>[2];
+                samplers: ConstructorParameters<typeof PostProcess>[3];
+                _size: ConstructorParameters<typeof PostProcess>[4];
+                camera: ConstructorParameters<typeof PostProcess>[5];
+                samplingMode: ConstructorParameters<typeof PostProcess>[6];
+                engine: ConstructorParameters<typeof PostProcess>[7];
+                reusable: ConstructorParameters<typeof PostProcess>[8];
+                defines: ConstructorParameters<typeof PostProcess>[9];
+                textureType: ConstructorParameters<typeof PostProcess>[10];
+                vertexUrl: ConstructorParameters<typeof PostProcess>[11];
+                indexParameters: ConstructorParameters<typeof PostProcess>[12];
+                blockCompilation: ConstructorParameters<typeof PostProcess>[13];
+                textureFormat: ConstructorParameters<typeof PostProcess>[14];
+                shaderLanguage: ConstructorParameters<typeof PostProcess>[15];
+            }
+        >,
+        any
+    >;
+    postProcessManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PostProcessManager>,
+            {
+                scene: ConstructorParameters<typeof PostProcessManager>[0];
+            }
+        >,
+        any
+    >;
+    refractionPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RefractionPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof RefractionPostProcess>[0];
+                refractionTextureUrl: ConstructorParameters<typeof RefractionPostProcess>[1];
+                color: ConstructorParameters<typeof RefractionPostProcess>[2];
+                depth: ConstructorParameters<typeof RefractionPostProcess>[3];
+                colorLevel: ConstructorParameters<typeof RefractionPostProcess>[4];
+                options: ConstructorParameters<typeof RefractionPostProcess>[5];
+                camera: ConstructorParameters<typeof RefractionPostProcess>[6];
+                samplingMode: ConstructorParameters<typeof RefractionPostProcess>[7];
+                engine: ConstructorParameters<typeof RefractionPostProcess>[8];
+                reusable: ConstructorParameters<typeof RefractionPostProcess>[9];
+            }
+        >,
+        any
+    >;
+    screenSpaceCurvaturePostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ScreenSpaceCurvaturePostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[0];
+                scene: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[1];
+                options: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[2];
+                camera: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[3];
+                samplingMode: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[4];
+                engine: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[5];
+                reusable: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[6];
+                textureType: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[7];
+                blockCompilation: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[8];
+            }
+        >,
+        any
+    >;
+    screenSpaceReflectionPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ScreenSpaceReflectionPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[0];
+                scene: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[1];
+                options: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[2];
+                camera: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[3];
+                samplingMode: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[4];
+                engine: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[5];
+                reusable: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[6];
+                textureType: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[7];
+                blockCompilation: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[8];
+                forceGeometryBuffer: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[9];
+            }
+        >,
+        any
+    >;
+    sharpenPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SharpenPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SharpenPostProcess>[0];
+                options: ConstructorParameters<typeof SharpenPostProcess>[1];
+                camera: ConstructorParameters<typeof SharpenPostProcess>[2];
+                samplingMode: ConstructorParameters<typeof SharpenPostProcess>[3];
+                engine: ConstructorParameters<typeof SharpenPostProcess>[4];
+                reusable: ConstructorParameters<typeof SharpenPostProcess>[5];
+                textureType: ConstructorParameters<typeof SharpenPostProcess>[6];
+                blockCompilation: ConstructorParameters<typeof SharpenPostProcess>[7];
+            }
+        >,
+        any
+    >;
+    stereoscopicInterlacePostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StereoscopicInterlacePostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[0];
+                rigCameras: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[1];
+                isStereoscopicHoriz: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[2];
+                samplingMode: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[3];
+                engine: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[4];
+                reusable: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[5];
+            }
+        >,
+        any
+    >;
+    subSurfaceScatteringPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SubSurfaceScatteringPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[0];
+                scene: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[1];
+                options: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[2];
+                camera: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[3];
+                samplingMode: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[4];
+                engine: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[5];
+                reusable: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[6];
+                textureType: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[7];
+            }
+        >,
+        any
+    >;
+    tonemapPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TonemapPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof TonemapPostProcess>[0];
+                _operator: ConstructorParameters<typeof TonemapPostProcess>[1];
+                exposureAdjustment: ConstructorParameters<typeof TonemapPostProcess>[2];
+                camera: ConstructorParameters<typeof TonemapPostProcess>[3];
+                samplingMode: ConstructorParameters<typeof TonemapPostProcess>[4];
+                engine: ConstructorParameters<typeof TonemapPostProcess>[5];
+                textureFormat: ConstructorParameters<typeof TonemapPostProcess>[6];
+                reusable: ConstructorParameters<typeof TonemapPostProcess>[7];
+            }
+        >,
+        any
+    >;
+    volumetricLightScatteringPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<VolumetricLightScatteringPostProcess & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[0];
+                ratio: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[1];
+                camera: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[2];
+                mesh: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[3];
+                samples: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[4];
+                samplingMode: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[5];
+                engine: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[6];
+                reusable: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[7];
+                scene: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[8];
+            }
+        >,
+        any
+    >;
+    reflectionProbe: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReflectionProbe>,
+            {
+                name: ConstructorParameters<typeof ReflectionProbe>[0];
+                size: ConstructorParameters<typeof ReflectionProbe>[1];
+                scene: ConstructorParameters<typeof ReflectionProbe>[2];
+                generateMipMaps: ConstructorParameters<typeof ReflectionProbe>[3];
+                useFloat: ConstructorParameters<typeof ReflectionProbe>[4];
+                linearSpace: ConstructorParameters<typeof ReflectionProbe>[5];
+            }
+        >,
+        any
+    >;
+    boundingBoxRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoundingBoxRenderer>,
+            {
+                scene: ConstructorParameters<typeof BoundingBoxRenderer>[0];
+            }
+        >,
+        any
+    >;
+    depthPeelingRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthPeelingRenderer>,
+            {
+                scene: ConstructorParameters<typeof DepthPeelingRenderer>[0];
+                passCount: ConstructorParameters<typeof DepthPeelingRenderer>[1];
+            }
+        >,
+        any
+    >;
+    depthPeelingSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthPeelingSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof DepthPeelingSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    depthRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthRenderer>,
+            {
+                scene: ConstructorParameters<typeof DepthRenderer>[0];
+                type: ConstructorParameters<typeof DepthRenderer>[1];
+                camera: ConstructorParameters<typeof DepthRenderer>[2];
+                storeNonLinearDepth: ConstructorParameters<typeof DepthRenderer>[3];
+                samplingMode: ConstructorParameters<typeof DepthRenderer>[4];
+                storeCameraSpaceZ: ConstructorParameters<typeof DepthRenderer>[5];
+                name: ConstructorParameters<typeof DepthRenderer>[6];
+            }
+        >,
+        any
+    >;
+    depthRendererSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthRendererSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof DepthRendererSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    edgesRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<EdgesRenderer>,
+            {
+                source: ConstructorParameters<typeof EdgesRenderer>[0];
+                epsilon: ConstructorParameters<typeof EdgesRenderer>[1];
+                checkVerticesInsteadOfIndices: ConstructorParameters<typeof EdgesRenderer>[2];
+                generateEdgesLines: ConstructorParameters<typeof EdgesRenderer>[3];
+                options: ConstructorParameters<typeof EdgesRenderer>[4];
+            }
+        >,
+        any
+    >;
+    fluidRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FluidRenderer>,
+            {
+                scene: ConstructorParameters<typeof FluidRenderer>[0];
+            }
+        >,
+        any
+    >;
+    fluidRenderingDepthTextureCopy: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FluidRenderingDepthTextureCopy>,
+            {
+                engine: ConstructorParameters<typeof FluidRenderingDepthTextureCopy>[0];
+                width: ConstructorParameters<typeof FluidRenderingDepthTextureCopy>[1];
+                height: ConstructorParameters<typeof FluidRenderingDepthTextureCopy>[2];
+                samples: ConstructorParameters<typeof FluidRenderingDepthTextureCopy>[3];
+            }
+        >,
+        any
+    >;
+    fluidRenderingObject: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FluidRenderingObject>,
+            {
+                scene: ConstructorParameters<typeof FluidRenderingObject>[0];
+            }
+        >,
+        any
+    >;
+    fluidRenderingObjectCustomParticles: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FluidRenderingObjectCustomParticles>,
+            {
+                scene: ConstructorParameters<typeof FluidRenderingObjectCustomParticles>[0];
+                buffers: ConstructorParameters<typeof FluidRenderingObjectCustomParticles>[1];
+                numParticles: ConstructorParameters<typeof FluidRenderingObjectCustomParticles>[2];
+            }
+        >,
+        any
+    >;
+    fluidRenderingObjectParticleSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FluidRenderingObjectParticleSystem>,
+            {
+                scene: ConstructorParameters<typeof FluidRenderingObjectParticleSystem>[0];
+                ps: ConstructorParameters<typeof FluidRenderingObjectParticleSystem>[1];
+            }
+        >,
+        any
+    >;
+    fluidRenderingTargetRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FluidRenderingTargetRenderer>,
+            {
+                scene: ConstructorParameters<typeof FluidRenderingTargetRenderer>[0];
+                camera: ConstructorParameters<typeof FluidRenderingTargetRenderer>[1];
+            }
+        >,
+        any
+    >;
+    fluidRenderingTextures: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FluidRenderingTextures>,
+            {
+                name: ConstructorParameters<typeof FluidRenderingTextures>[0];
+                scene: ConstructorParameters<typeof FluidRenderingTextures>[1];
+                width: ConstructorParameters<typeof FluidRenderingTextures>[2];
+                height: ConstructorParameters<typeof FluidRenderingTextures>[3];
+                blurTextureSizeX: ConstructorParameters<typeof FluidRenderingTextures>[4];
+                blurTextureSizeY: ConstructorParameters<typeof FluidRenderingTextures>[5];
+                textureType: ConstructorParameters<typeof FluidRenderingTextures>[6];
+                textureFormat: ConstructorParameters<typeof FluidRenderingTextures>[7];
+                blurTextureType: ConstructorParameters<typeof FluidRenderingTextures>[8];
+                blurTextureFormat: ConstructorParameters<typeof FluidRenderingTextures>[9];
+                useStandardBlur: ConstructorParameters<typeof FluidRenderingTextures>[10];
+                camera: ConstructorParameters<typeof FluidRenderingTextures>[11];
+                generateDepthBuffer: ConstructorParameters<typeof FluidRenderingTextures>[12];
+                samples: ConstructorParameters<typeof FluidRenderingTextures>[13];
+            }
+        >,
+        any
+    >;
+    geometryBufferRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryBufferRenderer>,
+            {
+                scene: ConstructorParameters<typeof GeometryBufferRenderer>[0];
+                ratioOrDimensions: ConstructorParameters<typeof GeometryBufferRenderer>[1];
+                depthFormat: ConstructorParameters<typeof GeometryBufferRenderer>[2];
+                textureTypesAndFormats: ConstructorParameters<typeof GeometryBufferRenderer>[3];
+            }
+        >,
+        any
+    >;
+    geometryBufferRendererSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryBufferRendererSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof GeometryBufferRendererSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    motionBlurConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MotionBlurConfiguration>>, any>;
+    outlineRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<OutlineRenderer>,
+            {
+                scene: ConstructorParameters<typeof OutlineRenderer>[0];
+            }
+        >,
+        any
+    >;
+    prePassRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PrePassRenderer>,
+            {
+                scene: ConstructorParameters<typeof PrePassRenderer>[0];
+            }
+        >,
+        any
+    >;
+    prePassRendererSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PrePassRendererSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof PrePassRendererSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    reflectiveShadowMap: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReflectiveShadowMap>,
+            {
+                scene: ConstructorParameters<typeof ReflectiveShadowMap>[0];
+                light: ConstructorParameters<typeof ReflectiveShadowMap>[1];
+                textureDimensions: ConstructorParameters<typeof ReflectiveShadowMap>[2];
+            }
+        >,
+        any
+    >;
+    renderingGroup: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RenderingGroup>,
+            {
+                index: ConstructorParameters<typeof RenderingGroup>[0];
+                scene: ConstructorParameters<typeof RenderingGroup>[1];
+                opaqueSortCompareFn: ConstructorParameters<typeof RenderingGroup>[2];
+                alphaTestSortCompareFn: ConstructorParameters<typeof RenderingGroup>[3];
+                transparentSortCompareFn: ConstructorParameters<typeof RenderingGroup>[4];
+            }
+        >,
+        any
+    >;
+    renderingManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RenderingManager>,
+            {
+                scene: ConstructorParameters<typeof RenderingManager>[0];
+            }
+        >,
+        any
+    >;
+    screenSpaceReflections2Configuration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ScreenSpaceReflections2Configuration>>, any>;
+    screenSpaceReflectionsConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ScreenSpaceReflectionsConfiguration>>, any>;
+    subSurfaceConfiguration: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SubSurfaceConfiguration>,
+            {
+                scene: ConstructorParameters<typeof SubSurfaceConfiguration>[0];
+            }
+        >,
+        any
+    >;
+    subSurfaceSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SubSurfaceSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof SubSurfaceSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    utilityLayerRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<UtilityLayerRenderer>,
+            {
+                originalScene: ConstructorParameters<typeof UtilityLayerRenderer>[0];
+                handleEvents: ConstructorParameters<typeof UtilityLayerRenderer>[1];
+            }
+        >,
+        any
+    >;
+    sprite: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Sprite>,
+            {
+                name: ConstructorParameters<typeof Sprite>[0];
+                manager: ConstructorParameters<typeof Sprite>[1];
+            }
+        >,
+        any
+    >;
+    spriteManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SpriteManager>,
+            {
+                name: ConstructorParameters<typeof SpriteManager>[0];
+                imgUrl: ConstructorParameters<typeof SpriteManager>[1];
+                capacity: ConstructorParameters<typeof SpriteManager>[2];
+                cellSize: ConstructorParameters<typeof SpriteManager>[3];
+                scene: ConstructorParameters<typeof SpriteManager>[4];
+                epsilon: ConstructorParameters<typeof SpriteManager>[5];
+                samplingMode: ConstructorParameters<typeof SpriteManager>[6];
+                fromPacked: ConstructorParameters<typeof SpriteManager>[7];
+                spriteJSON: ConstructorParameters<typeof SpriteManager>[8];
+            }
+        >,
+        any
+    >;
+    spriteMap: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SpriteMap>,
+            {
+                name: ConstructorParameters<typeof SpriteMap>[0];
+                atlasJSON: ConstructorParameters<typeof SpriteMap>[1];
+                spriteSheet: ConstructorParameters<typeof SpriteMap>[2];
+                options: ConstructorParameters<typeof SpriteMap>[3];
+                scene: ConstructorParameters<typeof SpriteMap>[4];
+            }
+        >,
+        any
+    >;
+    spritePackedManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SpritePackedManager>,
+            {
+                name: ConstructorParameters<typeof SpritePackedManager>[0];
+                imgUrl: ConstructorParameters<typeof SpritePackedManager>[1];
+                capacity: ConstructorParameters<typeof SpritePackedManager>[2];
+                scene: ConstructorParameters<typeof SpritePackedManager>[3];
+                spriteJSON: ConstructorParameters<typeof SpritePackedManager>[4];
+                epsilon: ConstructorParameters<typeof SpritePackedManager>[5];
+                samplingMode: ConstructorParameters<typeof SpritePackedManager>[6];
+            }
+        >,
+        any
+    >;
+    spriteRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SpriteRenderer>,
+            {
+                engine: ConstructorParameters<typeof SpriteRenderer>[0];
+                capacity: ConstructorParameters<typeof SpriteRenderer>[1];
+                epsilon: ConstructorParameters<typeof SpriteRenderer>[2];
+                scene: ConstructorParameters<typeof SpriteRenderer>[3];
+            }
+        >,
+        any
+    >;
+    spriteSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SpriteSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof SpriteSceneComponent>[0];
+            }
+        >,
+        any
+    >;
+    thinSprite: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinSprite>>, any>;
+    depthCullingState: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DepthCullingState>,
+            {
+                reset: ConstructorParameters<typeof DepthCullingState>[0];
+            }
+        >,
+        any
+    >;
+    stencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StencilState>>, any>;
+    stencilStateComposer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StencilStateComposer>,
+            {
+                reset: ConstructorParameters<typeof StencilStateComposer>[0];
+            }
+        >,
+        any
+    >;
+    WebXRAbstractFeature: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRAbstractFeature>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRAbstractFeature>[0];
+            }
+        >,
+        any
+    >;
+    WebXRAnchorSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRAnchorSystem>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRAnchorSystem>[0];
+                _options: ConstructorParameters<typeof WebXRAnchorSystem>[1];
+            }
+        >,
+        any
+    >;
+    WebXRBackgroundRemover: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRBackgroundRemover>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRBackgroundRemover>[0];
+                options: ConstructorParameters<typeof WebXRBackgroundRemover>[1];
+            }
+        >,
+        any
+    >;
+    WebXRControllerMovement: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRControllerMovement>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRControllerMovement>[0];
+                options: ConstructorParameters<typeof WebXRControllerMovement>[1];
+            }
+        >,
+        any
+    >;
+    WebXRControllerPhysics: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRControllerPhysics>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRControllerPhysics>[0];
+                _options: ConstructorParameters<typeof WebXRControllerPhysics>[1];
+            }
+        >,
+        any
+    >;
+    WebXRControllerPointerSelection: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRControllerPointerSelection>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRControllerPointerSelection>[0];
+                _options: ConstructorParameters<typeof WebXRControllerPointerSelection>[1];
+            }
+        >,
+        any
+    >;
+    WebXRDepthSensing: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRDepthSensing>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRDepthSensing>[0];
+                options: ConstructorParameters<typeof WebXRDepthSensing>[1];
+            }
+        >,
+        any
+    >;
+    WebXREyeTracking: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXREyeTracking>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXREyeTracking>[0];
+            }
+        >,
+        any
+    >;
+    WebXRFeaturePointSystem: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRFeaturePointSystem>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRFeaturePointSystem>[0];
+            }
+        >,
+        any
+    >;
+    WebXRHandTracking: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRHandTracking>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRHandTracking>[0];
+                options: ConstructorParameters<typeof WebXRHandTracking>[1];
+            }
+        >,
+        any
+    >;
+    WebXRHitTest: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRHitTest>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRHitTest>[0];
+                options: ConstructorParameters<typeof WebXRHitTest>[1];
+            }
+        >,
+        any
+    >;
+    WebXRHitTestLegacy: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRHitTestLegacy>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRHitTestLegacy>[0];
+                options: ConstructorParameters<typeof WebXRHitTestLegacy>[1];
+            }
+        >,
+        any
+    >;
+    WebXRImageTracking: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRImageTracking>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRImageTracking>[0];
+                options: ConstructorParameters<typeof WebXRImageTracking>[1];
+            }
+        >,
+        any
+    >;
+    WebXRLayers: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRLayers>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRLayers>[0];
+                _options: ConstructorParameters<typeof WebXRLayers>[1];
+            }
+        >,
+        any
+    >;
+    WebXRLightEstimation: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRLightEstimation>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRLightEstimation>[0];
+                options: ConstructorParameters<typeof WebXRLightEstimation>[1];
+            }
+        >,
+        any
+    >;
+    WebXRMeshDetector: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRMeshDetector>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRMeshDetector>[0];
+                _options: ConstructorParameters<typeof WebXRMeshDetector>[1];
+            }
+        >,
+        any
+    >;
+    WebXRNearInteraction: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRNearInteraction>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRNearInteraction>[0];
+                _options: ConstructorParameters<typeof WebXRNearInteraction>[1];
+            }
+        >,
+        any
+    >;
+    WebXRPlaneDetector: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRPlaneDetector>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRPlaneDetector>[0];
+                _options: ConstructorParameters<typeof WebXRPlaneDetector>[1];
+            }
+        >,
+        any
+    >;
+    WebXRRawCameraAccess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRRawCameraAccess>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRRawCameraAccess>[0];
+                options: ConstructorParameters<typeof WebXRRawCameraAccess>[1];
+            }
+        >,
+        any
+    >;
+    WebXRSpaceWarp: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRSpaceWarp>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRSpaceWarp>[0];
+            }
+        >,
+        any
+    >;
+    WebXRWalkingLocomotion: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRWalkingLocomotion>,
+            {
+                sessionManager: ConstructorParameters<typeof WebXRWalkingLocomotion>[0];
+                options: ConstructorParameters<typeof WebXRWalkingLocomotion>[1];
+            }
+        >,
+        any
+    >;
+    webXRAbstractMotionController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRAbstractMotionController>,
+            {
+                scene: ConstructorParameters<typeof WebXRAbstractMotionController>[0];
+                layout: ConstructorParameters<typeof WebXRAbstractMotionController>[1];
+                gamepadObject: ConstructorParameters<typeof WebXRAbstractMotionController>[2];
+                handedness: ConstructorParameters<typeof WebXRAbstractMotionController>[3];
+                _doNotLoadControllerMesh: ConstructorParameters<typeof WebXRAbstractMotionController>[4];
+                _controllerCache: ConstructorParameters<typeof WebXRAbstractMotionController>[5];
+            }
+        >,
+        any
+    >;
+    webXRControllerComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRControllerComponent>,
+            {
+                id: ConstructorParameters<typeof WebXRControllerComponent>[0];
+                type: ConstructorParameters<typeof WebXRControllerComponent>[1];
+                _buttonIndex: ConstructorParameters<typeof WebXRControllerComponent>[2];
+                _axesIndices: ConstructorParameters<typeof WebXRControllerComponent>[3];
+            }
+        >,
+        any
+    >;
+    webXRGenericHandController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRGenericHandController>,
+            {
+                scene: ConstructorParameters<typeof WebXRGenericHandController>[0];
+                gamepadObject: ConstructorParameters<typeof WebXRGenericHandController>[1];
+                handedness: ConstructorParameters<typeof WebXRGenericHandController>[2];
+            }
+        >,
+        any
+    >;
+    webXRHTCViveMotionController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRHTCViveMotionController>,
+            {
+                scene: ConstructorParameters<typeof WebXRHTCViveMotionController>[0];
+                gamepadObject: ConstructorParameters<typeof WebXRHTCViveMotionController>[1];
+                handedness: ConstructorParameters<typeof WebXRHTCViveMotionController>[2];
+            }
+        >,
+        any
+    >;
+    webXRMicrosoftMixedRealityController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRMicrosoftMixedRealityController>,
+            {
+                scene: ConstructorParameters<typeof WebXRMicrosoftMixedRealityController>[0];
+                gamepadObject: ConstructorParameters<typeof WebXRMicrosoftMixedRealityController>[1];
+                handedness: ConstructorParameters<typeof WebXRMicrosoftMixedRealityController>[2];
+            }
+        >,
+        any
+    >;
+    webXROculusTouchMotionController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXROculusTouchMotionController>,
+            {
+                scene: ConstructorParameters<typeof WebXROculusTouchMotionController>[0];
+                gamepadObject: ConstructorParameters<typeof WebXROculusTouchMotionController>[1];
+                handedness: ConstructorParameters<typeof WebXROculusTouchMotionController>[2];
+                _legacyMapping: ConstructorParameters<typeof WebXROculusTouchMotionController>[3];
+                _forceLegacyControllers: ConstructorParameters<typeof WebXROculusTouchMotionController>[4];
+            }
+        >,
+        any
+    >;
+    webXRProfiledMotionController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRProfiledMotionController>,
+            {
+                scene: ConstructorParameters<typeof WebXRProfiledMotionController>[0];
+                xrInput: ConstructorParameters<typeof WebXRProfiledMotionController>[1];
+                _profile: ConstructorParameters<typeof WebXRProfiledMotionController>[2];
+                _repositoryUrl: ConstructorParameters<typeof WebXRProfiledMotionController>[3];
+                controllerCache: ConstructorParameters<typeof WebXRProfiledMotionController>[4];
+            }
+        >,
+        any
+    >;
+    nativeXRFrame: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NativeXRFrame>,
+            {
+                _nativeImpl: ConstructorParameters<typeof NativeXRFrame>[0];
+            }
+        >,
+        any
+    >;
+    nativeXRRenderTarget: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NativeXRRenderTarget>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof NativeXRRenderTarget>[0];
+            }
+        >,
+        any
+    >;
+    webXRCamera: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRCamera & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof WebXRCamera>[0];
+                scene: ConstructorParameters<typeof WebXRCamera>[1];
+                _xrSessionManager: ConstructorParameters<typeof WebXRCamera>[2];
+            }
+        >,
+        any
+    >;
+    webXRDefaultExperience: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebXRDefaultExperience>>, any>;
+    webXREnterExitUI: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXREnterExitUI>,
+            {
+                _scene: ConstructorParameters<typeof WebXREnterExitUI>[0];
+                options: ConstructorParameters<typeof WebXREnterExitUI>[1];
+            }
+        >,
+        any
+    >;
+    webXRExperienceHelper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRExperienceHelper>,
+            {
+                _scene: ConstructorParameters<typeof WebXRExperienceHelper>[0];
+            }
+        >,
+        any
+    >;
+    webXRFeaturesManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRFeaturesManager>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRFeaturesManager>[0];
+            }
+        >,
+        any
+    >;
+    webXRInput: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRInput>,
+            {
+                xrSessionManager: ConstructorParameters<typeof WebXRInput>[0];
+                xrCamera: ConstructorParameters<typeof WebXRInput>[1];
+                _options: ConstructorParameters<typeof WebXRInput>[2];
+            }
+        >,
+        any
+    >;
+    webXRInputSource: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRInputSource>,
+            {
+                _scene: ConstructorParameters<typeof WebXRInputSource>[0];
+                inputSource: ConstructorParameters<typeof WebXRInputSource>[1];
+                _options: ConstructorParameters<typeof WebXRInputSource>[2];
+            }
+        >,
+        any
+    >;
+    webXRLayerWrapper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRLayerWrapper>,
+            {
+                getWidth: ConstructorParameters<typeof WebXRLayerWrapper>[0];
+                getHeight: ConstructorParameters<typeof WebXRLayerWrapper>[1];
+                layer: ConstructorParameters<typeof WebXRLayerWrapper>[2];
+                layerType: ConstructorParameters<typeof WebXRLayerWrapper>[3];
+                _createRenderTargetTextureProvider: ConstructorParameters<typeof WebXRLayerWrapper>[4];
+            }
+        >,
+        any
+    >;
+    webXRManagedOutputCanvas: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRManagedOutputCanvas>,
+            {
+                _xrSessionManager: ConstructorParameters<typeof WebXRManagedOutputCanvas>[0];
+                _options: ConstructorParameters<typeof WebXRManagedOutputCanvas>[1];
+            }
+        >,
+        any
+    >;
+    webXRSessionManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebXRSessionManager>,
+            {
+                scene: ConstructorParameters<typeof WebXRSessionManager>[0];
+            }
+        >,
+        any
+    >;
+    abstractScene: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractScene>>, any>;
+    assetContainer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AssetContainer>,
+            {
+                scene: ConstructorParameters<typeof AssetContainer>[0];
+            }
+        >,
+        any
+    >;
+    node: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Node & { cloneBy: string }>,
+            {
+                name: ConstructorParameters<typeof Node>[0];
+                scene: ConstructorParameters<typeof Node>[1];
+                isPure: ConstructorParameters<typeof Node>[2];
+            }
+        >,
+        any
+    >;
+    scene: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Scene>,
+            {
+                engine: ConstructorParameters<typeof Scene>[0];
+                options: ConstructorParameters<typeof Scene>[1];
+            }
+        >,
+        any
+    >;
 }
