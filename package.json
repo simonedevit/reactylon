@@ -9,10 +9,10 @@
         "url": "git+https://dvmstudios@dev.azure.com/dvmstudios/webxr/_git/reactylon"
     },
     "scripts": {
+        "prepare": "husky",
         "test": "echo \"Error: no test specified\" && exit 1",
         "generate-jsx-elements": "ts-node scripts/generate-jsx-elements.ts",
         "init": "npm ci",
-        "prepare": "husky",
         "start": "webpack serve",
         "build": "webpack --env environment=PROD",
         "release": "commit-and-tag-version && git push --follow-tags && bash scripts/publish.sh"
@@ -62,7 +62,9 @@
         "commit-and-tag-version": "^12.2.0",
         "husky": "^9.0.11",
         "lint-staged": "^15.2.2",
-        "prettier": "3.2.5"
+        "prettier": "3.2.5",
+        "@commitlint/cli": "^19.2.1",
+        "@commitlint/config-conventional": "^19.1.0"
     },
     "engines": {
         "node": "20.11.1",
