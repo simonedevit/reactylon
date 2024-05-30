@@ -1,5 +1,13 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.3](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.2&targetVersion=GTv0.0.3&_a=files) (2024-05-30)
+
+
+### Chore
+
+* **general,reconciler,jsx-elements:** add clone prop + generate jsx elements with proper props ([8a92793](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/8a9279344a0a0d87371cede71c740cb8c3abf672))
+* **general:** add missing git hooks ([0b643b0](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/0b643b0ecc2e3ef3dd1a5f8b2840f2eb9bc5437d))
+
 ## [0.0.2](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.1&targetVersion=GTv0.0.2&_a=files) (2024-05-27)
 
 
