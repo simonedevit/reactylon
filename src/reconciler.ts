@@ -111,12 +111,7 @@ const reconciler = ReactReconciler({
         Object.keys(props)
             .filter(propName => !paramNames.includes(propName))
             .forEach(key => {
-                // FIXME: it won't work with listeners (they will be immediately called) - but now it works for attchControl (camera)
-                if (typeof props[key] !== 'function') {
-                    element[key] = props[key];
-                } else {
-                    element[key](...props[key]());
-                }
+                element[key] = props[key];
             });
         return element;
     },
