@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.4](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.3&targetVersion=GTv0.0.4&_a=files) (2024-05-31)
+
+
+### Chore
+
+* **general,reconciler:** remove automatic functions execution + upgrade babylon ([f1bd11c](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/f1bd11c066504b83158fc91a7b8c8ac440b8f804))
+
 ## [0.0.3](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.2&targetVersion=GTv0.0.3&_a=files) (2024-05-30)
 
 
