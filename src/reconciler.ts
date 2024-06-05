@@ -1,18 +1,20 @@
-//@ts-nocheck
 import React, { version } from 'react';
 import ReactReconciler, { FiberRoot } from 'react-reconciler';
-import { Scene } from '@babylonjs/core';
 import * as Babylon from '@babylonjs/core';
 import * as MeshBuilder from '@babylonjs/core/Meshes/Builders';
 import isEqualWith from 'lodash.isequalwith';
-import { getClassConstructorParams, capitalizeFirstLetter, getFunctionParams, isEqualCustomizer } from './utils';
+import { capitalizeFirstLetter, isEqualCustomizer } from './utils';
+import { type ComponentInstance, type UpdatePayload, type RootContainer } from './types/types';
+import { Host } from './components/hosts/Host';
+import { MaterialHost } from './components/hosts/MaterialHost';
+import { TextureHost } from './components/hosts/TextureHost';
 
 //https://github.com/facebook/react/tree/main/packages/react-reconciler
 //https://github.com/facebook/react/blob/main/packages/react-art/src/ReactFiberConfigART.js
 
-// elements = Babylon children, "children" already taken by React (should i call babylonChildren)
+// elements = Babylon children, "children" already taken by React
 
-function addChild(parentInstance, child) {
+function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
     // Append the child to the parent element
     if (parentInstance) {
         if (!child) {
@@ -21,11 +23,8 @@ function addChild(parentInstance, child) {
             if (!parentInstance.elements) {
                 parentInstance.elements = [];
             }
+            child.handlers?.addChild?.(parentInstance, child);
             parentInstance.elements.push(child);
-            if (child instanceof Babylon.Material) {
-                //TODO: handle multi material
-                parentInstance.material = child;
-            }
             // FIXME: should i add the parent also?
             //child.parent = parentInstance;
         }
@@ -65,7 +64,21 @@ const meshes = [
 ];
 
 // check methods execution's order: "reconciler.png" and https://blog.atulr.com/react-custom-renderer-2/)
-const reconciler = ReactReconciler({
+const reconciler = ReactReconciler<
+    string,
+    ComponentInstance,
+    RootContainer,
+    ComponentInstance,
+    ComponentInstance,
+    ComponentInstance,
+    unknown,
+    unknown,
+    unknown,
+    UpdatePayload,
+    ComponentInstance,
+    unknown,
+    unknown
+>({
     supportsMutation: true,
 
     /*
@@ -76,59 +89,42 @@ const reconciler = ReactReconciler({
      * This method happens in the render phase. It can (and usually should) mutate the node it has just created before returning it, but it must not modify any other nodes. It must not register any event handlers on the parent tree. This is because an instance being created doesn't guarantee it would
      * be placed in the tree — it could be left unused and later collected by GC. If you need to do something when an instance is definitely in the tree, look at commitMount instead.
      */
-    createInstance(type, props, rootContainer: RootContainer, hostContext, internalHandle) {
-        const scene = rootContainer.scene;
-        let element = null;
-
-        // good place to set listener (onClick from prop)
+    createInstance(type, props, rootContainer, hostContext, internalHandle) {
         let Class = null;
-        let isConstructor = true;
+        let isBuilder = false;
         // MeshBuilder.Create
         if (meshes.includes(type)) {
+            //@ts-ignore
             Class = MeshBuilder[`Create${capitalizeFirstLetter(type)}`];
-            isConstructor = false;
+            isBuilder = true;
         } else {
+            //@ts-ignore
             Class = Babylon[capitalizeFirstLetter(type)];
         }
-        const paramNames = isConstructor ? getClassConstructorParams(Class) : getFunctionParams(Class);
-        const paramValues = paramNames.map(param => {
-            return props[param];
-        });
-        const cloneBy = props.cloneBy;
-        if (cloneBy) {
-            if (Class.prototype instanceof Babylon.Material) {
-                const original = scene.getMaterialById(cloneBy);
-                if (!original) {
-                    throw new Error(`Reactylon - ${cloneBy} doesn't exist.`);
-                }
-                element = original.clone(props.name);
-            }
-        } else {
-            // invoke Babylon creator method with constructor props
-            element = isConstructor ? new Class(...paramValues) : Class(...paramValues);
+        let createInstanceFn = Host.createInstance;
+        if (Class.prototype instanceof Babylon.Material) {
+            createInstanceFn = MaterialHost.createInstance;
+        } else if (Class.prototype instanceof Babylon.BaseTexture) {
+            createInstanceFn = TextureHost.createInstance;
         }
-        // set non-constructor props
-        Object.keys(props)
-            .filter(propName => !paramNames.includes(propName))
-            .forEach(key => {
-                element[key] = props[key];
-            });
-        return element;
+        return createInstanceFn(isBuilder, Class, props, rootContainer);
     },
 
     /*
      * Same as createInstance, but for text nodes. If your renderer doesn't support text nodes, you can throw here.
-     */
+     
     createTextInstance(text, rootContainer, hostContext, internalHandle) {
         console.log('Created text instance:', text);
         // Create a new text node with the provided text content
         // return document.createTextNode(text);
     },
+    */
 
     /*
      * This method should mutate the parentInstance and add the child to its list of children.For example, in the DOM this would translate to a parentInstance.appendChild(child) call.
      * This method happens in the render phase.It can mutate parentInstance and child, but it must not modify any other nodes.It's called while the tree is still being built up and not connected to the actual tree on the screen.
      */
+
     appendInitialChild(parentInstance, child) {
         // Log information about appending initial child to parent
         console.log('Appending initial child to parent - partentInstance', parentInstance);
@@ -143,7 +139,7 @@ const reconciler = ReactReconciler({
      * If you don't want to do anything here, you should return false.
      */
     finalizeInitialChildren(instance, type, props, rootContainer, hostContext) {
-        //return null;
+        return false;
     },
 
     /*
@@ -153,7 +149,7 @@ const reconciler = ReactReconciler({
      * This method happens in the render phase.Do not mutate the tree from it.
      */
     shouldSetTextContent(type, props) {
-        return null;
+        return false;
     },
     /*
      * This method lets you return the initial host context from the root of the tree.See getChildHostContext for the explanation of host context.
@@ -268,7 +264,7 @@ const reconciler = ReactReconciler({
                 // child.parent = container.rootInstance
             } else {
                 console.log('addend child with no root (createPortal only?)');
-                addChild(container.rootInstance as unknown as CreatedInstance<any>, child);
+                addChild(container.rootInstance, child);
             }
         }
     },
@@ -301,6 +297,7 @@ const reconciler = ReactReconciler({
         console.log('removeChild - child', child);
         const index = parentInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
         parentInstance.elements.splice(index, 1);
+        //child.handlers?.removeChild?.(parentInstance, child);
         child.dispose(false, true);
     },
 
@@ -312,6 +309,7 @@ const reconciler = ReactReconciler({
         console.log('removeChildFromContainer - child', child);
         const index = container.rootInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
         container.rootInstance.elements.splice(index, 1);
+        //child.handlers?.removeChild?.(container, child);
         child.dispose(false, true);
     },
 
@@ -356,7 +354,7 @@ const reconciler = ReactReconciler({
         }
         console.log(`prepareUpdate ${type} - ${instance.name} - changes`, oldProps, newProps);
         //TODO: return only changed props
-        return newProps;
+        return newProps as UpdatePayload;
     },
 
     /*
@@ -408,7 +406,8 @@ const reconciler = ReactReconciler({
     /*
      * This method may be called during render if the Host Component type and props might suspend a commit.It can be used to initiate any work that might shorten the duration of a suspended commit.
      */
-    preloadInstance(type, props) {
+    //@ts-ignore
+    preloadInstance(type: unknown, props: unknown) {
         return true;
     }, // Return true to indicate it's already loaded
 
@@ -434,10 +433,6 @@ const reconciler = ReactReconciler({
     },
 });
 
-export type RootContainer = {
-    scene: Scene;
-    rootInstance: any;
-};
 type ReactylonType = {
     render: (element: React.ReactNode, rootContainer: RootContainer) => void;
 };
@@ -450,9 +445,11 @@ const Reactylon: ReactylonType = {
         // first render
         if (!root) {
             // Create a container using the reconciler's createContainer method
+            // @ts-ignore
             root = reconciler.createContainer(rootContainer, false, false);
             roots.set(rootContainer, root);
             reconciler.injectIntoDevTools({
+                //@ts-ignore
                 findFiberByHostInstance: reconciler.findHostInstance,
                 bundleType: process.env.NODE_ENV === 'development' ? 1 : 0,
                 version,
@@ -476,6 +473,3 @@ const Reactylon: ReactylonType = {
 };
 
 export default Reactylon;
-
-// for sure i need for create instance, update and removing... but do i really need about append something to DOM? Maybe for some internal manipulation? I.e. i perform optimization
-// or maybe for multiple removing? Or for adding children?

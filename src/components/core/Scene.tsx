@@ -1,6 +1,7 @@
 import { createContext, useContext, useRef, useEffect, useState } from 'react';
 import { Scene as BabylonScene, type Nullable, SceneOptions } from '@babylonjs/core';
-import Reactylon, { type RootContainer } from '../../reconciler';
+import Reactylon from '../../reconciler';
+import { RootContainer } from '../../types/types';
 import { useEngine } from './Engine';
 import { Inspector } from '@babylonjs/inspector';
 
@@ -14,7 +15,6 @@ export const SceneContext = createContext<SceneContextType>({
     sceneReady: false,
 });
 
-
 export const useScene = (): BabylonScene => useContext(SceneContext).scene as BabylonScene;
 
 export type SceneProps = React.PropsWithChildren<{
@@ -25,14 +25,12 @@ export type SceneProps = React.PropsWithChildren<{
 }>;
 
 export const Scene: React.FC<SceneProps> = ({ sceneOptions, onSceneReady, isReactylonRender, isInteractiveInspector = false, children }) => {
-
     const engine = useEngine();
     const rootContainer = useRef<Nullable<RootContainer>>(null);
     const scene = useRef<Nullable<BabylonScene>>(null);
     const [isSceneReady, setIsSceneReady] = useState<boolean>(false);
 
     useEffect(() => {
-
         scene.current = new BabylonScene(engine, sceneOptions);
         // enable/disable inspector
         if (isInteractiveInspector) {
@@ -59,7 +57,7 @@ export const Scene: React.FC<SceneProps> = ({ sceneOptions, onSceneReady, isReac
                 // observers: {},
                 parent: null,
             },
-        }
+        };
         // updateScene()
 
         setIsSceneReady(true);
@@ -68,11 +66,7 @@ export const Scene: React.FC<SceneProps> = ({ sceneOptions, onSceneReady, isReac
         // some observable, check https://github.com/brianzinn/react-babylonjs/blob/master/packages/react-babylonjs/src/Scene.tsx#L123
 
         if (isReactylonRender) {
-            Reactylon.render(
-                <SceneContext.Provider value={{ scene: scene.current, sceneReady: isSceneReady }}>
-                    {children}
-                </SceneContext.Provider>, rootContainer.current
-            );
+            Reactylon.render(<SceneContext.Provider value={{ scene: scene.current, sceneReady: isSceneReady }}>{children}</SceneContext.Provider>, rootContainer.current);
 
             return () => {
                 // cleanup observable
@@ -84,24 +78,15 @@ export const Scene: React.FC<SceneProps> = ({ sceneOptions, onSceneReady, isReac
     }, []);
 
     useEffect(() => {
-
         if (scene.current === null || rootContainer.current === null) {
             return;
         }
 
         // updateScene()
         if (isReactylonRender) {
-            Reactylon.render(
-                <SceneContext.Provider value={{ scene: scene.current, sceneReady: isSceneReady }}>
-                    {children}
-                </SceneContext.Provider>, rootContainer.current
-            );
+            Reactylon.render(<SceneContext.Provider value={{ scene: scene.current, sceneReady: isSceneReady }}>{children}</SceneContext.Provider>, rootContainer.current);
         }
     });
 
-    return isReactylonRender ? null : (
-        <SceneContext.Provider value={{ scene: scene.current, sceneReady: isSceneReady }}>
-            {isSceneReady && children}
-        </SceneContext.Provider>
-    );
+    return isReactylonRender ? null : <SceneContext.Provider value={{ scene: scene.current, sceneReady: isSceneReady }}>{isSceneReady && children}</SceneContext.Provider>;
 };

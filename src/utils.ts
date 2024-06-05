@@ -6,7 +6,7 @@ export function capitalizeFirstLetter(str: string): string {
 }
 
 // FIXME: test with other parameters
-export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }) => {
+export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }): Array<string> => {
     const ast = parse(cls.toString(), {
         ecmaVersion: 2020,
     });
@@ -23,7 +23,7 @@ export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }) =
 };
 
 //FIXME: add strong typing
-export const getFunctionParams = (fn: (...args: any[]) => void) => {
+export const getFunctionParams = (fn: (...args: any[]) => void): Array<string> => {
     //@ts-ignore
     const ast = parse(fn, {
         ecmaVersion: 2020,

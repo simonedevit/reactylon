@@ -1,3 +1,7 @@
+/* PROPS USED BY JSX ELEMENTS GENERATOR */
+
+import { ActionEvent, Scene } from '@babylonjs/core';
+
 type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
 
 // no readonly props
@@ -34,3 +38,36 @@ export type BabylonProps<Props, ConstructorProps> = {
 } & MarkUndefinedAsOptional<ConstructorProps> & {
         children?: React.ReactNode;
     };
+
+/* PROPS USED BY RECONCILER */
+
+export type ComponentInstance = {
+    name: string;
+    elements: Array<ComponentInstance>;
+    dispose: Function;
+    onClick?: (evt: ActionEvent) => void;
+    cloneBy?: string;
+    handlers?: Partial<{
+        addChild(parentInstance: ComponentInstance, child: ComponentInstance): void;
+        removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void;
+        prepareUpdate(): UpdatePayload;
+        commitUpdate(): void;
+    }>;
+    [key: string]: unknown;
+};
+
+export type UpdatePayload = {
+    [key: string]: unknown;
+};
+
+export type RootContainer = {
+    scene: Scene;
+    rootInstance: {
+        elements: Array<ComponentInstance>;
+        hostInstance: Scene;
+        metadata: {
+            [key: string]: string;
+        };
+        parent: null;
+    };
+};
