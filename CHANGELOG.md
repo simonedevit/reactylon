@@ -1,5 +1,13 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.5](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.4&targetVersion=GTv0.0.5&_a=files) (2024-06-05)
+
+
+### Chore
+
+* **general,reconciler:** add path alias + custom props + multi material + texture update [#84](https://dev.azure.com/dvmstudios/webxr/_workitems/edit/84) ([ae6f8a2](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/ae6f8a24d1b6dd7be10198622155c24e45a6ebad))
+* **general,reconciler:** add handlers + code engineering ([fc66604](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/fc666040dcd85b0d87e6a1f2d521c8d1b444d0f2))
+
 ## [0.0.4](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.3&targetVersion=GTv0.0.4&_a=files) (2024-05-31)
 
 
