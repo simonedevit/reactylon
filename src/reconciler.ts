@@ -3,8 +3,8 @@ import ReactReconciler, { FiberRoot } from 'react-reconciler';
 import * as Babylon from '@babylonjs/core';
 import * as MeshBuilder from '@babylonjs/core/Meshes/Builders';
 import isEqualWith from 'lodash.isequalwith';
-import { capitalizeFirstLetter, isEqualCustomizer } from './utils';
-import { type ComponentInstance, type UpdatePayload, type RootContainer } from './types/types';
+import { capitalizeFirstLetter, isEqualCustomizer } from '@utils';
+import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
 import { Host } from './components/hosts/Host';
 import { MaterialHost } from './components/hosts/MaterialHost';
 import { TextureHost } from './components/hosts/TextureHost';
@@ -101,7 +101,7 @@ const reconciler = ReactReconciler<
             //@ts-ignore
             Class = Babylon[capitalizeFirstLetter(type)];
         }
-        let createInstanceFn = Host.createInstance;
+        let createInstanceFn: Function = Host.createInstance;
         if (Class.prototype instanceof Babylon.Material) {
             createInstanceFn = MaterialHost.createInstance;
         } else if (Class.prototype instanceof Babylon.BaseTexture) {
@@ -298,7 +298,7 @@ const reconciler = ReactReconciler<
         const index = parentInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
         parentInstance.elements.splice(index, 1);
         //child.handlers?.removeChild?.(parentInstance, child);
-        child.dispose(false, true);
+        child.dispose?.(false, true);
     },
 
     /*
@@ -310,7 +310,7 @@ const reconciler = ReactReconciler<
         const index = container.rootInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
         container.rootInstance.elements.splice(index, 1);
         //child.handlers?.removeChild?.(container, child);
-        child.dispose(false, true);
+        child.dispose?.(false, true);
     },
 
     /*
@@ -346,7 +346,11 @@ const reconciler = ReactReconciler<
     prepareUpdate(instance, type, oldProps, newProps, rootContainer, hostContext) {
         //TODO: exclude constructor props
         //FIXME: oldProps always !== newProps so how can i optimize equality process? Immutable data structure? Shallow comparison on what?
-        const areSameProps = isEqualWith(oldProps, newProps, isEqualCustomizer);
+
+        const { children: _a, ...oldPropsWihoutChildren } = oldProps;
+        const { children: _b, ...newPropsWihoutChildren } = newProps;
+
+        const areSameProps = isEqualWith(oldPropsWihoutChildren, newPropsWihoutChildren, isEqualCustomizer);
         if (areSameProps) {
             console.log(`prepareUpdate ${type} - ${instance.name} - no changes`);
             // no need to update
@@ -366,9 +370,12 @@ const reconciler = ReactReconciler<
     */
     commitUpdate(instance, updatePayload, type, prevProps, nextProps, internalHandle) {
         console.log(`commitUpdate ${type} - ${instance.name}`);
-        Object.entries(updatePayload).forEach(([key, value]) => {
-            instance[key] = value;
-        });
+        Object.entries(updatePayload)
+            .filter(([key]) => key !== 'children')
+            .forEach(([key, value]) => {
+                instance[key as keyof ComponentInstance] = value;
+            });
+        instance.handlers?.commitUpdate?.(instance, updatePayload);
     },
 
     /*
@@ -435,6 +442,7 @@ const reconciler = ReactReconciler<
 
 type ReactylonType = {
     render: (element: React.ReactNode, rootContainer: RootContainer) => void;
+    unmount: (rootContainer: RootContainer) => void;
 };
 
 export const roots = new Map<any, FiberRoot>();
@@ -449,8 +457,7 @@ const Reactylon: ReactylonType = {
             root = reconciler.createContainer(rootContainer, false, false);
             roots.set(rootContainer, root);
             reconciler.injectIntoDevTools({
-                //@ts-ignore
-                findFiberByHostInstance: reconciler.findHostInstance,
+                //findFiberByHostInstance: reconciler.findHostInstance,
                 bundleType: process.env.NODE_ENV === 'development' ? 1 : 0,
                 version,
                 rendererPackageName: '@dvmstudios/reactylon',
@@ -461,15 +468,12 @@ const Reactylon: ReactylonType = {
         reconciler.updateContainer(element, root, null, null);
     },
 
-    /* 
-    unmount(container: Container): void {
-        const root = roots.get(container)!
-        reconciler.updateContainer(null, root, null, () => {
-            // ignored
-        })
-        roots.delete(container)
-    }
-    */
+    unmount(container: FiberRoot): void {
+        console.log('unmounted');
+        const root = roots.get(container);
+        reconciler.updateContainer(null, root, null, null);
+        roots.delete(container);
+    },
 };
 
 export default Reactylon;

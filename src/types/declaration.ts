@@ -1,5 +1,6 @@
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from './types';
+import { type MeshProps, type Clonable } from './props';
 import { AbstractActionManager } from '@babylonjs/core/Actions/abstractActionManager';
 import { Action } from '@babylonjs/core/Actions/action';
 import { ActionEvent } from '@babylonjs/core/Actions/actionEvent';
@@ -691,14 +692,15 @@ import { Node } from '@babylonjs/core/node';
 import { Scene } from '@babylonjs/core/scene';
 
 export interface JSXElements {
-    abstractActionManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractActionManager>>, any>;
+    abstractActionManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractActionManager>, AbstractActionManager>, any>;
     action: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Action>,
             {
                 triggerOptions: ConstructorParameters<typeof Action>[0];
                 condition: ConstructorParameters<typeof Action>[1];
-            }
+            },
+            Action
         >,
         any
     >;
@@ -712,7 +714,8 @@ export interface JSXElements {
                 meshUnderPointer: ConstructorParameters<typeof ActionEvent>[3];
                 sourceEvent: ConstructorParameters<typeof ActionEvent>[4];
                 additionalData: ConstructorParameters<typeof ActionEvent>[5];
-            }
+            },
+            ActionEvent
         >,
         any
     >;
@@ -721,7 +724,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<ActionManager>,
             {
                 scene: ConstructorParameters<typeof ActionManager>[0];
-            }
+            },
+            ActionManager
         >,
         any
     >;
@@ -730,7 +734,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<Condition>,
             {
                 actionManager: ConstructorParameters<typeof Condition>[0];
-            }
+            },
+            Condition
         >,
         any
     >;
@@ -746,7 +751,8 @@ export interface JSXElements {
                 condition: ConstructorParameters<typeof InterpolateValueAction>[5];
                 stopOtherAnimations: ConstructorParameters<typeof InterpolateValueAction>[6];
                 onInterpolationDone: ConstructorParameters<typeof InterpolateValueAction>[7];
-            }
+            },
+            InterpolateValueAction
         >,
         any
     >;
@@ -765,13 +771,14 @@ export interface JSXElements {
                 onAnimationLoop: ConstructorParameters<typeof Animatable>[8];
                 isAdditive: ConstructorParameters<typeof Animatable>[9];
                 playOrder: ConstructorParameters<typeof Animatable>[10];
-            }
+            },
+            Animatable
         >,
         any
     >;
     animation: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Animation & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Animation> & Clonable,
             {
                 name: ConstructorParameters<typeof Animation>[0];
                 targetProperty: ConstructorParameters<typeof Animation>[1];
@@ -779,7 +786,8 @@ export interface JSXElements {
                 dataType: ConstructorParameters<typeof Animation>[3];
                 loopMode: ConstructorParameters<typeof Animation>[4];
                 enableBlending: ConstructorParameters<typeof Animation>[5];
-            }
+            },
+            Animation
         >,
         any
     >;
@@ -790,19 +798,21 @@ export interface JSXElements {
                 frame: ConstructorParameters<typeof AnimationEvent>[0];
                 action: ConstructorParameters<typeof AnimationEvent>[1];
                 onlyOnce: ConstructorParameters<typeof AnimationEvent>[2];
-            }
+            },
+            AnimationEvent
         >,
         any
     >;
     animationGroup: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AnimationGroup & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AnimationGroup> & Clonable,
             {
                 name: ConstructorParameters<typeof AnimationGroup>[0];
                 scene: ConstructorParameters<typeof AnimationGroup>[1];
                 weight: ConstructorParameters<typeof AnimationGroup>[2];
                 playOrder: ConstructorParameters<typeof AnimationGroup>[3];
-            }
+            },
+            AnimationGroup
         >,
         any
     >;
@@ -812,19 +822,21 @@ export interface JSXElements {
             {
                 names: ConstructorParameters<typeof AnimationGroupMask>[0];
                 mode: ConstructorParameters<typeof AnimationGroupMask>[1];
-            }
+            },
+            AnimationGroupMask
         >,
         any
     >;
-    animationPropertiesOverride: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AnimationPropertiesOverride>>, any>;
+    animationPropertiesOverride: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AnimationPropertiesOverride>, AnimationPropertiesOverride>, any>;
     animationRange: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AnimationRange & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AnimationRange> & Clonable,
             {
                 name: ConstructorParameters<typeof AnimationRange>[0];
                 from: ConstructorParameters<typeof AnimationRange>[1];
                 to: ConstructorParameters<typeof AnimationRange>[2];
-            }
+            },
+            AnimationRange
         >,
         any
     >;
@@ -833,7 +845,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<PathCursor>,
             {
                 _path: ConstructorParameters<typeof PathCursor>[0];
-            }
+            },
+            PathCursor
         >,
         any
     >;
@@ -845,7 +858,8 @@ export interface JSXElements {
                 animation: ConstructorParameters<typeof RuntimeAnimation>[1];
                 scene: ConstructorParameters<typeof RuntimeAnimation>[2];
                 host: ConstructorParameters<typeof RuntimeAnimation>[3];
-            }
+            },
+            RuntimeAnimation
         >,
         any
     >;
@@ -854,7 +868,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<Analyser>,
             {
                 scene: ConstructorParameters<typeof Analyser>[0];
-            }
+            },
+            Analyser
         >,
         any
     >;
@@ -865,7 +880,8 @@ export interface JSXElements {
                 hostElement: ConstructorParameters<typeof AudioEngine>[0];
                 audioContext: ConstructorParameters<typeof AudioEngine>[1];
                 audioDestination: ConstructorParameters<typeof AudioEngine>[2];
-            }
+            },
+            AudioEngine
         >,
         any
     >;
@@ -874,20 +890,22 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<AudioSceneComponent>,
             {
                 scene: ConstructorParameters<typeof AudioSceneComponent>[0];
-            }
+            },
+            AudioSceneComponent
         >,
         any
     >;
     sound: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Sound & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Sound> & Clonable,
             {
                 name: ConstructorParameters<typeof Sound>[0];
                 urlOrArrayBuffer: ConstructorParameters<typeof Sound>[1];
                 scene: ConstructorParameters<typeof Sound>[2];
                 readyToPlayCallback: ConstructorParameters<typeof Sound>[3];
                 options: ConstructorParameters<typeof Sound>[4];
-            }
+            },
+            Sound
         >,
         any
     >;
@@ -897,16 +915,18 @@ export interface JSXElements {
             {
                 scene: ConstructorParameters<typeof SoundTrack>[0];
                 options: ConstructorParameters<typeof SoundTrack>[1];
-            }
+            },
+            SoundTrack
         >,
         any
     >;
     bakedVertexAnimationManager: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BakedVertexAnimationManager & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BakedVertexAnimationManager> & Clonable,
             {
                 scene: ConstructorParameters<typeof BakedVertexAnimationManager>[0];
-            }
+            },
+            BakedVertexAnimationManager
         >,
         any
     >;
@@ -916,41 +936,44 @@ export interface JSXElements {
             {
                 scene: ConstructorParameters<typeof VertexAnimationBaker>[0];
                 meshOrSkeleton: ConstructorParameters<typeof VertexAnimationBaker>[1];
-            }
+            },
+            VertexAnimationBaker
         >,
         any
     >;
-    autoRotationBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AutoRotationBehavior>>, any>;
-    bouncingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BouncingBehavior>>, any>;
-    framingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FramingBehavior>>, any>;
+    autoRotationBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AutoRotationBehavior>, AutoRotationBehavior>, any>;
+    bouncingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BouncingBehavior>, BouncingBehavior>, any>;
+    framingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FramingBehavior>, FramingBehavior>, any>;
     attachToBoxBehavior: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AttachToBoxBehavior>,
             {
                 _ui: ConstructorParameters<typeof AttachToBoxBehavior>[0];
-            }
+            },
+            AttachToBoxBehavior
         >,
         any
     >;
-    baseSixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseSixDofDragBehavior>>, any>;
-    fadeInOutBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FadeInOutBehavior>>, any>;
-    followBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowBehavior>>, any>;
-    handConstraintBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HandConstraintBehavior>>, any>;
-    multiPointerScaleBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MultiPointerScaleBehavior>>, any>;
+    baseSixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseSixDofDragBehavior>, BaseSixDofDragBehavior>, any>;
+    fadeInOutBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FadeInOutBehavior>, FadeInOutBehavior>, any>;
+    followBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowBehavior>, FollowBehavior>, any>;
+    handConstraintBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HandConstraintBehavior>, HandConstraintBehavior>, any>;
+    multiPointerScaleBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MultiPointerScaleBehavior>, MultiPointerScaleBehavior>, any>;
     pointerDragBehavior: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PointerDragBehavior>,
             {
                 options: ConstructorParameters<typeof PointerDragBehavior>[0];
-            }
+            },
+            PointerDragBehavior
         >,
         any
     >;
-    sixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SixDofDragBehavior>>, any>;
-    surfaceMagnetismBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SurfaceMagnetismBehavior>>, any>;
+    sixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SixDofDragBehavior>, SixDofDragBehavior>, any>;
+    surfaceMagnetismBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SurfaceMagnetismBehavior>, SurfaceMagnetismBehavior>, any>;
     bone: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Bone & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Bone> & Clonable,
             {
                 name: ConstructorParameters<typeof Bone>[0];
                 skeleton: ConstructorParameters<typeof Bone>[1];
@@ -959,7 +982,8 @@ export interface JSXElements {
                 restMatrix: ConstructorParameters<typeof Bone>[4];
                 bindMatrix: ConstructorParameters<typeof Bone>[5];
                 index: ConstructorParameters<typeof Bone>[6];
-            }
+            },
+            Bone
         >,
         any
     >;
@@ -970,7 +994,8 @@ export interface JSXElements {
                 mesh: ConstructorParameters<typeof BoneIKController>[0];
                 bone: ConstructorParameters<typeof BoneIKController>[1];
                 options: ConstructorParameters<typeof BoneIKController>[2];
-            }
+            },
+            BoneIKController
         >,
         any
     >;
@@ -982,18 +1007,20 @@ export interface JSXElements {
                 bone: ConstructorParameters<typeof BoneLookController>[1];
                 target: ConstructorParameters<typeof BoneLookController>[2];
                 options: ConstructorParameters<typeof BoneLookController>[3];
-            }
+            },
+            BoneLookController
         >,
         any
     >;
     skeleton: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Skeleton & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Skeleton> & Clonable,
             {
                 name: ConstructorParameters<typeof Skeleton>[0];
                 id: ConstructorParameters<typeof Skeleton>[1];
                 scene: ConstructorParameters<typeof Skeleton>[2];
-            }
+            },
+            Skeleton
         >,
         any
     >;
@@ -1010,11 +1037,12 @@ export interface JSXElements {
                 useBytes: ConstructorParameters<typeof Buffer>[6];
                 divisor: ConstructorParameters<typeof Buffer>[7];
                 label: ConstructorParameters<typeof Buffer>[8];
-            }
+            },
+            Buffer
         >,
         any
     >;
-    dataBuffer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DataBuffer>>, any>;
+    dataBuffer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DataBuffer>, DataBuffer>, any>;
     storageBuffer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<StorageBuffer>,
@@ -1023,47 +1051,53 @@ export interface JSXElements {
                 size: ConstructorParameters<typeof StorageBuffer>[1];
                 creationFlags: ConstructorParameters<typeof StorageBuffer>[2];
                 label: ConstructorParameters<typeof StorageBuffer>[3];
-            }
+            },
+            StorageBuffer
         >,
         any
     >;
-    BaseCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraMouseWheelInput>>, any>;
-    BaseCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraPointersInput>>, any>;
-    arcRotateCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraGamepadInput>>, any>;
-    arcRotateCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraKeyboardMoveInput>>, any>;
-    arcRotateCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraMouseWheelInput>>, any>;
-    arcRotateCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraPointersInput>>, any>;
-    arcRotateCameraVRDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraVRDeviceOrientationInput>>, any>;
-    flyCameraKeyboardInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraKeyboardInput>>, any>;
-    flyCameraMouseInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraMouseInput>>, any>;
-    followCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraKeyboardMoveInput>>, any>;
-    followCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraMouseWheelInput>>, any>;
-    followCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraPointersInput>>, any>;
-    freeCameraDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraDeviceOrientationInput>>, any>;
-    freeCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraGamepadInput>>, any>;
-    freeCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraKeyboardMoveInput>>, any>;
+    BaseCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraMouseWheelInput>, BaseCameraMouseWheelInput>, any>;
+    BaseCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraPointersInput>, BaseCameraPointersInput>, any>;
+    arcRotateCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraGamepadInput>, ArcRotateCameraGamepadInput>, any>;
+    arcRotateCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraKeyboardMoveInput>, ArcRotateCameraKeyboardMoveInput>, any>;
+    arcRotateCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraMouseWheelInput>, ArcRotateCameraMouseWheelInput>, any>;
+    arcRotateCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraPointersInput>, ArcRotateCameraPointersInput>, any>;
+    arcRotateCameraVRDeviceOrientationInput: React.DetailedHTMLProps<
+        BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraVRDeviceOrientationInput>, ArcRotateCameraVRDeviceOrientationInput>,
+        any
+    >;
+    flyCameraKeyboardInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraKeyboardInput>, FlyCameraKeyboardInput>, any>;
+    flyCameraMouseInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraMouseInput>, FlyCameraMouseInput>, any>;
+    followCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraKeyboardMoveInput>, FollowCameraKeyboardMoveInput>, any>;
+    followCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraMouseWheelInput>, FollowCameraMouseWheelInput>, any>;
+    followCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraPointersInput>, FollowCameraPointersInput>, any>;
+    freeCameraDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraDeviceOrientationInput>, FreeCameraDeviceOrientationInput>, any>;
+    freeCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraGamepadInput>, FreeCameraGamepadInput>, any>;
+    freeCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraKeyboardMoveInput>, FreeCameraKeyboardMoveInput>, any>;
     freeCameraMouseInput: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FreeCameraMouseInput>,
             {
                 touchEnabled: ConstructorParameters<typeof FreeCameraMouseInput>[0];
-            }
+            },
+            FreeCameraMouseInput
         >,
         any
     >;
-    freeCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraMouseWheelInput>>, any>;
+    freeCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraMouseWheelInput>, FreeCameraMouseWheelInput>, any>;
     freeCameraTouchInput: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FreeCameraTouchInput>,
             {
                 allowMouse: ConstructorParameters<typeof FreeCameraTouchInput>[0];
-            }
+            },
+            FreeCameraTouchInput
         >,
         any
     >;
     anaglyphArcRotateCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AnaglyphArcRotateCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AnaglyphArcRotateCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof AnaglyphArcRotateCamera>[0];
                 alpha: ConstructorParameters<typeof AnaglyphArcRotateCamera>[1];
@@ -1072,49 +1106,53 @@ export interface JSXElements {
                 target: ConstructorParameters<typeof AnaglyphArcRotateCamera>[4];
                 interaxialDistance: ConstructorParameters<typeof AnaglyphArcRotateCamera>[5];
                 scene: ConstructorParameters<typeof AnaglyphArcRotateCamera>[6];
-            }
+            },
+            AnaglyphArcRotateCamera
         >,
         any
     >;
     anaglyphFreeCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AnaglyphFreeCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AnaglyphFreeCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof AnaglyphFreeCamera>[0];
                 position: ConstructorParameters<typeof AnaglyphFreeCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof AnaglyphFreeCamera>[2];
                 scene: ConstructorParameters<typeof AnaglyphFreeCamera>[3];
-            }
+            },
+            AnaglyphFreeCamera
         >,
         any
     >;
     anaglyphGamepadCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AnaglyphGamepadCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AnaglyphGamepadCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof AnaglyphGamepadCamera>[0];
                 position: ConstructorParameters<typeof AnaglyphGamepadCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof AnaglyphGamepadCamera>[2];
                 scene: ConstructorParameters<typeof AnaglyphGamepadCamera>[3];
-            }
+            },
+            AnaglyphGamepadCamera
         >,
         any
     >;
     anaglyphUniversalCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AnaglyphUniversalCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AnaglyphUniversalCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof AnaglyphUniversalCamera>[0];
                 position: ConstructorParameters<typeof AnaglyphUniversalCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof AnaglyphUniversalCamera>[2];
                 scene: ConstructorParameters<typeof AnaglyphUniversalCamera>[3];
-            }
+            },
+            AnaglyphUniversalCamera
         >,
         any
     >;
     stereoscopicArcRotateCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<StereoscopicArcRotateCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<StereoscopicArcRotateCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof StereoscopicArcRotateCamera>[0];
                 alpha: ConstructorParameters<typeof StereoscopicArcRotateCamera>[1];
@@ -1124,65 +1162,70 @@ export interface JSXElements {
                 interaxialDistance: ConstructorParameters<typeof StereoscopicArcRotateCamera>[5];
                 isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicArcRotateCamera>[6];
                 scene: ConstructorParameters<typeof StereoscopicArcRotateCamera>[7];
-            }
+            },
+            StereoscopicArcRotateCamera
         >,
         any
     >;
     stereoscopicFreeCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<StereoscopicFreeCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<StereoscopicFreeCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof StereoscopicFreeCamera>[0];
                 position: ConstructorParameters<typeof StereoscopicFreeCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof StereoscopicFreeCamera>[2];
                 isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicFreeCamera>[3];
                 scene: ConstructorParameters<typeof StereoscopicFreeCamera>[4];
-            }
+            },
+            StereoscopicFreeCamera
         >,
         any
     >;
     stereoscopicGamepadCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<StereoscopicGamepadCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<StereoscopicGamepadCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof StereoscopicGamepadCamera>[0];
                 position: ConstructorParameters<typeof StereoscopicGamepadCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof StereoscopicGamepadCamera>[2];
                 isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicGamepadCamera>[3];
                 scene: ConstructorParameters<typeof StereoscopicGamepadCamera>[4];
-            }
+            },
+            StereoscopicGamepadCamera
         >,
         any
     >;
     stereoscopicScreenUniversalCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<StereoscopicScreenUniversalCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<StereoscopicScreenUniversalCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[0];
                 position: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[1];
                 scene: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[2];
                 distanceToProjectionPlane: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[3];
                 distanceBetweenEyes: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[4];
-            }
+            },
+            StereoscopicScreenUniversalCamera
         >,
         any
     >;
     stereoscopicUniversalCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<StereoscopicUniversalCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<StereoscopicUniversalCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof StereoscopicUniversalCamera>[0];
                 position: ConstructorParameters<typeof StereoscopicUniversalCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof StereoscopicUniversalCamera>[2];
                 isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicUniversalCamera>[3];
                 scene: ConstructorParameters<typeof StereoscopicUniversalCamera>[4];
-            }
+            },
+            StereoscopicUniversalCamera
         >,
         any
     >;
     arcRotateCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ArcRotateCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ArcRotateCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof ArcRotateCamera>[0];
                 alpha: ConstructorParameters<typeof ArcRotateCamera>[1];
@@ -1191,7 +1234,8 @@ export interface JSXElements {
                 target: ConstructorParameters<typeof ArcRotateCamera>[4];
                 scene: ConstructorParameters<typeof ArcRotateCamera>[5];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof ArcRotateCamera>[6];
-            }
+            },
+            ArcRotateCamera
         >,
         any
     >;
@@ -1200,19 +1244,21 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<ArcRotateCameraInputsManager>,
             {
                 camera: ConstructorParameters<typeof ArcRotateCameraInputsManager>[0];
-            }
+            },
+            ArcRotateCameraInputsManager
         >,
         any
     >;
     camera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Camera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Camera> & Clonable,
             {
                 name: ConstructorParameters<typeof Camera>[0];
                 position: ConstructorParameters<typeof Camera>[1];
                 scene: ConstructorParameters<typeof Camera>[2];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof Camera>[3];
-            }
+            },
+            Camera
         >,
         any
     >;
@@ -1221,30 +1267,33 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<CameraInputsManager>,
             {
                 camera: ConstructorParameters<typeof CameraInputsManager>[0];
-            }
+            },
+            CameraInputsManager
         >,
         any
     >;
     deviceOrientationCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DeviceOrientationCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DeviceOrientationCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof DeviceOrientationCamera>[0];
                 position: ConstructorParameters<typeof DeviceOrientationCamera>[1];
                 scene: ConstructorParameters<typeof DeviceOrientationCamera>[2];
-            }
+            },
+            DeviceOrientationCamera
         >,
         any
     >;
     flyCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlyCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FlyCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof FlyCamera>[0];
                 position: ConstructorParameters<typeof FlyCamera>[1];
                 scene: ConstructorParameters<typeof FlyCamera>[2];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof FlyCamera>[3];
-            }
+            },
+            FlyCamera
         >,
         any
     >;
@@ -1253,19 +1302,21 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlyCameraInputsManager>,
             {
                 camera: ConstructorParameters<typeof FlyCameraInputsManager>[0];
-            }
+            },
+            FlyCameraInputsManager
         >,
         any
     >;
     followCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FollowCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FollowCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof FollowCamera>[0];
                 position: ConstructorParameters<typeof FollowCamera>[1];
                 scene: ConstructorParameters<typeof FollowCamera>[2];
                 lockedTarget: ConstructorParameters<typeof FollowCamera>[3];
-            }
+            },
+            FollowCamera
         >,
         any
     >;
@@ -1274,19 +1325,21 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FollowCameraInputsManager>,
             {
                 camera: ConstructorParameters<typeof FollowCameraInputsManager>[0];
-            }
+            },
+            FollowCameraInputsManager
         >,
         any
     >;
     freeCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FreeCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FreeCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof FreeCamera>[0];
                 position: ConstructorParameters<typeof FreeCamera>[1];
                 scene: ConstructorParameters<typeof FreeCamera>[2];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof FreeCamera>[3];
-            }
+            },
+            FreeCamera
         >,
         any
     >;
@@ -1295,67 +1348,73 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FreeCameraInputsManager>,
             {
                 camera: ConstructorParameters<typeof FreeCameraInputsManager>[0];
-            }
+            },
+            FreeCameraInputsManager
         >,
         any
     >;
     gamepadCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GamepadCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GamepadCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof GamepadCamera>[0];
                 position: ConstructorParameters<typeof GamepadCamera>[1];
                 scene: ConstructorParameters<typeof GamepadCamera>[2];
-            }
+            },
+            GamepadCamera
         >,
         any
     >;
     targetCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TargetCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TargetCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof TargetCamera>[0];
                 position: ConstructorParameters<typeof TargetCamera>[1];
                 scene: ConstructorParameters<typeof TargetCamera>[2];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof TargetCamera>[3];
-            }
+            },
+            TargetCamera
         >,
         any
     >;
     touchCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TouchCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TouchCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof TouchCamera>[0];
                 position: ConstructorParameters<typeof TouchCamera>[1];
                 scene: ConstructorParameters<typeof TouchCamera>[2];
-            }
+            },
+            TouchCamera
         >,
         any
     >;
     universalCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<UniversalCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<UniversalCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof UniversalCamera>[0];
                 position: ConstructorParameters<typeof UniversalCamera>[1];
                 scene: ConstructorParameters<typeof UniversalCamera>[2];
-            }
+            },
+            UniversalCamera
         >,
         any
     >;
     virtualJoysticksCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<VirtualJoysticksCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<VirtualJoysticksCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof VirtualJoysticksCamera>[0];
                 position: ConstructorParameters<typeof VirtualJoysticksCamera>[1];
                 scene: ConstructorParameters<typeof VirtualJoysticksCamera>[2];
-            }
+            },
+            VirtualJoysticksCamera
         >,
         any
     >;
-    collider: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Collider>>, any>;
+    collider: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Collider>, Collider>, any>;
     intersectionInfo: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<IntersectionInfo>,
@@ -1363,11 +1422,12 @@ export interface JSXElements {
                 bu: ConstructorParameters<typeof IntersectionInfo>[0];
                 bv: ConstructorParameters<typeof IntersectionInfo>[1];
                 distance: ConstructorParameters<typeof IntersectionInfo>[2];
-            }
+            },
+            IntersectionInfo
         >,
         any
     >;
-    pickingInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PickingInfo>>, any>;
+    pickingInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PickingInfo>, PickingInfo>, any>;
     computeEffect: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ComputeEffect>,
@@ -1376,7 +1436,8 @@ export interface JSXElements {
                 options: ConstructorParameters<typeof ComputeEffect>[1];
                 engine: ConstructorParameters<typeof ComputeEffect>[2];
                 key: ConstructorParameters<typeof ComputeEffect>[3];
-            }
+            },
+            ComputeEffect
         >,
         any
     >;
@@ -1388,7 +1449,8 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof ComputeShader>[1];
                 shaderPath: ConstructorParameters<typeof ComputeShader>[2];
                 options: ConstructorParameters<typeof ComputeShader>[3];
-            }
+            },
+            ComputeShader
         >,
         any
     >;
@@ -1399,7 +1461,8 @@ export interface JSXElements {
                 creationFunc: ConstructorParameters<typeof Octree>[0];
                 maxBlockCapacity: ConstructorParameters<typeof Octree>[1];
                 maxDepth: ConstructorParameters<typeof Octree>[2];
-            }
+            },
+            Octree
         >,
         any
     >;
@@ -1413,7 +1476,8 @@ export interface JSXElements {
                 depth: ConstructorParameters<typeof OctreeBlock>[3];
                 maxDepth: ConstructorParameters<typeof OctreeBlock>[4];
                 creationFunc: ConstructorParameters<typeof OctreeBlock>[5];
-            }
+            },
+            OctreeBlock
         >,
         any
     >;
@@ -1422,7 +1486,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<OctreeSceneComponent>,
             {
                 scene: ConstructorParameters<typeof OctreeSceneComponent>[0];
-            }
+            },
+            OctreeSceneComponent
         >,
         any
     >;
@@ -1433,7 +1498,8 @@ export interface JSXElements {
                 min: ConstructorParameters<typeof BoundingBox>[0];
                 max: ConstructorParameters<typeof BoundingBox>[1];
                 worldMatrix: ConstructorParameters<typeof BoundingBox>[2];
-            }
+            },
+            BoundingBox
         >,
         any
     >;
@@ -1444,7 +1510,8 @@ export interface JSXElements {
                 minimum: ConstructorParameters<typeof BoundingInfo>[0];
                 maximum: ConstructorParameters<typeof BoundingInfo>[1];
                 worldMatrix: ConstructorParameters<typeof BoundingInfo>[2];
-            }
+            },
+            BoundingInfo
         >,
         any
     >;
@@ -1455,19 +1522,21 @@ export interface JSXElements {
                 min: ConstructorParameters<typeof BoundingSphere>[0];
                 max: ConstructorParameters<typeof BoundingSphere>[1];
                 worldMatrix: ConstructorParameters<typeof BoundingSphere>[2];
-            }
+            },
+            BoundingSphere
         >,
         any
     >;
     ray: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Ray & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Ray> & Clonable,
             {
                 origin: ConstructorParameters<typeof Ray>[0];
                 direction: ConstructorParameters<typeof Ray>[1];
                 length: ConstructorParameters<typeof Ray>[2];
                 epsilon: ConstructorParameters<typeof Ray>[3];
-            }
+            },
+            Ray
         >,
         any
     >;
@@ -1482,7 +1551,8 @@ export interface JSXElements {
                 yAxis: ConstructorParameters<typeof AxesViewer>[4];
                 zAxis: ConstructorParameters<typeof AxesViewer>[5];
                 lineThickness: ConstructorParameters<typeof AxesViewer>[6];
-            }
+            },
+            AxesViewer
         >,
         any
     >;
@@ -1494,7 +1564,8 @@ export interface JSXElements {
                 bone: ConstructorParameters<typeof BoneAxesViewer>[1];
                 mesh: ConstructorParameters<typeof BoneAxesViewer>[2];
                 scaleLines: ConstructorParameters<typeof BoneAxesViewer>[3];
-            }
+            },
+            BoneAxesViewer
         >,
         any
     >;
@@ -1503,7 +1574,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<DebugLayer>,
             {
                 scene: ConstructorParameters<typeof DebugLayer>[0];
-            }
+            },
+            DebugLayer
         >,
         any
     >;
@@ -1513,7 +1585,8 @@ export interface JSXElements {
             {
                 light: ConstructorParameters<typeof DirectionalLightFrustumViewer>[0];
                 camera: ConstructorParameters<typeof DirectionalLightFrustumViewer>[1];
-            }
+            },
+            DirectionalLightFrustumViewer
         >,
         any
     >;
@@ -1522,7 +1595,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<PhysicsViewer>,
             {
                 scene: ConstructorParameters<typeof PhysicsViewer>[0];
-            }
+            },
+            PhysicsViewer
         >,
         any
     >;
@@ -1531,7 +1605,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<RayHelper>,
             {
                 ray: ConstructorParameters<typeof RayHelper>[0];
-            }
+            },
+            RayHelper
         >,
         any
     >;
@@ -1545,7 +1620,8 @@ export interface JSXElements {
                 autoUpdateBonesMatrices: ConstructorParameters<typeof SkeletonViewer>[3];
                 renderingGroupId: ConstructorParameters<typeof SkeletonViewer>[4];
                 options: ConstructorParameters<typeof SkeletonViewer>[5];
-            }
+            },
+            SkeletonViewer
         >,
         any
     >;
@@ -1556,7 +1632,8 @@ export interface JSXElements {
                 deviceInputSystem: ConstructorParameters<typeof DeviceSource>[0];
                 deviceType: ConstructorParameters<typeof DeviceSource>[1];
                 deviceSlot: ConstructorParameters<typeof DeviceSource>[2];
-            }
+            },
+            DeviceSource
         >,
         any
     >;
@@ -1565,7 +1642,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<DeviceSourceManager>,
             {
                 engine: ConstructorParameters<typeof DeviceSourceManager>[0];
-            }
+            },
+            DeviceSourceManager
         >,
         any
     >;
@@ -1574,7 +1652,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<InternalDeviceSourceManager>,
             {
                 engine: ConstructorParameters<typeof InternalDeviceSourceManager>[0];
-            }
+            },
+            InternalDeviceSourceManager
         >,
         any
     >;
@@ -1585,7 +1664,8 @@ export interface JSXElements {
                 onDeviceConnected: ConstructorParameters<typeof NativeDeviceInputSystem>[0];
                 onDeviceDisconnected: ConstructorParameters<typeof NativeDeviceInputSystem>[1];
                 onInputChanged: ConstructorParameters<typeof NativeDeviceInputSystem>[2];
-            }
+            },
+            NativeDeviceInputSystem
         >,
         any
     >;
@@ -1597,18 +1677,20 @@ export interface JSXElements {
                 onDeviceConnected: ConstructorParameters<typeof WebDeviceInputSystem>[1];
                 onDeviceDisconnected: ConstructorParameters<typeof WebDeviceInputSystem>[2];
                 onInputChanged: ConstructorParameters<typeof WebDeviceInputSystem>[3];
-            }
+            },
+            WebDeviceInputSystem
         >,
         any
     >;
-    nativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NativeDataStream>>, any>;
+    nativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NativeDataStream>, NativeDataStream>, any>;
     nativeHardwareTexture: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NativeHardwareTexture>,
             {
                 existingTexture: ConstructorParameters<typeof NativeHardwareTexture>[0];
                 engine: ConstructorParameters<typeof NativeHardwareTexture>[1];
-            }
+            },
+            NativeHardwareTexture
         >,
         any
     >;
@@ -1619,7 +1701,8 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof NativePipelineContext>[0];
                 isAsync: ConstructorParameters<typeof NativePipelineContext>[1];
                 shaderProcessingContext: ConstructorParameters<typeof NativePipelineContext>[2];
-            }
+            },
+            NativePipelineContext
         >,
         any
     >;
@@ -1631,12 +1714,13 @@ export interface JSXElements {
                 isCube: ConstructorParameters<typeof NativeRenderTargetWrapper>[1];
                 size: ConstructorParameters<typeof NativeRenderTargetWrapper>[2];
                 engine: ConstructorParameters<typeof NativeRenderTargetWrapper>[3];
-            }
+            },
+            NativeRenderTargetWrapper
         >,
         any
     >;
-    nativeShaderProcessingContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NativeShaderProcessingContext>>, any>;
-    validatedNativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ValidatedNativeDataStream>>, any>;
+    nativeShaderProcessingContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NativeShaderProcessingContext>, NativeShaderProcessingContext>, any>;
+    validatedNativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ValidatedNativeDataStream>, ValidatedNativeDataStream>, any>;
     shaderDefineArithmeticOperator: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ShaderDefineArithmeticOperator>,
@@ -1644,7 +1728,8 @@ export interface JSXElements {
                 define: ConstructorParameters<typeof ShaderDefineArithmeticOperator>[0];
                 operand: ConstructorParameters<typeof ShaderDefineArithmeticOperator>[1];
                 testValue: ConstructorParameters<typeof ShaderDefineArithmeticOperator>[2];
-            }
+            },
+            ShaderDefineArithmeticOperator
         >,
         any
     >;
@@ -1654,33 +1739,36 @@ export interface JSXElements {
             {
                 define: ConstructorParameters<typeof ShaderDefineIsDefinedOperator>[0];
                 not: ConstructorParameters<typeof ShaderDefineIsDefinedOperator>[1];
-            }
+            },
+            ShaderDefineIsDefinedOperator
         >,
         any
     >;
-    shaderCodeCursor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShaderCodeCursor>>, any>;
+    shaderCodeCursor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShaderCodeCursor>, ShaderCodeCursor>, any>;
     shaderCodeInliner: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ShaderCodeInliner>,
             {
                 sourceCode: ConstructorParameters<typeof ShaderCodeInliner>[0];
                 numMaxIterations: ConstructorParameters<typeof ShaderCodeInliner>[1];
-            }
+            },
+            ShaderCodeInliner
         >,
         any
     >;
-    shaderCodeNode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShaderCodeNode>>, any>;
+    shaderCodeNode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShaderCodeNode>, ShaderCodeNode>, any>;
     webGLHardwareTexture: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WebGLHardwareTexture>,
             {
                 existingTexture: ConstructorParameters<typeof WebGLHardwareTexture>[0];
                 context: ConstructorParameters<typeof WebGLHardwareTexture>[1];
-            }
+            },
+            WebGLHardwareTexture
         >,
         any
     >;
-    webGLPipelineContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGLPipelineContext>>, any>;
+    webGLPipelineContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGLPipelineContext>, WebGLPipelineContext>, any>;
     webGLRenderTargetWrapper: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WebGLRenderTargetWrapper>,
@@ -1690,7 +1778,8 @@ export interface JSXElements {
                 size: ConstructorParameters<typeof WebGLRenderTargetWrapper>[2];
                 engine: ConstructorParameters<typeof WebGLRenderTargetWrapper>[3];
                 context: ConstructorParameters<typeof WebGLRenderTargetWrapper>[4];
-            }
+            },
+            WebGLRenderTargetWrapper
         >,
         any
     >;
@@ -1701,7 +1790,8 @@ export interface JSXElements {
                 antialias: ConstructorParameters<typeof AbstractEngine>[0];
                 options: ConstructorParameters<typeof AbstractEngine>[1];
                 adaptToDeviceRatio: ConstructorParameters<typeof AbstractEngine>[2];
-            }
+            },
+            AbstractEngine
         >,
         any
     >;
@@ -1713,7 +1803,8 @@ export interface JSXElements {
                 antialias: ConstructorParameters<typeof Engine>[1];
                 options: ConstructorParameters<typeof Engine>[2];
                 adaptToDeviceRatio: ConstructorParameters<typeof Engine>[3];
-            }
+            },
+            Engine
         >,
         any
     >;
@@ -1722,7 +1813,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<NativeEngine>,
             {
                 options: ConstructorParameters<typeof NativeEngine>[0];
-            }
+            },
+            NativeEngine
         >,
         any
     >;
@@ -1731,7 +1823,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<NullEngine>,
             {
                 options: ConstructorParameters<typeof NullEngine>[0];
-            }
+            },
+            NullEngine
         >,
         any
     >;
@@ -1744,7 +1837,8 @@ export interface JSXElements {
                 size: ConstructorParameters<typeof RenderTargetWrapper>[2];
                 engine: ConstructorParameters<typeof RenderTargetWrapper>[3];
                 label: ConstructorParameters<typeof RenderTargetWrapper>[4];
-            }
+            },
+            RenderTargetWrapper
         >,
         any
     >;
@@ -1756,7 +1850,8 @@ export interface JSXElements {
                 antialias: ConstructorParameters<typeof ThinEngine>[1];
                 options: ConstructorParameters<typeof ThinEngine>[2];
                 adaptToDeviceRatio: ConstructorParameters<typeof ThinEngine>[3];
-            }
+            },
+            ThinEngine
         >,
         any
     >;
@@ -1770,7 +1865,8 @@ export interface JSXElements {
                 _operation: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[3];
                 _className: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[4];
                 config: ConstructorParameters<typeof FlowGraphBinaryOperationBlock>[5];
-            }
+            },
+            FlowGraphBinaryOperationBlock
         >,
         any
     >;
@@ -1780,7 +1876,8 @@ export interface JSXElements {
             {
                 outputRichType: ConstructorParameters<typeof FlowGraphCachedOperationBlock>[0];
                 config: ConstructorParameters<typeof FlowGraphCachedOperationBlock>[1];
-            }
+            },
+            FlowGraphCachedOperationBlock
         >,
         any
     >;
@@ -1789,7 +1886,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphConditionalDataBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphConditionalDataBlock>[0];
-            }
+            },
+            FlowGraphConditionalDataBlock
         >,
         any
     >;
@@ -1798,7 +1896,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphConstantBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphConstantBlock>[0];
-            }
+            },
+            FlowGraphConstantBlock
         >,
         any
     >;
@@ -1810,7 +1909,8 @@ export interface JSXElements {
                 _operation: ConstructorParameters<typeof FlowGraphConstantOperationBlock>[1];
                 _className: ConstructorParameters<typeof FlowGraphConstantOperationBlock>[2];
                 config: ConstructorParameters<typeof FlowGraphConstantOperationBlock>[3];
-            }
+            },
+            FlowGraphConstantOperationBlock
         >,
         any
     >;
@@ -1819,7 +1919,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphCoordinateTransformBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphCoordinateTransformBlock>[0];
-            }
+            },
+            FlowGraphCoordinateTransformBlock
         >,
         any
     >;
@@ -1828,7 +1929,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphGetPropertyBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphGetPropertyBlock>[0];
-            }
+            },
+            FlowGraphGetPropertyBlock
         >,
         any
     >;
@@ -1837,7 +1939,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphGetVariableBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphGetVariableBlock>[0];
-            }
+            },
+            FlowGraphGetVariableBlock
         >,
         any
     >;
@@ -1852,7 +1955,8 @@ export interface JSXElements {
                 _operation: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[4];
                 _className: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[5];
                 config: ConstructorParameters<typeof FlowGraphTernaryOperationBlock>[6];
-            }
+            },
+            FlowGraphTernaryOperationBlock
         >,
         any
     >;
@@ -1865,7 +1969,8 @@ export interface JSXElements {
                 _operation: ConstructorParameters<typeof FlowGraphUnaryOperationBlock>[2];
                 _className: ConstructorParameters<typeof FlowGraphUnaryOperationBlock>[3];
                 config: ConstructorParameters<typeof FlowGraphUnaryOperationBlock>[4];
-            }
+            },
+            FlowGraphUnaryOperationBlock
         >,
         any
     >;
@@ -1874,7 +1979,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphMeshPickEventBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphMeshPickEventBlock>[0];
-            }
+            },
+            FlowGraphMeshPickEventBlock
         >,
         any
     >;
@@ -1883,7 +1989,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphReceiveCustomEventBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphReceiveCustomEventBlock>[0];
-            }
+            },
+            FlowGraphReceiveCustomEventBlock
         >,
         any
     >;
@@ -1892,7 +1999,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphPauseAnimationBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphPauseAnimationBlock>[0];
-            }
+            },
+            FlowGraphPauseAnimationBlock
         >,
         any
     >;
@@ -1901,7 +2009,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphPlayAnimationBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphPlayAnimationBlock>[0];
-            }
+            },
+            FlowGraphPlayAnimationBlock
         >,
         any
     >;
@@ -1910,7 +2019,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphStopAnimationBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphStopAnimationBlock>[0];
-            }
+            },
+            FlowGraphStopAnimationBlock
         >,
         any
     >;
@@ -1919,7 +2029,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphPlayAudioBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphPlayAudioBlock>[0];
-            }
+            },
+            FlowGraphPlayAudioBlock
         >,
         any
     >;
@@ -1928,7 +2039,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphStopAudioBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphStopAudioBlock>[0];
-            }
+            },
+            FlowGraphStopAudioBlock
         >,
         any
     >;
@@ -1937,7 +2049,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphBranchBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphBranchBlock>[0];
-            }
+            },
+            FlowGraphBranchBlock
         >,
         any
     >;
@@ -1946,7 +2059,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphCounterBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphCounterBlock>[0];
-            }
+            },
+            FlowGraphCounterBlock
         >,
         any
     >;
@@ -1955,7 +2069,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphDebounceBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphDebounceBlock>[0];
-            }
+            },
+            FlowGraphDebounceBlock
         >,
         any
     >;
@@ -1964,7 +2079,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphDoNBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphDoNBlock>[0];
-            }
+            },
+            FlowGraphDoNBlock
         >,
         any
     >;
@@ -1973,7 +2089,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphFlipFlopBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphFlipFlopBlock>[0];
-            }
+            },
+            FlowGraphFlipFlopBlock
         >,
         any
     >;
@@ -1982,7 +2099,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphForLoopBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphForLoopBlock>[0];
-            }
+            },
+            FlowGraphForLoopBlock
         >,
         any
     >;
@@ -1991,7 +2109,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphMultiGateBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphMultiGateBlock>[0];
-            }
+            },
+            FlowGraphMultiGateBlock
         >,
         any
     >;
@@ -2000,7 +2119,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphSequenceBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphSequenceBlock>[0];
-            }
+            },
+            FlowGraphSequenceBlock
         >,
         any
     >;
@@ -2009,7 +2129,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphSwitchBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphSwitchBlock>[0];
-            }
+            },
+            FlowGraphSwitchBlock
         >,
         any
     >;
@@ -2018,7 +2139,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphThrottleBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphThrottleBlock>[0];
-            }
+            },
+            FlowGraphThrottleBlock
         >,
         any
     >;
@@ -2027,7 +2149,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphTimerBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphTimerBlock>[0];
-            }
+            },
+            FlowGraphTimerBlock
         >,
         any
     >;
@@ -2036,7 +2159,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphWaitAllBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphWaitAllBlock>[0];
-            }
+            },
+            FlowGraphWaitAllBlock
         >,
         any
     >;
@@ -2045,7 +2169,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphWhileLoopBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphWhileLoopBlock>[0];
-            }
+            },
+            FlowGraphWhileLoopBlock
         >,
         any
     >;
@@ -2054,7 +2179,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphConsoleLogBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphConsoleLogBlock>[0];
-            }
+            },
+            FlowGraphConsoleLogBlock
         >,
         any
     >;
@@ -2063,7 +2189,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphSendCustomEventBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphSendCustomEventBlock>[0];
-            }
+            },
+            FlowGraphSendCustomEventBlock
         >,
         any
     >;
@@ -2072,7 +2199,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphSetPropertyBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphSetPropertyBlock>[0];
-            }
+            },
+            FlowGraphSetPropertyBlock
         >,
         any
     >;
@@ -2081,7 +2209,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphSetVariableBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphSetVariableBlock>[0];
-            }
+            },
+            FlowGraphSetVariableBlock
         >,
         any
     >;
@@ -2090,7 +2219,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraph>,
             {
                 params: ConstructorParameters<typeof FlowGraph>[0];
-            }
+            },
+            FlowGraph
         >,
         any
     >;
@@ -2099,7 +2229,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphAsyncExecutionBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphAsyncExecutionBlock>[0];
-            }
+            },
+            FlowGraphAsyncExecutionBlock
         >,
         any
     >;
@@ -2108,7 +2239,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphBlock>[0];
-            }
+            },
+            FlowGraphBlock
         >,
         any
     >;
@@ -2119,7 +2251,8 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof FlowGraphConnection>[0];
                 _connectionType: ConstructorParameters<typeof FlowGraphConnection>[1];
                 _ownerBlock: ConstructorParameters<typeof FlowGraphConnection>[2];
-            }
+            },
+            FlowGraphConnection
         >,
         any
     >;
@@ -2128,7 +2261,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphContext>,
             {
                 params: ConstructorParameters<typeof FlowGraphContext>[0];
-            }
+            },
+            FlowGraphContext
         >,
         any
     >;
@@ -2137,7 +2271,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphContextLogger>,
             {
                 _context: ConstructorParameters<typeof FlowGraphContextLogger>[0];
-            }
+            },
+            FlowGraphContextLogger
         >,
         any
     >;
@@ -2146,7 +2281,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphCoordinator>,
             {
                 config: ConstructorParameters<typeof FlowGraphCoordinator>[0];
-            }
+            },
+            FlowGraphCoordinator
         >,
         any
     >;
@@ -2158,7 +2294,8 @@ export interface JSXElements {
                 connectionType: ConstructorParameters<typeof FlowGraphDataConnection>[1];
                 ownerBlock: ConstructorParameters<typeof FlowGraphDataConnection>[2];
                 richType: ConstructorParameters<typeof FlowGraphDataConnection>[3];
-            }
+            },
+            FlowGraphDataConnection
         >,
         any
     >;
@@ -2167,7 +2304,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphExecutionBlock>,
             {
                 config: ConstructorParameters<typeof FlowGraphExecutionBlock>[0];
-            }
+            },
+            FlowGraphExecutionBlock
         >,
         any
     >;
@@ -2176,7 +2314,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphExecutionBlockWithOutSignal>,
             {
                 config: ConstructorParameters<typeof FlowGraphExecutionBlockWithOutSignal>[0];
-            }
+            },
+            FlowGraphExecutionBlockWithOutSignal
         >,
         any
     >;
@@ -2185,7 +2324,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FlowGraphInteger>,
             {
                 value: ConstructorParameters<typeof FlowGraphInteger>[0];
-            }
+            },
+            FlowGraphInteger
         >,
         any
     >;
@@ -2195,7 +2335,8 @@ export interface JSXElements {
             {
                 _context: ConstructorParameters<typeof FlowGraphPathConverter>[0];
                 _separator: ConstructorParameters<typeof FlowGraphPathConverter>[1];
-            }
+            },
+            FlowGraphPathConverter
         >,
         any
     >;
@@ -2205,7 +2346,8 @@ export interface JSXElements {
             {
                 path: ConstructorParameters<typeof FlowGraphPathConverterComponent>[0];
                 ownerBlock: ConstructorParameters<typeof FlowGraphPathConverterComponent>[1];
-            }
+            },
+            FlowGraphPathConverterComponent
         >,
         any
     >;
@@ -2220,7 +2362,8 @@ export interface JSXElements {
                 leftStickY: ConstructorParameters<typeof Gamepad>[4];
                 rightStickX: ConstructorParameters<typeof Gamepad>[5];
                 rightStickY: ConstructorParameters<typeof Gamepad>[6];
-            }
+            },
+            Gamepad
         >,
         any
     >;
@@ -2229,7 +2372,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<GamepadManager>,
             {
                 _scene: ConstructorParameters<typeof GamepadManager>[0];
-            }
+            },
+            GamepadManager
         >,
         any
     >;
@@ -2244,7 +2388,8 @@ export interface JSXElements {
                 thickness: ConstructorParameters<typeof AxisDragGizmo>[4];
                 hoverColor: ConstructorParameters<typeof AxisDragGizmo>[5];
                 disableColor: ConstructorParameters<typeof AxisDragGizmo>[6];
-            }
+            },
+            AxisDragGizmo
         >,
         any
     >;
@@ -2259,7 +2404,8 @@ export interface JSXElements {
                 thickness: ConstructorParameters<typeof AxisScaleGizmo>[4];
                 hoverColor: ConstructorParameters<typeof AxisScaleGizmo>[5];
                 disableColor: ConstructorParameters<typeof AxisScaleGizmo>[6];
-            }
+            },
+            AxisScaleGizmo
         >,
         any
     >;
@@ -2269,7 +2415,8 @@ export interface JSXElements {
             {
                 color: ConstructorParameters<typeof BoundingBoxGizmo>[0];
                 gizmoLayer: ConstructorParameters<typeof BoundingBoxGizmo>[1];
-            }
+            },
+            BoundingBoxGizmo
         >,
         any
     >;
@@ -2280,7 +2427,8 @@ export interface JSXElements {
                 gizmoLayer: ConstructorParameters<typeof CameraGizmo>[0];
                 gizmoColor: ConstructorParameters<typeof CameraGizmo>[1];
                 frustumLinesColor: ConstructorParameters<typeof CameraGizmo>[2];
-            }
+            },
+            CameraGizmo
         >,
         any
     >;
@@ -2289,7 +2437,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<Gizmo>,
             {
                 gizmoLayer: ConstructorParameters<typeof Gizmo>[0];
-            }
+            },
+            Gizmo
         >,
         any
     >;
@@ -2301,7 +2450,8 @@ export interface JSXElements {
                 thickness: ConstructorParameters<typeof GizmoManager>[1];
                 utilityLayer: ConstructorParameters<typeof GizmoManager>[2];
                 keepDepthUtilityLayer: ConstructorParameters<typeof GizmoManager>[3];
-            }
+            },
+            GizmoManager
         >,
         any
     >;
@@ -2310,7 +2460,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<LightGizmo>,
             {
                 gizmoLayer: ConstructorParameters<typeof LightGizmo>[0];
-            }
+            },
+            LightGizmo
         >,
         any
     >;
@@ -2324,7 +2475,8 @@ export interface JSXElements {
                 parent: ConstructorParameters<typeof PlaneDragGizmo>[3];
                 hoverColor: ConstructorParameters<typeof PlaneDragGizmo>[4];
                 disableColor: ConstructorParameters<typeof PlaneDragGizmo>[5];
-            }
+            },
+            PlaneDragGizmo
         >,
         any
     >;
@@ -2341,7 +2493,8 @@ export interface JSXElements {
                 thickness: ConstructorParameters<typeof PlaneRotationGizmo>[6];
                 hoverColor: ConstructorParameters<typeof PlaneRotationGizmo>[7];
                 disableColor: ConstructorParameters<typeof PlaneRotationGizmo>[8];
-            }
+            },
+            PlaneRotationGizmo
         >,
         any
     >;
@@ -2353,7 +2506,8 @@ export interface JSXElements {
                 thickness: ConstructorParameters<typeof PositionGizmo>[1];
                 gizmoManager: ConstructorParameters<typeof PositionGizmo>[2];
                 options: ConstructorParameters<typeof PositionGizmo>[3];
-            }
+            },
+            PositionGizmo
         >,
         any
     >;
@@ -2367,7 +2521,8 @@ export interface JSXElements {
                 thickness: ConstructorParameters<typeof RotationGizmo>[3];
                 gizmoManager: ConstructorParameters<typeof RotationGizmo>[4];
                 options: ConstructorParameters<typeof RotationGizmo>[5];
-            }
+            },
+            RotationGizmo
         >,
         any
     >;
@@ -2379,7 +2534,8 @@ export interface JSXElements {
                 thickness: ConstructorParameters<typeof ScaleGizmo>[1];
                 gizmoManager: ConstructorParameters<typeof ScaleGizmo>[2];
                 options: ConstructorParameters<typeof ScaleGizmo>[3];
-            }
+            },
+            ScaleGizmo
         >,
         any
     >;
@@ -2389,30 +2545,33 @@ export interface JSXElements {
             {
                 options: ConstructorParameters<typeof EnvironmentHelper>[0];
                 scene: ConstructorParameters<typeof EnvironmentHelper>[1];
-            }
+            },
+            EnvironmentHelper
         >,
         any
     >;
     textureDome: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TextureDome & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TextureDome> & Clonable,
             {
                 name: ConstructorParameters<typeof TextureDome>[0];
                 textureUrlOrElement: ConstructorParameters<typeof TextureDome>[1];
                 options: ConstructorParameters<typeof TextureDome>[2];
                 scene: ConstructorParameters<typeof TextureDome>[3];
                 onError: ConstructorParameters<typeof TextureDome>[4];
-            }
+            },
+            TextureDome
         >,
         any
     >;
-    pointerPickingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PointerPickingConfiguration>>, any>;
+    pointerPickingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PointerPickingConfiguration>, PointerPickingConfiguration>, any>;
     engineInstrumentation: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<EngineInstrumentation>,
             {
                 engine: ConstructorParameters<typeof EngineInstrumentation>[0];
-            }
+            },
+            EngineInstrumentation
         >,
         any
     >;
@@ -2421,7 +2580,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<SceneInstrumentation>,
             {
                 scene: ConstructorParameters<typeof SceneInstrumentation>[0];
-            }
+            },
+            SceneInstrumentation
         >,
         any
     >;
@@ -2431,7 +2591,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof EffectLayer>[0];
                 scene: ConstructorParameters<typeof EffectLayer>[1];
-            }
+            },
+            EffectLayer
         >,
         any
     >;
@@ -2440,7 +2601,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<EffectLayerSceneComponent>,
             {
                 scene: ConstructorParameters<typeof EffectLayerSceneComponent>[0];
-            }
+            },
+            EffectLayerSceneComponent
         >,
         any
     >;
@@ -2451,7 +2613,8 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof GlowLayer>[0];
                 scene: ConstructorParameters<typeof GlowLayer>[1];
                 options: ConstructorParameters<typeof GlowLayer>[2];
-            }
+            },
+            GlowLayer
         >,
         any
     >;
@@ -2462,7 +2625,8 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof HighlightLayer>[0];
                 scene: ConstructorParameters<typeof HighlightLayer>[1];
                 options: ConstructorParameters<typeof HighlightLayer>[2];
-            }
+            },
+            HighlightLayer
         >,
         any
     >;
@@ -2475,7 +2639,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof Layer>[2];
                 isBackground: ConstructorParameters<typeof Layer>[3];
                 color: ConstructorParameters<typeof Layer>[4];
-            }
+            },
+            Layer
         >,
         any
     >;
@@ -2484,7 +2649,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<LayerSceneComponent>,
             {
                 scene: ConstructorParameters<typeof LayerSceneComponent>[0];
-            }
+            },
+            LayerSceneComponent
         >,
         any
     >;
@@ -2497,7 +2663,8 @@ export interface JSXElements {
                 color: ConstructorParameters<typeof LensFlare>[2];
                 imgUrl: ConstructorParameters<typeof LensFlare>[3];
                 system: ConstructorParameters<typeof LensFlare>[4];
-            }
+            },
+            LensFlare
         >,
         any
     >;
@@ -2508,7 +2675,8 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof LensFlareSystem>[0];
                 emitter: ConstructorParameters<typeof LensFlareSystem>[1];
                 scene: ConstructorParameters<typeof LensFlareSystem>[2];
-            }
+            },
+            LensFlareSystem
         >,
         any
     >;
@@ -2517,7 +2685,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<LensFlareSystemSceneComponent>,
             {
                 scene: ConstructorParameters<typeof LensFlareSystemSceneComponent>[0];
-            }
+            },
+            LensFlareSystemSceneComponent
         >,
         any
     >;
@@ -2530,7 +2699,8 @@ export interface JSXElements {
                 usefulFloatFirst: ConstructorParameters<typeof CascadedShadowGenerator>[2];
                 camera: ConstructorParameters<typeof CascadedShadowGenerator>[3];
                 useRedTextureType: ConstructorParameters<typeof CascadedShadowGenerator>[4];
-            }
+            },
+            CascadedShadowGenerator
         >,
         any
     >;
@@ -2543,7 +2713,8 @@ export interface JSXElements {
                 usefullFloatFirst: ConstructorParameters<typeof ShadowGenerator>[2];
                 camera: ConstructorParameters<typeof ShadowGenerator>[3];
                 useRedTextureType: ConstructorParameters<typeof ShadowGenerator>[4];
-            }
+            },
+            ShadowGenerator
         >,
         any
     >;
@@ -2552,57 +2723,62 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<ShadowGeneratorSceneComponent>,
             {
                 scene: ConstructorParameters<typeof ShadowGeneratorSceneComponent>[0];
-            }
+            },
+            ShadowGeneratorSceneComponent
         >,
         any
     >;
     directionalLight: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DirectionalLight & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DirectionalLight> & Clonable,
             {
                 name: ConstructorParameters<typeof DirectionalLight>[0];
                 direction: ConstructorParameters<typeof DirectionalLight>[1];
                 scene: ConstructorParameters<typeof DirectionalLight>[2];
-            }
+            },
+            DirectionalLight
         >,
         any
     >;
     hemisphericLight: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<HemisphericLight & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<HemisphericLight> & Clonable,
             {
                 name: ConstructorParameters<typeof HemisphericLight>[0];
                 direction: ConstructorParameters<typeof HemisphericLight>[1];
                 scene: ConstructorParameters<typeof HemisphericLight>[2];
-            }
+            },
+            HemisphericLight
         >,
         any
     >;
     light: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Light & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Light> & Clonable,
             {
                 name: ConstructorParameters<typeof Light>[0];
                 scene: ConstructorParameters<typeof Light>[1];
-            }
+            },
+            Light
         >,
         any
     >;
     pointLight: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PointLight & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PointLight> & Clonable,
             {
                 name: ConstructorParameters<typeof PointLight>[0];
                 position: ConstructorParameters<typeof PointLight>[1];
                 scene: ConstructorParameters<typeof PointLight>[2];
-            }
+            },
+            PointLight
         >,
         any
     >;
-    shadowLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShadowLight & { cloneBy: string }>>, any>;
+    shadowLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShadowLight> & Clonable, ShadowLight>, any>;
     spotLight: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SpotLight & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SpotLight> & Clonable,
             {
                 name: ConstructorParameters<typeof SpotLight>[0];
                 position: ConstructorParameters<typeof SpotLight>[1];
@@ -2610,27 +2786,30 @@ export interface JSXElements {
                 angle: ConstructorParameters<typeof SpotLight>[3];
                 exponent: ConstructorParameters<typeof SpotLight>[4];
                 scene: ConstructorParameters<typeof SpotLight>[5];
-            }
+            },
+            SpotLight
         >,
         any
     >;
     backgroundMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BackgroundMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BackgroundMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof BackgroundMaterial>[0];
                 scene: ConstructorParameters<typeof BackgroundMaterial>[1];
-            }
+            },
+            BackgroundMaterial
         >,
         any
     >;
     gaussianSplattingMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GaussianSplattingMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GaussianSplattingMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof GaussianSplattingMaterial>[0];
                 scene: ConstructorParameters<typeof GaussianSplattingMaterial>[1];
-            }
+            },
+            GaussianSplattingMaterial
         >,
         any
     >;
@@ -2641,932 +2820,1034 @@ export interface JSXElements {
                 material: ConstructorParameters<typeof GreasedLinePluginMaterial>[0];
                 scene: ConstructorParameters<typeof GreasedLinePluginMaterial>[1];
                 options: ConstructorParameters<typeof GreasedLinePluginMaterial>[2];
-            }
+            },
+            GreasedLinePluginMaterial
         >,
         any
     >;
     greasedLineSimpleMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GreasedLineSimpleMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GreasedLineSimpleMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof GreasedLineSimpleMaterial>[0];
                 scene: ConstructorParameters<typeof GreasedLineSimpleMaterial>[1];
                 options: ConstructorParameters<typeof GreasedLineSimpleMaterial>[2];
-            }
+            },
+            GreasedLineSimpleMaterial
         >,
         any
     >;
     clipPlanesBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ClipPlanesBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ClipPlanesBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ClipPlanesBlock>[0];
-            }
+            },
+            ClipPlanesBlock
         >,
         any
     >;
     currentScreenBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CurrentScreenBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CurrentScreenBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof CurrentScreenBlock>[0];
-            }
+            },
+            CurrentScreenBlock
         >,
         any
     >;
     fogBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FogBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FogBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof FogBlock>[0];
-            }
+            },
+            FogBlock
         >,
         any
     >;
     imageSourceBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ImageSourceBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ImageSourceBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ImageSourceBlock>[0];
-            }
+            },
+            ImageSourceBlock
         >,
         any
     >;
     lightBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<LightBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<LightBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof LightBlock>[0];
-            }
+            },
+            LightBlock
         >,
         any
     >;
     reflectionTextureBaseBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReflectionTextureBaseBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReflectionTextureBaseBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ReflectionTextureBaseBlock>[0];
-            }
+            },
+            ReflectionTextureBaseBlock
         >,
         any
     >;
     reflectionTextureBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReflectionTextureBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReflectionTextureBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ReflectionTextureBlock>[0];
-            }
+            },
+            ReflectionTextureBlock
         >,
         any
     >;
     sceneDepthBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SceneDepthBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SceneDepthBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SceneDepthBlock>[0];
-            }
+            },
+            SceneDepthBlock
         >,
         any
     >;
     textureBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TextureBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TextureBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TextureBlock>[0];
                 fragmentOnly: ConstructorParameters<typeof TextureBlock>[1];
-            }
+            },
+            TextureBlock
         >,
         any
     >;
     TBNBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TBNBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TBNBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TBNBlock>[0];
-            }
+            },
+            TBNBlock
         >,
         any
     >;
     derivativeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DerivativeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DerivativeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof DerivativeBlock>[0];
-            }
+            },
+            DerivativeBlock
         >,
         any
     >;
     discardBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DiscardBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DiscardBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof DiscardBlock>[0];
-            }
+            },
+            DiscardBlock
         >,
         any
     >;
     fragCoordBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FragCoordBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FragCoordBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof FragCoordBlock>[0];
-            }
+            },
+            FragCoordBlock
         >,
         any
     >;
     fragDepthBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FragDepthBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FragDepthBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof FragDepthBlock>[0];
-            }
+            },
+            FragDepthBlock
         >,
         any
     >;
     fragmentOutputBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FragmentOutputBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FragmentOutputBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof FragmentOutputBlock>[0];
-            }
+            },
+            FragmentOutputBlock
         >,
         any
     >;
     frontFacingBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FrontFacingBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FrontFacingBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof FrontFacingBlock>[0];
-            }
+            },
+            FrontFacingBlock
         >,
         any
     >;
     heightToNormalBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<HeightToNormalBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<HeightToNormalBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof HeightToNormalBlock>[0];
-            }
+            },
+            HeightToNormalBlock
         >,
         any
     >;
     imageProcessingBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ImageProcessingBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ImageProcessingBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ImageProcessingBlock>[0];
-            }
+            },
+            ImageProcessingBlock
         >,
         any
     >;
     perturbNormalBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PerturbNormalBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PerturbNormalBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof PerturbNormalBlock>[0];
-            }
+            },
+            PerturbNormalBlock
         >,
         any
     >;
     prePassOutputBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PrePassOutputBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PrePassOutputBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof PrePassOutputBlock>[0];
-            }
+            },
+            PrePassOutputBlock
         >,
         any
     >;
     screenSizeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ScreenSizeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ScreenSizeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ScreenSizeBlock>[0];
-            }
+            },
+            ScreenSizeBlock
         >,
         any
     >;
     screenSpaceBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ScreenSpaceBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ScreenSpaceBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ScreenSpaceBlock>[0];
-            }
+            },
+            ScreenSpaceBlock
         >,
         any
     >;
     shadowMapBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ShadowMapBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ShadowMapBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ShadowMapBlock>[0];
-            }
+            },
+            ShadowMapBlock
         >,
         any
     >;
     twirlBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TwirlBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TwirlBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TwirlBlock>[0];
-            }
+            },
+            TwirlBlock
         >,
         any
     >;
     inputBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InputBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InputBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InputBlock>[0];
                 target: ConstructorParameters<typeof InputBlock>[1];
                 type: ConstructorParameters<typeof InputBlock>[2];
-            }
+            },
+            InputBlock
         >,
         any
     >;
     prePassTextureBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PrePassTextureBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PrePassTextureBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof PrePassTextureBlock>[0];
                 target: ConstructorParameters<typeof PrePassTextureBlock>[1];
-            }
+            },
+            PrePassTextureBlock
         >,
         any
     >;
     anisotropyBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AnisotropyBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AnisotropyBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof AnisotropyBlock>[0];
-            }
+            },
+            AnisotropyBlock
         >,
         any
     >;
     clearCoatBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ClearCoatBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ClearCoatBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ClearCoatBlock>[0];
-            }
+            },
+            ClearCoatBlock
         >,
         any
     >;
     iridescenceBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<IridescenceBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<IridescenceBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof IridescenceBlock>[0];
-            }
+            },
+            IridescenceBlock
         >,
         any
     >;
     reflectionBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReflectionBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReflectionBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ReflectionBlock>[0];
-            }
+            },
+            ReflectionBlock
         >,
         any
     >;
     refractionBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RefractionBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RefractionBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof RefractionBlock>[0];
-            }
+            },
+            RefractionBlock
         >,
         any
     >;
     sheenBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SheenBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SheenBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SheenBlock>[0];
-            }
+            },
+            SheenBlock
         >,
         any
     >;
     subSurfaceBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SubSurfaceBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SubSurfaceBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SubSurfaceBlock>[0];
-            }
+            },
+            SubSurfaceBlock
         >,
         any
     >;
     particleBlendMultiplyBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ParticleBlendMultiplyBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ParticleBlendMultiplyBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ParticleBlendMultiplyBlock>[0];
-            }
+            },
+            ParticleBlendMultiplyBlock
         >,
         any
     >;
     particleRampGradientBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ParticleRampGradientBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ParticleRampGradientBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ParticleRampGradientBlock>[0];
-            }
+            },
+            ParticleRampGradientBlock
         >,
         any
     >;
     particleTextureBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ParticleTextureBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ParticleTextureBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ParticleTextureBlock>[0];
-            }
+            },
+            ParticleTextureBlock
         >,
         any
     >;
     bonesBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BonesBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BonesBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof BonesBlock>[0];
-            }
+            },
+            BonesBlock
         >,
         any
     >;
     instancesBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstancesBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstancesBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InstancesBlock>[0];
-            }
+            },
+            InstancesBlock
         >,
         any
     >;
     lightInformationBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<LightInformationBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<LightInformationBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof LightInformationBlock>[0];
-            }
+            },
+            LightInformationBlock
         >,
         any
     >;
     morphTargetsBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MorphTargetsBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MorphTargetsBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MorphTargetsBlock>[0];
-            }
+            },
+            MorphTargetsBlock
         >,
         any
     >;
     vertexOutputBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<VertexOutputBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<VertexOutputBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof VertexOutputBlock>[0];
-            }
+            },
+            VertexOutputBlock
         >,
         any
     >;
     addBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AddBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AddBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof AddBlock>[0];
-            }
+            },
+            AddBlock
         >,
         any
     >;
     arcTan2Block: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ArcTan2Block & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ArcTan2Block> & Clonable,
             {
                 name: ConstructorParameters<typeof ArcTan2Block>[0];
-            }
+            },
+            ArcTan2Block
         >,
         any
     >;
     baseMathBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BaseMathBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BaseMathBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof BaseMathBlock>[0];
-            }
+            },
+            BaseMathBlock
         >,
         any
     >;
     biPlanarBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BiPlanarBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BiPlanarBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof BiPlanarBlock>[0];
-            }
+            },
+            BiPlanarBlock
         >,
         any
     >;
     clampBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ClampBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ClampBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ClampBlock>[0];
-            }
+            },
+            ClampBlock
         >,
         any
     >;
     cloudBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CloudBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CloudBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof CloudBlock>[0];
-            }
+            },
+            CloudBlock
         >,
         any
     >;
     colorMergerBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ColorMergerBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ColorMergerBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ColorMergerBlock>[0];
-            }
+            },
+            ColorMergerBlock
         >,
         any
     >;
     colorSplitterBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ColorSplitterBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ColorSplitterBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ColorSplitterBlock>[0];
-            }
+            },
+            ColorSplitterBlock
         >,
         any
     >;
     conditionalBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ConditionalBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ConditionalBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ConditionalBlock>[0];
-            }
+            },
+            ConditionalBlock
         >,
         any
     >;
     crossBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CrossBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CrossBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof CrossBlock>[0];
-            }
+            },
+            CrossBlock
         >,
         any
     >;
     curveBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CurveBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CurveBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof CurveBlock>[0];
-            }
+            },
+            CurveBlock
         >,
         any
     >;
     customBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CustomBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CustomBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof CustomBlock>[0];
-            }
+            },
+            CustomBlock
         >,
         any
     >;
     desaturateBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DesaturateBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DesaturateBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof DesaturateBlock>[0];
-            }
+            },
+            DesaturateBlock
         >,
         any
     >;
     distanceBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DistanceBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DistanceBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof DistanceBlock>[0];
-            }
+            },
+            DistanceBlock
         >,
         any
     >;
     divideBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DivideBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DivideBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof DivideBlock>[0];
-            }
+            },
+            DivideBlock
         >,
         any
     >;
     dotBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DotBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DotBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof DotBlock>[0];
-            }
+            },
+            DotBlock
         >,
         any
     >;
     elbowBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ElbowBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ElbowBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ElbowBlock>[0];
-            }
+            },
+            ElbowBlock
         >,
         any
     >;
     fresnelBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FresnelBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FresnelBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof FresnelBlock>[0];
-            }
+            },
+            FresnelBlock
         >,
         any
     >;
     gradientBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GradientBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GradientBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GradientBlock>[0];
-            }
+            },
+            GradientBlock
         >,
         any
     >;
     lengthBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<LengthBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<LengthBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof LengthBlock>[0];
-            }
+            },
+            LengthBlock
         >,
         any
     >;
     lerpBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<LerpBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<LerpBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof LerpBlock>[0];
-            }
+            },
+            LerpBlock
         >,
         any
     >;
     matrixBuilderBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MatrixBuilderBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MatrixBuilderBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MatrixBuilderBlock>[0];
-            }
+            },
+            MatrixBuilderBlock
         >,
         any
     >;
     matrixDeterminantBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MatrixDeterminantBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MatrixDeterminantBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MatrixDeterminantBlock>[0];
-            }
+            },
+            MatrixDeterminantBlock
         >,
         any
     >;
     matrixTransposeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MatrixTransposeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MatrixTransposeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MatrixTransposeBlock>[0];
-            }
+            },
+            MatrixTransposeBlock
         >,
         any
     >;
     maxBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MaxBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MaxBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MaxBlock>[0];
-            }
+            },
+            MaxBlock
         >,
         any
     >;
     meshAttributeExistsBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MeshAttributeExistsBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MeshAttributeExistsBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MeshAttributeExistsBlock>[0];
-            }
+            },
+            MeshAttributeExistsBlock
         >,
         any
     >;
     minBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MinBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MinBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MinBlock>[0];
-            }
+            },
+            MinBlock
         >,
         any
     >;
     modBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ModBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ModBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ModBlock>[0];
-            }
+            },
+            ModBlock
         >,
         any
     >;
     multiplyBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MultiplyBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MultiplyBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MultiplyBlock>[0];
-            }
+            },
+            MultiplyBlock
         >,
         any
     >;
     nLerpBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NLerpBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NLerpBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NLerpBlock>[0];
-            }
+            },
+            NLerpBlock
         >,
         any
     >;
     negateBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NegateBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NegateBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NegateBlock>[0];
-            }
+            },
+            NegateBlock
         >,
         any
     >;
     normalBlendBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NormalBlendBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NormalBlendBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NormalBlendBlock>[0];
-            }
+            },
+            NormalBlendBlock
         >,
         any
     >;
     normalizeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NormalizeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NormalizeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NormalizeBlock>[0];
-            }
+            },
+            NormalizeBlock
         >,
         any
     >;
     oneMinusBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<OneMinusBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<OneMinusBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof OneMinusBlock>[0];
-            }
+            },
+            OneMinusBlock
         >,
         any
     >;
     posterizeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PosterizeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PosterizeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof PosterizeBlock>[0];
-            }
+            },
+            PosterizeBlock
         >,
         any
     >;
     powBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PowBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PowBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof PowBlock>[0];
-            }
+            },
+            PowBlock
         >,
         any
     >;
     randomNumberBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RandomNumberBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RandomNumberBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof RandomNumberBlock>[0];
-            }
+            },
+            RandomNumberBlock
         >,
         any
     >;
     reciprocalBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReciprocalBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReciprocalBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ReciprocalBlock>[0];
-            }
+            },
+            ReciprocalBlock
         >,
         any
     >;
     reflectBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReflectBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReflectBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ReflectBlock>[0];
-            }
+            },
+            ReflectBlock
         >,
         any
     >;
     refractBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RefractBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RefractBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof RefractBlock>[0];
-            }
+            },
+            RefractBlock
         >,
         any
     >;
     remapBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RemapBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RemapBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof RemapBlock>[0];
-            }
+            },
+            RemapBlock
         >,
         any
     >;
     replaceColorBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReplaceColorBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReplaceColorBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ReplaceColorBlock>[0];
-            }
+            },
+            ReplaceColorBlock
         >,
         any
     >;
     rotate2dBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Rotate2dBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Rotate2dBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof Rotate2dBlock>[0];
-            }
+            },
+            Rotate2dBlock
         >,
         any
     >;
     scaleBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ScaleBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ScaleBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ScaleBlock>[0];
-            }
+            },
+            ScaleBlock
         >,
         any
     >;
     simplexPerlin3DBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SimplexPerlin3DBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SimplexPerlin3DBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SimplexPerlin3DBlock>[0];
-            }
+            },
+            SimplexPerlin3DBlock
         >,
         any
     >;
     smoothStepBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SmoothStepBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SmoothStepBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SmoothStepBlock>[0];
-            }
+            },
+            SmoothStepBlock
         >,
         any
     >;
     stepBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<StepBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<StepBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof StepBlock>[0];
-            }
+            },
+            StepBlock
         >,
         any
     >;
     subtractBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SubtractBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SubtractBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SubtractBlock>[0];
-            }
+            },
+            SubtractBlock
         >,
         any
     >;
     transformBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TransformBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TransformBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TransformBlock>[0];
-            }
+            },
+            TransformBlock
         >,
         any
     >;
     triPlanarBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TriPlanarBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TriPlanarBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TriPlanarBlock>[0];
                 hideSourceZ: ConstructorParameters<typeof TriPlanarBlock>[1];
-            }
+            },
+            TriPlanarBlock
         >,
         any
     >;
     trigonometryBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TrigonometryBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TrigonometryBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TrigonometryBlock>[0];
-            }
+            },
+            TrigonometryBlock
         >,
         any
     >;
     vectorMergerBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<VectorMergerBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<VectorMergerBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof VectorMergerBlock>[0];
-            }
+            },
+            VectorMergerBlock
         >,
         any
     >;
     vectorSplitterBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<VectorSplitterBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<VectorSplitterBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof VectorSplitterBlock>[0];
-            }
+            },
+            VectorSplitterBlock
         >,
         any
     >;
     viewDirectionBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ViewDirectionBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ViewDirectionBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ViewDirectionBlock>[0];
-            }
+            },
+            ViewDirectionBlock
         >,
         any
     >;
     voronoiNoiseBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<VoronoiNoiseBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<VoronoiNoiseBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof VoronoiNoiseBlock>[0];
-            }
+            },
+            VoronoiNoiseBlock
         >,
         any
     >;
     waveBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<WaveBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<WaveBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof WaveBlock>[0];
-            }
+            },
+            WaveBlock
         >,
         any
     >;
     worleyNoise3DBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<WorleyNoise3DBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<WorleyNoise3DBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof WorleyNoise3DBlock>[0];
-            }
+            },
+            WorleyNoise3DBlock
         >,
         any
     >;
     nodeMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NodeMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NodeMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof NodeMaterial>[0];
                 scene: ConstructorParameters<typeof NodeMaterial>[1];
                 options: ConstructorParameters<typeof NodeMaterial>[2];
-            }
+            },
+            NodeMaterial
         >,
         any
     >;
     nodeMaterialBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NodeMaterialBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NodeMaterialBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NodeMaterialBlock>[0];
                 target: ConstructorParameters<typeof NodeMaterialBlock>[1];
                 isFinalMerger: ConstructorParameters<typeof NodeMaterialBlock>[2];
-            }
+            },
+            NodeMaterialBlock
         >,
         any
     >;
-    nodeMaterialBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeMaterialBuildState>>, any>;
-    nodeMaterialBuildStateSharedData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeMaterialBuildStateSharedData>>, any>;
+    nodeMaterialBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeMaterialBuildState>, NodeMaterialBuildState>, any>;
+    nodeMaterialBuildStateSharedData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeMaterialBuildStateSharedData>, NodeMaterialBuildStateSharedData>, any>;
     nodeMaterialConnectionPointCustomObject: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NodeMaterialConnectionPointCustomObject>,
@@ -3576,33 +3857,36 @@ export interface JSXElements {
                 direction: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[2];
                 _blockType: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[3];
                 _blockName: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[4];
-            }
+            },
+            NodeMaterialConnectionPointCustomObject
         >,
         any
     >;
     occlusionMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<OcclusionMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<OcclusionMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof OcclusionMaterial>[0];
                 scene: ConstructorParameters<typeof OcclusionMaterial>[1];
-            }
+            },
+            OcclusionMaterial
         >,
         any
     >;
     MultiviewRenderTarget: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MultiviewRenderTarget & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MultiviewRenderTarget> & Clonable,
             {
                 scene: ConstructorParameters<typeof MultiviewRenderTarget>[0];
                 size: ConstructorParameters<typeof MultiviewRenderTarget>[1];
-            }
+            },
+            MultiviewRenderTarget
         >,
         any
     >;
     customProceduralTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CustomProceduralTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CustomProceduralTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof CustomProceduralTexture>[0];
                 texturePath: ConstructorParameters<typeof CustomProceduralTexture>[1];
@@ -3611,26 +3895,28 @@ export interface JSXElements {
                 fallbackTexture: ConstructorParameters<typeof CustomProceduralTexture>[4];
                 generateMipMaps: ConstructorParameters<typeof CustomProceduralTexture>[5];
                 skipJson: ConstructorParameters<typeof CustomProceduralTexture>[6];
-            }
+            },
+            CustomProceduralTexture
         >,
         any
     >;
     noiseProceduralTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NoiseProceduralTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NoiseProceduralTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof NoiseProceduralTexture>[0];
                 size: ConstructorParameters<typeof NoiseProceduralTexture>[1];
                 scene: ConstructorParameters<typeof NoiseProceduralTexture>[2];
                 fallbackTexture: ConstructorParameters<typeof NoiseProceduralTexture>[3];
                 generateMipMaps: ConstructorParameters<typeof NoiseProceduralTexture>[4];
-            }
+            },
+            NoiseProceduralTexture
         >,
         any
     >;
     proceduralTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ProceduralTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ProceduralTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof ProceduralTexture>[0];
                 size: ConstructorParameters<typeof ProceduralTexture>[1];
@@ -3640,7 +3926,8 @@ export interface JSXElements {
                 generateMipMaps: ConstructorParameters<typeof ProceduralTexture>[5];
                 isCube: ConstructorParameters<typeof ProceduralTexture>[6];
                 textureType: ConstructorParameters<typeof ProceduralTexture>[7];
-            }
+            },
+            ProceduralTexture
         >,
         any
     >;
@@ -3649,34 +3936,37 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<ProceduralTextureSceneComponent>,
             {
                 scene: ConstructorParameters<typeof ProceduralTextureSceneComponent>[0];
-            }
+            },
+            ProceduralTextureSceneComponent
         >,
         any
     >;
     baseTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BaseTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BaseTexture> & Clonable,
             {
                 sceneOrEngine: ConstructorParameters<typeof BaseTexture>[0];
                 internalTexture: ConstructorParameters<typeof BaseTexture>[1];
-            }
+            },
+            BaseTexture
         >,
         any
     >;
     colorGradingTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ColorGradingTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ColorGradingTexture> & Clonable,
             {
                 url: ConstructorParameters<typeof ColorGradingTexture>[0];
                 sceneOrEngine: ConstructorParameters<typeof ColorGradingTexture>[1];
                 onLoad: ConstructorParameters<typeof ColorGradingTexture>[2];
-            }
+            },
+            ColorGradingTexture
         >,
         any
     >;
     cubeTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CubeTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CubeTexture> & Clonable,
             {
                 rootUrl: ConstructorParameters<typeof CubeTexture>[0];
                 sceneOrEngine: ConstructorParameters<typeof CubeTexture>[1];
@@ -3693,13 +3983,14 @@ export interface JSXElements {
                 lodOffset: ConstructorParameters<typeof CubeTexture>[12];
                 loaderOptions: ConstructorParameters<typeof CubeTexture>[13];
                 useSRGBBuffer: ConstructorParameters<typeof CubeTexture>[14];
-            }
+            },
+            CubeTexture
         >,
         any
     >;
     dynamicTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DynamicTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DynamicTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof DynamicTexture>[0];
                 options: ConstructorParameters<typeof DynamicTexture>[1];
@@ -3708,13 +3999,14 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof DynamicTexture>[4];
                 format: ConstructorParameters<typeof DynamicTexture>[5];
                 invertY: ConstructorParameters<typeof DynamicTexture>[6];
-            }
+            },
+            DynamicTexture
         >,
         any
     >;
     equiRectangularCubeTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<EquiRectangularCubeTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<EquiRectangularCubeTexture> & Clonable,
             {
                 url: ConstructorParameters<typeof EquiRectangularCubeTexture>[0];
                 scene: ConstructorParameters<typeof EquiRectangularCubeTexture>[1];
@@ -3724,7 +4016,8 @@ export interface JSXElements {
                 onLoad: ConstructorParameters<typeof EquiRectangularCubeTexture>[5];
                 onError: ConstructorParameters<typeof EquiRectangularCubeTexture>[6];
                 supersample: ConstructorParameters<typeof EquiRectangularCubeTexture>[7];
-            }
+            },
+            EquiRectangularCubeTexture
         >,
         any
     >;
@@ -3733,18 +4026,20 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<ExternalTexture>,
             {
                 video: ConstructorParameters<typeof ExternalTexture>[0];
-            }
+            },
+            ExternalTexture
         >,
         any
     >;
     htmlElementTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<HtmlElementTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<HtmlElementTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof HtmlElementTexture>[0];
                 element: ConstructorParameters<typeof HtmlElementTexture>[1];
                 options: ConstructorParameters<typeof HtmlElementTexture>[2];
-            }
+            },
+            HtmlElementTexture
         >,
         any
     >;
@@ -3755,13 +4050,14 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof InternalTexture>[0];
                 source: ConstructorParameters<typeof InternalTexture>[1];
                 delayAllocation: ConstructorParameters<typeof InternalTexture>[2];
-            }
+            },
+            InternalTexture
         >,
         any
     >;
     mirrorTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MirrorTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MirrorTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof MirrorTexture>[0];
                 size: ConstructorParameters<typeof MirrorTexture>[1];
@@ -3770,13 +4066,14 @@ export interface JSXElements {
                 type: ConstructorParameters<typeof MirrorTexture>[4];
                 samplingMode: ConstructorParameters<typeof MirrorTexture>[5];
                 generateDepthBuffer: ConstructorParameters<typeof MirrorTexture>[6];
-            }
+            },
+            MirrorTexture
         >,
         any
     >;
     multiRenderTarget: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MultiRenderTarget & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MultiRenderTarget> & Clonable,
             {
                 name: ConstructorParameters<typeof MultiRenderTarget>[0];
                 size: ConstructorParameters<typeof MultiRenderTarget>[1];
@@ -3784,13 +4081,14 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof MultiRenderTarget>[3];
                 options: ConstructorParameters<typeof MultiRenderTarget>[4];
                 textureNames: ConstructorParameters<typeof MultiRenderTarget>[5];
-            }
+            },
+            MultiRenderTarget
         >,
         any
     >;
     prePassRenderTarget: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PrePassRenderTarget & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PrePassRenderTarget> & Clonable,
             {
                 name: ConstructorParameters<typeof PrePassRenderTarget>[0];
                 renderTargetTexture: ConstructorParameters<typeof PrePassRenderTarget>[1];
@@ -3798,13 +4096,14 @@ export interface JSXElements {
                 count: ConstructorParameters<typeof PrePassRenderTarget>[3];
                 scene: ConstructorParameters<typeof PrePassRenderTarget>[4];
                 options: ConstructorParameters<typeof PrePassRenderTarget>[5];
-            }
+            },
+            PrePassRenderTarget
         >,
         any
     >;
     rawCubeTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RawCubeTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RawCubeTexture> & Clonable,
             {
                 scene: ConstructorParameters<typeof RawCubeTexture>[0];
                 data: ConstructorParameters<typeof RawCubeTexture>[1];
@@ -3815,13 +4114,14 @@ export interface JSXElements {
                 invertY: ConstructorParameters<typeof RawCubeTexture>[6];
                 samplingMode: ConstructorParameters<typeof RawCubeTexture>[7];
                 compression: ConstructorParameters<typeof RawCubeTexture>[8];
-            }
+            },
+            RawCubeTexture
         >,
         any
     >;
     rawTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RawTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RawTexture> & Clonable,
             {
                 data: ConstructorParameters<typeof RawTexture>[0];
                 width: ConstructorParameters<typeof RawTexture>[1];
@@ -3834,13 +4134,14 @@ export interface JSXElements {
                 type: ConstructorParameters<typeof RawTexture>[8];
                 creationFlags: ConstructorParameters<typeof RawTexture>[9];
                 useSRGBBuffer: ConstructorParameters<typeof RawTexture>[10];
-            }
+            },
+            RawTexture
         >,
         any
     >;
     rawTexture2DArray: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RawTexture2DArray & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RawTexture2DArray> & Clonable,
             {
                 data: ConstructorParameters<typeof RawTexture2DArray>[0];
                 width: ConstructorParameters<typeof RawTexture2DArray>[1];
@@ -3853,13 +4154,14 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof RawTexture2DArray>[8];
                 textureType: ConstructorParameters<typeof RawTexture2DArray>[9];
                 creationFlags: ConstructorParameters<typeof RawTexture2DArray>[10];
-            }
+            },
+            RawTexture2DArray
         >,
         any
     >;
     rawTexture3D: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RawTexture3D & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RawTexture3D> & Clonable,
             {
                 data: ConstructorParameters<typeof RawTexture3D>[0];
                 width: ConstructorParameters<typeof RawTexture3D>[1];
@@ -3872,25 +4174,27 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof RawTexture3D>[8];
                 textureType: ConstructorParameters<typeof RawTexture3D>[9];
                 creationFlags: ConstructorParameters<typeof RawTexture3D>[10];
-            }
+            },
+            RawTexture3D
         >,
         any
     >;
     refractionTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RefractionTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RefractionTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof RefractionTexture>[0];
                 size: ConstructorParameters<typeof RefractionTexture>[1];
                 scene: ConstructorParameters<typeof RefractionTexture>[2];
                 generateMipMaps: ConstructorParameters<typeof RefractionTexture>[3];
-            }
+            },
+            RefractionTexture
         >,
         any
     >;
     renderTargetTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RenderTargetTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RenderTargetTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof RenderTargetTexture>[0];
                 size: ConstructorParameters<typeof RenderTargetTexture>[1];
@@ -3909,13 +4213,14 @@ export interface JSXElements {
                 creationFlags: ConstructorParameters<typeof RenderTargetTexture>[14];
                 noColorAttachment: ConstructorParameters<typeof RenderTargetTexture>[15];
                 useSRGBBuffer: ConstructorParameters<typeof RenderTargetTexture>[16];
-            }
+            },
+            RenderTargetTexture
         >,
         any
     >;
     texture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Texture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Texture> & Clonable,
             {
                 url: ConstructorParameters<typeof Texture>[0];
                 sceneOrEngine: ConstructorParameters<typeof Texture>[1];
@@ -3931,11 +4236,12 @@ export interface JSXElements {
                 loaderOptions: ConstructorParameters<typeof Texture>[11];
                 creationFlags: ConstructorParameters<typeof Texture>[12];
                 forcedExtension: ConstructorParameters<typeof Texture>[13];
-            }
+            },
+            Texture
         >,
         any
     >;
-    textureSampler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextureSampler>>, any>;
+    textureSampler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextureSampler>, TextureSampler>, any>;
     thinRenderTargetTexture: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ThinRenderTargetTexture>,
@@ -3943,7 +4249,8 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof ThinRenderTargetTexture>[0];
                 size: ConstructorParameters<typeof ThinRenderTargetTexture>[1];
                 options: ConstructorParameters<typeof ThinRenderTargetTexture>[2];
-            }
+            },
+            ThinRenderTargetTexture
         >,
         any
     >;
@@ -3952,13 +4259,14 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<ThinTexture>,
             {
                 internalTexture: ConstructorParameters<typeof ThinTexture>[0];
-            }
+            },
+            ThinTexture
         >,
         any
     >;
     videoTexture: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<VideoTexture & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<VideoTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof VideoTexture>[0];
                 src: ConstructorParameters<typeof VideoTexture>[1];
@@ -3969,18 +4277,20 @@ export interface JSXElements {
                 settings: ConstructorParameters<typeof VideoTexture>[6];
                 onError: ConstructorParameters<typeof VideoTexture>[7];
                 format: ConstructorParameters<typeof VideoTexture>[8];
-            }
+            },
+            VideoTexture
         >,
         any
     >;
-    colorCurves: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ColorCurves & { cloneBy: string }>>, any>;
+    colorCurves: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ColorCurves> & Clonable, ColorCurves>, any>;
     drawWrapper: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<DrawWrapper>,
             {
                 engine: ConstructorParameters<typeof DrawWrapper>[0];
                 createMaterialContext: ConstructorParameters<typeof DrawWrapper>[1];
-            }
+            },
+            DrawWrapper
         >,
         any
     >;
@@ -4000,39 +4310,43 @@ export interface JSXElements {
                 indexParameters: ConstructorParameters<typeof Effect>[9];
                 key: ConstructorParameters<typeof Effect>[10];
                 shaderLanguage: ConstructorParameters<typeof Effect>[11];
-            }
+            },
+            Effect
         >,
         any
     >;
-    effectFallbacks: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EffectFallbacks>>, any>;
+    effectFallbacks: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EffectFallbacks>, EffectFallbacks>, any>;
     effectRenderer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<EffectRenderer>,
             {
                 engine: ConstructorParameters<typeof EffectRenderer>[0];
                 options: ConstructorParameters<typeof EffectRenderer>[1];
-            }
+            },
+            EffectRenderer
         >,
         any
     >;
     fresnelParameters: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FresnelParameters & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FresnelParameters> & Clonable,
             {
                 options: ConstructorParameters<typeof FresnelParameters>[0];
-            }
+            },
+            FresnelParameters
         >,
         any
     >;
-    imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ImageProcessingConfiguration & { cloneBy: string }>>, any>;
+    imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ImageProcessingConfiguration> & Clonable, ImageProcessingConfiguration>, any>;
     material: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Material & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Material> & Clonable,
             {
                 name: ConstructorParameters<typeof Material>[0];
                 scene: ConstructorParameters<typeof Material>[1];
                 doNotAdd: ConstructorParameters<typeof Material>[2];
-            }
+            },
+            Material
         >,
         any
     >;
@@ -4041,7 +4355,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<MaterialDefines>,
             {
                 externalProperties: ConstructorParameters<typeof MaterialDefines>[0];
-            }
+            },
+            MaterialDefines
         >,
         any
     >;
@@ -4056,7 +4371,8 @@ export interface JSXElements {
                 addToPluginList: ConstructorParameters<typeof MaterialPluginBase>[4];
                 enable: ConstructorParameters<typeof MaterialPluginBase>[5];
                 resolveIncludes: ConstructorParameters<typeof MaterialPluginBase>[6];
-            }
+            },
+            MaterialPluginBase
         >,
         any
     >;
@@ -4065,53 +4381,58 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<MaterialPluginManager>,
             {
                 material: ConstructorParameters<typeof MaterialPluginManager>[0];
-            }
+            },
+            MaterialPluginManager
         >,
         any
     >;
-    materialStencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialStencilState>>, any>;
+    materialStencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialStencilState>, MaterialStencilState>, any>;
     meshDebugPluginMaterial: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<MeshDebugPluginMaterial>,
             {
                 material: ConstructorParameters<typeof MeshDebugPluginMaterial>[0];
                 options: ConstructorParameters<typeof MeshDebugPluginMaterial>[1];
-            }
+            },
+            MeshDebugPluginMaterial
         >,
         any
     >;
     multiMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MultiMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MultiMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof MultiMaterial>[0];
                 scene: ConstructorParameters<typeof MultiMaterial>[1];
-            }
+            },
+            MultiMaterial
         >,
         any
     >;
-    prePassConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PrePassConfiguration>>, any>;
+    prePassConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PrePassConfiguration>, PrePassConfiguration>, any>;
     pushMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PushMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PushMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof PushMaterial>[0];
                 scene: ConstructorParameters<typeof PushMaterial>[1];
                 storeEffectOnSubMeshes: ConstructorParameters<typeof PushMaterial>[2];
-            }
+            },
+            PushMaterial
         >,
         any
     >;
     shaderMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ShaderMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ShaderMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof ShaderMaterial>[0];
                 scene: ConstructorParameters<typeof ShaderMaterial>[1];
                 shaderPath: ConstructorParameters<typeof ShaderMaterial>[2];
                 options: ConstructorParameters<typeof ShaderMaterial>[3];
                 storeEffectOnSubMeshes: ConstructorParameters<typeof ShaderMaterial>[4];
-            }
+            },
+            ShaderMaterial
         >,
         any
     >;
@@ -4122,17 +4443,19 @@ export interface JSXElements {
                 baseMaterial: ConstructorParameters<typeof ShadowDepthWrapper>[0];
                 scene: ConstructorParameters<typeof ShadowDepthWrapper>[1];
                 options: ConstructorParameters<typeof ShadowDepthWrapper>[2];
-            }
+            },
+            ShadowDepthWrapper
         >,
         any
     >;
     standardMaterial: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<StandardMaterial & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<StandardMaterial> & Clonable,
             {
                 name: ConstructorParameters<typeof StandardMaterial>[0];
                 scene: ConstructorParameters<typeof StandardMaterial>[1];
-            }
+            },
+            StandardMaterial
         >,
         any
     >;
@@ -4145,7 +4468,8 @@ export interface JSXElements {
                 dynamic: ConstructorParameters<typeof UniformBuffer>[2];
                 name: ConstructorParameters<typeof UniformBuffer>[3];
                 forceNoUniformBuffer: ConstructorParameters<typeof UniformBuffer>[4];
-            }
+            },
+            UniformBuffer
         >,
         any
     >;
@@ -4154,7 +4478,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<UniformBufferEffectCommonAccessor>,
             {
                 uboOrEffect: ConstructorParameters<typeof UniformBufferEffectCommonAccessor>[0];
-            }
+            },
+            UniformBufferEffectCommonAccessor
         >,
         any
     >;
@@ -4167,768 +4492,852 @@ export interface JSXElements {
                 baseY: ConstructorParameters<typeof Halton2DSequence>[2];
                 width: ConstructorParameters<typeof Halton2DSequence>[3];
                 height: ConstructorParameters<typeof Halton2DSequence>[4];
-            }
+            },
+            Halton2DSequence
         >,
         any
     >;
-    sphericalPolynomial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalPolynomial>>, any>;
+    sphericalPolynomial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalPolynomial>, SphericalPolynomial>, any>;
     dracoCompression: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<DracoCompression>,
             {
                 numWorkers: ConstructorParameters<typeof DracoCompression>[0];
-            }
+            },
+            DracoCompression
         >,
         any
     >;
-    meshoptCompression: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MeshoptCompression>>, any>;
+    meshoptCompression: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MeshoptCompression>, MeshoptCompression>, any>;
     gaussianSplattingMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GaussianSplattingMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GaussianSplattingMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof GaussianSplattingMesh>[0];
                 url: ConstructorParameters<typeof GaussianSplattingMesh>[1];
                 scene: ConstructorParameters<typeof GaussianSplattingMesh>[2];
-            }
+            },
+            GaussianSplattingMesh
         >,
         any
     >;
     greasedLineBaseMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GreasedLineBaseMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GreasedLineBaseMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof GreasedLineBaseMesh>[0];
                 scene: ConstructorParameters<typeof GreasedLineBaseMesh>[1];
                 _options: ConstructorParameters<typeof GreasedLineBaseMesh>[2];
-            }
+            },
+            GreasedLineBaseMesh
         >,
         any
     >;
     greasedLineMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GreasedLineMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GreasedLineMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof GreasedLineMesh>[0];
                 scene: ConstructorParameters<typeof GreasedLineMesh>[1];
                 _options: ConstructorParameters<typeof GreasedLineMesh>[2];
-            }
+            },
+            GreasedLineMesh
         >,
         any
     >;
     greasedLineRibbonMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GreasedLineRibbonMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GreasedLineRibbonMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof GreasedLineRibbonMesh>[0];
                 scene: ConstructorParameters<typeof GreasedLineRibbonMesh>[1];
                 _options: ConstructorParameters<typeof GreasedLineRibbonMesh>[2];
                 _pathOptions: ConstructorParameters<typeof GreasedLineRibbonMesh>[3];
-            }
+            },
+            GreasedLineRibbonMesh
         >,
         any
     >;
     instantiateBaseBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstantiateBaseBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstantiateBaseBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InstantiateBaseBlock>[0];
-            }
+            },
+            InstantiateBaseBlock
         >,
         any
     >;
     instantiateBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstantiateBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstantiateBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InstantiateBlock>[0];
-            }
+            },
+            InstantiateBlock
         >,
         any
     >;
     instantiateLinearBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstantiateLinearBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstantiateLinearBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InstantiateLinearBlock>[0];
-            }
+            },
+            InstantiateLinearBlock
         >,
         any
     >;
     instantiateOnFacesBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstantiateOnFacesBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstantiateOnFacesBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InstantiateOnFacesBlock>[0];
-            }
+            },
+            InstantiateOnFacesBlock
         >,
         any
     >;
     instantiateOnVerticesBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstantiateOnVerticesBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstantiateOnVerticesBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InstantiateOnVerticesBlock>[0];
-            }
+            },
+            InstantiateOnVerticesBlock
         >,
         any
     >;
     instantiateOnVolumeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstantiateOnVolumeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstantiateOnVolumeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InstantiateOnVolumeBlock>[0];
-            }
+            },
+            InstantiateOnVolumeBlock
         >,
         any
     >;
     instantiateRadialBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstantiateRadialBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstantiateRadialBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof InstantiateRadialBlock>[0];
-            }
+            },
+            InstantiateRadialBlock
         >,
         any
     >;
     alignBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AlignBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AlignBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof AlignBlock>[0];
-            }
+            },
+            AlignBlock
         >,
         any
     >;
     rotationXBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RotationXBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RotationXBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof RotationXBlock>[0];
-            }
+            },
+            RotationXBlock
         >,
         any
     >;
     rotationYBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RotationYBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RotationYBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof RotationYBlock>[0];
-            }
+            },
+            RotationYBlock
         >,
         any
     >;
     rotationZBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RotationZBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RotationZBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof RotationZBlock>[0];
-            }
+            },
+            RotationZBlock
         >,
         any
     >;
     scalingBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ScalingBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ScalingBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ScalingBlock>[0];
-            }
+            },
+            ScalingBlock
         >,
         any
     >;
     translationBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TranslationBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TranslationBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TranslationBlock>[0];
-            }
+            },
+            TranslationBlock
         >,
         any
     >;
     setColorsBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SetColorsBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SetColorsBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SetColorsBlock>[0];
-            }
+            },
+            SetColorsBlock
         >,
         any
     >;
     setMaterialIDBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SetMaterialIDBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SetMaterialIDBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SetMaterialIDBlock>[0];
-            }
+            },
+            SetMaterialIDBlock
         >,
         any
     >;
     setNormalsBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SetNormalsBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SetNormalsBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SetNormalsBlock>[0];
-            }
+            },
+            SetNormalsBlock
         >,
         any
     >;
     setPositionsBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SetPositionsBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SetPositionsBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SetPositionsBlock>[0];
-            }
+            },
+            SetPositionsBlock
         >,
         any
     >;
     setTangentsBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SetTangentsBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SetTangentsBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SetTangentsBlock>[0];
-            }
+            },
+            SetTangentsBlock
         >,
         any
     >;
     setUVsBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SetUVsBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SetUVsBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SetUVsBlock>[0];
-            }
+            },
+            SetUVsBlock
         >,
         any
     >;
     boxBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BoxBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BoxBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof BoxBlock>[0];
-            }
+            },
+            BoxBlock
         >,
         any
     >;
     capsuleBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CapsuleBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CapsuleBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof CapsuleBlock>[0];
-            }
+            },
+            CapsuleBlock
         >,
         any
     >;
     cylinderBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CylinderBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CylinderBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof CylinderBlock>[0];
-            }
+            },
+            CylinderBlock
         >,
         any
     >;
     discBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DiscBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DiscBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof DiscBlock>[0];
-            }
+            },
+            DiscBlock
         >,
         any
     >;
     gridBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GridBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GridBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GridBlock>[0];
-            }
+            },
+            GridBlock
         >,
         any
     >;
     icoSphereBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<IcoSphereBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<IcoSphereBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof IcoSphereBlock>[0];
-            }
+            },
+            IcoSphereBlock
         >,
         any
     >;
     meshBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MeshBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MeshBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MeshBlock>[0];
-            }
+            },
+            MeshBlock
         >,
         any
     >;
     nullBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NullBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NullBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NullBlock>[0];
-            }
+            },
+            NullBlock
         >,
         any
     >;
     planeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PlaneBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PlaneBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof PlaneBlock>[0];
-            }
+            },
+            PlaneBlock
         >,
         any
     >;
     sphereBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SphereBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SphereBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof SphereBlock>[0];
-            }
+            },
+            SphereBlock
         >,
         any
     >;
     torusBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TorusBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TorusBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TorusBlock>[0];
-            }
+            },
+            TorusBlock
         >,
         any
     >;
     teleportInBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TeleportInBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TeleportInBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TeleportInBlock>[0];
-            }
+            },
+            TeleportInBlock
         >,
         any
     >;
     teleportOutBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TeleportOutBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TeleportOutBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof TeleportOutBlock>[0];
-            }
+            },
+            TeleportOutBlock
         >,
         any
     >;
     geometryTextureBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryTextureBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryTextureBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryTextureBlock>[0];
-            }
+            },
+            GeometryTextureBlock
         >,
         any
     >;
     geometryTextureFetchBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryTextureFetchBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryTextureFetchBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryTextureFetchBlock>[0];
-            }
+            },
+            GeometryTextureFetchBlock
         >,
         any
     >;
     booleanGeometryBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BooleanGeometryBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BooleanGeometryBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof BooleanGeometryBlock>[0];
-            }
+            },
+            BooleanGeometryBlock
         >,
         any
     >;
     boundingBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BoundingBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BoundingBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof BoundingBlock>[0];
-            }
+            },
+            BoundingBlock
         >,
         any
     >;
     computeNormalsBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ComputeNormalsBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ComputeNormalsBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ComputeNormalsBlock>[0];
-            }
+            },
+            ComputeNormalsBlock
         >,
         any
     >;
     conditionBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ConditionBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ConditionBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof ConditionBlock>[0];
-            }
+            },
+            ConditionBlock
         >,
         any
     >;
     debugBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DebugBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DebugBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof DebugBlock>[0];
-            }
+            },
+            DebugBlock
         >,
         any
     >;
     geometryArcTan2Block: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryArcTan2Block & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryArcTan2Block> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryArcTan2Block>[0];
-            }
+            },
+            GeometryArcTan2Block
         >,
         any
     >;
     geometryClampBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryClampBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryClampBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryClampBlock>[0];
-            }
+            },
+            GeometryClampBlock
         >,
         any
     >;
     geometryCollectionBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryCollectionBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryCollectionBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryCollectionBlock>[0];
-            }
+            },
+            GeometryCollectionBlock
         >,
         any
     >;
     geometryCrossBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryCrossBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryCrossBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryCrossBlock>[0];
-            }
+            },
+            GeometryCrossBlock
         >,
         any
     >;
     geometryCurveBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryCurveBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryCurveBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryCurveBlock>[0];
-            }
+            },
+            GeometryCurveBlock
         >,
         any
     >;
     geometryDesaturateBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryDesaturateBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryDesaturateBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryDesaturateBlock>[0];
-            }
+            },
+            GeometryDesaturateBlock
         >,
         any
     >;
     geometryDistanceBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryDistanceBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryDistanceBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryDistanceBlock>[0];
-            }
+            },
+            GeometryDistanceBlock
         >,
         any
     >;
     geometryDotBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryDotBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryDotBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryDotBlock>[0];
-            }
+            },
+            GeometryDotBlock
         >,
         any
     >;
     geometryElbowBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryElbowBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryElbowBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryElbowBlock>[0];
-            }
+            },
+            GeometryElbowBlock
         >,
         any
     >;
     geometryInfoBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryInfoBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryInfoBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryInfoBlock>[0];
-            }
+            },
+            GeometryInfoBlock
         >,
         any
     >;
     geometryInputBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryInputBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryInputBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryInputBlock>[0];
                 type: ConstructorParameters<typeof GeometryInputBlock>[1];
-            }
+            },
+            GeometryInputBlock
         >,
         any
     >;
     geometryLengthBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryLengthBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryLengthBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryLengthBlock>[0];
-            }
+            },
+            GeometryLengthBlock
         >,
         any
     >;
     geometryLerpBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryLerpBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryLerpBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryLerpBlock>[0];
-            }
+            },
+            GeometryLerpBlock
         >,
         any
     >;
     geometryModBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryModBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryModBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryModBlock>[0];
-            }
+            },
+            GeometryModBlock
         >,
         any
     >;
     geometryNLerpBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryNLerpBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryNLerpBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryNLerpBlock>[0];
-            }
+            },
+            GeometryNLerpBlock
         >,
         any
     >;
     geometryOptimizeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryOptimizeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryOptimizeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryOptimizeBlock>[0];
-            }
+            },
+            GeometryOptimizeBlock
         >,
         any
     >;
     geometryOutputBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryOutputBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryOutputBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryOutputBlock>[0];
-            }
+            },
+            GeometryOutputBlock
         >,
         any
     >;
     geometryPosterizeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryPosterizeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryPosterizeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryPosterizeBlock>[0];
-            }
+            },
+            GeometryPosterizeBlock
         >,
         any
     >;
     geometryPowBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryPowBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryPowBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryPowBlock>[0];
-            }
+            },
+            GeometryPowBlock
         >,
         any
     >;
     geometryReplaceColorBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryReplaceColorBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryReplaceColorBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryReplaceColorBlock>[0];
-            }
+            },
+            GeometryReplaceColorBlock
         >,
         any
     >;
     geometryRotate2dBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryRotate2dBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryRotate2dBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryRotate2dBlock>[0];
-            }
+            },
+            GeometryRotate2dBlock
         >,
         any
     >;
     geometrySmoothStepBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometrySmoothStepBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometrySmoothStepBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometrySmoothStepBlock>[0];
-            }
+            },
+            GeometrySmoothStepBlock
         >,
         any
     >;
     geometryStepBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryStepBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryStepBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryStepBlock>[0];
-            }
+            },
+            GeometryStepBlock
         >,
         any
     >;
     geometryTransformBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryTransformBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryTransformBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryTransformBlock>[0];
-            }
+            },
+            GeometryTransformBlock
         >,
         any
     >;
     geometryTrigonometryBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GeometryTrigonometryBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GeometryTrigonometryBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof GeometryTrigonometryBlock>[0];
-            }
+            },
+            GeometryTrigonometryBlock
         >,
         any
     >;
     intFloatConverterBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<IntFloatConverterBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<IntFloatConverterBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof IntFloatConverterBlock>[0];
-            }
+            },
+            IntFloatConverterBlock
         >,
         any
     >;
     mapRangeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MapRangeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MapRangeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MapRangeBlock>[0];
-            }
+            },
+            MapRangeBlock
         >,
         any
     >;
     mappingBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MappingBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MappingBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MappingBlock>[0];
-            }
+            },
+            MappingBlock
         >,
         any
     >;
     mathBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MathBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MathBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MathBlock>[0];
-            }
+            },
+            MathBlock
         >,
         any
     >;
     matrixComposeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MatrixComposeBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MatrixComposeBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MatrixComposeBlock>[0];
-            }
+            },
+            MatrixComposeBlock
         >,
         any
     >;
     mergeGeometryBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MergeGeometryBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MergeGeometryBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof MergeGeometryBlock>[0];
-            }
+            },
+            MergeGeometryBlock
         >,
         any
     >;
     noiseBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NoiseBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NoiseBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NoiseBlock>[0];
-            }
+            },
+            NoiseBlock
         >,
         any
     >;
     normalizeVectorBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NormalizeVectorBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NormalizeVectorBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NormalizeVectorBlock>[0];
-            }
+            },
+            NormalizeVectorBlock
         >,
         any
     >;
     randomBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RandomBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RandomBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof RandomBlock>[0];
-            }
+            },
+            RandomBlock
         >,
         any
     >;
     vectorConverterBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<VectorConverterBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<VectorConverterBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof VectorConverterBlock>[0];
-            }
+            },
+            VectorConverterBlock
         >,
         any
     >;
     nodeGeometry: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NodeGeometry & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NodeGeometry> & Clonable,
             {
                 name: ConstructorParameters<typeof NodeGeometry>[0];
-            }
+            },
+            NodeGeometry
         >,
         any
     >;
     nodeGeometryBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<NodeGeometryBlock & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<NodeGeometryBlock> & Clonable,
             {
                 name: ConstructorParameters<typeof NodeGeometryBlock>[0];
-            }
+            },
+            NodeGeometryBlock
         >,
         any
     >;
-    nodeGeometryBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeGeometryBuildState>>, any>;
+    nodeGeometryBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeGeometryBuildState>, NodeGeometryBuildState>, any>;
     webGLDataBuffer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WebGLDataBuffer>,
             {
                 resource: ConstructorParameters<typeof WebGLDataBuffer>[0];
-            }
+            },
+            WebGLDataBuffer
         >,
         any
     >;
     abstractMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AbstractMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AbstractMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof AbstractMesh>[0];
                 scene: ConstructorParameters<typeof AbstractMesh>[1];
-            }
+            },
+            AbstractMesh
         >,
         any
     >;
@@ -4945,7 +5354,8 @@ export interface JSXElements {
                 useBytes: ConstructorParameters<typeof Buffer>[6];
                 divisor: ConstructorParameters<typeof Buffer>[7];
                 label: ConstructorParameters<typeof Buffer>[8];
-            }
+            },
+            Buffer
         >,
         any
     >;
@@ -4958,34 +5368,37 @@ export interface JSXElements {
                 vertexData: ConstructorParameters<typeof Geometry>[2];
                 updatable: ConstructorParameters<typeof Geometry>[3];
                 mesh: ConstructorParameters<typeof Geometry>[4];
-            }
+            },
+            Geometry
         >,
         any
     >;
-    goldbergMesh: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GoldbergMesh & { cloneBy: string }>>, any>;
+    goldbergMesh: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GoldbergMesh> & Clonable, GoldbergMesh>, any>;
     groundMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GroundMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GroundMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof GroundMesh>[0];
                 scene: ConstructorParameters<typeof GroundMesh>[1];
-            }
+            },
+            GroundMesh
         >,
         any
     >;
     instancedMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<InstancedMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<InstancedMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof InstancedMesh>[0];
                 source: ConstructorParameters<typeof InstancedMesh>[1];
-            }
+            },
+            InstancedMesh
         >,
         any
     >;
     linesMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<LinesMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<LinesMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof LinesMesh>[0];
                 scene: ConstructorParameters<typeof LinesMesh>[1];
@@ -4995,13 +5408,14 @@ export interface JSXElements {
                 useVertexColor: ConstructorParameters<typeof LinesMesh>[5];
                 useVertexAlpha: ConstructorParameters<typeof LinesMesh>[6];
                 material: ConstructorParameters<typeof LinesMesh>[7];
-            }
+            },
+            LinesMesh
         >,
         any
     >;
     mesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Mesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Mesh> & Clonable,
             {
                 name: ConstructorParameters<typeof Mesh>[0];
                 scene: ConstructorParameters<typeof Mesh>[1];
@@ -5009,324 +5423,353 @@ export interface JSXElements {
                 source: ConstructorParameters<typeof Mesh>[3];
                 doNotCloneChildren: ConstructorParameters<typeof Mesh>[4];
                 clonePhysicsImpostor: ConstructorParameters<typeof Mesh>[5];
-            }
+            },
+            Mesh
         >,
         any
     >;
     box: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateBox> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateBox>> & MeshProps,
             {
                 name: Parameters<typeof CreateBox>[0];
                 options: Parameters<typeof CreateBox>[1];
                 scene: Parameters<typeof CreateBox>[2];
-            }
+            },
+            ReturnType<typeof CreateBox>
         >,
         any
     >;
     tiledBox: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledBox> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledBox>> & MeshProps,
             {
                 name: Parameters<typeof CreateTiledBox>[0];
                 options: Parameters<typeof CreateTiledBox>[1];
                 scene: Parameters<typeof CreateTiledBox>[2];
-            }
+            },
+            ReturnType<typeof CreateTiledBox>
         >,
         any
     >;
     sphere: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateSphere> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateSphere>> & MeshProps,
             {
                 name: Parameters<typeof CreateSphere>[0];
                 options: Parameters<typeof CreateSphere>[1];
                 scene: Parameters<typeof CreateSphere>[2];
-            }
+            },
+            ReturnType<typeof CreateSphere>
         >,
         any
     >;
     disc: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDisc> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDisc>> & MeshProps,
             {
                 name: Parameters<typeof CreateDisc>[0];
                 options: Parameters<typeof CreateDisc>[1];
                 scene: Parameters<typeof CreateDisc>[2];
-            }
+            },
+            ReturnType<typeof CreateDisc>
         >,
         any
     >;
     icoSphere: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateIcoSphere> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateIcoSphere>> & MeshProps,
             {
                 name: Parameters<typeof CreateIcoSphere>[0];
                 options: Parameters<typeof CreateIcoSphere>[1];
                 scene: Parameters<typeof CreateIcoSphere>[2];
-            }
+            },
+            ReturnType<typeof CreateIcoSphere>
         >,
         any
     >;
     ribbon: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateRibbon> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateRibbon>> & MeshProps,
             {
                 name: Parameters<typeof CreateRibbon>[0];
                 options: Parameters<typeof CreateRibbon>[1];
                 scene: Parameters<typeof CreateRibbon>[2];
-            }
+            },
+            ReturnType<typeof CreateRibbon>
         >,
         any
     >;
     cylinder: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateCylinder> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateCylinder>> & MeshProps,
             {
                 name: Parameters<typeof CreateCylinder>[0];
                 options: Parameters<typeof CreateCylinder>[1];
                 scene: Parameters<typeof CreateCylinder>[2];
-            }
+            },
+            ReturnType<typeof CreateCylinder>
         >,
         any
     >;
     torus: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTorus> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTorus>> & MeshProps,
             {
                 name: Parameters<typeof CreateTorus>[0];
                 options: Parameters<typeof CreateTorus>[1];
                 scene: Parameters<typeof CreateTorus>[2];
-            }
+            },
+            ReturnType<typeof CreateTorus>
         >,
         any
     >;
     torusKnot: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTorusKnot> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTorusKnot>> & MeshProps,
             {
                 name: Parameters<typeof CreateTorusKnot>[0];
                 options: Parameters<typeof CreateTorusKnot>[1];
                 scene: Parameters<typeof CreateTorusKnot>[2];
-            }
+            },
+            ReturnType<typeof CreateTorusKnot>
         >,
         any
     >;
     lineSystem: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLineSystem> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLineSystem>> & MeshProps,
             {
                 name: Parameters<typeof CreateLineSystem>[0];
                 options: Parameters<typeof CreateLineSystem>[1];
                 scene: Parameters<typeof CreateLineSystem>[2];
-            }
+            },
+            ReturnType<typeof CreateLineSystem>
         >,
         any
     >;
     lines: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLines> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLines>> & MeshProps,
             {
                 name: Parameters<typeof CreateLines>[0];
                 options: Parameters<typeof CreateLines>[1];
                 scene: Parameters<typeof CreateLines>[2];
-            }
+            },
+            ReturnType<typeof CreateLines>
         >,
         any
     >;
     dashedLines: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDashedLines> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDashedLines>> & MeshProps,
             {
                 name: Parameters<typeof CreateDashedLines>[0];
                 options: Parameters<typeof CreateDashedLines>[1];
                 scene: Parameters<typeof CreateDashedLines>[2];
-            }
+            },
+            ReturnType<typeof CreateDashedLines>
         >,
         any
     >;
     extrudeShape: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShape> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShape>> & MeshProps,
             {
                 name: Parameters<typeof ExtrudeShape>[0];
                 options: Parameters<typeof ExtrudeShape>[1];
                 scene: Parameters<typeof ExtrudeShape>[2];
-            }
+            },
+            ReturnType<typeof ExtrudeShape>
         >,
         any
     >;
     extrudeShapeCustom: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShapeCustom> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShapeCustom>> & MeshProps,
             {
                 name: Parameters<typeof ExtrudeShapeCustom>[0];
                 options: Parameters<typeof ExtrudeShapeCustom>[1];
                 scene: Parameters<typeof ExtrudeShapeCustom>[2];
-            }
+            },
+            ReturnType<typeof ExtrudeShapeCustom>
         >,
         any
     >;
     lathe: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLathe> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateLathe>> & MeshProps,
             {
                 name: Parameters<typeof CreateLathe>[0];
                 options: Parameters<typeof CreateLathe>[1];
                 scene: Parameters<typeof CreateLathe>[2];
-            }
+            },
+            ReturnType<typeof CreateLathe>
         >,
         any
     >;
     tiledPlane: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledPlane> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledPlane>> & MeshProps,
             {
                 name: Parameters<typeof CreateTiledPlane>[0];
                 options: Parameters<typeof CreateTiledPlane>[1];
                 scene: Parameters<typeof CreateTiledPlane>[2];
-            }
+            },
+            ReturnType<typeof CreateTiledPlane>
         >,
         any
     >;
     plane: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePlane> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePlane>> & MeshProps,
             {
                 name: Parameters<typeof CreatePlane>[0];
                 options: Parameters<typeof CreatePlane>[1];
                 scene: Parameters<typeof CreatePlane>[2];
-            }
+            },
+            ReturnType<typeof CreatePlane>
         >,
         any
     >;
     ground: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGround> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGround>> & MeshProps,
             {
                 name: Parameters<typeof CreateGround>[0];
                 options: Parameters<typeof CreateGround>[1];
                 scene: Parameters<typeof CreateGround>[2];
-            }
+            },
+            ReturnType<typeof CreateGround>
         >,
         any
     >;
     tiledGround: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledGround> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTiledGround>> & MeshProps,
             {
                 name: Parameters<typeof CreateTiledGround>[0];
                 options: Parameters<typeof CreateTiledGround>[1];
                 scene: Parameters<typeof CreateTiledGround>[2];
-            }
+            },
+            ReturnType<typeof CreateTiledGround>
         >,
         any
     >;
     groundFromHeightMap: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGroundFromHeightMap> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGroundFromHeightMap>> & MeshProps,
             {
                 name: Parameters<typeof CreateGroundFromHeightMap>[0];
                 url: Parameters<typeof CreateGroundFromHeightMap>[1];
                 options: Parameters<typeof CreateGroundFromHeightMap>[2];
                 scene: Parameters<typeof CreateGroundFromHeightMap>[3];
-            }
+            },
+            ReturnType<typeof CreateGroundFromHeightMap>
         >,
         any
     >;
     polygon: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePolygon> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePolygon>> & MeshProps,
             {
                 name: Parameters<typeof CreatePolygon>[0];
                 options: Parameters<typeof CreatePolygon>[1];
                 scene: Parameters<typeof CreatePolygon>[2];
                 earcutInjection: Parameters<typeof CreatePolygon>[3];
-            }
+            },
+            ReturnType<typeof CreatePolygon>
         >,
         any
     >;
     extrudePolygon: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudePolygon> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudePolygon>> & MeshProps,
             {
                 name: Parameters<typeof ExtrudePolygon>[0];
                 options: Parameters<typeof ExtrudePolygon>[1];
                 scene: Parameters<typeof ExtrudePolygon>[2];
                 earcutInjection: Parameters<typeof ExtrudePolygon>[3];
-            }
+            },
+            ReturnType<typeof ExtrudePolygon>
         >,
         any
     >;
     tube: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTube> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateTube>> & MeshProps,
             {
                 name: Parameters<typeof CreateTube>[0];
                 options: Parameters<typeof CreateTube>[1];
                 scene: Parameters<typeof CreateTube>[2];
-            }
+            },
+            ReturnType<typeof CreateTube>
         >,
         any
     >;
     polyhedron: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePolyhedron> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePolyhedron>> & MeshProps,
             {
                 name: Parameters<typeof CreatePolyhedron>[0];
                 options: Parameters<typeof CreatePolyhedron>[1];
                 scene: Parameters<typeof CreatePolyhedron>[2];
-            }
+            },
+            ReturnType<typeof CreatePolyhedron>
         >,
         any
     >;
     geodesic: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGeodesic> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGeodesic>> & MeshProps,
             {
                 name: Parameters<typeof CreateGeodesic>[0];
                 options: Parameters<typeof CreateGeodesic>[1];
                 scene: Parameters<typeof CreateGeodesic>[2];
-            }
+            },
+            ReturnType<typeof CreateGeodesic>
         >,
         any
     >;
     goldberg: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGoldberg> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateGoldberg>> & MeshProps,
             {
                 name: Parameters<typeof CreateGoldberg>[0];
                 options: Parameters<typeof CreateGoldberg>[1];
                 scene: Parameters<typeof CreateGoldberg>[2];
-            }
+            },
+            ReturnType<typeof CreateGoldberg>
         >,
         any
     >;
     decal: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDecal> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateDecal>> & MeshProps,
             {
                 name: Parameters<typeof CreateDecal>[0];
                 sourceMesh: Parameters<typeof CreateDecal>[1];
                 options: Parameters<typeof CreateDecal>[2];
-            }
+            },
+            ReturnType<typeof CreateDecal>
         >,
         any
     >;
     capsule: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateCapsule> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateCapsule>> & MeshProps,
             {
                 name: Parameters<typeof CreateCapsule>[0];
                 options: Parameters<typeof CreateCapsule>[1];
                 scene: Parameters<typeof CreateCapsule>[2];
-            }
+            },
+            ReturnType<typeof CreateCapsule>
         >,
         any
     >;
     text: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateText> & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateText>> & MeshProps,
             {
                 name: Parameters<typeof CreateText>[0];
                 text: Parameters<typeof CreateText>[1];
@@ -5334,7 +5777,8 @@ export interface JSXElements {
                 options: Parameters<typeof CreateText>[3];
                 scene: Parameters<typeof CreateText>[4];
                 earcutInjection: Parameters<typeof CreateText>[5];
-            }
+            },
+            ReturnType<typeof CreateText>
         >,
         any
     >;
@@ -5344,7 +5788,8 @@ export interface JSXElements {
             {
                 distanceOrScreenCoverage: ConstructorParameters<typeof MeshLODLevel>[0];
                 mesh: ConstructorParameters<typeof MeshLODLevel>[1];
-            }
+            },
+            MeshLODLevel
         >,
         any
     >;
@@ -5355,13 +5800,14 @@ export interface JSXElements {
                 mesh: ConstructorParameters<typeof MeshUVSpaceRenderer>[0];
                 scene: ConstructorParameters<typeof MeshUVSpaceRenderer>[1];
                 options: ConstructorParameters<typeof MeshUVSpaceRenderer>[2];
-            }
+            },
+            MeshUVSpaceRenderer
         >,
         any
     >;
     subMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SubMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SubMesh> & Clonable,
             {
                 materialIndex: ConstructorParameters<typeof SubMesh>[0];
                 verticesStart: ConstructorParameters<typeof SubMesh>[1];
@@ -5372,32 +5818,35 @@ export interface JSXElements {
                 renderingMesh: ConstructorParameters<typeof SubMesh>[6];
                 createBoundingBox: ConstructorParameters<typeof SubMesh>[7];
                 addToMesh: ConstructorParameters<typeof SubMesh>[8];
-            }
+            },
+            SubMesh
         >,
         any
     >;
     trailMesh: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TrailMesh & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TrailMesh> & Clonable,
             {
                 name: ConstructorParameters<typeof TrailMesh>[0];
                 generator: ConstructorParameters<typeof TrailMesh>[1];
                 scene: ConstructorParameters<typeof TrailMesh>[2];
-                diameter: ConstructorParameters<typeof TrailMesh>[3];
+                diameterOrOptions: ConstructorParameters<typeof TrailMesh>[3];
                 length: ConstructorParameters<typeof TrailMesh>[4];
                 autoStart: ConstructorParameters<typeof TrailMesh>[5];
-            }
+            },
+            TrailMesh
         >,
         any
     >;
     transformNode: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TransformNode & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TransformNode> & Clonable,
             {
                 name: ConstructorParameters<typeof TransformNode>[0];
                 scene: ConstructorParameters<typeof TransformNode>[1];
                 isPure: ConstructorParameters<typeof TransformNode>[2];
-            }
+            },
+            TransformNode
         >,
         any
     >;
@@ -5406,7 +5855,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<DynamicFloat32Array>,
             {
                 itemCapacity: ConstructorParameters<typeof DynamicFloat32Array>[0];
-            }
+            },
+            DynamicFloat32Array
         >,
         any
     >;
@@ -5416,7 +5866,8 @@ export interface JSXElements {
             {
                 _scene: ConstructorParameters<typeof PerformanceViewerCollector>[0];
                 _enabledStrategyCallbacks: ConstructorParameters<typeof PerformanceViewerCollector>[1];
-            }
+            },
+            PerformanceViewerCollector
         >,
         any
     >;
@@ -5425,7 +5876,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<AssetsManager>,
             {
                 scene: ConstructorParameters<typeof AssetsManager>[0];
-            }
+            },
+            AssetsManager
         >,
         any
     >;
@@ -5435,7 +5887,8 @@ export interface JSXElements {
             {
                 engine: ConstructorParameters<typeof CopyTextureToTexture>[0];
                 isDepthTexture: ConstructorParameters<typeof CopyTextureToTexture>[1];
-            }
+            },
+            CopyTextureToTexture
         >,
         any
     >;
@@ -5444,17 +5897,19 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<DataReader>,
             {
                 buffer: ConstructorParameters<typeof DataReader>[0];
-            }
+            },
+            DataReader
         >,
         any
     >;
-    deferred: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Deferred>>, any>;
+    deferred: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Deferred>, Deferred>, any>;
     depthReducer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<DepthReducer>,
             {
                 camera: ConstructorParameters<typeof DepthReducer>[0];
-            }
+            },
+            DepthReducer
         >,
         any
     >;
@@ -5472,7 +5927,8 @@ export interface JSXElements {
                 onReloadCallback: ConstructorParameters<typeof FilesInput>[7];
                 errorCallback: ConstructorParameters<typeof FilesInput>[8];
                 useAppend: ConstructorParameters<typeof FilesInput>[9];
-            }
+            },
+            FilesInput
         >,
         any
     >;
@@ -5482,7 +5938,8 @@ export interface JSXElements {
             {
                 data: ConstructorParameters<typeof KhronosTextureContainer>[0];
                 facesExpected: ConstructorParameters<typeof KhronosTextureContainer>[1];
-            }
+            },
+            KhronosTextureContainer
         >,
         any
     >;
@@ -5492,7 +5949,8 @@ export interface JSXElements {
             {
                 engine: ConstructorParameters<typeof KhronosTextureContainer2>[0];
                 numWorkersOrOptions: ConstructorParameters<typeof KhronosTextureContainer2>[1];
-            }
+            },
+            KhronosTextureContainer2
         >,
         any
     >;
@@ -5502,7 +5960,8 @@ export interface JSXElements {
             {
                 meshes: ConstructorParameters<typeof MeshExploder>[0];
                 centerMesh: ConstructorParameters<typeof MeshExploder>[1];
-            }
+            },
+            MeshExploder
         >,
         any
     >;
@@ -5511,27 +5970,30 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<MinMaxReducer>,
             {
                 camera: ConstructorParameters<typeof MinMaxReducer>[0];
-            }
+            },
+            MinMaxReducer
         >,
         any
     >;
     observable: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Observable & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Observable> & Clonable,
             {
                 onObserverAdded: ConstructorParameters<typeof Observable>[0];
                 notifyIfTriggered: ConstructorParameters<typeof Observable>[1];
-            }
+            },
+            Observable
         >,
         any
     >;
-    perfCounter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PerfCounter>>, any>;
+    perfCounter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PerfCounter>, PerfCounter>, any>;
     performanceMonitor: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PerformanceMonitor>,
             {
                 frameSampleSize: ConstructorParameters<typeof PerformanceMonitor>[0];
-            }
+            },
+            PerformanceMonitor
         >,
         any
     >;
@@ -5540,7 +6002,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<PressureObserverWrapper>,
             {
                 options: ConstructorParameters<typeof PressureObserverWrapper>[0];
-            }
+            },
+            PressureObserverWrapper
         >,
         any
     >;
@@ -5551,7 +6014,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof Reflector>[0];
                 hostname: ConstructorParameters<typeof Reflector>[1];
                 port: ConstructorParameters<typeof Reflector>[2];
-            }
+            },
+            Reflector
         >,
         any
     >;
@@ -5563,29 +6027,32 @@ export interface JSXElements {
                 options: ConstructorParameters<typeof SceneOptimizer>[1];
                 autoGeneratePriorities: ConstructorParameters<typeof SceneOptimizer>[2];
                 improvementMode: ConstructorParameters<typeof SceneOptimizer>[3];
-            }
+            },
+            SceneOptimizer
         >,
         any
     >;
-    sceneRecorder: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SceneRecorder>>, any>;
+    sceneRecorder: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SceneRecorder>, SceneRecorder>, any>;
     smartArray: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SmartArray>,
             {
                 capacity: ConstructorParameters<typeof SmartArray>[0];
-            }
+            },
+            SmartArray
         >,
         any
     >;
-    stringDictionary: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StringDictionary>>, any>;
-    trajectoryClassifier: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TrajectoryClassifier>>, any>;
+    stringDictionary: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StringDictionary>, StringDictionary>, any>;
+    trajectoryClassifier: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TrajectoryClassifier>, TrajectoryClassifier>, any>;
     videoRecorder: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<VideoRecorder>,
             {
                 engine: ConstructorParameters<typeof VideoRecorder>[0];
                 options: ConstructorParameters<typeof VideoRecorder>[1];
-            }
+            },
+            VideoRecorder
         >,
         any
     >;
@@ -5595,37 +6062,41 @@ export interface JSXElements {
             {
                 leftJoystick: ConstructorParameters<typeof VirtualJoystick>[0];
                 customizations: ConstructorParameters<typeof VirtualJoystick>[1];
-            }
+            },
+            VirtualJoystick
         >,
         any
     >;
-    webRequest: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebRequest>>, any>;
+    webRequest: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebRequest>, WebRequest>, any>;
     workerPool: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WorkerPool>,
             {
                 workers: ConstructorParameters<typeof WorkerPool>[0];
-            }
+            },
+            WorkerPool
         >,
         any
     >;
     morphTarget: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MorphTarget & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MorphTarget> & Clonable,
             {
                 name: ConstructorParameters<typeof MorphTarget>[0];
                 influence: ConstructorParameters<typeof MorphTarget>[1];
                 scene: ConstructorParameters<typeof MorphTarget>[2];
-            }
+            },
+            MorphTarget
         >,
         any
     >;
     morphTargetManager: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MorphTargetManager & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MorphTargetManager> & Clonable,
             {
                 scene: ConstructorParameters<typeof MorphTargetManager>[0];
-            }
+            },
+            MorphTargetManager
         >,
         any
     >;
@@ -5634,7 +6105,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<RecastJSPlugin>,
             {
                 recastInjection: ConstructorParameters<typeof RecastJSPlugin>[0];
-            }
+            },
+            RecastJSPlugin
         >,
         any
     >;
@@ -5645,64 +6117,70 @@ export interface JSXElements {
                 urlToScene: ConstructorParameters<typeof Database>[0];
                 callbackManifestChecked: ConstructorParameters<typeof Database>[1];
                 disableManifestCheck: ConstructorParameters<typeof Database>[2];
-            }
+            },
+            Database
         >,
         any
     >;
-    boxParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BoxParticleEmitter & { cloneBy: string }>>, any>;
+    boxParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BoxParticleEmitter> & Clonable, BoxParticleEmitter>, any>;
     coneParticleEmitter: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ConeParticleEmitter & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ConeParticleEmitter> & Clonable,
             {
                 radius: ConstructorParameters<typeof ConeParticleEmitter>[0];
                 angle: ConstructorParameters<typeof ConeParticleEmitter>[1];
                 directionRandomizer: ConstructorParameters<typeof ConeParticleEmitter>[2];
-            }
+            },
+            ConeParticleEmitter
         >,
         any
     >;
-    customParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CustomParticleEmitter & { cloneBy: string }>>, any>;
+    customParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CustomParticleEmitter> & Clonable, CustomParticleEmitter>, any>;
     cylinderParticleEmitter: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CylinderParticleEmitter & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CylinderParticleEmitter> & Clonable,
             {
                 radius: ConstructorParameters<typeof CylinderParticleEmitter>[0];
                 height: ConstructorParameters<typeof CylinderParticleEmitter>[1];
                 radiusRange: ConstructorParameters<typeof CylinderParticleEmitter>[2];
                 directionRandomizer: ConstructorParameters<typeof CylinderParticleEmitter>[3];
-            }
+            },
+            CylinderParticleEmitter
         >,
         any
     >;
     hemisphericParticleEmitter: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<HemisphericParticleEmitter & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<HemisphericParticleEmitter> & Clonable,
             {
                 radius: ConstructorParameters<typeof HemisphericParticleEmitter>[0];
                 radiusRange: ConstructorParameters<typeof HemisphericParticleEmitter>[1];
                 directionRandomizer: ConstructorParameters<typeof HemisphericParticleEmitter>[2];
-            }
+            },
+            HemisphericParticleEmitter
         >,
         any
     >;
     meshParticleEmitter: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MeshParticleEmitter & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MeshParticleEmitter> & Clonable,
             {
                 mesh: ConstructorParameters<typeof MeshParticleEmitter>[0];
-            }
+            },
+            MeshParticleEmitter
         >,
         any
     >;
-    pointParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PointParticleEmitter & { cloneBy: string }>>, any>;
+    pointParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PointParticleEmitter> & Clonable, PointParticleEmitter>, any>;
     sphereParticleEmitter: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SphereParticleEmitter & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SphereParticleEmitter> & Clonable,
             {
                 radius: ConstructorParameters<typeof SphereParticleEmitter>[0];
                 radiusRange: ConstructorParameters<typeof SphereParticleEmitter>[1];
                 directionRandomizer: ConstructorParameters<typeof SphereParticleEmitter>[2];
-            }
+            },
+            SphereParticleEmitter
         >,
         any
     >;
@@ -5711,7 +6189,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<BaseParticleSystem>,
             {
                 name: ConstructorParameters<typeof BaseParticleSystem>[0];
-            }
+            },
+            BaseParticleSystem
         >,
         any
     >;
@@ -5724,7 +6203,8 @@ export interface JSXElements {
                 groupId: ConstructorParameters<typeof CloudPoint>[2];
                 idxInGroup: ConstructorParameters<typeof CloudPoint>[3];
                 pcs: ConstructorParameters<typeof CloudPoint>[4];
-            }
+            },
+            CloudPoint
         >,
         any
     >;
@@ -5734,7 +6214,8 @@ export interface JSXElements {
             {
                 parent: ConstructorParameters<typeof ComputeShaderParticleSystem>[0];
                 engine: ConstructorParameters<typeof ComputeShaderParticleSystem>[1];
-            }
+            },
+            ComputeShaderParticleSystem
         >,
         any
     >;
@@ -5743,12 +6224,13 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<Particle>,
             {
                 particleSystem: ConstructorParameters<typeof Particle>[0];
-            }
+            },
+            Particle
         >,
         any
     >;
-    particleSystem: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystem & { cloneBy: string }>>, any>;
-    particleSystemSet: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystemSet>>, any>;
+    particleSystem: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystem> & Clonable, ParticleSystem>, any>;
+    particleSystemSet: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystemSet>, ParticleSystemSet>, any>;
     pointsCloudSystem: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PointsCloudSystem>,
@@ -5757,7 +6239,8 @@ export interface JSXElements {
                 pointSize: ConstructorParameters<typeof PointsCloudSystem>[1];
                 scene: ConstructorParameters<typeof PointsCloudSystem>[2];
                 options: ConstructorParameters<typeof PointsCloudSystem>[3];
-            }
+            },
+            PointsCloudSystem
         >,
         any
     >;
@@ -5775,7 +6258,8 @@ export interface JSXElements {
                 sps: ConstructorParameters<typeof SolidParticle>[7];
                 modelBoundingInfo: ConstructorParameters<typeof SolidParticle>[8];
                 materialIndex: ConstructorParameters<typeof SolidParticle>[9];
-            }
+            },
+            SolidParticle
         >,
         any
     >;
@@ -5786,22 +6270,24 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof SolidParticleSystem>[0];
                 scene: ConstructorParameters<typeof SolidParticleSystem>[1];
                 options: ConstructorParameters<typeof SolidParticleSystem>[2];
-            }
+            },
+            SolidParticleSystem
         >,
         any
     >;
     subEmitter: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SubEmitter & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SubEmitter> & Clonable,
             {
                 particleSystem: ConstructorParameters<typeof SubEmitter>[0];
-            }
+            },
+            SubEmitter
         >,
         any
     >;
     thinParticleSystem: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ThinParticleSystem & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ThinParticleSystem> & Clonable,
             {
                 name: ConstructorParameters<typeof ThinParticleSystem>[0];
                 capacity: ConstructorParameters<typeof ThinParticleSystem>[1];
@@ -5809,7 +6295,8 @@ export interface JSXElements {
                 customEffect: ConstructorParameters<typeof ThinParticleSystem>[3];
                 isAnimationSheetEnabled: ConstructorParameters<typeof ThinParticleSystem>[4];
                 epsilon: ConstructorParameters<typeof ThinParticleSystem>[5];
-            }
+            },
+            ThinParticleSystem
         >,
         any
     >;
@@ -5820,7 +6307,8 @@ export interface JSXElements {
                 _useDeltaForWorldStep: ConstructorParameters<typeof AmmoJSPlugin>[0];
                 ammoInjection: ConstructorParameters<typeof AmmoJSPlugin>[1];
                 overlappingPairCache: ConstructorParameters<typeof AmmoJSPlugin>[2];
-            }
+            },
+            AmmoJSPlugin
         >,
         any
     >;
@@ -5831,7 +6319,8 @@ export interface JSXElements {
                 _useDeltaForWorldStep: ConstructorParameters<typeof CannonJSPlugin>[0];
                 iterations: ConstructorParameters<typeof CannonJSPlugin>[1];
                 cannonInjection: ConstructorParameters<typeof CannonJSPlugin>[2];
-            }
+            },
+            CannonJSPlugin
         >,
         any
     >;
@@ -5842,18 +6331,20 @@ export interface JSXElements {
                 _useDeltaForWorldStep: ConstructorParameters<typeof OimoJSPlugin>[0];
                 iterations: ConstructorParameters<typeof OimoJSPlugin>[1];
                 oimoInjection: ConstructorParameters<typeof OimoJSPlugin>[2];
-            }
+            },
+            OimoJSPlugin
         >,
         any
     >;
-    castingResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CastingResult>>, any>;
+    castingResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CastingResult>, CastingResult>, any>;
     physicsEngine: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PhysicsEngine>,
             {
                 gravity: ConstructorParameters<typeof PhysicsEngine>[0];
                 _physicsPlugin: ConstructorParameters<typeof PhysicsEngine>[1];
-            }
+            },
+            PhysicsEngine
         >,
         any
     >;
@@ -5862,19 +6353,21 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<PhysicsHelper>,
             {
                 scene: ConstructorParameters<typeof PhysicsHelper>[0];
-            }
+            },
+            PhysicsHelper
         >,
         any
     >;
     physicsImpostor: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PhysicsImpostor & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PhysicsImpostor> & Clonable,
             {
                 object: ConstructorParameters<typeof PhysicsImpostor>[0];
                 type: ConstructorParameters<typeof PhysicsImpostor>[1];
                 _options: ConstructorParameters<typeof PhysicsImpostor>[2];
                 _scene: ConstructorParameters<typeof PhysicsImpostor>[3];
-            }
+            },
+            PhysicsImpostor
         >,
         any
     >;
@@ -5884,13 +6377,14 @@ export interface JSXElements {
             {
                 type: ConstructorParameters<typeof PhysicsJoint>[0];
                 jointData: ConstructorParameters<typeof PhysicsJoint>[1];
-            }
+            },
+            PhysicsJoint
         >,
         any
     >;
-    physicsRaycastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsRaycastResult>>, any>;
-    proximityCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ProximityCastResult>>, any>;
-    shapeCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShapeCastResult>>, any>;
+    physicsRaycastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsRaycastResult>, PhysicsRaycastResult>, any>;
+    proximityCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ProximityCastResult>, ProximityCastResult>, any>;
+    shapeCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShapeCastResult>, ShapeCastResult>, any>;
     ammoJSPlugin: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AmmoJSPlugin>,
@@ -5898,7 +6392,8 @@ export interface JSXElements {
                 _useDeltaForWorldStep: ConstructorParameters<typeof AmmoJSPlugin>[0];
                 ammoInjection: ConstructorParameters<typeof AmmoJSPlugin>[1];
                 overlappingPairCache: ConstructorParameters<typeof AmmoJSPlugin>[2];
-            }
+            },
+            AmmoJSPlugin
         >,
         any
     >;
@@ -5909,7 +6404,8 @@ export interface JSXElements {
                 _useDeltaForWorldStep: ConstructorParameters<typeof CannonJSPlugin>[0];
                 iterations: ConstructorParameters<typeof CannonJSPlugin>[1];
                 cannonInjection: ConstructorParameters<typeof CannonJSPlugin>[2];
-            }
+            },
+            CannonJSPlugin
         >,
         any
     >;
@@ -5920,7 +6416,8 @@ export interface JSXElements {
                 _useDeltaForWorldStep: ConstructorParameters<typeof OimoJSPlugin>[0];
                 iterations: ConstructorParameters<typeof OimoJSPlugin>[1];
                 oimoInjection: ConstructorParameters<typeof OimoJSPlugin>[2];
-            }
+            },
+            OimoJSPlugin
         >,
         any
     >;
@@ -5930,19 +6427,21 @@ export interface JSXElements {
             {
                 gravity: ConstructorParameters<typeof PhysicsEngine>[0];
                 _physicsPlugin: ConstructorParameters<typeof PhysicsEngine>[1];
-            }
+            },
+            PhysicsEngine
         >,
         any
     >;
     physicsImpostor: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PhysicsImpostor & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PhysicsImpostor> & Clonable,
             {
                 object: ConstructorParameters<typeof PhysicsImpostor>[0];
                 type: ConstructorParameters<typeof PhysicsImpostor>[1];
                 _options: ConstructorParameters<typeof PhysicsImpostor>[2];
                 _scene: ConstructorParameters<typeof PhysicsImpostor>[3];
-            }
+            },
+            PhysicsImpostor
         >,
         any
     >;
@@ -5952,7 +6451,8 @@ export interface JSXElements {
             {
                 type: ConstructorParameters<typeof PhysicsJoint>[0];
                 jointData: ConstructorParameters<typeof PhysicsJoint>[1];
-            }
+            },
+            PhysicsJoint
         >,
         any
     >;
@@ -5962,7 +6462,8 @@ export interface JSXElements {
             {
                 _useDeltaForWorldStep: ConstructorParameters<typeof HavokPlugin>[0];
                 hpInjection: ConstructorParameters<typeof HavokPlugin>[1];
-            }
+            },
+            HavokPlugin
         >,
         any
     >;
@@ -5974,19 +6475,21 @@ export interface JSXElements {
                 type: ConstructorParameters<typeof PhysicsAggregate>[1];
                 _options: ConstructorParameters<typeof PhysicsAggregate>[2];
                 _scene: ConstructorParameters<typeof PhysicsAggregate>[3];
-            }
+            },
+            PhysicsAggregate
         >,
         any
     >;
     physicsBody: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PhysicsBody & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PhysicsBody> & Clonable,
             {
                 transformNode: ConstructorParameters<typeof PhysicsBody>[0];
                 motionType: ConstructorParameters<typeof PhysicsBody>[1];
                 startsAsleep: ConstructorParameters<typeof PhysicsBody>[2];
                 scene: ConstructorParameters<typeof PhysicsBody>[3];
-            }
+            },
+            PhysicsBody
         >,
         any
     >;
@@ -5997,7 +6500,8 @@ export interface JSXElements {
                 type: ConstructorParameters<typeof PhysicsConstraint>[0];
                 options: ConstructorParameters<typeof PhysicsConstraint>[1];
                 scene: ConstructorParameters<typeof PhysicsConstraint>[2];
-            }
+            },
+            PhysicsConstraint
         >,
         any
     >;
@@ -6007,7 +6511,8 @@ export interface JSXElements {
             {
                 gravity: ConstructorParameters<typeof PhysicsEngine>[0];
                 _physicsPlugin: ConstructorParameters<typeof PhysicsEngine>[1];
-            }
+            },
+            PhysicsEngine
         >,
         any
     >;
@@ -6017,7 +6522,8 @@ export interface JSXElements {
             {
                 options: ConstructorParameters<typeof PhysicsShape>[0];
                 scene: ConstructorParameters<typeof PhysicsShape>[1];
-            }
+            },
+            PhysicsShape
         >,
         any
     >;
@@ -6028,7 +6534,8 @@ export interface JSXElements {
                 skeleton: ConstructorParameters<typeof Ragdoll>[0];
                 rootTransformNode: ConstructorParameters<typeof Ragdoll>[1];
                 config: ConstructorParameters<typeof Ragdoll>[2];
-            }
+            },
+            Ragdoll
         >,
         any
     >;
@@ -6041,7 +6548,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof DefaultRenderingPipeline>[2];
                 cameras: ConstructorParameters<typeof DefaultRenderingPipeline>[3];
                 automaticBuild: ConstructorParameters<typeof DefaultRenderingPipeline>[4];
-            }
+            },
+            DefaultRenderingPipeline
         >,
         any
     >;
@@ -6054,7 +6562,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof LensRenderingPipeline>[2];
                 ratio: ConstructorParameters<typeof LensRenderingPipeline>[3];
                 cameras: ConstructorParameters<typeof LensRenderingPipeline>[4];
-            }
+            },
+            LensRenderingPipeline
         >,
         any
     >;
@@ -6067,7 +6576,8 @@ export interface JSXElements {
                 ratio: ConstructorParameters<typeof StandardRenderingPipeline>[2];
                 originalPostProcess: ConstructorParameters<typeof StandardRenderingPipeline>[3];
                 cameras: ConstructorParameters<typeof StandardRenderingPipeline>[4];
-            }
+            },
+            StandardRenderingPipeline
         >,
         any
     >;
@@ -6079,7 +6589,8 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof PostProcessRenderEffect>[1];
                 getPostProcesses: ConstructorParameters<typeof PostProcessRenderEffect>[2];
                 singleInstance: ConstructorParameters<typeof PostProcessRenderEffect>[3];
-            }
+            },
+            PostProcessRenderEffect
         >,
         any
     >;
@@ -6089,23 +6600,25 @@ export interface JSXElements {
             {
                 _engine: ConstructorParameters<typeof PostProcessRenderPipeline>[0];
                 name: ConstructorParameters<typeof PostProcessRenderPipeline>[1];
-            }
+            },
+            PostProcessRenderPipeline
         >,
         any
     >;
-    postProcessRenderPipelineManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PostProcessRenderPipelineManager>>, any>;
+    postProcessRenderPipelineManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PostProcessRenderPipelineManager>, PostProcessRenderPipelineManager>, any>;
     postProcessRenderPipelineManagerSceneComponent: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PostProcessRenderPipelineManagerSceneComponent>,
             {
                 scene: ConstructorParameters<typeof PostProcessRenderPipelineManagerSceneComponent>[0];
-            }
+            },
+            PostProcessRenderPipelineManagerSceneComponent
         >,
         any
     >;
     anaglyphPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<AnaglyphPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<AnaglyphPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof AnaglyphPostProcess>[0];
                 options: ConstructorParameters<typeof AnaglyphPostProcess>[1];
@@ -6113,13 +6626,14 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof AnaglyphPostProcess>[3];
                 engine: ConstructorParameters<typeof AnaglyphPostProcess>[4];
                 reusable: ConstructorParameters<typeof AnaglyphPostProcess>[5];
-            }
+            },
+            AnaglyphPostProcess
         >,
         any
     >;
     blackAndWhitePostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BlackAndWhitePostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BlackAndWhitePostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof BlackAndWhitePostProcess>[0];
                 options: ConstructorParameters<typeof BlackAndWhitePostProcess>[1];
@@ -6127,7 +6641,8 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof BlackAndWhitePostProcess>[3];
                 engine: ConstructorParameters<typeof BlackAndWhitePostProcess>[4];
                 reusable: ConstructorParameters<typeof BlackAndWhitePostProcess>[5];
-            }
+            },
+            BlackAndWhitePostProcess
         >,
         any
     >;
@@ -6141,13 +6656,14 @@ export interface JSXElements {
                 bloomKernel: ConstructorParameters<typeof BloomEffect>[3];
                 pipelineTextureType: ConstructorParameters<typeof BloomEffect>[4];
                 blockCompilation: ConstructorParameters<typeof BloomEffect>[5];
-            }
+            },
+            BloomEffect
         >,
         any
     >;
     bloomMergePostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BloomMergePostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BloomMergePostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof BloomMergePostProcess>[0];
                 originalFromInput: ConstructorParameters<typeof BloomMergePostProcess>[1];
@@ -6160,13 +6676,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof BloomMergePostProcess>[8];
                 textureType: ConstructorParameters<typeof BloomMergePostProcess>[9];
                 blockCompilation: ConstructorParameters<typeof BloomMergePostProcess>[10];
-            }
+            },
+            BloomMergePostProcess
         >,
         any
     >;
     blurPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<BlurPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<BlurPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof BlurPostProcess>[0];
                 direction: ConstructorParameters<typeof BlurPostProcess>[1];
@@ -6180,13 +6697,14 @@ export interface JSXElements {
                 defines: ConstructorParameters<typeof BlurPostProcess>[9];
                 _blockCompilation: ConstructorParameters<typeof BlurPostProcess>[10];
                 textureFormat: ConstructorParameters<typeof BlurPostProcess>[11];
-            }
+            },
+            BlurPostProcess
         >,
         any
     >;
     chromaticAberrationPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ChromaticAberrationPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ChromaticAberrationPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof ChromaticAberrationPostProcess>[0];
                 screenWidth: ConstructorParameters<typeof ChromaticAberrationPostProcess>[1];
@@ -6198,13 +6716,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof ChromaticAberrationPostProcess>[7];
                 textureType: ConstructorParameters<typeof ChromaticAberrationPostProcess>[8];
                 blockCompilation: ConstructorParameters<typeof ChromaticAberrationPostProcess>[9];
-            }
+            },
+            ChromaticAberrationPostProcess
         >,
         any
     >;
     circleOfConfusionPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<CircleOfConfusionPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<CircleOfConfusionPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof CircleOfConfusionPostProcess>[0];
                 depthTexture: ConstructorParameters<typeof CircleOfConfusionPostProcess>[1];
@@ -6215,13 +6734,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof CircleOfConfusionPostProcess>[6];
                 textureType: ConstructorParameters<typeof CircleOfConfusionPostProcess>[7];
                 blockCompilation: ConstructorParameters<typeof CircleOfConfusionPostProcess>[8];
-            }
+            },
+            CircleOfConfusionPostProcess
         >,
         any
     >;
     colorCorrectionPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ColorCorrectionPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ColorCorrectionPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof ColorCorrectionPostProcess>[0];
                 colorTableUrl: ConstructorParameters<typeof ColorCorrectionPostProcess>[1];
@@ -6230,13 +6750,14 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof ColorCorrectionPostProcess>[4];
                 engine: ConstructorParameters<typeof ColorCorrectionPostProcess>[5];
                 reusable: ConstructorParameters<typeof ColorCorrectionPostProcess>[6];
-            }
+            },
+            ColorCorrectionPostProcess
         >,
         any
     >;
     convolutionPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ConvolutionPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ConvolutionPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof ConvolutionPostProcess>[0];
                 kernel: ConstructorParameters<typeof ConvolutionPostProcess>[1];
@@ -6246,13 +6767,14 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof ConvolutionPostProcess>[5];
                 reusable: ConstructorParameters<typeof ConvolutionPostProcess>[6];
                 textureType: ConstructorParameters<typeof ConvolutionPostProcess>[7];
-            }
+            },
+            ConvolutionPostProcess
         >,
         any
     >;
     depthOfFieldBlurPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DepthOfFieldBlurPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DepthOfFieldBlurPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[0];
                 scene: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[1];
@@ -6268,7 +6790,8 @@ export interface JSXElements {
                 textureType: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[11];
                 blockCompilation: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[12];
                 textureFormat: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[13];
-            }
+            },
+            DepthOfFieldBlurPostProcess
         >,
         any
     >;
@@ -6281,13 +6804,14 @@ export interface JSXElements {
                 blurLevel: ConstructorParameters<typeof DepthOfFieldEffect>[2];
                 pipelineTextureType: ConstructorParameters<typeof DepthOfFieldEffect>[3];
                 blockCompilation: ConstructorParameters<typeof DepthOfFieldEffect>[4];
-            }
+            },
+            DepthOfFieldEffect
         >,
         any
     >;
     depthOfFieldMergePostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DepthOfFieldMergePostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DepthOfFieldMergePostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[0];
                 originalFromInput: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[1];
@@ -6300,13 +6824,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[8];
                 textureType: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[9];
                 blockCompilation: ConstructorParameters<typeof DepthOfFieldMergePostProcess>[10];
-            }
+            },
+            DepthOfFieldMergePostProcess
         >,
         any
     >;
     displayPassPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<DisplayPassPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<DisplayPassPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof DisplayPassPostProcess>[0];
                 options: ConstructorParameters<typeof DisplayPassPostProcess>[1];
@@ -6314,13 +6839,14 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof DisplayPassPostProcess>[3];
                 engine: ConstructorParameters<typeof DisplayPassPostProcess>[4];
                 reusable: ConstructorParameters<typeof DisplayPassPostProcess>[5];
-            }
+            },
+            DisplayPassPostProcess
         >,
         any
     >;
     extractHighlightsPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ExtractHighlightsPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ExtractHighlightsPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof ExtractHighlightsPostProcess>[0];
                 options: ConstructorParameters<typeof ExtractHighlightsPostProcess>[1];
@@ -6330,13 +6856,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof ExtractHighlightsPostProcess>[5];
                 textureType: ConstructorParameters<typeof ExtractHighlightsPostProcess>[6];
                 blockCompilation: ConstructorParameters<typeof ExtractHighlightsPostProcess>[7];
-            }
+            },
+            ExtractHighlightsPostProcess
         >,
         any
     >;
     filterPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FilterPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FilterPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof FilterPostProcess>[0];
                 kernelMatrix: ConstructorParameters<typeof FilterPostProcess>[1];
@@ -6345,13 +6872,14 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof FilterPostProcess>[4];
                 engine: ConstructorParameters<typeof FilterPostProcess>[5];
                 reusable: ConstructorParameters<typeof FilterPostProcess>[6];
-            }
+            },
+            FilterPostProcess
         >,
         any
     >;
     fxaaPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FxaaPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<FxaaPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof FxaaPostProcess>[0];
                 options: ConstructorParameters<typeof FxaaPostProcess>[1];
@@ -6360,13 +6888,14 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof FxaaPostProcess>[4];
                 reusable: ConstructorParameters<typeof FxaaPostProcess>[5];
                 textureType: ConstructorParameters<typeof FxaaPostProcess>[6];
-            }
+            },
+            FxaaPostProcess
         >,
         any
     >;
     grainPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<GrainPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<GrainPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof GrainPostProcess>[0];
                 options: ConstructorParameters<typeof GrainPostProcess>[1];
@@ -6376,13 +6905,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof GrainPostProcess>[5];
                 textureType: ConstructorParameters<typeof GrainPostProcess>[6];
                 blockCompilation: ConstructorParameters<typeof GrainPostProcess>[7];
-            }
+            },
+            GrainPostProcess
         >,
         any
     >;
     highlightsPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<HighlightsPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<HighlightsPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof HighlightsPostProcess>[0];
                 options: ConstructorParameters<typeof HighlightsPostProcess>[1];
@@ -6391,13 +6921,14 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof HighlightsPostProcess>[4];
                 reusable: ConstructorParameters<typeof HighlightsPostProcess>[5];
                 textureType: ConstructorParameters<typeof HighlightsPostProcess>[6];
-            }
+            },
+            HighlightsPostProcess
         >,
         any
     >;
     imageProcessingPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ImageProcessingPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ImageProcessingPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof ImageProcessingPostProcess>[0];
                 options: ConstructorParameters<typeof ImageProcessingPostProcess>[1];
@@ -6407,13 +6938,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof ImageProcessingPostProcess>[5];
                 textureType: ConstructorParameters<typeof ImageProcessingPostProcess>[6];
                 imageProcessingConfiguration: ConstructorParameters<typeof ImageProcessingPostProcess>[7];
-            }
+            },
+            ImageProcessingPostProcess
         >,
         any
     >;
     motionBlurPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<MotionBlurPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<MotionBlurPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof MotionBlurPostProcess>[0];
                 scene: ConstructorParameters<typeof MotionBlurPostProcess>[1];
@@ -6425,13 +6957,14 @@ export interface JSXElements {
                 textureType: ConstructorParameters<typeof MotionBlurPostProcess>[7];
                 blockCompilation: ConstructorParameters<typeof MotionBlurPostProcess>[8];
                 forceGeometryBuffer: ConstructorParameters<typeof MotionBlurPostProcess>[9];
-            }
+            },
+            MotionBlurPostProcess
         >,
         any
     >;
     passPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PassPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PassPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof PassPostProcess>[0];
                 options: ConstructorParameters<typeof PassPostProcess>[1];
@@ -6441,13 +6974,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof PassPostProcess>[5];
                 textureType: ConstructorParameters<typeof PassPostProcess>[6];
                 blockCompilation: ConstructorParameters<typeof PassPostProcess>[7];
-            }
+            },
+            PassPostProcess
         >,
         any
     >;
     postProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<PostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<PostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof PostProcess>[0];
                 fragmentUrl: ConstructorParameters<typeof PostProcess>[1];
@@ -6465,7 +6999,8 @@ export interface JSXElements {
                 blockCompilation: ConstructorParameters<typeof PostProcess>[13];
                 textureFormat: ConstructorParameters<typeof PostProcess>[14];
                 shaderLanguage: ConstructorParameters<typeof PostProcess>[15];
-            }
+            },
+            PostProcess
         >,
         any
     >;
@@ -6474,13 +7009,14 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<PostProcessManager>,
             {
                 scene: ConstructorParameters<typeof PostProcessManager>[0];
-            }
+            },
+            PostProcessManager
         >,
         any
     >;
     refractionPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<RefractionPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<RefractionPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof RefractionPostProcess>[0];
                 refractionTextureUrl: ConstructorParameters<typeof RefractionPostProcess>[1];
@@ -6492,13 +7028,14 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof RefractionPostProcess>[7];
                 engine: ConstructorParameters<typeof RefractionPostProcess>[8];
                 reusable: ConstructorParameters<typeof RefractionPostProcess>[9];
-            }
+            },
+            RefractionPostProcess
         >,
         any
     >;
     screenSpaceCurvaturePostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ScreenSpaceCurvaturePostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ScreenSpaceCurvaturePostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[0];
                 scene: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[1];
@@ -6509,13 +7046,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[6];
                 textureType: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[7];
                 blockCompilation: ConstructorParameters<typeof ScreenSpaceCurvaturePostProcess>[8];
-            }
+            },
+            ScreenSpaceCurvaturePostProcess
         >,
         any
     >;
     screenSpaceReflectionPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ScreenSpaceReflectionPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<ScreenSpaceReflectionPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[0];
                 scene: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[1];
@@ -6527,13 +7065,14 @@ export interface JSXElements {
                 textureType: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[7];
                 blockCompilation: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[8];
                 forceGeometryBuffer: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[9];
-            }
+            },
+            ScreenSpaceReflectionPostProcess
         >,
         any
     >;
     sharpenPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SharpenPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SharpenPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof SharpenPostProcess>[0];
                 options: ConstructorParameters<typeof SharpenPostProcess>[1];
@@ -6543,13 +7082,14 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof SharpenPostProcess>[5];
                 textureType: ConstructorParameters<typeof SharpenPostProcess>[6];
                 blockCompilation: ConstructorParameters<typeof SharpenPostProcess>[7];
-            }
+            },
+            SharpenPostProcess
         >,
         any
     >;
     stereoscopicInterlacePostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<StereoscopicInterlacePostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<StereoscopicInterlacePostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[0];
                 rigCameras: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[1];
@@ -6557,13 +7097,14 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[3];
                 engine: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[4];
                 reusable: ConstructorParameters<typeof StereoscopicInterlacePostProcess>[5];
-            }
+            },
+            StereoscopicInterlacePostProcess
         >,
         any
     >;
     subSurfaceScatteringPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<SubSurfaceScatteringPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<SubSurfaceScatteringPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[0];
                 scene: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[1];
@@ -6573,13 +7114,14 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[5];
                 reusable: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[6];
                 textureType: ConstructorParameters<typeof SubSurfaceScatteringPostProcess>[7];
-            }
+            },
+            SubSurfaceScatteringPostProcess
         >,
         any
     >;
     tonemapPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<TonemapPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<TonemapPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof TonemapPostProcess>[0];
                 _operator: ConstructorParameters<typeof TonemapPostProcess>[1];
@@ -6589,13 +7131,14 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof TonemapPostProcess>[5];
                 textureFormat: ConstructorParameters<typeof TonemapPostProcess>[6];
                 reusable: ConstructorParameters<typeof TonemapPostProcess>[7];
-            }
+            },
+            TonemapPostProcess
         >,
         any
     >;
     volumetricLightScatteringPostProcess: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<VolumetricLightScatteringPostProcess & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<VolumetricLightScatteringPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[0];
                 ratio: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[1];
@@ -6606,7 +7149,8 @@ export interface JSXElements {
                 engine: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[6];
                 reusable: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[7];
                 scene: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[8];
-            }
+            },
+            VolumetricLightScatteringPostProcess
         >,
         any
     >;
@@ -6620,7 +7164,8 @@ export interface JSXElements {
                 generateMipMaps: ConstructorParameters<typeof ReflectionProbe>[3];
                 useFloat: ConstructorParameters<typeof ReflectionProbe>[4];
                 linearSpace: ConstructorParameters<typeof ReflectionProbe>[5];
-            }
+            },
+            ReflectionProbe
         >,
         any
     >;
@@ -6629,7 +7174,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<BoundingBoxRenderer>,
             {
                 scene: ConstructorParameters<typeof BoundingBoxRenderer>[0];
-            }
+            },
+            BoundingBoxRenderer
         >,
         any
     >;
@@ -6639,7 +7185,8 @@ export interface JSXElements {
             {
                 scene: ConstructorParameters<typeof DepthPeelingRenderer>[0];
                 passCount: ConstructorParameters<typeof DepthPeelingRenderer>[1];
-            }
+            },
+            DepthPeelingRenderer
         >,
         any
     >;
@@ -6648,7 +7195,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<DepthPeelingSceneComponent>,
             {
                 scene: ConstructorParameters<typeof DepthPeelingSceneComponent>[0];
-            }
+            },
+            DepthPeelingSceneComponent
         >,
         any
     >;
@@ -6663,7 +7211,8 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof DepthRenderer>[4];
                 storeCameraSpaceZ: ConstructorParameters<typeof DepthRenderer>[5];
                 name: ConstructorParameters<typeof DepthRenderer>[6];
-            }
+            },
+            DepthRenderer
         >,
         any
     >;
@@ -6672,7 +7221,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<DepthRendererSceneComponent>,
             {
                 scene: ConstructorParameters<typeof DepthRendererSceneComponent>[0];
-            }
+            },
+            DepthRendererSceneComponent
         >,
         any
     >;
@@ -6685,7 +7235,8 @@ export interface JSXElements {
                 checkVerticesInsteadOfIndices: ConstructorParameters<typeof EdgesRenderer>[2];
                 generateEdgesLines: ConstructorParameters<typeof EdgesRenderer>[3];
                 options: ConstructorParameters<typeof EdgesRenderer>[4];
-            }
+            },
+            EdgesRenderer
         >,
         any
     >;
@@ -6694,7 +7245,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FluidRenderer>,
             {
                 scene: ConstructorParameters<typeof FluidRenderer>[0];
-            }
+            },
+            FluidRenderer
         >,
         any
     >;
@@ -6706,7 +7258,8 @@ export interface JSXElements {
                 width: ConstructorParameters<typeof FluidRenderingDepthTextureCopy>[1];
                 height: ConstructorParameters<typeof FluidRenderingDepthTextureCopy>[2];
                 samples: ConstructorParameters<typeof FluidRenderingDepthTextureCopy>[3];
-            }
+            },
+            FluidRenderingDepthTextureCopy
         >,
         any
     >;
@@ -6715,7 +7268,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<FluidRenderingObject>,
             {
                 scene: ConstructorParameters<typeof FluidRenderingObject>[0];
-            }
+            },
+            FluidRenderingObject
         >,
         any
     >;
@@ -6726,7 +7280,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof FluidRenderingObjectCustomParticles>[0];
                 buffers: ConstructorParameters<typeof FluidRenderingObjectCustomParticles>[1];
                 numParticles: ConstructorParameters<typeof FluidRenderingObjectCustomParticles>[2];
-            }
+            },
+            FluidRenderingObjectCustomParticles
         >,
         any
     >;
@@ -6736,7 +7291,8 @@ export interface JSXElements {
             {
                 scene: ConstructorParameters<typeof FluidRenderingObjectParticleSystem>[0];
                 ps: ConstructorParameters<typeof FluidRenderingObjectParticleSystem>[1];
-            }
+            },
+            FluidRenderingObjectParticleSystem
         >,
         any
     >;
@@ -6746,7 +7302,8 @@ export interface JSXElements {
             {
                 scene: ConstructorParameters<typeof FluidRenderingTargetRenderer>[0];
                 camera: ConstructorParameters<typeof FluidRenderingTargetRenderer>[1];
-            }
+            },
+            FluidRenderingTargetRenderer
         >,
         any
     >;
@@ -6768,7 +7325,8 @@ export interface JSXElements {
                 camera: ConstructorParameters<typeof FluidRenderingTextures>[11];
                 generateDepthBuffer: ConstructorParameters<typeof FluidRenderingTextures>[12];
                 samples: ConstructorParameters<typeof FluidRenderingTextures>[13];
-            }
+            },
+            FluidRenderingTextures
         >,
         any
     >;
@@ -6780,7 +7338,8 @@ export interface JSXElements {
                 ratioOrDimensions: ConstructorParameters<typeof GeometryBufferRenderer>[1];
                 depthFormat: ConstructorParameters<typeof GeometryBufferRenderer>[2];
                 textureTypesAndFormats: ConstructorParameters<typeof GeometryBufferRenderer>[3];
-            }
+            },
+            GeometryBufferRenderer
         >,
         any
     >;
@@ -6789,17 +7348,19 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<GeometryBufferRendererSceneComponent>,
             {
                 scene: ConstructorParameters<typeof GeometryBufferRendererSceneComponent>[0];
-            }
+            },
+            GeometryBufferRendererSceneComponent
         >,
         any
     >;
-    motionBlurConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MotionBlurConfiguration>>, any>;
+    motionBlurConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MotionBlurConfiguration>, MotionBlurConfiguration>, any>;
     outlineRenderer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<OutlineRenderer>,
             {
                 scene: ConstructorParameters<typeof OutlineRenderer>[0];
-            }
+            },
+            OutlineRenderer
         >,
         any
     >;
@@ -6808,7 +7369,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<PrePassRenderer>,
             {
                 scene: ConstructorParameters<typeof PrePassRenderer>[0];
-            }
+            },
+            PrePassRenderer
         >,
         any
     >;
@@ -6817,7 +7379,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<PrePassRendererSceneComponent>,
             {
                 scene: ConstructorParameters<typeof PrePassRendererSceneComponent>[0];
-            }
+            },
+            PrePassRendererSceneComponent
         >,
         any
     >;
@@ -6828,7 +7391,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof ReflectiveShadowMap>[0];
                 light: ConstructorParameters<typeof ReflectiveShadowMap>[1];
                 textureDimensions: ConstructorParameters<typeof ReflectiveShadowMap>[2];
-            }
+            },
+            ReflectiveShadowMap
         >,
         any
     >;
@@ -6841,7 +7405,8 @@ export interface JSXElements {
                 opaqueSortCompareFn: ConstructorParameters<typeof RenderingGroup>[2];
                 alphaTestSortCompareFn: ConstructorParameters<typeof RenderingGroup>[3];
                 transparentSortCompareFn: ConstructorParameters<typeof RenderingGroup>[4];
-            }
+            },
+            RenderingGroup
         >,
         any
     >;
@@ -6850,18 +7415,26 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<RenderingManager>,
             {
                 scene: ConstructorParameters<typeof RenderingManager>[0];
-            }
+            },
+            RenderingManager
         >,
         any
     >;
-    screenSpaceReflections2Configuration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ScreenSpaceReflections2Configuration>>, any>;
-    screenSpaceReflectionsConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ScreenSpaceReflectionsConfiguration>>, any>;
+    screenSpaceReflections2Configuration: React.DetailedHTMLProps<
+        BabylonProps<ExcludeReadonlyAndPrivate<ScreenSpaceReflections2Configuration>, ScreenSpaceReflections2Configuration>,
+        any
+    >;
+    screenSpaceReflectionsConfiguration: React.DetailedHTMLProps<
+        BabylonProps<ExcludeReadonlyAndPrivate<ScreenSpaceReflectionsConfiguration>, ScreenSpaceReflectionsConfiguration>,
+        any
+    >;
     subSurfaceConfiguration: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SubSurfaceConfiguration>,
             {
                 scene: ConstructorParameters<typeof SubSurfaceConfiguration>[0];
-            }
+            },
+            SubSurfaceConfiguration
         >,
         any
     >;
@@ -6870,7 +7443,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<SubSurfaceSceneComponent>,
             {
                 scene: ConstructorParameters<typeof SubSurfaceSceneComponent>[0];
-            }
+            },
+            SubSurfaceSceneComponent
         >,
         any
     >;
@@ -6880,7 +7454,8 @@ export interface JSXElements {
             {
                 originalScene: ConstructorParameters<typeof UtilityLayerRenderer>[0];
                 handleEvents: ConstructorParameters<typeof UtilityLayerRenderer>[1];
-            }
+            },
+            UtilityLayerRenderer
         >,
         any
     >;
@@ -6890,7 +7465,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof Sprite>[0];
                 manager: ConstructorParameters<typeof Sprite>[1];
-            }
+            },
+            Sprite
         >,
         any
     >;
@@ -6907,7 +7483,8 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof SpriteManager>[6];
                 fromPacked: ConstructorParameters<typeof SpriteManager>[7];
                 spriteJSON: ConstructorParameters<typeof SpriteManager>[8];
-            }
+            },
+            SpriteManager
         >,
         any
     >;
@@ -6920,7 +7497,8 @@ export interface JSXElements {
                 spriteSheet: ConstructorParameters<typeof SpriteMap>[2];
                 options: ConstructorParameters<typeof SpriteMap>[3];
                 scene: ConstructorParameters<typeof SpriteMap>[4];
-            }
+            },
+            SpriteMap
         >,
         any
     >;
@@ -6935,7 +7513,8 @@ export interface JSXElements {
                 spriteJSON: ConstructorParameters<typeof SpritePackedManager>[4];
                 epsilon: ConstructorParameters<typeof SpritePackedManager>[5];
                 samplingMode: ConstructorParameters<typeof SpritePackedManager>[6];
-            }
+            },
+            SpritePackedManager
         >,
         any
     >;
@@ -6947,7 +7526,8 @@ export interface JSXElements {
                 capacity: ConstructorParameters<typeof SpriteRenderer>[1];
                 epsilon: ConstructorParameters<typeof SpriteRenderer>[2];
                 scene: ConstructorParameters<typeof SpriteRenderer>[3];
-            }
+            },
+            SpriteRenderer
         >,
         any
     >;
@@ -6956,27 +7536,30 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<SpriteSceneComponent>,
             {
                 scene: ConstructorParameters<typeof SpriteSceneComponent>[0];
-            }
+            },
+            SpriteSceneComponent
         >,
         any
     >;
-    thinSprite: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinSprite>>, any>;
+    thinSprite: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinSprite>, ThinSprite>, any>;
     depthCullingState: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<DepthCullingState>,
             {
                 reset: ConstructorParameters<typeof DepthCullingState>[0];
-            }
+            },
+            DepthCullingState
         >,
         any
     >;
-    stencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StencilState>>, any>;
+    stencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StencilState>, StencilState>, any>;
     stencilStateComposer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<StencilStateComposer>,
             {
                 reset: ConstructorParameters<typeof StencilStateComposer>[0];
-            }
+            },
+            StencilStateComposer
         >,
         any
     >;
@@ -6985,7 +7568,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<WebXRAbstractFeature>,
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRAbstractFeature>[0];
-            }
+            },
+            WebXRAbstractFeature
         >,
         any
     >;
@@ -6995,7 +7579,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRAnchorSystem>[0];
                 _options: ConstructorParameters<typeof WebXRAnchorSystem>[1];
-            }
+            },
+            WebXRAnchorSystem
         >,
         any
     >;
@@ -7005,7 +7590,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRBackgroundRemover>[0];
                 options: ConstructorParameters<typeof WebXRBackgroundRemover>[1];
-            }
+            },
+            WebXRBackgroundRemover
         >,
         any
     >;
@@ -7015,7 +7601,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRControllerMovement>[0];
                 options: ConstructorParameters<typeof WebXRControllerMovement>[1];
-            }
+            },
+            WebXRControllerMovement
         >,
         any
     >;
@@ -7025,7 +7612,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRControllerPhysics>[0];
                 _options: ConstructorParameters<typeof WebXRControllerPhysics>[1];
-            }
+            },
+            WebXRControllerPhysics
         >,
         any
     >;
@@ -7035,7 +7623,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRControllerPointerSelection>[0];
                 _options: ConstructorParameters<typeof WebXRControllerPointerSelection>[1];
-            }
+            },
+            WebXRControllerPointerSelection
         >,
         any
     >;
@@ -7045,7 +7634,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRDepthSensing>[0];
                 options: ConstructorParameters<typeof WebXRDepthSensing>[1];
-            }
+            },
+            WebXRDepthSensing
         >,
         any
     >;
@@ -7054,7 +7644,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<WebXREyeTracking>,
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXREyeTracking>[0];
-            }
+            },
+            WebXREyeTracking
         >,
         any
     >;
@@ -7063,7 +7654,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<WebXRFeaturePointSystem>,
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRFeaturePointSystem>[0];
-            }
+            },
+            WebXRFeaturePointSystem
         >,
         any
     >;
@@ -7073,7 +7665,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRHandTracking>[0];
                 options: ConstructorParameters<typeof WebXRHandTracking>[1];
-            }
+            },
+            WebXRHandTracking
         >,
         any
     >;
@@ -7083,7 +7676,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRHitTest>[0];
                 options: ConstructorParameters<typeof WebXRHitTest>[1];
-            }
+            },
+            WebXRHitTest
         >,
         any
     >;
@@ -7093,7 +7687,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRHitTestLegacy>[0];
                 options: ConstructorParameters<typeof WebXRHitTestLegacy>[1];
-            }
+            },
+            WebXRHitTestLegacy
         >,
         any
     >;
@@ -7103,7 +7698,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRImageTracking>[0];
                 options: ConstructorParameters<typeof WebXRImageTracking>[1];
-            }
+            },
+            WebXRImageTracking
         >,
         any
     >;
@@ -7113,7 +7709,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRLayers>[0];
                 _options: ConstructorParameters<typeof WebXRLayers>[1];
-            }
+            },
+            WebXRLayers
         >,
         any
     >;
@@ -7123,7 +7720,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRLightEstimation>[0];
                 options: ConstructorParameters<typeof WebXRLightEstimation>[1];
-            }
+            },
+            WebXRLightEstimation
         >,
         any
     >;
@@ -7133,7 +7731,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRMeshDetector>[0];
                 _options: ConstructorParameters<typeof WebXRMeshDetector>[1];
-            }
+            },
+            WebXRMeshDetector
         >,
         any
     >;
@@ -7143,7 +7742,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRNearInteraction>[0];
                 _options: ConstructorParameters<typeof WebXRNearInteraction>[1];
-            }
+            },
+            WebXRNearInteraction
         >,
         any
     >;
@@ -7153,7 +7753,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRPlaneDetector>[0];
                 _options: ConstructorParameters<typeof WebXRPlaneDetector>[1];
-            }
+            },
+            WebXRPlaneDetector
         >,
         any
     >;
@@ -7163,7 +7764,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRRawCameraAccess>[0];
                 options: ConstructorParameters<typeof WebXRRawCameraAccess>[1];
-            }
+            },
+            WebXRRawCameraAccess
         >,
         any
     >;
@@ -7172,7 +7774,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<WebXRSpaceWarp>,
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRSpaceWarp>[0];
-            }
+            },
+            WebXRSpaceWarp
         >,
         any
     >;
@@ -7182,7 +7785,8 @@ export interface JSXElements {
             {
                 sessionManager: ConstructorParameters<typeof WebXRWalkingLocomotion>[0];
                 options: ConstructorParameters<typeof WebXRWalkingLocomotion>[1];
-            }
+            },
+            WebXRWalkingLocomotion
         >,
         any
     >;
@@ -7196,7 +7800,8 @@ export interface JSXElements {
                 handedness: ConstructorParameters<typeof WebXRAbstractMotionController>[3];
                 _doNotLoadControllerMesh: ConstructorParameters<typeof WebXRAbstractMotionController>[4];
                 _controllerCache: ConstructorParameters<typeof WebXRAbstractMotionController>[5];
-            }
+            },
+            WebXRAbstractMotionController
         >,
         any
     >;
@@ -7208,7 +7813,8 @@ export interface JSXElements {
                 type: ConstructorParameters<typeof WebXRControllerComponent>[1];
                 _buttonIndex: ConstructorParameters<typeof WebXRControllerComponent>[2];
                 _axesIndices: ConstructorParameters<typeof WebXRControllerComponent>[3];
-            }
+            },
+            WebXRControllerComponent
         >,
         any
     >;
@@ -7219,7 +7825,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof WebXRGenericHandController>[0];
                 gamepadObject: ConstructorParameters<typeof WebXRGenericHandController>[1];
                 handedness: ConstructorParameters<typeof WebXRGenericHandController>[2];
-            }
+            },
+            WebXRGenericHandController
         >,
         any
     >;
@@ -7230,7 +7837,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof WebXRHTCViveMotionController>[0];
                 gamepadObject: ConstructorParameters<typeof WebXRHTCViveMotionController>[1];
                 handedness: ConstructorParameters<typeof WebXRHTCViveMotionController>[2];
-            }
+            },
+            WebXRHTCViveMotionController
         >,
         any
     >;
@@ -7241,7 +7849,8 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof WebXRMicrosoftMixedRealityController>[0];
                 gamepadObject: ConstructorParameters<typeof WebXRMicrosoftMixedRealityController>[1];
                 handedness: ConstructorParameters<typeof WebXRMicrosoftMixedRealityController>[2];
-            }
+            },
+            WebXRMicrosoftMixedRealityController
         >,
         any
     >;
@@ -7254,7 +7863,8 @@ export interface JSXElements {
                 handedness: ConstructorParameters<typeof WebXROculusTouchMotionController>[2];
                 _legacyMapping: ConstructorParameters<typeof WebXROculusTouchMotionController>[3];
                 _forceLegacyControllers: ConstructorParameters<typeof WebXROculusTouchMotionController>[4];
-            }
+            },
+            WebXROculusTouchMotionController
         >,
         any
     >;
@@ -7267,7 +7877,8 @@ export interface JSXElements {
                 _profile: ConstructorParameters<typeof WebXRProfiledMotionController>[2];
                 _repositoryUrl: ConstructorParameters<typeof WebXRProfiledMotionController>[3];
                 controllerCache: ConstructorParameters<typeof WebXRProfiledMotionController>[4];
-            }
+            },
+            WebXRProfiledMotionController
         >,
         any
     >;
@@ -7276,7 +7887,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<NativeXRFrame>,
             {
                 _nativeImpl: ConstructorParameters<typeof NativeXRFrame>[0];
-            }
+            },
+            NativeXRFrame
         >,
         any
     >;
@@ -7285,29 +7897,32 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<NativeXRRenderTarget>,
             {
                 _xrSessionManager: ConstructorParameters<typeof NativeXRRenderTarget>[0];
-            }
+            },
+            NativeXRRenderTarget
         >,
         any
     >;
     webXRCamera: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<WebXRCamera & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<WebXRCamera> & Clonable,
             {
                 name: ConstructorParameters<typeof WebXRCamera>[0];
                 scene: ConstructorParameters<typeof WebXRCamera>[1];
                 _xrSessionManager: ConstructorParameters<typeof WebXRCamera>[2];
-            }
+            },
+            WebXRCamera
         >,
         any
     >;
-    webXRDefaultExperience: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebXRDefaultExperience>>, any>;
+    webXRDefaultExperience: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebXRDefaultExperience>, WebXRDefaultExperience>, any>;
     webXREnterExitUI: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WebXREnterExitUI>,
             {
                 _scene: ConstructorParameters<typeof WebXREnterExitUI>[0];
                 options: ConstructorParameters<typeof WebXREnterExitUI>[1];
-            }
+            },
+            WebXREnterExitUI
         >,
         any
     >;
@@ -7316,7 +7931,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<WebXRExperienceHelper>,
             {
                 _scene: ConstructorParameters<typeof WebXRExperienceHelper>[0];
-            }
+            },
+            WebXRExperienceHelper
         >,
         any
     >;
@@ -7325,7 +7941,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<WebXRFeaturesManager>,
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRFeaturesManager>[0];
-            }
+            },
+            WebXRFeaturesManager
         >,
         any
     >;
@@ -7336,7 +7953,8 @@ export interface JSXElements {
                 xrSessionManager: ConstructorParameters<typeof WebXRInput>[0];
                 xrCamera: ConstructorParameters<typeof WebXRInput>[1];
                 _options: ConstructorParameters<typeof WebXRInput>[2];
-            }
+            },
+            WebXRInput
         >,
         any
     >;
@@ -7347,7 +7965,8 @@ export interface JSXElements {
                 _scene: ConstructorParameters<typeof WebXRInputSource>[0];
                 inputSource: ConstructorParameters<typeof WebXRInputSource>[1];
                 _options: ConstructorParameters<typeof WebXRInputSource>[2];
-            }
+            },
+            WebXRInputSource
         >,
         any
     >;
@@ -7360,7 +7979,8 @@ export interface JSXElements {
                 layer: ConstructorParameters<typeof WebXRLayerWrapper>[2];
                 layerType: ConstructorParameters<typeof WebXRLayerWrapper>[3];
                 _createRenderTargetTextureProvider: ConstructorParameters<typeof WebXRLayerWrapper>[4];
-            }
+            },
+            WebXRLayerWrapper
         >,
         any
     >;
@@ -7370,7 +7990,8 @@ export interface JSXElements {
             {
                 _xrSessionManager: ConstructorParameters<typeof WebXRManagedOutputCanvas>[0];
                 _options: ConstructorParameters<typeof WebXRManagedOutputCanvas>[1];
-            }
+            },
+            WebXRManagedOutputCanvas
         >,
         any
     >;
@@ -7379,28 +8000,31 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<WebXRSessionManager>,
             {
                 scene: ConstructorParameters<typeof WebXRSessionManager>[0];
-            }
+            },
+            WebXRSessionManager
         >,
         any
     >;
-    abstractScene: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractScene>>, any>;
+    abstractScene: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractScene>, AbstractScene>, any>;
     assetContainer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AssetContainer>,
             {
                 scene: ConstructorParameters<typeof AssetContainer>[0];
-            }
+            },
+            AssetContainer
         >,
         any
     >;
     node: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<Node & { cloneBy: string }>,
+            ExcludeReadonlyAndPrivate<Node> & Clonable,
             {
                 name: ConstructorParameters<typeof Node>[0];
                 scene: ConstructorParameters<typeof Node>[1];
                 isPure: ConstructorParameters<typeof Node>[2];
-            }
+            },
+            Node
         >,
         any
     >;
@@ -7410,7 +8034,8 @@ export interface JSXElements {
             {
                 engine: ConstructorParameters<typeof Scene>[0];
                 options: ConstructorParameters<typeof Scene>[1];
-            }
+            },
+            Scene
         >,
         any
     >;

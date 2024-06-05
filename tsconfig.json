@@ -29,6 +29,10 @@
         "noFallthroughCasesInSwitch": true,
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
+        "paths": {
+            "@types": ["src/types/types.ts"],
+            "@utils": ["src/utils.ts"],
+        }
     },
     "ts-node": {
         // these options are overrides used only by ts-node

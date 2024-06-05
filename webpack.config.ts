@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { Configuration, WebpackOptionsNormalized } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 interface EnvironmentVariable {
     environment: 'DEV' | 'PROD';
@@ -28,10 +29,11 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
         devServer: {
             devMiddleware: {
                 writeToDisk: true,
-            }
+            },
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.jsx', '.js'],
+            plugins: [new TsconfigPathsPlugin()],
         },
         module: {
             rules: [
@@ -57,14 +59,8 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
                 },
             },
         },*/
-        externals: [
-            'react',
-            'react-dom/client',
-            /^@babylonjs\/*/,
-        ],
-        plugins: [
-            new CleanWebpackPlugin(),
-        ],
+        externals: ['react', 'react-dom/client', /^@babylonjs\/*/],
+        plugins: [new CleanWebpackPlugin()],
     };
 };
 

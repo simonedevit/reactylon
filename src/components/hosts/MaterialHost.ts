@@ -1,8 +1,11 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from 'src/types/types';
+import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
+import { Material, Mesh, MultiMaterial } from '@babylonjs/core';
+
+type AugmentedMaterial = ComponentInstance<Material & JSX.IntrinsicElements['material']>;
 
 export class MaterialHost {
-    static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer) {
+    static createInstance(isBuilder: boolean, Class: any, props: AugmentedMaterial, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const { cloneBy } = props;
         if (cloneBy) {
@@ -22,9 +25,12 @@ export class MaterialHost {
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance, child: ComponentInstance): void {
-        // handle multimaterial
-        parentInstance.material = child;
+    static addChild(parentInstance: ComponentInstance<Mesh | MultiMaterial>, child: AugmentedMaterial): void {
+        if (parentInstance instanceof MultiMaterial) {
+            parentInstance.subMaterials.push(child);
+        } else {
+            parentInstance.material = child;
+        }
     }
 
     static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void {}
@@ -33,5 +39,5 @@ export class MaterialHost {
         return {};
     }
 
-    static commitUpdate(): void {}
+    static commitUpdate(instance: AugmentedMaterial, updatePayload: UpdatePayload): void {}
 }

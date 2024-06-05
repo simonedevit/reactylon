@@ -1,17 +1,22 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from 'src/types/types';
+import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
+import { Texture } from '@babylonjs/core';
+
+type AugmentedTexture = ComponentInstance<Texture & JSX.IntrinsicElements['texture']>;
 
 export class TextureHost {
-    static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer) {
+    static createInstance(isBuilder: boolean, Class: any, props: AugmentedTexture, rootContainer: RootContainer) {
         const element = Host.createInstance(isBuilder, Class, props, rootContainer);
         element.handlers = {
             addChild: TextureHost.addChild,
+            commitUpdate: TextureHost.commitUpdate,
         };
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance, child: ComponentInstance): void {
-        parentInstance[child.type as string] = child;
+    static addChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {
+        const textureType = child.type as keyof ComponentInstance;
+        parentInstance[textureType] = child;
     }
 
     static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void {}
@@ -20,5 +25,8 @@ export class TextureHost {
         return {};
     }
 
-    static commitUpdate(): void {}
+    static commitUpdate(instance: AugmentedTexture, updatePayload: UpdatePayload): void {
+        const { url } = updatePayload;
+        instance.updateURL(url as string);
+    }
 }

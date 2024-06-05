@@ -1,7 +1,7 @@
 import { createContext, useContext, useRef, useEffect, useState } from 'react';
 import { Scene as BabylonScene, type Nullable, SceneOptions } from '@babylonjs/core';
 import Reactylon from '../../reconciler';
-import { RootContainer } from '../../types/types';
+import { RootContainer } from '@types';
 import { useEngine } from './Engine';
 import { Inspector } from '@babylonjs/inspector';
 

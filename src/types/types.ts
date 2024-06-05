@@ -1,6 +1,7 @@
 /* PROPS USED BY JSX ELEMENTS GENERATOR */
 
-import { ActionEvent, Scene } from '@babylonjs/core';
+import { Scene } from '@babylonjs/core';
+import { Clickable, Clonable, CommonProps } from './props';
 
 type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
 
@@ -31,30 +32,32 @@ type RemoveUndefined<T> = {
 
 type MarkUndefinedAsOptional<T> = Omit<T, UndefinedProps<T>> & Partial<RemoveUndefined<Pick<T, UndefinedProps<T>>>>;
 
-export type BabylonProps<Props, ConstructorProps> = {
+export type BabylonProps<Props, ConstructorProps, Element> = {
     // all props of returned instance
     [P in keyof Props]?: Props[P];
-    // transform undefined props into optional props (to avoid to explicitely pass prop={undefined})
+    // transform undefined constructor props into optional props (to avoid to explicitely pass prop={undefined})
 } & MarkUndefinedAsOptional<ConstructorProps> & {
         children?: React.ReactNode;
-    };
+    } & Pick<CommonProps<Element>, 'onCreate'>;
 
 /* PROPS USED BY RECONCILER */
 
-export type ComponentInstance = {
-    name: string;
-    elements: Array<ComponentInstance>;
-    dispose: Function;
-    onClick?: (evt: ActionEvent) => void;
-    cloneBy?: string;
-    handlers?: Partial<{
-        addChild(parentInstance: ComponentInstance, child: ComponentInstance): void;
-        removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void;
-        prepareUpdate(): UpdatePayload;
-        commitUpdate(): void;
-    }>;
-    [key: string]: unknown;
-};
+export type ComponentInstance<T = unknown> = T &
+    CommonProps &
+    Clickable &
+    Partial<Clonable> & {
+        name: string;
+        uniqueId: string;
+        dispose?: Function;
+        children?: any;
+        elements: Array<ComponentInstance<T>>;
+        handlers?: Partial<{
+            addChild(parentInstance: ComponentInstance<T>, child: ComponentInstance<T>): void;
+            removeChild(parentInstance: ComponentInstance<T>, child: ComponentInstance<T>): void;
+            prepareUpdate(): UpdatePayload;
+            commitUpdate(instance: ComponentInstance<T>, updatePayload: UpdatePayload): void;
+        }>;
+    };
 
 export type UpdatePayload = {
     [key: string]: unknown;

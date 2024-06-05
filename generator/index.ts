@@ -90,7 +90,11 @@ function getRelativeFileName(basePath: string, file: string) {
 }
 
 function getClonableProp(isClonable: boolean) {
-    return isClonable ? ' & { cloneBy: string }' : '';
+    return isClonable ? ' & Clonable' : '';
+}
+
+function getMeshProps() {
+    return ' & MeshProps';
 }
 
 function getConstructorProps<T>(Class: { new (...args: any[]): T }, className: string, isConstructor: boolean) {
@@ -140,10 +144,8 @@ async function createJsxDeclarations(directoryPath: string, basePath: string = '
         } else if (file.endsWith('.d.ts')) {
             // get file name without extension (i.e. standardMaterial)
             const jsxElementName = file.split('.')[0];
-            let isClonable = false;
             if (file === 'meshBuilder.d.ts') {
                 for (const key of Object.keys(MeshBuilder)) {
-                    isClonable = true; // all meshes are clonable
                     const className = key;
                     const jsxElementName = lowercaseFirstLetter(key.replace('Create', ''));
                     const importStatement = `import { ${className} } from '@babylonjs/core/Meshes/Builders';`; // import { CreateBox } from '@babylonjs/core/Meshes/Builders';
@@ -158,11 +160,11 @@ async function createJsxDeclarations(directoryPath: string, basePath: string = '
         ${result}
             }`
                             : '';
-                        const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ${className}>${getClonableProp(isClonable)}>${FunctionProps}>, any>;`;
+                        const ElementType = `ReturnType<typeof ${className}>`;
+                        const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getMeshProps()}${FunctionProps},${ElementType}>, any>;`;
 
                         jxsElements.imports.push(importStatement);
                         jxsElements.declarations.push(declarationStatement);
-                        console.log(`${importStatement}\n${declarationStatement}\n`);
                     } catch (error) {
                         console.log(error);
                     }
@@ -201,9 +203,10 @@ async function createJsxDeclarations(directoryPath: string, basePath: string = '
             }
 
             // check if "clone" method exists, if it exists will be added cloneBy prop
-            isClonable = Class?.prototype?.clone;
+            const isClonable = Class?.prototype?.clone;
 
-            const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${className}${getClonableProp(isClonable)}>${ConstructorProps}>, any>;`;
+            const ElementType = className;
+            const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getClonableProp(isClonable)}${ConstructorProps},${ElementType}>, any>;`;
 
             jxsElements.imports.push(importStatement);
             jxsElements.declarations.push(declarationStatement);
@@ -220,6 +223,7 @@ const directoryPath = path.join(__dirname, '../node_modules/@babylonjs/core');
     const content = `
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from './types';
+import { type MeshProps, type Clonable } from './props';
 ${jxsElements.imports.join('\n')}
 
 export interface JSXElements {
