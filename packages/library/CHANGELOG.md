@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.6](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.5&targetVersion=GTv0.0.6&_a=files) (2024-06-06)
+
+
+### Chore
+
+* **general:** refactor whole solution in workspaces ([d9c04d5](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/d9c04d5b28a0dace8c03cd0dad4c3a1c6e858d61))
+
 ## [0.0.5](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.4&targetVersion=GTv0.0.5&_a=files) (2024-06-05)
 
 
