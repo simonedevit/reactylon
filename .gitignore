@@ -4,14 +4,14 @@
 .vscode
 
 # dependencies
-/node_modules
+node_modules
 .npmrc
 
 # testing
 /coverage
 
 # production
-/build
+build
 
 # authority certificate
 .cert

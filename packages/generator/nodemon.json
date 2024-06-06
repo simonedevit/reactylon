@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "./**/*.ts"
+  ],
+  "exec": "tsc && node build/index.js",
+  "ext": "ts"
+}

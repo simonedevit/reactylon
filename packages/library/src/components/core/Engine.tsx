@@ -22,7 +22,6 @@ export const useEngine = (): BabylonEngine => useContext(EngineCanvasContext).en
  */
 export const useCanvas = (): Nullable<HTMLCanvasElement | WebGLRenderingContext> => useContext(EngineCanvasContext).canvas;
 
-
 export type EngineProps = React.PropsWithChildren<{
     canvasId: string;
     antialias?: boolean;
@@ -34,10 +33,9 @@ export type EngineProps = React.PropsWithChildren<{
 export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void;
 
 export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptToDeviceRatio, loader, canvasId, children }) => {
-
     const canvasRef = useRef<Nullable<HTMLCanvasElement>>(null);
     const engine = useRef<Nullable<BabylonEngine>>(null);
-    const [isEngineReady, setIsEngineReady] = useState<boolean>(false)
+    const [isEngineReady, setIsEngineReady] = useState<boolean>(false);
 
     useEffect(() => {
         if (canvasRef.current) {
@@ -46,7 +44,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
                 engine.current.loadingScreen = new CustomLoadingScreen(canvasRef.current, loader);
             }
             engine.current.runRenderLoop(() => {
-                engine.current!.scenes.forEach((scene) => {
+                engine.current!.scenes.forEach(scene => {
                     if (!scene.activeCamera) {
                         // @babylonjs/core throws an error if you attempt to render with no active camera.
                         // if we attach as a child React component we have frames with no active camera.
@@ -55,12 +53,12 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
                     if (scene.cameras?.length > 0) {
                         scene.render();
                     }
-                })
+                });
             });
 
             const onResizeWindow = () => {
                 engine.current!.resize();
-            }
+            };
             window.addEventListener('resize', onResizeWindow);
             setIsEngineReady(true);
 

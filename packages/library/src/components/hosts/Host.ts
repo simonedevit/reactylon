@@ -1,5 +1,5 @@
 import { ActionManager, ExecuteCodeAction } from '@babylonjs/core';
-import { getFunctionParams, getClassConstructorParams } from '@utils';
+import { getFunctionParams, getClassConstructorParams } from '@dvmstudios/reactylon-common';
 import { ComponentInstance, RootContainer } from '@types';
 
 const excludedProps = ['children', 'onCreate'];

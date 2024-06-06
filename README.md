@@ -16,3 +16,4 @@
 # TODO
 1. Refactor util.ts and use same methods both for reconciler and generator
 2. Massive refactor of index.ts
+3. With concurrently it is a mess, find a way to start process and understand who should depend from others

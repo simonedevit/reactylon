@@ -1,0 +1,13 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./build",
+        "target": "es2019",
+        "isolatedModules": false,
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+    },
+    "include": [
+        "./index.ts"
+    ]
+}

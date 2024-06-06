@@ -1,0 +1,22 @@
+{
+    "name": "@dvmstudios/reactylon-common",
+    "type": "module",
+    "private": true,
+    "main": "build/index.js",
+    "description": "Utils to parse AST and deal with Babylon props",
+    "scripts": {
+        "start": "nodemon"
+    },
+    "dependencies": {
+        "acorn": "^8.11.3"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.3"
+    },
+    "engines": {
+        "node": "20.11.1",
+        "npm": "10.2.4"
+    },
+    "author": "",
+    "license": "ISC"
+}

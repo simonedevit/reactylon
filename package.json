@@ -1,21 +1,19 @@
 {
-    "name": "@dvmstudios/reactylon",
-    "version": "0.0.5",
-    "description": "Framework to work on Babylon.js with React",
-    "main": "./build/index.js",
-    "types": "./build/index.d.ts",
+    "name": "reactylon",
+    "description": "Workspace",
     "repository": {
         "type": "git",
         "url": "git+https://dvmstudios@dev.azure.com/dvmstudios/webxr/_git/reactylon"
     },
     "scripts": {
         "prepare": "husky",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "generate-jsx-elements": "npm run --prefix generator generate",
         "init": "npm ci",
-        "start": "webpack serve",
-        "build": "webpack --env environment=PROD",
-        "release": "commit-and-tag-version && git push --follow-tags && bash scripts/publish.sh"
+        "start:common": "npm run start --workspace @dvmstudios/reactylon-common",
+        "start:library": "npm run start --workspace @dvmstudios/reactylon",
+        "start:generator": "npm run start --workspace @dvmstudios/reactylon-generator",
+        "start": "concurrently \"npm run start:*\"",
+        "build": "npm run build --workspaces",
+        "release": "npm run release --workspace @dvmstudios/reactylon"
     },
     "keywords": [],
     "lint-staged": {
@@ -24,51 +22,23 @@
             "prettier --write"
         ]
     },
-    "commit-and-tag-version": {
-        "writerOpts": {
-            "commitsSort": false
-        }
-    },
-    "dependencies": {
-        "acorn": "^8.11.3",
-        "lodash.clonedeep": "^4.5.0",
-        "lodash.isequalwith": "^4.4.0",
-        "react-reconciler": "^0.29.2"
-    },
+    "workspaces": [
+        "./packages/*"
+    ],
     "peerDependencies": {
         "@babylonjs/core": "^7.9.0",
-        "@babylonjs/inspector": "^7.9.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "@babylonjs/inspector": "^7.9.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.17.3",
-        "@babel/preset-env": "^7.24.3",
-        "@babel/preset-typescript": "^7.24.1",
-        "@babel/register": "^7.23.7",
+        "concurrently": "^8.2.1",
         "@commitlint/cli": "^19.2.1",
         "@commitlint/config-conventional": "^19.1.0",
-        "@types/acorn": "^6.0.0",
-        "@types/lodash.clonedeep": "^4.5.9",
-        "@types/lodash.isequalwith": "^4.4.0",
         "@types/node": "^20.11.30",
-        "@types/react": "^18.0.23",
-        "@types/react-dom": "^18.0.7",
-        "@types/react-reconciler": "^0.28.8",
-        "@types/webpack": "^5.28.5",
-        "clean-webpack-plugin": "^4.0.0",
-        "commit-and-tag-version": "^12.2.0",
         "husky": "^9.0.11",
         "lint-staged": "^15.2.2",
         "prettier": "3.2.5",
-        "ts-loader": "^9.4.1",
-        "ts-node": "^10.9.2",
         "tsc-files": "^1.1.4",
-        "tsconfig-paths-webpack-plugin": "^4.1.0",
-        "typescript": "^5.4.3",
-        "webpack": "^5.91.0",
-        "webpack-cli": "^5.1.4",
-        "webpack-dev-server": "^5.0.4"
+        "typescript": "^5.4.5"
     },
     "engines": {
         "node": "20.11.1",

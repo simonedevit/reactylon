@@ -1,0 +1,22 @@
+{
+    "name": "@dvmstudios/reactylon-generator",
+    "type": "module",
+    "private": true,
+    "description": "Internal tool to auto-generate JSX elements",
+    "scripts": {
+        "start": "nodemon",
+        "debug": "node --inspect-brk build/index.js"
+    },
+    "dependencies": {
+        "@dvmstudios/reactylon-common": "file:../common"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.3"
+    },
+    "engines": {
+        "node": "20.11.1",
+        "npm": "10.2.4"
+    },
+    "author": "",
+    "license": "ISC"
+}

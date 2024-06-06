@@ -19,8 +19,6 @@
         "isolatedModules": true,
         "resolveJsonModule": true,
         "noEmit": false,
-        "declaration": true,
-        "declarationDir": "./build",
         "jsx": "react-jsx",
         "sourceMap": true,
         "noUnusedLocals": true,
@@ -30,18 +28,9 @@
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
         "paths": {
-            "@types": ["src/types/types.ts"],
-            "@utils": ["src/utils.ts"],
+            "@types": ["packages/library/src/types/types.ts"],
+            "@utils": ["packages/library/src/utils.ts"],
         }
     },
-    "ts-node": {
-        // these options are overrides used only by ts-node
-        // same as the --compilerOptions flag and the TS_NODE_COMPILER_OPTIONS environment variable
-        "compilerOptions": {
-            "module": "commonjs",
-        }
-    },
-    "include": [
-        "src",
-    ],
+   
 }
