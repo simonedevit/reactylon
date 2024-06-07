@@ -1,5 +1,13 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.7](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.6&targetVersion=GTv0.0.7&_a=files) (2024-06-07)
+
+
+### Chore
+
+* **general:** remove file system references ([167e87d](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/167e87dce09624cb3e94c6f0cae9941b7b448948))
+* **general:** add logger + declare namespace before export of reconciler using it ([d08b565](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/d08b565c4f5bc1e1b6d723c3cd08ee3e9a00ca0a))
+
 ## [0.0.6](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.5&targetVersion=GTv0.0.6&_a=files) (2024-06-06)
 
 
