@@ -7,10 +7,8 @@
         "start": "nodemon",
         "debug": "node --inspect-brk build/index.js"
     },
-    "dependencies": {
-        "@dvmstudios/reactylon-common": "*"
-    },
     "devDependencies": {
+        "@dvmstudios/reactylon-common": "*",
         "nodemon": "^3.1.3"
     },
     "engines": {

@@ -24,8 +24,7 @@
         "acorn": "^8.11.3",
         "lodash.clonedeep": "^4.5.0",
         "lodash.isequalwith": "^4.4.0",
-        "react-reconciler": "^0.29.2",
-        "@dvmstudios/reactylon-common": "*"
+        "react-reconciler": "^0.29.2"
     },
     "peerDependencies": {
         "@babylonjs/core": "^7.9.0",
@@ -34,6 +33,7 @@
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
+        "@dvmstudios/reactylon-common": "*",
         "@babel/core": "^7.17.3",
         "@babel/preset-env": "^7.24.3",
         "@babel/preset-typescript": "^7.24.1",
