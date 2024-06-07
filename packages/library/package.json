@@ -25,7 +25,7 @@
         "lodash.clonedeep": "^4.5.0",
         "lodash.isequalwith": "^4.4.0",
         "react-reconciler": "^0.29.2",
-        "@dvmstudios/reactylon-common": "file:../common"
+        "@dvmstudios/reactylon-common": "*"
     },
     "peerDependencies": {
         "@babylonjs/core": "^7.9.0",
