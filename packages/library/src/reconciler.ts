@@ -3,7 +3,7 @@ import ReactReconciler, { FiberRoot } from 'react-reconciler';
 import * as Babylon from '@babylonjs/core';
 import * as MeshBuilder from '@babylonjs/core/Meshes/Builders';
 import isEqualWith from 'lodash.isequalwith';
-import { capitalizeFirstLetter } from '@dvmstudios/reactylon-common';
+import { Logger, capitalizeFirstLetter } from '@dvmstudios/reactylon-common';
 import { isEqualCustomizer } from '@utils';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
 import { Host } from './components/hosts/Host';
@@ -19,7 +19,7 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
     // Append the child to the parent element
     if (parentInstance) {
         if (!child) {
-            console.error('undefined child', parentInstance);
+            Logger.error('undefined child', parentInstance);
         } else {
             if (!parentInstance.elements) {
                 parentInstance.elements = [];
@@ -128,8 +128,10 @@ const reconciler = ReactReconciler<
 
     appendInitialChild(parentInstance, child) {
         // Log information about appending initial child to parent
-        console.log('Appending initial child to parent - partentInstance', parentInstance);
-        console.log('Appending initial child to parent - child', child);
+        Logger.group('appendInitialChild', [
+            ['parentInstance', parentInstance],
+            ['child', child],
+        ]);
         addChild(parentInstance, child);
     },
 
@@ -248,7 +250,10 @@ const reconciler = ReactReconciler<
      */
     appendChild(parentInstance, child) {
         // Log information about appending child to parent
-        console.log('Appending child to parent:', child);
+        Logger.group('appendChild', [
+            ['parentInstance', parentInstance],
+            ['child', child],
+        ]);
         addChild(parentInstance, child);
     },
 
@@ -257,7 +262,10 @@ const reconciler = ReactReconciler<
      */
     appendChildToContainer(container, child) {
         // Log information about appending child to container
-        console.log('Appending child to container:', child.name);
+        Logger.group('appendChildToContainer', [
+            ['container', container],
+            ['child', child],
+        ]);
         if (child) {
             if (container.rootInstance) {
                 container.rootInstance.elements.push(child);
@@ -275,7 +283,11 @@ const reconciler = ReactReconciler<
      * Note that React uses this method both for insertions and for reordering nodes.Similar to DOM, it is expected that you can call insertBefore to reposition an existing child.Do not mutate any other parts of the tree from it.
      */
     insertBefore(parentInstance, child, beforeChild) {
-        console.log('insertBefore - parentInstance', parentInstance);
+        Logger.group('insertBefore', [
+            ['parentInstance', parentInstance],
+            ['child', child],
+            ['beforeChild', beforeChild],
+        ]);
         const index = parentInstance.elements.findIndex(item => item.uniqueId === beforeChild.uniqueId);
         parentInstance.elements.splice(index, 0, child);
     },
@@ -284,7 +296,11 @@ const reconciler = ReactReconciler<
      * Same as insertBefore, but for when a node is attached to the root container.This is useful if attaching to the root has a slightly different implementation, or if the root container nodes are of a different type than the rest of the tree.
      */
     insertInContainerBefore(container, child, beforeChild) {
-        console.log('insertInContainerBefore - container', container);
+        Logger.group('insertInContainerBefore', [
+            ['container', container],
+            ['child', child],
+            ['beforeChild', beforeChild],
+        ]);
         const index = container.rootInstance.elements.findIndex(item => item.uniqueId === beforeChild.uniqueId);
         container.rootInstance.elements.splice(index, 0, child);
     },
@@ -294,8 +310,10 @@ const reconciler = ReactReconciler<
      * React will only call it for the top - level node that is being removed.It is expected that garbage collection would take care of the whole subtree.You are not expected to traverse the child tree in it.
      */
     removeChild(parentInstance, child) {
-        console.log('removeChild - parentInstance', parentInstance);
-        console.log('removeChild - child', child);
+        Logger.group('removeChild', [
+            ['parentInstance', parentInstance],
+            ['child', child],
+        ]);
         const index = parentInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
         parentInstance.elements.splice(index, 1);
         //child.handlers?.removeChild?.(parentInstance, child);
@@ -306,8 +324,10 @@ const reconciler = ReactReconciler<
      * Same as removeChild, but for when a node is detached from the root container.This is useful if attaching to the root has a slightly different implementation, or if the root container nodes are of a different type than the rest of the tree.
      */
     removeChildFromContainer(container, child) {
-        console.log('removeChildFromContainer - container', container);
-        console.log('removeChildFromContainer - child', child);
+        Logger.group('removeChildFromContainer', [
+            ['container', container],
+            ['child', child],
+        ]);
         const index = container.rootInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
         container.rootInstance.elements.splice(index, 1);
         //child.handlers?.removeChild?.(container, child);
@@ -353,11 +373,14 @@ const reconciler = ReactReconciler<
 
         const areSameProps = isEqualWith(oldPropsWihoutChildren, newPropsWihoutChildren, isEqualCustomizer);
         if (areSameProps) {
-            console.log(`prepareUpdate ${type} - ${instance.name} - no changes`);
+            Logger.log(`prepareUpdate (no changes) - ${type}: ${instance.name}`);
             // no need to update
             return null;
         }
-        console.log(`prepareUpdate ${type} - ${instance.name} - changes`, oldProps, newProps);
+        Logger.group(`prepareUpdate (changes) - ${type}: ${instance.name}`, [
+            ['oldProps', oldProps],
+            ['newProps', newProps],
+        ]);
         //TODO: return only changed props
         return newProps as UpdatePayload;
     },
@@ -366,11 +389,11 @@ const reconciler = ReactReconciler<
     * This method should mutate the instance according to the set of changes in updatePayload. Here, updatePayload is the object that you've returned from prepareUpdate and has an arbitrary structure
     * that makes sense for your renderer. For example, the DOM renderer returns an update payload like [prop1, value1, prop2, value2, ...] from prepareUpdate, and that structure gets passed into commitUpdate.
     * Ideally, all the diffing and calculation should happen inside prepareUpdate so that commitUpdate can be fast and straightforward.
-    * The internalHandle data structure is meant to be opaque. If you bend the rules and rely on its internal fields, be aware that it may change significantly between versions. You're taking on additional maintenance risk by reading from it, and giving up all guarantees if you write something to it.
+    * The internalHandle data soldPropstructure is meant to be opaque. If you bend the rules and rely on its internal fields, be aware that it may change significantly between versions. You're taking on additional maintenance risk by reading from it, and giving up all guarantees if you write something to it.
     
     */
     commitUpdate(instance, updatePayload, type, prevProps, nextProps, internalHandle) {
-        console.log(`commitUpdate ${type} - ${instance.name}`);
+        Logger.log(`commitUpdate - ${type}: ${instance.name}`);
         Object.entries(updatePayload)
             .filter(([key]) => key !== 'children')
             .forEach(([key, value]) => {
@@ -470,7 +493,7 @@ const Reactylon: ReactylonType = {
     },
 
     unmount(container: FiberRoot): void {
-        console.log('unmounted');
+        Logger.log('unmounted');
         const root = roots.get(container);
         reconciler.updateContainer(null, root, null, null);
         roots.delete(container);

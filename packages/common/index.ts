@@ -1,4 +1,5 @@
 import { parse } from 'acorn';
+export { Logger } from './Logger.js';
 
 export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }): Array<string> => {
     const ast = parse(cls.toString(), {

@@ -40,7 +40,7 @@ async function createJsxDeclarations(): Promise<void> {
                     ? `, {
 ${result}
     }`
-                    : '';
+                    : ', {}';
 
                 // check if "clone" method exists, if it exists will be added cloneBy prop
                 const isClonable = Class.prototype.clone;
@@ -63,7 +63,7 @@ ${result}
                             ? `, {
         ${result}
             }`
-                            : '';
+                            : ', {}';
                         const ElementType = `ReturnType<typeof ${key}>`;
                         const jsxElementName = lowercaseFirstLetter(key.replace('Create', ''));
                         const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getMeshProps()}${FunctionProps},${ElementType}>, any>;`;

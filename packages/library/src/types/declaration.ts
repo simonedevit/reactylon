@@ -961,7 +961,7 @@ import { _TGATextureLoader } from '@babylonjs/core';
 import { _TimeToken } from '@babylonjs/core';
 
 export interface JSXElements {
-    abstractActionManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractActionManager>, AbstractActionManager>, any>;
+    abstractActionManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractActionManager>, {}, AbstractActionManager>, any>;
     abstractAssetTask: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AbstractAssetTask>,
@@ -995,7 +995,7 @@ export interface JSXElements {
         >,
         any
     >;
-    abstractScene: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractScene>, AbstractScene>, any>;
+    abstractScene: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractScene>, {}, AbstractScene>, any>;
     action: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Action>,
@@ -1062,7 +1062,7 @@ export interface JSXElements {
         >,
         any
     >;
-    alphaState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AlphaState>, AlphaState>, any>;
+    alphaState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AlphaState>, {}, AlphaState>, any>;
     ammoJSPlugin: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AmmoJSPlugin>,
@@ -1250,7 +1250,7 @@ export interface JSXElements {
         >,
         any
     >;
-    animationPropertiesOverride: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AnimationPropertiesOverride>, AnimationPropertiesOverride>, any>;
+    animationPropertiesOverride: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AnimationPropertiesOverride>, {}, AnimationPropertiesOverride>, any>;
     animationRange: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AnimationRange> & Clonable,
@@ -1316,7 +1316,7 @@ export interface JSXElements {
         >,
         any
     >;
-    arcRotateCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraGamepadInput>, ArcRotateCameraGamepadInput>, any>;
+    arcRotateCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraGamepadInput>, {}, ArcRotateCameraGamepadInput>, any>;
     arcRotateCameraInputsManager: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ArcRotateCameraInputsManager>,
@@ -1327,11 +1327,11 @@ export interface JSXElements {
         >,
         any
     >;
-    arcRotateCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraKeyboardMoveInput>, ArcRotateCameraKeyboardMoveInput>, any>;
-    arcRotateCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraMouseWheelInput>, ArcRotateCameraMouseWheelInput>, any>;
-    arcRotateCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraPointersInput>, ArcRotateCameraPointersInput>, any>;
+    arcRotateCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraKeyboardMoveInput>, {}, ArcRotateCameraKeyboardMoveInput>, any>;
+    arcRotateCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraMouseWheelInput>, {}, ArcRotateCameraMouseWheelInput>, any>;
+    arcRotateCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraPointersInput>, {}, ArcRotateCameraPointersInput>, any>;
     arcRotateCameraVRDeviceOrientationInput: React.DetailedHTMLProps<
-        BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraVRDeviceOrientationInput>, ArcRotateCameraVRDeviceOrientationInput>,
+        BabylonProps<ExcludeReadonlyAndPrivate<ArcRotateCameraVRDeviceOrientationInput>, {}, ArcRotateCameraVRDeviceOrientationInput>,
         any
     >;
     arcTan2Block: React.DetailedHTMLProps<
@@ -1433,7 +1433,7 @@ export interface JSXElements {
         >,
         any
     >;
-    autoRotationBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AutoRotationBehavior>, AutoRotationBehavior>, any>;
+    autoRotationBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AutoRotationBehavior>, {}, AutoRotationBehavior>, any>;
     axesViewer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AxesViewer>,
@@ -1527,8 +1527,8 @@ export interface JSXElements {
         >,
         any
     >;
-    baseCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraMouseWheelInput>, BaseCameraMouseWheelInput>, any>;
-    baseCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraPointersInput>, BaseCameraPointersInput>, any>;
+    baseCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraMouseWheelInput>, {}, BaseCameraMouseWheelInput>, any>;
+    baseCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseCameraPointersInput>, {}, BaseCameraPointersInput>, any>;
     baseParticleSystem: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<BaseParticleSystem>,
@@ -1539,7 +1539,7 @@ export interface JSXElements {
         >,
         any
     >;
-    baseSixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseSixDofDragBehavior>, BaseSixDofDragBehavior>, any>;
+    baseSixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BaseSixDofDragBehavior>, {}, BaseSixDofDragBehavior>, any>;
     baseTexture: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<BaseTexture> & Clonable,
@@ -1741,7 +1741,7 @@ export interface JSXElements {
         >,
         any
     >;
-    bouncingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BouncingBehavior>, BouncingBehavior>, any>;
+    bouncingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BouncingBehavior>, {}, BouncingBehavior>, any>;
     boundingBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<BoundingBlock> & Clonable,
@@ -1819,7 +1819,7 @@ export interface JSXElements {
         >,
         any
     >;
-    boxParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BoxParticleEmitter> & Clonable, BoxParticleEmitter>, any>;
+    boxParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BoxParticleEmitter> & Clonable, {}, BoxParticleEmitter>, any>;
     buffer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Buffer>,
@@ -1838,7 +1838,7 @@ export interface JSXElements {
         >,
         any
     >;
-    cSG: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CSG> & Clonable, CSG>, any>;
+    cSG: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CSG> & Clonable, {}, CSG>, any>;
     camera: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Camera> & Clonable,
@@ -2012,7 +2012,7 @@ export interface JSXElements {
         >,
         any
     >;
-    collider: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Collider>, Collider>, any>;
+    collider: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Collider>, {}, Collider>, any>;
     color3: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Color3> & Clonable,
@@ -2065,7 +2065,7 @@ export interface JSXElements {
         >,
         any
     >;
-    colorCurves: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ColorCurves> & Clonable, ColorCurves>, any>;
+    colorCurves: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ColorCurves> & Clonable, {}, ColorCurves>, any>;
     colorGradient: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ColorGradient>,
@@ -3074,7 +3074,7 @@ export interface JSXElements {
         >,
         any
     >;
-    customParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CustomParticleEmitter> & Clonable, CustomParticleEmitter>, any>;
+    customParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CustomParticleEmitter> & Clonable, {}, CustomParticleEmitter>, any>;
     customProceduralTexture: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<CustomProceduralTexture> & Clonable,
@@ -3128,7 +3128,7 @@ export interface JSXElements {
         >,
         any
     >;
-    dataBuffer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DataBuffer>, DataBuffer>, any>;
+    dataBuffer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DataBuffer>, {}, DataBuffer>, any>;
     dataReader: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<DataReader>,
@@ -3182,9 +3182,9 @@ export interface JSXElements {
         >,
         any
     >;
-    decalMapDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DecalMapDefines>, DecalMapDefines>, any>;
-    defaultCollisionCoordinator: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DefaultCollisionCoordinator>, DefaultCollisionCoordinator>, any>;
-    defaultKTX2DecoderOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DefaultKTX2DecoderOptions>, DefaultKTX2DecoderOptions>, any>;
+    decalMapDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DecalMapDefines>, {}, DecalMapDefines>, any>;
+    defaultCollisionCoordinator: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DefaultCollisionCoordinator>, {}, DefaultCollisionCoordinator>, any>;
+    defaultKTX2DecoderOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DefaultKTX2DecoderOptions>, {}, DefaultKTX2DecoderOptions>, any>;
     defaultLoadingScreen: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<DefaultLoadingScreen>,
@@ -3211,7 +3211,7 @@ export interface JSXElements {
         >,
         any
     >;
-    deferred: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Deferred>, Deferred>, any>;
+    deferred: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Deferred>, {}, Deferred>, any>;
     depthCullingState: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<DepthCullingState>,
@@ -3593,7 +3593,7 @@ export interface JSXElements {
         >,
         any
     >;
-    easingFunction: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EasingFunction>, EasingFunction>, any>;
+    easingFunction: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EasingFunction>, {}, EasingFunction>, any>;
     edgesRenderer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<EdgesRenderer>,
@@ -3629,7 +3629,7 @@ export interface JSXElements {
         >,
         any
     >;
-    effectFallbacks: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EffectFallbacks>, EffectFallbacks>, any>;
+    effectFallbacks: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EffectFallbacks>, {}, EffectFallbacks>, any>;
     effectLayer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<EffectLayer>,
@@ -3832,7 +3832,7 @@ export interface JSXElements {
         >,
         any
     >;
-    fadeInOutBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FadeInOutBehavior>, FadeInOutBehavior>, any>;
+    fadeInOutBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FadeInOutBehavior>, {}, FadeInOutBehavior>, any>;
     filesInput: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FilesInput>,
@@ -5040,8 +5040,8 @@ export interface JSXElements {
         >,
         any
     >;
-    flyCameraKeyboardInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraKeyboardInput>, FlyCameraKeyboardInput>, any>;
-    flyCameraMouseInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraMouseInput>, FlyCameraMouseInput>, any>;
+    flyCameraKeyboardInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraKeyboardInput>, {}, FlyCameraKeyboardInput>, any>;
+    flyCameraMouseInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlyCameraMouseInput>, {}, FlyCameraMouseInput>, any>;
     fogBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FogBlock> & Clonable,
@@ -5052,7 +5052,7 @@ export interface JSXElements {
         >,
         any
     >;
-    followBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowBehavior>, FollowBehavior>, any>;
+    followBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowBehavior>, {}, FollowBehavior>, any>;
     followCamera: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FollowCamera> & Clonable,
@@ -5076,9 +5076,9 @@ export interface JSXElements {
         >,
         any
     >;
-    followCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraKeyboardMoveInput>, FollowCameraKeyboardMoveInput>, any>;
-    followCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraMouseWheelInput>, FollowCameraMouseWheelInput>, any>;
-    followCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraPointersInput>, FollowCameraPointersInput>, any>;
+    followCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraKeyboardMoveInput>, {}, FollowCameraKeyboardMoveInput>, any>;
+    followCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraMouseWheelInput>, {}, FollowCameraMouseWheelInput>, any>;
+    followCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FollowCameraPointersInput>, {}, FollowCameraPointersInput>, any>;
     fragCoordBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FragCoordBlock> & Clonable,
@@ -5109,7 +5109,7 @@ export interface JSXElements {
         >,
         any
     >;
-    framingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FramingBehavior>, FramingBehavior>, any>;
+    framingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FramingBehavior>, {}, FramingBehavior>, any>;
     freeCamera: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FreeCamera> & Clonable,
@@ -5123,8 +5123,8 @@ export interface JSXElements {
         >,
         any
     >;
-    freeCameraDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraDeviceOrientationInput>, FreeCameraDeviceOrientationInput>, any>;
-    freeCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraGamepadInput>, FreeCameraGamepadInput>, any>;
+    freeCameraDeviceOrientationInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraDeviceOrientationInput>, {}, FreeCameraDeviceOrientationInput>, any>;
+    freeCameraGamepadInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraGamepadInput>, {}, FreeCameraGamepadInput>, any>;
     freeCameraInputsManager: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FreeCameraInputsManager>,
@@ -5135,7 +5135,7 @@ export interface JSXElements {
         >,
         any
     >;
-    freeCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraKeyboardMoveInput>, FreeCameraKeyboardMoveInput>, any>;
+    freeCameraKeyboardMoveInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraKeyboardMoveInput>, {}, FreeCameraKeyboardMoveInput>, any>;
     freeCameraMouseInput: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FreeCameraMouseInput>,
@@ -5146,7 +5146,7 @@ export interface JSXElements {
         >,
         any
     >;
-    freeCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraMouseWheelInput>, FreeCameraMouseWheelInput>, any>;
+    freeCameraMouseWheelInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FreeCameraMouseWheelInput>, {}, FreeCameraMouseWheelInput>, any>;
     freeCameraTouchInput: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FreeCameraTouchInput>,
@@ -5251,7 +5251,7 @@ export interface JSXElements {
         >,
         any
     >;
-    gPUPicker: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GPUPicker>, GPUPicker>, any>;
+    gPUPicker: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GPUPicker>, {}, GPUPicker>, any>;
     gamepad: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Gamepad>,
@@ -5678,7 +5678,7 @@ export interface JSXElements {
         >,
         any
     >;
-    goldbergMesh: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GoldbergMesh> & Clonable, GoldbergMesh>, any>;
+    goldbergMesh: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GoldbergMesh> & Clonable, {}, GoldbergMesh>, any>;
     gradientBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<GradientBlock> & Clonable,
@@ -5859,7 +5859,7 @@ export interface JSXElements {
         >,
         any
     >;
-    handConstraintBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HandConstraintBehavior>, HandConstraintBehavior>, any>;
+    handConstraintBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HandConstraintBehavior>, {}, HandConstraintBehavior>, any>;
     hardwareScalingOptimization: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<HardwareScalingOptimization>,
@@ -6022,7 +6022,7 @@ export interface JSXElements {
         >,
         any
     >;
-    imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ImageProcessingConfiguration> & Clonable, ImageProcessingConfiguration>, any>;
+    imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ImageProcessingConfiguration> & Clonable, {}, ImageProcessingConfiguration>, any>;
     imageProcessingPostProcess: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ImageProcessingPostProcess> & Clonable,
@@ -6168,7 +6168,7 @@ export interface JSXElements {
         >,
         any
     >;
-    instantiatedEntries: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<InstantiatedEntries>, InstantiatedEntries>, any>;
+    instantiatedEntries: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<InstantiatedEntries>, {}, InstantiatedEntries>, any>;
     intFloatConverterBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<IntFloatConverterBlock> & Clonable,
@@ -6485,8 +6485,8 @@ export interface JSXElements {
         >,
         any
     >;
-    materialAnisotropicDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialAnisotropicDefines>, MaterialAnisotropicDefines>, any>;
-    materialClearCoatDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialClearCoatDefines>, MaterialClearCoatDefines>, any>;
+    materialAnisotropicDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialAnisotropicDefines>, {}, MaterialAnisotropicDefines>, any>;
+    materialClearCoatDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialClearCoatDefines>, {}, MaterialClearCoatDefines>, any>;
     materialDefines: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<MaterialDefines>,
@@ -6497,9 +6497,9 @@ export interface JSXElements {
         >,
         any
     >;
-    materialDetailMapDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialDetailMapDefines>, MaterialDetailMapDefines>, any>;
-    materialGreasedLineDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialGreasedLineDefines>, MaterialGreasedLineDefines>, any>;
-    materialIridescenceDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialIridescenceDefines>, MaterialIridescenceDefines>, any>;
+    materialDetailMapDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialDetailMapDefines>, {}, MaterialDetailMapDefines>, any>;
+    materialGreasedLineDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialGreasedLineDefines>, {}, MaterialGreasedLineDefines>, any>;
+    materialIridescenceDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialIridescenceDefines>, {}, MaterialIridescenceDefines>, any>;
     materialPluginBase: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<MaterialPluginBase>,
@@ -6526,8 +6526,8 @@ export interface JSXElements {
         >,
         any
     >;
-    materialSheenDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialSheenDefines>, MaterialSheenDefines>, any>;
-    materialSubSurfaceDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialSubSurfaceDefines>, MaterialSubSurfaceDefines>, any>;
+    materialSheenDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialSheenDefines>, {}, MaterialSheenDefines>, any>;
+    materialSubSurfaceDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialSubSurfaceDefines>, {}, MaterialSubSurfaceDefines>, any>;
     mathBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<MathBlock> & Clonable,
@@ -6538,7 +6538,7 @@ export interface JSXElements {
         >,
         any
     >;
-    matrix: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Matrix> & Clonable, Matrix>, any>;
+    matrix: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Matrix> & Clonable, {}, Matrix>, any>;
     matrixBuilderBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<MatrixBuilderBlock> & Clonable,
@@ -6599,7 +6599,7 @@ export interface JSXElements {
         >,
         any
     >;
-    mergeMeshesOptimization: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MergeMeshesOptimization>, MergeMeshesOptimization>, any>;
+    mergeMeshesOptimization: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MergeMeshesOptimization>, {}, MergeMeshesOptimization>, any>;
     mesh: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Mesh> & Clonable,
@@ -6704,7 +6704,7 @@ export interface JSXElements {
         >,
         any
     >;
-    meshoptCompression: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MeshoptCompression>, MeshoptCompression>, any>;
+    meshoptCompression: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MeshoptCompression>, {}, MeshoptCompression>, any>;
     minBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<MinBlock> & Clonable,
@@ -6842,7 +6842,7 @@ export interface JSXElements {
         >,
         any
     >;
-    multiPointerScaleBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MultiPointerScaleBehavior>, MultiPointerScaleBehavior>, any>;
+    multiPointerScaleBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MultiPointerScaleBehavior>, {}, MultiPointerScaleBehavior>, any>;
     multiRenderTarget: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<MultiRenderTarget> & Clonable,
@@ -6878,7 +6878,7 @@ export interface JSXElements {
         >,
         any
     >;
-    nativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NativeDataStream>, NativeDataStream>, any>;
+    nativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NativeDataStream>, {}, NativeDataStream>, any>;
     nativeEngine: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NativeEngine>,
@@ -6972,7 +6972,7 @@ export interface JSXElements {
         >,
         any
     >;
-    nodeGeometryBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeGeometryBuildState>, NodeGeometryBuildState>, any>;
+    nodeGeometryBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeGeometryBuildState>, {}, NodeGeometryBuildState>, any>;
     nodeGeometryConnectionPoint: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NodeGeometryConnectionPoint>,
@@ -7035,7 +7035,7 @@ export interface JSXElements {
         >,
         any
     >;
-    nodeMaterialDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeMaterialDefines>, NodeMaterialDefines>, any>;
+    nodeMaterialDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeMaterialDefines>, {}, NodeMaterialDefines>, any>;
     nodeMaterialTeleportInBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NodeMaterialTeleportInBlock> & Clonable,
@@ -7130,7 +7130,7 @@ export interface JSXElements {
         >,
         any
     >;
-    nullEngineOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NullEngineOptions>, NullEngineOptions>, any>;
+    nullEngineOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NullEngineOptions>, {}, NullEngineOptions>, any>;
     observable: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Observable> & Clonable,
@@ -7394,8 +7394,8 @@ export interface JSXElements {
         >,
         any
     >;
-    particleSystem: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystem> & Clonable, ParticleSystem>, any>;
-    particleSystemSet: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystemSet>, ParticleSystemSet>, any>;
+    particleSystem: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystem> & Clonable, {}, ParticleSystem>, any>;
+    particleSystemSet: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleSystemSet>, {}, ParticleSystemSet>, any>;
     particleTextureBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ParticleTextureBlock> & Clonable,
@@ -7474,7 +7474,7 @@ export interface JSXElements {
         >,
         any
     >;
-    perfCounter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PerfCounter>, PerfCounter>, any>;
+    perfCounter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PerfCounter>, {}, PerfCounter>, any>;
     performanceMonitor: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PerformanceMonitor>,
@@ -7613,10 +7613,10 @@ export interface JSXElements {
         any
     >;
     physicsRadialExplosionEventOptions: React.DetailedHTMLProps<
-        BabylonProps<ExcludeReadonlyAndPrivate<PhysicsRadialExplosionEventOptions>, PhysicsRadialExplosionEventOptions>,
+        BabylonProps<ExcludeReadonlyAndPrivate<PhysicsRadialExplosionEventOptions>, {}, PhysicsRadialExplosionEventOptions>,
         any
     >;
-    physicsRaycastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsRaycastResult>, PhysicsRaycastResult>, any>;
+    physicsRaycastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsRaycastResult>, {}, PhysicsRaycastResult>, any>;
     physicsShape: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PhysicsShape>,
@@ -7711,7 +7711,7 @@ export interface JSXElements {
         >,
         any
     >;
-    physicsUpdraftEventOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsUpdraftEventOptions>, PhysicsUpdraftEventOptions>, any>;
+    physicsUpdraftEventOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsUpdraftEventOptions>, {}, PhysicsUpdraftEventOptions>, any>;
     physicsViewer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PhysicsViewer>,
@@ -7722,8 +7722,8 @@ export interface JSXElements {
         >,
         any
     >;
-    physicsVortexEventOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsVortexEventOptions>, PhysicsVortexEventOptions>, any>;
-    pickingInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PickingInfo>, PickingInfo>, any>;
+    physicsVortexEventOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsVortexEventOptions>, {}, PhysicsVortexEventOptions>, any>;
+    pickingInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PickingInfo>, {}, PickingInfo>, any>;
     plane: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Plane> & Clonable,
@@ -7819,7 +7819,7 @@ export interface JSXElements {
         >,
         any
     >;
-    pointParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PointParticleEmitter> & Clonable, PointParticleEmitter>, any>;
+    pointParticleEmitter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PointParticleEmitter> & Clonable, {}, PointParticleEmitter>, any>;
     pointerDragBehavior: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PointerDragBehavior>,
@@ -8023,7 +8023,7 @@ export interface JSXElements {
         >,
         any
     >;
-    postProcessRenderPipelineManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PostProcessRenderPipelineManager>, PostProcessRenderPipelineManager>, any>;
+    postProcessRenderPipelineManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PostProcessRenderPipelineManager>, {}, PostProcessRenderPipelineManager>, any>;
     postProcessRenderPipelineManagerSceneComponent: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PostProcessRenderPipelineManagerSceneComponent>,
@@ -8167,7 +8167,7 @@ export interface JSXElements {
         >,
         any
     >;
-    proximityCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ProximityCastResult>, ProximityCastResult>, any>;
+    proximityCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ProximityCastResult>, {}, ProximityCastResult>, any>;
     pushMaterial: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PushMaterial> & Clonable,
@@ -8857,7 +8857,7 @@ export interface JSXElements {
         >,
         any
     >;
-    sceneRecorder: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SceneRecorder>, SceneRecorder>, any>;
+    sceneRecorder: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SceneRecorder>, {}, SceneRecorder>, any>;
     screenSizeBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ScreenSizeBlock> & Clonable,
@@ -9076,7 +9076,7 @@ export interface JSXElements {
         >,
         any
     >;
-    shadowLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShadowLight> & Clonable, ShadowLight>, any>;
+    shadowLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShadowLight> & Clonable, {}, ShadowLight>, any>;
     shadowMapBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ShadowMapBlock> & Clonable,
@@ -9087,7 +9087,7 @@ export interface JSXElements {
         >,
         any
     >;
-    shapeCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShapeCastResult>, ShapeCastResult>, any>;
+    shapeCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ShapeCastResult>, {}, ShapeCastResult>, any>;
     sharpenPostProcess: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SharpenPostProcess> & Clonable,
@@ -9135,7 +9135,7 @@ export interface JSXElements {
         >,
         any
     >;
-    simplificationQueue: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SimplificationQueue>, SimplificationQueue>, any>;
+    simplificationQueue: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SimplificationQueue>, {}, SimplificationQueue>, any>;
     simplificationSettings: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SimplificationSettings>,
@@ -9148,7 +9148,7 @@ export interface JSXElements {
         >,
         any
     >;
-    sixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SixDofDragBehavior>, SixDofDragBehavior>, any>;
+    sixDofDragBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SixDofDragBehavior>, {}, SixDofDragBehavior>, any>;
     size: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Size> & Clonable,
@@ -9211,7 +9211,7 @@ export interface JSXElements {
         >,
         any
     >;
-    smartArrayNoDuplicate: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SmartArrayNoDuplicate>, SmartArrayNoDuplicate>, any>;
+    smartArrayNoDuplicate: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SmartArrayNoDuplicate>, {}, SmartArrayNoDuplicate>, any>;
     smoothStepBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SmoothStepBlock> & Clonable,
@@ -9253,7 +9253,7 @@ export interface JSXElements {
         >,
         any
     >;
-    solidParticleVertex: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SolidParticleVertex>, SolidParticleVertex>, any>;
+    solidParticleVertex: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SolidParticleVertex>, {}, SolidParticleVertex>, any>;
     sound: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Sound> & Clonable,
@@ -9325,8 +9325,8 @@ export interface JSXElements {
         >,
         any
     >;
-    sphericalHarmonics: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalHarmonics>, SphericalHarmonics>, any>;
-    sphericalPolynomial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalPolynomial>, SphericalPolynomial>, any>;
+    sphericalHarmonics: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalHarmonics>, {}, SphericalHarmonics>, any>;
+    sphericalPolynomial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalPolynomial>, {}, SphericalPolynomial>, any>;
     spotLight: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SpotLight> & Clonable,
@@ -9486,7 +9486,7 @@ export interface JSXElements {
         >,
         any
     >;
-    stencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StencilState>, StencilState>, any>;
+    stencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StencilState>, {}, StencilState>, any>;
     stencilStateComposer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<StencilStateComposer>,
@@ -9659,7 +9659,7 @@ export interface JSXElements {
         >,
         any
     >;
-    stringDictionary: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StringDictionary>, StringDictionary>, any>;
+    stringDictionary: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StringDictionary>, {}, StringDictionary>, any>;
     subEmitter: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SubEmitter> & Clonable,
@@ -9718,7 +9718,7 @@ export interface JSXElements {
         >,
         any
     >;
-    surfaceMagnetismBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SurfaceMagnetismBehavior>, SurfaceMagnetismBehavior>, any>;
+    surfaceMagnetismBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SurfaceMagnetismBehavior>, {}, SurfaceMagnetismBehavior>, any>;
     switchBooleanAction: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SwitchBooleanAction>,
@@ -9884,7 +9884,7 @@ export interface JSXElements {
         >,
         any
     >;
-    textureSampler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextureSampler>, TextureSampler>, any>;
+    textureSampler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextureSampler>, {}, TextureSampler>, any>;
     thinEngine: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ThinEngine>,
@@ -9984,7 +9984,7 @@ export interface JSXElements {
         >,
         any
     >;
-    trajectoryClassifier: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TrajectoryClassifier>, TrajectoryClassifier>, any>;
+    trajectoryClassifier: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TrajectoryClassifier>, {}, TrajectoryClassifier>, any>;
     transformBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<TransformBlock> & Clonable,
@@ -10085,7 +10085,7 @@ export interface JSXElements {
         >,
         any
     >;
-    vRCameraMetrics: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<VRCameraMetrics>, VRCameraMetrics>, any>;
+    vRCameraMetrics: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<VRCameraMetrics>, {}, VRCameraMetrics>, any>;
     vRDeviceOrientationArcRotateCamera: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<VRDeviceOrientationArcRotateCamera> & Clonable,
@@ -10167,7 +10167,7 @@ export interface JSXElements {
         >,
         any
     >;
-    validatedNativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ValidatedNativeDataStream>, ValidatedNativeDataStream>, any>;
+    validatedNativeDataStream: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ValidatedNativeDataStream>, {}, ValidatedNativeDataStream>, any>;
     valueCondition: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ValueCondition>,
@@ -10282,7 +10282,7 @@ export interface JSXElements {
         >,
         any
     >;
-    vertexData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<VertexData> & Clonable, VertexData>, any>;
+    vertexData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<VertexData> & Clonable, {}, VertexData>, any>;
     vertexOutputBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<VertexOutputBlock> & Clonable,
@@ -10417,7 +10417,7 @@ export interface JSXElements {
         >,
         any
     >;
-    webGL2ShaderProcessor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGL2ShaderProcessor>, WebGL2ShaderProcessor>, any>;
+    webGL2ShaderProcessor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGL2ShaderProcessor>, {}, WebGL2ShaderProcessor>, any>;
     webGLDataBuffer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WebGLDataBuffer>,
@@ -10439,7 +10439,7 @@ export interface JSXElements {
         >,
         any
     >;
-    webGLPipelineContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGLPipelineContext>, WebGLPipelineContext>, any>;
+    webGLPipelineContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGLPipelineContext>, {}, WebGLPipelineContext>, any>;
     webGPUCacheBindGroups: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WebGPUCacheBindGroups>,
@@ -10519,7 +10519,7 @@ export interface JSXElements {
         >,
         any
     >;
-    webRequest: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebRequest>, WebRequest>, any>;
+    webRequest: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebRequest>, {}, WebRequest>, any>;
     webXRAbstractFeature: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WebXRAbstractFeature>,
@@ -10625,7 +10625,7 @@ export interface JSXElements {
         >,
         any
     >;
-    webXRDefaultExperience: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebXRDefaultExperience>, WebXRDefaultExperience>, any>;
+    webXRDefaultExperience: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebXRDefaultExperience>, {}, WebXRDefaultExperience>, any>;
     webXRDepthSensing: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<WebXRDepthSensing>,
@@ -11071,15 +11071,15 @@ export interface JSXElements {
         >,
         any
     >;
-    _BasisTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_BasisTextureLoader>, _BasisTextureLoader>, any>;
-    _DDSTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_DDSTextureLoader>, _DDSTextureLoader>, any>;
-    _ENVTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_ENVTextureLoader>, _ENVTextureLoader>, any>;
-    _HDRTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_HDRTextureLoader>, _HDRTextureLoader>, any>;
-    _InstancesBatch: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_InstancesBatch>, _InstancesBatch>, any>;
-    _KTXTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_KTXTextureLoader>, _KTXTextureLoader>, any>;
-    _MeshCollisionData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_MeshCollisionData>, _MeshCollisionData>, any>;
-    _OcclusionDataStorage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_OcclusionDataStorage>, _OcclusionDataStorage>, any>;
-    _PrimaryIsoTriangle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_PrimaryIsoTriangle>, _PrimaryIsoTriangle>, any>;
-    _TGATextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_TGATextureLoader>, _TGATextureLoader>, any>;
-    _TimeToken: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_TimeToken>, _TimeToken>, any>;
+    _BasisTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_BasisTextureLoader>, {}, _BasisTextureLoader>, any>;
+    _DDSTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_DDSTextureLoader>, {}, _DDSTextureLoader>, any>;
+    _ENVTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_ENVTextureLoader>, {}, _ENVTextureLoader>, any>;
+    _HDRTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_HDRTextureLoader>, {}, _HDRTextureLoader>, any>;
+    _InstancesBatch: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_InstancesBatch>, {}, _InstancesBatch>, any>;
+    _KTXTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_KTXTextureLoader>, {}, _KTXTextureLoader>, any>;
+    _MeshCollisionData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_MeshCollisionData>, {}, _MeshCollisionData>, any>;
+    _OcclusionDataStorage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_OcclusionDataStorage>, {}, _OcclusionDataStorage>, any>;
+    _PrimaryIsoTriangle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_PrimaryIsoTriangle>, {}, _PrimaryIsoTriangle>, any>;
+    _TGATextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_TGATextureLoader>, {}, _TGATextureLoader>, any>;
+    _TimeToken: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_TimeToken>, {}, _TimeToken>, any>;
 }
