@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.9](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.8&targetVersion=GTv0.0.9&_a=files) (2024-06-10)
+
+
+### Chore
+
+* **general:** improve dependencies ([8886f5b](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/8886f5bc2e0c7fb84cc706bbab7591d8859508ce))
+
 ## [0.0.8](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.7&targetVersion=GTv0.0.8&_a=files) (2024-06-07)
 
 
