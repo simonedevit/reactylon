@@ -3,7 +3,7 @@ export { Logger } from './Logger.js';
 
 export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }): Array<string> => {
     const ast = parse(cls.toString(), {
-        ecmaVersion: 2020,
+        ecmaVersion: 2021,
     });
     //@ts-ignore
     const parameters = traverse(ast.body[0].body.body.find(x => x.type === 'MethodDefinition' && x.kind === 'constructor').value);
@@ -44,9 +44,8 @@ function traverse(node: any) {
 export const getFunctionParams = (fn: (...args: any[]) => void): Array<string> => {
     //@ts-ignore
     const ast = parse(fn, {
-        ecmaVersion: 2020,
+        ecmaVersion: 2021,
     });
-
     // Recursively traverse the AST
     const parameters = traverse(ast.body[0]);
     return (parameters || []).filter((param: any) => param !== null); // Remove null values

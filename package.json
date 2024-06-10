@@ -25,10 +25,6 @@
     "workspaces": [
         "./packages/*"
     ],
-    "peerDependencies": {
-        "@babylonjs/core": "^7.9.0",
-        "@babylonjs/inspector": "^7.9.0"
-    },
     "devDependencies": {
         "concurrently": "^8.2.1",
         "@commitlint/cli": "^19.2.1",

@@ -3001,7 +3001,7 @@ export interface JSXElements {
             {
                 rootUrl: ConstructorParameters<typeof CubeTexture>[0];
                 sceneOrEngine: ConstructorParameters<typeof CubeTexture>[1];
-                extensions: ConstructorParameters<typeof CubeTexture>[2];
+                extensionsOrOptions: ConstructorParameters<typeof CubeTexture>[2];
                 noMipmap: ConstructorParameters<typeof CubeTexture>[3];
                 files: ConstructorParameters<typeof CubeTexture>[4];
                 onLoad: ConstructorParameters<typeof CubeTexture>[5];
