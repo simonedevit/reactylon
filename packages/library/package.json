@@ -1,6 +1,6 @@
 {
     "name": "@dvmstudios/reactylon",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "Framework to work on Babylon.js with React",
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
@@ -12,7 +12,7 @@
         "init": "npm ci",
         "start": "webpack serve",
         "build": "webpack --env environment=PROD",
-        "release": "commit-and-tag-version && git push --follow-tags && bash ../../scripts/publish.sh"
+        "release": "npm run build && commit-and-tag-version && git push --follow-tags && bash ../../scripts/publish.sh"
     },
     "keywords": [],
     "commit-and-tag-version": {

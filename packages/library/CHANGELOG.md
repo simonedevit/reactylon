@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.10](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.9&targetVersion=GTv0.0.10&_a=files) (2024-06-23)
+
+
+### Chore
+
+* **general:** use metadata to set children + merge engine and scene components ([21d0443](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/21d04437fedfda937d959e0635d635af20b12a49))
+
 ## [0.0.9](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.8&targetVersion=GTv0.0.9&_a=files) (2024-06-10)
 
 
