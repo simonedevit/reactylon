@@ -15,7 +15,8 @@ export class TextureHost {
     }
 
     static addChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {
-        const textureType = child.type as keyof ComponentInstance;
+        const textureType = child.type as JSX.IntrinsicElements['texture']['type'];
+        //@ts-ignore
         parentInstance[textureType] = child;
     }
 

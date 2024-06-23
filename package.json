@@ -8,6 +8,7 @@
     "scripts": {
         "prepare": "husky",
         "init": "npm ci",
+        "clean": "rm -rf node_modules package-lock.json",
         "start:common": "npm run start --workspace @dvmstudios/reactylon-common",
         "start:library": "npm run start --workspace @dvmstudios/reactylon",
         "start:generator": "npm run start --workspace @dvmstudios/reactylon-generator",

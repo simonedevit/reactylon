@@ -16,6 +16,7 @@ export class Host {
         } else {
             element = isBuilder ? Class(...paramValues) : new Class(...paramValues);
         }
+
         // set non-constructor props
         Object.keys(props)
             .filter(propName => !paramNames.includes(propName) && !excludedProps.includes(propName))
@@ -23,12 +24,18 @@ export class Host {
                 element[key] = props[key as keyof ComponentInstance];
             });
 
+        // use metadata to store children in reconciler
+        if (!element.metadata) {
+            element.metadata = {};
+        }
+
         // TODO: set here other listeners (or in specialized subclasses)
         if (props.onClick) {
             const actionManager = new ActionManager(rootContainer.scene);
             actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, props.onClick));
             element.actionManager = actionManager;
         }
+
         // execute custom code as soon the object is created
         props.onCreate?.(element);
         return element;

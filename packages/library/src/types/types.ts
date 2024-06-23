@@ -1,6 +1,6 @@
 /* PROPS USED BY JSX ELEMENTS GENERATOR */
 
-import { Scene } from '@babylonjs/core';
+import { Node, Scene } from '@babylonjs/core';
 import { Clickable, Clonable, CommonProps } from './props';
 
 type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
@@ -45,12 +45,14 @@ export type BabylonProps<Props, ConstructorProps, Element> = {
 export type ComponentInstance<T = unknown> = T &
     CommonProps &
     Clickable &
-    Partial<Clonable> & {
-        name: string;
-        uniqueId: string;
-        dispose?: Function;
+    Partial<Clonable> &
+    Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
         children?: any;
-        elements: Array<ComponentInstance<T>>;
+        // use this field to skip cloning
+        metadata: {
+            children: Array<ComponentInstance<T>>;
+            // [key: string]: string;
+        };
         handlers?: Partial<{
             addChild(parentInstance: ComponentInstance<T>, child: ComponentInstance<T>): void;
             removeChild(parentInstance: ComponentInstance<T>, child: ComponentInstance<T>): void;
@@ -66,10 +68,10 @@ export type UpdatePayload = {
 export type RootContainer = {
     scene: Scene;
     rootInstance: {
-        elements: Array<ComponentInstance>;
         hostInstance: Scene;
         metadata: {
-            [key: string]: string;
+            children: Array<ComponentInstance>;
+            // [key: string]: string;
         };
         parent: null;
     };

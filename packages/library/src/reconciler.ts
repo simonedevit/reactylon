@@ -6,32 +6,34 @@ import isEqualWith from 'lodash.isequalwith';
 import { Logger, capitalizeFirstLetter } from '@dvmstudios/reactylon-common';
 import { isEqualCustomizer } from '@utils';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
-import { Host } from './components/hosts/Host';
-import { MaterialHost } from './components/hosts/MaterialHost';
-import { TextureHost } from './components/hosts/TextureHost';
+import { Host, MaterialHost, TextureHost /*, TransformNodeHost*/ } from './components/hosts';
 
-//https://github.com/facebook/react/tree/main/packages/react-reconciler
-//https://github.com/facebook/react/blob/main/packages/react-art/src/ReactFiberConfigART.js
+// https://github.com/facebook/react/tree/main/packages/react-reconciler
+// https://github.com/facebook/react/blob/main/packages/react-art/src/ReactFiberConfigART.js
 
-// elements = Babylon children, "children" already taken by React
+// metadata.children contains the children of current instance, "metadata" attribute will be skipped from
+// deep copy of a mesh (during clone for instance), see more:
+// https://github.com/BabylonJS/Babylon.js/blob/master/packages/dev/core/src/Meshes/mesh.ts#L634
 
 function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
     // Append the child to the parent element
     if (parentInstance) {
         if (!child) {
-            Logger.error('undefined child', parentInstance);
+            Logger.error(`addChild - undefined child`);
         } else {
-            if (!parentInstance.elements) {
-                parentInstance.elements = [];
+            if (!parentInstance.metadata.children) {
+                parentInstance.metadata.children = [];
             }
             child.handlers?.addChild?.(parentInstance, child);
-            parentInstance.elements.push(child);
-            // FIXME: should i add the parent also?
-            //child.parent = parentInstance;
+            parentInstance.metadata.children.push(child);
+            if (child instanceof Babylon.Node) {
+                child.parent = parentInstance as unknown as Babylon.Node;
+            }
         }
     }
 }
 
+//TODO: get meshes dinamically from node_modules/@babylonjs/core/Meshes/meshBuilder.d.ts
 const meshes = [
     'box',
     'tiledBox',
@@ -108,12 +110,15 @@ const reconciler = ReactReconciler<
         } else if (Class.prototype instanceof Babylon.BaseTexture) {
             createInstanceFn = TextureHost.createInstance;
         }
+        /* else if (Class.name === 'TransformNode') {
+            createInstanceFn = TransformNodeHost.createInstance;
+        }*/
         return createInstanceFn(isBuilder, Class, props, rootContainer);
     },
 
     /*
      * Same as createInstance, but for text nodes. If your renderer doesn't support text nodes, you can throw here.
-     
+    
     createTextInstance(text, rootContainer, hostContext, internalHandle) {
         console.log('Created text instance:', text);
         // Create a new text node with the provided text content
@@ -268,7 +273,7 @@ const reconciler = ReactReconciler<
         ]);
         if (child) {
             if (container.rootInstance) {
-                container.rootInstance.elements.push(child);
+                container.rootInstance.metadata.children.push(child);
                 // FIXME: should i add the parent also?
                 // child.parent = container.rootInstance
             } else {
@@ -288,8 +293,8 @@ const reconciler = ReactReconciler<
             ['child', child],
             ['beforeChild', beforeChild],
         ]);
-        const index = parentInstance.elements.findIndex(item => item.uniqueId === beforeChild.uniqueId);
-        parentInstance.elements.splice(index, 0, child);
+        const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
+        parentInstance.metadata.children.splice(index, 0, child);
     },
 
     /*
@@ -301,8 +306,8 @@ const reconciler = ReactReconciler<
             ['child', child],
             ['beforeChild', beforeChild],
         ]);
-        const index = container.rootInstance.elements.findIndex(item => item.uniqueId === beforeChild.uniqueId);
-        container.rootInstance.elements.splice(index, 0, child);
+        const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
+        container.rootInstance.metadata.children.splice(index, 0, child);
     },
 
     /*
@@ -314,8 +319,8 @@ const reconciler = ReactReconciler<
             ['parentInstance', parentInstance],
             ['child', child],
         ]);
-        const index = parentInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
-        parentInstance.elements.splice(index, 1);
+        const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
+        parentInstance.metadata.children.splice(index, 1);
         //child.handlers?.removeChild?.(parentInstance, child);
         child.dispose?.(false, true);
     },
@@ -328,8 +333,8 @@ const reconciler = ReactReconciler<
             ['container', container],
             ['child', child],
         ]);
-        const index = container.rootInstance.elements.findIndex(item => item.uniqueId === child.uniqueId);
-        container.rootInstance.elements.splice(index, 1);
+        const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
+        container.rootInstance.metadata.children.splice(index, 1);
         //child.handlers?.removeChild?.(container, child);
         child.dispose?.(false, true);
     },
@@ -397,7 +402,8 @@ const reconciler = ReactReconciler<
         Object.entries(updatePayload)
             .filter(([key]) => key !== 'children')
             .forEach(([key, value]) => {
-                instance[key as keyof ComponentInstance] = value;
+                //@ts-ignore
+                instance[key] = value;
             });
         instance.handlers?.commitUpdate?.(instance, updatePayload);
     },

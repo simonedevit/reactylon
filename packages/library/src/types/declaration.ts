@@ -645,6 +645,8 @@ import { PhysicsShapeCapsule } from '@babylonjs/core';
 import { PhysicsShapeContainer } from '@babylonjs/core';
 import { PhysicsShapeConvexHull } from '@babylonjs/core';
 import { PhysicsShapeCylinder } from '@babylonjs/core';
+import { PhysicsShapeGroundMesh } from '@babylonjs/core';
+import { PhysicsShapeHeightField } from '@babylonjs/core';
 import { PhysicsShapeMesh } from '@babylonjs/core';
 import { PhysicsShapeSphere } from '@babylonjs/core';
 import { PhysicsUpdraftEventOptions } from '@babylonjs/core';
@@ -7685,6 +7687,32 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof PhysicsShapeCylinder>[3];
             },
             PhysicsShapeCylinder
+        >,
+        any
+    >;
+    physicsShapeGroundMesh: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsShapeGroundMesh>,
+            {
+                groundMesh: ConstructorParameters<typeof PhysicsShapeGroundMesh>[0];
+                scene: ConstructorParameters<typeof PhysicsShapeGroundMesh>[1];
+            },
+            PhysicsShapeGroundMesh
+        >,
+        any
+    >;
+    physicsShapeHeightField: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsShapeHeightField>,
+            {
+                heightFieldSizeX: ConstructorParameters<typeof PhysicsShapeHeightField>[0];
+                heightFieldSizeZ: ConstructorParameters<typeof PhysicsShapeHeightField>[1];
+                numHeightFieldSamplesX: ConstructorParameters<typeof PhysicsShapeHeightField>[2];
+                numHeightFieldSamplesZ: ConstructorParameters<typeof PhysicsShapeHeightField>[3];
+                heightFieldData: ConstructorParameters<typeof PhysicsShapeHeightField>[4];
+                scene: ConstructorParameters<typeof PhysicsShapeHeightField>[5];
+            },
+            PhysicsShapeHeightField
         >,
         any
     >;
