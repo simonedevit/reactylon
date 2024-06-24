@@ -6,7 +6,7 @@ import isEqualWith from 'lodash.isequalwith';
 import { Logger, capitalizeFirstLetter } from '@dvmstudios/reactylon-common';
 import { isEqualCustomizer } from '@utils';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
-import { Host, MaterialHost, TextureHost /*, TransformNodeHost*/ } from './components/hosts';
+import { Host, MaterialHost, TextureHost, MeshHost /*, TransformNodeHost*/ } from './components/hosts';
 
 // https://github.com/facebook/react/tree/main/packages/react-reconciler
 // https://github.com/facebook/react/blob/main/packages/react-art/src/ReactFiberConfigART.js
@@ -32,39 +32,6 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
         }
     }
 }
-
-//TODO: get meshes dinamically from node_modules/@babylonjs/core/Meshes/meshBuilder.d.ts
-const meshes = [
-    'box',
-    'tiledBox',
-    'sphere',
-    'disc',
-    'icoSphere',
-    'ribbon',
-    'cylinder',
-    'torus',
-    'torusKnot',
-    'lineSystem',
-    'lines',
-    'dashedLines',
-    //'extrudeShape',
-    //'extrudeShapeCustom',
-    'lathe',
-    'tiledPlane',
-    'plane',
-    'ground',
-    'tiledGround',
-    'groundFromHeightMap',
-    'polygon',
-    //'extrudePolygon',
-    'tube',
-    'polyhedron',
-    'geodesic',
-    'goldberg',
-    'decal',
-    'capsule',
-    'text',
-];
 
 // check methods execution's order: "reconciler.png" and https://blog.atulr.com/react-custom-renderer-2/)
 const reconciler = ReactReconciler<
@@ -95,17 +62,20 @@ const reconciler = ReactReconciler<
     createInstance(type, props, rootContainer, hostContext, internalHandle) {
         let Class = null;
         let isBuilder = false;
+        const BabylonElement = capitalizeFirstLetter(type);
         // MeshBuilder.Create
-        if (meshes.includes(type)) {
+        if (`Create${BabylonElement}` in MeshBuilder) {
             //@ts-ignore
-            Class = MeshBuilder[`Create${capitalizeFirstLetter(type)}`];
+            Class = MeshBuilder[`Create${BabylonElement}`];
             isBuilder = true;
         } else {
             //@ts-ignore
-            Class = Babylon[capitalizeFirstLetter(type)];
+            Class = Babylon[BabylonElement];
         }
         let createInstanceFn: Function = Host.createInstance;
-        if (Class.prototype instanceof Babylon.Material) {
+        if (isBuilder) {
+            createInstanceFn = MeshHost.createInstance;
+        } else if (Class.prototype instanceof Babylon.Material) {
             createInstanceFn = MaterialHost.createInstance;
         } else if (Class.prototype instanceof Babylon.BaseTexture) {
             createInstanceFn = TextureHost.createInstance;

@@ -1,6 +1,8 @@
 import { ActionManager, ExecuteCodeAction } from '@babylonjs/core';
 import { getFunctionParams, getClassConstructorParams } from '@dvmstudios/reactylon-common';
 import { ComponentInstance, RootContainer } from '@types';
+// required for git hook (otherwise it can't resolve the augmented JSXElements)
+import '../../index';
 
 const excludedProps = ['children', 'onCreate', 'assignTo'];
 export class Host {
