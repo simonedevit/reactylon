@@ -1,5 +1,13 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.11](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.10&targetVersion=GTv0.0.11&_a=files) (2024-06-24)
+
+
+### Chore
+
+* **reconciler:** add mesh host ([6db76f6](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/6db76f64c6bec52d128df416959452a082564df5))
+* **reconciler:** add assignTo prop to materials ([263690b](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/263690b0436df88a19c24800029c1782c2930a92))
+
 ## [0.0.10](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.9&targetVersion=GTv0.0.10&_a=files) (2024-06-23)
 
 
