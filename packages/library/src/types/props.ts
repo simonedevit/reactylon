@@ -19,6 +19,10 @@ export type TextureProps = {
     type: keyof Pick<StandardMaterial, 'diffuseTexture' | 'specularTexture' | 'emissiveTexture' | 'ambientTexture' | 'bumpTexture' | 'opacityTexture'> | (string & {});
 };
 
+export type MaterialProps = {
+    assignTo?: Array<string>;
+};
+
 // you don't need to add it to JSX namespace because it is dynamically done in generator (due to multitude of mesh components)
 export type MeshProps = Clonable &
     Clickable & {

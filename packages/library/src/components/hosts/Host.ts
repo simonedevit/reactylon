@@ -2,7 +2,7 @@ import { ActionManager, ExecuteCodeAction } from '@babylonjs/core';
 import { getFunctionParams, getClassConstructorParams } from '@dvmstudios/reactylon-common';
 import { ComponentInstance, RootContainer } from '@types';
 
-const excludedProps = ['children', 'onCreate'];
+const excludedProps = ['children', 'onCreate', 'assignTo'];
 export class Host {
     static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function) {
         let element: any;

@@ -2,23 +2,33 @@ import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { Material, Mesh, MultiMaterial } from '@babylonjs/core';
 
-type AugmentedMaterial = ComponentInstance<Material & JSX.IntrinsicElements['material']>;
+// add other materials when you study them (e.g. PBRMaterial, etc..) - see packages/library/src/index.tsx
+type AugmentedMaterial = ComponentInstance<Material & JSX.IntrinsicElements['standardMaterial']>;
 
 export class MaterialHost {
     static createInstance(isBuilder: boolean, Class: any, props: AugmentedMaterial, rootContainer: RootContainer) {
         let cloneFn = undefined;
-        const { cloneBy } = props;
+        const scene = rootContainer.scene;
+        const { cloneBy, assignTo } = props;
         if (cloneBy) {
             cloneFn = () => {
-                const scene = rootContainer.scene;
                 const original = scene.getMaterialById(cloneBy);
                 if (!original) {
-                    throw new Error(`Reactylon: Material - ${cloneBy} doesn't exist.`);
+                    throw new Error(`[Reactylon] - createInstance (clone) - ${cloneBy} doesn't exist.`);
                 }
                 return original.clone(props.name);
             };
         }
         const element = Host.createInstance(isBuilder, Class, props, rootContainer, cloneFn);
+        if (assignTo) {
+            assignTo.forEach(meshId => {
+                const mesh = scene.getMeshById(meshId);
+                if (!mesh) {
+                    throw new Error(`[Reactylon] - createInstance (assignTo) - ${meshId} doesn't exist.`);
+                }
+                mesh.material = element;
+            });
+        }
         element.handlers = {
             addChild: MaterialHost.addChild,
         };
