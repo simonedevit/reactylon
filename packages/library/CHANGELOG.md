@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.12](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.11&targetVersion=GTv0.0.12&_a=files) (2024-07-02)
+
+
+### Chore
+
+* **reconciler,jsx-elements:** setParent + cloneFrom + instanceFrom props ([d89b368](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/d89b3684ff922f9f0649203e61a23404671ea1b6))
+
 ## [0.0.11](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.10&targetVersion=GTv0.0.11&_a=files) (2024-06-24)
 
 
