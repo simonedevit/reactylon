@@ -26,9 +26,8 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
             }
             child.handlers?.addChild?.(parentInstance, child);
             parentInstance.metadata.children.push(child);
-            if (child instanceof Babylon.Node) {
-                child.parent = parentInstance as unknown as Babylon.Node;
-            }
+            //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons, materials have .setParent method
+            child.setParent?.(parentInstance);
         }
     }
 }
@@ -245,7 +244,7 @@ const reconciler = ReactReconciler<
             if (container.rootInstance) {
                 container.rootInstance.metadata.children.push(child);
                 // FIXME: should i add the parent also?
-                // child.parent = container.rootInstance
+                // child.setParent(container.rootInstance)
             } else {
                 console.log('addend child with no root (createPortal only?)');
                 addChild(container.rootInstance, child);

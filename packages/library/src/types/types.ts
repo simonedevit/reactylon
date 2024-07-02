@@ -3,6 +3,14 @@
 import { Node, Scene } from '@babylonjs/core';
 import { Clickable, Clonable, CommonProps } from './props';
 
+type Only<T, U> = {
+    [P in keyof T]: T[P];
+} & {
+    [P in keyof U]?: never;
+};
+
+export type Either<T, U> = Only<T, U> | Only<U, T>;
+
 type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
 
 // no readonly props

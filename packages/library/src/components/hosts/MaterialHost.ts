@@ -9,12 +9,12 @@ export class MaterialHost {
     static createInstance(isBuilder: boolean, Class: any, props: AugmentedMaterial, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
-        const { cloneBy, assignTo } = props;
-        if (cloneBy) {
+        const { cloneFrom, assignTo } = props;
+        if (cloneFrom) {
             cloneFn = () => {
-                const original = scene.getMaterialById(cloneBy);
+                const original = scene.getMaterialById(cloneFrom);
                 if (!original) {
-                    throw new Error(`[Reactylon] - createInstance (clone) - ${cloneBy} doesn't exist.`);
+                    throw new Error(`[Reactylon] - createInstance (clone) - ${cloneFrom} doesn't exist.`);
                 }
                 return original.clone(props.name);
             };

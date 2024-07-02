@@ -17,3 +17,12 @@
 1. With concurrently it is a mess, find a way to start process and understand who should depend from others
 2. Remove logs from production build
 3. MeshBuilder: extrudeShape, extrudeShapeCustom, extrudePolygon
+
+
+# Props
+- onCreate
+- assignTo (material)
+- cloneFrom
+- instanceFrom (mesh)
+- type (texture)
+- onClick

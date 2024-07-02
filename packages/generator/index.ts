@@ -42,7 +42,7 @@ ${result}
     }`
                     : ', {}';
 
-                // check if "clone" method exists, if it exists will be added cloneBy prop
+                // check if "clone" method exists, if it exists will be added cloneFrom prop
                 const isClonable = Class.prototype.clone;
 
                 const ElementType = key;

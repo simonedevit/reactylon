@@ -81,6 +81,7 @@ import { BoundingBox } from '@babylonjs/core';
 import { BoundingBoxGizmo } from '@babylonjs/core';
 import { BoundingBoxRenderer } from '@babylonjs/core';
 import { BoundingInfo } from '@babylonjs/core';
+import { BoundingInfoHelper } from '@babylonjs/core';
 import { BoundingSphere } from '@babylonjs/core';
 import { BoxBlock } from '@babylonjs/core';
 import { BoxParticleEmitter } from '@babylonjs/core';
@@ -114,6 +115,7 @@ import { CombineAction } from '@babylonjs/core';
 import { ComputeEffect } from '@babylonjs/core';
 import { ComputeNormalsBlock } from '@babylonjs/core';
 import { ComputeShader } from '@babylonjs/core';
+import { ComputeShaderBoundingHelper } from '@babylonjs/core';
 import { ComputeShaderParticleSystem } from '@babylonjs/core';
 import { Condition } from '@babylonjs/core';
 import { ConditionBlock } from '@babylonjs/core';
@@ -852,6 +854,7 @@ import { TrailMesh } from '@babylonjs/core';
 import { Trajectory } from '@babylonjs/core';
 import { TrajectoryClassifier } from '@babylonjs/core';
 import { TransformBlock } from '@babylonjs/core';
+import { TransformFeedbackBoundingHelper } from '@babylonjs/core';
 import { TransformNode } from '@babylonjs/core';
 import { TranslationBlock } from '@babylonjs/core';
 import { TriPlanarBlock } from '@babylonjs/core';
@@ -1799,6 +1802,16 @@ export interface JSXElements {
         >,
         any
     >;
+    boundingInfoHelper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BoundingInfoHelper>,
+            {
+                engine: ConstructorParameters<typeof BoundingInfoHelper>[0];
+            },
+            BoundingInfoHelper
+        >,
+        any
+    >;
     boundingSphere: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<BoundingSphere>,
@@ -2158,6 +2171,16 @@ export interface JSXElements {
                 options: ConstructorParameters<typeof ComputeShader>[3];
             },
             ComputeShader
+        >,
+        any
+    >;
+    computeShaderBoundingHelper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ComputeShaderBoundingHelper>,
+            {
+                engine: ConstructorParameters<typeof ComputeShaderBoundingHelper>[0];
+            },
+            ComputeShaderBoundingHelper
         >,
         any
     >;
@@ -10020,6 +10043,16 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof TransformBlock>[0];
             },
             TransformBlock
+        >,
+        any
+    >;
+    transformFeedbackBoundingHelper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<TransformFeedbackBoundingHelper>,
+            {
+                engine: ConstructorParameters<typeof TransformFeedbackBoundingHelper>[0];
+            },
+            TransformFeedbackBoundingHelper
         >,
         any
     >;

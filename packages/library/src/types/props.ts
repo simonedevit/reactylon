@@ -1,4 +1,5 @@
 import { ActionEvent, StandardMaterial } from '@babylonjs/core';
+import { type Either } from './types';
 
 /* Define here the custom props and add them in JSX namespace */
 
@@ -11,7 +12,12 @@ export type Clickable = {
 };
 
 export type Clonable = {
-    cloneBy: string;
+    cloneFrom: string;
+};
+
+// only meshes
+export type Instanceable = {
+    instanceFrom: string;
 };
 
 export type TextureProps = {
@@ -24,7 +30,7 @@ export type MaterialProps = {
 };
 
 // you don't need to add it to JSX namespace because it is dynamically done in generator (due to multitude of mesh components)
-export type MeshProps = Clonable &
+export type MeshProps = Either<Clonable, Instanceable> &
     Clickable & {
         // add here other mesh props (e.g. "onDrag")
     };

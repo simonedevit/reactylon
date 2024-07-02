@@ -15,7 +15,7 @@ export class TransformNodeHost {
     }
 
     static addChild(parentInstance: ComponentInstance, child: AugmentedTransformNode): void {
-        child.parent = parentInstance as unknown as Node;
+        child.setParent(parentInstance as unknown as Node);
     }
 
     static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void {}
