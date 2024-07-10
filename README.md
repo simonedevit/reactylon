@@ -17,12 +17,13 @@
 1. With concurrently it is a mess, find a way to start process and understand who should depend from others
 2. Remove logs from production build
 3. MeshBuilder: extrudeShape, extrudeShapeCustom, extrudePolygon
-
+4. Create JSON.stringify method for stringify meshes in Reactylon (exclude 'metadata' attribute)
 
 # Props
 - onCreate
 - assignTo (material)
 - cloneFrom
 - instanceFrom (mesh)
-- type (texture)
+- kind (texture)
 - onClick
+- propertiesFrom

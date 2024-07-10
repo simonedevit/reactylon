@@ -4,9 +4,10 @@ import * as Babylon from '@babylonjs/core';
 import * as MeshBuilder from '@babylonjs/core/Meshes/Builders';
 import isEqualWith from 'lodash.isequalwith';
 import { Logger, capitalizeFirstLetter } from '@dvmstudios/reactylon-common';
-import { isEqualCustomizer } from '@utils';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
 import { Host, MaterialHost, TextureHost, MeshHost /*, TransformNodeHost*/ } from './components/hosts';
+import ObjectUtils from '@utils/ObjectUtils';
+import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 
 // https://github.com/facebook/react/tree/main/packages/react-reconciler
 // https://github.com/facebook/react/blob/main/packages/react-art/src/ReactFiberConfigART.js
@@ -59,6 +60,7 @@ const reconciler = ReactReconciler<
      * be placed in the tree — it could be left unused and later collected by GC. If you need to do something when an instance is definitely in the tree, look at commitMount instead.
      */
     createInstance(type, props, rootContainer, hostContext, internalHandle) {
+        Logger.log(`createInstance - ${type}: ${props.name}`);
         let Class = null;
         let isBuilder = false;
         const BabylonElement = capitalizeFirstLetter(type);
@@ -103,8 +105,8 @@ const reconciler = ReactReconciler<
     appendInitialChild(parentInstance, child) {
         // Log information about appending initial child to parent
         Logger.group('appendInitialChild', [
-            ['parentInstance', parentInstance],
-            ['child', child],
+            [`parentInstance: ${parentInstance.name}`, parentInstance],
+            [`child: ${child.name}`, child],
         ]);
         addChild(parentInstance, child);
     },
@@ -116,6 +118,7 @@ const reconciler = ReactReconciler<
      * If you don't want to do anything here, you should return false.
      */
     finalizeInitialChildren(instance, type, props, rootContainer, hostContext) {
+        Logger.log(`finalizeInitialChildren - ${type}: ${instance.name}`);
         return false;
     },
 
@@ -225,8 +228,8 @@ const reconciler = ReactReconciler<
     appendChild(parentInstance, child) {
         // Log information about appending child to parent
         Logger.group('appendChild', [
-            ['parentInstance', parentInstance],
-            ['child', child],
+            [`parentInstance: ${parentInstance.name}`, parentInstance],
+            [`child: ${child.name}`, child],
         ]);
         addChild(parentInstance, child);
     },
@@ -238,7 +241,7 @@ const reconciler = ReactReconciler<
         // Log information about appending child to container
         Logger.group('appendChildToContainer', [
             ['container', container],
-            ['child', child],
+            [`child: ${child.name}`, child],
         ]);
         if (child) {
             if (container.rootInstance) {
@@ -258,9 +261,9 @@ const reconciler = ReactReconciler<
      */
     insertBefore(parentInstance, child, beforeChild) {
         Logger.group('insertBefore', [
-            ['parentInstance', parentInstance],
-            ['child', child],
-            ['beforeChild', beforeChild],
+            [`parentInstance: ${parentInstance.name}`, parentInstance],
+            [`child: ${child.name}`, child],
+            [`beforeChild: ${beforeChild.name}`, beforeChild],
         ]);
         const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
         parentInstance.metadata.children.splice(index, 0, child);
@@ -272,8 +275,8 @@ const reconciler = ReactReconciler<
     insertInContainerBefore(container, child, beforeChild) {
         Logger.group('insertInContainerBefore', [
             ['container', container],
-            ['child', child],
-            ['beforeChild', beforeChild],
+            [`child: ${child.name}`, child],
+            [`beforeChild: ${beforeChild.name}`, beforeChild],
         ]);
         const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
         container.rootInstance.metadata.children.splice(index, 0, child);
@@ -285,8 +288,8 @@ const reconciler = ReactReconciler<
      */
     removeChild(parentInstance, child) {
         Logger.group('removeChild', [
-            ['parentInstance', parentInstance],
-            ['child', child],
+            [`parentInstance: ${parentInstance.name}`, parentInstance],
+            [`child: ${child.name}`, child],
         ]);
         const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
         parentInstance.metadata.children.splice(index, 1);
@@ -300,7 +303,7 @@ const reconciler = ReactReconciler<
     removeChildFromContainer(container, child) {
         Logger.group('removeChildFromContainer', [
             ['container', container],
-            ['child', child],
+            [`child: ${child.name}`, child],
         ]);
         const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
         container.rootInstance.metadata.children.splice(index, 1);
@@ -345,18 +348,31 @@ const reconciler = ReactReconciler<
         const { children: _a, ...oldPropsWihoutChildren } = oldProps;
         const { children: _b, ...newPropsWihoutChildren } = newProps;
 
-        const areSameProps = isEqualWith(oldPropsWihoutChildren, newPropsWihoutChildren, isEqualCustomizer);
+        const areSameProps = isEqualWith(oldPropsWihoutChildren, newPropsWihoutChildren, ObjectUtils.isEqualCustomizer);
         if (areSameProps) {
             Logger.log(`prepareUpdate (no changes) - ${type}: ${instance.name}`);
             // no need to update
             return null;
         }
         Logger.group(`prepareUpdate (changes) - ${type}: ${instance.name}`, [
-            ['oldProps', oldProps],
-            ['newProps', newProps],
+            ['oldProps', oldPropsWihoutChildren],
+            ['newProps', newPropsWihoutChildren],
         ]);
-        //TODO: return only changed props
-        return newProps as UpdatePayload;
+        let propertiesFromProps = {};
+        // propertiesFromProps
+        if (newPropsWihoutChildren.propertiesFrom) {
+            const scene = rootContainer.scene;
+            propertiesFromProps = newPropsWihoutChildren.propertiesFrom.reduce(
+                (props, { property, source, type }) => {
+                    const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
+                    props[property] = sourceElement[property];
+                    return props;
+                },
+                {} as Record<string, unknown>,
+            );
+        }
+        //TODO: return only changed props - should i remove propertiesFrom from newPropsWihoutChildren?
+        return { ...newPropsWihoutChildren, ...propertiesFromProps } as UpdatePayload;
     },
 
     /*
@@ -369,10 +385,15 @@ const reconciler = ReactReconciler<
     commitUpdate(instance, updatePayload, type, prevProps, nextProps, internalHandle) {
         Logger.log(`commitUpdate - ${type}: ${instance.name}`);
         Object.entries(updatePayload)
-            .filter(([key]) => key !== 'children')
-            .forEach(([key, value]) => {
-                //@ts-ignore
-                instance[key] = value;
+            .filter(([key]) => key !== 'children' && key !== 'propertiesFrom')
+            .forEach(([_key, value]) => {
+                const key = _key as keyof ComponentInstance;
+                if (key in TransformKeysMap) {
+                    ObjectUtils.set(instance, TransformKeysMap[key as keyof typeof TransformKeysMap], value);
+                } else {
+                    //@ts-ignore
+                    instance[key] = value;
+                }
             });
         instance.handlers?.commitUpdate?.(instance, updatePayload);
     },

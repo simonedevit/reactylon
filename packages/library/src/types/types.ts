@@ -46,7 +46,7 @@ export type BabylonProps<Props, ConstructorProps, Element> = {
     // transform undefined constructor props into optional props (to avoid to explicitely pass prop={undefined})
 } & MarkUndefinedAsOptional<ConstructorProps> & {
         children?: React.ReactNode;
-    } & Pick<CommonProps<Element>, 'onCreate'>;
+    } & CommonProps<Element>;
 
 /* PROPS USED BY RECONCILER */
 

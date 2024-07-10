@@ -15,7 +15,7 @@ export class TextureHost {
     }
 
     static addChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {
-        const textureType = child.type as JSX.IntrinsicElements['texture']['type'];
+        const textureType = child.kind as JSX.IntrinsicElements['texture']['kind'];
         //@ts-ignore
         parentInstance[textureType] = child;
     }
@@ -27,7 +27,7 @@ export class TextureHost {
     }
 
     static commitUpdate(instance: AugmentedTexture, updatePayload: UpdatePayload): void {
-        const { url } = updatePayload;
-        instance.updateURL(url as string);
+        const { url, rootUrl } = updatePayload;
+        instance.updateURL((url || rootUrl) as string);
     }
 }
