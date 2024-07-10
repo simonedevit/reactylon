@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.13](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.12&targetVersion=GTv0.0.13&_a=files) (2024-07-10)
+
+
+### Chore
+
+* **reconciler:** add transform props + propertiesFrom + rename "type" into "kind" prop ([7621370](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/762137020ad0124ff0b392a90258093c94698f14))
+
 ## [0.0.12](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.11&targetVersion=GTv0.0.12&_a=files) (2024-07-02)
 
 
