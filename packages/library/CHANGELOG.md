@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.14](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.13&targetVersion=GTv0.0.14&_a=files) (2024-07-11)
+
+
+### Chore
+
+* **general:** disable loggin in production ([ee3a98c](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/ee3a98cd9ddb8171fb28ff6204701c1344b121cc))
+
 ## [0.0.13](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.12&targetVersion=GTv0.0.13&_a=files) (2024-07-10)
 
 
