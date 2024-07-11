@@ -10,7 +10,7 @@
     },
     "scripts": {
         "init": "npm ci",
-        "start": "webpack serve",
+        "start": "webpack serve --env isLogging=true",
         "build": "webpack --env environment=PROD",
         "release": "npm run build && commit-and-tag-version && git push --follow-tags && bash ../../scripts/publish.sh"
     },

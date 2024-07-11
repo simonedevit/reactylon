@@ -1,16 +1,19 @@
 import * as path from 'path';
-import { Configuration, WebpackOptionsNormalized } from 'webpack';
+import { Configuration, EnvironmentPlugin, WebpackOptionsNormalized } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 interface EnvironmentVariable {
     environment: 'DEV' | 'PROD';
+    isLogging: boolean;
     //add here other custom environment variables
 }
 
 const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<WebpackOptionsNormalized, 'devServer'> => {
     const isProduction = env.environment === 'PROD';
+    const isLogging = !!env.isLogging;
     console.log(`Mode: ${env.environment || 'DEV'}`);
+    console.log(`Logging: ${isLogging ? 'Enabled' : 'Disabled'}`);
     console.log();
 
     return {
@@ -60,7 +63,13 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
             },
         },*/
         externals: ['react', 'react-dom/client', /^@babylonjs\/*/],
-        plugins: [new CleanWebpackPlugin()],
+        plugins: [
+            new CleanWebpackPlugin(),
+            // serve custom environment variable to application
+            new EnvironmentPlugin({
+                IS_LOGGING_ENABLED: isLogging,
+            }),
+        ],
     };
 };
 
