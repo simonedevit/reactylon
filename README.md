@@ -20,10 +20,19 @@
 4. Create JSON.stringify method for stringify meshes in Reactylon (exclude 'metadata' attribute)
 
 # Props
+
+## Cross
 - onCreate
-- assignTo (material)
 - cloneFrom
-- instanceFrom (mesh)
-- kind (texture)
-- onClick
 - propertiesFrom
+
+## Meshes
+- instanceFrom
+- onPick, onDoublePick, onPickDown, onPickUp, onPickOut, onLeftPick, onRightPick, onCenterPick, onLongPress, onPointerOver, onPointerOut, onIntersectionEnter, onIntersectionExit
+- intersectionMeshId (mesh, only with onIntersectionEnter and onIntersectionExit)
+
+## Materials
+- assignTo
+
+## Textures
+- kind

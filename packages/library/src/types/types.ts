@@ -1,7 +1,7 @@
 /* PROPS USED BY JSX ELEMENTS GENERATOR */
 
 import { Node, Scene } from '@babylonjs/core';
-import { Clickable, Clonable, CommonProps } from './props';
+import { Clonable, CommonProps } from './props';
 
 type Only<T, U> = {
     [P in keyof T]: T[P];
@@ -52,7 +52,6 @@ export type BabylonProps<Props, ConstructorProps, Element> = {
 
 export type ComponentInstance<T = unknown> = T &
     CommonProps &
-    Clickable &
     Partial<Clonable> &
     Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
         children?: any;

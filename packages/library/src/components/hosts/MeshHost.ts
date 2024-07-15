@@ -1,9 +1,34 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { Mesh } from '@babylonjs/core';
-import { type Instanceable } from '../../types/props';
+import { ActionEvent, ActionManager, ExecuteCodeAction, Mesh, Scene } from '@babylonjs/core';
+import { Triggerable, Triggers, type Instanceable } from '../../types/props';
 
-type AugmentedMesh = ComponentInstance<Mesh & JSX.IntrinsicElements['mesh']> & Partial<Instanceable>;
+function handleEvents(props: AugmentedMesh, scene: Scene) {
+    const isAtLeastOneTrigger = Object.keys(Triggers).some(trigger => props[trigger as keyof Triggerable]);
+    if (isAtLeastOneTrigger) {
+        const actionManager = new ActionManager(scene);
+        Object.entries(Triggers).forEach(([_key, name]) => {
+            const key = _key as keyof Triggerable;
+            const handlerFn = props[key] as (evt: ActionEvent) => void;
+            if (handlerFn) {
+                const { intersectionMeshId } = props;
+                actionManager.registerAction(
+                    new ExecuteCodeAction(
+                        {
+                            trigger: name,
+                            parameter: intersectionMeshId ? scene.getMeshById(intersectionMeshId) : undefined,
+                        },
+                        handlerFn,
+                    ),
+                );
+            }
+        });
+        return actionManager;
+    }
+    return null;
+}
+
+type AugmentedMesh = ComponentInstance<Mesh & JSX.IntrinsicElements['mesh']> & Partial<Instanceable> & Triggerable;
 
 export class MeshHost {
     static createInstance(isBuilder: boolean, Class: any, props: AugmentedMesh, rootContainer: RootContainer) {
@@ -25,6 +50,7 @@ export class MeshHost {
             };
         }
         const element = Host.createInstance(isBuilder, Class, props, rootContainer, cloneFn);
+        element.actionManager = handleEvents(props, scene);
         element.handlers = {
             // add here your custom handlers for meshes
         };

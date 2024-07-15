@@ -1,4 +1,3 @@
-import { ActionManager, ExecuteCodeAction } from '@babylonjs/core';
 import { getFunctionParams, getClassConstructorParams } from '@dvmstudios/reactylon-common';
 import { ComponentInstance, RootContainer } from '@types';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
@@ -46,13 +45,6 @@ export class Host {
         // use metadata to store children in reconciler
         if (!element.metadata) {
             element.metadata = {};
-        }
-
-        // TODO: set here other listeners (or in specialized subclasses)
-        if (props.onClick) {
-            const actionManager = new ActionManager(rootContainer.scene);
-            actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, props.onClick));
-            element.actionManager = actionManager;
         }
 
         // execute custom code as soon the object is created

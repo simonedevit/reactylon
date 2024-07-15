@@ -1,4 +1,4 @@
-import { ActionEvent, StandardMaterial } from '@babylonjs/core';
+import { ActionEvent, ActionManager, StandardMaterial } from '@babylonjs/core';
 import { type Either } from './types';
 
 type TransformType = 'position' | 'rotation' | 'scaling';
@@ -26,8 +26,28 @@ export type CommonProps<T = unknown> = Partial<TransformProps> & {
     }>;
 };
 
-export type Clickable = {
-    onClick?: (evt: ActionEvent) => void;
+export enum Triggers {
+    onPick = ActionManager.OnPickTrigger,
+    onDoublePick = ActionManager.OnDoublePickTrigger,
+    onPickDown = ActionManager.OnPickDownTrigger,
+    onPickUp = ActionManager.OnPickUpTrigger,
+    onPickOut = ActionManager.OnPickOutTrigger,
+    onLeftPick = ActionManager.OnLeftPickTrigger,
+    onRightPick = ActionManager.OnRightPickTrigger,
+    onCenterPick = ActionManager.OnCenterPickTrigger,
+    onLongPress = ActionManager.OnLongPressTrigger,
+    onPointerOver = ActionManager.OnPointerOverTrigger,
+    onPointerOut = ActionManager.OnPointerOutTrigger,
+    onIntersectionEnter = ActionManager.OnIntersectionEnterTrigger,
+    onIntersectionExit = ActionManager.OnIntersectionExitTrigger,
+}
+
+// only meshes
+export type Triggerable = {
+    [key in keyof typeof Triggers]?: (evt: ActionEvent) => void;
+} & {
+    // only with onIntersectionEnter and onIntersectionExit
+    intersectionMeshId?: string;
 };
 
 export type Clonable = {
@@ -55,6 +75,6 @@ export type MaterialProps = {
 
 // you don't need to add it to JSX namespace because it is dynamically done in generator (due to multitude of mesh components)
 export type MeshProps = Either<Clonable, Instanceable> &
-    Clickable & {
+    Triggerable & {
         // add here other mesh props (e.g. "onDrag")
     };
