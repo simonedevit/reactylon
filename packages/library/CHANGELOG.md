@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.15](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.14&targetVersion=GTv0.0.15&_a=files) (2024-07-15)
+
+
+### Chore
+
+* **general:** add events on meshes ([110494a](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/110494a55bf7c0f23dd387ec345a179970abc947))
+
 ## [0.0.14](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.13&targetVersion=GTv0.0.14&_a=files) (2024-07-11)
 
 
