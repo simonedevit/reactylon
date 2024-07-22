@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.16](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.15&targetVersion=GTv0.0.16&_a=files) (2024-07-22)
+
+
+### Chore
+
+* **general:** handle gui elements + split gui and core elements creation ([93b02ca](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/93b02caa329923f9b4583f44395a5cbf918c159f))
+
 ## [0.0.15](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.14&targetVersion=GTv0.0.15&_a=files) (2024-07-15)
 
 
