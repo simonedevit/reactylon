@@ -1,7 +1,17 @@
 import { writeFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getClassConstructorParams, getClonableProp, getFunctionParams, getMeshProps, isClass, lowercaseFirstLetter } from '@dvmstudios/reactylon-common';
+import {
+    getClassConstructorParams,
+    getClonableProp,
+    getFunctionParams,
+    getMeshProps,
+    isClass,
+    lowercaseFirstLetter,
+    CollidingComponents,
+    BabylonPackages,
+    getGuiProps,
+} from '@dvmstudios/reactylon-common';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
@@ -22,19 +32,19 @@ function getConstructorProps<T>(Class: Constructor<T> | Function, className: str
     return '';
 }
 
-const jxsElements: Record<string, Array<string>> = {
-    imports: [],
-    declarations: [],
-};
-
 // FIXME: handle duplicates
-async function createJsxDeclarations(): Promise<void> {
-    const index = await import('@babylonjs/core/index.js');
-    Object.entries(index).forEach(([key, value]) => {
+async function createJsxDeclarations(index: string, babylonPackage: BabylonPackages): Promise<Record<string, Array<string>>> {
+    const jsxElements: Record<string, Array<string>> = {
+        imports: [],
+        declarations: [],
+    };
+
+    const entryPoint = await import(`${index}/index.js`);
+    Object.entries(entryPoint).forEach(([key, value]) => {
         try {
             if (isClass(value)) {
                 const Class = value as Constructor<typeof value>;
-                const importStatement = `import { ${key} } from '@babylonjs/core';`;
+                const importStatement = `import { ${key} } from '${index}';`;
                 const result = getConstructorProps(Class, key, true);
                 const ConstructorProps = result
                     ? `, {
@@ -46,18 +56,23 @@ ${result}
                 const isClonable = Class.prototype.clone;
 
                 const ElementType = key;
-                const jsxElementName = lowercaseFirstLetter(key);
-                const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getClonableProp(isClonable)}${ConstructorProps},${ElementType}>, any>;`;
+                let jsxElementName = lowercaseFirstLetter(key);
+                if (CollidingComponents[ElementType]) {
+                    jsxElementName = CollidingComponents[ElementType];
+                }
 
-                jxsElements.imports.push(importStatement);
-                jxsElements.declarations.push(declarationStatement);
+                const GuiProps = babylonPackage === BabylonPackages.GUI ? getGuiProps() : '';
+                const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getClonableProp(isClonable)}${ConstructorProps}${GuiProps},${ElementType}>, any>;`;
+
+                jsxElements.imports.push(importStatement);
+                jsxElements.declarations.push(declarationStatement);
             } else {
                 // exclude objects, constants and other stuff
                 if (typeof value === 'function') {
                     // get builder (i.e. CreateBox)
                     if (key.startsWith('Create')) {
                         const Builder = value as Function;
-                        const importStatement = `import { ${key} } from '@babylonjs/core';`;
+                        const importStatement = `import { ${key} } from '${index}';`;
                         const result = getConstructorProps(Builder, key, false);
                         const FunctionProps = result
                             ? `, {
@@ -68,8 +83,8 @@ ${result}
                         const jsxElementName = lowercaseFirstLetter(key.replace('Create', ''));
                         const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getMeshProps()}${FunctionProps},${ElementType}>, any>;`;
 
-                        jxsElements.imports.push(importStatement);
-                        jxsElements.declarations.push(declarationStatement);
+                        jsxElements.imports.push(importStatement);
+                        jsxElements.declarations.push(declarationStatement);
                     } else if (key.startsWith('Extrude')) {
                         // handle Extruded meshesh
                     }
@@ -80,26 +95,41 @@ ${result}
             console.log(key);
         }
     });
+    return jsxElements;
 }
+
+const declarations = {
+    core: {
+        index: '@babylonjs/core',
+        fileName: 'core.declarations.ts',
+        babylonPackage: BabylonPackages.CORE,
+    },
+    gui: {
+        index: '@babylonjs/gui',
+        fileName: 'gui.declarations.ts',
+        babylonPackage: BabylonPackages.GUI,
+    },
+};
 
 (async () => {
-    await createJsxDeclarations();
-    const content = `
+    Object.values(declarations).forEach(async ({ index, fileName, babylonPackage }) => {
+        const jsxElements = await createJsxDeclarations(index, babylonPackage);
+        const content = `
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from './types';
-import { type MeshProps, type Clonable } from './props';
-${jxsElements.imports.join('\n')}
-
+import { type MeshProps, type GuiProps, type Clonable } from './props';
+${jsxElements.imports.join('\n')}
+    
 export interface JSXElements {
-  ${jxsElements.declarations.join('\n  ')}
+  ${jsxElements.declarations.join('\n  ')}
 }
 `;
-    try {
-        const fileName = 'declaration.ts';
-        const fullPathFileName = path.join(__dirname, `../../library/src/types/${fileName}`);
-        await writeFile(fullPathFileName, content);
-        console.log(`\n${fileName} created successfully`);
-    } catch (error) {
-        console.log(`Error creating file: ${error}`);
-    }
+        try {
+            const fullPathFileName = path.join(__dirname, `../../library/src/types/${fileName}`);
+            await writeFile(fullPathFileName, content);
+            console.log(`\n${fileName} created successfully`);
+        } catch (error) {
+            console.log(`Error creating ${fileName}: ${error}`);
+        }
+    });
 })();

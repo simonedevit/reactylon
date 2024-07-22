@@ -1,5 +1,6 @@
-import { ActionEvent, ActionManager, StandardMaterial } from '@babylonjs/core';
+import { ActionEvent, ActionManager, Observable, StandardMaterial } from '@babylonjs/core';
 import { type Either } from './types';
+import { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
 
 type TransformType = 'position' | 'rotation' | 'scaling';
 type Axis = 'X' | 'Y' | 'Z';
@@ -26,7 +27,21 @@ export type CommonProps<T = unknown> = Partial<TransformProps> & {
     }>;
 };
 
-export enum Triggers {
+export enum GuiTriggers {
+    onPointerMove = 'onPointerMoveObservable',
+    onPointerEnter = 'onPointerEnterObservable',
+    onPointerOut = 'onPointerOutObservable',
+    onPointerDown = 'onPointerDownObservable',
+    onPointerUp = 'onPointerUpObservable',
+    onPointerClick = 'onPointerClickObservable',
+    onClipboard = 'onClipboardObservable',
+}
+
+export type GuiTriggerable = {
+    [key in keyof typeof GuiTriggers]?: Parameters<Observable<Vector2WithInfo>['add']>[0];
+};
+
+export enum MeshTriggers {
     onPick = ActionManager.OnPickTrigger,
     onDoublePick = ActionManager.OnDoublePickTrigger,
     onPickDown = ActionManager.OnPickDownTrigger,
@@ -44,7 +59,7 @@ export enum Triggers {
 
 // only meshes
 export type Triggerable = {
-    [key in keyof typeof Triggers]?: (evt: ActionEvent) => void;
+    [key in keyof typeof MeshTriggers]?: (evt: ActionEvent) => void;
 } & {
     // only with onIntersectionEnter and onIntersectionExit
     intersectionMeshId?: string;
@@ -69,6 +84,32 @@ export type TextureProps = {
         | (string & {});
 };
 
+type CreateFullscreeUIOptions = {
+    createFullscreenUI: {
+        name: Parameters<typeof AdvancedDynamicTexture.CreateFullscreenUI>[0];
+        foreground?: Parameters<typeof AdvancedDynamicTexture.CreateFullscreenUI>[1];
+        scene?: Parameters<typeof AdvancedDynamicTexture.CreateFullscreenUI>[2];
+        sampling?: Parameters<typeof AdvancedDynamicTexture.CreateFullscreenUI>[3];
+        adaptiveScaling?: Parameters<typeof AdvancedDynamicTexture.CreateFullscreenUI>[4];
+    };
+};
+
+type CreateForMeshOptions = {
+    createForMesh: {
+        mesh: string;
+        width?: Parameters<typeof AdvancedDynamicTexture.CreateForMesh>[1];
+        height?: Parameters<typeof AdvancedDynamicTexture.CreateForMesh>[2];
+        supportPointerMove?: Parameters<typeof AdvancedDynamicTexture.CreateForMesh>[3];
+        onlyAlphaTesting?: Parameters<typeof AdvancedDynamicTexture.CreateForMesh>[4];
+        invertY?: Parameters<typeof AdvancedDynamicTexture.CreateForMesh>[5];
+        materialSetupCallback?: Parameters<typeof AdvancedDynamicTexture.CreateForMesh>[6];
+    };
+};
+
+export type AdvancedDynamicTextureProps = Either<CreateFullscreeUIOptions, CreateForMeshOptions> & {
+    kind: 'createFullscreenUI' | 'createForMesh';
+};
+
 export type MaterialProps = {
     assignTo?: Array<string>;
 };
@@ -77,4 +118,10 @@ export type MaterialProps = {
 export type MeshProps = Either<Clonable, Instanceable> &
     Triggerable & {
         // add here other mesh props (e.g. "onDrag")
+    };
+
+export type GuiProps =
+    /*Either<Clonable, Instanceable> &*/
+    GuiTriggerable & {
+        // add here other gui props
     };

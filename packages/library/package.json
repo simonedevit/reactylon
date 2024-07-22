@@ -29,8 +29,9 @@
         "react-reconciler": "^0.29.2"
     },
     "peerDependencies": {
-        "@babylonjs/core": "7.12.0",
-        "@babylonjs/inspector": "7.12.0",
+        "@babylonjs/core": "7.16.0",
+        "@babylonjs/gui": "7.16.0",
+        "@babylonjs/inspector": "7.16.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },

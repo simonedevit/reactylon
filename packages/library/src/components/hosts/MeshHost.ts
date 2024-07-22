@@ -1,13 +1,13 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { ActionEvent, ActionManager, ExecuteCodeAction, Mesh, Scene } from '@babylonjs/core';
-import { Triggerable, Triggers, type Instanceable } from '../../types/props';
+import { Triggerable, MeshTriggers, type Instanceable } from '../../types/props';
 
 function handleEvents(props: AugmentedMesh, scene: Scene) {
-    const isAtLeastOneTrigger = Object.keys(Triggers).some(trigger => props[trigger as keyof Triggerable]);
+    const isAtLeastOneTrigger = Object.keys(MeshTriggers).some(trigger => props[trigger as keyof Triggerable]);
     if (isAtLeastOneTrigger) {
         const actionManager = new ActionManager(scene);
-        Object.entries(Triggers).forEach(([_key, name]) => {
+        Object.entries(MeshTriggers).forEach(([_key, name]) => {
             const key = _key as keyof Triggerable;
             const handlerFn = props[key] as (evt: ActionEvent) => void;
             if (handlerFn) {

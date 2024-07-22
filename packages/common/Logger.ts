@@ -13,10 +13,8 @@ export class Logger {
     }
 
     static error(...args: Array<any>) {
-        if (Logger.isEnabled()) {
-            const [first, ...rest] = args;
-            console.error(`${this.prefix} - ${first}`, ...rest);
-        }
+        const [first, ...rest] = args;
+        console.error(`${this.prefix} - ${first}`, ...rest);
     }
 
     static group(title: string, labels: Array<Array<any>>) {

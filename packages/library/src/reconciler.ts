@@ -1,11 +1,12 @@
 import React, { version } from 'react';
 import ReactReconciler, { FiberRoot } from 'react-reconciler';
-import * as Babylon from '@babylonjs/core';
+import * as BabylonCore from '@babylonjs/core';
+import * as BabylonGui from '@babylonjs/gui';
 import * as MeshBuilder from '@babylonjs/core/Meshes/Builders';
 import isEqualWith from 'lodash.isequalwith';
-import { Logger, capitalizeFirstLetter } from '@dvmstudios/reactylon-common';
+import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
-import { Host, MaterialHost, TextureHost, MeshHost /*, TransformNodeHost*/ } from './components/hosts';
+import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 
@@ -27,8 +28,11 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
             }
             child.handlers?.addChild?.(parentInstance, child);
             parentInstance.metadata.children.push(child);
-            //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons, materials have .setParent method
-            child.setParent?.(parentInstance);
+            //child.setParent?.(parentInstance);
+            if (child.metadata.babylonPackage === BabylonPackages.CORE) {
+                //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons, materials have .setParent method
+                child.parent = parentInstance;
+            }
         }
     }
 }
@@ -63,27 +67,49 @@ const reconciler = ReactReconciler<
         Logger.log(`createInstance - ${type}: ${props.name}`);
         let Class = null;
         let isBuilder = false;
+        let babylonPackage: BabylonPackages = BabylonPackages.CORE;
         const BabylonElement = capitalizeFirstLetter(type);
-        // MeshBuilder.Create
-        if (`Create${BabylonElement}` in MeshBuilder) {
+        // @babylonjs/gui
+        if (BabylonElement in BabylonGui || type in ReversedCollidingComponents) {
+            babylonPackage = BabylonPackages.GUI;
             //@ts-ignore
-            Class = MeshBuilder[`Create${BabylonElement}`];
-            isBuilder = true;
-        } else {
-            //@ts-ignore
-            Class = Babylon[BabylonElement];
+            Class = BabylonGui[BabylonElement] || BabylonGui[ReversedCollidingComponents[type]];
         }
-        let createInstanceFn: Function = Host.createInstance;
-        if (isBuilder) {
-            createInstanceFn = MeshHost.createInstance;
-        } else if (Class.prototype instanceof Babylon.Material) {
-            createInstanceFn = MaterialHost.createInstance;
-        } else if (Class.prototype instanceof Babylon.BaseTexture) {
-            createInstanceFn = TextureHost.createInstance;
+        // @babylonjs/core
+        else {
+            // MeshBuilder.Create
+            if (`Create${BabylonElement}` in MeshBuilder) {
+                //@ts-ignore
+                Class = MeshBuilder[`Create${BabylonElement}`];
+                isBuilder = true;
+            } else {
+                //@ts-ignore
+                Class = BabylonCore[BabylonElement];
+            }
         }
-        /* else if (Class.name === 'TransformNode') {
-            createInstanceFn = TransformNodeHost.createInstance;
-        }*/
+        let createInstanceFn: Function;
+
+        switch (babylonPackage) {
+            case BabylonPackages.CORE:
+                createInstanceFn = Host.createInstance;
+                if (isBuilder) {
+                    createInstanceFn = MeshHost.createInstance;
+                } else if (Class.prototype instanceof BabylonCore.Material) {
+                    createInstanceFn = MaterialHost.createInstance;
+                } else if (Class.prototype instanceof BabylonCore.BaseTexture) {
+                    createInstanceFn = TextureHost.createInstance;
+                } /* else if (Class.name === 'TransformNode') {
+                    createInstanceFn = TransformNodeHost.createInstance;
+                }*/
+                break;
+            case BabylonPackages.GUI:
+                createInstanceFn = GuiHost.createInstance;
+                if (Class.prototype instanceof BabylonCore.DynamicTexture) {
+                    createInstanceFn = AdvancedDynamicTextureHost.createInstance;
+                    isBuilder = true;
+                }
+                break;
+        }
         return createInstanceFn(isBuilder, Class, props, rootContainer);
     },
 
@@ -247,7 +273,7 @@ const reconciler = ReactReconciler<
             if (container.rootInstance) {
                 container.rootInstance.metadata.children.push(child);
                 // FIXME: should i add the parent also?
-                // child.setParent(container.rootInstance)
+                // child.parent = container.rootInstance
             } else {
                 console.log('addend child with no root (createPortal only?)');
                 addChild(container.rootInstance, child);
@@ -267,6 +293,7 @@ const reconciler = ReactReconciler<
         ]);
         const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
         parentInstance.metadata.children.splice(index, 0, child);
+        child.handlers?.addChild?.(parentInstance, child);
     },
 
     /*
@@ -280,6 +307,7 @@ const reconciler = ReactReconciler<
         ]);
         const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
         container.rootInstance.metadata.children.splice(index, 0, child);
+        child.handlers?.addChild?.(container, child);
     },
 
     /*
@@ -293,8 +321,10 @@ const reconciler = ReactReconciler<
         ]);
         const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
         parentInstance.metadata.children.splice(index, 1);
-        //child.handlers?.removeChild?.(parentInstance, child);
+        child.handlers?.removeChild?.(parentInstance, child);
+        //if (child.metadata.babylonPackage === BabylonPackages.CORE) {
         child.dispose?.(false, true);
+        //}
     },
 
     /*
@@ -307,8 +337,10 @@ const reconciler = ReactReconciler<
         ]);
         const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
         container.rootInstance.metadata.children.splice(index, 1);
-        //child.handlers?.removeChild?.(container, child);
+        child.handlers?.removeChild?.(container, child);
+        //if (child.metadata.babylonPackage === BabylonPackages.CORE) {
         child.dispose?.(false, true);
+        //}
     },
 
     /*

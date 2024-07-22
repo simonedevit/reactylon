@@ -1,4 +1,4 @@
-import { getFunctionParams, getClassConstructorParams } from '@dvmstudios/reactylon-common';
+import { getFunctionParams, getClassConstructorParams, BabylonPackages } from '@dvmstudios/reactylon-common';
 import { ComponentInstance, RootContainer } from '@types';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
@@ -10,19 +10,19 @@ export class Host {
     static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function) {
         let element: any;
 
-        const paramNames = isBuilder ? getFunctionParams(Class) : getClassConstructorParams(Class);
-        const paramValues = paramNames.map(param => {
+        const paramsNames = isBuilder ? getFunctionParams(Class) : getClassConstructorParams(Class);
+        const paramsValues = paramsNames.map(param => {
             return props[param as keyof ComponentInstance];
         });
         if (cloneFn) {
             element = cloneFn();
         } else {
-            element = isBuilder ? Class(...paramValues) : new Class(...paramValues);
+            element = isBuilder ? Class(...paramsValues) : new Class(...paramsValues);
         }
 
         // set non-constructor props
         Object.keys(props)
-            .filter(propName => !paramNames.includes(propName) && !excludedProps.includes(propName))
+            .filter(propName => !paramsNames.includes(propName) && !excludedProps.includes(propName))
             .forEach(_key => {
                 const key = _key as keyof ComponentInstance;
                 const value = props[key];
@@ -44,7 +44,9 @@ export class Host {
 
         // use metadata to store children in reconciler
         if (!element.metadata) {
-            element.metadata = {};
+            element.metadata = {
+                babylonPackage: BabylonPackages.CORE,
+            };
         }
 
         // execute custom code as soon the object is created

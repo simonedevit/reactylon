@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from './types';
-import { type MeshProps, type Clonable } from './props';
+import { type MeshProps, type GuiProps, type Clonable } from './props';
 import { AbstractActionManager } from '@babylonjs/core';
 import { AbstractAssetTask } from '@babylonjs/core';
 import { AbstractEngine } from '@babylonjs/core';
@@ -43,6 +43,7 @@ import { ArcTan2Block } from '@babylonjs/core';
 import { AssetContainer } from '@babylonjs/core';
 import { AssetsManager } from '@babylonjs/core';
 import { AssetsProgressEvent } from '@babylonjs/core';
+import { AsyncLock } from '@babylonjs/core';
 import { AsyncLoop } from '@babylonjs/core';
 import { AttachToBoxBehavior } from '@babylonjs/core';
 import { AudioEngine } from '@babylonjs/core';
@@ -1381,6 +1382,7 @@ export interface JSXElements {
         >,
         any
     >;
+    asyncLock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AsyncLock>, {}, AsyncLock>, any>;
     asyncLoop: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AsyncLoop>,

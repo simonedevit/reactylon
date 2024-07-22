@@ -1,21 +1,24 @@
-import { JSXElements } from './types/declaration';
-import { TextureProps, MaterialProps } from './types/props';
-export type { JSXElements };
+import { JSXElements as CoreJSXElements } from './types/core.declarations';
+import { JSXElements as GuiJSXElements } from './types/gui.declarations';
+import { TextureProps, MaterialProps, AdvancedDynamicTextureProps } from './types/props';
 
 declare global {
     namespace JSX {
-        interface IntrinsicElements extends JSXElements {
-            texture: JSXElements['texture'] & TextureProps;
-            dynamicTexture: JSXElements['dynamicTexture'] & TextureProps;
-            videoTexture: JSXElements['videoTexture'] & TextureProps;
-            cubeTexture: JSXElements['cubeTexture'] & TextureProps;
-            equiRectangularCubeTexture: JSXElements['equiRectangularCubeTexture'] & TextureProps;
-            hDRCubeTexture: JSXElements['hDRCubeTexture'] & TextureProps;
-            mirrorTexture: JSXElements['mirrorTexture'] & TextureProps;
-            refractionTexture: JSXElements['refractionTexture'] & TextureProps;
+        interface IntrinsicElements extends CoreJSXElements {
+            texture: CoreJSXElements['texture'] & TextureProps;
+            dynamicTexture: CoreJSXElements['dynamicTexture'] & TextureProps;
+            videoTexture: CoreJSXElements['videoTexture'] & TextureProps;
+            cubeTexture: CoreJSXElements['cubeTexture'] & TextureProps;
+            equiRectangularCubeTexture: CoreJSXElements['equiRectangularCubeTexture'] & TextureProps;
+            hDRCubeTexture: CoreJSXElements['hDRCubeTexture'] & TextureProps;
+            mirrorTexture: CoreJSXElements['mirrorTexture'] & TextureProps;
+            refractionTexture: CoreJSXElements['refractionTexture'] & TextureProps;
             // add other materials when you study them (e.g. PBRMaterial, etc..)
-            standardMaterial: JSXElements['standardMaterial'] & MaterialProps;
+            standardMaterial: CoreJSXElements['standardMaterial'] & MaterialProps;
             // add here other custom props
+        }
+        interface IntrinsicElements extends GuiJSXElements {
+            advancedDynamicTexture: Omit<GuiJSXElements['advancedDynamicTexture'], 'name'> & AdvancedDynamicTextureProps;
         }
     }
 }

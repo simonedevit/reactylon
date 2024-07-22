@@ -89,3 +89,19 @@ export function getClonableProp(isClonable: boolean) {
 export function getMeshProps() {
     return ' & MeshProps';
 }
+
+export function getGuiProps() {
+    return ' & GuiProps';
+}
+
+// TIP: what about call them {name}-XR ?
+export const CollidingComponents: Record<string, string> = {
+    Button: 'button2D',
+};
+
+export const ReversedCollidingComponents = Object.entries(CollidingComponents).reduce((acc, [key, value]) => ((acc[value] = key), acc), {} as Record<string, string>);
+
+export enum BabylonPackages {
+    'CORE',
+    'GUI',
+}

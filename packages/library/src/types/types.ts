@@ -2,6 +2,8 @@
 
 import { Node, Scene } from '@babylonjs/core';
 import { Clonable, CommonProps } from './props';
+import { BabylonPackages } from '@dvmstudios/reactylon-common';
+import { GUI3DManager } from '@babylonjs/gui';
 
 type Only<T, U> = {
     [P in keyof T]: T[P];
@@ -58,11 +60,12 @@ export type ComponentInstance<T = unknown> = T &
         // use this field to skip cloning
         metadata: {
             children: Array<ComponentInstance<T>>;
+            babylonPackage: BabylonPackages;
             // [key: string]: string;
         };
         handlers?: Partial<{
-            addChild(parentInstance: ComponentInstance<T>, child: ComponentInstance<T>): void;
-            removeChild(parentInstance: ComponentInstance<T>, child: ComponentInstance<T>): void;
+            addChild(parentInstance: ComponentInstance<T> | RootContainer, child: ComponentInstance<T>): void;
+            removeChild(parentInstance: ComponentInstance<T> | RootContainer, child: ComponentInstance<T>): void;
             prepareUpdate(): UpdatePayload;
             commitUpdate(instance: ComponentInstance<T>, updatePayload: UpdatePayload): void;
         }>;
@@ -78,6 +81,7 @@ export type RootContainer = {
         hostInstance: Scene;
         metadata: {
             children: Array<ComponentInstance>;
+            gui3DManager?: GUI3DManager;
             // [key: string]: string;
         };
         parent: null;

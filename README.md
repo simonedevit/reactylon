@@ -18,21 +18,29 @@
 2. Remove logs from production build
 3. MeshBuilder: extrudeShape, extrudeShapeCustom, extrudePolygon
 4. Create JSON.stringify method for stringify meshes in Reactylon (exclude 'metadata' attribute)
+5. Add observable for inputText, checkbox, radioButton, slider (https://doc.babylonjs.com/features/featuresDeepDive/gui/gui)
+6. inputPassword -> check generated component
+7. Add observable for 3D gui (https://doc.babylonjs.com/features/featuresDeepDive/gui/gui3D)
+6. Plane panel
+7. Events on meshButton3D (animations)
 
 # Props
 
 ## Cross
-- onCreate
-- cloneFrom
-- propertiesFrom
+- onCreate (executed after instance creation)
+- cloneFrom (clone element from another element)
+- propertiesFrom (copy properties from another element)
+
+# Scene
+- isGui3DManager (required to use GUI3DManager)
 
 ## Meshes
-- instanceFrom
+- instanceFrom (create instance from another mesh)
 - onPick, onDoublePick, onPickDown, onPickUp, onPickOut, onLeftPick, onRightPick, onCenterPick, onLongPress, onPointerOver, onPointerOut, onIntersectionEnter, onIntersectionExit
 - intersectionMeshId (mesh, only with onIntersectionEnter and onIntersectionExit)
 
 ## Materials
-- assignTo
+- assignTo (assign material to one or more meshes)
 
 ## Textures
-- kind
+- kind (attribute will be applied to material instance)

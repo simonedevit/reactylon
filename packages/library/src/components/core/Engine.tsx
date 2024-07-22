@@ -4,6 +4,7 @@ import CustomLoadingScreen from '../CustomLoadingScreen';
 import { RootContainer } from '@types';
 import { Inspector } from '@babylonjs/inspector';
 import Reactylon from '../../reconciler';
+import { GUI3DManager } from '@babylonjs/gui';
 
 export type EngineCanvasContextType = {
     engine: Nullable<BabylonEngine>;
@@ -49,6 +50,7 @@ export type EngineProps = React.PropsWithChildren<{
         sceneOptions?: SceneOptions;
         isInteractiveInspector?: boolean;
         onSceneReady?: (scene: Scene) => void;
+        isGui3DManager?: boolean;
     };
 }>;
 
@@ -56,7 +58,7 @@ export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void
 
 export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: sceneProps, children }) => {
     const { antialias, engineOptions, adaptToDeviceRatio, loader, canvasId } = engineProps;
-    const { sceneOptions, onSceneReady, isInteractiveInspector = false } = sceneProps || {};
+    const { sceneOptions, onSceneReady, isInteractiveInspector = false, isGui3DManager = true } = sceneProps || {};
 
     const canvasRef = useRef<Nullable<HTMLCanvasElement>>(null);
     const engine = useRef<Nullable<BabylonEngine>>(null);
@@ -111,6 +113,7 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
                     hostInstance: scene.current,
                     metadata: {
                         children: [],
+                        gui3DManager: isGui3DManager ? new GUI3DManager(scene.current) : undefined,
                         // className: 'root',
                     },
                     // observers: {},
