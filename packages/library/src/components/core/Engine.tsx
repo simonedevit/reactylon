@@ -1,5 +1,14 @@
 import React, { useEffect, createContext, useContext, useRef } from 'react';
-import { type Nullable, Engine as BabylonEngine, type EngineOptions, Scene, EventState, SceneOptions } from '@babylonjs/core';
+import {
+    type Nullable,
+    Engine as BabylonEngine,
+    type EngineOptions,
+    Scene,
+    EventState,
+    SceneOptions,
+    WebXRDefaultExperienceOptions,
+    WebXRDefaultExperience,
+} from '@babylonjs/core';
 import CustomLoadingScreen from '../CustomLoadingScreen';
 import { RootContainer } from '@types';
 import { Inspector } from '@babylonjs/inspector';
@@ -29,14 +38,18 @@ export const useCanvas = (): Nullable<HTMLCanvasElement | WebGLRenderingContext>
 export type SceneContextType = {
     scene: Nullable<Scene>;
     sceneReady: boolean;
+    xrExperience: Nullable<WebXRDefaultExperience>;
 };
 
 export const SceneContext = createContext<SceneContextType>({
     scene: null,
     sceneReady: false,
+    xrExperience: null,
 });
 
 export const useScene = (): Scene => useContext(SceneContext).scene as Scene;
+
+export const useXrExperience = (): WebXRDefaultExperience => useContext(SceneContext).xrExperience as WebXRDefaultExperience;
 
 export type EngineProps = React.PropsWithChildren<{
     engine: {
@@ -51,6 +64,7 @@ export type EngineProps = React.PropsWithChildren<{
         isInteractiveInspector?: boolean;
         onSceneReady?: (scene: Scene) => void;
         isGui3DManager?: boolean;
+        xrDefaultExperienceOptions?: WebXRDefaultExperienceOptions;
     };
 }>;
 
@@ -58,7 +72,7 @@ export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void
 
 export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: sceneProps, children }) => {
     const { antialias, engineOptions, adaptToDeviceRatio, loader, canvasId } = engineProps;
-    const { sceneOptions, onSceneReady, isInteractiveInspector = false, isGui3DManager = true } = sceneProps || {};
+    const { sceneOptions, onSceneReady, isInteractiveInspector = false, isGui3DManager = true, xrDefaultExperienceOptions } = sceneProps || {};
 
     const canvasRef = useRef<Nullable<HTMLCanvasElement>>(null);
     const engine = useRef<Nullable<BabylonEngine>>(null);
@@ -67,80 +81,89 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
     const rootContainer = useRef<Nullable<RootContainer>>(null);
 
     useEffect(() => {
-        if (canvasRef.current) {
-            // engine code
-            engine.current = new BabylonEngine(canvasRef.current, antialias, engineOptions, adaptToDeviceRatio);
-            if (loader) {
-                engine.current.loadingScreen = new CustomLoadingScreen(canvasRef.current, loader);
-            }
-            engine.current.runRenderLoop(() => {
-                engine.current!.scenes.forEach(scene => {
-                    if (!scene.activeCamera) {
-                        // @babylonjs/core throws an error if you attempt to render with no active camera.
-                        // if we attach as a child React component we have frames with no active camera.
-                        console.warn('no active camera..');
-                    }
-                    if (scene.cameras?.length > 0) {
-                        scene.render();
-                    }
-                });
-            });
-
-            const onResizeWindow = () => {
-                engine.current!.resize();
-            };
-            window.addEventListener('resize', onResizeWindow);
-
-            // scene code
-            scene.current = new Scene(engine.current, sceneOptions);
-            // enable/disable inspector
-            if (isInteractiveInspector) {
-                document.addEventListener(
-                    'keydown',
-                    event => {
-                        const { ctrlKey, code } = event;
-                        if (ctrlKey && code === 'KeyI') {
-                            Inspector.IsVisible ? Inspector.Hide() : Inspector.Show(scene.current!, {});
-                        }
-                    },
-                    false,
-                );
-            }
-            rootContainer.current = {
-                scene: scene.current,
-                rootInstance: {
-                    // customProps: {},
-                    hostInstance: scene.current,
-                    metadata: {
-                        children: [],
-                        gui3DManager: isGui3DManager ? new GUI3DManager(scene.current) : undefined,
-                        // className: 'root',
-                    },
-                    // observers: {},
-                    parent: null,
-                },
-            };
-
-            onSceneReady?.(scene.current);
-
-            Reactylon.render(
-                <EngineCanvasContext.Provider value={{ engine: engine.current, canvas: canvasRef.current }}>
-                    <SceneContext.Provider value={{ scene: scene.current, sceneReady: true }}>{children}</SceneContext.Provider>
-                </EngineCanvasContext.Provider>,
-                rootContainer.current,
-            );
-
-            return () => {
+        async function initializeScene() {
+            if (canvasRef.current) {
                 // engine code
-                window.removeEventListener('resize', onResizeWindow);
-                engine.current!.dispose();
+                engine.current = new BabylonEngine(canvasRef.current, antialias, engineOptions, adaptToDeviceRatio);
+                if (loader) {
+                    engine.current.loadingScreen = new CustomLoadingScreen(canvasRef.current, loader);
+                }
+                engine.current.runRenderLoop(() => {
+                    engine.current!.scenes.forEach(scene => {
+                        if (!scene.activeCamera) {
+                            // @babylonjs/core throws an error if you attempt to render with no active camera.
+                            // if we attach as a child React component we have frames with no active camera.
+                            console.warn('no active camera..');
+                        }
+                        if (scene.cameras?.length > 0) {
+                            scene.render();
+                        }
+                    });
+                });
+
+                const onResizeWindow = () => {
+                    engine.current!.resize();
+                };
+                window.addEventListener('resize', onResizeWindow);
+
                 // scene code
-                // cleanup observable
-                Reactylon.render(null, rootContainer.current!);
-                rootContainer.current = null;
-                // scene.current = null;
-            };
+                scene.current = new Scene(engine.current, sceneOptions);
+                // enable/disable inspector
+                if (isInteractiveInspector) {
+                    document.addEventListener(
+                        'keydown',
+                        event => {
+                            const { ctrlKey, code } = event;
+                            if (ctrlKey && code === 'KeyI') {
+                                Inspector.IsVisible ? Inspector.Hide() : Inspector.Show(scene.current!, {});
+                            }
+                        },
+                        false,
+                    );
+                }
+                rootContainer.current = {
+                    scene: scene.current,
+                    rootInstance: {
+                        // customProps: {},
+                        hostInstance: scene.current,
+                        metadata: {
+                            children: [],
+                            gui3DManager: isGui3DManager ? new GUI3DManager(scene.current) : undefined,
+                            // className: 'root',
+                        },
+                        // observers: {},
+                        parent: null,
+                    },
+                };
+
+                let xrExperience = null;
+                if (xrDefaultExperienceOptions) {
+                    xrExperience = await scene.current.createDefaultXRExperienceAsync(xrDefaultExperienceOptions);
+                }
+
+                onSceneReady?.(scene.current);
+
+                Reactylon.render(
+                    <EngineCanvasContext.Provider value={{ engine: engine.current, canvas: canvasRef.current }}>
+                        <SceneContext.Provider value={{ scene: scene.current, sceneReady: true, xrExperience: xrExperience }}>{children}</SceneContext.Provider>
+                    </EngineCanvasContext.Provider>,
+                    rootContainer.current,
+                );
+
+                return () => {
+                    // engine code
+                    window.removeEventListener('resize', onResizeWindow);
+                    engine.current!.dispose();
+                    // scene code
+                    // cleanup observable
+                    Reactylon.render(null, rootContainer.current!);
+                    rootContainer.current = null;
+                    // scene.current = null;
+                };
+            }
         }
+
+        initializeScene();
     }, [canvasRef]);
 
     // USE IT ONLY IF YOU ARE UPDATING Engine COMPONENT (e.g. setting state) AND YOU NEED TO RE-RENDER PROVIDERS
