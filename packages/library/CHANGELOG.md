@@ -1,5 +1,14 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.17](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.16&targetVersion=GTv0.0.17&_a=files) (2024-07-24)
+
+
+### Chore
+
+* **jsx-elements:** update declarations ([14cd50f](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/14cd50f4307618677edd1ecc93306b8ddd169144))
+* **reconciler:** fix disposing on cloned/instanced meshes + handle anchor on 3d elements ([14b36b1](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/14b36b1aedb7095b5e862d378c4110b57644113f))
+* **components:** add webxr support ([b94a66f](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/b94a66f6a069e5b53328fade3ce601fc36a1d698))
+
 ## [0.0.16](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.15&targetVersion=GTv0.0.16&_a=files) (2024-07-22)
 
 
