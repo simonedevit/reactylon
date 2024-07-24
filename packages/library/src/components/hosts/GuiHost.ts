@@ -6,7 +6,7 @@ import ObjectUtils from '@utils/ObjectUtils';
 import '../../index';
 import { Button3D, Container, Container3D, Control, GUI3DManager, HolographicButton, HolographicSlate, Vector2WithInfo } from '@babylonjs/gui';
 import { GuiTriggerable, GuiTriggers } from '../../types/props';
-import { Observable, DynamicTexture } from '@babylonjs/core';
+import { Observable, DynamicTexture, AbstractMesh } from '@babylonjs/core';
 
 function handleEvents(props: ComponentInstance<GuiComponent>, element: any) {
     Object.entries(GuiTriggers).forEach(([_key, observableName]) => {
@@ -52,6 +52,18 @@ export class GuiHost {
             element = isBuilder ? Class(...paramsValues) : new Class(...paramsValues);
         }
 
+        element.uniqueId = scene.getUniqueId();
+
+        let anchor = null;
+        // StackPanel3D, volumeBasedPanel, etc...
+        if (element instanceof Container3D || element instanceof HolographicSlate || element instanceof Button3D) {
+            const gui3DManager = rootContainer.rootInstance.metadata.gui3DManager as GUI3DManager;
+            gui3DManager.addControl(element);
+            // @ts-ignore
+            anchor = new AbstractMesh(`${props.name || element.uniqueId}-anchor`);
+            element.linkToTransformNode(anchor);
+        }
+
         // set non-constructor props
         Object.keys(props)
             .filter(propName => !paramsNames.includes(propName) && !excludedProps.includes(propName))
@@ -59,7 +71,7 @@ export class GuiHost {
                 const key = _key as keyof ComponentInstance;
                 const value = props[key];
                 if (key in TransformKeysMap) {
-                    ObjectUtils.set(element, TransformKeysMap[key as keyof typeof TransformKeysMap], value);
+                    ObjectUtils.set(anchor || element, TransformKeysMap[key as keyof typeof TransformKeysMap], value);
                 } else {
                     element[key] = value;
                 }
@@ -90,14 +102,6 @@ export class GuiHost {
             removeChild: GuiHost.removeChild,
             // add here your custom handlers
         };
-
-        element.uniqueId = scene.getUniqueId();
-
-        // StackPanel3D, volumeBasedPanel, etc...
-        if (element instanceof Container3D || element instanceof HolographicSlate) {
-            const gui3DManager = rootContainer.rootInstance.metadata.gui3DManager as GUI3DManager;
-            gui3DManager.addControl(element);
-        }
 
         return element;
     }

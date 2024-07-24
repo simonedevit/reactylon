@@ -37,6 +37,21 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
     }
 }
 
+function shouldDisposeMaterialsAndTextures(child: unknown) {
+    if (child instanceof BabylonCore.AbstractMesh) {
+        const associatedMeshesToMaterial = Object.values(child.material?.meshMap!);
+        // material associated to multple meshes
+        if (associatedMeshesToMaterial.length > 1) {
+            return false;
+        }
+        // material is associated to one mesh but not the current (instance) we are removing
+        if (associatedMeshesToMaterial[0]?.id !== child.id) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // check methods execution's order: "reconciler.png" and https://blog.atulr.com/react-custom-renderer-2/)
 const reconciler = ReactReconciler<
     string,
@@ -322,9 +337,8 @@ const reconciler = ReactReconciler<
         const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
         parentInstance.metadata.children.splice(index, 1);
         child.handlers?.removeChild?.(parentInstance, child);
-        //if (child.metadata.babylonPackage === BabylonPackages.CORE) {
-        child.dispose?.(false, true);
-        //}
+        const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
+        child.dispose?.(false, disposeMaterialsAndTextures);
     },
 
     /*
@@ -338,9 +352,8 @@ const reconciler = ReactReconciler<
         const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
         container.rootInstance.metadata.children.splice(index, 1);
         child.handlers?.removeChild?.(container, child);
-        //if (child.metadata.babylonPackage === BabylonPackages.CORE) {
-        child.dispose?.(false, true);
-        //}
+        const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
+        child.dispose?.(false, disposeMaterialsAndTextures);
     },
 
     /*
@@ -421,7 +434,12 @@ const reconciler = ReactReconciler<
             .forEach(([_key, value]) => {
                 const key = _key as keyof ComponentInstance;
                 if (key in TransformKeysMap) {
-                    ObjectUtils.set(instance, TransformKeysMap[key as keyof typeof TransformKeysMap], value);
+                    if (instance.metadata.babylonPackage === BabylonPackages.CORE) {
+                        ObjectUtils.set(instance, TransformKeysMap[key as keyof typeof TransformKeysMap], value);
+                    } else if (instance.metadata.babylonPackage === BabylonPackages.GUI) {
+                        //@ts-ignore .node_parent is the anchor element created by instance.linkToTransformNode(anchor)
+                        ObjectUtils.set(instance._node.parent || instance, TransformKeysMap[key as keyof typeof TransformKeysMap], value);
+                    }
                 } else {
                     //@ts-ignore
                     instance[key] = value;
