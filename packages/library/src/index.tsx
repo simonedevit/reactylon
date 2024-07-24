@@ -4,6 +4,7 @@ import { TextureProps, MaterialProps, AdvancedDynamicTextureProps } from './type
 
 declare global {
     namespace JSX {
+        // CORE
         interface IntrinsicElements extends CoreJSXElements {
             texture: CoreJSXElements['texture'] & TextureProps;
             dynamicTexture: CoreJSXElements['dynamicTexture'] & TextureProps;
@@ -17,6 +18,7 @@ declare global {
             standardMaterial: CoreJSXElements['standardMaterial'] & MaterialProps;
             // add here other custom props
         }
+        // GUI
         interface IntrinsicElements extends GuiJSXElements {
             advancedDynamicTexture: Omit<GuiJSXElements['advancedDynamicTexture'], 'name'> & AdvancedDynamicTextureProps;
         }
