@@ -1,7 +1,7 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { ActionEvent, ActionManager, ExecuteCodeAction, Mesh, Scene } from '@babylonjs/core';
-import { Triggerable, MeshTriggers, type Instanceable } from '../../types/props';
+import { ActionEvent, ActionManager, ExecuteCodeAction, Mesh, PhysicsAggregate, Scene } from '@babylonjs/core';
+import { Triggerable, MeshTriggers, MeshProps } from '../../types/props';
 
 function handleEvents(props: AugmentedMesh, scene: Scene) {
     const isAtLeastOneTrigger = Object.keys(MeshTriggers).some(trigger => props[trigger as keyof Triggerable]);
@@ -28,13 +28,13 @@ function handleEvents(props: AugmentedMesh, scene: Scene) {
     return null;
 }
 
-type AugmentedMesh = ComponentInstance<Mesh & JSX.IntrinsicElements['mesh']> & Partial<Instanceable> & Triggerable;
+type AugmentedMesh = ComponentInstance<Mesh & JSX.IntrinsicElements['mesh'] & MeshProps>;
 
 export class MeshHost {
     static createInstance(isBuilder: boolean, Class: any, props: AugmentedMesh, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
-        const { name, cloneFrom, instanceFrom } = props;
+        const { name, cloneFrom, instanceFrom, physicsAggregate } = props;
         const meshId = cloneFrom || instanceFrom;
         if (meshId) {
             cloneFn = () => {
@@ -50,6 +50,9 @@ export class MeshHost {
             };
         }
         const element = Host.createInstance(isBuilder, Class, props, rootContainer, cloneFn);
+        if (physicsAggregate) {
+            element.physicsAggregate = new PhysicsAggregate(element, physicsAggregate.type, physicsAggregate._options);
+        }
         element.actionManager = handleEvents(props, scene);
         element.handlers = {
             // add here your custom handlers for meshes
@@ -59,7 +62,12 @@ export class MeshHost {
 
     static addChild(parentInstance: ComponentInstance<Mesh>, child: AugmentedMesh): void {}
 
-    static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void {}
+    static removeChild(parentInstance: ComponentInstance, child: AugmentedMesh): void {
+        if (child.physicsAggregate) {
+            // @ts-ignore
+            child.physicsAggregate.dispose();
+        }
+    }
 
     static prepareUpdate(): UpdatePayload {
         return {};

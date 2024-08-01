@@ -5,7 +5,7 @@ import ObjectUtils from '@utils/ObjectUtils';
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
 import '../../index';
 
-const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom'];
+const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'physicsAggregate'];
 export class Host {
     static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function) {
         let element: any;

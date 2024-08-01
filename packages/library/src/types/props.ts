@@ -1,4 +1,4 @@
-import { ActionEvent, ActionManager, Observable, StandardMaterial } from '@babylonjs/core';
+import { ActionEvent, ActionManager, Observable, PhysicsAggregate, StandardMaterial } from '@babylonjs/core';
 import { type Either } from './types';
 import { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
 
@@ -118,6 +118,10 @@ export type MaterialProps = {
 export type MeshProps = Either<Clonable, Instanceable> &
     Triggerable & {
         // add here other mesh props (e.g. "onDrag")
+        physicsAggregate?: {
+            type: ConstructorParameters<typeof PhysicsAggregate>[1];
+            _options: ConstructorParameters<typeof PhysicsAggregate>[2];
+        };
     };
 
 export type GuiProps =

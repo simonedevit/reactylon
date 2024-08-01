@@ -390,8 +390,10 @@ const reconciler = ReactReconciler<
         //TODO: exclude constructor props
         //FIXME: oldProps always !== newProps so how can i optimize equality process? Immutable data structure? Shallow comparison on what?
 
-        const { children: _a, ...oldPropsWihoutChildren } = oldProps;
-        const { children: _b, ...newPropsWihoutChildren } = newProps;
+        //@ts-ignore
+        const { children: _oldChildren, physicsAggregate: _oldPhysicsAggregate, ...oldPropsWihoutChildren } = oldProps;
+        //@ts-ignore
+        const { children: _newChildren, physicsAggregate: _newPhysicsAggregate, ...newPropsWihoutChildren } = newProps;
 
         const areSameProps = isEqualWith(oldPropsWihoutChildren, newPropsWihoutChildren, ObjectUtils.isEqualCustomizer);
         if (areSameProps) {

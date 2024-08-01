@@ -8,12 +8,15 @@ import {
     SceneOptions,
     WebXRDefaultExperienceOptions,
     WebXRDefaultExperience,
+    HavokPlugin,
+    Vector3,
 } from '@babylonjs/core';
 import CustomLoadingScreen from '../CustomLoadingScreen';
 import { RootContainer } from '@types';
 import { Inspector } from '@babylonjs/inspector';
 import Reactylon from '../../reconciler';
 import { GUI3DManager } from '@babylonjs/gui';
+import HavokPhysics from '@babylonjs/havok';
 
 export type EngineCanvasContextType = {
     engine: Nullable<BabylonEngine>;
@@ -65,6 +68,10 @@ export type EngineProps = React.PropsWithChildren<{
         onSceneReady?: (scene: Scene) => void;
         isGui3DManager?: boolean;
         xrDefaultExperienceOptions?: WebXRDefaultExperienceOptions;
+        physicsOptions?: {
+            gravity?: Parameters<Scene['enablePhysics']>[0];
+            plugin?: Parameters<Scene['enablePhysics']>[1];
+        };
     };
 }>;
 
@@ -72,7 +79,7 @@ export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void
 
 export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: sceneProps, children }) => {
     const { antialias, engineOptions, adaptToDeviceRatio, loader, canvasId } = engineProps;
-    const { sceneOptions, onSceneReady, isInteractiveInspector = false, isGui3DManager = true, xrDefaultExperienceOptions } = sceneProps || {};
+    const { sceneOptions, onSceneReady, isInteractiveInspector = false, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions } = sceneProps || {};
 
     const canvasRef = useRef<Nullable<HTMLCanvasElement>>(null);
     const engine = useRef<Nullable<BabylonEngine>>(null);
@@ -83,7 +90,9 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
     useEffect(() => {
         async function initializeScene() {
             if (canvasRef.current) {
-                // engine code
+                /* --------------------------------------------------------------------------------------- */
+                /* ENGINE
+                ------------------------------------------------------------------------------------------ */
                 engine.current = new BabylonEngine(canvasRef.current, antialias, engineOptions, adaptToDeviceRatio);
                 if (loader) {
                     engine.current.loadingScreen = new CustomLoadingScreen(canvasRef.current, loader);
@@ -106,8 +115,33 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
                 };
                 window.addEventListener('resize', onResizeWindow);
 
-                // scene code
+                /* --------------------------------------------------------------------------------------- */
+                /* SCENE
+                ------------------------------------------------------------------------------------------ */
                 scene.current = new Scene(engine.current, sceneOptions);
+                onSceneReady?.(scene.current);
+
+                // enable physics
+                if (physicsOptions) {
+                    scene.current.enablePhysics(
+                        physicsOptions?.gravity || new Vector3(0, -9.8, 0),
+                        physicsOptions?.plugin ||
+                            new HavokPlugin(
+                                true,
+                                await HavokPhysics({
+                                    // TODO: serve .wasm file from your own server
+                                    locateFile: file => {
+                                        return `https://preview.babylonjs.com/havok/${file}`;
+                                    },
+                                }),
+                            ),
+                    );
+                }
+                // enable xr experience
+                let xrExperience = null;
+                if (xrDefaultExperienceOptions) {
+                    xrExperience = await scene.current.createDefaultXRExperienceAsync(xrDefaultExperienceOptions);
+                }
                 // enable/disable inspector
                 if (isInteractiveInspector) {
                     document.addEventListener(
@@ -121,6 +155,10 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
                         false,
                     );
                 }
+
+                /* --------------------------------------------------------------------------------------- */
+                /* RECONCILER
+                ------------------------------------------------------------------------------------------ */
                 rootContainer.current = {
                     scene: scene.current,
                     rootInstance: {
@@ -136,19 +174,14 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
                     },
                 };
 
-                let xrExperience = null;
-                if (xrDefaultExperienceOptions) {
-                    xrExperience = await scene.current.createDefaultXRExperienceAsync(xrDefaultExperienceOptions);
-                }
-
-                onSceneReady?.(scene.current);
-
                 Reactylon.render(
                     <EngineCanvasContext.Provider value={{ engine: engine.current, canvas: canvasRef.current }}>
                         <SceneContext.Provider value={{ scene: scene.current, sceneReady: true, xrExperience: xrExperience }}>{children}</SceneContext.Provider>
                     </EngineCanvasContext.Provider>,
                     rootContainer.current,
                 );
+
+                /* --------------------------------------------------------------------------------------- */
 
                 return () => {
                     // engine code
@@ -162,7 +195,6 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
                 };
             }
         }
-
         initializeScene();
     }, [canvasRef]);
 
