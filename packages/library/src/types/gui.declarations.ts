@@ -355,7 +355,7 @@ export interface JSXElements {
         >,
         any
     >;
-    image: React.DetailedHTMLProps<
+    image2D: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Image> & Clonable,
             {

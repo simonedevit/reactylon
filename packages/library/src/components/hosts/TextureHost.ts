@@ -1,6 +1,6 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { Texture } from '@babylonjs/core';
+import { CubeTexture, Texture } from '@babylonjs/core';
 
 type AugmentedTexture = ComponentInstance<Texture & JSX.IntrinsicElements['texture']>;
 
@@ -26,8 +26,13 @@ export class TextureHost {
         return {};
     }
 
-    static commitUpdate(instance: AugmentedTexture, updatePayload: UpdatePayload): void {
-        const { url, rootUrl } = updatePayload;
-        instance.updateURL((url || rootUrl) as string);
+    static commitUpdate(instance: AugmentedTexture | CubeTexture, updatePayload: UpdatePayload): void {
+        const { url, rootUrl, extensionsOrOptions } = updatePayload;
+        // check it, are you using it on consumer?
+        if (instance instanceof CubeTexture) {
+            instance.updateURL(rootUrl as string, undefined, undefined, undefined, undefined, extensionsOrOptions as any);
+        } else {
+            instance.updateURL((url || rootUrl) as string);
+        }
     }
 }

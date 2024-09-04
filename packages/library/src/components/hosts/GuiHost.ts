@@ -113,7 +113,8 @@ export class GuiHost {
         if (parentInstance instanceof Button3D && !(parentInstance instanceof HolographicButton)) {
             parentInstance.content = child;
         } else {
-            parentInstance.addControl(child);
+            // ensure that addControl function exists (parentInstance could be transformNode)
+            parentInstance.addControl?.(child);
         }
     }
 

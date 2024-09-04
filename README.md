@@ -14,8 +14,8 @@
 
 
 # TODO
-1. With concurrently it is a mess, find a way to start process and understand who should depend from others
-2. Remove logs from production build
+1. With concurrently it is a mess, find a way to start process and understand who should depend from others (scripting)
+2. DONE - Remove logs from production build
 3. MeshBuilder: extrudeShape, extrudeShapeCustom, extrudePolygon
 4. Create JSON.stringify method for stringify meshes in Reactylon (exclude 'metadata' attribute)
 5. Add observable for inputText, checkbox, radioButton, slider (https://doc.babylonjs.com/features/featuresDeepDive/gui/gui)
@@ -23,6 +23,8 @@
 7. Add observable for 3D gui (https://doc.babylonjs.com/features/featuresDeepDive/gui/gui3D)
 6. Plane panel
 7. Events on meshButton3D (animations)
+8. Remove observable mapping, use directly observable in onCreate
+9. Improve rendering (props comparison)
 
 # Props
 
