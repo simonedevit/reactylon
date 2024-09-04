@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.19](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.18&targetVersion=GTv0.0.19&_a=files) (2024-09-04)
+
+
+### Chore
+
+* **general:** fix GUI ([ddb2399](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/ddb23991aa834e03a7f485f3e2efb24563232fd8))
+
 ## [0.0.18](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.17&targetVersion=GTv0.0.18&_a=files) (2024-08-01)
 
 
