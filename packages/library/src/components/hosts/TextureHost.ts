@@ -27,12 +27,13 @@ export class TextureHost {
     }
 
     static commitUpdate(instance: AugmentedTexture | CubeTexture, updatePayload: UpdatePayload): void {
-        const { url, rootUrl, extensionsOrOptions } = updatePayload;
+        const { url, rootUrl, extensionsOrOptions, src } = updatePayload;
         // check it, are you using it on consumer?
         if (instance instanceof CubeTexture) {
             instance.updateURL(rootUrl as string, undefined, undefined, undefined, undefined, extensionsOrOptions as any);
         } else {
-            instance.updateURL((url || rootUrl) as string);
+            // texture || cubeTexture || videoTexture
+            instance.updateURL((url || rootUrl || src) as string);
         }
     }
 }
