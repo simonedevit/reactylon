@@ -1,5 +1,7 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.20](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.19&targetVersion=GTv0.0.20&_a=files) (2024-09-06)
+
 ## [0.0.19](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.18&targetVersion=GTv0.0.19&_a=files) (2024-09-04)
 
 
