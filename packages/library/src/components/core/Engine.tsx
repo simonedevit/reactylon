@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, createContext, useContext, useRef } from 'react';
 import {
     type Nullable,
