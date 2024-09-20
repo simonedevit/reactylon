@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.24](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.23&targetVersion=GTv0.0.24&_a=files) (2024-09-20)
+
+
+### Chore
+
+* **general:** add use client for csr in next.js app ([7ae1f77](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/7ae1f779b3d6c20df2303876a1cf14400742dac2))
+
 ## [0.0.23](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.22&targetVersion=GTv0.0.23&_a=files) (2024-09-20)
 
 
