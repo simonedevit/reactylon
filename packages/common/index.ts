@@ -6,7 +6,7 @@ export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }): 
         ecmaVersion: 2021,
     });
     //@ts-ignore
-    const parameters = traverse(ast.body[0].body.body.find(x => x.type === 'MethodDefinition' && x.kind === 'constructor').value);
+    const parameters = traverse(ast.body[0].body.body.find(x => x.type === 'MethodDefinition' && x.kind === 'constructor')?.value);
     return (parameters || []).filter((param: any) => param !== null); // Remove null values
 };
 function traverse(node: any) {
