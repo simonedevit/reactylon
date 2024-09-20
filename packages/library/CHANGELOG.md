@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.23](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.22&targetVersion=GTv0.0.23&_a=files) (2024-09-20)
+
+
+### Chore
+
+* **general:** add optional chaining operator ([9d88a66](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/9d88a6619f7a0e3f95c21e3cd932bf2b7271df2d))
+
 ## [0.0.22](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.21&targetVersion=GTv0.0.22&_a=files) (2024-09-17)
 
 ## [0.0.21](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.20&targetVersion=GTv0.0.21&_a=files) (2024-09-06)
