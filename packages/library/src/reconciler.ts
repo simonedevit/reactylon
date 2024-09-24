@@ -2,7 +2,6 @@ import React, { version } from 'react';
 import ReactReconciler, { FiberRoot } from 'react-reconciler';
 import * as BabylonCore from '@babylonjs/core';
 import * as BabylonGui from '@babylonjs/gui';
-import * as MeshBuilder from '@babylonjs/core/Meshes/Builders';
 import isEqualWith from 'lodash.isequalwith';
 import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
@@ -39,7 +38,11 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
 
 function shouldDisposeMaterialsAndTextures(child: unknown) {
     if (child instanceof BabylonCore.AbstractMesh) {
-        const associatedMeshesToMaterial = Object.values(child.material?.meshMap!);
+        // no material (i.e. "default material")
+        if (!child.material) {
+            return false;
+        }
+        const associatedMeshesToMaterial = Object.values(child.material.meshMap!);
         // material associated to multple meshes
         if (associatedMeshesToMaterial.length > 1) {
             return false;
@@ -93,9 +96,9 @@ const reconciler = ReactReconciler<
         // @babylonjs/core
         else {
             // MeshBuilder.Create
-            if (`Create${BabylonElement}` in MeshBuilder) {
+            if (`Create${BabylonElement}` in BabylonCore.MeshBuilder) {
                 //@ts-ignore
-                Class = MeshBuilder[`Create${BabylonElement}`];
+                Class = BabylonCore.MeshBuilder[`Create${BabylonElement}`];
                 isBuilder = true;
             } else {
                 //@ts-ignore

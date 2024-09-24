@@ -1,60 +1,11 @@
-'use client';
-
-import React, { useEffect, createContext, useContext, useRef } from 'react';
-import {
-    type Nullable,
-    Engine as BabylonEngine,
-    type EngineOptions,
-    Scene,
-    EventState,
-    SceneOptions,
-    WebXRDefaultExperienceOptions,
-    WebXRDefaultExperience,
-    HavokPlugin,
-    Vector3,
-} from '@babylonjs/core';
+import React, { useEffect, useRef } from 'react';
+import { type Nullable, Engine as BabylonEngine, type EngineOptions, Scene, EventState, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3 } from '@babylonjs/core';
 import CustomLoadingScreen from '../CustomLoadingScreen';
 import { RootContainer } from '@types';
-import { Inspector } from '@babylonjs/inspector';
 import Reactylon from '../../reconciler';
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
-
-export type EngineCanvasContextType = {
-    engine: Nullable<BabylonEngine>;
-    canvas: Nullable<HTMLCanvasElement | WebGLRenderingContext>;
-};
-
-export const EngineCanvasContext = createContext<EngineCanvasContextType>({
-    engine: null,
-    canvas: null,
-});
-
-/**
- * Get the engine from the context.
- */
-export const useEngine = (): BabylonEngine => useContext(EngineCanvasContext).engine as BabylonEngine;
-
-/**
- * Get the canvas DOM element from the context.
- */
-export const useCanvas = (): Nullable<HTMLCanvasElement | WebGLRenderingContext> => useContext(EngineCanvasContext).canvas;
-
-export type SceneContextType = {
-    scene: Nullable<Scene>;
-    sceneReady: boolean;
-    xrExperience: Nullable<WebXRDefaultExperience>;
-};
-
-export const SceneContext = createContext<SceneContextType>({
-    scene: null,
-    sceneReady: false,
-    xrExperience: null,
-});
-
-export const useScene = (): Scene => useContext(SceneContext).scene as Scene;
-
-export const useXrExperience = (): WebXRDefaultExperience => useContext(SceneContext).xrExperience as WebXRDefaultExperience;
+import { EngineCanvasContext, SceneContext } from './hooks';
 
 export type EngineProps = React.PropsWithChildren<{
     engine: {
@@ -66,7 +17,6 @@ export type EngineProps = React.PropsWithChildren<{
     };
     scene?: {
         sceneOptions?: SceneOptions;
-        isInteractiveInspector?: boolean;
         onSceneReady?: (scene: Scene) => void;
         isGui3DManager?: boolean;
         xrDefaultExperienceOptions?: WebXRDefaultExperienceOptions;
@@ -81,7 +31,7 @@ export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void
 
 export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: sceneProps, children }) => {
     const { antialias, engineOptions, adaptToDeviceRatio, loader, canvasId } = engineProps;
-    const { sceneOptions, onSceneReady, isInteractiveInspector = false, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions } = sceneProps || {};
+    const { sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions } = sceneProps || {};
 
     const canvasRef = useRef<Nullable<HTMLCanvasElement>>(null);
     const engine = useRef<Nullable<BabylonEngine>>(null);
@@ -91,6 +41,9 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
 
     useEffect(() => {
         async function initializeScene() {
+            // canvasId should be an Array of canvas
+            // useScene will have an optional parameter to get the scene by Id (default will return the first one)
+
             if (canvasRef.current) {
                 /* --------------------------------------------------------------------------------------- */
                 /* ENGINE
@@ -102,8 +55,7 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
                 engine.current.runRenderLoop(() => {
                     engine.current!.scenes.forEach(scene => {
                         if (!scene.activeCamera) {
-                            // @babylonjs/core throws an error if you attempt to render with no active camera.
-                            // if we attach as a child React component we have frames with no active camera.
+                            // meantime you are setting a camera
                             console.warn('no active camera..');
                         }
                         if (scene.cameras?.length > 0) {
@@ -144,19 +96,6 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
                 if (xrDefaultExperienceOptions) {
                     xrExperience = await scene.current.createDefaultXRExperienceAsync(xrDefaultExperienceOptions);
                 }
-                // enable/disable inspector
-                if (isInteractiveInspector) {
-                    document.addEventListener(
-                        'keydown',
-                        event => {
-                            const { ctrlKey, code } = event;
-                            if (ctrlKey && code === 'KeyI') {
-                                Inspector.IsVisible ? Inspector.Hide() : Inspector.Show(scene.current!, {});
-                            }
-                        },
-                        false,
-                    );
-                }
 
                 /* --------------------------------------------------------------------------------------- */
                 /* RECONCILER
@@ -175,6 +114,9 @@ export const Engine: React.FC<EngineProps> = ({ engine: engineProps, scene: scen
                         parent: null,
                     },
                 };
+
+                // you should put Array of canvas and array of Scene
+                // children should have each one his proper scene
 
                 Reactylon.render(
                     <EngineCanvasContext.Provider value={{ engine: engine.current, canvas: canvasRef.current }}>

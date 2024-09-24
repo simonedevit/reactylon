@@ -24,9 +24,9 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
             path: path.resolve(__dirname, 'build'),
             publicPath: '/',
             filename: 'index.js',
+            globalObject: 'globalThis', // Use globalThis instead of self
             library: {
-                name: '@dvmstudios/reactylon',
-                type: 'umd',
+                type: 'module',
             },
         },
         devServer: {
@@ -37,6 +37,9 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
         resolve: {
             extensions: ['.tsx', '.ts', '.jsx', '.js'],
             plugins: [new TsconfigPathsPlugin()],
+        },
+        experiments: {
+            outputModule: true,
         },
         module: {
             rules: [
