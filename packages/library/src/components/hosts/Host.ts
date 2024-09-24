@@ -35,7 +35,7 @@ export class Host {
 
         // propertiesFrom
         if (props.propertiesFrom) {
-            const scene = rootContainer.scene;
+            const scene = props.scene || rootContainer.scene;
             props.propertiesFrom.forEach(({ property, source, type }) => {
                 const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
                 element[property] = sourceElement[property];

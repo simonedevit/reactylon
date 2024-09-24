@@ -31,7 +31,7 @@ const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanc
 export class GuiHost {
     static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
         let element: any;
-        const scene = rootContainer.scene;
+        const scene = props.scene || rootContainer.scene;
 
         let paramsNames = [];
         let paramsValues = [];
@@ -57,7 +57,7 @@ export class GuiHost {
         let anchor = null;
         // StackPanel3D, volumeBasedPanel, etc...
         if (element instanceof Container3D || element instanceof HolographicSlate || element instanceof Button3D) {
-            const gui3DManager = rootContainer.rootInstance.metadata.gui3DManager as GUI3DManager;
+            const gui3DManager = scene.metadata.gui3DManager as GUI3DManager;
             gui3DManager.addControl(element);
             // @ts-ignore
             anchor = new AbstractMesh(`${props.name || element.uniqueId}-anchor`);

@@ -8,7 +8,7 @@ type AugmentedMaterial = ComponentInstance<Material & JSX.IntrinsicElements['sta
 export class MaterialHost {
     static createInstance(isBuilder: boolean, Class: any, props: AugmentedMaterial, rootContainer: RootContainer) {
         let cloneFn = undefined;
-        const scene = rootContainer.scene;
+        const scene = props.scene || rootContainer.scene;
         const { cloneFrom, assignTo } = props;
         if (cloneFrom) {
             cloneFn = () => {

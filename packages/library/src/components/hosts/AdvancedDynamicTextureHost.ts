@@ -16,7 +16,7 @@ export class AdvancedDynamicTextureHost {
     static createInstance(isBuilder: boolean, Class: any, props: AugmentedAdvancedDynamicTexture, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const { kind } = props;
-        const scene = rootContainer.scene;
+        const scene = props.scene || rootContainer.scene;
         const params = Object.entries(props[kind] as keyof BuilderProps).reduce(
             (result, [key, value]) => {
                 const newValue = kind === 'createForMesh' && key === 'mesh' ? scene.getMeshById(value as string) : value;

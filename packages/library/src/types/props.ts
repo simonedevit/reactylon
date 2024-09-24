@@ -1,4 +1,4 @@
-import { ActionEvent, ActionManager, Observable, PhysicsAggregate, StandardMaterial } from '@babylonjs/core';
+import { ActionEvent, ActionManager, Observable, PhysicsAggregate, Scene, StandardMaterial } from '@babylonjs/core';
 import { type Either } from './types';
 import { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
 
@@ -20,6 +20,7 @@ export enum BabylonElements {
 
 export type CommonProps<T = unknown> = Partial<TransformProps> & {
     onCreate?: (element: T) => void;
+    scene?: Scene;
     propertiesFrom?: Array<{
         property: string;
         source: string;

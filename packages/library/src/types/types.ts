@@ -3,7 +3,6 @@
 import { Node, Scene } from '@babylonjs/core';
 import { Clonable, CommonProps } from './props';
 import { BabylonPackages } from '@dvmstudios/reactylon-common';
-import { GUI3DManager } from '@babylonjs/gui';
 
 type Only<T, U> = {
     [P in keyof T]: T[P];
@@ -52,8 +51,7 @@ export type BabylonProps<Props, ConstructorProps, Element> = {
 
 /* PROPS USED BY RECONCILER */
 
-export type ComponentInstance<T = unknown> = T &
-    CommonProps &
+export type ComponentInstance<T = unknown> = CommonProps &
     Partial<Clonable> &
     Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
         children?: any;
@@ -69,19 +67,19 @@ export type ComponentInstance<T = unknown> = T &
             prepareUpdate(): UpdatePayload;
             commitUpdate(instance: ComponentInstance<T>, updatePayload: UpdatePayload): void;
         }>;
-    };
+    } & T;
 
 export type UpdatePayload = {
     [key: string]: unknown;
 };
 
 export type RootContainer = {
+    // always the main (first) scene
     scene: Scene;
     rootInstance: {
         hostInstance: Scene;
         metadata: {
             children: Array<ComponentInstance>;
-            gui3DManager?: GUI3DManager;
             // [key: string]: string;
         };
         parent: null;

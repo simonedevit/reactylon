@@ -33,7 +33,7 @@ type AugmentedMesh = ComponentInstance<Mesh & JSX.IntrinsicElements['mesh'] & Me
 export class MeshHost {
     static createInstance(isBuilder: boolean, Class: any, props: AugmentedMesh, rootContainer: RootContainer) {
         let cloneFn = undefined;
-        const scene = rootContainer.scene;
+        const scene = props.scene || rootContainer.scene;
         const { name, cloneFrom, instanceFrom, physicsAggregate } = props;
         const meshId = cloneFrom || instanceFrom;
         if (meshId) {

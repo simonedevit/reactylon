@@ -411,7 +411,7 @@ const reconciler = ReactReconciler<
         let propertiesFromProps = {};
         // propertiesFromProps
         if (newPropsWihoutChildren.propertiesFrom) {
-            const scene = rootContainer.scene;
+            const scene = newPropsWihoutChildren.scene || rootContainer.scene;
             propertiesFromProps = newPropsWihoutChildren.propertiesFrom.reduce(
                 (props, { property, source, type }) => {
                     const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
@@ -552,3 +552,5 @@ const Reactylon: ReactylonType = {
 };
 
 export default Reactylon;
+
+// internalHandle._debugOwner.dependencies.firstContext.memoizedValue -> GET CLOSEST CONTEXT
