@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Camera } from '@babylonjs/core';
+import React, { useEffect, useRef } from 'react';
+import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Camera, Nullable } from '@babylonjs/core';
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
-import { SceneContext, SceneContextType, useEngine } from './hooks';
+import { SceneContext, useEngine } from './hooks';
+import { RootContainer } from '@types';
+import Reactylon from '../../reconciler';
 
 type SceneProps = React.PropsWithChildren<{
     canvas: HTMLCanvasElement;
@@ -21,13 +23,15 @@ export let activeScene: BabylonScene | null = null;
 
 export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions, canvas }) => {
     const { engine, isMultipleScene } = useEngine();
-    const [context, setContext] = useState<SceneContextType | null>(null);
+    const rootContainer = useRef<Nullable<RootContainer>>(null);
 
     useEffect(() => {
         (async () => {
             if (engine) {
+                /* --------------------------------------------------------------------------------------- */
+                /* SCENE
+                ------------------------------------------------------------------------------------------ */
                 const scene = new BabylonScene(engine, sceneOptions);
-                // NON MI CONVINCE
                 scene.metadata = {
                     ...scene.metadata,
                     gui3DManager: isGui3DManager ? new GUI3DManager(scene) : undefined,
@@ -70,10 +74,35 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     };
                 }
 
-                setContext({ scene, xrExperience, canvas });
+                /* --------------------------------------------------------------------------------------- */
+                /* RECONCILER
+                ------------------------------------------------------------------------------------------ */
+                rootContainer.current = {
+                    scene,
+                    metadata: {
+                        children: [],
+                    },
+                };
+
+                Reactylon.render(<SceneContext.Provider value={{ scene, xrExperience, canvas }}>{children}</SceneContext.Provider>, rootContainer.current);
             }
         })();
+
+        return () => {
+            Reactylon.render(null, rootContainer.current!);
+            rootContainer.current = null;
+        };
     }, []);
 
-    return context ? <SceneContext.Provider value={context}>{children}</SceneContext.Provider> : null;
+    return null;
 };
+
+// USE IT ONLY IF YOU ARE UPDATING Engine COMPONENT (e.g. setting state) AND YOU NEED TO RE-RENDER PROVIDERS
+/*useEffect(() => {
+        useEffect(() => {
+        Reactylon.render(
+            <EngineContext.Provider value={{ engine: engine.current, isMultipleScene: isMultipleScene.current, activeScene, setActiveScene }}>
+                {rest.children}
+            </EngineContext.Provider>, rootContainer.current as RootContainer
+        );
+    }, [yourDep]); */

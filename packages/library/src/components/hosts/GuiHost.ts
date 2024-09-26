@@ -31,7 +31,7 @@ const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanc
 export class GuiHost {
     static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
         let element: any;
-        const scene = props.scene as any; //|| rootContainer.scene;
+        const scene = rootContainer.scene;
 
         let paramsNames = [];
         let paramsValues = [];

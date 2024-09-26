@@ -128,8 +128,8 @@ const reconciler = ReactReconciler<
                 }
                 break;
         }
-        const instance = createInstanceFn(isBuilder, Class, props, rootContainer);
-        return instance;
+        const propsWithScene = { ...props, scene: rootContainer.scene };
+        return createInstanceFn(isBuilder, Class, propsWithScene, rootContainer);
     },
 
     /*
@@ -289,13 +289,13 @@ const reconciler = ReactReconciler<
             [`child: ${child.name}`, child],
         ]);
         if (child) {
-            if (container.rootInstance) {
-                container.rootInstance.metadata.children.push(child);
+            if (container) {
+                container.metadata.children.push(child);
                 // FIXME: should i add the parent also?
-                // child.parent = container.rootInstance
+                // child.parent = container
             } else {
                 console.log('addend child with no root (createPortal only?)');
-                addChild(container.rootInstance, child);
+                addChild(container, child);
             }
         }
     },
@@ -324,8 +324,8 @@ const reconciler = ReactReconciler<
             [`child: ${child.name}`, child],
             [`beforeChild: ${beforeChild.name}`, beforeChild],
         ]);
-        const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
-        container.rootInstance.metadata.children.splice(index, 0, child);
+        const index = container.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
+        container.metadata.children.splice(index, 0, child);
         child.handlers?.addChild?.(container, child);
     },
 
@@ -353,8 +353,8 @@ const reconciler = ReactReconciler<
             ['container', container],
             [`child: ${child.name}`, child],
         ]);
-        const index = container.rootInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
-        container.rootInstance.metadata.children.splice(index, 1);
+        const index = container.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
+        container.metadata.children.splice(index, 1);
         child.handlers?.removeChild?.(container, child);
         const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
         child.dispose?.(false, disposeMaterialsAndTextures);
@@ -412,7 +412,7 @@ const reconciler = ReactReconciler<
         let propertiesFromProps = {};
         // propertiesFromProps
         if (newPropsWihoutChildren.propertiesFrom) {
-            const scene = newPropsWihoutChildren.scene as any; // || rootContainer.scene;
+            const scene = rootContainer.scene;
             propertiesFromProps = newPropsWihoutChildren.propertiesFrom.reduce(
                 (props, { property, source, type }) => {
                     const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
