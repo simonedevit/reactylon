@@ -3,16 +3,18 @@ import { type Nullable, Engine as BabylonEngine, Scene, WebXRDefaultExperience }
 
 export type EngineContextType = {
     engine: Nullable<BabylonEngine>;
+    isMultipleScene: boolean;
 };
 
 export const EngineContext = createContext<EngineContextType>({
     engine: null,
+    isMultipleScene: false,
 });
 
 /**
  * Get the engine from the context.
  */
-export const useEngine = (): BabylonEngine => useContext(EngineContext).engine as BabylonEngine;
+export const useEngine = (): EngineContextType => useContext(EngineContext) as EngineContextType;
 
 export type SceneContextType = {
     scene: Nullable<Scene>;

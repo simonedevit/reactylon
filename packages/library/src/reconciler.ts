@@ -128,7 +128,8 @@ const reconciler = ReactReconciler<
                 }
                 break;
         }
-        return createInstanceFn(isBuilder, Class, props, rootContainer);
+        const instance = createInstanceFn(isBuilder, Class, props, rootContainer);
+        return instance;
     },
 
     /*
@@ -181,7 +182,7 @@ const reconciler = ReactReconciler<
      * This method happens in the render phase.Do not mutate the tree from it.
      */
     getRootHostContext(rootContainer) {
-        return null;
+        return rootContainer;
         /* return {
             type: `root-container`
         } */
@@ -411,7 +412,7 @@ const reconciler = ReactReconciler<
         let propertiesFromProps = {};
         // propertiesFromProps
         if (newPropsWihoutChildren.propertiesFrom) {
-            const scene = newPropsWihoutChildren.scene || rootContainer.scene;
+            const scene = newPropsWihoutChildren.scene as any; // || rootContainer.scene;
             propertiesFromProps = newPropsWihoutChildren.propertiesFrom.reduce(
                 (props, { property, source, type }) => {
                     const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
