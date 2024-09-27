@@ -536,7 +536,8 @@ const Reactylon: ReactylonType = {
                 //findFiberByHostInstance: reconciler.findHostInstance,
                 bundleType: process.env.NODE_ENV === 'development' ? 1 : 0,
                 version,
-                rendererPackageName: '@dvmstudios/reactylon',
+                //rendererPackageName: '@dvmstudios/reactylon',
+                rendererPackageName: 'reactylon',
             });
         }
 
