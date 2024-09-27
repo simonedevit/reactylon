@@ -1,4 +1,4 @@
-import { types } from '../../commitlint.config';
+const { types } = require('../../commitlint.config');
 
 const ORGANIZATION = 'dvmstudios',
     PROJECT = 'webxr',
