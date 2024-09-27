@@ -1,5 +1,22 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.26](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.25&targetVersion=GTv0.0.26&_a=files) (2024-09-27)
+
+
+### Chore
+
+* **general:** change es6 import ([bb788c5](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/bb788c5a975d909654b8ba457cddb83f36e35d20))
+* **general:** add context bridge to share contexts between renders ([24cd76d](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/24cd76dddc1ef444a87760ffd907474ec6208361))
+* **general:** restructure root container ([70374a7](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/70374a767b9c371cddae76e6e67ce66eae0f9d23))
+* **general:** split engine and scene ([487a856](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/487a85672d0e01b3369c4289dfc857d9517414e1))
+* **general:** add multiple scenes ([11fae36](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/11fae365212e5139267e75e38fd3aba031e3c004))
+* **general:** export library in es6 ([71e6d36](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/71e6d36402201ad0f5c96f4ba86ab76703a7245c))
+
+
+### Bug Fixes
+
+* **general:** fix reactylon name ([962996e](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/962996e8805957277d9f2515387cb1c029d882e8))
+
 ## [0.0.25](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.24&targetVersion=GTv0.0.25&_a=files) (2024-09-20)
 
 ## [0.0.24](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.23&targetVersion=GTv0.0.24&_a=files) (2024-09-20)
