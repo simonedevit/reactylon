@@ -10,6 +10,7 @@ export const EngineContext = createContext<EngineContextType>({
     engine: null,
     isMultipleScene: false,
 });
+EngineContext.displayName = 'EngineContext';
 
 /**
  * Get the engine from the context.
@@ -29,6 +30,7 @@ export const SceneContext = createContext<SceneContextType>({
     //sceneReady: false,
     xrExperience: null,
 });
+SceneContext.displayName = 'SceneContext';
 
 /**
  * Get the canvas DOM element from the context.

@@ -2,6 +2,7 @@ import React, { useEffect, Children, useState } from 'react';
 import { Engine as BabylonEngine, type EngineOptions, Scene, EventState } from '@babylonjs/core';
 import CustomLoadingScreen from '../CustomLoadingScreen';
 import { EngineContext, EngineContextType } from './hooks';
+import { FiberProvider } from 'its-fine';
 
 export type EngineProps = React.PropsWithChildren<{
     antialias?: boolean;
@@ -58,5 +59,9 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
         initializeScene();
     }, []);
 
-    return context ? <EngineContext.Provider value={context}>{rest.children}</EngineContext.Provider> : null;
+    return context ? (
+        <FiberProvider>
+            <EngineContext.Provider value={context}>{rest.children}</EngineContext.Provider>
+        </FiberProvider>
+    ) : null;
 };

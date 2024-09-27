@@ -5,6 +5,7 @@ import HavokPhysics from '@babylonjs/havok';
 import { SceneContext, useEngine } from './hooks';
 import { RootContainer } from '@types';
 import Reactylon from '../../reconciler';
+import { type ContextBridge, useContextBridge } from 'its-fine';
 
 type SceneProps = React.PropsWithChildren<{
     canvas: HTMLCanvasElement;
@@ -24,6 +25,9 @@ export let activeScene: BabylonScene | null = null;
 export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions, canvas }) => {
     const { engine, isMultipleScene } = useEngine();
     const rootContainer = useRef<Nullable<RootContainer>>(null);
+
+    // Returns a bridged context provider that forwards context
+    const Bridge: ContextBridge = useContextBridge();
 
     useEffect(() => {
         (async () => {
@@ -84,7 +88,13 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     },
                 };
 
-                Reactylon.render(<SceneContext.Provider value={{ scene, xrExperience, canvas }}>{children}</SceneContext.Provider>, rootContainer.current);
+                // Renders children with bridged context into a secondary renderer
+                Reactylon.render(
+                    <Bridge>
+                        <SceneContext.Provider value={{ scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
+                    </Bridge>,
+                    rootContainer.current,
+                );
             }
         })();
 
