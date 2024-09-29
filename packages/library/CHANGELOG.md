@@ -1,5 +1,13 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.27](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.26&targetVersion=GTv0.0.27&_a=files) (2024-09-29)
+
+
+### Chore
+
+* **general:** handle multiple cameras on multiple scenes ([c90a934](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/c90a934b529af4d20b4252985ccea8af4a236a2d))
+* **general:** change versionrc file extension to load cjs module ([6cc1bcc](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/6cc1bcc1970cf59cd8459dd19485f594cc1862d9))
+
 ## [0.0.26](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.25&targetVersion=GTv0.0.26&_a=files) (2024-09-27)
 
 
