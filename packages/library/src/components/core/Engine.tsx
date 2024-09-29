@@ -1,4 +1,4 @@
-import React, { useEffect, Children, useState } from 'react';
+import React, { useEffect, Children, useState, useRef } from 'react';
 import { Engine as BabylonEngine, type EngineOptions, Scene, EventState } from '@babylonjs/core';
 import CustomLoadingScreen from '../CustomLoadingScreen';
 import { EngineContext, EngineContextType } from './hooks';
@@ -15,6 +15,10 @@ export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void
 
 export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptToDeviceRatio, loader, ...rest }) => {
     const [context, setContext] = useState<EngineContextType | null>(null);
+    const engineRef = useRef<{
+        engine: BabylonEngine;
+        onResizeWindow: () => void;
+    }>();
 
     useEffect(() => {
         async function initializeScene() {
@@ -25,7 +29,8 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
             /* --------------------------------------------------------------------------------------- */
             /* ENGINE
             ------------------------------------------------------------------------------------------ */
-            const engine = new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
+            let engine = engineRef.current?.engine;
+            engine = new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
             if (loader) {
                 engine.loadingScreen = new CustomLoadingScreen(canvas, loader);
             }
@@ -44,19 +49,20 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
                 });
             });
 
-            const onResizeWindow = () => {
-                engine!.resize();
-            };
-            window.addEventListener('resize', onResizeWindow);
+            engineRef.current!.onResizeWindow = () => engine.resize();
+
+            window.addEventListener('resize', engineRef.current!.onResizeWindow);
 
             setContext({ engine, isMultipleScene });
-
-            return () => {
-                window.removeEventListener('resize', onResizeWindow);
-                engine.dispose();
-            };
         }
         initializeScene();
+
+        return () => {
+            if (engineRef.current) {
+                window.removeEventListener('resize', engineRef.current.onResizeWindow);
+                engineRef.current.engine.dispose();
+            }
+        };
     }, []);
 
     return context ? (
