@@ -29,8 +29,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
             /* --------------------------------------------------------------------------------------- */
             /* ENGINE
             ------------------------------------------------------------------------------------------ */
-            let engine = engineRef.current.engine;
-            engine = new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
+            const engine = new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
             if (loader) {
                 engine.loadingScreen = new CustomLoadingScreen(canvas, loader);
             }
@@ -49,8 +48,8 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
                 });
             });
 
+            engineRef.current.engine = engine;
             engineRef.current.onResizeWindow = () => engine.resize();
-
             window.addEventListener('resize', engineRef.current.onResizeWindow);
 
             setContext({ engine, isMultipleScene });
