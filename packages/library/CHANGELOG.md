@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.28](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.27&targetVersion=GTv0.0.28&_a=files) (2024-09-29)
+
+
+### Chore
+
+* **general:** add engine cleanup function ([df78423](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/df78423047ef665039371e7afa87ca4dfa853de5))
+
 ## [0.0.27](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.26&targetVersion=GTv0.0.27&_a=files) (2024-09-29)
 
 
