@@ -18,7 +18,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
     const engineRef = useRef<{
         engine: BabylonEngine;
         onResizeWindow: () => void;
-    }>();
+    }>({ engine: {} as BabylonEngine, onResizeWindow: () => {} });
 
     useEffect(() => {
         async function initializeScene() {
@@ -29,7 +29,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
             /* --------------------------------------------------------------------------------------- */
             /* ENGINE
             ------------------------------------------------------------------------------------------ */
-            let engine = engineRef.current?.engine;
+            let engine = engineRef.current.engine;
             engine = new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
             if (loader) {
                 engine.loadingScreen = new CustomLoadingScreen(canvas, loader);
@@ -49,16 +49,16 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
                 });
             });
 
-            engineRef.current!.onResizeWindow = () => engine.resize();
+            engineRef.current.onResizeWindow = () => engine.resize();
 
-            window.addEventListener('resize', engineRef.current!.onResizeWindow);
+            window.addEventListener('resize', engineRef.current.onResizeWindow);
 
             setContext({ engine, isMultipleScene });
         }
         initializeScene();
 
         return () => {
-            if (engineRef.current) {
+            if (engineRef.current.engine) {
                 window.removeEventListener('resize', engineRef.current.onResizeWindow);
                 engineRef.current.engine.dispose();
             }
