@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.30](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.29&targetVersion=GTv0.0.30&_a=files) (2024-09-29)
+
+
+### Bug Fixes
+
+* **general:** engine ref ([dc6b11a](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/dc6b11a1f21de0f1f5d2c49a0f3793e1c8149ce4))
+
 ## [0.0.29](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.28&targetVersion=GTv0.0.29&_a=files) (2024-09-29)
 
 
