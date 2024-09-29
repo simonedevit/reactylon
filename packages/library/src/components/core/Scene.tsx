@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Camera, Nullable } from '@babylonjs/core';
+import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Nullable, Camera } from '@babylonjs/core';
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
 import { SceneContext, useEngine } from './hooks';
@@ -65,8 +65,23 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 }
 
                 if (isMultipleScene) {
-                    engine.registerView(canvas, scene.activeCamera as Camera);
+                    // consumer is using scene.createDefaultCamera
+                    if (scene.activeCamera) {
+                        engine.registerView(canvas, scene.activeCamera as Camera);
+                    }
+
                     scene.detachControl();
+
+                    scene.onNewCameraAddedObservable.add(camera => {
+                        // HACK: ensure that camera.dispose() is invoked on old camera before to unregister and register new canvas and camera
+                        setTimeout(() => {
+                            const view = (engine.views || []).find(view => view.target === canvas);
+                            if (view) {
+                                engine.unRegisterView(canvas);
+                            }
+                            engine.registerView(canvas, camera);
+                        }, 0);
+                    });
 
                     canvas.onclick = () => {
                         if (activeScene !== scene) {
@@ -82,7 +97,10 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 /* RECONCILER
                 ------------------------------------------------------------------------------------------ */
                 rootContainer.current = {
+                    engine,
                     scene,
+                    canvas,
+                    isMultipleScene,
                     metadata: {
                         children: [],
                     },

@@ -1,6 +1,6 @@
 /* PROPS USED BY JSX ELEMENTS GENERATOR */
 
-import { Node, Scene } from '@babylonjs/core';
+import { Engine, Node, Scene } from '@babylonjs/core';
 import { Clonable, CommonProps } from './props';
 import { BabylonPackages } from '@dvmstudios/reactylon-common';
 
@@ -74,8 +74,10 @@ export type UpdatePayload = {
 };
 
 export type RootContainer = {
-    //engine: Engine;
+    engine: Engine;
     scene: Scene;
+    canvas: HTMLCanvasElement;
+    isMultipleScene: boolean;
     metadata: {
         children: Array<ComponentInstance>;
         // [key: string]: string;
