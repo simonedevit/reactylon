@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.34](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.33&targetVersion=GTv0.0.34&_a=files) (2024-10-04)
+
+
+### Chore
+
+* **general:** add missing declaration file ([46c21f7](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/46c21f71c126b4ad4519f9bc37e87afb32634f27))
+
 ## [0.0.33](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.32&targetVersion=GTv0.0.33&_a=files) (2024-10-04)
 
 
