@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.32](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.31&targetVersion=GTv0.0.32&_a=files) (2024-10-04)
+
+
+### Chore
+
+* **general:** handle text3D in generator ([7c499c9](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/7c499c94c81403afe69dda7d3a052f655c9cc3e7))
+
 ## [0.0.31](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.30&targetVersion=GTv0.0.31&_a=files) (2024-10-04)
 
 ## [0.0.30](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.29&targetVersion=GTv0.0.30&_a=files) (2024-09-29)
