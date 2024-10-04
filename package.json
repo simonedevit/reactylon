@@ -24,7 +24,9 @@
         ]
     },
     "workspaces": [
-        "./packages/*"
+        "./packages/common",
+        "./packages/generator",
+        "./packages/library"
     ],
     "devDependencies": {
         "concurrently": "^8.2.1",

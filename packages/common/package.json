@@ -5,7 +5,8 @@
     "main": "build/index.js",
     "description": "Utils to parse AST and deal with Babylon props",
     "scripts": {
-        "start": "nodemon"
+        "start": "nodemon",
+        "build": "bash build.sh"
     },
     "dependencies": {
         "acorn": "^8.11.3"

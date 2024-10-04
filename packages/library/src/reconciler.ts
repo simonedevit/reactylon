@@ -88,21 +88,22 @@ const reconciler = ReactReconciler<
         let babylonPackage: BabylonPackages = BabylonPackages.CORE;
         const BabylonElement = capitalizeFirstLetter(type);
         // @babylonjs/gui
-        if (BabylonElement in BabylonGui || type in ReversedCollidingComponents) {
+        if (BabylonElement in BabylonGui || (type in ReversedCollidingComponents && type !== 'text3D')) {
             babylonPackage = BabylonPackages.GUI;
             //@ts-ignore
             Class = BabylonGui[BabylonElement] || BabylonGui[ReversedCollidingComponents[type]];
         }
         // @babylonjs/core
         else {
+            const ResolvedBabylonElement = ReversedCollidingComponents[type] || BabylonElement; 
             // MeshBuilder.Create
-            if (`Create${BabylonElement}` in BabylonCore.MeshBuilder) {
+            if (`Create${ResolvedBabylonElement}` in BabylonCore.MeshBuilder) {
                 //@ts-ignore
-                Class = BabylonCore.MeshBuilder[`Create${BabylonElement}`];
+                Class = BabylonCore.MeshBuilder[`Create${ResolvedBabylonElement}`];
                 isBuilder = true;
             } else {
                 //@ts-ignore
-                Class = BabylonCore[BabylonElement];
+                Class = BabylonCore[ResolvedBabylonElement];
             }
         }
         let createInstanceFn: Function;

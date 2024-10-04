@@ -98,6 +98,7 @@ export function getGuiProps() {
 export const CollidingComponents: Record<string, string> = {
     Button: 'button2D',
     Image: 'image2D',
+    Text: 'text3D',
 };
 
 export const ReversedCollidingComponents = Object.entries(CollidingComponents).reduce((acc, [key, value]) => ((acc[value] = key), acc), {} as Record<string, string>);

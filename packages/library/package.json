@@ -31,8 +31,8 @@
         "its-fine": "^1.2.5"
     },
     "peerDependencies": {
-        "@babylonjs/core": "7.16.0",
-        "@babylonjs/gui": "7.16.0",
+        "@babylonjs/core": "7.28.0",
+        "@babylonjs/gui": "7.28.0",
         "@babylonjs/havok": "^1.3.7",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"

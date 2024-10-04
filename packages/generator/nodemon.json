@@ -2,6 +2,6 @@
   "watch": [
     "./**/*.ts"
   ],
-  "exec": "tsc && node build/index.js",
+  "exec": "npm run build",
   "ext": "ts"
 }
