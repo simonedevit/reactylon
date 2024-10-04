@@ -80,9 +80,10 @@ ${result}
             }`
                             : ', {}';
                         const ElementType = `ReturnType<typeof ${key}>`;
-                        let jsxElementName = lowercaseFirstLetter(key.replace('Create', ''));
-                        if (CollidingComponents[ElementType]) {
-                            jsxElementName = CollidingComponents[ElementType];
+                        const keyWithoutCreate = key.replace('Create', '');
+                        let jsxElementName = lowercaseFirstLetter(keyWithoutCreate);
+                        if (CollidingComponents[keyWithoutCreate]) {
+                            jsxElementName = CollidingComponents[keyWithoutCreate];
                         }
                         const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getMeshProps()}${FunctionProps},${ElementType}>, any>;`;
 
