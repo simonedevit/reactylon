@@ -101,13 +101,11 @@ const reconciler = ReactReconciler<
                 //@ts-ignore
                 Class = BabylonCore.MeshBuilder[`Create${ResolvedBabylonElement}`];
                 isBuilder = true;
-            }
-            else if (`Extrude${BabylonElement}` in BabylonCore.MeshBuilder) {
-                //@ts-ignore
-                Class = BabylonCore.MeshBuilder[`Extrude${BabylonElement}`];
-                isBuilder = true;
-            }
-            else {
+            } else {
+                // MeshBuilder.ExtrudePolygon
+                if (ResolvedBabylonElement === 'ExtrudePolygon'){
+                    isBuilder = true;
+                }
                 //@ts-ignore
                 Class = BabylonCore[ResolvedBabylonElement];
             }
