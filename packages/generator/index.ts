@@ -73,9 +73,9 @@ ${result}
                 if (typeof value === 'function') {
                     let prefix = 'Create';
                     // get builder (i.e. CreateBox or ExtrudePolygon)
-                    if (key.startsWith('Extrude')) {
+                    /* if (key.startsWith('Extrude')) {
                         prefix = 'Extrude';
-                    }
+                    }*/
                     const Builder = value as Function;
                         const importStatement = `import { ${key} } from '${index}';`;
                         const result = getConstructorProps(Builder, key, false);

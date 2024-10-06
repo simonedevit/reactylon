@@ -2843,20 +2843,20 @@ name: ConstructorParameters<typeof ExtractHighlightsPostProcess>[0];
     blockCompilation: ConstructorParameters<typeof ExtractHighlightsPostProcess>[7];
     
     },ExtractHighlightsPostProcess>, any>;
-  polygon3D: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudePolygon>> & MeshProps, {
+  extrudePolygon: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudePolygon>> & MeshProps, {
         name: Parameters<typeof ExtrudePolygon>[0];
     options: Parameters<typeof ExtrudePolygon>[1];
     scene: Parameters<typeof ExtrudePolygon>[2];
     earcutInjection: Parameters<typeof ExtrudePolygon>[3];
     
             },ReturnType<typeof ExtrudePolygon>>, any>;
-  shape: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShape>> & MeshProps, {
+  extrudeShape: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShape>> & MeshProps, {
         name: Parameters<typeof ExtrudeShape>[0];
     options: Parameters<typeof ExtrudeShape>[1];
     scene: Parameters<typeof ExtrudeShape>[2];
     
             },ReturnType<typeof ExtrudeShape>>, any>;
-  shapeCustom: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShapeCustom>> & MeshProps, {
+  extrudeShapeCustom: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShapeCustom>> & MeshProps, {
         name: Parameters<typeof ExtrudeShapeCustom>[0];
     options: Parameters<typeof ExtrudeShapeCustom>[1];
     scene: Parameters<typeof ExtrudeShapeCustom>[2];
