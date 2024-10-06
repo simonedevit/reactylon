@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.37](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.36&targetVersion=GTv0.0.37&_a=files) (2024-10-06)
+
+
+### Chore
+
+* **general:** fix extrude polygon reconciler ([eae339c](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/eae339ce6b4ed235b55a302803cf1e461dfe9475))
+
 ## [0.0.36](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.35&targetVersion=GTv0.0.36&_a=files) (2024-10-06)
 
 
