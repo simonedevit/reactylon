@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.35](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.34&targetVersion=GTv0.0.35&_a=files) (2024-10-06)
+
+
+### Chore
+
+* **general:** handle polygon and extrude polygon ([42899f6](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/42899f6d5bca8644e1d8e3ccaa26b55a81a50cee))
+
 ## [0.0.34](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.33&targetVersion=GTv0.0.34&_a=files) (2024-10-04)
 
 
