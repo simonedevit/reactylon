@@ -96,9 +96,12 @@ export function getGuiProps() {
 
 // TIP: what about call them {name}-XR ?
 export const CollidingComponents: Record<string, string> = {
+    // GUI
     Button: 'button2D',
     Image: 'image2D',
+    // CORE
     Text: 'text3D',
+    Polygon: 'polygon3D',
 };
 
 export const ReversedCollidingComponents = Object.entries(CollidingComponents).reduce((acc, [key, value]) => ((acc[value] = key), acc), {} as Record<string, string>);

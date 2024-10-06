@@ -7,10 +7,15 @@ import { AbstractAssetContainer } from '@babylonjs/core';
 import { AbstractAssetTask } from '@babylonjs/core';
 import { AbstractEngine } from '@babylonjs/core';
 import { AbstractMesh } from '@babylonjs/core';
+import { AcquireNativeObjectAsync } from '@babylonjs/core';
 import { Action } from '@babylonjs/core';
 import { ActionEvent } from '@babylonjs/core';
 import { ActionManager } from '@babylonjs/core';
+import { AddAnimationExtensions } from '@babylonjs/core';
 import { AddBlock } from '@babylonjs/core';
+import { AddIndividualParser } from '@babylonjs/core';
+import { AddParser } from '@babylonjs/core';
+import { AddRayExtensions } from '@babylonjs/core';
 import { AdvancedTimer } from '@babylonjs/core';
 import { AlignBlock } from '@babylonjs/core';
 import { AlphaState } from '@babylonjs/core';
@@ -31,6 +36,8 @@ import { AnimationGroupMask } from '@babylonjs/core';
 import { AnimationPropertiesOverride } from '@babylonjs/core';
 import { AnimationRange } from '@babylonjs/core';
 import { AnisotropyBlock } from '@babylonjs/core';
+import { ApplyLut } from '@babylonjs/core';
+import { ApplyPostProcess } from '@babylonjs/core';
 import { Arc2 } from '@babylonjs/core';
 import { ArcFollowCamera } from '@babylonjs/core';
 import { ArcRotateCamera } from '@babylonjs/core';
@@ -66,6 +73,15 @@ import { BaseTexture } from '@babylonjs/core';
 import { BezierCurveEase } from '@babylonjs/core';
 import { BiPlanarBlock } from '@babylonjs/core';
 import { BinaryFileAssetTask } from '@babylonjs/core';
+import { BindBonesParameters } from '@babylonjs/core';
+import { BindFogParameters } from '@babylonjs/core';
+import { BindLight } from '@babylonjs/core';
+import { BindLightProperties } from '@babylonjs/core';
+import { BindLights } from '@babylonjs/core';
+import { BindLogDepth } from '@babylonjs/core';
+import { BindMorphTargetParameters } from '@babylonjs/core';
+import { BindSceneUniformBuffer } from '@babylonjs/core';
+import { BindTextureMatrix } from '@babylonjs/core';
 import { BlackAndWhitePostProcess } from '@babylonjs/core';
 import { BloomEffect } from '@babylonjs/core';
 import { BloomMergePostProcess } from '@babylonjs/core';
@@ -115,6 +131,8 @@ import { ColorGradingTexture } from '@babylonjs/core';
 import { ColorMergerBlock } from '@babylonjs/core';
 import { ColorSplitterBlock } from '@babylonjs/core';
 import { CombineAction } from '@babylonjs/core';
+import { CompleteGreasedLineColorTable } from '@babylonjs/core';
+import { CompleteGreasedLineWidthTable } from '@babylonjs/core';
 import { ComputeEffect } from '@babylonjs/core';
 import { ComputeNormalsBlock } from '@babylonjs/core';
 import { ComputeShader } from '@babylonjs/core';
@@ -127,6 +145,7 @@ import { ConeDirectedParticleEmitter } from '@babylonjs/core';
 import { ConeParticleEmitter } from '@babylonjs/core';
 import { ContainerAssetTask } from '@babylonjs/core';
 import { ConvolutionPostProcess } from '@babylonjs/core';
+import { CopyFloatData } from '@babylonjs/core';
 import { CopyTextureToTexture } from '@babylonjs/core';
 import { CreateBox } from '@babylonjs/core';
 import { CreateBoxVertexData } from '@babylonjs/core';
@@ -212,6 +231,13 @@ import { DebugBlock } from '@babylonjs/core';
 import { DebugLayer } from '@babylonjs/core';
 import { DecalMapConfiguration } from '@babylonjs/core';
 import { DecalMapDefines } from '@babylonjs/core';
+import { Decode } from '@babylonjs/core';
+import { DecodeBase64ToBinary } from '@babylonjs/core';
+import { DecodeBase64ToString } from '@babylonjs/core';
+import { DecodeBase64UrlToBinary } from '@babylonjs/core';
+import { DecodeBase64UrlToString } from '@babylonjs/core';
+import { DecodeFloat32 } from '@babylonjs/core';
+import { DecodeRunLength } from '@babylonjs/core';
 import { DefaultCollisionCoordinator } from '@babylonjs/core';
 import { DefaultKTX2DecoderOptions } from '@babylonjs/core';
 import { DefaultLoadingScreen } from '@babylonjs/core';
@@ -259,6 +285,8 @@ import { EffectRenderer } from '@babylonjs/core';
 import { EffectWrapper } from '@babylonjs/core';
 import { ElasticEase } from '@babylonjs/core';
 import { ElbowBlock } from '@babylonjs/core';
+import { EncodeArrayBufferToBase64 } from '@babylonjs/core';
+import { EndsWith } from '@babylonjs/core';
 import { Engine } from '@babylonjs/core';
 import { EngineInstrumentation } from '@babylonjs/core';
 import { EnvironmentHelper } from '@babylonjs/core';
@@ -266,9 +294,14 @@ import { EquiRectangularCubeTexture } from '@babylonjs/core';
 import { EquiRectangularCubeTextureAssetTask } from '@babylonjs/core';
 import { EventState } from '@babylonjs/core';
 import { ExecuteCodeAction } from '@babylonjs/core';
+import { ExitFullscreen } from '@babylonjs/core';
+import { ExitPointerlock } from '@babylonjs/core';
 import { ExponentialEase } from '@babylonjs/core';
 import { ExternalTexture } from '@babylonjs/core';
 import { ExtractHighlightsPostProcess } from '@babylonjs/core';
+import { ExtrudePolygon } from '@babylonjs/core';
+import { ExtrudeShape } from '@babylonjs/core';
+import { ExtrudeShapeCustom } from '@babylonjs/core';
 import { FactorGradient } from '@babylonjs/core';
 import { FadeInOutBehavior } from '@babylonjs/core';
 import { FilesInput } from '@babylonjs/core';
@@ -412,6 +445,7 @@ import { FreeCameraMouseWheelInput } from '@babylonjs/core';
 import { FreeCameraTouchInput } from '@babylonjs/core';
 import { FresnelBlock } from '@babylonjs/core';
 import { FresnelParameters } from '@babylonjs/core';
+import { FromHalfFloat } from '@babylonjs/core';
 import { FrontFacingBlock } from '@babylonjs/core';
 import { FxaaPostProcess } from '@babylonjs/core';
 import { GIRSM } from '@babylonjs/core';
@@ -425,6 +459,9 @@ import { GamepadManager } from '@babylonjs/core';
 import { GamepadSystemSceneComponent } from '@babylonjs/core';
 import { GaussianSplattingMaterial } from '@babylonjs/core';
 import { GaussianSplattingMesh } from '@babylonjs/core';
+import { GenerateBase64StringFromPixelData } from '@babylonjs/core';
+import { GenerateBase64StringFromTexture } from '@babylonjs/core';
+import { GenerateBase64StringFromTextureAsync } from '@babylonjs/core';
 import { GenericPad } from '@babylonjs/core';
 import { Geometry } from '@babylonjs/core';
 import { GeometryArcTan2Block } from '@babylonjs/core';
@@ -457,6 +494,22 @@ import { GeometryTextureBlock } from '@babylonjs/core';
 import { GeometryTextureFetchBlock } from '@babylonjs/core';
 import { GeometryTransformBlock } from '@babylonjs/core';
 import { GeometryTrigonometryBlock } from '@babylonjs/core';
+import { GetClass } from '@babylonjs/core';
+import { GetClassName } from '@babylonjs/core';
+import { GetDOMTextContent } from '@babylonjs/core';
+import { GetEnvInfo } from '@babylonjs/core';
+import { GetEnvironmentBRDFTexture } from '@babylonjs/core';
+import { GetExrHeader } from '@babylonjs/core';
+import { GetFogState } from '@babylonjs/core';
+import { GetFontOffset } from '@babylonjs/core';
+import { GetForwardRay } from '@babylonjs/core';
+import { GetForwardRayToRef } from '@babylonjs/core';
+import { GetIndividualParser } from '@babylonjs/core';
+import { GetInternalFormatFromBasisFormat } from '@babylonjs/core';
+import { GetParser } from '@babylonjs/core';
+import { GetPointsCount } from '@babylonjs/core';
+import { GetTGAHeader } from '@babylonjs/core';
+import { GetTextureDataAsync } from '@babylonjs/core';
 import { Gizmo } from '@babylonjs/core';
 import { GizmoManager } from '@babylonjs/core';
 import { GlowLayer } from '@babylonjs/core';
@@ -476,6 +529,7 @@ import { HDRCubeTextureAssetTask } from '@babylonjs/core';
 import { HDRFiltering } from '@babylonjs/core';
 import { Halton2DSequence } from '@babylonjs/core';
 import { HandConstraintBehavior } from '@babylonjs/core';
+import { HandleFallbacksForShadows } from '@babylonjs/core';
 import { HardwareScalingOptimization } from '@babylonjs/core';
 import { HavokPlugin } from '@babylonjs/core';
 import { HeightToNormalBlock } from '@babylonjs/core';
@@ -487,6 +541,7 @@ import { Hinge2Joint } from '@babylonjs/core';
 import { HingeConstraint } from '@babylonjs/core';
 import { HingeJoint } from '@babylonjs/core';
 import { HtmlElementTexture } from '@babylonjs/core';
+import { HufUncompress } from '@babylonjs/core';
 import { IblShadowsRenderPipeline } from '@babylonjs/core';
 import { IcoSphereBlock } from '@babylonjs/core';
 import { ImageAssetTask } from '@babylonjs/core';
@@ -507,9 +562,16 @@ import { InstantiateOnVolumeBlock } from '@babylonjs/core';
 import { InstantiateRadialBlock } from '@babylonjs/core';
 import { InstantiatedEntries } from '@babylonjs/core';
 import { IntFloatConverterBlock } from '@babylonjs/core';
+import { InterleaveScalar } from '@babylonjs/core';
 import { InternalTexture } from '@babylonjs/core';
 import { InterpolateValueAction } from '@babylonjs/core';
 import { IntersectionInfo } from '@babylonjs/core';
+import { IsBase64DataUrl } from '@babylonjs/core';
+import { IsDocumentAvailable } from '@babylonjs/core';
+import { IsFileURL } from '@babylonjs/core';
+import { IsNavigatorAvailable } from '@babylonjs/core';
+import { IsWindowObjectExist } from '@babylonjs/core';
+import { IsWrapper } from '@babylonjs/core';
 import { KeyboardInfo } from '@babylonjs/core';
 import { KeyboardInfoPre } from '@babylonjs/core';
 import { KhronosTextureContainer } from '@babylonjs/core';
@@ -528,7 +590,10 @@ import { LightGizmo } from '@babylonjs/core';
 import { LightInformationBlock } from '@babylonjs/core';
 import { LineEdgesRenderer } from '@babylonjs/core';
 import { LinesMesh } from '@babylonjs/core';
+import { LoadFile } from '@babylonjs/core';
 import { LoadFileError } from '@babylonjs/core';
+import { LoadImage } from '@babylonjs/core';
+import { LoadTextureFromTranscodeResult } from '@babylonjs/core';
 import { LockConstraint } from '@babylonjs/core';
 import { LoopBlock } from '@babylonjs/core';
 import { MapRangeBlock } from '@babylonjs/core';
@@ -574,6 +639,8 @@ import { MorphTargetsBlock } from '@babylonjs/core';
 import { MotionBlurPostProcess } from '@babylonjs/core';
 import { MotorEnabledJoint } from '@babylonjs/core';
 import { MultiMaterial } from '@babylonjs/core';
+import { MultiPick } from '@babylonjs/core';
+import { MultiPickWithRay } from '@babylonjs/core';
 import { MultiPointerScaleBehavior } from '@babylonjs/core';
 import { MultiRenderTarget } from '@babylonjs/core';
 import { MultiplyBlock } from '@babylonjs/core';
@@ -626,6 +693,18 @@ import { PBRMetallicRoughnessMaterial } from '@babylonjs/core';
 import { PBRSheenConfiguration } from '@babylonjs/core';
 import { PBRSpecularGlossinessMaterial } from '@babylonjs/core';
 import { PBRSubSurfaceConfiguration } from '@babylonjs/core';
+import { PadNumber } from '@babylonjs/core';
+import { Parse } from '@babylonjs/core';
+import { ParseFloat16 } from '@babylonjs/core';
+import { ParseFloat32 } from '@babylonjs/core';
+import { ParseInt32 } from '@babylonjs/core';
+import { ParseInt64 } from '@babylonjs/core';
+import { ParseNullTerminatedString } from '@babylonjs/core';
+import { ParseUint16 } from '@babylonjs/core';
+import { ParseUint32 } from '@babylonjs/core';
+import { ParseUint8 } from '@babylonjs/core';
+import { ParseUint8Array } from '@babylonjs/core';
+import { ParseValue } from '@babylonjs/core';
 import { Particle } from '@babylonjs/core';
 import { ParticleBlendMultiplyBlock } from '@babylonjs/core';
 import { ParticleRampGradientBlock } from '@babylonjs/core';
@@ -665,6 +744,9 @@ import { PhysicsShapeSphere } from '@babylonjs/core';
 import { PhysicsUpdraftEventOptions } from '@babylonjs/core';
 import { PhysicsViewer } from '@babylonjs/core';
 import { PhysicsVortexEventOptions } from '@babylonjs/core';
+import { Pick } from '@babylonjs/core';
+import { PickWithBoundingInfo } from '@babylonjs/core';
+import { PickWithRay } from '@babylonjs/core';
 import { PickingInfo } from '@babylonjs/core';
 import { Plane } from '@babylonjs/core';
 import { PlaneBlock } from '@babylonjs/core';
@@ -700,17 +782,41 @@ import { PrePassRenderer } from '@babylonjs/core';
 import { PrePassRendererSceneComponent } from '@babylonjs/core';
 import { PrePassTextureBlock } from '@babylonjs/core';
 import { PredicateCondition } from '@babylonjs/core';
+import { Predictor } from '@babylonjs/core';
+import { PrepareAttributesForBakedVertexAnimation } from '@babylonjs/core';
+import { PrepareAttributesForBones } from '@babylonjs/core';
+import { PrepareAttributesForInstances } from '@babylonjs/core';
+import { PrepareAttributesForMorphTargets } from '@babylonjs/core';
+import { PrepareAttributesForMorphTargetsInfluencers } from '@babylonjs/core';
+import { PrepareDefinesForAttributes } from '@babylonjs/core';
+import { PrepareDefinesForBakedVertexAnimation } from '@babylonjs/core';
+import { PrepareDefinesForBones } from '@babylonjs/core';
+import { PrepareDefinesForCamera } from '@babylonjs/core';
+import { PrepareDefinesForFrameBoundValues } from '@babylonjs/core';
+import { PrepareDefinesForLight } from '@babylonjs/core';
+import { PrepareDefinesForLights } from '@babylonjs/core';
+import { PrepareDefinesForMergedUV } from '@babylonjs/core';
+import { PrepareDefinesForMisc } from '@babylonjs/core';
+import { PrepareDefinesForMorphTargets } from '@babylonjs/core';
+import { PrepareDefinesForMultiview } from '@babylonjs/core';
+import { PrepareDefinesForOIT } from '@babylonjs/core';
+import { PrepareDefinesForPrePass } from '@babylonjs/core';
+import { PrepareUniformsAndSamplersForLight } from '@babylonjs/core';
+import { PrepareUniformsAndSamplersList } from '@babylonjs/core';
 import { PressureObserverWrapper } from '@babylonjs/core';
 import { PrismaticConstraint } from '@babylonjs/core';
 import { ProceduralTexture } from '@babylonjs/core';
 import { ProceduralTextureSceneComponent } from '@babylonjs/core';
 import { ProximityCastResult } from '@babylonjs/core';
+import { PushAttributesForInstances } from '@babylonjs/core';
 import { PushMaterial } from '@babylonjs/core';
 import { QuadraticErrorSimplification } from '@babylonjs/core';
 import { Quaternion } from '@babylonjs/core';
+import { QueueNewFrame } from '@babylonjs/core';
 import { RSMCreatePluginMaterial } from '@babylonjs/core';
 import { Ragdoll } from '@babylonjs/core';
 import { RandomBlock } from '@babylonjs/core';
+import { RandomGUID } from '@babylonjs/core';
 import { RandomNumberBlock } from '@babylonjs/core';
 import { RawCubeTexture } from '@babylonjs/core';
 import { RawTexture } from '@babylonjs/core';
@@ -718,6 +824,7 @@ import { RawTexture2DArray } from '@babylonjs/core';
 import { RawTexture3D } from '@babylonjs/core';
 import { Ray } from '@babylonjs/core';
 import { RayHelper } from '@babylonjs/core';
+import { ReadFile } from '@babylonjs/core';
 import { ReadFileError } from '@babylonjs/core';
 import { RecastJSCrowd } from '@babylonjs/core';
 import { RecastJSPlugin } from '@babylonjs/core';
@@ -733,13 +840,22 @@ import { RefractBlock } from '@babylonjs/core';
 import { RefractionBlock } from '@babylonjs/core';
 import { RefractionPostProcess } from '@babylonjs/core';
 import { RefractionTexture } from '@babylonjs/core';
+import { RegisterClass } from '@babylonjs/core';
+import { RegisterMaterialPlugin } from '@babylonjs/core';
+import { RegisterNativeTypeAsync } from '@babylonjs/core';
+import { RegisterTargetForLateAnimationBinding } from '@babylonjs/core';
 import { RemapBlock } from '@babylonjs/core';
 import { RenderTargetTexture } from '@babylonjs/core';
 import { RenderTargetWrapper } from '@babylonjs/core';
 import { RenderingGroup } from '@babylonjs/core';
 import { RenderingManager } from '@babylonjs/core';
 import { ReplaceColorBlock } from '@babylonjs/core';
+import { RequestFile } from '@babylonjs/core';
 import { RequestFileError } from '@babylonjs/core';
+import { RequestFullscreen } from '@babylonjs/core';
+import { RequestPointerlock } from '@babylonjs/core';
+import { ResizeImageBitmap } from '@babylonjs/core';
+import { ReverseLutFromBitmap } from '@babylonjs/core';
 import { RichType } from '@babylonjs/core';
 import { RollingAverage } from '@babylonjs/core';
 import { Rotate2dBlock } from '@babylonjs/core';
@@ -755,6 +871,7 @@ import { SSRRenderingPipeline } from '@babylonjs/core';
 import { ScaleBlock } from '@babylonjs/core';
 import { ScaleGizmo } from '@babylonjs/core';
 import { ScalingBlock } from '@babylonjs/core';
+import { ScanData } from '@babylonjs/core';
 import { Scene } from '@babylonjs/core';
 import { SceneDepthBlock } from '@babylonjs/core';
 import { SceneInstrumentation } from '@babylonjs/core';
@@ -766,7 +883,9 @@ import { ScreenSizeBlock } from '@babylonjs/core';
 import { ScreenSpaceBlock } from '@babylonjs/core';
 import { ScreenSpaceCurvaturePostProcess } from '@babylonjs/core';
 import { ScreenSpaceReflectionPostProcess } from '@babylonjs/core';
+import { SetBasisTranscoderWorker } from '@babylonjs/core';
 import { SetColorsBlock } from '@babylonjs/core';
+import { SetCorsBehavior } from '@babylonjs/core';
 import { SetMaterialIDBlock } from '@babylonjs/core';
 import { SetNormalsBlock } from '@babylonjs/core';
 import { SetParentAction } from '@babylonjs/core';
@@ -819,6 +938,7 @@ import { Stage } from '@babylonjs/core';
 import { StandardMaterial } from '@babylonjs/core';
 import { StandardMaterialDefines } from '@babylonjs/core';
 import { StandardRenderingPipeline } from '@babylonjs/core';
+import { StartsWith } from '@babylonjs/core';
 import { StateCondition } from '@babylonjs/core';
 import { StencilState } from '@babylonjs/core';
 import { StencilStateComposer } from '@babylonjs/core';
@@ -849,6 +969,7 @@ import { TBNBlock } from '@babylonjs/core';
 import { TargetCamera } from '@babylonjs/core';
 import { TeleportInBlock } from '@babylonjs/core';
 import { TeleportOutBlock } from '@babylonjs/core';
+import { TestBase64DataUrl } from '@babylonjs/core';
 import { TextFileAssetTask } from '@babylonjs/core';
 import { Texture } from '@babylonjs/core';
 import { TextureAssetTask } from '@babylonjs/core';
@@ -860,12 +981,14 @@ import { TextureSampler } from '@babylonjs/core';
 import { ThinEngine } from '@babylonjs/core';
 import { ThinRenderTargetTexture } from '@babylonjs/core';
 import { ThinTexture } from '@babylonjs/core';
+import { ToHalfFloat } from '@babylonjs/core';
 import { TonemapPostProcess } from '@babylonjs/core';
 import { TorusBlock } from '@babylonjs/core';
 import { TouchCamera } from '@babylonjs/core';
 import { TrailMesh } from '@babylonjs/core';
 import { Trajectory } from '@babylonjs/core';
 import { TrajectoryClassifier } from '@babylonjs/core';
+import { TranscodeAsync } from '@babylonjs/core';
 import { TransformBlock } from '@babylonjs/core';
 import { TransformFeedbackBoundingHelper } from '@babylonjs/core';
 import { TransformNode } from '@babylonjs/core';
@@ -873,8 +996,19 @@ import { TranslationBlock } from '@babylonjs/core';
 import { TriPlanarBlock } from '@babylonjs/core';
 import { TrigonometryBlock } from '@babylonjs/core';
 import { TwirlBlock } from '@babylonjs/core';
+import { UncompressPIZ } from '@babylonjs/core';
+import { UncompressPXR } from '@babylonjs/core';
+import { UncompressRAW } from '@babylonjs/core';
+import { UncompressRLE } from '@babylonjs/core';
+import { UncompressZIP } from '@babylonjs/core';
 import { UniformBuffer } from '@babylonjs/core';
 import { UniversalCamera } from '@babylonjs/core';
+import { UnregisterAllMaterialPlugins } from '@babylonjs/core';
+import { UnregisterMaterialPlugin } from '@babylonjs/core';
+import { UploadContent } from '@babylonjs/core';
+import { UploadEnvLevelsAsync } from '@babylonjs/core';
+import { UploadEnvSpherical } from '@babylonjs/core';
+import { UploadLevelsAsync } from '@babylonjs/core';
 import { UtilityLayerRenderer } from '@babylonjs/core';
 import { VRCameraMetrics } from '@babylonjs/core';
 import { VRDeviceOrientationArcRotateCamera } from '@babylonjs/core';
@@ -886,8 +1020,11 @@ import { VRMultiviewToSingleviewPostProcess } from '@babylonjs/core';
 import { ValidatedNativeDataStream } from '@babylonjs/core';
 import { ValueCondition } from '@babylonjs/core';
 import { Vector2 } from '@babylonjs/core';
+import { Vector2ToFixed } from '@babylonjs/core';
 import { Vector3 } from '@babylonjs/core';
+import { Vector3ToFixed } from '@babylonjs/core';
 import { Vector4 } from '@babylonjs/core';
+import { Vector4ToFixed } from '@babylonjs/core';
 import { VectorConverterBlock } from '@babylonjs/core';
 import { VectorMergerBlock } from '@babylonjs/core';
 import { VectorSplitterBlock } from '@babylonjs/core';
@@ -903,6 +1040,7 @@ import { VirtualJoystick } from '@babylonjs/core';
 import { VirtualJoysticksCamera } from '@babylonjs/core';
 import { VolumetricLightScatteringPostProcess } from '@babylonjs/core';
 import { VoronoiNoiseBlock } from '@babylonjs/core';
+import { Wav2Decode } from '@babylonjs/core';
 import { WaveBlock } from '@babylonjs/core';
 import { WebGL2ParticleSystem } from '@babylonjs/core';
 import { WebGL2ShaderProcessor } from '@babylonjs/core';
@@ -968,9 +1106,12 @@ import { WorleyNoise3DBlock } from '@babylonjs/core';
 import { XRSpaceWarpRenderTarget } from '@babylonjs/core';
 import { Xbox360Pad } from '@babylonjs/core';
 import { _BasisTextureLoader } from '@babylonjs/core';
+import { _CommonDispose } from '@babylonjs/core';
+import { _CommonInit } from '@babylonjs/core';
 import { _DDSTextureLoader } from '@babylonjs/core';
 import { _ENVTextureLoader } from '@babylonjs/core';
 import { _ExrTextureLoader } from '@babylonjs/core';
+import { _GetCompatibleTextureLoader } from '@babylonjs/core';
 import { _HDRTextureLoader } from '@babylonjs/core';
 import { _InstancesBatch } from '@babylonjs/core';
 import { _KTXTextureLoader } from '@babylonjs/core';
@@ -979,6 +1120,61 @@ import { _OcclusionDataStorage } from '@babylonjs/core';
 import { _PrimaryIsoTriangle } from '@babylonjs/core';
 import { _TGATextureLoader } from '@babylonjs/core';
 import { _TimeToken } from '@babylonjs/core';
+import { _UpdateRGBDAsync } from '@babylonjs/core';
+import { _injectLTSFileTools } from '@babylonjs/core';
+import { addClipPlaneUniforms } from '@babylonjs/core';
+import { allocateAndCopyTypedBuffer } from '@babylonjs/core';
+import { appendSceneAsync } from '@babylonjs/core';
+import { bindClipPlane } from '@babylonjs/core';
+import { captureEquirectangularFromScene } from '@babylonjs/core';
+import { className } from '@babylonjs/core';
+import { computeMaxExtents } from '@babylonjs/core';
+import { createDetailMapPlugin } from '@babylonjs/core';
+import { createPBRAnisotropicPlugin } from '@babylonjs/core';
+import { createPBRBRDFPlugin } from '@babylonjs/core';
+import { createPBRClearCoatPlugin } from '@babylonjs/core';
+import { createPBRIridescencePlugin } from '@babylonjs/core';
+import { createPBRSheenPlugin } from '@babylonjs/core';
+import { createPBRSubSurfacePlugin } from '@babylonjs/core';
+import { createYieldingScheduler } from '@babylonjs/core';
+import { editableInPropertyPage } from '@babylonjs/core';
+import { expandToProperty } from '@babylonjs/core';
+import { extractMinAndMax } from '@babylonjs/core';
+import { extractMinAndMaxIndexed } from '@babylonjs/core';
+import { getRichTypeFromValue } from '@babylonjs/core';
+import { importAnimationsAsync } from '@babylonjs/core';
+import { inlineScheduler } from '@babylonjs/core';
+import { loadAssetContainerAsync } from '@babylonjs/core';
+import { loadSceneAsync } from '@babylonjs/core';
+import { makeAsyncFunction } from '@babylonjs/core';
+import { makeSyncFunction } from '@babylonjs/core';
+import { nativeOverride } from '@babylonjs/core';
+import { normalizeEnvInfo } from '@babylonjs/core';
+import { prepareDefinesForClipPlanes } from '@babylonjs/core';
+import { prepareStringDefinesForClipPlanes } from '@babylonjs/core';
+import { registerSceneLoaderPlugin } from '@babylonjs/core';
+import { registerTextureLoader } from '@babylonjs/core';
+import { runCoroutine } from '@babylonjs/core';
+import { runCoroutineAsync } from '@babylonjs/core';
+import { runCoroutineSync } from '@babylonjs/core';
+import { serialize } from '@babylonjs/core';
+import { serializeAsCameraReference } from '@babylonjs/core';
+import { serializeAsColor3 } from '@babylonjs/core';
+import { serializeAsColor4 } from '@babylonjs/core';
+import { serializeAsColorCurves } from '@babylonjs/core';
+import { serializeAsFresnelParameters } from '@babylonjs/core';
+import { serializeAsImageProcessingConfiguration } from '@babylonjs/core';
+import { serializeAsMatrix } from '@babylonjs/core';
+import { serializeAsMeshReference } from '@babylonjs/core';
+import { serializeAsQuaternion } from '@babylonjs/core';
+import { serializeAsTexture } from '@babylonjs/core';
+import { serializeAsVector2 } from '@babylonjs/core';
+import { serializeAsVector3 } from '@babylonjs/core';
+import { setAndStartTimer } from '@babylonjs/core';
+import { setStereoscopicAnaglyphRigMode } from '@babylonjs/core';
+import { setStereoscopicRigMode } from '@babylonjs/core';
+import { setVRRigMode } from '@babylonjs/core';
+import { unregisterTextureLoader } from '@babylonjs/core';
     
 export interface JSXElements {
   abstractActionManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractActionManager>, {},AbstractActionManager>, any>;
@@ -998,6 +1194,7 @@ name: ConstructorParameters<typeof AbstractMesh>[0];
     scene: ConstructorParameters<typeof AbstractMesh>[1];
     
     },AbstractMesh>, any>;
+  acquireNativeObjectAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof AcquireNativeObjectAsync>> & MeshProps, {},ReturnType<typeof AcquireNativeObjectAsync>>, any>;
   action: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Action>, {
 triggerOptions: ConstructorParameters<typeof Action>[0];
     condition: ConstructorParameters<typeof Action>[1];
@@ -1016,10 +1213,30 @@ source: ConstructorParameters<typeof ActionEvent>[0];
 scene: ConstructorParameters<typeof ActionManager>[0];
     
     },ActionManager>, any>;
+  addAnimationExtensions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof AddAnimationExtensions>> & MeshProps, {
+        sceneClass: Parameters<typeof AddAnimationExtensions>[0];
+    boneClass: Parameters<typeof AddAnimationExtensions>[1];
+    
+            },ReturnType<typeof AddAnimationExtensions>>, any>;
   addBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AddBlock> & Clonable, {
 name: ConstructorParameters<typeof AddBlock>[0];
     
     },AddBlock>, any>;
+  addIndividualParser: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof AddIndividualParser>> & MeshProps, {
+        name: Parameters<typeof AddIndividualParser>[0];
+    parser: Parameters<typeof AddIndividualParser>[1];
+    
+            },ReturnType<typeof AddIndividualParser>>, any>;
+  addParser: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof AddParser>> & MeshProps, {
+        name: Parameters<typeof AddParser>[0];
+    parser: Parameters<typeof AddParser>[1];
+    
+            },ReturnType<typeof AddParser>>, any>;
+  addRayExtensions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof AddRayExtensions>> & MeshProps, {
+        sceneClass: Parameters<typeof AddRayExtensions>[0];
+    cameraClass: Parameters<typeof AddRayExtensions>[1];
+    
+            },ReturnType<typeof AddRayExtensions>>, any>;
   advancedTimer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AdvancedTimer>, {
 options: ConstructorParameters<typeof AdvancedTimer>[0];
     
@@ -1143,6 +1360,23 @@ name: ConstructorParameters<typeof AnimationRange>[0];
 name: ConstructorParameters<typeof AnisotropyBlock>[0];
     
     },AnisotropyBlock>, any>;
+  applyLut: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ApplyLut>> & MeshProps, {
+        lut: Parameters<typeof ApplyLut>[0];
+    data: Parameters<typeof ApplyLut>[1];
+    nData: Parameters<typeof ApplyLut>[2];
+    
+            },ReturnType<typeof ApplyLut>>, any>;
+  applyPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ApplyPostProcess>> & MeshProps, {
+        postProcessName: Parameters<typeof ApplyPostProcess>[0];
+    internalTexture: Parameters<typeof ApplyPostProcess>[1];
+    scene: Parameters<typeof ApplyPostProcess>[2];
+    type: Parameters<typeof ApplyPostProcess>[3];
+    samplingMode: Parameters<typeof ApplyPostProcess>[4];
+    format: Parameters<typeof ApplyPostProcess>[5];
+    width: Parameters<typeof ApplyPostProcess>[6];
+    height: Parameters<typeof ApplyPostProcess>[7];
+    
+            },ReturnType<typeof ApplyPostProcess>>, any>;
   arc2: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Arc2>, {
 startPoint: ConstructorParameters<typeof Arc2>[0];
     midPoint: ConstructorParameters<typeof Arc2>[1];
@@ -1304,6 +1538,64 @@ name: ConstructorParameters<typeof BinaryFileAssetTask>[0];
     url: ConstructorParameters<typeof BinaryFileAssetTask>[1];
     
     },BinaryFileAssetTask>, any>;
+  bindBonesParameters: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindBonesParameters>> & MeshProps, {
+        mesh: Parameters<typeof BindBonesParameters>[0];
+    effect: Parameters<typeof BindBonesParameters>[1];
+    prePassConfiguration: Parameters<typeof BindBonesParameters>[2];
+    
+            },ReturnType<typeof BindBonesParameters>>, any>;
+  bindFogParameters: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindFogParameters>> & MeshProps, {
+        scene: Parameters<typeof BindFogParameters>[0];
+    mesh: Parameters<typeof BindFogParameters>[1];
+    effect: Parameters<typeof BindFogParameters>[2];
+    linearSpace: Parameters<typeof BindFogParameters>[3];
+    
+            },ReturnType<typeof BindFogParameters>>, any>;
+  bindLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindLight>> & MeshProps, {
+        light: Parameters<typeof BindLight>[0];
+    lightIndex: Parameters<typeof BindLight>[1];
+    scene: Parameters<typeof BindLight>[2];
+    effect: Parameters<typeof BindLight>[3];
+    useSpecular: Parameters<typeof BindLight>[4];
+    receiveShadows: Parameters<typeof BindLight>[5];
+    
+            },ReturnType<typeof BindLight>>, any>;
+  bindLightProperties: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindLightProperties>> & MeshProps, {
+        light: Parameters<typeof BindLightProperties>[0];
+    effect: Parameters<typeof BindLightProperties>[1];
+    lightIndex: Parameters<typeof BindLightProperties>[2];
+    
+            },ReturnType<typeof BindLightProperties>>, any>;
+  bindLights: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindLights>> & MeshProps, {
+        scene: Parameters<typeof BindLights>[0];
+    mesh: Parameters<typeof BindLights>[1];
+    effect: Parameters<typeof BindLights>[2];
+    defines: Parameters<typeof BindLights>[3];
+    maxSimultaneousLights: Parameters<typeof BindLights>[4];
+    
+            },ReturnType<typeof BindLights>>, any>;
+  bindLogDepth: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindLogDepth>> & MeshProps, {
+        defines: Parameters<typeof BindLogDepth>[0];
+    effect: Parameters<typeof BindLogDepth>[1];
+    scene: Parameters<typeof BindLogDepth>[2];
+    
+            },ReturnType<typeof BindLogDepth>>, any>;
+  bindMorphTargetParameters: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindMorphTargetParameters>> & MeshProps, {
+        abstractMesh: Parameters<typeof BindMorphTargetParameters>[0];
+    effect: Parameters<typeof BindMorphTargetParameters>[1];
+    
+            },ReturnType<typeof BindMorphTargetParameters>>, any>;
+  bindSceneUniformBuffer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindSceneUniformBuffer>> & MeshProps, {
+        effect: Parameters<typeof BindSceneUniformBuffer>[0];
+    sceneUbo: Parameters<typeof BindSceneUniformBuffer>[1];
+    
+            },ReturnType<typeof BindSceneUniformBuffer>>, any>;
+  bindTextureMatrix: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindTextureMatrix>> & MeshProps, {
+        texture: Parameters<typeof BindTextureMatrix>[0];
+    uniformBuffer: Parameters<typeof BindTextureMatrix>[1];
+    key: Parameters<typeof BindTextureMatrix>[2];
+    
+            },ReturnType<typeof BindTextureMatrix>>, any>;
   blackAndWhitePostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BlackAndWhitePostProcess> & Clonable, {
 name: ConstructorParameters<typeof BlackAndWhitePostProcess>[0];
     options: ConstructorParameters<typeof BlackAndWhitePostProcess>[1];
@@ -1598,6 +1890,21 @@ triggerOptions: ConstructorParameters<typeof CombineAction>[0];
     enableChildrenConditions: ConstructorParameters<typeof CombineAction>[3];
     
     },CombineAction>, any>;
+  completeGreasedLineColorTable: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CompleteGreasedLineColorTable>> & MeshProps, {
+        pointCount: Parameters<typeof CompleteGreasedLineColorTable>[0];
+    colors: Parameters<typeof CompleteGreasedLineColorTable>[1];
+    colorDistribution: Parameters<typeof CompleteGreasedLineColorTable>[2];
+    defaultColor: Parameters<typeof CompleteGreasedLineColorTable>[3];
+    
+            },ReturnType<typeof CompleteGreasedLineColorTable>>, any>;
+  completeGreasedLineWidthTable: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CompleteGreasedLineWidthTable>> & MeshProps, {
+        pointCount: Parameters<typeof CompleteGreasedLineWidthTable>[0];
+    widths: Parameters<typeof CompleteGreasedLineWidthTable>[1];
+    widthsDistribution: Parameters<typeof CompleteGreasedLineWidthTable>[2];
+    defaultWidthUpper: Parameters<typeof CompleteGreasedLineWidthTable>[3];
+    defaultWidthLower: Parameters<typeof CompleteGreasedLineWidthTable>[4];
+    
+            },ReturnType<typeof CompleteGreasedLineWidthTable>>, any>;
   computeEffect: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ComputeEffect>, {
 baseName: ConstructorParameters<typeof ComputeEffect>[0];
     options: ConstructorParameters<typeof ComputeEffect>[1];
@@ -1669,6 +1976,17 @@ name: ConstructorParameters<typeof ConvolutionPostProcess>[0];
     textureType: ConstructorParameters<typeof ConvolutionPostProcess>[7];
     
     },ConvolutionPostProcess>, any>;
+  copyFloatData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CopyFloatData>> & MeshProps, {
+        input: Parameters<typeof CopyFloatData>[0];
+    size: Parameters<typeof CopyFloatData>[1];
+    type: Parameters<typeof CopyFloatData>[2];
+    byteOffset: Parameters<typeof CopyFloatData>[3];
+    byteStride: Parameters<typeof CopyFloatData>[4];
+    normalized: Parameters<typeof CopyFloatData>[5];
+    totalVertices: Parameters<typeof CopyFloatData>[6];
+    output: Parameters<typeof CopyFloatData>[7];
+    
+            },ReturnType<typeof CopyFloatData>>, any>;
   copyTextureToTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CopyTextureToTexture>, {
 engine: ConstructorParameters<typeof CopyTextureToTexture>[0];
     isDepthTexture: ConstructorParameters<typeof CopyTextureToTexture>[1];
@@ -1887,7 +2205,7 @@ engine: ConstructorParameters<typeof CopyTextureToTexture>[0];
         options: Parameters<typeof CreatePlaneVertexData>[0];
     
             },ReturnType<typeof CreatePlaneVertexData>>, any>;
-  polygon: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePolygon>> & MeshProps, {
+  polygon3D: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePolygon>> & MeshProps, {
         name: Parameters<typeof CreatePolygon>[0];
     options: Parameters<typeof CreatePolygon>[1];
     scene: Parameters<typeof CreatePolygon>[2];
@@ -2177,6 +2495,23 @@ material: ConstructorParameters<typeof DecalMapConfiguration>[0];
     
     },DecalMapConfiguration>, any>;
   decalMapDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DecalMapDefines>, {},DecalMapDefines>, any>;
+  decode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Decode>> & MeshProps, {},ReturnType<typeof Decode>>, any>;
+  decodeBase64ToBinary: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof DecodeBase64ToBinary>> & MeshProps, {},ReturnType<typeof DecodeBase64ToBinary>>, any>;
+  decodeBase64ToString: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof DecodeBase64ToString>> & MeshProps, {},ReturnType<typeof DecodeBase64ToString>>, any>;
+  decodeBase64UrlToBinary: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof DecodeBase64UrlToBinary>> & MeshProps, {
+        uri: Parameters<typeof DecodeBase64UrlToBinary>[0];
+    
+            },ReturnType<typeof DecodeBase64UrlToBinary>>, any>;
+  decodeBase64UrlToString: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof DecodeBase64UrlToString>> & MeshProps, {},ReturnType<typeof DecodeBase64UrlToString>>, any>;
+  decodeFloat32: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof DecodeFloat32>> & MeshProps, {
+        dataView: Parameters<typeof DecodeFloat32>[0];
+    offset: Parameters<typeof DecodeFloat32>[1];
+    
+            },ReturnType<typeof DecodeFloat32>>, any>;
+  decodeRunLength: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof DecodeRunLength>> & MeshProps, {
+        source: Parameters<typeof DecodeRunLength>[0];
+    
+            },ReturnType<typeof DecodeRunLength>>, any>;
   defaultCollisionCoordinator: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DefaultCollisionCoordinator>, {},DefaultCollisionCoordinator>, any>;
   defaultKTX2DecoderOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DefaultKTX2DecoderOptions>, {},DefaultKTX2DecoderOptions>, any>;
   defaultLoadingScreen: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DefaultLoadingScreen>, {
@@ -2437,6 +2772,8 @@ oscillations: ConstructorParameters<typeof ElasticEase>[0];
 name: ConstructorParameters<typeof ElbowBlock>[0];
     
     },ElbowBlock>, any>;
+  encodeArrayBufferToBase64: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof EncodeArrayBufferToBase64>> & MeshProps, {},ReturnType<typeof EncodeArrayBufferToBase64>>, any>;
+  endsWith: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof EndsWith>> & MeshProps, {},ReturnType<typeof EndsWith>>, any>;
   engine: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Engine>, {
 canvasOrContext: ConstructorParameters<typeof Engine>[0];
     antialias: ConstructorParameters<typeof Engine>[1];
@@ -2485,6 +2822,8 @@ triggerOptions: ConstructorParameters<typeof ExecuteCodeAction>[0];
     condition: ConstructorParameters<typeof ExecuteCodeAction>[2];
     
     },ExecuteCodeAction>, any>;
+  exitFullscreen: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExitFullscreen>> & MeshProps, {},ReturnType<typeof ExitFullscreen>>, any>;
+  exitPointerlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExitPointerlock>> & MeshProps, {},ReturnType<typeof ExitPointerlock>>, any>;
   exponentialEase: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ExponentialEase>, {
 exponent: ConstructorParameters<typeof ExponentialEase>[0];
     
@@ -2504,6 +2843,25 @@ name: ConstructorParameters<typeof ExtractHighlightsPostProcess>[0];
     blockCompilation: ConstructorParameters<typeof ExtractHighlightsPostProcess>[7];
     
     },ExtractHighlightsPostProcess>, any>;
+  polygon3D: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudePolygon>> & MeshProps, {
+        name: Parameters<typeof ExtrudePolygon>[0];
+    options: Parameters<typeof ExtrudePolygon>[1];
+    scene: Parameters<typeof ExtrudePolygon>[2];
+    earcutInjection: Parameters<typeof ExtrudePolygon>[3];
+    
+            },ReturnType<typeof ExtrudePolygon>>, any>;
+  shape: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShape>> & MeshProps, {
+        name: Parameters<typeof ExtrudeShape>[0];
+    options: Parameters<typeof ExtrudeShape>[1];
+    scene: Parameters<typeof ExtrudeShape>[2];
+    
+            },ReturnType<typeof ExtrudeShape>>, any>;
+  shapeCustom: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudeShapeCustom>> & MeshProps, {
+        name: Parameters<typeof ExtrudeShapeCustom>[0];
+    options: Parameters<typeof ExtrudeShapeCustom>[1];
+    scene: Parameters<typeof ExtrudeShapeCustom>[2];
+    
+            },ReturnType<typeof ExtrudeShapeCustom>>, any>;
   factorGradient: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FactorGradient>, {
 gradient: ConstructorParameters<typeof FactorGradient>[0];
     factor1: ConstructorParameters<typeof FactorGradient>[1];
@@ -3079,6 +3437,10 @@ name: ConstructorParameters<typeof FresnelBlock>[0];
 options: ConstructorParameters<typeof FresnelParameters>[0];
     
     },FresnelParameters>, any>;
+  fromHalfFloat: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof FromHalfFloat>> & MeshProps, {
+        value: Parameters<typeof FromHalfFloat>[0];
+    
+            },ReturnType<typeof FromHalfFloat>>, any>;
   frontFacingBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrontFacingBlock> & Clonable, {
 name: ConstructorParameters<typeof FrontFacingBlock>[0];
     
@@ -3154,6 +3516,24 @@ name: ConstructorParameters<typeof GaussianSplattingMesh>[0];
     keepInRam: ConstructorParameters<typeof GaussianSplattingMesh>[3];
     
     },GaussianSplattingMesh>, any>;
+  generateBase64StringFromPixelData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GenerateBase64StringFromPixelData>> & MeshProps, {
+        pixels: Parameters<typeof GenerateBase64StringFromPixelData>[0];
+    size: Parameters<typeof GenerateBase64StringFromPixelData>[1];
+    invertY: Parameters<typeof GenerateBase64StringFromPixelData>[2];
+    
+            },ReturnType<typeof GenerateBase64StringFromPixelData>>, any>;
+  generateBase64StringFromTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GenerateBase64StringFromTexture>> & MeshProps, {
+        texture: Parameters<typeof GenerateBase64StringFromTexture>[0];
+    faceIndex: Parameters<typeof GenerateBase64StringFromTexture>[1];
+    level: Parameters<typeof GenerateBase64StringFromTexture>[2];
+    
+            },ReturnType<typeof GenerateBase64StringFromTexture>>, any>;
+  generateBase64StringFromTextureAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GenerateBase64StringFromTextureAsync>> & MeshProps, {
+        texture: Parameters<typeof GenerateBase64StringFromTextureAsync>[0];
+    faceIndex: Parameters<typeof GenerateBase64StringFromTextureAsync>[1];
+    level: Parameters<typeof GenerateBase64StringFromTextureAsync>[2];
+    
+            },ReturnType<typeof GenerateBase64StringFromTextureAsync>>, any>;
   genericPad: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GenericPad>, {
 id: ConstructorParameters<typeof GenericPad>[0];
     index: ConstructorParameters<typeof GenericPad>[1];
@@ -3292,6 +3672,77 @@ name: ConstructorParameters<typeof GeometryTransformBlock>[0];
 name: ConstructorParameters<typeof GeometryTrigonometryBlock>[0];
     
     },GeometryTrigonometryBlock>, any>;
+  getClass: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetClass>> & MeshProps, {
+        fqdn: Parameters<typeof GetClass>[0];
+    
+            },ReturnType<typeof GetClass>>, any>;
+  getClassName: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetClassName>> & MeshProps, {
+        obj: Parameters<typeof GetClassName>[0];
+    
+            },ReturnType<typeof GetClassName>>, any>;
+  getDOMTextContent: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetDOMTextContent>> & MeshProps, {
+        element: Parameters<typeof GetDOMTextContent>[0];
+    
+            },ReturnType<typeof GetDOMTextContent>>, any>;
+  getEnvInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetEnvInfo>> & MeshProps, {
+        data: Parameters<typeof GetEnvInfo>[0];
+    
+            },ReturnType<typeof GetEnvInfo>>, any>;
+  getEnvironmentBRDFTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetEnvironmentBRDFTexture>> & MeshProps, {},ReturnType<typeof GetEnvironmentBRDFTexture>>, any>;
+  getExrHeader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetExrHeader>> & MeshProps, {
+        dataView: Parameters<typeof GetExrHeader>[0];
+    offset: Parameters<typeof GetExrHeader>[1];
+    
+            },ReturnType<typeof GetExrHeader>>, any>;
+  getFogState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetFogState>> & MeshProps, {
+        mesh: Parameters<typeof GetFogState>[0];
+    scene: Parameters<typeof GetFogState>[1];
+    
+            },ReturnType<typeof GetFogState>>, any>;
+  getFontOffset: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetFontOffset>> & MeshProps, {
+        font: Parameters<typeof GetFontOffset>[0];
+    
+            },ReturnType<typeof GetFontOffset>>, any>;
+  getForwardRay: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetForwardRay>> & MeshProps, {
+        camera: Parameters<typeof GetForwardRay>[0];
+    length: Parameters<typeof GetForwardRay>[1];
+    transform: Parameters<typeof GetForwardRay>[2];
+    origin: Parameters<typeof GetForwardRay>[3];
+    
+            },ReturnType<typeof GetForwardRay>>, any>;
+  getForwardRayToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetForwardRayToRef>> & MeshProps, {
+        camera: Parameters<typeof GetForwardRayToRef>[0];
+    refRay: Parameters<typeof GetForwardRayToRef>[1];
+    length: Parameters<typeof GetForwardRayToRef>[2];
+    transform: Parameters<typeof GetForwardRayToRef>[3];
+    origin: Parameters<typeof GetForwardRayToRef>[4];
+    
+            },ReturnType<typeof GetForwardRayToRef>>, any>;
+  getIndividualParser: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetIndividualParser>> & MeshProps, {
+        name: Parameters<typeof GetIndividualParser>[0];
+    
+            },ReturnType<typeof GetIndividualParser>>, any>;
+  getInternalFormatFromBasisFormat: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetInternalFormatFromBasisFormat>> & MeshProps, {},ReturnType<typeof GetInternalFormatFromBasisFormat>>, any>;
+  getParser: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetParser>> & MeshProps, {
+        name: Parameters<typeof GetParser>[0];
+    
+            },ReturnType<typeof GetParser>>, any>;
+  getPointsCount: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetPointsCount>> & MeshProps, {
+        allPoints: Parameters<typeof GetPointsCount>[0];
+    
+            },ReturnType<typeof GetPointsCount>>, any>;
+  getTGAHeader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetTGAHeader>> & MeshProps, {
+        data: Parameters<typeof GetTGAHeader>[0];
+    
+            },ReturnType<typeof GetTGAHeader>>, any>;
+  getTextureDataAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetTextureDataAsync>> & MeshProps, {
+        texture: Parameters<typeof GetTextureDataAsync>[0];
+    width: Parameters<typeof GetTextureDataAsync>[1];
+    height: Parameters<typeof GetTextureDataAsync>[2];
+    face: Parameters<typeof GetTextureDataAsync>[3];
+    lod: Parameters<typeof GetTextureDataAsync>[4];
+    
+            },ReturnType<typeof GetTextureDataAsync>>, any>;
   gizmo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Gizmo>, {
 gizmoLayer: ConstructorParameters<typeof Gizmo>[0];
     
@@ -3407,6 +3858,13 @@ numSamples: ConstructorParameters<typeof Halton2DSequence>[0];
     
     },Halton2DSequence>, any>;
   handConstraintBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HandConstraintBehavior>, {},HandConstraintBehavior>, any>;
+  handleFallbacksForShadows: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof HandleFallbacksForShadows>> & MeshProps, {
+        defines: Parameters<typeof HandleFallbacksForShadows>[0];
+    fallbacks: Parameters<typeof HandleFallbacksForShadows>[1];
+    maxSimultaneousLights: Parameters<typeof HandleFallbacksForShadows>[2];
+    rank: Parameters<typeof HandleFallbacksForShadows>[3];
+    
+            },ReturnType<typeof HandleFallbacksForShadows>>, any>;
   hardwareScalingOptimization: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HardwareScalingOptimization>, {
 priority: ConstructorParameters<typeof HardwareScalingOptimization>[0];
     maximumScale: ConstructorParameters<typeof HardwareScalingOptimization>[1];
@@ -3472,6 +3930,15 @@ name: ConstructorParameters<typeof HtmlElementTexture>[0];
     options: ConstructorParameters<typeof HtmlElementTexture>[2];
     
     },HtmlElementTexture>, any>;
+  hufUncompress: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof HufUncompress>> & MeshProps, {
+        array: Parameters<typeof HufUncompress>[0];
+    dataView: Parameters<typeof HufUncompress>[1];
+    offset: Parameters<typeof HufUncompress>[2];
+    nCompressed: Parameters<typeof HufUncompress>[3];
+    outBuffer: Parameters<typeof HufUncompress>[4];
+    nRaw: Parameters<typeof HufUncompress>[5];
+    
+            },ReturnType<typeof HufUncompress>>, any>;
   iblShadowsRenderPipeline: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<IblShadowsRenderPipeline>, {
 name: ConstructorParameters<typeof IblShadowsRenderPipeline>[0];
     scene: ConstructorParameters<typeof IblShadowsRenderPipeline>[1];
@@ -3565,6 +4032,11 @@ name: ConstructorParameters<typeof InstantiateRadialBlock>[0];
 name: ConstructorParameters<typeof IntFloatConverterBlock>[0];
     
     },IntFloatConverterBlock>, any>;
+  interleaveScalar: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof InterleaveScalar>> & MeshProps, {
+        source: Parameters<typeof InterleaveScalar>[0];
+    out: Parameters<typeof InterleaveScalar>[1];
+    
+            },ReturnType<typeof InterleaveScalar>>, any>;
   internalTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<InternalTexture>, {
 engine: ConstructorParameters<typeof InternalTexture>[0];
     source: ConstructorParameters<typeof InternalTexture>[1];
@@ -3588,6 +4060,15 @@ bu: ConstructorParameters<typeof IntersectionInfo>[0];
     distance: ConstructorParameters<typeof IntersectionInfo>[2];
     
     },IntersectionInfo>, any>;
+  isBase64DataUrl: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsBase64DataUrl>> & MeshProps, {},ReturnType<typeof IsBase64DataUrl>>, any>;
+  isDocumentAvailable: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsDocumentAvailable>> & MeshProps, {},ReturnType<typeof IsDocumentAvailable>>, any>;
+  isFileURL: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsFileURL>> & MeshProps, {},ReturnType<typeof IsFileURL>>, any>;
+  isNavigatorAvailable: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsNavigatorAvailable>> & MeshProps, {},ReturnType<typeof IsNavigatorAvailable>>, any>;
+  isWindowObjectExist: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsWindowObjectExist>> & MeshProps, {},ReturnType<typeof IsWindowObjectExist>>, any>;
+  isWrapper: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsWrapper>> & MeshProps, {
+        effect: Parameters<typeof IsWrapper>[0];
+    
+            },ReturnType<typeof IsWrapper>>, any>;
   keyboardInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<KeyboardInfo>, {
 type: ConstructorParameters<typeof KeyboardInfo>[0];
     event: ConstructorParameters<typeof KeyboardInfo>[1];
@@ -3689,11 +4170,14 @@ name: ConstructorParameters<typeof LinesMesh>[0];
     material: ConstructorParameters<typeof LinesMesh>[7];
     
     },LinesMesh>, any>;
+  loadFile: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadFile>> & MeshProps, {},ReturnType<typeof LoadFile>>, any>;
   loadFileError: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<LoadFileError>, {
 message: ConstructorParameters<typeof LoadFileError>[0];
     object: ConstructorParameters<typeof LoadFileError>[1];
     
     },LoadFileError>, any>;
+  loadImage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadImage>> & MeshProps, {},ReturnType<typeof LoadImage>>, any>;
+  loadTextureFromTranscodeResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadTextureFromTranscodeResult>> & MeshProps, {},ReturnType<typeof LoadTextureFromTranscodeResult>>, any>;
   lockConstraint: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<LockConstraint>, {
 pivotA: ConstructorParameters<typeof LockConstraint>[0];
     pivotB: ConstructorParameters<typeof LockConstraint>[1];
@@ -3897,6 +4381,22 @@ name: ConstructorParameters<typeof MultiMaterial>[0];
     scene: ConstructorParameters<typeof MultiMaterial>[1];
     
     },MultiMaterial>, any>;
+  multiPick: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof MultiPick>> & MeshProps, {
+        scene: Parameters<typeof MultiPick>[0];
+    x: Parameters<typeof MultiPick>[1];
+    y: Parameters<typeof MultiPick>[2];
+    predicate: Parameters<typeof MultiPick>[3];
+    camera: Parameters<typeof MultiPick>[4];
+    trianglePredicate: Parameters<typeof MultiPick>[5];
+    
+            },ReturnType<typeof MultiPick>>, any>;
+  multiPickWithRay: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof MultiPickWithRay>> & MeshProps, {
+        scene: Parameters<typeof MultiPickWithRay>[0];
+    ray: Parameters<typeof MultiPickWithRay>[1];
+    predicate: Parameters<typeof MultiPickWithRay>[2];
+    trianglePredicate: Parameters<typeof MultiPickWithRay>[3];
+    
+            },ReturnType<typeof MultiPickWithRay>>, any>;
   multiPointerScaleBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MultiPointerScaleBehavior>, {},MultiPointerScaleBehavior>, any>;
   multiRenderTarget: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MultiRenderTarget> & Clonable, {
 name: ConstructorParameters<typeof MultiRenderTarget>[0];
@@ -4139,6 +4639,66 @@ material: ConstructorParameters<typeof PBRSubSurfaceConfiguration>[0];
     addToPluginList: ConstructorParameters<typeof PBRSubSurfaceConfiguration>[1];
     
     },PBRSubSurfaceConfiguration>, any>;
+  padNumber: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PadNumber>> & MeshProps, {},ReturnType<typeof PadNumber>>, any>;
+  parse: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Parse>> & MeshProps, {
+        jsonData: Parameters<typeof Parse>[0];
+    scene: Parameters<typeof Parse>[1];
+    container: Parameters<typeof Parse>[2];
+    rootUrl: Parameters<typeof Parse>[3];
+    
+            },ReturnType<typeof Parse>>, any>;
+  parseFloat16: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseFloat16>> & MeshProps, {
+        dataView: Parameters<typeof ParseFloat16>[0];
+    offset: Parameters<typeof ParseFloat16>[1];
+    
+            },ReturnType<typeof ParseFloat16>>, any>;
+  parseFloat32: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseFloat32>> & MeshProps, {
+        dataView: Parameters<typeof ParseFloat32>[0];
+    offset: Parameters<typeof ParseFloat32>[1];
+    
+            },ReturnType<typeof ParseFloat32>>, any>;
+  parseInt32: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseInt32>> & MeshProps, {
+        dataView: Parameters<typeof ParseInt32>[0];
+    offset: Parameters<typeof ParseInt32>[1];
+    
+            },ReturnType<typeof ParseInt32>>, any>;
+  parseInt64: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseInt64>> & MeshProps, {
+        dataView: Parameters<typeof ParseInt64>[0];
+    offset: Parameters<typeof ParseInt64>[1];
+    
+            },ReturnType<typeof ParseInt64>>, any>;
+  parseNullTerminatedString: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseNullTerminatedString>> & MeshProps, {
+        buffer: Parameters<typeof ParseNullTerminatedString>[0];
+    offset: Parameters<typeof ParseNullTerminatedString>[1];
+    
+            },ReturnType<typeof ParseNullTerminatedString>>, any>;
+  parseUint16: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseUint16>> & MeshProps, {
+        dataView: Parameters<typeof ParseUint16>[0];
+    offset: Parameters<typeof ParseUint16>[1];
+    
+            },ReturnType<typeof ParseUint16>>, any>;
+  parseUint32: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseUint32>> & MeshProps, {
+        dataView: Parameters<typeof ParseUint32>[0];
+    offset: Parameters<typeof ParseUint32>[1];
+    
+            },ReturnType<typeof ParseUint32>>, any>;
+  parseUint8: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseUint8>> & MeshProps, {
+        dataView: Parameters<typeof ParseUint8>[0];
+    offset: Parameters<typeof ParseUint8>[1];
+    
+            },ReturnType<typeof ParseUint8>>, any>;
+  parseUint8Array: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseUint8Array>> & MeshProps, {
+        array: Parameters<typeof ParseUint8Array>[0];
+    offset: Parameters<typeof ParseUint8Array>[1];
+    
+            },ReturnType<typeof ParseUint8Array>>, any>;
+  parseValue: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ParseValue>> & MeshProps, {
+        dataView: Parameters<typeof ParseValue>[0];
+    offset: Parameters<typeof ParseValue>[1];
+    type: Parameters<typeof ParseValue>[2];
+    size: Parameters<typeof ParseValue>[3];
+    
+            },ReturnType<typeof ParseValue>>, any>;
   particle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Particle>, {
 particleSystem: ConstructorParameters<typeof Particle>[0];
     
@@ -4329,6 +4889,34 @@ scene: ConstructorParameters<typeof PhysicsViewer>[0];
     
     },PhysicsViewer>, any>;
   physicsVortexEventOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PhysicsVortexEventOptions>, {},PhysicsVortexEventOptions>, any>;
+  pick: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Pick>> & MeshProps, {
+        scene: Parameters<typeof Pick>[0];
+    x: Parameters<typeof Pick>[1];
+    y: Parameters<typeof Pick>[2];
+    predicate: Parameters<typeof Pick>[3];
+    fastCheck: Parameters<typeof Pick>[4];
+    camera: Parameters<typeof Pick>[5];
+    trianglePredicate: Parameters<typeof Pick>[6];
+    _enableDistantPicking: Parameters<typeof Pick>[7];
+    
+            },ReturnType<typeof Pick>>, any>;
+  pickWithBoundingInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PickWithBoundingInfo>> & MeshProps, {
+        scene: Parameters<typeof PickWithBoundingInfo>[0];
+    x: Parameters<typeof PickWithBoundingInfo>[1];
+    y: Parameters<typeof PickWithBoundingInfo>[2];
+    predicate: Parameters<typeof PickWithBoundingInfo>[3];
+    fastCheck: Parameters<typeof PickWithBoundingInfo>[4];
+    camera: Parameters<typeof PickWithBoundingInfo>[5];
+    
+            },ReturnType<typeof PickWithBoundingInfo>>, any>;
+  pickWithRay: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PickWithRay>> & MeshProps, {
+        scene: Parameters<typeof PickWithRay>[0];
+    ray: Parameters<typeof PickWithRay>[1];
+    predicate: Parameters<typeof PickWithRay>[2];
+    fastCheck: Parameters<typeof PickWithRay>[3];
+    trianglePredicate: Parameters<typeof PickWithRay>[4];
+    
+            },ReturnType<typeof PickWithRay>>, any>;
   pickingInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PickingInfo>, {},PickingInfo>, any>;
   plane: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Plane> & Clonable, {
 a: ConstructorParameters<typeof Plane>[0];
@@ -4531,6 +5119,149 @@ actionManager: ConstructorParameters<typeof PredicateCondition>[0];
     predicate: ConstructorParameters<typeof PredicateCondition>[1];
     
     },PredicateCondition>, any>;
+  predictor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Predictor>> & MeshProps, {
+        source: Parameters<typeof Predictor>[0];
+    
+            },ReturnType<typeof Predictor>>, any>;
+  prepareAttributesForBakedVertexAnimation: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareAttributesForBakedVertexAnimation>> & MeshProps, {
+        attribs: Parameters<typeof PrepareAttributesForBakedVertexAnimation>[0];
+    mesh: Parameters<typeof PrepareAttributesForBakedVertexAnimation>[1];
+    defines: Parameters<typeof PrepareAttributesForBakedVertexAnimation>[2];
+    
+            },ReturnType<typeof PrepareAttributesForBakedVertexAnimation>>, any>;
+  prepareAttributesForBones: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareAttributesForBones>> & MeshProps, {
+        attribs: Parameters<typeof PrepareAttributesForBones>[0];
+    mesh: Parameters<typeof PrepareAttributesForBones>[1];
+    defines: Parameters<typeof PrepareAttributesForBones>[2];
+    fallbacks: Parameters<typeof PrepareAttributesForBones>[3];
+    
+            },ReturnType<typeof PrepareAttributesForBones>>, any>;
+  prepareAttributesForInstances: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareAttributesForInstances>> & MeshProps, {
+        attribs: Parameters<typeof PrepareAttributesForInstances>[0];
+    defines: Parameters<typeof PrepareAttributesForInstances>[1];
+    
+            },ReturnType<typeof PrepareAttributesForInstances>>, any>;
+  prepareAttributesForMorphTargets: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareAttributesForMorphTargets>> & MeshProps, {
+        attribs: Parameters<typeof PrepareAttributesForMorphTargets>[0];
+    mesh: Parameters<typeof PrepareAttributesForMorphTargets>[1];
+    defines: Parameters<typeof PrepareAttributesForMorphTargets>[2];
+    
+            },ReturnType<typeof PrepareAttributesForMorphTargets>>, any>;
+  prepareAttributesForMorphTargetsInfluencers: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareAttributesForMorphTargetsInfluencers>> & MeshProps, {
+        attribs: Parameters<typeof PrepareAttributesForMorphTargetsInfluencers>[0];
+    mesh: Parameters<typeof PrepareAttributesForMorphTargetsInfluencers>[1];
+    influencers: Parameters<typeof PrepareAttributesForMorphTargetsInfluencers>[2];
+    
+            },ReturnType<typeof PrepareAttributesForMorphTargetsInfluencers>>, any>;
+  prepareDefinesForAttributes: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForAttributes>> & MeshProps, {
+        mesh: Parameters<typeof PrepareDefinesForAttributes>[0];
+    defines: Parameters<typeof PrepareDefinesForAttributes>[1];
+    useVertexColor: Parameters<typeof PrepareDefinesForAttributes>[2];
+    useBones: Parameters<typeof PrepareDefinesForAttributes>[3];
+    useMorphTargets: Parameters<typeof PrepareDefinesForAttributes>[4];
+    useVertexAlpha: Parameters<typeof PrepareDefinesForAttributes>[5];
+    useBakedVertexAnimation: Parameters<typeof PrepareDefinesForAttributes>[6];
+    
+            },ReturnType<typeof PrepareDefinesForAttributes>>, any>;
+  prepareDefinesForBakedVertexAnimation: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForBakedVertexAnimation>> & MeshProps, {
+        mesh: Parameters<typeof PrepareDefinesForBakedVertexAnimation>[0];
+    defines: Parameters<typeof PrepareDefinesForBakedVertexAnimation>[1];
+    
+            },ReturnType<typeof PrepareDefinesForBakedVertexAnimation>>, any>;
+  prepareDefinesForBones: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForBones>> & MeshProps, {
+        mesh: Parameters<typeof PrepareDefinesForBones>[0];
+    defines: Parameters<typeof PrepareDefinesForBones>[1];
+    
+            },ReturnType<typeof PrepareDefinesForBones>>, any>;
+  prepareDefinesForCamera: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForCamera>> & MeshProps, {
+        scene: Parameters<typeof PrepareDefinesForCamera>[0];
+    defines: Parameters<typeof PrepareDefinesForCamera>[1];
+    
+            },ReturnType<typeof PrepareDefinesForCamera>>, any>;
+  prepareDefinesForFrameBoundValues: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForFrameBoundValues>> & MeshProps, {
+        scene: Parameters<typeof PrepareDefinesForFrameBoundValues>[0];
+    engine: Parameters<typeof PrepareDefinesForFrameBoundValues>[1];
+    material: Parameters<typeof PrepareDefinesForFrameBoundValues>[2];
+    defines: Parameters<typeof PrepareDefinesForFrameBoundValues>[3];
+    useInstances: Parameters<typeof PrepareDefinesForFrameBoundValues>[4];
+    useClipPlane: Parameters<typeof PrepareDefinesForFrameBoundValues>[5];
+    useThinInstances: Parameters<typeof PrepareDefinesForFrameBoundValues>[6];
+    
+            },ReturnType<typeof PrepareDefinesForFrameBoundValues>>, any>;
+  prepareDefinesForLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForLight>> & MeshProps, {
+        scene: Parameters<typeof PrepareDefinesForLight>[0];
+    mesh: Parameters<typeof PrepareDefinesForLight>[1];
+    light: Parameters<typeof PrepareDefinesForLight>[2];
+    lightIndex: Parameters<typeof PrepareDefinesForLight>[3];
+    defines: Parameters<typeof PrepareDefinesForLight>[4];
+    specularSupported: Parameters<typeof PrepareDefinesForLight>[5];
+    state: Parameters<typeof PrepareDefinesForLight>[6];
+    
+            },ReturnType<typeof PrepareDefinesForLight>>, any>;
+  prepareDefinesForLights: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForLights>> & MeshProps, {
+        scene: Parameters<typeof PrepareDefinesForLights>[0];
+    mesh: Parameters<typeof PrepareDefinesForLights>[1];
+    defines: Parameters<typeof PrepareDefinesForLights>[2];
+    specularSupported: Parameters<typeof PrepareDefinesForLights>[3];
+    maxSimultaneousLights: Parameters<typeof PrepareDefinesForLights>[4];
+    disableLighting: Parameters<typeof PrepareDefinesForLights>[5];
+    
+            },ReturnType<typeof PrepareDefinesForLights>>, any>;
+  prepareDefinesForMergedUV: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForMergedUV>> & MeshProps, {
+        texture: Parameters<typeof PrepareDefinesForMergedUV>[0];
+    defines: Parameters<typeof PrepareDefinesForMergedUV>[1];
+    key: Parameters<typeof PrepareDefinesForMergedUV>[2];
+    
+            },ReturnType<typeof PrepareDefinesForMergedUV>>, any>;
+  prepareDefinesForMisc: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForMisc>> & MeshProps, {
+        mesh: Parameters<typeof PrepareDefinesForMisc>[0];
+    scene: Parameters<typeof PrepareDefinesForMisc>[1];
+    useLogarithmicDepth: Parameters<typeof PrepareDefinesForMisc>[2];
+    pointsCloud: Parameters<typeof PrepareDefinesForMisc>[3];
+    fogEnabled: Parameters<typeof PrepareDefinesForMisc>[4];
+    alphaTest: Parameters<typeof PrepareDefinesForMisc>[5];
+    defines: Parameters<typeof PrepareDefinesForMisc>[6];
+    applyDecalAfterDetail: Parameters<typeof PrepareDefinesForMisc>[7];
+    
+            },ReturnType<typeof PrepareDefinesForMisc>>, any>;
+  prepareDefinesForMorphTargets: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForMorphTargets>> & MeshProps, {
+        mesh: Parameters<typeof PrepareDefinesForMorphTargets>[0];
+    defines: Parameters<typeof PrepareDefinesForMorphTargets>[1];
+    
+            },ReturnType<typeof PrepareDefinesForMorphTargets>>, any>;
+  prepareDefinesForMultiview: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForMultiview>> & MeshProps, {
+        scene: Parameters<typeof PrepareDefinesForMultiview>[0];
+    defines: Parameters<typeof PrepareDefinesForMultiview>[1];
+    
+            },ReturnType<typeof PrepareDefinesForMultiview>>, any>;
+  prepareDefinesForOIT: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForOIT>> & MeshProps, {
+        scene: Parameters<typeof PrepareDefinesForOIT>[0];
+    defines: Parameters<typeof PrepareDefinesForOIT>[1];
+    needAlphaBlending: Parameters<typeof PrepareDefinesForOIT>[2];
+    
+            },ReturnType<typeof PrepareDefinesForOIT>>, any>;
+  prepareDefinesForPrePass: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForPrePass>> & MeshProps, {
+        scene: Parameters<typeof PrepareDefinesForPrePass>[0];
+    defines: Parameters<typeof PrepareDefinesForPrePass>[1];
+    canRenderToMRT: Parameters<typeof PrepareDefinesForPrePass>[2];
+    
+            },ReturnType<typeof PrepareDefinesForPrePass>>, any>;
+  prepareUniformsAndSamplersForLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareUniformsAndSamplersForLight>> & MeshProps, {
+        lightIndex: Parameters<typeof PrepareUniformsAndSamplersForLight>[0];
+    uniformsList: Parameters<typeof PrepareUniformsAndSamplersForLight>[1];
+    samplersList: Parameters<typeof PrepareUniformsAndSamplersForLight>[2];
+    projectedLightTexture: Parameters<typeof PrepareUniformsAndSamplersForLight>[3];
+    uniformBuffersList: Parameters<typeof PrepareUniformsAndSamplersForLight>[4];
+    updateOnlyBuffersList: Parameters<typeof PrepareUniformsAndSamplersForLight>[5];
+    
+            },ReturnType<typeof PrepareUniformsAndSamplersForLight>>, any>;
+  prepareUniformsAndSamplersList: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareUniformsAndSamplersList>> & MeshProps, {
+        uniformsListOrOptions: Parameters<typeof PrepareUniformsAndSamplersList>[0];
+    samplersList: Parameters<typeof PrepareUniformsAndSamplersList>[1];
+    defines: Parameters<typeof PrepareUniformsAndSamplersList>[2];
+    maxSimultaneousLights: Parameters<typeof PrepareUniformsAndSamplersList>[3];
+    
+            },ReturnType<typeof PrepareUniformsAndSamplersList>>, any>;
   pressureObserverWrapper: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PressureObserverWrapper>, {
 options: ConstructorParameters<typeof PressureObserverWrapper>[0];
     
@@ -4559,6 +5290,11 @@ scene: ConstructorParameters<typeof ProceduralTextureSceneComponent>[0];
     
     },ProceduralTextureSceneComponent>, any>;
   proximityCastResult: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ProximityCastResult>, {},ProximityCastResult>, any>;
+  pushAttributesForInstances: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PushAttributesForInstances>> & MeshProps, {
+        attribs: Parameters<typeof PushAttributesForInstances>[0];
+    needsPreviousMatrices: Parameters<typeof PushAttributesForInstances>[1];
+    
+            },ReturnType<typeof PushAttributesForInstances>>, any>;
   pushMaterial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PushMaterial> & Clonable, {
 name: ConstructorParameters<typeof PushMaterial>[0];
     scene: ConstructorParameters<typeof PushMaterial>[1];
@@ -4576,6 +5312,11 @@ x: ConstructorParameters<typeof Quaternion>[0];
     w: ConstructorParameters<typeof Quaternion>[3];
     
     },Quaternion>, any>;
+  queueNewFrame: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof QueueNewFrame>> & MeshProps, {
+        func: Parameters<typeof QueueNewFrame>[0];
+    requester: Parameters<typeof QueueNewFrame>[1];
+    
+            },ReturnType<typeof QueueNewFrame>>, any>;
   rSMCreatePluginMaterial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RSMCreatePluginMaterial>, {
 material: ConstructorParameters<typeof RSMCreatePluginMaterial>[0];
     
@@ -4590,6 +5331,7 @@ skeleton: ConstructorParameters<typeof Ragdoll>[0];
 name: ConstructorParameters<typeof RandomBlock>[0];
     
     },RandomBlock>, any>;
+  randomGUID: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RandomGUID>> & MeshProps, {},ReturnType<typeof RandomGUID>>, any>;
   randomNumberBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RandomNumberBlock> & Clonable, {
 name: ConstructorParameters<typeof RandomNumberBlock>[0];
     
@@ -4659,6 +5401,7 @@ origin: ConstructorParameters<typeof Ray>[0];
 ray: ConstructorParameters<typeof RayHelper>[0];
     
     },RayHelper>, any>;
+  readFile: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ReadFile>> & MeshProps, {},ReturnType<typeof ReadFile>>, any>;
   readFileError: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReadFileError>, {
 message: ConstructorParameters<typeof ReadFileError>[0];
     file: ConstructorParameters<typeof ReadFileError>[1];
@@ -4744,6 +5487,27 @@ name: ConstructorParameters<typeof RefractionTexture>[0];
     generateMipMaps: ConstructorParameters<typeof RefractionTexture>[3];
     
     },RefractionTexture>, any>;
+  registerClass: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RegisterClass>> & MeshProps, {
+        className: Parameters<typeof RegisterClass>[0];
+    type: Parameters<typeof RegisterClass>[1];
+    
+            },ReturnType<typeof RegisterClass>>, any>;
+  registerMaterialPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RegisterMaterialPlugin>> & MeshProps, {
+        pluginName: Parameters<typeof RegisterMaterialPlugin>[0];
+    factory: Parameters<typeof RegisterMaterialPlugin>[1];
+    
+            },ReturnType<typeof RegisterMaterialPlugin>>, any>;
+  registerNativeTypeAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RegisterNativeTypeAsync>> & MeshProps, {
+        typeName: Parameters<typeof RegisterNativeTypeAsync>[0];
+    constructor: Parameters<typeof RegisterNativeTypeAsync>[1];
+    
+            },ReturnType<typeof RegisterNativeTypeAsync>>, any>;
+  registerTargetForLateAnimationBinding: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RegisterTargetForLateAnimationBinding>> & MeshProps, {
+        scene: Parameters<typeof RegisterTargetForLateAnimationBinding>[0];
+    runtimeAnimation: Parameters<typeof RegisterTargetForLateAnimationBinding>[1];
+    originalValue: Parameters<typeof RegisterTargetForLateAnimationBinding>[2];
+    
+            },ReturnType<typeof RegisterTargetForLateAnimationBinding>>, any>;
   remapBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RemapBlock> & Clonable, {
 name: ConstructorParameters<typeof RemapBlock>[0];
     
@@ -4792,11 +5556,32 @@ scene: ConstructorParameters<typeof RenderingManager>[0];
 name: ConstructorParameters<typeof ReplaceColorBlock>[0];
     
     },ReplaceColorBlock>, any>;
+  requestFile: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RequestFile>> & MeshProps, {},ReturnType<typeof RequestFile>>, any>;
   requestFileError: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RequestFileError>, {
 message: ConstructorParameters<typeof RequestFileError>[0];
     request: ConstructorParameters<typeof RequestFileError>[1];
     
     },RequestFileError>, any>;
+  requestFullscreen: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RequestFullscreen>> & MeshProps, {
+        element: Parameters<typeof RequestFullscreen>[0];
+    
+            },ReturnType<typeof RequestFullscreen>>, any>;
+  requestPointerlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RequestPointerlock>> & MeshProps, {
+        element: Parameters<typeof RequestPointerlock>[0];
+    
+            },ReturnType<typeof RequestPointerlock>>, any>;
+  resizeImageBitmap: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ResizeImageBitmap>> & MeshProps, {
+        engine: Parameters<typeof ResizeImageBitmap>[0];
+    image: Parameters<typeof ResizeImageBitmap>[1];
+    bufferWidth: Parameters<typeof ResizeImageBitmap>[2];
+    bufferHeight: Parameters<typeof ResizeImageBitmap>[3];
+    
+            },ReturnType<typeof ResizeImageBitmap>>, any>;
+  reverseLutFromBitmap: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ReverseLutFromBitmap>> & MeshProps, {
+        bitmap: Parameters<typeof ReverseLutFromBitmap>[0];
+    lut: Parameters<typeof ReverseLutFromBitmap>[1];
+    
+            },ReturnType<typeof ReverseLutFromBitmap>>, any>;
   richType: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RichType>, {
 typeName: ConstructorParameters<typeof RichType>[0];
     defaultValue: ConstructorParameters<typeof RichType>[1];
@@ -4884,6 +5669,13 @@ gizmoLayer: ConstructorParameters<typeof ScaleGizmo>[0];
 name: ConstructorParameters<typeof ScalingBlock>[0];
     
     },ScalingBlock>, any>;
+  scanData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ScanData>> & MeshProps, {
+        decoder: Parameters<typeof ScanData>[0];
+    header: Parameters<typeof ScanData>[1];
+    dataView: Parameters<typeof ScanData>[2];
+    offset: Parameters<typeof ScanData>[3];
+    
+            },ReturnType<typeof ScanData>>, any>;
   scene: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Scene>, {
 engine: ConstructorParameters<typeof Scene>[0];
     options: ConstructorParameters<typeof Scene>[1];
@@ -4947,10 +5739,12 @@ name: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[0];
     forceGeometryBuffer: ConstructorParameters<typeof ScreenSpaceReflectionPostProcess>[9];
     
     },ScreenSpaceReflectionPostProcess>, any>;
+  setBasisTranscoderWorker: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof SetBasisTranscoderWorker>> & MeshProps, {},ReturnType<typeof SetBasisTranscoderWorker>>, any>;
   setColorsBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SetColorsBlock> & Clonable, {
 name: ConstructorParameters<typeof SetColorsBlock>[0];
     
     },SetColorsBlock>, any>;
+  setCorsBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof SetCorsBehavior>> & MeshProps, {},ReturnType<typeof SetCorsBehavior>>, any>;
   setMaterialIDBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SetMaterialIDBlock> & Clonable, {
 name: ConstructorParameters<typeof SetMaterialIDBlock>[0];
     
@@ -5238,6 +6032,7 @@ name: ConstructorParameters<typeof StandardRenderingPipeline>[0];
     cameras: ConstructorParameters<typeof StandardRenderingPipeline>[4];
     
     },StandardRenderingPipeline>, any>;
+  startsWith: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof StartsWith>> & MeshProps, {},ReturnType<typeof StartsWith>>, any>;
   stateCondition: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StateCondition>, {
 actionManager: ConstructorParameters<typeof StateCondition>[0];
     target: ConstructorParameters<typeof StateCondition>[1];
@@ -5410,6 +6205,7 @@ name: ConstructorParameters<typeof TeleportInBlock>[0];
 name: ConstructorParameters<typeof TeleportOutBlock>[0];
     
     },TeleportOutBlock>, any>;
+  testBase64DataUrl: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof TestBase64DataUrl>> & MeshProps, {},ReturnType<typeof TestBase64DataUrl>>, any>;
   textFileAssetTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextFileAssetTask>, {
 name: ConstructorParameters<typeof TextFileAssetTask>[0];
     url: ConstructorParameters<typeof TextFileAssetTask>[1];
@@ -5482,6 +6278,10 @@ engine: ConstructorParameters<typeof ThinRenderTargetTexture>[0];
 internalTexture: ConstructorParameters<typeof ThinTexture>[0];
     
     },ThinTexture>, any>;
+  toHalfFloat: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ToHalfFloat>> & MeshProps, {
+        value: Parameters<typeof ToHalfFloat>[0];
+    
+            },ReturnType<typeof ToHalfFloat>>, any>;
   tonemapPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TonemapPostProcess> & Clonable, {
 name: ConstructorParameters<typeof TonemapPostProcess>[0];
     _operator: ConstructorParameters<typeof TonemapPostProcess>[1];
@@ -5517,6 +6317,7 @@ segmentLength: ConstructorParameters<typeof Trajectory>[0];
     
     },Trajectory>, any>;
   trajectoryClassifier: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TrajectoryClassifier>, {},TrajectoryClassifier>, any>;
+  transcodeAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof TranscodeAsync>> & MeshProps, {},ReturnType<typeof TranscodeAsync>>, any>;
   transformBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TransformBlock> & Clonable, {
 name: ConstructorParameters<typeof TransformBlock>[0];
     
@@ -5548,6 +6349,26 @@ name: ConstructorParameters<typeof TrigonometryBlock>[0];
 name: ConstructorParameters<typeof TwirlBlock>[0];
     
     },TwirlBlock>, any>;
+  uncompressPIZ: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UncompressPIZ>> & MeshProps, {
+        decoder: Parameters<typeof UncompressPIZ>[0];
+    
+            },ReturnType<typeof UncompressPIZ>>, any>;
+  uncompressPXR: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UncompressPXR>> & MeshProps, {
+        decoder: Parameters<typeof UncompressPXR>[0];
+    
+            },ReturnType<typeof UncompressPXR>>, any>;
+  uncompressRAW: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UncompressRAW>> & MeshProps, {
+        decoder: Parameters<typeof UncompressRAW>[0];
+    
+            },ReturnType<typeof UncompressRAW>>, any>;
+  uncompressRLE: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UncompressRLE>> & MeshProps, {
+        decoder: Parameters<typeof UncompressRLE>[0];
+    
+            },ReturnType<typeof UncompressRLE>>, any>;
+  uncompressZIP: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UncompressZIP>> & MeshProps, {
+        decoder: Parameters<typeof UncompressZIP>[0];
+    
+            },ReturnType<typeof UncompressZIP>>, any>;
   uniformBuffer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UniformBuffer>, {
 engine: ConstructorParameters<typeof UniformBuffer>[0];
     data: ConstructorParameters<typeof UniformBuffer>[1];
@@ -5562,6 +6383,33 @@ name: ConstructorParameters<typeof UniversalCamera>[0];
     scene: ConstructorParameters<typeof UniversalCamera>[2];
     
     },UniversalCamera>, any>;
+  unregisterAllMaterialPlugins: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UnregisterAllMaterialPlugins>> & MeshProps, {},ReturnType<typeof UnregisterAllMaterialPlugins>>, any>;
+  unregisterMaterialPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UnregisterMaterialPlugin>> & MeshProps, {
+        pluginName: Parameters<typeof UnregisterMaterialPlugin>[0];
+    
+            },ReturnType<typeof UnregisterMaterialPlugin>>, any>;
+  uploadContent: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UploadContent>> & MeshProps, {
+        texture: Parameters<typeof UploadContent>[0];
+    data: Parameters<typeof UploadContent>[1];
+    
+            },ReturnType<typeof UploadContent>>, any>;
+  uploadEnvLevelsAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UploadEnvLevelsAsync>> & MeshProps, {
+        texture: Parameters<typeof UploadEnvLevelsAsync>[0];
+    data: Parameters<typeof UploadEnvLevelsAsync>[1];
+    info: Parameters<typeof UploadEnvLevelsAsync>[2];
+    
+            },ReturnType<typeof UploadEnvLevelsAsync>>, any>;
+  uploadEnvSpherical: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UploadEnvSpherical>> & MeshProps, {
+        texture: Parameters<typeof UploadEnvSpherical>[0];
+    info: Parameters<typeof UploadEnvSpherical>[1];
+    
+            },ReturnType<typeof UploadEnvSpherical>>, any>;
+  uploadLevelsAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UploadLevelsAsync>> & MeshProps, {
+        texture: Parameters<typeof UploadLevelsAsync>[0];
+    imageData: Parameters<typeof UploadLevelsAsync>[1];
+    imageType: Parameters<typeof UploadLevelsAsync>[2];
+    
+            },ReturnType<typeof UploadLevelsAsync>>, any>;
   utilityLayerRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UtilityLayerRenderer>, {
 originalScene: ConstructorParameters<typeof UtilityLayerRenderer>[0];
     handleEvents: ConstructorParameters<typeof UtilityLayerRenderer>[1];
@@ -5627,12 +6475,22 @@ x: ConstructorParameters<typeof Vector2>[0];
     y: ConstructorParameters<typeof Vector2>[1];
     
     },Vector2>, any>;
+  vector2ToFixed: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Vector2ToFixed>> & MeshProps, {
+        vector: Parameters<typeof Vector2ToFixed>[0];
+    decimalCount: Parameters<typeof Vector2ToFixed>[1];
+    
+            },ReturnType<typeof Vector2ToFixed>>, any>;
   vector3: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Vector3> & Clonable, {
 x: ConstructorParameters<typeof Vector3>[0];
     y: ConstructorParameters<typeof Vector3>[1];
     z: ConstructorParameters<typeof Vector3>[2];
     
     },Vector3>, any>;
+  vector3ToFixed: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Vector3ToFixed>> & MeshProps, {
+        vector: Parameters<typeof Vector3ToFixed>[0];
+    decimalCount: Parameters<typeof Vector3ToFixed>[1];
+    
+            },ReturnType<typeof Vector3ToFixed>>, any>;
   vector4: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Vector4> & Clonable, {
 x: ConstructorParameters<typeof Vector4>[0];
     y: ConstructorParameters<typeof Vector4>[1];
@@ -5640,6 +6498,11 @@ x: ConstructorParameters<typeof Vector4>[0];
     w: ConstructorParameters<typeof Vector4>[3];
     
     },Vector4>, any>;
+  vector4ToFixed: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Vector4ToFixed>> & MeshProps, {
+        vector: Parameters<typeof Vector4ToFixed>[0];
+    decimalCount: Parameters<typeof Vector4ToFixed>[1];
+    
+            },ReturnType<typeof Vector4ToFixed>>, any>;
   vectorConverterBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<VectorConverterBlock> & Clonable, {
 name: ConstructorParameters<typeof VectorConverterBlock>[0];
     
@@ -5734,6 +6597,16 @@ name: ConstructorParameters<typeof VolumetricLightScatteringPostProcess>[0];
 name: ConstructorParameters<typeof VoronoiNoiseBlock>[0];
     
     },VoronoiNoiseBlock>, any>;
+  wav2Decode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Wav2Decode>> & MeshProps, {
+        buffer: Parameters<typeof Wav2Decode>[0];
+    j: Parameters<typeof Wav2Decode>[1];
+    nx: Parameters<typeof Wav2Decode>[2];
+    ox: Parameters<typeof Wav2Decode>[3];
+    ny: Parameters<typeof Wav2Decode>[4];
+    oy: Parameters<typeof Wav2Decode>[5];
+    mx: Parameters<typeof Wav2Decode>[6];
+    
+            },ReturnType<typeof Wav2Decode>>, any>;
   waveBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WaveBlock> & Clonable, {
 name: ConstructorParameters<typeof WaveBlock>[0];
     
@@ -6057,9 +6930,25 @@ id: ConstructorParameters<typeof Xbox360Pad>[0];
     
     },Xbox360Pad>, any>;
   _BasisTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_BasisTextureLoader>, {},_BasisTextureLoader>, any>;
+  _CommonDispose: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _CommonDispose>> & MeshProps, {
+        commonEngine: Parameters<typeof _CommonDispose>[0];
+    canvas: Parameters<typeof _CommonDispose>[1];
+    
+            },ReturnType<typeof _CommonDispose>>, any>;
+  _CommonInit: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _CommonInit>> & MeshProps, {
+        commonEngine: Parameters<typeof _CommonInit>[0];
+    canvas: Parameters<typeof _CommonInit>[1];
+    creationOptions: Parameters<typeof _CommonInit>[2];
+    
+            },ReturnType<typeof _CommonInit>>, any>;
   _DDSTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_DDSTextureLoader>, {},_DDSTextureLoader>, any>;
   _ENVTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_ENVTextureLoader>, {},_ENVTextureLoader>, any>;
   _ExrTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_ExrTextureLoader>, {},_ExrTextureLoader>, any>;
+  _GetCompatibleTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _GetCompatibleTextureLoader>> & MeshProps, {
+        extension: Parameters<typeof _GetCompatibleTextureLoader>[0];
+    mimeType: Parameters<typeof _GetCompatibleTextureLoader>[1];
+    
+            },ReturnType<typeof _GetCompatibleTextureLoader>>, any>;
   _HDRTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_HDRTextureLoader>, {},_HDRTextureLoader>, any>;
   _InstancesBatch: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_InstancesBatch>, {},_InstancesBatch>, any>;
   _KTXTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_KTXTextureLoader>, {},_KTXTextureLoader>, any>;
@@ -6068,4 +6957,275 @@ id: ConstructorParameters<typeof Xbox360Pad>[0];
   _PrimaryIsoTriangle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_PrimaryIsoTriangle>, {},_PrimaryIsoTriangle>, any>;
   _TGATextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_TGATextureLoader>, {},_TGATextureLoader>, any>;
   _TimeToken: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_TimeToken>, {},_TimeToken>, any>;
+  _UpdateRGBDAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _UpdateRGBDAsync>> & MeshProps, {
+        internalTexture: Parameters<typeof _UpdateRGBDAsync>[0];
+    data: Parameters<typeof _UpdateRGBDAsync>[1];
+    sphericalPolynomial: Parameters<typeof _UpdateRGBDAsync>[2];
+    lodScale: Parameters<typeof _UpdateRGBDAsync>[3];
+    lodOffset: Parameters<typeof _UpdateRGBDAsync>[4];
+    
+            },ReturnType<typeof _UpdateRGBDAsync>>, any>;
+  _injectLTSFileTools: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _injectLTSFileTools>> & MeshProps, {},ReturnType<typeof _injectLTSFileTools>>, any>;
+  addClipPlaneUniforms: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof addClipPlaneUniforms>> & MeshProps, {
+        uniforms: Parameters<typeof addClipPlaneUniforms>[0];
+    
+            },ReturnType<typeof addClipPlaneUniforms>>, any>;
+  allocateAndCopyTypedBuffer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof allocateAndCopyTypedBuffer>> & MeshProps, {
+        type: Parameters<typeof allocateAndCopyTypedBuffer>[0];
+    sizeOrDstBuffer: Parameters<typeof allocateAndCopyTypedBuffer>[1];
+    sizeInBytes: Parameters<typeof allocateAndCopyTypedBuffer>[2];
+    copyBuffer: Parameters<typeof allocateAndCopyTypedBuffer>[3];
+    
+            },ReturnType<typeof allocateAndCopyTypedBuffer>>, any>;
+  appendSceneAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof appendSceneAsync>> & MeshProps, {
+        source: Parameters<typeof appendSceneAsync>[0];
+    scene: Parameters<typeof appendSceneAsync>[1];
+    options: Parameters<typeof appendSceneAsync>[2];
+    
+            },ReturnType<typeof appendSceneAsync>>, any>;
+  bindClipPlane: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof bindClipPlane>> & MeshProps, {
+        effect: Parameters<typeof bindClipPlane>[0];
+    primaryHolder: Parameters<typeof bindClipPlane>[1];
+    secondaryHolder: Parameters<typeof bindClipPlane>[2];
+    
+            },ReturnType<typeof bindClipPlane>>, any>;
+  captureEquirectangularFromScene: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof captureEquirectangularFromScene>> & MeshProps, {
+        scene: Parameters<typeof captureEquirectangularFromScene>[0];
+    options: Parameters<typeof captureEquirectangularFromScene>[1];
+    
+            },ReturnType<typeof captureEquirectangularFromScene>>, any>;
+  className: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof className>> & MeshProps, {
+        name: Parameters<typeof className>[0];
+    module: Parameters<typeof className>[1];
+    
+            },ReturnType<typeof className>>, any>;
+  computeMaxExtents: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof computeMaxExtents>> & MeshProps, {
+        meshes: Parameters<typeof computeMaxExtents>[0];
+    animationGroup: Parameters<typeof computeMaxExtents>[1];
+    animationStep: Parameters<typeof computeMaxExtents>[2];
+    
+            },ReturnType<typeof computeMaxExtents>>, any>;
+  createDetailMapPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof createDetailMapPlugin>> & MeshProps, {
+        material: Parameters<typeof createDetailMapPlugin>[0];
+    
+            },ReturnType<typeof createDetailMapPlugin>>, any>;
+  createPBRAnisotropicPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof createPBRAnisotropicPlugin>> & MeshProps, {
+        material: Parameters<typeof createPBRAnisotropicPlugin>[0];
+    
+            },ReturnType<typeof createPBRAnisotropicPlugin>>, any>;
+  createPBRBRDFPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof createPBRBRDFPlugin>> & MeshProps, {
+        material: Parameters<typeof createPBRBRDFPlugin>[0];
+    
+            },ReturnType<typeof createPBRBRDFPlugin>>, any>;
+  createPBRClearCoatPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof createPBRClearCoatPlugin>> & MeshProps, {
+        material: Parameters<typeof createPBRClearCoatPlugin>[0];
+    
+            },ReturnType<typeof createPBRClearCoatPlugin>>, any>;
+  createPBRIridescencePlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof createPBRIridescencePlugin>> & MeshProps, {
+        material: Parameters<typeof createPBRIridescencePlugin>[0];
+    
+            },ReturnType<typeof createPBRIridescencePlugin>>, any>;
+  createPBRSheenPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof createPBRSheenPlugin>> & MeshProps, {
+        material: Parameters<typeof createPBRSheenPlugin>[0];
+    
+            },ReturnType<typeof createPBRSheenPlugin>>, any>;
+  createPBRSubSurfacePlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof createPBRSubSurfacePlugin>> & MeshProps, {
+        material: Parameters<typeof createPBRSubSurfacePlugin>[0];
+    
+            },ReturnType<typeof createPBRSubSurfacePlugin>>, any>;
+  createYieldingScheduler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof createYieldingScheduler>> & MeshProps, {
+        yieldAfterMS: Parameters<typeof createYieldingScheduler>[0];
+    
+            },ReturnType<typeof createYieldingScheduler>>, any>;
+  editableInPropertyPage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof editableInPropertyPage>> & MeshProps, {
+        displayName: Parameters<typeof editableInPropertyPage>[0];
+    propertyType: Parameters<typeof editableInPropertyPage>[1];
+    groupName: Parameters<typeof editableInPropertyPage>[2];
+    options: Parameters<typeof editableInPropertyPage>[3];
+    
+            },ReturnType<typeof editableInPropertyPage>>, any>;
+  expandToProperty: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof expandToProperty>> & MeshProps, {
+        callback: Parameters<typeof expandToProperty>[0];
+    targetKey: Parameters<typeof expandToProperty>[1];
+    
+            },ReturnType<typeof expandToProperty>>, any>;
+  extractMinAndMax: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof extractMinAndMax>> & MeshProps, {
+        positions: Parameters<typeof extractMinAndMax>[0];
+    start: Parameters<typeof extractMinAndMax>[1];
+    count: Parameters<typeof extractMinAndMax>[2];
+    bias: Parameters<typeof extractMinAndMax>[3];
+    stride: Parameters<typeof extractMinAndMax>[4];
+    
+            },ReturnType<typeof extractMinAndMax>>, any>;
+  extractMinAndMaxIndexed: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof extractMinAndMaxIndexed>> & MeshProps, {
+        positions: Parameters<typeof extractMinAndMaxIndexed>[0];
+    indices: Parameters<typeof extractMinAndMaxIndexed>[1];
+    indexStart: Parameters<typeof extractMinAndMaxIndexed>[2];
+    indexCount: Parameters<typeof extractMinAndMaxIndexed>[3];
+    bias: Parameters<typeof extractMinAndMaxIndexed>[4];
+    
+            },ReturnType<typeof extractMinAndMaxIndexed>>, any>;
+  getRichTypeFromValue: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof getRichTypeFromValue>> & MeshProps, {
+        value: Parameters<typeof getRichTypeFromValue>[0];
+    
+            },ReturnType<typeof getRichTypeFromValue>>, any>;
+  importAnimationsAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof importAnimationsAsync>> & MeshProps, {
+        source: Parameters<typeof importAnimationsAsync>[0];
+    scene: Parameters<typeof importAnimationsAsync>[1];
+    options: Parameters<typeof importAnimationsAsync>[2];
+    
+            },ReturnType<typeof importAnimationsAsync>>, any>;
+  inlineScheduler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof inlineScheduler>> & MeshProps, {
+        coroutine: Parameters<typeof inlineScheduler>[0];
+    onStep: Parameters<typeof inlineScheduler>[1];
+    onError: Parameters<typeof inlineScheduler>[2];
+    
+            },ReturnType<typeof inlineScheduler>>, any>;
+  loadAssetContainerAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof loadAssetContainerAsync>> & MeshProps, {
+        source: Parameters<typeof loadAssetContainerAsync>[0];
+    scene: Parameters<typeof loadAssetContainerAsync>[1];
+    options: Parameters<typeof loadAssetContainerAsync>[2];
+    
+            },ReturnType<typeof loadAssetContainerAsync>>, any>;
+  loadSceneAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof loadSceneAsync>> & MeshProps, {
+        source: Parameters<typeof loadSceneAsync>[0];
+    engine: Parameters<typeof loadSceneAsync>[1];
+    options: Parameters<typeof loadSceneAsync>[2];
+    
+            },ReturnType<typeof loadSceneAsync>>, any>;
+  makeAsyncFunction: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof makeAsyncFunction>> & MeshProps, {
+        coroutineFactory: Parameters<typeof makeAsyncFunction>[0];
+    scheduler: Parameters<typeof makeAsyncFunction>[1];
+    abortSignal: Parameters<typeof makeAsyncFunction>[2];
+    
+            },ReturnType<typeof makeAsyncFunction>>, any>;
+  makeSyncFunction: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof makeSyncFunction>> & MeshProps, {
+        coroutineFactory: Parameters<typeof makeSyncFunction>[0];
+    abortSignal: Parameters<typeof makeSyncFunction>[1];
+    
+            },ReturnType<typeof makeSyncFunction>>, any>;
+  nativeOverride: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof nativeOverride>> & MeshProps, {
+        target: Parameters<typeof nativeOverride>[0];
+    propertyKey: Parameters<typeof nativeOverride>[1];
+    descriptor: Parameters<typeof nativeOverride>[2];
+    predicate: Parameters<typeof nativeOverride>[3];
+    
+            },ReturnType<typeof nativeOverride>>, any>;
+  normalizeEnvInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof normalizeEnvInfo>> & MeshProps, {
+        info: Parameters<typeof normalizeEnvInfo>[0];
+    
+            },ReturnType<typeof normalizeEnvInfo>>, any>;
+  prepareDefinesForClipPlanes: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof prepareDefinesForClipPlanes>> & MeshProps, {
+        primaryHolder: Parameters<typeof prepareDefinesForClipPlanes>[0];
+    secondaryHolder: Parameters<typeof prepareDefinesForClipPlanes>[1];
+    defines: Parameters<typeof prepareDefinesForClipPlanes>[2];
+    
+            },ReturnType<typeof prepareDefinesForClipPlanes>>, any>;
+  prepareStringDefinesForClipPlanes: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof prepareStringDefinesForClipPlanes>> & MeshProps, {
+        primaryHolder: Parameters<typeof prepareStringDefinesForClipPlanes>[0];
+    secondaryHolder: Parameters<typeof prepareStringDefinesForClipPlanes>[1];
+    defines: Parameters<typeof prepareStringDefinesForClipPlanes>[2];
+    
+            },ReturnType<typeof prepareStringDefinesForClipPlanes>>, any>;
+  registerSceneLoaderPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof registerSceneLoaderPlugin>> & MeshProps, {
+        plugin: Parameters<typeof registerSceneLoaderPlugin>[0];
+    
+            },ReturnType<typeof registerSceneLoaderPlugin>>, any>;
+  registerTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof registerTextureLoader>> & MeshProps, {
+        extension: Parameters<typeof registerTextureLoader>[0];
+    loaderFactory: Parameters<typeof registerTextureLoader>[1];
+    
+            },ReturnType<typeof registerTextureLoader>>, any>;
+  runCoroutine: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof runCoroutine>> & MeshProps, {
+        coroutine: Parameters<typeof runCoroutine>[0];
+    scheduler: Parameters<typeof runCoroutine>[1];
+    onSuccess: Parameters<typeof runCoroutine>[2];
+    onError: Parameters<typeof runCoroutine>[3];
+    abortSignal: Parameters<typeof runCoroutine>[4];
+    
+            },ReturnType<typeof runCoroutine>>, any>;
+  runCoroutineAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof runCoroutineAsync>> & MeshProps, {
+        coroutine: Parameters<typeof runCoroutineAsync>[0];
+    scheduler: Parameters<typeof runCoroutineAsync>[1];
+    abortSignal: Parameters<typeof runCoroutineAsync>[2];
+    
+            },ReturnType<typeof runCoroutineAsync>>, any>;
+  runCoroutineSync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof runCoroutineSync>> & MeshProps, {
+        coroutine: Parameters<typeof runCoroutineSync>[0];
+    abortSignal: Parameters<typeof runCoroutineSync>[1];
+    
+            },ReturnType<typeof runCoroutineSync>>, any>;
+  serialize: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serialize>> & MeshProps, {
+        sourceName: Parameters<typeof serialize>[0];
+    
+            },ReturnType<typeof serialize>>, any>;
+  serializeAsCameraReference: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsCameraReference>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsCameraReference>[0];
+    
+            },ReturnType<typeof serializeAsCameraReference>>, any>;
+  serializeAsColor3: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsColor3>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsColor3>[0];
+    
+            },ReturnType<typeof serializeAsColor3>>, any>;
+  serializeAsColor4: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsColor4>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsColor4>[0];
+    
+            },ReturnType<typeof serializeAsColor4>>, any>;
+  serializeAsColorCurves: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsColorCurves>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsColorCurves>[0];
+    
+            },ReturnType<typeof serializeAsColorCurves>>, any>;
+  serializeAsFresnelParameters: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsFresnelParameters>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsFresnelParameters>[0];
+    
+            },ReturnType<typeof serializeAsFresnelParameters>>, any>;
+  serializeAsImageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsImageProcessingConfiguration>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsImageProcessingConfiguration>[0];
+    
+            },ReturnType<typeof serializeAsImageProcessingConfiguration>>, any>;
+  serializeAsMatrix: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsMatrix>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsMatrix>[0];
+    
+            },ReturnType<typeof serializeAsMatrix>>, any>;
+  serializeAsMeshReference: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsMeshReference>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsMeshReference>[0];
+    
+            },ReturnType<typeof serializeAsMeshReference>>, any>;
+  serializeAsQuaternion: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsQuaternion>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsQuaternion>[0];
+    
+            },ReturnType<typeof serializeAsQuaternion>>, any>;
+  serializeAsTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsTexture>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsTexture>[0];
+    
+            },ReturnType<typeof serializeAsTexture>>, any>;
+  serializeAsVector2: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsVector2>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsVector2>[0];
+    
+            },ReturnType<typeof serializeAsVector2>>, any>;
+  serializeAsVector3: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof serializeAsVector3>> & MeshProps, {
+        sourceName: Parameters<typeof serializeAsVector3>[0];
+    
+            },ReturnType<typeof serializeAsVector3>>, any>;
+  setAndStartTimer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof setAndStartTimer>> & MeshProps, {
+        options: Parameters<typeof setAndStartTimer>[0];
+    
+            },ReturnType<typeof setAndStartTimer>>, any>;
+  setStereoscopicAnaglyphRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof setStereoscopicAnaglyphRigMode>> & MeshProps, {
+        camera: Parameters<typeof setStereoscopicAnaglyphRigMode>[0];
+    
+            },ReturnType<typeof setStereoscopicAnaglyphRigMode>>, any>;
+  setStereoscopicRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof setStereoscopicRigMode>> & MeshProps, {
+        camera: Parameters<typeof setStereoscopicRigMode>[0];
+    
+            },ReturnType<typeof setStereoscopicRigMode>>, any>;
+  setVRRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof setVRRigMode>> & MeshProps, {
+        camera: Parameters<typeof setVRRigMode>[0];
+    rigParams: Parameters<typeof setVRRigMode>[1];
+    
+            },ReturnType<typeof setVRRigMode>>, any>;
+  unregisterTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof unregisterTextureLoader>> & MeshProps, {
+        extension: Parameters<typeof unregisterTextureLoader>[0];
+    
+            },ReturnType<typeof unregisterTextureLoader>>, any>;
 }

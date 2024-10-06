@@ -39,6 +39,8 @@ async function createJsxDeclarations(index: string, babylonPackage: BabylonPacka
         declarations: [],
     };
 
+    let classesInError = 0;
+
     const entryPoint = await import(`${index}/index.js`);
     Object.entries(entryPoint).forEach(([key, value]) => {
         try {
@@ -69,9 +71,12 @@ ${result}
             } else {
                 // exclude objects, constants and other stuff
                 if (typeof value === 'function') {
-                    // get builder (i.e. CreateBox)
-                    if (key.startsWith('Create')) {
-                        const Builder = value as Function;
+                    let prefix = 'Create';
+                    // get builder (i.e. CreateBox or ExtrudePolygon)
+                    if (key.startsWith('Extrude')) {
+                        prefix = 'Extrude';
+                    }
+                    const Builder = value as Function;
                         const importStatement = `import { ${key} } from '${index}';`;
                         const result = getConstructorProps(Builder, key, false);
                         const FunctionProps = result
@@ -80,25 +85,24 @@ ${result}
             }`
                             : ', {}';
                         const ElementType = `ReturnType<typeof ${key}>`;
-                        const keyWithoutCreate = key.replace('Create', '');
-                        let jsxElementName = lowercaseFirstLetter(keyWithoutCreate);
-                        if (CollidingComponents[keyWithoutCreate]) {
-                            jsxElementName = CollidingComponents[keyWithoutCreate];
+                        const keyWithoutPrefix = key.replace(prefix, '');
+                        let jsxElementName = lowercaseFirstLetter(keyWithoutPrefix);
+                        if (CollidingComponents[keyWithoutPrefix]) {
+                            jsxElementName = CollidingComponents[keyWithoutPrefix];
                         }
                         const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getMeshProps()}${FunctionProps},${ElementType}>, any>;`;
 
                         jsxElements.imports.push(importStatement);
                         jsxElements.declarations.push(declarationStatement);
-                    } else if (key.startsWith('Extrude')) {
-                        // handle Extruded meshesh
-                    }
                 }
             }
         } catch (error) {
+            classesInError++;
             // the following classes don't have constructor
             console.log(key);
         }
     });
+    //console.log('Total classes in error: ', classesInError);
     return jsxElements;
 }
 

@@ -88,7 +88,7 @@ const reconciler = ReactReconciler<
         let babylonPackage: BabylonPackages = BabylonPackages.CORE;
         const BabylonElement = capitalizeFirstLetter(type);
         // @babylonjs/gui
-        if (BabylonElement in BabylonGui || (type in ReversedCollidingComponents && type !== 'text3D')) {
+        if (BabylonElement in BabylonGui || (type in ReversedCollidingComponents && type !== 'text3D' && type !== 'polygon3D')) {
             babylonPackage = BabylonPackages.GUI;
             //@ts-ignore
             Class = BabylonGui[BabylonElement] || BabylonGui[ReversedCollidingComponents[type]];
