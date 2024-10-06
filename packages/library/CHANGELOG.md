@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.36](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.35&targetVersion=GTv0.0.36&_a=files) (2024-10-06)
+
+
+### Chore
+
+* **general:** fix extrude polygon ([caedea2](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/caedea27f25af568bf06e69999d99447fb555183))
+
 ## [0.0.35](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.34&targetVersion=GTv0.0.35&_a=files) (2024-10-06)
 
 
