@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.39](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.38&targetVersion=GTv0.0.39&_a=files) (2024-10-08)
+
+
+### Chore
+
+* **general:** handle material on instanced meshes ([281b4bb](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/281b4bba853f6b7f9f1e45193f2756c7a28a47e7))
+
 ## [0.0.38](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.37&targetVersion=GTv0.0.38&_a=files) (2024-10-06)
 
 
