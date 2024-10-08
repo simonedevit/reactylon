@@ -1,6 +1,8 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { Material, Mesh, MultiMaterial } from '@babylonjs/core';
+import { Logger } from '@dvmstudios/reactylon-common';
+import { type MeshProps  } from '../../types/props';
 
 // add other materials when you study them (e.g. PBRMaterial, etc..) - see packages/library/src/index.tsx
 type AugmentedMaterial = ComponentInstance<Material & JSX.IntrinsicElements['standardMaterial']>;
@@ -35,19 +37,23 @@ export class MaterialHost {
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance<Mesh | MultiMaterial>, child: AugmentedMaterial): void {
+    static addChild(parentInstance: ComponentInstance<(Mesh & MeshProps) | MultiMaterial>, child: AugmentedMaterial): void {
         if (parentInstance instanceof MultiMaterial) {
             parentInstance.subMaterials.push(child);
         } else {
+            if (parentInstance.instanceFrom) {
+                Logger.warn('addChild', `You are attempting to assign the new material ${child.name} over an instanced mesh ${parentInstance.name} and this is not possible in Babylon.js. Change ${parentInstance.name} material if you want affect all instances with a new material.`)
+            }
+            // don't worry: if parentInstance is an instanced mesh, Babylon will not assign the child material
             parentInstance.material = child;
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void {}
+    static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void { }
 
     static prepareUpdate(): UpdatePayload {
         return {};
     }
 
-    static commitUpdate(instance: AugmentedMaterial, updatePayload: UpdatePayload): void {}
+    static commitUpdate(instance: AugmentedMaterial, updatePayload: UpdatePayload): void { }
 }

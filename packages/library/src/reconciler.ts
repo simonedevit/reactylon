@@ -28,8 +28,8 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
             child.handlers?.addChild?.(parentInstance, child);
             parentInstance.metadata.children.push(child);
             //child.setParent?.(parentInstance);
-            if (child.metadata.babylonPackage === BabylonPackages.CORE) {
-                //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons, materials have .setParent method
+            if (child.metadata.babylonPackage === BabylonPackages.CORE && !(child instanceof BabylonCore.Material)) {
+                //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons have .setParent method
                 child.parent = parentInstance;
             }
         }

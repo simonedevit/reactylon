@@ -12,6 +12,11 @@ export class Logger {
         }
     }
 
+    static warn(...args: Array<any>) {
+        const [first, ...rest] = args;
+        console.warn(`${this.prefix} - ${first}`, ...rest);
+    }
+
     static error(...args: Array<any>) {
         const [first, ...rest] = args;
         console.error(`${this.prefix} - ${first}`, ...rest);
