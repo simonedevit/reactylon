@@ -1,6 +1,6 @@
 {
     "name": "@dvmstudios/reactylon",
-    "version": "0.0.39",
+    "version": "0.0.40",
     "description": "Framework to work on Babylon.js with React",
     "type": "module",
     "main": "./build/index.js",
