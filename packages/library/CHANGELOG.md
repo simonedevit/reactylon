@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.41](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.40&targetVersion=GTv0.0.41&_a=files) (2024-10-11)
+
+
+### Chore
+
+* **general:** handle highlight layer ([71e4254](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/71e4254f333030e3d111c60a86b0b99135be1f0b))
+
 ## [0.0.40](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.39&targetVersion=GTv0.0.40&_a=files) (2024-10-08)
 
 
