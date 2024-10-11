@@ -1,4 +1,4 @@
-import { ActionEvent, ActionManager, Observable, PhysicsAggregate, Scene, StandardMaterial } from '@babylonjs/core';
+import { ActionEvent, ActionManager, HighlightLayer, Observable, PhysicsAggregate, Scene, StandardMaterial } from '@babylonjs/core';
 import { type Either } from './types';
 import { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
 
@@ -122,6 +122,11 @@ export type MeshProps = Either<Clonable, Instanceable> &
         physicsAggregate?: {
             type: ConstructorParameters<typeof PhysicsAggregate>[1];
             _options: ConstructorParameters<typeof PhysicsAggregate>[2];
+        };
+        // highlight layer props
+        highlightLayer?: {
+            color: Parameters<HighlightLayer['addMesh']>[1];
+            glowEmissiveOnly?: Parameters<HighlightLayer['addMesh']>[2];
         };
     };
 

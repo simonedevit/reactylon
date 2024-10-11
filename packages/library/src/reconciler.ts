@@ -9,8 +9,15 @@ import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, 
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 
-// https://github.com/facebook/react/tree/main/packages/react-reconciler
-// https://github.com/facebook/react/blob/main/packages/react-art/src/ReactFiberConfigART.js
+function isParentNeeded(parentInstance: ComponentInstance, child: ComponentInstance) {
+    if (parentInstance instanceof BabylonCore.HighlightLayer) {
+        return false;
+    }
+    if (child instanceof BabylonCore.Material) {
+        return false;
+    }
+    return true;
+}
 
 // metadata.children contains the children of current instance, "metadata" attribute will be skipped from
 // deep copy of a mesh (during clone for instance), see more:
@@ -27,8 +34,9 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
             }
             child.handlers?.addChild?.(parentInstance, child);
             parentInstance.metadata.children.push(child);
-            //child.setParent?.(parentInstance);
-            if (child.metadata.babylonPackage === BabylonPackages.CORE && !(child instanceof BabylonCore.Material)) {
+            // reactylon internal purpose for hosts components
+            child.metadata.parent = parentInstance;
+            if (child.metadata.babylonPackage === BabylonPackages.CORE && isParentNeeded(parentInstance, child)) {
                 //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons have .setParent method
                 child.parent = parentInstance;
             }
@@ -95,7 +103,7 @@ const reconciler = ReactReconciler<
         }
         // @babylonjs/core
         else {
-            const ResolvedBabylonElement = ReversedCollidingComponents[type] || BabylonElement; 
+            const ResolvedBabylonElement = ReversedCollidingComponents[type] || BabylonElement;
             // MeshBuilder.Create
             if (`Create${ResolvedBabylonElement}` in BabylonCore.MeshBuilder) {
                 //@ts-ignore
@@ -103,7 +111,7 @@ const reconciler = ReactReconciler<
                 isBuilder = true;
             } else {
                 // MeshBuilder.ExtrudePolygon
-                if (ResolvedBabylonElement === 'ExtrudePolygon'){
+                if (ResolvedBabylonElement === 'ExtrudePolygon') {
                     isBuilder = true;
                 }
                 //@ts-ignore

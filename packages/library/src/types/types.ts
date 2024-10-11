@@ -55,10 +55,12 @@ export type ComponentInstance<T = unknown> = CommonProps &
     Partial<Clonable> &
     Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
         children?: any;
-        // use this field to skip cloning
+        // use this field to skip cloning (see packages/library/src/reconciler.ts:22)
         metadata: {
             children: Array<ComponentInstance<T>>;
             babylonPackage: BabylonPackages;
+            parent: ComponentInstance;
+            props?: unknown;
             // [key: string]: string;
         };
         handlers?: Partial<{

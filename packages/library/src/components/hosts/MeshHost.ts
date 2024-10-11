@@ -1,6 +1,6 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { ActionEvent, ActionManager, ExecuteCodeAction, Mesh, PhysicsAggregate, Scene } from '@babylonjs/core';
+import { ActionEvent, ActionManager, ExecuteCodeAction, HighlightLayer, Mesh, PhysicsAggregate, Scene } from '@babylonjs/core';
 import { Triggerable, MeshTriggers, MeshProps } from '../../types/props';
 
 function handleEvents(props: AugmentedMesh, scene: Scene) {
@@ -51,27 +51,52 @@ export class MeshHost {
         }
         const element = Host.createInstance(isBuilder, Class, props, rootContainer, cloneFn);
         if (physicsAggregate) {
-            element.physicsAggregate = new PhysicsAggregate(element, physicsAggregate.type, physicsAggregate._options);
+            element.metadata.physicsAggregate = new PhysicsAggregate(element, physicsAggregate.type, physicsAggregate._options);
         }
         element.actionManager = handleEvents(props, scene);
         element.handlers = {
+            addChild: MeshHost.addChild,
+            commitUpdate: MeshHost.commitUpdate,
+            removeChild: MeshHost.removeChild,
             // add here your custom handlers for meshes
         };
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance<Mesh>, child: AugmentedMesh): void {}
+    static addChild(parentInstance: ComponentInstance<Mesh | HighlightLayer>, child: AugmentedMesh): void {
+        if (parentInstance instanceof HighlightLayer) {
+            const { highlightLayer } = child.metadata.props;
+            if (highlightLayer) {
+                const { color, glowEmissiveOnly } = highlightLayer;
+                parentInstance.addMesh(child, color, glowEmissiveOnly);
+            }
+        }
+    }
 
     static removeChild(parentInstance: ComponentInstance, child: AugmentedMesh): void {
-        if (child.physicsAggregate) {
-            // @ts-ignore
-            child.physicsAggregate.dispose();
+        if (child.metadata.physicsAggregate) {
+            child.metadata.physicsAggregate.dispose();
         }
+        // you don't need, automatically done by Babylon.js when you dispose a mesh
+        /*if (parentInstance instanceof HighlightLayer){
+            parentInstance.removeMesh(child);
+        }*/
     }
 
     static prepareUpdate(): UpdatePayload {
         return {};
     }
 
-    static commitUpdate(instance: AugmentedMesh, updatePayload: UpdatePayload): void {}
+    static commitUpdate(instance: AugmentedMesh, updatePayload: UpdatePayload): void {
+        const parent = instance.metadata.parent;
+        if (parent instanceof HighlightLayer) {
+            const highlightLayer = updatePayload.highlightLayer as MeshProps['highlightLayer'];
+            if (highlightLayer) {
+                const { color, glowEmissiveOnly } = highlightLayer;
+                parent.addMesh(instance, color, glowEmissiveOnly);
+            } else {
+                parent.removeMesh(instance);
+            }
+        }
+    }
 }
