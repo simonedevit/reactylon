@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.42](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.41&targetVersion=GTv0.0.42&_a=files) (2024-10-15)
+
+
+### Chore
+
+* **general:** add support for react native + temporary disable custom loader ([f80dcea](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/f80dcea4b244892bfb57f2a96aad50d1eab8f2da))
+
 ## [0.0.41](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.40&targetVersion=GTv0.0.41&_a=files) (2024-10-11)
 
 
