@@ -34,8 +34,8 @@
         "@babylonjs/core": "7.28.0",
         "@babylonjs/gui": "7.28.0",
         "@babylonjs/havok": "^1.3.7",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "@babylonjs/react-native": "^1.8.6",
+        "react": "^18.2.0"
     },
     "devDependencies": {
         "@babel/core": "^7.17.3",
