@@ -1,6 +1,6 @@
 //@ts-nocheck
-import { type BabylonProps, type ExcludeReadonlyAndPrivate } from './types';
-import { type MeshProps, type GuiProps, type Clonable } from './props';
+import { type BabylonProps, type ExcludeReadonlyAndPrivate } from '../types/types';
+import { type MeshProps, type GuiProps, type Clonable } from '../types/props';
 import { AbstractActionManager } from '@babylonjs/core';
 import { AbstractAssetContainer } from '@babylonjs/core';
 import { AbstractAssetTask } from '@babylonjs/core';

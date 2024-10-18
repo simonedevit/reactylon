@@ -1,5 +1,5 @@
-import { JSXElements as CoreJSXElements } from './types/core.declarations';
-import { JSXElements as GuiJSXElements } from './types/gui.declarations';
+import { JSXElements as CoreJSXElements } from './_generated/babylon.core.declarations';
+import { JSXElements as GuiJSXElements } from './_generated/babylon.gui.declarations';
 import { TextureProps, MaterialProps, AdvancedDynamicTextureProps } from './types/props';
 
 declare global {
@@ -25,6 +25,6 @@ declare global {
     }
 }
 
-export * from './components/core';
+export * from './core';
 export { default as Reactylon } from './reconciler';
 export { BabylonElements } from './types/props';

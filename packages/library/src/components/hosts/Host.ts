@@ -3,8 +3,8 @@ import { ComponentInstance, RootContainer } from '@types';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
-import '../../index';
-import coreConstructors from '../../map/core.constructors';
+//import '../../index';
+import coreConstructors from '../../_generated/babylon.core.constructors';
 
 const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'physicsAggregate', 'highlightLayer'];
 export class Host {

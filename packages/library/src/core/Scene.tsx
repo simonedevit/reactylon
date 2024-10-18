@@ -4,7 +4,7 @@ import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
 import { SceneContext, useEngine } from './hooks';
 import { RootContainer } from '@types';
-import Reactylon from '../../reconciler';
+import Reactylon from '../reconciler';
 import { type ContextBridge, useContextBridge } from 'its-fine';
 
 type SceneProps = React.PropsWithChildren<{

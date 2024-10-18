@@ -7,7 +7,7 @@ import '../../index';
 import { Button3D, Container, Container3D, Control, GUI3DManager, HolographicButton, HolographicSlate, Vector2WithInfo } from '@babylonjs/gui';
 import { GuiTriggerable, GuiTriggers } from '../../types/props';
 import { Observable, DynamicTexture, AbstractMesh } from '@babylonjs/core';
-import guiConstructors from '../../map/gui.constructors';
+import guiConstructors from '../../_generated/babylon.gui.constructors';
 
 function handleEvents(props: ComponentInstance<GuiComponent>, element: any) {
     Object.entries(GuiTriggers).forEach(([_key, observableName]) => {

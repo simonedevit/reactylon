@@ -21,8 +21,8 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
         devtool: isProduction ? undefined : 'source-map',
         entry: {
             index: './src/index.tsx',
-            web: './src/components/web/index.ts',
-            mobile: './src/components/mobile/index.ts',
+            web: './src/web/index.ts',
+            mobile: './src/mobile/index.ts',
         },
         output: {
             path: path.resolve(__dirname, 'build'),

@@ -122,14 +122,14 @@ ${props}
 const packages = {
     core: {
         index: '@babylonjs/core',
-        declarationsFilename: 'core.declarations.ts',
-        constructorsFilename: 'core.constructors.ts',
+        declarationsFilename: 'babylon.core.declarations.ts',
+        constructorsFilename: 'babylon.core.constructors.ts',
         babylonPackage: BabylonPackages.CORE,
     },
     gui: {
         index: '@babylonjs/gui',
-        declarationsFilename: 'gui.declarations.ts',
-        constructorsFilename: 'gui.constructors.ts',
+        declarationsFilename: 'babylon.gui.declarations.ts',
+        constructorsFilename: 'babylon.gui.constructors.ts',
         babylonPackage: BabylonPackages.GUI,
     },
 };
@@ -139,8 +139,8 @@ const packages = {
         const jsxElements = await createJsxBabylonElements(index, babylonPackage);
         const declarationsContent = `
 //@ts-nocheck
-import { type BabylonProps, type ExcludeReadonlyAndPrivate } from './types';
-import { type MeshProps, type GuiProps, type Clonable } from './props';
+import { type BabylonProps, type ExcludeReadonlyAndPrivate } from '../types/types';
+import { type MeshProps, type GuiProps, type Clonable } from '../types/props';
 ${jsxElements.imports.join('\n')}
     
 export interface JSXElements {
@@ -155,11 +155,11 @@ ${Object.entries(jsxElements.constructorArguments).reduce((result, [jsxElementNa
 }
 export default ConstructorsMap;`;
         try {
-            const declarationsFullPathFilename = path.join(__dirname, `../../library/src/types/${declarationsFilename}`);
+            const declarationsFullPathFilename = path.join(__dirname, `../../library/src/_generated/${declarationsFilename}`);
             await writeFile(declarationsFullPathFilename, declarationsContent);
             console.log(`\n${declarationsFilename} created successfully`);
 
-            const constructorsFullPathFilename = path.join(__dirname, `../../library/src/map/${constructorsFilename}`);
+            const constructorsFullPathFilename = path.join(__dirname, `../../library/src/_generated/${constructorsFilename}`);
             await writeFile(path.join(constructorsFullPathFilename), constructorsContent);
             console.log(`\n${constructorsFilename} created successfully`);
         } catch (error) {
