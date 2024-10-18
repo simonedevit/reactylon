@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.50](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.49&targetVersion=GTv0.0.50&_a=files) (2024-10-18)
+
+
+### Chore
+
+* **general:** add its-fine to externals ([e4120bd](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/e4120bd9dddad6c0a661cbc94b13753732e0f060))
+
 ## [0.0.49](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.48&targetVersion=GTv0.0.49&_a=files) (2024-10-18)
 
 
