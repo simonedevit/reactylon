@@ -5,8 +5,8 @@ import { CubeTexture, Texture } from '@babylonjs/core';
 type AugmentedTexture = ComponentInstance<Texture & JSX.IntrinsicElements['texture']>;
 
 export class TextureHost {
-    static createInstance(isBuilder: boolean, Class: any, props: AugmentedTexture, rootContainer: RootContainer) {
-        const element = Host.createInstance(isBuilder, Class, props, rootContainer);
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: AugmentedTexture, rootContainer: RootContainer) {
+        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer);
         element.handlers = {
             addChild: TextureHost.addChild,
             commitUpdate: TextureHost.commitUpdate,

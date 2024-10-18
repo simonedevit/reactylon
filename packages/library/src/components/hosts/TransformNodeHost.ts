@@ -5,8 +5,8 @@ import { Node, TransformNode } from '@babylonjs/core';
 type AugmentedTransformNode = ComponentInstance<TransformNode & JSX.IntrinsicElements['transformNode']>;
 
 export class TransformNodeHost {
-    static createInstance(isBuilder: boolean, Class: any, props: AugmentedTransformNode, rootContainer: RootContainer) {
-        const element = Host.createInstance(isBuilder, Class, props, rootContainer);
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: AugmentedTransformNode, rootContainer: RootContainer) {
+        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer);
         element.handlers = {
             addChild: TransformNodeHost.addChild,
             commitUpdate: TransformNodeHost.commitUpdate,

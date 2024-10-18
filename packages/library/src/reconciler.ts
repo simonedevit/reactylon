@@ -142,7 +142,7 @@ const reconciler = ReactReconciler<
                 break;
         }
         const propsWithScene = { ...props, scene: rootContainer.scene };
-        return createInstanceFn(isBuilder, Class, propsWithScene, rootContainer);
+        return createInstanceFn(type, isBuilder, Class, propsWithScene, rootContainer);
     },
 
     /*

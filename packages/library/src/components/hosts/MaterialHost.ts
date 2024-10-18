@@ -1,13 +1,13 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { Material, Mesh, MultiMaterial } from '@babylonjs/core';
-import { type MeshProps  } from '../../types/props';
+import { type MeshProps } from '../../types/props';
 
 // add other materials when you study them (e.g. PBRMaterial, etc..) - see packages/library/src/index.tsx
 type AugmentedMaterial = ComponentInstance<Material & JSX.IntrinsicElements['standardMaterial']>;
 
 export class MaterialHost {
-    static createInstance(isBuilder: boolean, Class: any, props: AugmentedMaterial, rootContainer: RootContainer) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: AugmentedMaterial, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
         const { cloneFrom, assignTo } = props;
@@ -20,7 +20,7 @@ export class MaterialHost {
                 return original.clone(props.name);
             };
         }
-        const element = Host.createInstance(isBuilder, Class, props, rootContainer, cloneFn);
+        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer, cloneFn);
         if (assignTo) {
             assignTo.forEach(meshId => {
                 const mesh = scene.getMeshById(meshId);
@@ -44,11 +44,11 @@ export class MaterialHost {
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void { }
+    static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void {}
 
     static prepareUpdate(): UpdatePayload {
         return {};
     }
 
-    static commitUpdate(instance: AugmentedMaterial, updatePayload: UpdatePayload): void { }
+    static commitUpdate(instance: AugmentedMaterial, updatePayload: UpdatePayload): void {}
 }

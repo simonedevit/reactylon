@@ -31,7 +31,7 @@ function handleEvents(props: AugmentedMesh, scene: Scene) {
 type AugmentedMesh = ComponentInstance<Mesh & JSX.IntrinsicElements['mesh'] & MeshProps>;
 
 export class MeshHost {
-    static createInstance(isBuilder: boolean, Class: any, props: AugmentedMesh, rootContainer: RootContainer) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: AugmentedMesh, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
         const { name, cloneFrom, instanceFrom, physicsAggregate } = props;
@@ -49,7 +49,7 @@ export class MeshHost {
                 }
             };
         }
-        const element = Host.createInstance(isBuilder, Class, props, rootContainer, cloneFn);
+        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer, cloneFn);
         if (physicsAggregate) {
             element.metadata.physicsAggregate = new PhysicsAggregate(element, physicsAggregate.type, physicsAggregate._options);
         }

@@ -19,24 +19,30 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 type Constructor<T> = new (...args: any[]) => T;
 type Function = (...args: any[]) => void;
 
-function getConstructorProps<T>(Class: Constructor<T> | Function, className: string, isConstructor: boolean) {
+function getConstructorProps<T>(Class: Constructor<T> | Function, className: string, isConstructor: boolean): [string, Array<string>] {
     const params = isConstructor ? getClassConstructorParams(Class as Constructor<T>) : getFunctionParams(Class as Function);
     const parameterType = isConstructor ? 'ConstructorParameters' : 'Parameters';
     if (params.length) {
-        return params.reduce((type: string, prop: string, index: number) => {
+        const props = params.reduce((type: string, prop: string, index: number) => {
             const attribute = `${prop}: ${parameterType}<typeof ${className}>[${index}];`;
             type += `${attribute}\n    `;
             return type;
         }, '');
+        return [props, params];
     }
-    return '';
+    return ['', []];
 }
+type JsxElementsInfo = {
+    imports: Array<string>;
+    declarations: Array<string>;
+    constructorArguments: Record<string, Array<string>>;
+};
 
-// FIXME: handle duplicates
-async function createJsxDeclarations(index: string, babylonPackage: BabylonPackages): Promise<Record<string, Array<string>>> {
-    const jsxElements: Record<string, Array<string>> = {
+async function createJsxBabylonElements(index: string, babylonPackage: BabylonPackages): Promise<JsxElementsInfo> {
+    const jsxElements: JsxElementsInfo = {
         imports: [],
         declarations: [],
+        constructorArguments: {},
     };
 
     let classesInError = 0;
@@ -47,27 +53,30 @@ async function createJsxDeclarations(index: string, babylonPackage: BabylonPacka
             if (isClass(value)) {
                 const Class = value as Constructor<typeof value>;
                 const importStatement = `import { ${key} } from '${index}';`;
-                const result = getConstructorProps(Class, key, true);
-                const ConstructorProps = result
+                const ElementType = key;
+                let jsxElementName = lowercaseFirstLetter(key);
+                if (CollidingComponents[ElementType]) {
+                    jsxElementName = CollidingComponents[ElementType];
+                }
+                const [props, constructorArguments] = getConstructorProps(Class, key, true);
+                const ConstructorProps = props
                     ? `, {
-${result}
+${props}
     }`
                     : ', {}';
 
                 // check if "clone" method exists, if it exists will be added cloneFrom prop
                 const isClonable = Class.prototype.clone;
 
-                const ElementType = key;
-                let jsxElementName = lowercaseFirstLetter(key);
-                if (CollidingComponents[ElementType]) {
-                    jsxElementName = CollidingComponents[ElementType];
-                }
-
                 const GuiProps = babylonPackage === BabylonPackages.GUI ? getGuiProps() : '';
                 const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getClonableProp(isClonable)}${ConstructorProps}${GuiProps},${ElementType}>, any>;`;
 
-                jsxElements.imports.push(importStatement);
-                jsxElements.declarations.push(declarationStatement);
+                // handle duplicates
+                if (!(jsxElementName in jsxElements.constructorArguments)) {
+                    jsxElements.imports.push(importStatement);
+                    jsxElements.declarations.push(declarationStatement);
+                    jsxElements.constructorArguments[jsxElementName] = constructorArguments;
+                }
             } else {
                 // exclude objects, constants and other stuff
                 if (typeof value === 'function') {
@@ -77,23 +86,27 @@ ${result}
                         prefix = 'Extrude';
                     }*/
                     const Builder = value as Function;
-                        const importStatement = `import { ${key} } from '${index}';`;
-                        const result = getConstructorProps(Builder, key, false);
-                        const FunctionProps = result
-                            ? `, {
-        ${result}
+                    const importStatement = `import { ${key} } from '${index}';`;
+                    const keyWithoutPrefix = key.replace(prefix, '');
+                    let jsxElementName = lowercaseFirstLetter(keyWithoutPrefix);
+                    if (CollidingComponents[keyWithoutPrefix]) {
+                        jsxElementName = CollidingComponents[keyWithoutPrefix];
+                    }
+                    const [props, constructorArguments] = getConstructorProps(Builder, key, false);
+                    const FunctionProps = props
+                        ? `, {
+        ${props}
             }`
-                            : ', {}';
-                        const ElementType = `ReturnType<typeof ${key}>`;
-                        const keyWithoutPrefix = key.replace(prefix, '');
-                        let jsxElementName = lowercaseFirstLetter(keyWithoutPrefix);
-                        if (CollidingComponents[keyWithoutPrefix]) {
-                            jsxElementName = CollidingComponents[keyWithoutPrefix];
-                        }
-                        const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getMeshProps()}${FunctionProps},${ElementType}>, any>;`;
+                        : ', {}';
+                    const ElementType = `ReturnType<typeof ${key}>`;
+                    const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getMeshProps()}${FunctionProps},${ElementType}>, any>;`;
 
+                    // handle duplicates
+                    if (!(jsxElementName in jsxElements.constructorArguments)) {
                         jsxElements.imports.push(importStatement);
                         jsxElements.declarations.push(declarationStatement);
+                        jsxElements.constructorArguments[jsxElementName] = constructorArguments;
+                    }
                 }
             }
         } catch (error) {
@@ -106,23 +119,25 @@ ${result}
     return jsxElements;
 }
 
-const declarations = {
+const packages = {
     core: {
         index: '@babylonjs/core',
-        fileName: 'core.declarations.ts',
+        declarationsFilename: 'core.declarations.ts',
+        constructorsFilename: 'core.constructors.ts',
         babylonPackage: BabylonPackages.CORE,
     },
     gui: {
         index: '@babylonjs/gui',
-        fileName: 'gui.declarations.ts',
+        declarationsFilename: 'gui.declarations.ts',
+        constructorsFilename: 'gui.constructors.ts',
         babylonPackage: BabylonPackages.GUI,
     },
 };
 
 (async () => {
-    Object.values(declarations).forEach(async ({ index, fileName, babylonPackage }) => {
-        const jsxElements = await createJsxDeclarations(index, babylonPackage);
-        const content = `
+    Object.values(packages).forEach(async ({ index, declarationsFilename, constructorsFilename, babylonPackage }) => {
+        const jsxElements = await createJsxBabylonElements(index, babylonPackage);
+        const declarationsContent = `
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from './types';
 import { type MeshProps, type GuiProps, type Clonable } from './props';
@@ -132,12 +147,23 @@ export interface JSXElements {
   ${jsxElements.declarations.join('\n  ')}
 }
 `;
+        const constructorsContent = `const ConstructorsMap: Record<string, Array<string>> = {
+${Object.entries(jsxElements.constructorArguments).reduce((result, [jsxElementName, constructorArguments]) => {
+    result += `   ${jsxElementName}: ${JSON.stringify(constructorArguments)},\n`;
+    return result;
+}, '')}
+}
+export default ConstructorsMap;`;
         try {
-            const fullPathFileName = path.join(__dirname, `../../library/src/types/${fileName}`);
-            await writeFile(fullPathFileName, content);
-            console.log(`\n${fileName} created successfully`);
+            const declarationsFullPathFilename = path.join(__dirname, `../../library/src/types/${declarationsFilename}`);
+            await writeFile(declarationsFullPathFilename, declarationsContent);
+            console.log(`\n${declarationsFilename} created successfully`);
+
+            const constructorsFullPathFilename = path.join(__dirname, `../../library/src/map/${constructorsFilename}`);
+            await writeFile(path.join(constructorsFullPathFilename), constructorsContent);
+            console.log(`\n${constructorsFilename} created successfully`);
         } catch (error) {
-            console.log(`Error creating ${fileName}: ${error}`);
+            console.log(`Error creating ${index}: ${error}`);
         }
     });
 })();

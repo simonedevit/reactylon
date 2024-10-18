@@ -1,16 +1,17 @@
-import { getFunctionParams, getClassConstructorParams, BabylonPackages } from '@dvmstudios/reactylon-common';
+import { BabylonPackages } from '@dvmstudios/reactylon-common';
 import { ComponentInstance, RootContainer } from '@types';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
 import '../../index';
+import coreConstructors from '../../map/core.constructors';
 
 const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'physicsAggregate', 'highlightLayer'];
 export class Host {
-    static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function) {
         let element: any;
 
-        const paramsNames = isBuilder ? getFunctionParams(Class) : getClassConstructorParams(Class);
+        const paramsNames = coreConstructors[type];
         const paramsValues = paramsNames.map(param => {
             return props[param as keyof ComponentInstance];
         });

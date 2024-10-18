@@ -13,7 +13,7 @@ type BuilderProps = AdvancedDynamicTextureProps['createForMesh'] | AdvancedDynam
 type AugmentedAdvancedDynamicTexture = ComponentInstance<AdvancedDynamicTexture & JSX.IntrinsicElements['advancedDynamicTexture']>;
 
 export class AdvancedDynamicTextureHost {
-    static createInstance(isBuilder: boolean, Class: any, props: AugmentedAdvancedDynamicTexture, rootContainer: RootContainer) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: AugmentedAdvancedDynamicTexture, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const { kind } = props;
         const scene = rootContainer.scene;
@@ -29,7 +29,7 @@ export class AdvancedDynamicTextureHost {
                 paramsValues: [],
             } as Params,
         );
-        const element = GuiHost.createInstance(isBuilder, Builder[kind].bind(Class), props, rootContainer, cloneFn, params);
+        const element = GuiHost.createInstance(type, isBuilder, Builder[kind].bind(Class), props, rootContainer, cloneFn, params);
         return element;
     }
 }

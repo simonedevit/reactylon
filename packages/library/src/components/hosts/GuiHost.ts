@@ -1,4 +1,4 @@
-import { getFunctionParams, getClassConstructorParams, BabylonPackages, Logger } from '@dvmstudios/reactylon-common';
+import { BabylonPackages, Logger } from '@dvmstudios/reactylon-common';
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
@@ -7,6 +7,7 @@ import '../../index';
 import { Button3D, Container, Container3D, Control, GUI3DManager, HolographicButton, HolographicSlate, Vector2WithInfo } from '@babylonjs/gui';
 import { GuiTriggerable, GuiTriggers } from '../../types/props';
 import { Observable, DynamicTexture, AbstractMesh } from '@babylonjs/core';
+import guiConstructors from '../../map/gui.constructors';
 
 function handleEvents(props: ComponentInstance<GuiComponent>, element: any) {
     Object.entries(GuiTriggers).forEach(([_key, observableName]) => {
@@ -29,7 +30,7 @@ type GuiComponent = Pick<Container, 'addControl' | 'removeControl'> & GuiTrigger
 const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', ...Object.keys(GuiTriggers)];
 
 export class GuiHost {
-    static createInstance(isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
         let element: any;
         const scene = rootContainer.scene;
 
@@ -37,7 +38,7 @@ export class GuiHost {
         let paramsValues = [];
 
         if (!params) {
-            paramsNames = isBuilder ? getFunctionParams(Class) : getClassConstructorParams(Class);
+            paramsNames = guiConstructors[type];
             paramsValues = paramsNames.map(param => {
                 return props[param as keyof ComponentInstance];
             });
