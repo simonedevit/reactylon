@@ -19,11 +19,15 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
     return {
         mode: isProduction ? 'production' : 'development',
         devtool: isProduction ? undefined : 'source-map',
-        entry: './src/index.tsx',
+        entry: {
+            index: './src/index.tsx',
+            web: './src/components/core/Engine.tsx',
+            mobile: './src/components/core/NativeEngine.tsx',
+        },
         output: {
             path: path.resolve(__dirname, 'build'),
             publicPath: '/',
-            filename: 'index.js',
+            filename: '[name].bundle.js',
             globalObject: 'globalThis', // Use globalThis instead of self
             library: {
                 type: 'module',

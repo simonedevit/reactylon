@@ -1,6 +1,6 @@
 import React, { useEffect, Children, useState, useRef } from 'react';
 import { Engine as BabylonEngine, type EngineOptions, Scene, EventState } from '@babylonjs/core';
-//import CustomLoadingScreen from '../CustomLoadingScreen';
+import CustomLoadingScreen from '../CustomLoadingScreen';
 import { EngineContext, EngineContextType } from './hooks';
 import { FiberProvider } from 'its-fine';
 
@@ -31,7 +31,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
             ------------------------------------------------------------------------------------------ */
             const engine = new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
             if (loader) {
-                //engine.loadingScreen = new CustomLoadingScreen(canvas, loader);
+                engine.loadingScreen = new CustomLoadingScreen(canvas, loader);
             }
             engine.runRenderLoop(() => {
                 const camera = engine!.activeView?.camera;

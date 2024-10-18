@@ -503,12 +503,14 @@ import { GetFogState } from '@babylonjs/core';
 import { GetFontOffset } from '@babylonjs/core';
 import { GetForwardRay } from '@babylonjs/core';
 import { GetForwardRayToRef } from '@babylonjs/core';
+import { GetHotSpotToRef } from '@babylonjs/core';
 import { GetIndividualParser } from '@babylonjs/core';
 import { GetInternalFormatFromBasisFormat } from '@babylonjs/core';
 import { GetParser } from '@babylonjs/core';
 import { GetPointsCount } from '@babylonjs/core';
 import { GetTGAHeader } from '@babylonjs/core';
 import { GetTextureDataAsync } from '@babylonjs/core';
+import { GetTransformedPosition } from '@babylonjs/core';
 import { Gizmo } from '@babylonjs/core';
 import { GizmoManager } from '@babylonjs/core';
 import { GlowLayer } from '@babylonjs/core';
@@ -575,6 +577,9 @@ import { KeyboardInfo } from '@babylonjs/core';
 import { KeyboardInfoPre } from '@babylonjs/core';
 import { KhronosTextureContainer } from '@babylonjs/core';
 import { KhronosTextureContainer2 } from '@babylonjs/core';
+import { Lattice } from '@babylonjs/core';
+import { LatticeBlock } from '@babylonjs/core';
+import { LatticePluginMaterial } from '@babylonjs/core';
 import { Layer } from '@babylonjs/core';
 import { LayerSceneComponent } from '@babylonjs/core';
 import { LengthBlock } from '@babylonjs/core';
@@ -914,6 +919,7 @@ import { SliderConstraint } from '@babylonjs/core';
 import { SmartArray } from '@babylonjs/core';
 import { SmartArrayNoDuplicate } from '@babylonjs/core';
 import { SmoothStepBlock } from '@babylonjs/core';
+import { SnapshotRenderingHelper } from '@babylonjs/core';
 import { SolidParticle } from '@babylonjs/core';
 import { SolidParticleSystem } from '@babylonjs/core';
 import { SolidParticleVertex } from '@babylonjs/core';
@@ -1051,6 +1057,7 @@ import { WebGPUCacheSampler } from '@babylonjs/core';
 import { WebGPUDataBuffer } from '@babylonjs/core';
 import { WebGPUDrawContext } from '@babylonjs/core';
 import { WebGPUEngine } from '@babylonjs/core';
+import { WebGPUPipelineContext } from '@babylonjs/core';
 import { WebGPURenderTargetWrapper } from '@babylonjs/core';
 import { WebGPUShaderProcessor } from '@babylonjs/core';
 import { WebRequest } from '@babylonjs/core';
@@ -6449,6 +6456,18 @@ export interface JSXElements {
         >,
         any
     >;
+    getHotSpotToRef: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetHotSpotToRef>> & MeshProps,
+            {
+                mesh: Parameters<typeof GetHotSpotToRef>[0];
+                hotSpotQuery: Parameters<typeof GetHotSpotToRef>[1];
+                res: Parameters<typeof GetHotSpotToRef>[2];
+            },
+            ReturnType<typeof GetHotSpotToRef>
+        >,
+        any
+    >;
     getIndividualParser: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof GetIndividualParser>> & MeshProps,
@@ -6504,6 +6523,18 @@ export interface JSXElements {
                 lod: Parameters<typeof GetTextureDataAsync>[4];
             },
             ReturnType<typeof GetTextureDataAsync>
+        >,
+        any
+    >;
+    getTransformedPosition: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetTransformedPosition>> & MeshProps,
+            {
+                mesh: Parameters<typeof GetTransformedPosition>[0];
+                index: Parameters<typeof GetTransformedPosition>[1];
+                res: Parameters<typeof GetTransformedPosition>[2];
+            },
+            ReturnType<typeof GetTransformedPosition>
         >,
         any
     >;
@@ -7201,6 +7232,37 @@ export interface JSXElements {
                 numWorkersOrOptions: ConstructorParameters<typeof KhronosTextureContainer2>[1];
             },
             KhronosTextureContainer2
+        >,
+        any
+    >;
+    lattice: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<Lattice>,
+            {
+                options: ConstructorParameters<typeof Lattice>[0];
+            },
+            Lattice
+        >,
+        any
+    >;
+    latticeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LatticeBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof LatticeBlock>[0];
+            },
+            LatticeBlock
+        >,
+        any
+    >;
+    latticePluginMaterial: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<LatticePluginMaterial>,
+            {
+                lattice: ConstructorParameters<typeof LatticePluginMaterial>[0];
+                material: ConstructorParameters<typeof LatticePluginMaterial>[1];
+            },
+            LatticePluginMaterial
         >,
         any
     >;
@@ -10798,6 +10860,17 @@ export interface JSXElements {
         >,
         any
     >;
+    snapshotRenderingHelper: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SnapshotRenderingHelper>,
+            {
+                scene: ConstructorParameters<typeof SnapshotRenderingHelper>[0];
+                options: ConstructorParameters<typeof SnapshotRenderingHelper>[1];
+            },
+            SnapshotRenderingHelper
+        >,
+        any
+    >;
     solidParticle: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SolidParticle>,
@@ -10960,6 +11033,7 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof SpriteManager>[6];
                 fromPacked: ConstructorParameters<typeof SpriteManager>[7];
                 spriteJSON: ConstructorParameters<typeof SpriteManager>[8];
+                options: ConstructorParameters<typeof SpriteManager>[9];
             },
             SpriteManager
         >,
@@ -10990,6 +11064,7 @@ export interface JSXElements {
                 spriteJSON: ConstructorParameters<typeof SpritePackedManager>[4];
                 epsilon: ConstructorParameters<typeof SpritePackedManager>[5];
                 samplingMode: ConstructorParameters<typeof SpritePackedManager>[6];
+                options: ConstructorParameters<typeof SpritePackedManager>[7];
             },
             SpritePackedManager
         >,
@@ -12284,6 +12359,17 @@ export interface JSXElements {
                 options: ConstructorParameters<typeof WebGPUEngine>[1];
             },
             WebGPUEngine
+        >,
+        any
+    >;
+    webGPUPipelineContext: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<WebGPUPipelineContext>,
+            {
+                shaderProcessingContext: ConstructorParameters<typeof WebGPUPipelineContext>[0];
+                engine: ConstructorParameters<typeof WebGPUPipelineContext>[1];
+            },
+            WebGPUPipelineContext
         >,
         any
     >;
