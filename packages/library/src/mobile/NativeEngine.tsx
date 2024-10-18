@@ -1,6 +1,6 @@
 import { EngineView, useEngine } from '@babylonjs/react-native';
 import React from 'react';
-import { EngineContext } from '../core/hooks';
+import { EngineContext } from '../hooks';
 import { FiberProvider } from 'its-fine';
 import { Camera } from '@babylonjs/core';
 

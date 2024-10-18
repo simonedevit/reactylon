@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Nullable, Camera } from '@babylonjs/core';
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
-import { SceneContext, useEngine } from './hooks';
+import { SceneContext, useEngine } from '../hooks';
 import { RootContainer } from '@types';
 import Reactylon from '../reconciler';
 import { type ContextBridge, useContextBridge } from 'its-fine';
