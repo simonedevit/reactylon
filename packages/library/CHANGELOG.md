@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.47](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.46&targetVersion=GTv0.0.47&_a=files) (2024-10-18)
+
+
+### Chore
+
+* **general:** restructuring ([6da1085](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/6da1085d0e301a3f700ddb6b726d4ea2f7fa6764))
+
 ## [0.0.46](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.45&targetVersion=GTv0.0.46&_a=files) (2024-10-18)
 
 ## [0.0.45](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.44&targetVersion=GTv0.0.45&_a=files) (2024-10-18)
