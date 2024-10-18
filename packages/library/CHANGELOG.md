@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.49](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.48&targetVersion=GTv0.0.49&_a=files) (2024-10-18)
+
+
+### Chore
+
+* **general:** export missing index ([efb1d47](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/efb1d4771899acf04a0a7c50262545f26606e55c))
+
 ## [0.0.48](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.47&targetVersion=GTv0.0.48&_a=files) (2024-10-18)
 
 
