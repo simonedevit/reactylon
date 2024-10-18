@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.44](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.43&targetVersion=GTv0.0.44&_a=files) (2024-10-18)
+
+
+### Chore
+
+* **general:** split web and mobile bundles ([fa96af8](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/fa96af8132431a2f0b357bb19f414fe7d40fceec))
+
 ## [0.0.43](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.42&targetVersion=GTv0.0.43&_a=files) (2024-10-18)
 
 
