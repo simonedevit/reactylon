@@ -1,7 +1,7 @@
 import React, { useEffect, Children, useState, useRef } from 'react';
 import { Engine as BabylonEngine, type EngineOptions, Scene, EventState } from '@babylonjs/core';
-import CustomLoadingScreen from '../CustomLoadingScreen';
-import { EngineContext, EngineContextType } from './hooks';
+import CustomLoadingScreen from './CustomLoadingScreen';
+import { EngineContext, EngineContextType } from '../core/hooks';
 import { FiberProvider } from 'its-fine';
 
 export type EngineProps = React.PropsWithChildren<{

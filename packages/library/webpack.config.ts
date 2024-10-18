@@ -21,13 +21,15 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
         devtool: isProduction ? undefined : 'source-map',
         entry: {
             index: './src/index.tsx',
-            web: './src/components/core/Engine.tsx',
-            mobile: './src/components/core/NativeEngine.tsx',
+            web: './src/components/web/index.ts',
+            mobile: './src/components/mobile/index.ts',
         },
         output: {
             path: path.resolve(__dirname, 'build'),
             publicPath: '/',
-            filename: '[name].bundle.js',
+            filename: pathData => {
+                return pathData.runtime === 'index' ? 'index.js' : `${pathData.runtime}/index.js`;
+            },
             globalObject: 'globalThis', // Use globalThis instead of self
             library: {
                 type: 'module',
