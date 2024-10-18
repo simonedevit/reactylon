@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.43](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.42&targetVersion=GTv0.0.43&_a=files) (2024-10-18)
+
+
+### Chore
+
+* **general:** replace dynamic constructor arguments with static map ([07a5e47](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/07a5e477a0f0eb6252307eda299a43f9091643e2))
+
 ## [0.0.42](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.41&targetVersion=GTv0.0.42&_a=files) (2024-10-15)
 
 
