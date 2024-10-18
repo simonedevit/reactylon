@@ -1,5 +1,13 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.48](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.47&targetVersion=GTv0.0.48&_a=files) (2024-10-18)
+
+
+### Chore
+
+* **general:** test splitting hooks ([3ae08d0](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/3ae08d098f99f2d74acb503a2a6e807df72ea232))
+* **general:** test splitting hooks ([31cb26b](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/31cb26be027fe1d264b701ed02d483688caa7dc4))
+
 ## [0.0.47](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.46&targetVersion=GTv0.0.47&_a=files) (2024-10-18)
 
 
