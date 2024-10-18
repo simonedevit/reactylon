@@ -21,7 +21,7 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
         devtool: isProduction ? undefined : 'source-map',
         entry: {
             hooks: './src/hooks.ts',
-            index: './src/index.tss',
+            index: './src/index.tsx',
             web: './src/web/index.ts',
             mobile: './src/mobile/index.ts',
         },
@@ -72,7 +72,7 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
                 },
             },
         },*/
-        externals: ['react', 'react-dom/client', /^@babylonjs\/*/],
+        externals: ['react', 'react-dom/client', /^@babylonjs\/*/, 'its-fine'],
         plugins: [
             new CleanWebpackPlugin(),
             // serve custom environment variable to application
