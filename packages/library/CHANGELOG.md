@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.56](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.55&targetVersion=GTv0.0.56&_a=files) (2024-10-19)
+
+
+### Chore
+
+* **general:** move @babylonjs/react-native and react-dom as peer deps ([901fbc0](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/901fbc0c4a0f3bf5a995d77265856d8fdd4acf77))
+
 ## [0.0.55](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.54&targetVersion=GTv0.0.55&_a=files) (2024-10-19)
 
 
