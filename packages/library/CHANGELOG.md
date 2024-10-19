@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.51](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.50&targetVersion=GTv0.0.51&_a=files) (2024-10-19)
+
+
+### Chore
+
+* **general:** final web/mobile split ([122e89b](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/122e89b05e41ac9871cdc04510ccdee71fe4ec95))
+
 ## [0.0.50](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.49&targetVersion=GTv0.0.50&_a=files) (2024-10-18)
 
 
