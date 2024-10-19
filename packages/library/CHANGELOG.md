@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.59](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.58&targetVersion=GTv0.0.59&_a=files) (2024-10-19)
+
+
+### Chore
+
+* **general:** revert react deps ([b7c90d4](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/b7c90d426b7e7c49e7219cf0910a684392cd02ce))
+
 ## [0.0.58](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.57&targetVersion=GTv0.0.58&_a=files) (2024-10-19)
 
 
