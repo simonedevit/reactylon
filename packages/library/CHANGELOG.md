@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.53](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.52&targetVersion=GTv0.0.53&_a=files) (2024-10-19)
+
+
+### Chore
+
+* **general:** temporary fix on null metadata ([67fb259](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/67fb2593ae624182153d0bc1fd3287ddc9a8f753))
+
 ## [0.0.52](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.51&targetVersion=GTv0.0.52&_a=files) (2024-10-19)
 
 ## [0.0.51](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.50&targetVersion=GTv0.0.51&_a=files) (2024-10-19)
