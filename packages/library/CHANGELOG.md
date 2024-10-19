@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.58](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.57&targetVersion=GTv0.0.58&_a=files) (2024-10-19)
+
+
+### Chore
+
+* **general:** downgrade react deps to allow minor version of react native ([bc4b940](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/bc4b940172978fd002b165c2f31bf4919f30e61c))
+
 ## [0.0.57](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.56&targetVersion=GTv0.0.57&_a=files) (2024-10-19)
 
 
