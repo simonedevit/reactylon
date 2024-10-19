@@ -20,7 +20,6 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
         mode: isProduction ? 'production' : 'development',
         devtool: isProduction ? undefined : 'source-map',
         entry: {
-            hooks: './src/hooks.ts',
             index: './src/index.tsx',
             web: './src/web/index.ts',
             mobile: './src/mobile/index.ts',

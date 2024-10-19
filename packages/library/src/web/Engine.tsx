@@ -1,8 +1,9 @@
 import React, { useEffect, Children, useState, useRef } from 'react';
 import { Engine as BabylonEngine, type EngineOptions, Scene, EventState } from '@babylonjs/core';
 import CustomLoadingScreen from './CustomLoadingScreen';
-import { EngineContext, EngineContextType } from '../hooks';
 import { FiberProvider } from 'its-fine';
+import { EngineContextType } from '../core/hooks';
+import { Logger } from '@dvmstudios/reactylon-common';
 
 export type EngineProps = React.PropsWithChildren<{
     antialias?: boolean;
@@ -20,25 +21,43 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
         onResizeWindow: () => void;
     }>({ engine: {} as BabylonEngine, onResizeWindow: () => {} });
 
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    const children = Children.toArray(rest.children) as Array<React.ReactElement>;
+    const isMultipleScene = children.length > 1;
+
     useEffect(() => {
         async function initializeScene() {
-            const children = Children.toArray(rest.children) as Array<React.ReactElement>;
-            const isMultipleScene = children.length > 1;
-            const canvas = isMultipleScene ? document.createElement('canvas') : children[0].props.canvas;
+            let canvas = null;
+            if (!isMultipleScene) {
+                canvas = canvasRef.current;
+            } else {
+                React.Children.forEach(rest.children, child => {
+                    if (React.isValidElement(child)) {
+                        if (!child.props.canvas) {
+                            Logger.error(
+                                `Engine - initializeScene - Each Scene component requires a corresponding canvas element. Ensure that you provide one canvas for every Scene you are using.`,
+                            );
+                        }
+                    }
+                });
+                // fake canvas to work with multiple scenes (Babylon.js constraint)
+                canvas = document.createElement('canvas');
+            }
 
             /* --------------------------------------------------------------------------------------- */
             /* ENGINE
             ------------------------------------------------------------------------------------------ */
             const engine = new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
             if (loader) {
-                engine.loadingScreen = new CustomLoadingScreen(canvas, loader);
+                engine.loadingScreen = new CustomLoadingScreen(canvas as HTMLCanvasElement, loader);
             }
             engine.runRenderLoop(() => {
                 const camera = engine!.activeView?.camera;
                 engine!.scenes.forEach(scene => {
                     if (!scene.activeCamera) {
                         // meantime you are setting a camera
-                        console.warn('no active camera..');
+                        Logger.warn('Engine - runRenderLoop - There is no active camera...');
                     }
                     if (scene.cameras?.length > 0) {
                         if (!isMultipleScene || scene.activeCamera === camera) {
@@ -64,9 +83,16 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
         };
     }, []);
 
-    return context ? (
-        <FiberProvider>
-            <EngineContext.Provider value={context}>{rest.children}</EngineContext.Provider>
-        </FiberProvider>
-    ) : null;
+    return (
+        <>
+            {!isMultipleScene ? <canvas id='reactylon-canvas' ref={canvasRef} /> : null}
+            {context ? (
+                <FiberProvider>
+                    {React.Children.map(rest.children, (child: any) => {
+                        return React.cloneElement(child, { context });
+                    })}
+                </FiberProvider>
+            ) : null}
+        </>
+    );
 };

@@ -2,13 +2,16 @@ import React, { useEffect, useRef } from 'react';
 import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Nullable, Camera } from '@babylonjs/core';
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
-import { SceneContext, useEngine } from '../hooks';
+import { SceneContext, EngineContextType } from './hooks';
 import { RootContainer } from '@types';
 import Reactylon from '../reconciler';
 import { type ContextBridge, useContextBridge } from 'its-fine';
 
 type SceneProps = React.PropsWithChildren<{
-    canvas: HTMLCanvasElement;
+    /**
+     * This prop should be set only when you have multiple scenes.
+     */
+    canvas?: HTMLCanvasElement;
     sceneOptions?: SceneOptions;
     onSceneReady?: (scene: BabylonScene) => void;
     isGui3DManager?: boolean;
@@ -17,13 +20,18 @@ type SceneProps = React.PropsWithChildren<{
         gravity?: Parameters<BabylonScene['enablePhysics']>[0];
         plugin?: Parameters<BabylonScene['enablePhysics']>[1];
     };
+    /**
+     * @internal
+     * This prop is only for internal use and should not be passed to this component.
+     */
+    context?: EngineContextType;
 }>;
 
 //FIXME: replace global var with a singleton Manager
 export let activeScene: BabylonScene | null = null;
 
-export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions, canvas }) => {
-    const { engine, isMultipleScene } = useEngine();
+export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions, context, ...rest }) => {
+    const { engine, isMultipleScene } = context as EngineContextType;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
 
     // Returns a bridged context provider that forwards context
@@ -32,6 +40,8 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
     useEffect(() => {
         (async () => {
             if (engine) {
+                const canvas = rest.canvas as HTMLCanvasElement;
+
                 /* --------------------------------------------------------------------------------------- */
                 /* SCENE
                 ------------------------------------------------------------------------------------------ */
@@ -109,7 +119,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 // Renders children with bridged context into a secondary renderer
                 Reactylon.render(
                     <Bridge>
-                        <SceneContext.Provider value={{ scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
+                        <SceneContext.Provider value={{ engine, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
                     </Bridge>,
                     rootContainer.current,
                 );
@@ -125,12 +135,12 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
     return null;
 };
 
-// USE IT ONLY IF YOU ARE UPDATING Engine COMPONENT (e.g. setting state) AND YOU NEED TO RE-RENDER PROVIDERS
+// USE IT ONLY IF YOU ARE UPDATING ON TOP (e.g. setting state) AND YOU NEED TO RE-RENDER PROVIDERS
 /*useEffect(() => {
-        useEffect(() => {
         Reactylon.render(
-            <EngineContext.Provider value={{ engine: engine.current, isMultipleScene: isMultipleScene.current, activeScene, setActiveScene }}>
-                {rest.children}
-            </EngineContext.Provider>, rootContainer.current as RootContainer
+            <Bridge>
+                <SceneContext.Provider value={{ engine, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
+            </Bridge>,
+            rootContainer.current,
         );
-    }, [yourDep]); */
+}, [yourDep]); */
