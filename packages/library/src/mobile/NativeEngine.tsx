@@ -17,8 +17,10 @@ export const NativeEngine: React.FC<NativeEngineProps> = ({ children, camera }) 
                 <FiberProvider>
                     {React.Children.map<any, any>(children, child => {
                         return React.cloneElement(child, {
-                            engine,
-                            isMultipleScene: false,
+                            context: {
+                                engine,
+                                isMultipleScene: false,
+                            },
                         });
                     })}
                 </FiberProvider>
