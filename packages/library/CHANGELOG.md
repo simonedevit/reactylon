@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.54](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.53&targetVersion=GTv0.0.54&_a=files) (2024-10-19)
+
+
+### Chore
+
+* **general:** add missing context prop in mobile + add react-dom as optional dep ([9f849cf](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/9f849cfbf81a68da9190ab31bb69acf7f9ac6d16))
+
 ## [0.0.53](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.52&targetVersion=GTv0.0.53&_a=files) (2024-10-19)
 
 
