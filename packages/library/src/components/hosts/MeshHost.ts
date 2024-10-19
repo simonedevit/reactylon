@@ -74,7 +74,8 @@ export class MeshHost {
     }
 
     static removeChild(parentInstance: ComponentInstance, child: AugmentedMesh): void {
-        if (child.metadata.physicsAggregate) {
+        //FIXME: child.metadata is null. Does Babylon set it somewhere?
+        if (child.metadata && child.metadata.physicsAggregate) {
             child.metadata.physicsAggregate.dispose();
         }
         // you don't need, automatically done by Babylon.js when you dispose a mesh
