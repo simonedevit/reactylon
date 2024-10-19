@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.57](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.56&targetVersion=GTv0.0.57&_a=files) (2024-10-19)
+
+
+### Chore
+
+* **general:** update deps ([5bad5af](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/5bad5af13f999a6d7edaa5c2506fc783c2d24f72))
+
 ## [0.0.56](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.55&targetVersion=GTv0.0.56&_a=files) (2024-10-19)
 
 
