@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.60](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.59&targetVersion=GTv0.0.60&_a=files) (2024-10-20)
+
+
+### Chore
+
+* **general:** test react deps ([a74858c](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/a74858c55f18200e31e3e44e59143c921a89691b))
+
 ## [0.0.59](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.58&targetVersion=GTv0.0.59&_a=files) (2024-10-19)
 
 
