@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.62](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.61&targetVersion=GTv0.0.62&_a=files) (2024-10-23)
+
+
+### Bug Fixes
+
+* **general:** unset parent to avoid maximum call excedeed in inspector ([750b3c4](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/750b3c43d5e3a69afa0c880d1e9346f2ffd9bedc))
+
 ## [0.0.61](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.60&targetVersion=GTv0.0.61&_a=files) (2024-10-23)
 
 ## [0.0.60](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.59&targetVersion=GTv0.0.60&_a=files) (2024-10-20)
