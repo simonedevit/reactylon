@@ -89,7 +89,7 @@ export class MeshHost {
     }
 
     static commitUpdate(instance: AugmentedMesh, updatePayload: UpdatePayload): void {
-        const parent = instance.metadata.parent;
+        const parent = instance.parent;
         if (parent instanceof HighlightLayer) {
             const highlightLayer = updatePayload.highlightLayer as MeshProps['highlightLayer'];
             if (highlightLayer) {

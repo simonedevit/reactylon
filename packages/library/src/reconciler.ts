@@ -9,10 +9,10 @@ import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, 
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 
-function isParentNeeded(parentInstance: ComponentInstance, child: ComponentInstance) {
-    if (parentInstance instanceof BabylonCore.HighlightLayer) {
+function isParentNeeded(_parentInstance: ComponentInstance, child: ComponentInstance) {
+    /*if (parentInstance instanceof BabylonCore.HighlightLayer) {
         return false;
-    }
+    }*/
     if (child instanceof BabylonCore.Material) {
         return false;
     }
@@ -34,8 +34,8 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
             }
             child.handlers?.addChild?.(parentInstance, child);
             parentInstance.metadata.children.push(child);
-            // reactylon internal purpose for hosts components
-            child.metadata.parent = parentInstance;
+            // reactylon internal purpose for hosts components (it throws maximum call exceeded in inspector)
+            // child.metadata.parent = parentInstance;
             if (child.metadata.babylonPackage === BabylonPackages.CORE && isParentNeeded(parentInstance, child)) {
                 //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons have .setParent method
                 child.parent = parentInstance;

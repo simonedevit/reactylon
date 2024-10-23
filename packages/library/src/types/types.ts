@@ -59,7 +59,6 @@ export type ComponentInstance<T = unknown> = CommonProps &
         metadata: {
             children: Array<ComponentInstance<T>>;
             babylonPackage: BabylonPackages;
-            parent: ComponentInstance;
             props?: unknown;
             // [key: string]: string;
         };
