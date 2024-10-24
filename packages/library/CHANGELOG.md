@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.65](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.64&targetVersion=GTv0.0.65&_a=files) (2024-10-24)
+
+
+### Chore
+
+* **general:** set constructor props for cloned elements --no-verify ([44c159e](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/44c159e249f9bb4bab1ae70b741b4f1a8b1ecc2f))
+
 ## [0.0.64](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.63&targetVersion=GTv0.0.64&_a=files) (2024-10-24)
 
 
