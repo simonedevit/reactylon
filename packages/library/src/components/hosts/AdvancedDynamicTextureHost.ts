@@ -1,7 +1,7 @@
-import { ComponentInstance, RootContainer } from '@types';
+import { RootContainer } from '@types';
 import { GuiHost, type Params } from './GuiHost';
 import { AdvancedDynamicTexture } from '@babylonjs/gui';
-import { AdvancedDynamicTextureProps } from '../../types/props';
+import { AdvancedDynamicTextureProps, GuiHostProps } from '@props';
 
 const Builder = {
     createFullscreenUI: AdvancedDynamicTexture.CreateFullscreenUI,
@@ -10,10 +10,8 @@ const Builder = {
 
 type BuilderProps = AdvancedDynamicTextureProps['createForMesh'] | AdvancedDynamicTextureProps['createFullscreenUI'];
 
-type AugmentedAdvancedDynamicTexture = ComponentInstance<AdvancedDynamicTexture & JSX.IntrinsicElements['advancedDynamicTexture']>;
-
 export class AdvancedDynamicTextureHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: AugmentedAdvancedDynamicTexture, rootContainer: RootContainer) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: GuiHostProps<AdvancedDynamicTextureProps>, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const { kind } = props;
         const scene = rootContainer.scene;

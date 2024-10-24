@@ -1,15 +1,15 @@
 import { BabylonPackages, Logger } from '@dvmstudios/reactylon-common';
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
-import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
+import { TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
 import '../../index';
 import { Button3D, Container, Container3D, Control, GUI3DManager, HolographicButton, HolographicSlate, Vector2WithInfo } from '@babylonjs/gui';
-import { GuiTriggerable, GuiTriggers } from '../../types/props';
+import { GuiHostProps, GuiTriggerable, GuiTriggers } from '@props';
 import { Observable, DynamicTexture, AbstractMesh } from '@babylonjs/core';
 import guiConstructors from '../../_generated/babylon.gui.constructors';
 
-function handleEvents(props: ComponentInstance<GuiComponent>, element: any) {
+function handleEvents(props: GuiHostProps, element: any) {
     Object.entries(GuiTriggers).forEach(([_key, observableName]) => {
         const key = _key as keyof GuiTriggerable;
         //TODO: handle addOnce
@@ -27,11 +27,11 @@ export type Params = {
 
 type GuiComponent = Pick<Container, 'addControl' | 'removeControl'> & GuiTriggerable;
 
-const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', ...Object.keys(GuiTriggers)];
+const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', ...Object.keys(GuiTriggers)];
 
 export class GuiHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
-        let element: any;
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: GuiHostProps, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
+        let element: ComponentInstance<any>;
         const scene = rootContainer.scene;
 
         let paramsNames = [];
@@ -40,7 +40,7 @@ export class GuiHost {
         if (!params) {
             paramsNames = guiConstructors[type];
             paramsValues = paramsNames.map(param => {
-                return props[param as keyof ComponentInstance];
+                return props[param as keyof GuiHostProps];
             });
             // AdvancedDynamicTexture
         } else {
@@ -69,7 +69,7 @@ export class GuiHost {
         Object.keys(props)
             .filter(propName => !paramsNames.includes(propName) && !excludedProps.includes(propName))
             .forEach(_key => {
-                const key = _key as keyof ComponentInstance;
+                const key = _key as keyof GuiHostProps;
                 const value = props[key];
                 if (key in TransformKeysMap) {
                     ObjectUtils.set(anchor || element, TransformKeysMap[key as keyof typeof TransformKeysMap], value);
@@ -77,14 +77,6 @@ export class GuiHost {
                     element[key] = value;
                 }
             });
-
-        // propertiesFrom
-        if (props.propertiesFrom) {
-            props.propertiesFrom.forEach(({ property, source, type }) => {
-                const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
-                element[property] = sourceElement[property];
-            });
-        }
 
         // use metadata to store children in reconciler
         if (!element.metadata) {
@@ -96,7 +88,7 @@ export class GuiHost {
         // execute custom code as soon the object is created
         props.onCreate?.(element);
 
-        handleEvents(props as ComponentInstance<GuiComponent>, element);
+        handleEvents(props, element);
 
         element.handlers = {
             addChild: GuiHost.addChild,

@@ -1,13 +1,12 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { Material, Mesh, MultiMaterial } from '@babylonjs/core';
-import { type MeshProps } from '../../types/props';
+import { type MeshProps, type MaterialProps, CoreHostProps } from '@props';
 
-// add other materials when you study them (e.g. PBRMaterial, etc..) - see packages/library/src/index.tsx
-type AugmentedMaterial = ComponentInstance<Material & JSX.IntrinsicElements['standardMaterial']>;
+type AugmentedMaterial = ComponentInstance<MaterialProps & Material>;
 
 export class MaterialHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: AugmentedMaterial, rootContainer: RootContainer) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<MaterialProps>, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
         const { cloneFrom, assignTo } = props;
@@ -44,7 +43,7 @@ export class MaterialHost {
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: ComponentInstance): void {}
+    static removeChild(parentInstance: ComponentInstance, child: AugmentedMaterial): void {}
 
     static prepareUpdate(): UpdatePayload {
         return {};

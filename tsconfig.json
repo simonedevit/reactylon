@@ -29,6 +29,7 @@
         "strictPropertyInitialization": false,
         "paths": {
             "@types": ["packages/library/src/types/types.ts"],
+            "@props": ["packages/library/src/types/props.ts"],
             "@utils/*": ["packages/library/src/utils/*"],
             "@constants": ["packages/library/src/constants.ts"],
         }

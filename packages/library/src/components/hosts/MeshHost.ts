@@ -1,9 +1,9 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { ActionEvent, ActionManager, ExecuteCodeAction, HighlightLayer, Mesh, PhysicsAggregate, Scene } from '@babylonjs/core';
-import { Triggerable, MeshTriggers, MeshProps } from '../../types/props';
+import { Triggerable, MeshTriggers, MeshProps, CoreHostProps } from '@props';
 
-function handleEvents(props: AugmentedMesh, scene: Scene) {
+function handleEvents(props: CoreHostProps<MeshProps>, scene: Scene) {
     const isAtLeastOneTrigger = Object.keys(MeshTriggers).some(trigger => props[trigger as keyof Triggerable]);
     if (isAtLeastOneTrigger) {
         const actionManager = new ActionManager(scene);
@@ -28,10 +28,10 @@ function handleEvents(props: AugmentedMesh, scene: Scene) {
     return null;
 }
 
-type AugmentedMesh = ComponentInstance<Mesh & JSX.IntrinsicElements['mesh'] & MeshProps>;
+type AugmentedMesh = ComponentInstance<MeshProps & Mesh>;
 
 export class MeshHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: AugmentedMesh, rootContainer: RootContainer) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<MeshProps>, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
         const { name, cloneFrom, instanceFrom, physicsAggregate } = props;
@@ -74,7 +74,7 @@ export class MeshHost {
     }
 
     static removeChild(parentInstance: ComponentInstance, child: AugmentedMesh): void {
-        //FIXME: child.metadata is null. Does Babylon set it somewhere?
+        //FIXME: child.metadata is null. Does Babylon set it somewhere? Check it with new physic system (v2)
         if (child.metadata && child.metadata.physicsAggregate) {
             child.metadata.physicsAggregate.dispose();
         }

@@ -8,6 +8,7 @@ import { type ComponentInstance, type UpdatePayload, type RootContainer } from '
 import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
+import { CoreHostProps, GuiHostProps } from '@props';
 
 function isParentNeeded(_parentInstance: ComponentInstance, child: ComponentInstance) {
     /*if (parentInstance instanceof BabylonCore.HighlightLayer) {
@@ -66,7 +67,7 @@ function shouldDisposeMaterialsAndTextures(child: unknown) {
 // check methods execution's order: "reconciler.png" and https://blog.atulr.com/react-custom-renderer-2/)
 const reconciler = ReactReconciler<
     string,
-    ComponentInstance,
+    CoreHostProps | GuiHostProps,
     RootContainer,
     ComponentInstance,
     ComponentInstance,

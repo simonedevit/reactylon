@@ -1,4 +1,4 @@
-import { ActionEvent, ActionManager, HighlightLayer, Observable, PhysicsAggregate, Scene, StandardMaterial } from '@babylonjs/core';
+import { ActionEvent, ActionManager, HighlightLayer, Node, Observable, PhysicsAggregate, Scene, StandardMaterial } from '@babylonjs/core';
 import { type Either } from './types';
 import { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
 
@@ -20,7 +20,7 @@ export enum BabylonElements {
 
 export type CommonProps<T = unknown> = Partial<TransformProps> & {
     onCreate?: (element: T) => void;
-    scene?: Scene;
+    scene?: Scene; // used for multiple scenes
     propertiesFrom?: Array<{
         property: string;
         source: string;
@@ -76,7 +76,7 @@ export type Instanceable = {
 };
 
 export type TextureProps = {
-    // add here other texture when you get it, (string & {}) is used to allow also strings without losing typing
+    // add here other textures when you study them, (string & {}) is used to allow also strings without losing typing
     kind:
         | keyof Pick<
               StandardMaterial,
@@ -111,7 +111,9 @@ export type AdvancedDynamicTextureProps = Either<CreateFullscreeUIOptions, Creat
     kind: 'createFullscreenUI' | 'createForMesh';
 };
 
-export type MaterialProps = {
+export type LightProps = Clonable;
+
+export type MaterialProps = Clonable & {
     assignTo?: Array<string>;
 };
 
@@ -135,3 +137,8 @@ export type GuiProps =
     GuiTriggerable & {
         // add here other gui props
     };
+
+// MinimalHostProps don't contain JSXElements[keyof JSXElements] to avoid long TypeScript checking times, but image it like it (useful representation for Host.ts and GuiHost.ts)
+type MinimalHostProps = CommonProps & Pick<Node, 'name'>;
+export type CoreHostProps<T = undefined> = T extends undefined ? MinimalHostProps : MinimalHostProps & T;
+export type GuiHostProps<T = undefined> = (T extends undefined ? MinimalHostProps : MinimalHostProps & T) & GuiProps;

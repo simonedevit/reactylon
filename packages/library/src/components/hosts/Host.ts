@@ -5,15 +5,17 @@ import ObjectUtils from '@utils/ObjectUtils';
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
 import '../../index';
 import coreConstructors from '../../_generated/babylon.core.constructors';
+import { CoreHostProps } from '@props';
 
 const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'physicsAggregate', 'highlightLayer'];
+
 export class Host {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: ComponentInstance, rootContainer: RootContainer, cloneFn?: Function) {
-        let element: any;
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps, rootContainer: RootContainer, cloneFn?: Function) {
+        let element: ComponentInstance<any>;
 
         const paramsNames = coreConstructors[type];
         const paramsValues = paramsNames.map(param => {
-            return props[param as keyof ComponentInstance];
+            return props[param as keyof CoreHostProps];
         });
         if (cloneFn) {
             element = cloneFn();
@@ -25,7 +27,7 @@ export class Host {
         Object.keys(props)
             .filter(propName => !paramsNames.includes(propName) && !excludedProps.includes(propName))
             .forEach(_key => {
-                const key = _key as keyof ComponentInstance;
+                const key = _key as keyof CoreHostProps;
                 const value = props[key];
                 if (key in TransformKeysMap) {
                     ObjectUtils.set(element, TransformKeysMap[key as keyof typeof TransformKeysMap], value);
@@ -39,7 +41,7 @@ export class Host {
             const scene = rootContainer.scene;
             props.propertiesFrom.forEach(({ property, source, type }) => {
                 const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
-                element[property] = sourceElement[property];
+                element[property as keyof ComponentInstance] = sourceElement[property];
             });
         }
 

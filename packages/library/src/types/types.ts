@@ -51,16 +51,15 @@ export type BabylonProps<Props, ConstructorProps, Element> = {
 
 /* PROPS USED BY RECONCILER */
 
-export type ComponentInstance<T = unknown> = CommonProps &
-    Partial<Clonable> &
+export type ComponentInstance<T = unknown> = Partial<Clonable> &
     Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
         children?: any;
         // use this field to skip cloning (see packages/library/src/reconciler.ts:22)
         metadata: {
             children: Array<ComponentInstance<T>>;
             babylonPackage: BabylonPackages;
-            props?: unknown;
-            // [key: string]: string;
+            props?: any;
+            [key: string]: any;
         };
         handlers?: Partial<{
             addChild(parentInstance: ComponentInstance<T> | RootContainer, child: ComponentInstance<T>): void;
