@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.64](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.63&targetVersion=GTv0.0.64&_a=files) (2024-10-24)
+
+
+### Chore
+
+* **general:** add condition for light host ([41ece45](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/41ece458f9013b870ed95eedf0a2b53bba95ab7f))
+
 ## [0.0.63](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.62&targetVersion=GTv0.0.63&_a=files) (2024-10-24)
 
 
