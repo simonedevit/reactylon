@@ -32,6 +32,7 @@ const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', ..
 export class GuiHost {
     static createInstance(type: string, isBuilder: boolean, Class: any, props: GuiHostProps, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
         let element: ComponentInstance<any>;
+        let isCloned = false;
         const scene = rootContainer.scene;
 
         let paramsNames = [];
@@ -49,6 +50,7 @@ export class GuiHost {
         }
         if (cloneFn) {
             element = cloneFn();
+            isCloned = true;
         } else {
             element = isBuilder ? Class(...paramsValues) : new Class(...paramsValues);
         }
@@ -65,9 +67,9 @@ export class GuiHost {
             element.linkToTransformNode(anchor);
         }
 
-        // set non-constructor props
+        // set non-constructor props (set constructor props only if element is cloned)
         Object.keys(props)
-            .filter(propName => !paramsNames.includes(propName) && !excludedProps.includes(propName))
+            .filter(propName => (isCloned ? true : !paramsNames.includes(propName)) && !excludedProps.includes(propName))
             .forEach(_key => {
                 const key = _key as keyof GuiHostProps;
                 const value = props[key];

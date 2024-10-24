@@ -12,6 +12,7 @@ const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanc
 export class Host {
     static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps, rootContainer: RootContainer, cloneFn?: Function) {
         let element: ComponentInstance<any>;
+        let isCloned = false;
 
         const paramsNames = coreConstructors[type];
         const paramsValues = paramsNames.map(param => {
@@ -19,13 +20,14 @@ export class Host {
         });
         if (cloneFn) {
             element = cloneFn();
+            isCloned = true;
         } else {
             element = isBuilder ? Class(...paramsValues) : new Class(...paramsValues);
         }
 
-        // set non-constructor props
+        // set non-constructor props (set constructor props only if element is cloned)
         Object.keys(props)
-            .filter(propName => !paramsNames.includes(propName) && !excludedProps.includes(propName))
+            .filter(propName => (isCloned ? true : !paramsNames.includes(propName)) && !excludedProps.includes(propName))
             .forEach(_key => {
                 const key = _key as keyof CoreHostProps;
                 const value = props[key];
