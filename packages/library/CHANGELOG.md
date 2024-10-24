@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.63](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.62&targetVersion=GTv0.0.63&_a=files) (2024-10-24)
+
+
+### Chore
+
+* **general:** add light host + restructure hosts ([18298ce](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/18298ceb89214e12be2884a7dced4b5be9d3b77c))
+
 ## [0.0.62](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.61&targetVersion=GTv0.0.62&_a=files) (2024-10-23)
 
 
