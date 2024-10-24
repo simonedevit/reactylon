@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.66](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.65&targetVersion=GTv0.0.66&_a=files) (2024-10-24)
+
+
+### Chore
+
+* **general:** add parent in metadata for highlightlayer ([1c7a13d](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/1c7a13dc98a90d4f7f3acd740fad299cbcee80f2))
+
 ## [0.0.65](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.64&targetVersion=GTv0.0.65&_a=files) (2024-10-24)
 
 
