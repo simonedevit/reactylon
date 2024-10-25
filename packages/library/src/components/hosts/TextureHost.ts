@@ -1,6 +1,6 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { CubeTexture, Texture } from '@babylonjs/core';
+import { CubeTexture, Material, PBRMaterial, StandardMaterial, Texture } from '@babylonjs/core';
 import { CoreHostProps, TextureProps } from '@props';
 
 type AugmentedTexture = ComponentInstance<TextureProps & (Texture | CubeTexture)>;
@@ -17,11 +17,15 @@ export class TextureHost {
 
     static addChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {
         const textureType = child.kind as JSX.IntrinsicElements['texture']['kind'];
-        //@ts-ignore - you could deal with a different materials that can (and can't) have textureType attribute
-        parentInstance[textureType] = child;
+        if (textureType === 'detailMap') {
+            (parentInstance as StandardMaterial | PBRMaterial).detailMap.texture = child;
+        } else {
+            //@ts-ignore - you could deal with a different materials that can (and can't) have this textureType attribute
+            parentInstance[textureType] = child;
+        }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {}
+    static removeChild(parentInstance: ComponentInstance, child: AugmentedTexture): void { }
 
     static prepareUpdate(): UpdatePayload {
         return {};

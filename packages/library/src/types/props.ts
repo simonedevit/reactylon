@@ -80,7 +80,7 @@ export type TextureProps = {
     kind:
         | keyof Pick<
               StandardMaterial,
-              'diffuseTexture' | 'specularTexture' | 'emissiveTexture' | 'ambientTexture' | 'bumpTexture' | 'opacityTexture' | 'reflectionTexture' | 'refractionTexture'
+              'diffuseTexture' | 'specularTexture' | 'emissiveTexture' | 'ambientTexture' | 'bumpTexture' | 'opacityTexture' | 'reflectionTexture' | 'refractionTexture' | 'detailMap'
           >
         | (string & {});
 };
