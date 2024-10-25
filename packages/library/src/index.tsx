@@ -1,6 +1,6 @@
 import { JSXElements as CoreJSXElements } from './_generated/babylon.core.declarations';
 import { JSXElements as GuiJSXElements } from './_generated/babylon.gui.declarations';
-import { TextureProps, MaterialProps, AdvancedDynamicTextureProps } from '@props';
+import { TextureProps, MaterialProps, AdvancedDynamicTextureProps } from './types/props';
 
 declare global {
     namespace JSX {
@@ -27,4 +27,4 @@ declare global {
 
 export * from './core';
 export { default as Reactylon } from './reconciler';
-export { BabylonElements } from '@props';
+export { BabylonElements } from './types/props';
