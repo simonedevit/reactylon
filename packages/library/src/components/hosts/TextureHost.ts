@@ -1,6 +1,6 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { CubeTexture, Material, PBRMaterial, StandardMaterial, Texture } from '@babylonjs/core';
+import { CubeTexture, PBRMaterial, StandardMaterial, Texture } from '@babylonjs/core';
 import { CoreHostProps, TextureProps } from '@props';
 
 type AugmentedTexture = ComponentInstance<TextureProps & (Texture | CubeTexture)>;
