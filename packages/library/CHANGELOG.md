@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.68](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.67&targetVersion=GTv0.0.68&_a=files) (2024-10-25)
+
+
+### Chore
+
+* **general:** add clonable props to materials as partial ([e1512a4](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/e1512a49871e7802878ec346a9b151d7ebbcdaf1))
+
 ## [0.0.67](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.66&targetVersion=GTv0.0.67&_a=files) (2024-10-25)
 
 
