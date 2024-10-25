@@ -113,7 +113,7 @@ export type AdvancedDynamicTextureProps = Either<CreateFullscreeUIOptions, Creat
 
 export type LightProps = Clonable;
 
-export type MaterialProps = {
+export type MaterialProps = Clonable & {
     assignTo?: Array<string>;
 };
 
