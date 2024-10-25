@@ -1,5 +1,13 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.67](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.66&targetVersion=GTv0.0.67&_a=files) (2024-10-25)
+
+
+### Chore
+
+* **general:** add clonable props to materials ([0153d93](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/0153d93df2fd1cbdacd76d850df87eb7b1008c1f))
+* **general:** fix imports/exports of props ([b4e4051](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/b4e405132105d84ad73b9f8a223a58fde456b475))
+
 ## [0.0.66](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.65&targetVersion=GTv0.0.66&_a=files) (2024-10-24)
 
 
