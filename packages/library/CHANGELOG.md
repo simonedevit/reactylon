@@ -1,5 +1,17 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.69](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.68&targetVersion=GTv0.0.69&_a=files) (2024-10-25)
+
+
+### Chore
+
+* **general:** add detailMap for materials ([59ddd3f](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/59ddd3fe6b49c81f2976bcb329fd82c89453b8b6))
+
+
+### Bug Fixes
+
+* **general:** remove unused variable ([aca94fb](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/aca94fb485213554a818c6bcdcd51077b825bcc4))
+
 ## [0.0.68](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.67&targetVersion=GTv0.0.68&_a=files) (2024-10-25)
 
 
