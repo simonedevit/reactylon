@@ -4,7 +4,7 @@ git update-index --assume-unchanged .npmrc
 encoded_token=$(echo -n "$1" | base64 -w 0)
 
 cat <<EOF > ./.npmrc
-registry=https://pkgs.dev.azure.com/dvmstudios/_packaging/dvmstudios-registry/npm/registry/ 
+@dvmstudios:registry=https://pkgs.dev.azure.com/dvmstudios/_packaging/dvmstudios-registry/npm/registry/ 
 always-auth=true
 
 ; begin auth token
