@@ -11,10 +11,13 @@ import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import { CoreHostProps, GuiHostProps } from '@props';
 
 function isParentNeeded(parentInstance: ComponentInstance, child: ComponentInstance) {
-    if (parentInstance instanceof BabylonCore.HighlightLayer) {
+    if (child instanceof BabylonCore.Material) {
         return false;
     }
-    if (child instanceof BabylonCore.Material) {
+    if (child instanceof BabylonCore.BaseTexture) {
+        return false;
+    }
+    if (parentInstance instanceof BabylonCore.HighlightLayer) {
         return false;
     }
     return true;
