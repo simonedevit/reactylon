@@ -14,9 +14,11 @@ export class Host {
         let element: ComponentInstance<any>;
         let isCloned = false;
 
+        const scene = rootContainer.scene;
+        const propsWithScene = { ...props, scene };
         const paramsNames = coreConstructors[type];
         const paramsValues = paramsNames.map(param => {
-            return props[param as keyof CoreHostProps];
+            return propsWithScene[param as keyof CoreHostProps];
         });
         if (cloneFn) {
             element = cloneFn();
@@ -40,7 +42,6 @@ export class Host {
 
         // propertiesFrom
         if (props.propertiesFrom) {
-            const scene = rootContainer.scene;
             props.propertiesFrom.forEach(({ property, source, type }) => {
                 const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
                 element[property as keyof ComponentInstance] = sourceElement[property];
