@@ -1,5 +1,18 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.70](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.69&targetVersion=GTv0.0.70&_a=files) (2024-11-12)
+
+
+### Build
+
+* **general:** fix .npmrc generation with scope ([c4f1797](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/c4f1797e9edabb3367711b791b6f10a96cecfb8a))
+
+
+### Chore
+
+* **general:** exclude textures from parenting ([a17ed4a](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/a17ed4a83abc7501c5ad3c866e7370799e24efe2))
+* **general:** update package-lock.json ([4a048a8](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/4a048a818ca7807227a8754ca206bbc7b43f9050))
+
 ## [0.0.69](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.68&targetVersion=GTv0.0.69&_a=files) (2024-10-25)
 
 
