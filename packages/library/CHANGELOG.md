@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.71](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.70&targetVersion=GTv0.0.71&_a=files) (2024-11-12)
+
+
+### Chore
+
+* **general:** remove scene from component props to avoid maximu call excedeed in inspector ([261f373](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/261f37386a6cf3e1fcf0243d467b2e3d754d9221))
+
 ## [0.0.70](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.69&targetVersion=GTv0.0.70&_a=files) (2024-11-12)
 
 
