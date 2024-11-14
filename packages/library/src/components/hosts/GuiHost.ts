@@ -34,6 +34,7 @@ export class GuiHost {
         let element: ComponentInstance<any>;
         let isCloned = false;
         const scene = rootContainer.scene;
+        const propsWithScene = { ...props, scene };
 
         let paramsNames = [];
         let paramsValues = [];
@@ -41,7 +42,7 @@ export class GuiHost {
         if (!params) {
             paramsNames = guiConstructors[type];
             paramsValues = paramsNames.map(param => {
-                return props[param as keyof GuiHostProps];
+                return propsWithScene[param as keyof GuiHostProps];
             });
             // AdvancedDynamicTexture
         } else {
