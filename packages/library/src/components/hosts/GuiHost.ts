@@ -21,7 +21,7 @@ function handleEvents(props: GuiHostProps, element: any) {
 }
 
 export type Params = {
-    paramsNames: Array<string>;
+    paramsNames: Array<string | undefined>;
     paramsValues: Array<unknown>;
 };
 

@@ -28,10 +28,17 @@ export class AdvancedDynamicTextureHost {
                 paramsValues: [],
             } as Params,
         );
-        // add scene in third position
         if (kind === 'createFullscreenUI') {
-            params.paramsNames.splice(2, 0, 'scene');
-            params.paramsValues.splice(2, 0, scene);
+            // if there is only a value (name), fill second value with undefined
+            if (params.paramsNames.length === 1) {
+                params.paramsNames.push(undefined);
+                params.paramsValues.push(undefined);
+            }
+            if (!params.paramsNames[2]) {
+                // add scene in third position only if consumer doesn't already have defined a scene (so don't override the scene passed by consumer)
+                params.paramsNames.splice(2, 0, 'scene');
+                params.paramsValues.splice(2, 0, scene);
+            }
         }
         const element = GuiHost.createInstance(type, isBuilder, Builder[kind].bind(Class), props, rootContainer, cloneFn, params);
         return element;
