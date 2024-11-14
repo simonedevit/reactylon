@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.73](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.72&targetVersion=GTv0.0.73&_a=files) (2024-11-14)
+
+
+### Bug Fixes
+
+* **general:** handle multiple scenes in babylon gui ([0d597da](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/0d597dada624ac5437e4a9599137920f1c73a73c))
+
 ## [0.0.72](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.71&targetVersion=GTv0.0.72&_a=files) (2024-11-14)
 
 
