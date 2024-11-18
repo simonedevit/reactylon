@@ -57,7 +57,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
                 engine!.scenes.forEach(scene => {
                     if (!scene.activeCamera) {
                         // meantime you are setting a camera
-                        Logger.warn('Engine - runRenderLoop - There is no active camera...');
+                        Logger.warn('Engine - runRenderLoop - Waiting for active camera...');
                     }
                     if (scene.cameras?.length > 0) {
                         if (!isMultipleScene || scene.activeCamera === camera) {

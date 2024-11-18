@@ -1,5 +1,5 @@
 {
-    "name": "@dvmstudios/reactylon",
+    "name": "reactylon",
     "version": "0.0.73",
     "description": "Framework to work on Babylon.js with React",
     "type": "module",

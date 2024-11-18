@@ -10,11 +10,11 @@
         "init": "npm ci",
         "clean": "rm -rf node_modules package-lock.json",
         "start:common": "npm run start --workspace @dvmstudios/reactylon-common",
-        "start:library": "npm run start --workspace @dvmstudios/reactylon",
+        "start:library": "npm run start --workspace reactylon",
         "start:generator": "npm run start --workspace @dvmstudios/reactylon-generator",
         "start": "concurrently \"npm run start:*\"",
         "build": "npm run build --workspaces",
-        "release": "npm run release --workspace @dvmstudios/reactylon"
+        "release": "npm run release --workspace reactylon"
     },
     "keywords": [],
     "lint-staged": {
@@ -44,5 +44,5 @@
         "npm": "10.2.4"
     },
     "author": "Simone Dev",
-    "license": "ISC"
+    "license": "AGPL-3.0-only"
 }
