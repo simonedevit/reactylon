@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.74](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.73&targetVersion=GTv0.0.74&_a=files) (2024-11-18)
+
+
+### Chore
+
+* **general:** prepare reactylon for public package ([bdf5c4e](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/bdf5c4e539db42fe250dbcd3f3880142f5bd5c9b))
+
 ## [0.0.73](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.72&targetVersion=GTv0.0.73&_a=files) (2024-11-14)
 
 
