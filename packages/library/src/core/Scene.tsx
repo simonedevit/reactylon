@@ -3,7 +3,7 @@ import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, Hav
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
 import { SceneContext, EngineContextType } from './hooks';
-import { RootContainer } from '@types';
+import { RootContainer } from '@custom-types';
 import Reactylon from '../reconciler';
 import { type ContextBridge, useContextBridge } from 'its-fine';
 

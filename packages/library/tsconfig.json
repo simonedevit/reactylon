@@ -6,7 +6,7 @@
         "declaration": true,
         "declarationDir": "./build",
         "paths": {
-            "@types": ["src/types/types.ts"],
+            "@custom-types": ["src/types/types.ts"],
             "@props": ["src/types/props.ts"],
             "@utils/*": ["src/utils/*"],
             "@constants": ["src/constants.ts"],
