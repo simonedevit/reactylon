@@ -1,5 +1,5 @@
 import { BabylonPackages } from '@dvmstudios/reactylon-common';
-import { ComponentInstance, RootContainer } from '@custom-types';
+import { ComponentInstance, RootContainer } from '@types';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
 // required for git hook (otherwise it can't resolve the augmented JSXElements)

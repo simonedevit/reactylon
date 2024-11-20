@@ -4,7 +4,7 @@ import * as BabylonCore from '@babylonjs/core';
 import * as BabylonGui from '@babylonjs/gui';
 import isEqualWith from 'lodash.isequalwith';
 import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
-import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@custom-types';
+import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
 import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';

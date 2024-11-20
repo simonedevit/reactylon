@@ -1,4 +1,4 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from '@custom-types';
+import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { CubeTexture, PBRMaterial, StandardMaterial, Texture } from '@babylonjs/core';
 import { CoreHostProps, TextureProps } from '@props';

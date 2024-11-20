@@ -1,4 +1,4 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from '@custom-types';
+import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { Material, Mesh, MultiMaterial } from '@babylonjs/core';
 import { type MeshProps, type MaterialProps, CoreHostProps } from '@props';

@@ -1,4 +1,4 @@
-import { RootContainer } from '@custom-types';
+import { RootContainer } from '@types';
 import { GuiHost, type Params } from './GuiHost';
 import { AdvancedDynamicTexture } from '@babylonjs/gui';
 import { AdvancedDynamicTextureProps, GuiHostProps } from '@props';

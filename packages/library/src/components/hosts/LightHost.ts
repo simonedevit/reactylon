@@ -1,4 +1,4 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from '@custom-types';
+import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { CoreHostProps, LightProps } from '@props';
 import { Light } from '@babylonjs/core';

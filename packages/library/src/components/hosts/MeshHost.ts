@@ -1,4 +1,4 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from '@custom-types';
+import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import { ActionEvent, ActionManager, ExecuteCodeAction, HighlightLayer, Mesh, PhysicsAggregate, Scene } from '@babylonjs/core';
 import { Triggerable, MeshTriggers, MeshProps, CoreHostProps } from '@props';
