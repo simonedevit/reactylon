@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.76](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.75&targetVersion=GTv0.0.76&_a=files) (2024-11-20)
+
+
+### Revert
+
+* revert [@custom-types](https://dev.azure.com/custom-types) into [@types](https://dev.azure.com/types) ([0de5aa3](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/0de5aa3d7f18afd29ccf1a70d5ccaf8adfaf9f64))
+
 ## [0.0.75](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.74&targetVersion=GTv0.0.75&_a=files) (2024-11-20)
 
 
