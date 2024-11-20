@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.75](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.74&targetVersion=GTv0.0.75&_a=files) (2024-11-20)
+
+
+### Chore
+
+* **general:** change [@types](https://dev.azure.com/types) into [@custom-types](https://dev.azure.com/custom-types) to avoid ts error https://github.com/Microsoft/TypeScript/issues/27956 ([e3bd98a](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/e3bd98ab382a683efc973842df81adf9b12c877c))
+
 ## [0.0.74](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.73&targetVersion=GTv0.0.74&_a=files) (2024-11-18)
 
 
