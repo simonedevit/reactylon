@@ -10,11 +10,16 @@ export type EngineProps = React.PropsWithChildren<{
     engineOptions?: EngineOptions;
     adaptToDeviceRatio?: boolean;
     loader?: React.FC;
+    /**
+     * This property is typically not required and has no effect when using multiple scenes.
+     * @default 'reactylon-canvas'
+     */
+    canvasId?: string;
 }>;
 
 export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void;
 
-export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptToDeviceRatio, loader, ...rest }) => {
+export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptToDeviceRatio, loader, canvasId = 'reactylon-canvas', ...rest }) => {
     const [context, setContext] = useState<EngineContextType | null>(null);
     const engineRef = useRef<{
         engine: BabylonEngine;
@@ -85,7 +90,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
 
     return (
         <>
-            {!isMultipleScene ? <canvas id='reactylon-canvas' ref={canvasRef} /> : null}
+            {!isMultipleScene ? <canvas id={canvasId} ref={canvasRef} /> : null}
             {context ? (
                 <FiberProvider>
                     {React.Children.map(rest.children, (child: any) => {

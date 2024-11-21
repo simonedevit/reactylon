@@ -9,7 +9,7 @@ import { type ContextBridge, useContextBridge } from 'its-fine';
 
 type SceneProps = React.PropsWithChildren<{
     /**
-     * This prop should be set only when you have multiple scenes.
+     * This prop must be set only when you have multiple scenes.
      */
     canvas?: HTMLCanvasElement;
     sceneOptions?: SceneOptions;
