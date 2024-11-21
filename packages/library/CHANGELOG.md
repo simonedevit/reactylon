@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.77](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.76&targetVersion=GTv0.0.77&_a=files) (2024-11-21)
+
+
+### Chore
+
+* **general:** add canvasId prop ([550764b](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/550764b8b0b049d29c4886064b0a0f7d58d997cc))
+
 ## [0.0.76](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.75&targetVersion=GTv0.0.76&_a=files) (2024-11-20)
 
 
