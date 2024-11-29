@@ -11,6 +11,7 @@ import {
     CollidingComponents,
     BabylonPackages,
     getGuiProps,
+    CustomProps,
 } from '@dvmstudios/reactylon-common';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -32,6 +33,7 @@ function getConstructorProps<T>(Class: Constructor<T> | Function, className: str
     }
     return ['', []];
 }
+
 type JsxElementsInfo = {
     imports: Array<string>;
     declarations: Array<string>;
@@ -69,7 +71,8 @@ ${props}
                 const isClonable = Class.prototype.clone;
 
                 const GuiProps = babylonPackage === BabylonPackages.GUI ? getGuiProps() : '';
-                const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getClonableProp(isClonable)}${ConstructorProps}${GuiProps},${ElementType}>, any>;`;
+                const AdditionalProps = CustomProps[jsxElementName] || '';
+                const declarationStatement = `${jsxElementName}: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<${ElementType}>${getClonableProp(isClonable)}${ConstructorProps}${GuiProps}${AdditionalProps},${ElementType}>, any>;`;
 
                 // handle duplicates
                 if (!(jsxElementName in jsxElements.constructorArguments)) {
@@ -140,7 +143,7 @@ const packages = {
         const declarationsContent = `
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from '../types/types';
-import { type MeshProps, type GuiProps, type Clonable } from '../types/props';
+import { type MeshProps, type GuiProps, type Clonable, type WebXRCameraProps } from '../types/props';
 ${jsxElements.imports.join('\n')}
     
 export interface JSXElements {

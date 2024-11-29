@@ -111,6 +111,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     scene,
                     canvas,
                     isMultipleScene,
+                    xrExperience,
                     metadata: {
                         children: [],
                     },

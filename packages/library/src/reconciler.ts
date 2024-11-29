@@ -5,7 +5,7 @@ import * as BabylonGui from '@babylonjs/gui';
 import isEqualWith from 'lodash.isequalwith';
 import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
-import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost /*, TransformNodeHost*/ } from './components/hosts';
+import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import { CoreHostProps, GuiHostProps } from '@props';
@@ -140,7 +140,9 @@ const reconciler = ReactReconciler<
                     createInstanceFn = TextureHost.createInstance;
                 } else if (Class.prototype instanceof BabylonCore.Light) {
                     createInstanceFn = LightHost.createInstance;
-                } /* else if (Class.name === 'TransformNode') {
+                } else if (Class.prototype instanceof BabylonCore.Camera) {
+                    createInstanceFn = CameraHost.createInstance;
+                } /* else if (Class.name === BabylonCore.TransformNode.name) {
                     createInstanceFn = TransformNodeHost.createInstance;
                 }*/
                 break;

@@ -110,3 +110,7 @@ export enum BabylonPackages {
     'CORE',
     'GUI',
 }
+
+export const CustomProps: Record<string, string> = {
+    webXRCamera: ` & WebXRCameraProps`,
+};

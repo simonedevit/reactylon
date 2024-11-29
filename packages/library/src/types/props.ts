@@ -80,7 +80,15 @@ export type TextureProps = {
     kind:
         | keyof Pick<
               StandardMaterial,
-              'diffuseTexture' | 'specularTexture' | 'emissiveTexture' | 'ambientTexture' | 'bumpTexture' | 'opacityTexture' | 'reflectionTexture' | 'refractionTexture' | 'detailMap'
+              | 'diffuseTexture'
+              | 'specularTexture'
+              | 'emissiveTexture'
+              | 'ambientTexture'
+              | 'bumpTexture'
+              | 'opacityTexture'
+              | 'reflectionTexture'
+              | 'refractionTexture'
+              | 'detailMap'
           >
         | (string & {});
 };
@@ -112,6 +120,11 @@ export type AdvancedDynamicTextureProps = Either<CreateFullscreeUIOptions, Creat
 };
 
 export type LightProps = Clonable;
+
+export type WebXRCameraProps = {
+    // not from XR default experience helper
+    isManual?: boolean;
+};
 
 export type MaterialProps = Partial<Clonable> & {
     assignTo?: Array<string>;

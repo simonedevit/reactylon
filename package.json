@@ -43,6 +43,6 @@
         "node": "20.11.1",
         "npm": "10.2.4"
     },
-    "author": "Simone Dev",
+    "author": "Simone De Vittorio",
     "license": "AGPL-3.0-only"
 }

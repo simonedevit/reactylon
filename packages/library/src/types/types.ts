@@ -1,6 +1,6 @@
 /* PROPS USED BY JSX ELEMENTS GENERATOR */
 
-import { Engine, Node, Scene } from '@babylonjs/core';
+import { Engine, Node, Nullable, Scene, WebXRDefaultExperience } from '@babylonjs/core';
 import { Clonable, CommonProps } from './props';
 import { BabylonPackages } from '@dvmstudios/reactylon-common';
 
@@ -78,6 +78,7 @@ export type RootContainer = {
     scene: Scene;
     canvas: HTMLCanvasElement;
     isMultipleScene: boolean;
+    xrExperience: Nullable<WebXRDefaultExperience>;
     metadata: {
         children: Array<ComponentInstance>;
         // [key: string]: string;
