@@ -1,5 +1,12 @@
 # DVM Studios - Reactylon - Changelog
 
+## [0.0.78](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.77&targetVersion=GTv0.0.78&_a=files) (2024-11-29)
+
+
+### Features
+
+* **general:** handle webxr camera ([f32c234](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/commit/f32c2341f74bc5a969cc1e8c31fa1596e3e589f9))
+
 ## [0.0.77](https://dev.azure.com/dvmstudios/webxr/_git/reactylon/branchCompare?baseVersion=GTv0.0.76&targetVersion=GTv0.0.77&_a=files) (2024-11-21)
 
 
