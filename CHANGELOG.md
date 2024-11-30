@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.0.2](https://github.com/simonedevit/reactylon/compare/v1.0.1...v1.0.2) (2024-11-30)
+
+
+### Chore
+
+* **general:** prepend copyright text over override file ([d11c5e1](https://github.com/simonedevit/reactylon/commit/d11c5e15053ed127d92d35a539b6d666bb3d0294))
+
 ## [1.0.1](https://github.com/simonedevit/reactylon/compare/v1.0.0...v1.0.1) (2024-11-30)
 
 
