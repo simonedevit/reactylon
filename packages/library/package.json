@@ -18,6 +18,9 @@
     },
     "keywords": [],
     "commit-and-tag-version": {
+        "scripts":{
+            "postchangelog": "bash ../../scripts/changelog.sh"
+        },
         "writerOpts": {
             "commitsSort": false
         }
