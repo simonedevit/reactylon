@@ -10,8 +10,8 @@ cp .npmignore ./build/.npmignore
 COPYRIGHT_TEXT="/* Copyright (c) 2024 Simone De Vittorio. */"
 FILE="./build/index.js"
 
-# add the copyright text at the top of index.js
-echo -e "$COPYRIGHT_TEXT\n$(cat $FILE)" > $FILE
+# prepend the copyright text to the file, using '#' as delimiter for sed
+sed -i "1s#^#$COPYRIGHT_TEXT\n#" $FILE
 
 ## add licenses
 cp "../../LICENSE.md" "./build/index.js.LICENSE.txt"
