@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.0.1](https://github.com/simonedevit/reactylon/compare/v1.0.0...v1.0.1) (2024-11-30)
+
+
+### Chore
+
+* **general:** add readme on published package ([25ab8ef](https://github.com/simonedevit/reactylon/commit/25ab8ef233ba82debc59301e78cad0ebe0fc8e6c))
+
 ## [1.0.0](https://github.com/simonedevit/reactylon/compare/v0.0.78...v1.0.0) (2024-11-30)
 
 
