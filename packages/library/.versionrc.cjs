@@ -1,15 +1,13 @@
 const { types } = require('../../commitlint.config');
 
-const ORGANIZATION = 'dvmstudios',
-    PROJECT = 'webxr',
-    REPOSITORY = 'reactylon';
+const OWNER = 'simonedevit';
+const REPOSITORY = 'reactylon';
 
 module.exports = {
-    header: '# DVM Studios - Reactylon - Changelog\n',
+    header: '# Reactylon - Changelog\n',
     types,
-    //releaseCommitMessageFormat: "chore(release): {{currentTag}}",
-    commitUrlFormat: `{{host}}/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY}/commit/{{hash}}`,
-    compareUrlFormat: `{{host}}/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY}/branchCompare?baseVersion=GT{{previousTag}}&targetVersion=GT{{currentTag}}&_a=files`,
+    commitUrlFormat: `https://github.com/${OWNER}/${REPOSITORY}/commit/{{hash}}`,
+    compareUrlFormat: `https://github.com/${OWNER}/${REPOSITORY}/compare/{{previousTag}}...{{currentTag}}`,
     issuePrefixes: ['#'],
-    issueUrlFormat: `{{host}}/${ORGANIZATION}/${PROJECT}/_workitems/edit/{{id}}`,
+    issueUrlFormat: `https://github.com/${OWNER}/${REPOSITORY}/issues/{{id}}`,
 };

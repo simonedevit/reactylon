@@ -3,7 +3,7 @@
     "type": "module",
     "private": true,
     "main": "build/index.js",
-    "description": "Utils to parse AST and deal with Babylon props",
+    "description": "Utils to parse AST and deal with Babylon props.",
     "scripts": {
         "start": "nodemon",
         "build": "bash build.sh"

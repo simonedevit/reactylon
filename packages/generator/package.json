@@ -2,7 +2,7 @@
     "name": "@dvmstudios/reactylon-generator",
     "type": "module",
     "private": true,
-    "description": "Internal tool to auto-generate JSX elements",
+    "description": "Internal tool to auto-generate JSX elements.",
     "scripts": {
         "start": "nodemon",
         "build": "bash build.sh",

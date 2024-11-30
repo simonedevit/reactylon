@@ -1,9 +1,9 @@
 {
     "name": "reactylon",
-    "description": "Workspace",
+    "description": "Workspace for Reactylon framework.",
     "repository": {
         "type": "git",
-        "url": "git+https://dvmstudios@dev.azure.com/dvmstudios/webxr/_git/reactylon"
+        "url": "git+https://github.com/simonedevit/reactylon"
     },
     "scripts": {
         "prepare": "husky",
