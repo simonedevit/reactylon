@@ -1,5 +1,25 @@
 # Reactylon - Changelog
 
+## [1.0.0](https://github.com/simonedevit/reactylon/compare/v0.0.78...v1.0.0) (2024-11-30)
+
+
+### Chore
+
+* **general:** remove old private registry copy ([5dbbd28](https://github.com/simonedevit/reactylon/commit/5dbbd287dac9b7b2ddd2dd0a5734e3cb38608e95))
+* **general:** migrate CHANGELOG from azure to github ([ba146d9](https://github.com/simonedevit/reactylon/commit/ba146d992922fb71ee7ab0b01e4cba708553abb7))
+* **general:** update licences ([bfbfad7](https://github.com/simonedevit/reactylon/commit/bfbfad79d2fe1d8427ed9215b692eae405774b3c))
+
+
+### Documentation
+
+* **general:** copy CHANGELOG on root ([a924a3b](https://github.com/simonedevit/reactylon/commit/a924a3bc0131768b87c6d30b81068efc7139f155))
+* **general:** update README + moving repo adjustments ([6661a3d](https://github.com/simonedevit/reactylon/commit/6661a3d784fd3a4d052ef246a0c5e6b359dfffc2))
+
+
+### Bug Fixes
+
+* **general:** copy CHANGELOG.md on root ([5ebb1a5](https://github.com/simonedevit/reactylon/commit/5ebb1a5d847ff488b3f39696d6fcb478c70b36e1))
+
 ## [0.0.78](https://github.com/simonedevit/reactylon/compare/v0.0.77...v0.0.78) (2024-11-29)
 
 

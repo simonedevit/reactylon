@@ -1,6 +1,6 @@
 {
     "name": "reactylon",
-    "version": "0.0.78",
+    "version": "1.0.0",
     "description": "Framework to work on Babylon.js with React",
     "type": "module",
     "main": "./build/index.js",
@@ -18,7 +18,7 @@
     },
     "keywords": [],
     "commit-and-tag-version": {
-        "scripts":{
+        "scripts": {
             "postchangelog": "bash ../../scripts/changelog.sh"
         },
         "writerOpts": {
