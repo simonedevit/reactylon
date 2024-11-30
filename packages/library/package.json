@@ -1,6 +1,6 @@
 {
     "name": "reactylon",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Framework to work on Babylon.js with React",
     "type": "module",
     "main": "./build/index.js",
