@@ -16,6 +16,9 @@ echo -e "$COPYRIGHT_TEXT\n$(cat $FILE)" > $FILE
 ## add licenses
 cp "../../LICENSE.md" "./build/index.js.LICENSE.txt"
 
+## add readme
+cp "../../README.md" "./build/README.md"
+
 cd build
 
 npm publish

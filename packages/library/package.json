@@ -6,8 +6,7 @@
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
     "repository": {
-        "type": "git",
-        "url": "git+https://dvmstudios@dev.azure.com/dvmstudios/webxr/_git/reactylon"
+        "url": "https://github.com/simonedevit/reactylon.git"
     },
     "scripts": {
         "init": "npm ci",
