@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.0.5](https://github.com/simonedevit/reactylon/compare/v1.0.4...v1.0.5) (2024-12-02)
+
+
+### Chore
+
+* **general:** upgrade node version ([4ffd5fe](https://github.com/simonedevit/reactylon/commit/4ffd5fef97fb2f070cad1ded29524ef7c3f279aa))
+
 ## [1.0.4](https://github.com/simonedevit/reactylon/compare/v1.0.3...v1.0.4) (2024-12-02)
 
 
