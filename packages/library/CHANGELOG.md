@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.0.3](https://github.com/simonedevit/reactylon/compare/v1.0.2...v1.0.3) (2024-12-02)
+
+
+### Chore
+
+* **general:** update npm package description ([68948c5](https://github.com/simonedevit/reactylon/commit/68948c5b517c35e2a50353d218ef89196b4a8d09))
+
 ## [1.0.2](https://github.com/simonedevit/reactylon/compare/v1.0.1...v1.0.2) (2024-11-30)
 
 
