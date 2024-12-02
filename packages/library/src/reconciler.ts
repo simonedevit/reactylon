@@ -2,7 +2,7 @@ import React, { version } from 'react';
 import ReactReconciler, { FiberRoot } from 'react-reconciler';
 import * as BabylonCore from '@babylonjs/core';
 import * as BabylonGui from '@babylonjs/gui';
-import isEqualWith from 'lodash.isequalwith';
+import { isEqualWith } from 'lodash';
 import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
 import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost /*, TransformNodeHost*/ } from './components/hosts';

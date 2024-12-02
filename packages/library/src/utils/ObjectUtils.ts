@@ -1,6 +1,5 @@
 import { Vector3, Vector4 } from '@babylonjs/core';
-import setWith from 'lodash.setwith';
-import get from 'lodash.get';
+import { get, setWith } from 'lodash';
 
 export default class ObjectUtils {
     static set(object: any, path: string, value: any, customizer: any = Object) {
