@@ -56,7 +56,6 @@
         "@dvmstudios/reactylon-common": "*",
         "@types/lodash": "^4.17.13",
         "@types/acorn": "^6.0.0",
-        "@types/node": "^20.11.30",
         "@types/react": "^18.0.23",
         "@types/react-dom": "^18.0.7",
         "@types/react-reconciler": "^0.28.8",
@@ -71,8 +70,8 @@
         "webpack-dev-server": "^5.0.4"
     },
     "engines": {
-        "node": "20.11.1",
-        "npm": "10.2.4"
+        "node": "^22.11.0",
+        "npm": "^10.9.0"
     },
     "author": "Simone De Vittorio",
     "license": "MIT"

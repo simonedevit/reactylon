@@ -31,7 +31,6 @@
         "concurrently": "^8.2.1",
         "@commitlint/cli": "^19.2.1",
         "@commitlint/config-conventional": "^19.1.0",
-        "@types/node": "^20.11.30",
         "husky": "^9.0.11",
         "lint-staged": "^15.2.2",
         "prettier": "3.2.5",
@@ -39,8 +38,8 @@
         "typescript": "^5.4.5"
     },
     "engines": {
-        "node": "20.11.1",
-        "npm": "10.2.4"
+        "node": "^22.11.0",
+        "npm": "^10.9.0"
     },
     "author": "Simone De Vittorio",
     "license": "MIT"
