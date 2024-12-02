@@ -16,6 +16,7 @@ import { AddIndividualParser } from '@babylonjs/core';
 import { AddParser } from '@babylonjs/core';
 import { AddRayExtensions } from '@babylonjs/core';
 import { AdvancedTimer } from '@babylonjs/core';
+import { AggregatorBlock } from '@babylonjs/core';
 import { AlignBlock } from '@babylonjs/core';
 import { AlphaState } from '@babylonjs/core';
 import { AmmoJSPlugin } from '@babylonjs/core';
@@ -104,6 +105,7 @@ import { BoxBlock } from '@babylonjs/core';
 import { BoxParticleEmitter } from '@babylonjs/core';
 import { Buffer } from '@babylonjs/core';
 import { CSG } from '@babylonjs/core';
+import { CSG2 } from '@babylonjs/core';
 import { Camera } from '@babylonjs/core';
 import { CameraGizmo } from '@babylonjs/core';
 import { CameraInputsManager } from '@babylonjs/core';
@@ -113,6 +115,7 @@ import { CascadedShadowGenerator } from '@babylonjs/core';
 import { ChromaticAberrationPostProcess } from '@babylonjs/core';
 import { CircleOfConfusionPostProcess } from '@babylonjs/core';
 import { ClampBlock } from '@babylonjs/core';
+import { CleanGeometryBlock } from '@babylonjs/core';
 import { ClearCoatBlock } from '@babylonjs/core';
 import { ClipPlanesBlock } from '@babylonjs/core';
 import { ClipboardInfo } from '@babylonjs/core';
@@ -305,6 +308,7 @@ import { FactorGradient } from '@babylonjs/core';
 import { FadeInOutBehavior } from '@babylonjs/core';
 import { FilesInput } from '@babylonjs/core';
 import { FilterPostProcess } from '@babylonjs/core';
+import { FixFlippedFaces } from '@babylonjs/core';
 import { FlowGraph } from '@babylonjs/core';
 import { FlowGraphAbsBlock } from '@babylonjs/core';
 import { FlowGraphAcosBlock } from '@babylonjs/core';
@@ -433,6 +437,26 @@ import { FollowCameraPointersInput } from '@babylonjs/core';
 import { FragCoordBlock } from '@babylonjs/core';
 import { FragDepthBlock } from '@babylonjs/core';
 import { FragmentOutputBlock } from '@babylonjs/core';
+import { FrameGraph } from '@babylonjs/core';
+import { FrameGraphBlackAndWhiteTask } from '@babylonjs/core';
+import { FrameGraphBloomTask } from '@babylonjs/core';
+import { FrameGraphBlurTask } from '@babylonjs/core';
+import { FrameGraphCircleOfConfusionTask } from '@babylonjs/core';
+import { FrameGraphClearTextureTask } from '@babylonjs/core';
+import { FrameGraphCopyToTextureTask } from '@babylonjs/core';
+import { FrameGraphCullObjectsTask } from '@babylonjs/core';
+import { FrameGraphDepthOfFieldTask } from '@babylonjs/core';
+import { FrameGraphExtractHighlightsTask } from '@babylonjs/core';
+import { FrameGraphGeometryRendererTask } from '@babylonjs/core';
+import { FrameGraphObjectRendererTask } from '@babylonjs/core';
+import { FrameGraphPass } from '@babylonjs/core';
+import { FrameGraphPostProcessTask } from '@babylonjs/core';
+import { FrameGraphRenderContext } from '@babylonjs/core';
+import { FrameGraphRenderPass } from '@babylonjs/core';
+import { FrameGraphRenderTarget } from '@babylonjs/core';
+import { FrameGraphTAAObjectRendererTask } from '@babylonjs/core';
+import { FrameGraphTask } from '@babylonjs/core';
+import { FrameGraphTextureManager } from '@babylonjs/core';
 import { FramingBehavior } from '@babylonjs/core';
 import { FreeCamera } from '@babylonjs/core';
 import { FreeCameraDeviceOrientationInput } from '@babylonjs/core';
@@ -456,6 +480,8 @@ import { Gamepad } from '@babylonjs/core';
 import { GamepadCamera } from '@babylonjs/core';
 import { GamepadManager } from '@babylonjs/core';
 import { GamepadSystemSceneComponent } from '@babylonjs/core';
+import { GaussianBlock } from '@babylonjs/core';
+import { GaussianSplattingBlock } from '@babylonjs/core';
 import { GaussianSplattingMaterial } from '@babylonjs/core';
 import { GaussianSplattingMesh } from '@babylonjs/core';
 import { GenerateBase64StringFromPixelData } from '@babylonjs/core';
@@ -511,6 +537,7 @@ import { GetPointsCount } from '@babylonjs/core';
 import { GetTGAHeader } from '@babylonjs/core';
 import { GetTextureDataAsync } from '@babylonjs/core';
 import { GetTransformedPosition } from '@babylonjs/core';
+import { GetTypeForDepthTexture } from '@babylonjs/core';
 import { Gizmo } from '@babylonjs/core';
 import { GizmoManager } from '@babylonjs/core';
 import { GlowLayer } from '@babylonjs/core';
@@ -532,6 +559,7 @@ import { Halton2DSequence } from '@babylonjs/core';
 import { HandConstraintBehavior } from '@babylonjs/core';
 import { HandleFallbacksForShadows } from '@babylonjs/core';
 import { HardwareScalingOptimization } from '@babylonjs/core';
+import { HasStencilAspect } from '@babylonjs/core';
 import { HavokPlugin } from '@babylonjs/core';
 import { HeightToNormalBlock } from '@babylonjs/core';
 import { HemisphericLight } from '@babylonjs/core';
@@ -551,6 +579,7 @@ import { ImageProcessingConfiguration } from '@babylonjs/core';
 import { ImageProcessingPostProcess } from '@babylonjs/core';
 import { ImageSourceBlock } from '@babylonjs/core';
 import { IncrementValueAction } from '@babylonjs/core';
+import { InitializeCSG2Async } from '@babylonjs/core';
 import { InputBlock } from '@babylonjs/core';
 import { InstancedLinesMesh } from '@babylonjs/core';
 import { InstancedMesh } from '@babylonjs/core';
@@ -568,6 +597,8 @@ import { InternalTexture } from '@babylonjs/core';
 import { InterpolateValueAction } from '@babylonjs/core';
 import { IntersectionInfo } from '@babylonjs/core';
 import { IsBase64DataUrl } from '@babylonjs/core';
+import { IsCSG2Ready } from '@babylonjs/core';
+import { IsDepthTexture } from '@babylonjs/core';
 import { IsDocumentAvailable } from '@babylonjs/core';
 import { IsFileURL } from '@babylonjs/core';
 import { IsNavigatorAvailable } from '@babylonjs/core';
@@ -668,6 +699,28 @@ import { NodeMaterialConnectionPointCustomObject } from '@babylonjs/core';
 import { NodeMaterialDefines } from '@babylonjs/core';
 import { NodeMaterialTeleportInBlock } from '@babylonjs/core';
 import { NodeMaterialTeleportOutBlock } from '@babylonjs/core';
+import { NodeRenderGraph } from '@babylonjs/core';
+import { NodeRenderGraphBlackAndWhitePostProcessBlock } from '@babylonjs/core';
+import { NodeRenderGraphBlock } from '@babylonjs/core';
+import { NodeRenderGraphBloomPostProcessBlock } from '@babylonjs/core';
+import { NodeRenderGraphBlurPostProcessBlock } from '@babylonjs/core';
+import { NodeRenderGraphBuildState } from '@babylonjs/core';
+import { NodeRenderGraphCircleOfConfusionPostProcessBlock } from '@babylonjs/core';
+import { NodeRenderGraphClearBlock } from '@babylonjs/core';
+import { NodeRenderGraphConnectionPoint } from '@babylonjs/core';
+import { NodeRenderGraphCopyTextureBlock } from '@babylonjs/core';
+import { NodeRenderGraphCullObjectsBlock } from '@babylonjs/core';
+import { NodeRenderGraphDepthOfFieldPostProcessBlock } from '@babylonjs/core';
+import { NodeRenderGraphElbowBlock } from '@babylonjs/core';
+import { NodeRenderGraphExtractHighlightsPostProcessBlock } from '@babylonjs/core';
+import { NodeRenderGraphGenerateMipmapsBlock } from '@babylonjs/core';
+import { NodeRenderGraphGeometryRendererBlock } from '@babylonjs/core';
+import { NodeRenderGraphInputBlock } from '@babylonjs/core';
+import { NodeRenderGraphObjectRendererBlock } from '@babylonjs/core';
+import { NodeRenderGraphOutputBlock } from '@babylonjs/core';
+import { NodeRenderGraphTAAObjectRendererBlock } from '@babylonjs/core';
+import { NodeRenderGraphTeleportInBlock } from '@babylonjs/core';
+import { NodeRenderGraphTeleportOutBlock } from '@babylonjs/core';
 import { NoiseBlock } from '@babylonjs/core';
 import { NoiseProceduralTexture } from '@babylonjs/core';
 import { NormalBlendBlock } from '@babylonjs/core';
@@ -676,6 +729,7 @@ import { NormalizeVectorBlock } from '@babylonjs/core';
 import { NullBlock } from '@babylonjs/core';
 import { NullEngine } from '@babylonjs/core';
 import { NullEngineOptions } from '@babylonjs/core';
+import { ObjectRenderer } from '@babylonjs/core';
 import { Observable } from '@babylonjs/core';
 import { Observer } from '@babylonjs/core';
 import { OcclusionMaterial } from '@babylonjs/core';
@@ -895,6 +949,7 @@ import { SetParentAction } from '@babylonjs/core';
 import { SetPositionsBlock } from '@babylonjs/core';
 import { SetStateAction } from '@babylonjs/core';
 import { SetTangentsBlock } from '@babylonjs/core';
+import { SetToDefaultGaussianSplatting } from '@babylonjs/core';
 import { SetUVsBlock } from '@babylonjs/core';
 import { SetValueAction } from '@babylonjs/core';
 import { ShaderCodeInliner } from '@babylonjs/core';
@@ -931,6 +986,7 @@ import { SphereParticleEmitter } from '@babylonjs/core';
 import { Spherical } from '@babylonjs/core';
 import { SphericalHarmonics } from '@babylonjs/core';
 import { SphericalPolynomial } from '@babylonjs/core';
+import { SplatReaderBlock } from '@babylonjs/core';
 import { SpotLight } from '@babylonjs/core';
 import { SpringConstraint } from '@babylonjs/core';
 import { Sprite } from '@babylonjs/core';
@@ -982,7 +1038,13 @@ import { TextureOptimization } from '@babylonjs/core';
 import { TexturePacker } from '@babylonjs/core';
 import { TexturePackerFrame } from '@babylonjs/core';
 import { TextureSampler } from '@babylonjs/core';
+import { ThinBlackAndWhitePostProcess } from '@babylonjs/core';
+import { ThinBloomEffect } from '@babylonjs/core';
+import { ThinBlurPostProcess } from '@babylonjs/core';
+import { ThinCircleOfConfusionPostProcess } from '@babylonjs/core';
+import { ThinDepthOfFieldEffect } from '@babylonjs/core';
 import { ThinEngine } from '@babylonjs/core';
+import { ThinExtractHighlightsPostProcess } from '@babylonjs/core';
 import { ThinRenderTargetTexture } from '@babylonjs/core';
 import { ThinTexture } from '@babylonjs/core';
 import { ToHalfFloat } from '@babylonjs/core';
@@ -1146,6 +1208,7 @@ import { editableInPropertyPage } from '@babylonjs/core';
 import { expandToProperty } from '@babylonjs/core';
 import { extractMinAndMax } from '@babylonjs/core';
 import { extractMinAndMaxIndexed } from '@babylonjs/core';
+import { getDimensionsFromTextureSize } from '@babylonjs/core';
 import { getRichTypeFromValue } from '@babylonjs/core';
 import { importAnimationsAsync } from '@babylonjs/core';
 import { inlineScheduler } from '@babylonjs/core';
@@ -1176,9 +1239,11 @@ import { serializeAsTexture } from '@babylonjs/core';
 import { serializeAsVector2 } from '@babylonjs/core';
 import { serializeAsVector3 } from '@babylonjs/core';
 import { setAndStartTimer } from '@babylonjs/core';
+import { setOpenGLOrientationForUV } from '@babylonjs/core';
 import { setStereoscopicAnaglyphRigMode } from '@babylonjs/core';
 import { setStereoscopicRigMode } from '@babylonjs/core';
 import { setVRRigMode } from '@babylonjs/core';
+import { textureSizeIsObject } from '@babylonjs/core';
 import { unregisterTextureLoader } from '@babylonjs/core';
 
 export interface JSXElements {
@@ -1318,6 +1383,16 @@ export interface JSXElements {
                 options: ConstructorParameters<typeof AdvancedTimer>[0];
             },
             AdvancedTimer
+        >,
+        any
+    >;
+    aggregatorBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AggregatorBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof AggregatorBlock>[0];
+            },
+            AggregatorBlock
         >,
         any
     >;
@@ -2016,8 +2091,8 @@ export interface JSXElements {
         BabylonProps<
             ExcludeReadonlyAndPrivate<BloomEffect>,
             {
-                scene: ConstructorParameters<typeof BloomEffect>[0];
-                _bloomScale: ConstructorParameters<typeof BloomEffect>[1];
+                sceneOrEngine: ConstructorParameters<typeof BloomEffect>[0];
+                bloomScale: ConstructorParameters<typeof BloomEffect>[1];
                 bloomWeight: ConstructorParameters<typeof BloomEffect>[2];
                 bloomKernel: ConstructorParameters<typeof BloomEffect>[3];
                 pipelineTextureType: ConstructorParameters<typeof BloomEffect>[4];
@@ -2061,7 +2136,7 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof BlurPostProcess>[7];
                 textureType: ConstructorParameters<typeof BlurPostProcess>[8];
                 defines: ConstructorParameters<typeof BlurPostProcess>[9];
-                _blockCompilation: ConstructorParameters<typeof BlurPostProcess>[10];
+                blockCompilation: ConstructorParameters<typeof BlurPostProcess>[10];
                 textureFormat: ConstructorParameters<typeof BlurPostProcess>[11];
             },
             BlurPostProcess
@@ -2261,6 +2336,18 @@ export interface JSXElements {
         any
     >;
     cSG: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CSG> & Clonable, {}, CSG>, any>;
+    cSG2: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CSG2>,
+            {
+                manifold: ConstructorParameters<typeof CSG2>[0];
+                numProp: ConstructorParameters<typeof CSG2>[1];
+                vertexStructure: ConstructorParameters<typeof CSG2>[2];
+            },
+            CSG2
+        >,
+        any
+    >;
     camera: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Camera> & Clonable,
@@ -2376,6 +2463,16 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof ClampBlock>[0];
             },
             ClampBlock
+        >,
+        any
+    >;
+    cleanGeometryBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<CleanGeometryBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof CleanGeometryBlock>[0];
+            },
+            CleanGeometryBlock
         >,
         any
     >;
@@ -3830,7 +3927,7 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<DepthOfFieldBlurPostProcess> & Clonable,
             {
                 name: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[0];
-                scene: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[1];
+                _scene: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[1];
                 direction: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[2];
                 kernel: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[3];
                 options: ConstructorParameters<typeof DepthOfFieldBlurPostProcess>[4];
@@ -3852,11 +3949,12 @@ export interface JSXElements {
         BabylonProps<
             ExcludeReadonlyAndPrivate<DepthOfFieldEffect>,
             {
-                scene: ConstructorParameters<typeof DepthOfFieldEffect>[0];
+                sceneOrEngine: ConstructorParameters<typeof DepthOfFieldEffect>[0];
                 depthTexture: ConstructorParameters<typeof DepthOfFieldEffect>[1];
                 blurLevel: ConstructorParameters<typeof DepthOfFieldEffect>[2];
                 pipelineTextureType: ConstructorParameters<typeof DepthOfFieldEffect>[3];
                 blockCompilation: ConstructorParameters<typeof DepthOfFieldEffect>[4];
+                depthNotNormalized: ConstructorParameters<typeof DepthOfFieldEffect>[5];
             },
             DepthOfFieldEffect
         >,
@@ -4185,8 +4283,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<DynamicTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof DynamicTexture>[0];
-                options: ConstructorParameters<typeof DynamicTexture>[1];
-                scene: ConstructorParameters<typeof DynamicTexture>[2];
+                canvasOrSize: ConstructorParameters<typeof DynamicTexture>[1];
+                sceneOrOptions: ConstructorParameters<typeof DynamicTexture>[2];
                 generateMipMaps: ConstructorParameters<typeof DynamicTexture>[3];
                 samplingMode: ConstructorParameters<typeof DynamicTexture>[4];
                 format: ConstructorParameters<typeof DynamicTexture>[5];
@@ -4514,6 +4612,17 @@ export interface JSXElements {
                 reusable: ConstructorParameters<typeof FilterPostProcess>[6];
             },
             FilterPostProcess
+        >,
+        any
+    >;
+    fixFlippedFaces: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof FixFlippedFaces>> & MeshProps,
+            {
+                positions: Parameters<typeof FixFlippedFaces>[0];
+                indices: Parameters<typeof FixFlippedFaces>[1];
+            },
+            ReturnType<typeof FixFlippedFaces>
         >,
         any
     >;
@@ -5762,6 +5871,255 @@ export interface JSXElements {
         >,
         any
     >;
+    frameGraph: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraph>,
+            {
+                engine: ConstructorParameters<typeof FrameGraph>[0];
+                debugTextures: ConstructorParameters<typeof FrameGraph>[1];
+                scene: ConstructorParameters<typeof FrameGraph>[2];
+            },
+            FrameGraph
+        >,
+        any
+    >;
+    frameGraphBlackAndWhiteTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphBlackAndWhiteTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphBlackAndWhiteTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphBlackAndWhiteTask>[1];
+                thinPostProcess: ConstructorParameters<typeof FrameGraphBlackAndWhiteTask>[2];
+            },
+            FrameGraphBlackAndWhiteTask
+        >,
+        any
+    >;
+    frameGraphBloomTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphBloomTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphBloomTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphBloomTask>[1];
+                engine: ConstructorParameters<typeof FrameGraphBloomTask>[2];
+                weight: ConstructorParameters<typeof FrameGraphBloomTask>[3];
+                kernel: ConstructorParameters<typeof FrameGraphBloomTask>[4];
+                threshold: ConstructorParameters<typeof FrameGraphBloomTask>[5];
+                hdr: ConstructorParameters<typeof FrameGraphBloomTask>[6];
+                bloomScale: ConstructorParameters<typeof FrameGraphBloomTask>[7];
+            },
+            FrameGraphBloomTask
+        >,
+        any
+    >;
+    frameGraphBlurTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphBlurTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphBlurTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphBlurTask>[1];
+                thinPostProcess: ConstructorParameters<typeof FrameGraphBlurTask>[2];
+            },
+            FrameGraphBlurTask
+        >,
+        any
+    >;
+    frameGraphCircleOfConfusionTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphCircleOfConfusionTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphCircleOfConfusionTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphCircleOfConfusionTask>[1];
+                thinPostProcess: ConstructorParameters<typeof FrameGraphCircleOfConfusionTask>[2];
+            },
+            FrameGraphCircleOfConfusionTask
+        >,
+        any
+    >;
+    frameGraphClearTextureTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphClearTextureTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphClearTextureTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphClearTextureTask>[1];
+            },
+            FrameGraphClearTextureTask
+        >,
+        any
+    >;
+    frameGraphCopyToTextureTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphCopyToTextureTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphCopyToTextureTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphCopyToTextureTask>[1];
+            },
+            FrameGraphCopyToTextureTask
+        >,
+        any
+    >;
+    frameGraphCullObjectsTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphCullObjectsTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphCullObjectsTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphCullObjectsTask>[1];
+                scene: ConstructorParameters<typeof FrameGraphCullObjectsTask>[2];
+            },
+            FrameGraphCullObjectsTask
+        >,
+        any
+    >;
+    frameGraphDepthOfFieldTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphDepthOfFieldTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[1];
+                engine: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[2];
+                blurLevel: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[3];
+                hdr: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[4];
+            },
+            FrameGraphDepthOfFieldTask
+        >,
+        any
+    >;
+    frameGraphExtractHighlightsTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphExtractHighlightsTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphExtractHighlightsTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphExtractHighlightsTask>[1];
+                thinPostProcess: ConstructorParameters<typeof FrameGraphExtractHighlightsTask>[2];
+            },
+            FrameGraphExtractHighlightsTask
+        >,
+        any
+    >;
+    frameGraphGeometryRendererTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphGeometryRendererTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphGeometryRendererTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphGeometryRendererTask>[1];
+                scene: ConstructorParameters<typeof FrameGraphGeometryRendererTask>[2];
+                options: ConstructorParameters<typeof FrameGraphGeometryRendererTask>[3];
+            },
+            FrameGraphGeometryRendererTask
+        >,
+        any
+    >;
+    frameGraphObjectRendererTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphObjectRendererTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphObjectRendererTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphObjectRendererTask>[1];
+                scene: ConstructorParameters<typeof FrameGraphObjectRendererTask>[2];
+                options: ConstructorParameters<typeof FrameGraphObjectRendererTask>[3];
+            },
+            FrameGraphObjectRendererTask
+        >,
+        any
+    >;
+    frameGraphPass: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphPass>,
+            {
+                name: ConstructorParameters<typeof FrameGraphPass>[0];
+                _parentTask: ConstructorParameters<typeof FrameGraphPass>[1];
+                _context: ConstructorParameters<typeof FrameGraphPass>[2];
+            },
+            FrameGraphPass
+        >,
+        any
+    >;
+    frameGraphPostProcessTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphPostProcessTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphPostProcessTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphPostProcessTask>[1];
+                postProcess: ConstructorParameters<typeof FrameGraphPostProcessTask>[2];
+            },
+            FrameGraphPostProcessTask
+        >,
+        any
+    >;
+    frameGraphRenderContext: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphRenderContext>,
+            {
+                _engine: ConstructorParameters<typeof FrameGraphRenderContext>[0];
+                _textureManager: ConstructorParameters<typeof FrameGraphRenderContext>[1];
+                _scene: ConstructorParameters<typeof FrameGraphRenderContext>[2];
+            },
+            FrameGraphRenderContext
+        >,
+        any
+    >;
+    frameGraphRenderPass: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphRenderPass>,
+            {
+                name: ConstructorParameters<typeof FrameGraphRenderPass>[0];
+                parentTask: ConstructorParameters<typeof FrameGraphRenderPass>[1];
+                context: ConstructorParameters<typeof FrameGraphRenderPass>[2];
+                engine: ConstructorParameters<typeof FrameGraphRenderPass>[3];
+            },
+            FrameGraphRenderPass
+        >,
+        any
+    >;
+    frameGraphRenderTarget: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphRenderTarget>,
+            {
+                name: ConstructorParameters<typeof FrameGraphRenderTarget>[0];
+                textureManager: ConstructorParameters<typeof FrameGraphRenderTarget>[1];
+                renderTargets: ConstructorParameters<typeof FrameGraphRenderTarget>[2];
+                renderTargetDepth: ConstructorParameters<typeof FrameGraphRenderTarget>[3];
+            },
+            FrameGraphRenderTarget
+        >,
+        any
+    >;
+    frameGraphTAAObjectRendererTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphTAAObjectRendererTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphTAAObjectRendererTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphTAAObjectRendererTask>[1];
+                scene: ConstructorParameters<typeof FrameGraphTAAObjectRendererTask>[2];
+                options: ConstructorParameters<typeof FrameGraphTAAObjectRendererTask>[3];
+            },
+            FrameGraphTAAObjectRendererTask
+        >,
+        any
+    >;
+    frameGraphTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphTask>[1];
+            },
+            FrameGraphTask
+        >,
+        any
+    >;
+    frameGraphTextureManager: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphTextureManager>,
+            {
+                engine: ConstructorParameters<typeof FrameGraphTextureManager>[0];
+                _debugTextures: ConstructorParameters<typeof FrameGraphTextureManager>[1];
+                _scene: ConstructorParameters<typeof FrameGraphTextureManager>[2];
+            },
+            FrameGraphTextureManager
+        >,
+        any
+    >;
     framingBehavior: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FramingBehavior>, {}, FramingBehavior>, any>;
     freeCamera: React.DetailedHTMLProps<
         BabylonProps<
@@ -5960,6 +6318,26 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof GamepadSystemSceneComponent>[0];
             },
             GamepadSystemSceneComponent
+        >,
+        any
+    >;
+    gaussianBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GaussianBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof GaussianBlock>[0];
+            },
+            GaussianBlock
+        >,
+        any
+    >;
+    gaussianSplattingBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GaussianSplattingBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof GaussianSplattingBlock>[0];
+            },
+            GaussianSplattingBlock
         >,
         any
     >;
@@ -6462,7 +6840,8 @@ export interface JSXElements {
             {
                 mesh: Parameters<typeof GetHotSpotToRef>[0];
                 hotSpotQuery: Parameters<typeof GetHotSpotToRef>[1];
-                res: Parameters<typeof GetHotSpotToRef>[2];
+                resPosition: Parameters<typeof GetHotSpotToRef>[2];
+                resNormal: Parameters<typeof GetHotSpotToRef>[3];
             },
             ReturnType<typeof GetHotSpotToRef>
         >,
@@ -6535,6 +6914,16 @@ export interface JSXElements {
                 res: Parameters<typeof GetTransformedPosition>[2];
             },
             ReturnType<typeof GetTransformedPosition>
+        >,
+        any
+    >;
+    getTypeForDepthTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetTypeForDepthTexture>> & MeshProps,
+            {
+                format: Parameters<typeof GetTypeForDepthTexture>[0];
+            },
+            ReturnType<typeof GetTypeForDepthTexture>
         >,
         any
     >;
@@ -6780,6 +7169,16 @@ export interface JSXElements {
         >,
         any
     >;
+    hasStencilAspect: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof HasStencilAspect>> & MeshProps,
+            {
+                format: Parameters<typeof HasStencilAspect>[0];
+            },
+            ReturnType<typeof HasStencilAspect>
+        >,
+        any
+    >;
     havokPlugin: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<HavokPlugin>,
@@ -7000,6 +7399,16 @@ export interface JSXElements {
         >,
         any
     >;
+    initializeCSG2Async: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof InitializeCSG2Async>> & MeshProps,
+            {
+                options: Parameters<typeof InitializeCSG2Async>[0];
+            },
+            ReturnType<typeof InitializeCSG2Async>
+        >,
+        any
+    >;
     inputBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<InputBlock> & Clonable,
@@ -7168,6 +7577,17 @@ export interface JSXElements {
         any
     >;
     isBase64DataUrl: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsBase64DataUrl>> & MeshProps, {}, ReturnType<typeof IsBase64DataUrl>>, any>;
+    isCSG2Ready: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsCSG2Ready>> & MeshProps, {}, ReturnType<typeof IsCSG2Ready>>, any>;
+    isDepthTexture: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof IsDepthTexture>> & MeshProps,
+            {
+                format: Parameters<typeof IsDepthTexture>[0];
+            },
+            ReturnType<typeof IsDepthTexture>
+        >,
+        any
+    >;
     isDocumentAvailable: React.DetailedHTMLProps<
         BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsDocumentAvailable>> & MeshProps, {}, ReturnType<typeof IsDocumentAvailable>>,
         any
@@ -7499,6 +7919,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof Material>[0];
                 scene: ConstructorParameters<typeof Material>[1];
                 doNotAdd: ConstructorParameters<typeof Material>[2];
+                forceGLSL: ConstructorParameters<typeof Material>[3];
             },
             Material
         >,
@@ -8103,6 +8524,268 @@ export interface JSXElements {
         >,
         any
     >;
+    nodeRenderGraph: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraph> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraph>[0];
+                scene: ConstructorParameters<typeof NodeRenderGraph>[1];
+                options: ConstructorParameters<typeof NodeRenderGraph>[2];
+            },
+            NodeRenderGraph
+        >,
+        any
+    >;
+    nodeRenderGraphBlackAndWhitePostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphBlackAndWhitePostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphBlackAndWhitePostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphBlackAndWhitePostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphBlackAndWhitePostProcessBlock>[2];
+            },
+            NodeRenderGraphBlackAndWhitePostProcessBlock
+        >,
+        any
+    >;
+    nodeRenderGraphBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphBlock>[2];
+                _additionalConstructionParameters: ConstructorParameters<typeof NodeRenderGraphBlock>[3];
+            },
+            NodeRenderGraphBlock
+        >,
+        any
+    >;
+    nodeRenderGraphBloomPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphBloomPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphBloomPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphBloomPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphBloomPostProcessBlock>[2];
+                hdr: ConstructorParameters<typeof NodeRenderGraphBloomPostProcessBlock>[3];
+                bloomScale: ConstructorParameters<typeof NodeRenderGraphBloomPostProcessBlock>[4];
+            },
+            NodeRenderGraphBloomPostProcessBlock
+        >,
+        any
+    >;
+    nodeRenderGraphBlurPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphBlurPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphBlurPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphBlurPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphBlurPostProcessBlock>[2];
+            },
+            NodeRenderGraphBlurPostProcessBlock
+        >,
+        any
+    >;
+    nodeRenderGraphBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphBuildState>, {}, NodeRenderGraphBuildState>, any>;
+    nodeRenderGraphCircleOfConfusionPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphCircleOfConfusionPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphCircleOfConfusionPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphCircleOfConfusionPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphCircleOfConfusionPostProcessBlock>[2];
+            },
+            NodeRenderGraphCircleOfConfusionPostProcessBlock
+        >,
+        any
+    >;
+    nodeRenderGraphClearBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphClearBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphClearBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphClearBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphClearBlock>[2];
+            },
+            NodeRenderGraphClearBlock
+        >,
+        any
+    >;
+    nodeRenderGraphConnectionPoint: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphConnectionPoint>,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphConnectionPoint>[0];
+                ownerBlock: ConstructorParameters<typeof NodeRenderGraphConnectionPoint>[1];
+                direction: ConstructorParameters<typeof NodeRenderGraphConnectionPoint>[2];
+            },
+            NodeRenderGraphConnectionPoint
+        >,
+        any
+    >;
+    nodeRenderGraphCopyTextureBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphCopyTextureBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphCopyTextureBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphCopyTextureBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphCopyTextureBlock>[2];
+            },
+            NodeRenderGraphCopyTextureBlock
+        >,
+        any
+    >;
+    nodeRenderGraphCullObjectsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphCullObjectsBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphCullObjectsBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphCullObjectsBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphCullObjectsBlock>[2];
+            },
+            NodeRenderGraphCullObjectsBlock
+        >,
+        any
+    >;
+    nodeRenderGraphDepthOfFieldPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphDepthOfFieldPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphDepthOfFieldPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphDepthOfFieldPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphDepthOfFieldPostProcessBlock>[2];
+                blurLevel: ConstructorParameters<typeof NodeRenderGraphDepthOfFieldPostProcessBlock>[3];
+                hdr: ConstructorParameters<typeof NodeRenderGraphDepthOfFieldPostProcessBlock>[4];
+            },
+            NodeRenderGraphDepthOfFieldPostProcessBlock
+        >,
+        any
+    >;
+    nodeRenderGraphElbowBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphElbowBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphElbowBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphElbowBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphElbowBlock>[2];
+            },
+            NodeRenderGraphElbowBlock
+        >,
+        any
+    >;
+    nodeRenderGraphExtractHighlightsPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphExtractHighlightsPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphExtractHighlightsPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphExtractHighlightsPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphExtractHighlightsPostProcessBlock>[2];
+            },
+            NodeRenderGraphExtractHighlightsPostProcessBlock
+        >,
+        any
+    >;
+    nodeRenderGraphGenerateMipmapsBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphGenerateMipmapsBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphGenerateMipmapsBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphGenerateMipmapsBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphGenerateMipmapsBlock>[2];
+            },
+            NodeRenderGraphGenerateMipmapsBlock
+        >,
+        any
+    >;
+    nodeRenderGraphGeometryRendererBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphGeometryRendererBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[2];
+                doNotChangeAspectRatio: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[3];
+            },
+            NodeRenderGraphGeometryRendererBlock
+        >,
+        any
+    >;
+    nodeRenderGraphInputBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphInputBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphInputBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphInputBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphInputBlock>[2];
+                type: ConstructorParameters<typeof NodeRenderGraphInputBlock>[3];
+            },
+            NodeRenderGraphInputBlock
+        >,
+        any
+    >;
+    nodeRenderGraphObjectRendererBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphObjectRendererBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[2];
+                doNotChangeAspectRatio: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[3];
+            },
+            NodeRenderGraphObjectRendererBlock
+        >,
+        any
+    >;
+    nodeRenderGraphOutputBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphOutputBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphOutputBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphOutputBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphOutputBlock>[2];
+            },
+            NodeRenderGraphOutputBlock
+        >,
+        any
+    >;
+    nodeRenderGraphTAAObjectRendererBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphTAAObjectRendererBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphTAAObjectRendererBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphTAAObjectRendererBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphTAAObjectRendererBlock>[2];
+                doNotChangeAspectRatio: ConstructorParameters<typeof NodeRenderGraphTAAObjectRendererBlock>[3];
+            },
+            NodeRenderGraphTAAObjectRendererBlock
+        >,
+        any
+    >;
+    nodeRenderGraphTeleportInBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphTeleportInBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphTeleportInBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphTeleportInBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphTeleportInBlock>[2];
+            },
+            NodeRenderGraphTeleportInBlock
+        >,
+        any
+    >;
+    nodeRenderGraphTeleportOutBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphTeleportOutBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphTeleportOutBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphTeleportOutBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphTeleportOutBlock>[2];
+            },
+            NodeRenderGraphTeleportOutBlock
+        >,
+        any
+    >;
     noiseBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NoiseBlock> & Clonable,
@@ -8178,6 +8861,18 @@ export interface JSXElements {
         any
     >;
     nullEngineOptions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NullEngineOptions>, {}, NullEngineOptions>, any>;
+    objectRenderer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ObjectRenderer> & Clonable,
+            {
+                name: ConstructorParameters<typeof ObjectRenderer>[0];
+                scene: ConstructorParameters<typeof ObjectRenderer>[1];
+                options: ConstructorParameters<typeof ObjectRenderer>[2];
+            },
+            ObjectRenderer
+        >,
+        any
+    >;
     observable: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<Observable> & Clonable,
@@ -9690,6 +10385,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof PushMaterial>[0];
                 scene: ConstructorParameters<typeof PushMaterial>[1];
                 storeEffectOnSubMeshes: ConstructorParameters<typeof PushMaterial>[2];
+                forceGLSL: ConstructorParameters<typeof PushMaterial>[3];
             },
             PushMaterial
         >,
@@ -10628,6 +11324,16 @@ export interface JSXElements {
         >,
         any
     >;
+    setToDefaultGaussianSplatting: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof SetToDefaultGaussianSplatting>> & MeshProps,
+            {
+                nodeMaterial: Parameters<typeof SetToDefaultGaussianSplatting>[0];
+            },
+            ReturnType<typeof SetToDefaultGaussianSplatting>
+        >,
+        any
+    >;
     setUVsBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SetUVsBlock> & Clonable,
@@ -10976,6 +11682,16 @@ export interface JSXElements {
     >;
     sphericalHarmonics: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalHarmonics>, {}, SphericalHarmonics>, any>;
     sphericalPolynomial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SphericalPolynomial>, {}, SphericalPolynomial>, any>;
+    splatReaderBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SplatReaderBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof SplatReaderBlock>[0];
+            },
+            SplatReaderBlock
+        >,
+        any
+    >;
     spotLight: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SpotLight> & Clonable,
@@ -11562,6 +12278,71 @@ export interface JSXElements {
         any
     >;
     textureSampler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextureSampler>, {}, TextureSampler>, any>;
+    thinBlackAndWhitePostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinBlackAndWhitePostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinBlackAndWhitePostProcess>[0];
+                engine: ConstructorParameters<typeof ThinBlackAndWhitePostProcess>[1];
+                options: ConstructorParameters<typeof ThinBlackAndWhitePostProcess>[2];
+            },
+            ThinBlackAndWhitePostProcess
+        >,
+        any
+    >;
+    thinBloomEffect: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinBloomEffect>,
+            {
+                name: ConstructorParameters<typeof ThinBloomEffect>[0];
+                engine: ConstructorParameters<typeof ThinBloomEffect>[1];
+                scale: ConstructorParameters<typeof ThinBloomEffect>[2];
+                blockCompilation: ConstructorParameters<typeof ThinBloomEffect>[3];
+            },
+            ThinBloomEffect
+        >,
+        any
+    >;
+    thinBlurPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinBlurPostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinBlurPostProcess>[0];
+                engine: ConstructorParameters<typeof ThinBlurPostProcess>[1];
+                direction: ConstructorParameters<typeof ThinBlurPostProcess>[2];
+                kernel: ConstructorParameters<typeof ThinBlurPostProcess>[3];
+                options: ConstructorParameters<typeof ThinBlurPostProcess>[4];
+            },
+            ThinBlurPostProcess
+        >,
+        any
+    >;
+    thinCircleOfConfusionPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinCircleOfConfusionPostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinCircleOfConfusionPostProcess>[0];
+                engine: ConstructorParameters<typeof ThinCircleOfConfusionPostProcess>[1];
+                options: ConstructorParameters<typeof ThinCircleOfConfusionPostProcess>[2];
+            },
+            ThinCircleOfConfusionPostProcess
+        >,
+        any
+    >;
+    thinDepthOfFieldEffect: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinDepthOfFieldEffect>,
+            {
+                name: ConstructorParameters<typeof ThinDepthOfFieldEffect>[0];
+                engine: ConstructorParameters<typeof ThinDepthOfFieldEffect>[1];
+                blurLevel: ConstructorParameters<typeof ThinDepthOfFieldEffect>[2];
+                depthNotNormalized: ConstructorParameters<typeof ThinDepthOfFieldEffect>[3];
+                blockCompilation: ConstructorParameters<typeof ThinDepthOfFieldEffect>[4];
+            },
+            ThinDepthOfFieldEffect
+        >,
+        any
+    >;
     thinEngine: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ThinEngine>,
@@ -11572,6 +12353,18 @@ export interface JSXElements {
                 adaptToDeviceRatio: ConstructorParameters<typeof ThinEngine>[3];
             },
             ThinEngine
+        >,
+        any
+    >;
+    thinExtractHighlightsPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinExtractHighlightsPostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinExtractHighlightsPostProcess>[0];
+                engine: ConstructorParameters<typeof ThinExtractHighlightsPostProcess>[1];
+                options: ConstructorParameters<typeof ThinExtractHighlightsPostProcess>[2];
+            },
+            ThinExtractHighlightsPostProcess
         >,
         any
     >;
@@ -13217,6 +14010,16 @@ export interface JSXElements {
         >,
         any
     >;
+    getDimensionsFromTextureSize: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof getDimensionsFromTextureSize>> & MeshProps,
+            {
+                size: Parameters<typeof getDimensionsFromTextureSize>[0];
+            },
+            ReturnType<typeof getDimensionsFromTextureSize>
+        >,
+        any
+    >;
     getRichTypeFromValue: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof getRichTypeFromValue>> & MeshProps,
@@ -13543,6 +14346,16 @@ export interface JSXElements {
         >,
         any
     >;
+    setOpenGLOrientationForUV: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof setOpenGLOrientationForUV>> & MeshProps,
+            {
+                value: Parameters<typeof setOpenGLOrientationForUV>[0];
+            },
+            ReturnType<typeof setOpenGLOrientationForUV>
+        >,
+        any
+    >;
     setStereoscopicAnaglyphRigMode: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof setStereoscopicAnaglyphRigMode>> & MeshProps,
@@ -13571,6 +14384,16 @@ export interface JSXElements {
                 rigParams: Parameters<typeof setVRRigMode>[1];
             },
             ReturnType<typeof setVRRigMode>
+        >,
+        any
+    >;
+    textureSizeIsObject: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof textureSizeIsObject>> & MeshProps,
+            {
+                size: Parameters<typeof textureSizeIsObject>[0];
+            },
+            ReturnType<typeof textureSizeIsObject>
         >,
         any
     >;

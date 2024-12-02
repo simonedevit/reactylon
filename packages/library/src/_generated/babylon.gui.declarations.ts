@@ -22,6 +22,7 @@ import { FluentButtonMaterial } from '@babylonjs/gui';
 import { FluentMaterial } from '@babylonjs/gui';
 import { FluentMaterialDefines } from '@babylonjs/gui';
 import { FocusableButton } from '@babylonjs/gui';
+import { FrameGraphGUITask } from '@babylonjs/gui';
 import { GUI3DManager } from '@babylonjs/gui';
 import { GizmoHandle } from '@babylonjs/gui';
 import { Grid } from '@babylonjs/gui';
@@ -46,6 +47,7 @@ import { MeshButton3D } from '@babylonjs/gui';
 import { MultiLine } from '@babylonjs/gui';
 import { MultiLinePoint } from '@babylonjs/gui';
 import { NearMenu } from '@babylonjs/gui';
+import { NodeRenderGraphGUIBlock } from '@babylonjs/gui';
 import { RadialGradient } from '@babylonjs/gui';
 import { RadioButton } from '@babylonjs/gui';
 import { RadioGroup } from '@babylonjs/gui';
@@ -92,8 +94,8 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<AdvancedDynamicTexture> & Clonable,
             {
                 name: ConstructorParameters<typeof AdvancedDynamicTexture>[0];
-                width: ConstructorParameters<typeof AdvancedDynamicTexture>[1];
-                height: ConstructorParameters<typeof AdvancedDynamicTexture>[2];
+                widthOrOptions: ConstructorParameters<typeof AdvancedDynamicTexture>[1];
+                _height: ConstructorParameters<typeof AdvancedDynamicTexture>[2];
                 scene: ConstructorParameters<typeof AdvancedDynamicTexture>[3];
                 generateMipMaps: ConstructorParameters<typeof AdvancedDynamicTexture>[4];
                 samplingMode: ConstructorParameters<typeof AdvancedDynamicTexture>[5];
@@ -267,6 +269,18 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof FocusableButton>[0];
             } & GuiProps,
             FocusableButton
+        >,
+        any
+    >;
+    frameGraphGUITask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphGUITask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphGUITask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphGUITask>[1];
+                adt: ConstructorParameters<typeof FrameGraphGUITask>[2];
+            } & GuiProps,
+            FrameGraphGUITask
         >,
         any
     >;
@@ -530,6 +544,18 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof NearMenu>[0];
             } & GuiProps,
             NearMenu
+        >,
+        any
+    >;
+    nodeRenderGraphGUIBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphGUIBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphGUIBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphGUIBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphGUIBlock>[2];
+            } & GuiProps,
+            NodeRenderGraphGUIBlock
         >,
         any
     >;
