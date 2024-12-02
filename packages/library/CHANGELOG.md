@@ -1,5 +1,13 @@
 # Reactylon - Changelog
 
+## [1.0.4](https://github.com/simonedevit/reactylon/compare/v1.0.3...v1.0.4) (2024-12-02)
+
+
+### Chore
+
+* **general:** add meta deps into dev deps + generate declarations ([e413952](https://github.com/simonedevit/reactylon/commit/e413952098dd013f83ad75ee3ccdadcb60dd46fe))
+* **general:** swap loadash to solve pollution cve ([585f58f](https://github.com/simonedevit/reactylon/commit/585f58f4685827c405b3097caf482366671cffe0))
+
 ## [1.0.3](https://github.com/simonedevit/reactylon/compare/v1.0.2...v1.0.3) (2024-12-02)
 
 
