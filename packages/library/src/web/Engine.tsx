@@ -1,5 +1,5 @@
 import React, { useEffect, Children, useState, useRef } from 'react';
-import { Engine as BabylonEngine, type EngineOptions, Scene, EventState } from '@babylonjs/core';
+import { Engine as BabylonEngine, NullEngine, type EngineOptions, Scene, EventState, type NullEngineOptions } from '@babylonjs/core';
 import CustomLoadingScreen from './CustomLoadingScreen';
 import { FiberProvider } from 'its-fine';
 import { EngineContextType } from '../core/hooks';
@@ -15,11 +15,16 @@ export type EngineProps = React.PropsWithChildren<{
      * @default 'reactylon-canvas'
      */
     canvasId?: string;
+    /**
+     * @internal
+     * This prop is only for testing purpose and should not be passed to this component.
+     */
+    _nullEngineOptions?: NullEngineOptions;
 }>;
 
 export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void;
 
-export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptToDeviceRatio, loader, canvasId = 'reactylon-canvas', ...rest }) => {
+export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptToDeviceRatio, loader, canvasId = 'reactylon-canvas', _nullEngineOptions, ...rest }) => {
     const [context, setContext] = useState<EngineContextType | null>(null);
     const engineRef = useRef<{
         engine: BabylonEngine;
@@ -53,7 +58,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
             /* --------------------------------------------------------------------------------------- */
             /* ENGINE
             ------------------------------------------------------------------------------------------ */
-            const engine = new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
+            const engine = process.env.NODE_ENV === 'test' ? new NullEngine(_nullEngineOptions) : new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
             if (loader) {
                 engine.loadingScreen = new CustomLoadingScreen(canvas as HTMLCanvasElement, loader);
             }
@@ -94,7 +99,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
             {context ? (
                 <FiberProvider>
                     {React.Children.map(rest.children, (child: any) => {
-                        return React.cloneElement(child, { context });
+                        return React.cloneElement(child, { _context: context });
                     })}
                 </FiberProvider>
             ) : null}
