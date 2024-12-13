@@ -24,15 +24,16 @@ type SceneProps = React.PropsWithChildren<{
      * @internal
      * This prop is only for internal use and should not be passed to this component.
      */
-    context?: EngineContextType;
+    _context?: EngineContextType;
 }>;
 
 //FIXME: replace global var with a singleton Manager
 export let activeScene: BabylonScene | null = null;
 
-export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions, context, ...rest }) => {
-    const { engine, isMultipleScene } = context as EngineContextType;
+export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }) => {
+    const { engine, isMultipleScene } = _context as EngineContextType;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
+    const isFirstRender = useRef(false);
 
     // Returns a bridged context provider that forwards context
     const Bridge: ContextBridge = useContextBridge();
@@ -122,16 +123,35 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     <Bridge>
                         <SceneContext.Provider value={{ engine, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
                     </Bridge>,
-                    rootContainer.current,
+                    rootContainer.current!,
                 );
+
+                isFirstRender.current = true;
             }
         })();
 
         return () => {
-            Reactylon.render(null, rootContainer.current!);
+            Reactylon.unmount(rootContainer.current!);
             rootContainer.current = null;
         };
     }, []);
+
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'test') {
+            if (!isFirstRender.current) {
+                const { scene, xrExperience, canvas } = rootContainer.current!;
+                // Renders children with bridged context into a secondary renderer
+                Reactylon.render(
+                    <Bridge>
+                        <SceneContext.Provider value={{ engine, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
+                    </Bridge>,
+                    rootContainer.current!,
+                );
+            } else {
+                isFirstRender.current = false;
+            }
+        }
+    });
 
     return null;
 };
