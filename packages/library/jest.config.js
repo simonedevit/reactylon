@@ -9,12 +9,13 @@ export default {
     '^@props$': '<rootDir>/src/types/props.ts',
     '^@constants$': '<rootDir>/src/constants.ts',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^(\\.{1,2}/.*)\\.js$': '$1'
   },
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   transform: {
-    "^.+.tsx?$": ["ts-jest", { 
+    "^.+.tsx?$": ["ts-jest", {
       //tsconfig: './tsconfig.json',
       useESM: true
-     }],
+    }],
   },
 };
