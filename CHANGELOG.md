@@ -1,5 +1,29 @@
 # Reactylon - Changelog
 
+## [1.0.6](https://github.com/simonedevit/reactylon/compare/v1.0.5...v1.0.6) (2024-12-14)
+
+
+### Continuous integration
+
+* **general:** add Github Actions build workflow ([d61516a](https://github.com/simonedevit/reactylon/commit/d61516a044c2251728d602a553e65eceac67258f))
+* **general:** add Github Actions workflow for Jest tests ([e6f319e](https://github.com/simonedevit/reactylon/commit/e6f319e881e9a8636ca3c15799e4fe48aea6a53b))
+
+
+### Chore
+
+* **general:** move Logger into index to avoid not correct module resolution ([f19ff67](https://github.com/simonedevit/reactylon/commit/f19ff679c848403a84ae9eeca7d9d9a03b7060fb))
+
+
+### Documentation
+
+* **general:** add badges on readme ([085fc28](https://github.com/simonedevit/reactylon/commit/085fc280919601fd417388fca6625d1d9f124f47))
+
+
+### Test
+
+* **general:** fix module resolution for Jest in GitHub Actions ([8521bac](https://github.com/simonedevit/reactylon/commit/8521bac073c2e41c70be4d9d692bd431f0d98b87))
+* **general:** add integration tests [#2](https://github.com/simonedevit/reactylon/issues/2) ([bc7dee4](https://github.com/simonedevit/reactylon/commit/bc7dee4d33e54538c185ca1a0496689e3d83ea19))
+
 ## [1.0.5](https://github.com/simonedevit/reactylon/compare/v1.0.4...v1.0.5) (2024-12-02)
 
 
