@@ -8,8 +8,7 @@ export default {
     '^@types$': '<rootDir>/src/types/types.ts',
     '^@props$': '<rootDir>/src/types/props.ts',
     '^@constants$': '<rootDir>/src/constants.ts',
-    '^@utils/(.*)$': '<rootDir>/src/utils/$1',
-    '^(\\.{1,2}/.*)\\.js$': '$1'
+    '^@utils/(.*)$': '<rootDir>/src/utils/$1'
   },
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   transform: {

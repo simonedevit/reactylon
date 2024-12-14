@@ -1,5 +1,41 @@
 import { parse } from 'acorn';
-export { Logger } from './Logger.js';
+
+//TODO: move it in a separate file (pay attention to module resolution due to "nodeNext")
+
+export class Logger {
+    static prefix: string = '[Reactylon]';
+
+    private static isEnabled() {
+        return process.env.IS_LOGGING_ENABLED;
+    }
+
+    static log(...args: Array<any>) {
+        if (Logger.isEnabled()) {
+            const [first, ...rest] = args;
+            console.log(`${this.prefix} - ${first}`, ...rest);
+        }
+    }
+
+    static warn(...args: Array<any>) {
+        const [first, ...rest] = args;
+        console.warn(`${this.prefix} - ${first}`, ...rest);
+    }
+
+    static error(...args: Array<any>) {
+        const [first, ...rest] = args;
+        console.error(`${this.prefix} - ${first}`, ...rest);
+    }
+
+    static group(title: string, labels: Array<Array<any>>) {
+        if (Logger.isEnabled()) {
+            console.group(`${this.prefix} - ${title}`);
+            labels.forEach(label => {
+                console.log(...label);
+            });
+            console.groupEnd();
+        }
+    }
+}
 
 export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }): Array<string> => {
     const ast = parse(cls.toString(), {
@@ -9,6 +45,7 @@ export const getClassConstructorParams = <T>(cls: { new (...args: any[]): T }): 
     const parameters = traverse(ast.body[0].body.body.find(x => x.type === 'MethodDefinition' && x.kind === 'constructor')?.value);
     return (parameters || []).filter((param: any) => param !== null); // Remove null values
 };
+
 function traverse(node: any) {
     if (node.type === 'FunctionDeclaration' || node.type === 'FunctionExpression') {
         return node.params.map((param: any) => {
