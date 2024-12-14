@@ -1,4 +1,22 @@
-# Reactylon
+<div align="center">
+  <a href="https://www.reactylon.com">
+    <picture>
+      <img alt="Reactylon logo" src="https://www.reactylon.com/logo.svg" height="170">
+    </picture>
+  </a>
+  <h1>Reactylon</h1>
+</div>
+
+<div align="center">
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/simonedevit/reactylon">
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/simonedevit/reactylon/build.yml?label=test%2Fbuild">
+  <img alt="Sonar Cloud Quality Gate" src="https://sonarcloud.io/api/project_badges/measure?project=simonedevit_reactylon&metric=alert_status">
+  <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fwww.reactylon.com&up_message=online&label=reactylon.com">
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/reactylon">
+  <img alt="NPM License" src="https://img.shields.io/npm/l/reactylon">
+</div>
+
+<br />
 
 Welcome to **Reactylon**, a powerful and intuitive rendering library built on top of Babylon.js, designed to simplify 3D development within React. This library allows developers to create full immersive experience in a declarative way, unlocking the full potential of React’s component-based architecture for interactive 3D applications.
 
