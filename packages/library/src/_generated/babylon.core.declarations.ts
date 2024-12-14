@@ -172,6 +172,7 @@ import { CreateGroundFromHeightMap } from '@babylonjs/core';
 import { CreateGroundFromHeightMapVertexData } from '@babylonjs/core';
 import { CreateGroundVertexData } from '@babylonjs/core';
 import { CreateHemisphere } from '@babylonjs/core';
+import { CreateHotSpotQueryForPickingInfo } from '@babylonjs/core';
 import { CreateIcoSphere } from '@babylonjs/core';
 import { CreateIcoSphereVertexData } from '@babylonjs/core';
 import { CreateImageBitmapFromSource } from '@babylonjs/core';
@@ -291,6 +292,7 @@ import { EncodeArrayBufferToBase64 } from '@babylonjs/core';
 import { EndsWith } from '@babylonjs/core';
 import { Engine } from '@babylonjs/core';
 import { EngineInstrumentation } from '@babylonjs/core';
+import { EnumerateFloatValues } from '@babylonjs/core';
 import { EnvironmentHelper } from '@babylonjs/core';
 import { EquiRectangularCubeTexture } from '@babylonjs/core';
 import { EquiRectangularCubeTextureAssetTask } from '@babylonjs/core';
@@ -441,12 +443,16 @@ import { FrameGraph } from '@babylonjs/core';
 import { FrameGraphBlackAndWhiteTask } from '@babylonjs/core';
 import { FrameGraphBloomTask } from '@babylonjs/core';
 import { FrameGraphBlurTask } from '@babylonjs/core';
+import { FrameGraphCascadedShadowGeneratorTask } from '@babylonjs/core';
 import { FrameGraphCircleOfConfusionTask } from '@babylonjs/core';
 import { FrameGraphClearTextureTask } from '@babylonjs/core';
 import { FrameGraphCopyToTextureTask } from '@babylonjs/core';
 import { FrameGraphCullObjectsTask } from '@babylonjs/core';
+import { FrameGraphCullPass } from '@babylonjs/core';
 import { FrameGraphDepthOfFieldTask } from '@babylonjs/core';
+import { FrameGraphExecuteTask } from '@babylonjs/core';
 import { FrameGraphExtractHighlightsTask } from '@babylonjs/core';
+import { FrameGraphGenerateMipMapsTask } from '@babylonjs/core';
 import { FrameGraphGeometryRendererTask } from '@babylonjs/core';
 import { FrameGraphObjectRendererTask } from '@babylonjs/core';
 import { FrameGraphPass } from '@babylonjs/core';
@@ -454,6 +460,7 @@ import { FrameGraphPostProcessTask } from '@babylonjs/core';
 import { FrameGraphRenderContext } from '@babylonjs/core';
 import { FrameGraphRenderPass } from '@babylonjs/core';
 import { FrameGraphRenderTarget } from '@babylonjs/core';
+import { FrameGraphShadowGeneratorTask } from '@babylonjs/core';
 import { FrameGraphTAAObjectRendererTask } from '@babylonjs/core';
 import { FrameGraphTask } from '@babylonjs/core';
 import { FrameGraphTextureManager } from '@babylonjs/core';
@@ -525,6 +532,7 @@ import { GetDOMTextContent } from '@babylonjs/core';
 import { GetEnvInfo } from '@babylonjs/core';
 import { GetEnvironmentBRDFTexture } from '@babylonjs/core';
 import { GetExrHeader } from '@babylonjs/core';
+import { GetFloatData } from '@babylonjs/core';
 import { GetFogState } from '@babylonjs/core';
 import { GetFontOffset } from '@babylonjs/core';
 import { GetForwardRay } from '@babylonjs/core';
@@ -537,6 +545,7 @@ import { GetPointsCount } from '@babylonjs/core';
 import { GetTGAHeader } from '@babylonjs/core';
 import { GetTextureDataAsync } from '@babylonjs/core';
 import { GetTransformedPosition } from '@babylonjs/core';
+import { GetTypeByteLength } from '@babylonjs/core';
 import { GetTypeForDepthTexture } from '@babylonjs/core';
 import { Gizmo } from '@babylonjs/core';
 import { GizmoManager } from '@babylonjs/core';
@@ -571,6 +580,8 @@ import { HingeConstraint } from '@babylonjs/core';
 import { HingeJoint } from '@babylonjs/core';
 import { HtmlElementTexture } from '@babylonjs/core';
 import { HufUncompress } from '@babylonjs/core';
+import { IblCdfGenerator } from '@babylonjs/core';
+import { IblCdfGeneratorSceneComponent } from '@babylonjs/core';
 import { IblShadowsRenderPipeline } from '@babylonjs/core';
 import { IcoSphereBlock } from '@babylonjs/core';
 import { ImageAssetTask } from '@babylonjs/core';
@@ -627,6 +638,7 @@ import { LineEdgesRenderer } from '@babylonjs/core';
 import { LinesMesh } from '@babylonjs/core';
 import { LoadFile } from '@babylonjs/core';
 import { LoadFileError } from '@babylonjs/core';
+import { LoadIESData } from '@babylonjs/core';
 import { LoadImage } from '@babylonjs/core';
 import { LoadTextureFromTranscodeResult } from '@babylonjs/core';
 import { LockConstraint } from '@babylonjs/core';
@@ -649,6 +661,7 @@ import { Matrix } from '@babylonjs/core';
 import { MatrixBuilderBlock } from '@babylonjs/core';
 import { MatrixComposeBlock } from '@babylonjs/core';
 import { MatrixDeterminantBlock } from '@babylonjs/core';
+import { MatrixSplitterBlock } from '@babylonjs/core';
 import { MatrixTransposeBlock } from '@babylonjs/core';
 import { MaxBlock } from '@babylonjs/core';
 import { MergeGeometryBlock } from '@babylonjs/core';
@@ -705,6 +718,7 @@ import { NodeRenderGraphBlock } from '@babylonjs/core';
 import { NodeRenderGraphBloomPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphBlurPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphBuildState } from '@babylonjs/core';
+import { NodeRenderGraphCascadedShadowGeneratorBlock } from '@babylonjs/core';
 import { NodeRenderGraphCircleOfConfusionPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphClearBlock } from '@babylonjs/core';
 import { NodeRenderGraphConnectionPoint } from '@babylonjs/core';
@@ -712,12 +726,15 @@ import { NodeRenderGraphCopyTextureBlock } from '@babylonjs/core';
 import { NodeRenderGraphCullObjectsBlock } from '@babylonjs/core';
 import { NodeRenderGraphDepthOfFieldPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphElbowBlock } from '@babylonjs/core';
+import { NodeRenderGraphExecuteBlock } from '@babylonjs/core';
 import { NodeRenderGraphExtractHighlightsPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphGenerateMipmapsBlock } from '@babylonjs/core';
 import { NodeRenderGraphGeometryRendererBlock } from '@babylonjs/core';
 import { NodeRenderGraphInputBlock } from '@babylonjs/core';
 import { NodeRenderGraphObjectRendererBlock } from '@babylonjs/core';
 import { NodeRenderGraphOutputBlock } from '@babylonjs/core';
+import { NodeRenderGraphResourceContainerBlock } from '@babylonjs/core';
+import { NodeRenderGraphShadowGeneratorBlock } from '@babylonjs/core';
 import { NodeRenderGraphTAAObjectRendererBlock } from '@babylonjs/core';
 import { NodeRenderGraphTeleportInBlock } from '@babylonjs/core';
 import { NodeRenderGraphTeleportOutBlock } from '@babylonjs/core';
@@ -781,6 +798,7 @@ import { PerturbNormalBlock } from '@babylonjs/core';
 import { Physics6DoFConstraint } from '@babylonjs/core';
 import { PhysicsAggregate } from '@babylonjs/core';
 import { PhysicsBody } from '@babylonjs/core';
+import { PhysicsCharacterController } from '@babylonjs/core';
 import { PhysicsConstraint } from '@babylonjs/core';
 import { PhysicsEngine } from '@babylonjs/core';
 import { PhysicsEngineV2 } from '@babylonjs/core';
@@ -1180,6 +1198,7 @@ import { _ENVTextureLoader } from '@babylonjs/core';
 import { _ExrTextureLoader } from '@babylonjs/core';
 import { _GetCompatibleTextureLoader } from '@babylonjs/core';
 import { _HDRTextureLoader } from '@babylonjs/core';
+import { _IESTextureLoader } from '@babylonjs/core';
 import { _InstancesBatch } from '@babylonjs/core';
 import { _KTXTextureLoader } from '@babylonjs/core';
 import { _MeshCollisionData } from '@babylonjs/core';
@@ -1204,6 +1223,7 @@ import { createPBRIridescencePlugin } from '@babylonjs/core';
 import { createPBRSheenPlugin } from '@babylonjs/core';
 import { createPBRSubSurfacePlugin } from '@babylonjs/core';
 import { createYieldingScheduler } from '@babylonjs/core';
+import { deepMerge } from '@babylonjs/core';
 import { editableInPropertyPage } from '@babylonjs/core';
 import { expandToProperty } from '@babylonjs/core';
 import { extractMinAndMax } from '@babylonjs/core';
@@ -3113,6 +3133,16 @@ export interface JSXElements {
         >,
         any
     >;
+    hotSpotQueryForPickingInfo: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateHotSpotQueryForPickingInfo>> & MeshProps,
+            {
+                pickingInfo: Parameters<typeof CreateHotSpotQueryForPickingInfo>[0];
+            },
+            ReturnType<typeof CreateHotSpotQueryForPickingInfo>
+        >,
+        any
+    >;
     icoSphere: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof CreateIcoSphere>> & MeshProps,
@@ -4424,6 +4454,23 @@ export interface JSXElements {
         >,
         any
     >;
+    enumerateFloatValues: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof EnumerateFloatValues>> & MeshProps,
+            {
+                data: Parameters<typeof EnumerateFloatValues>[0];
+                byteOffset: Parameters<typeof EnumerateFloatValues>[1];
+                byteStride: Parameters<typeof EnumerateFloatValues>[2];
+                componentCount: Parameters<typeof EnumerateFloatValues>[3];
+                componentType: Parameters<typeof EnumerateFloatValues>[4];
+                count: Parameters<typeof EnumerateFloatValues>[5];
+                normalized: Parameters<typeof EnumerateFloatValues>[6];
+                callback: Parameters<typeof EnumerateFloatValues>[7];
+            },
+            ReturnType<typeof EnumerateFloatValues>
+        >,
+        any
+    >;
     environmentHelper: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<EnvironmentHelper>,
@@ -4594,6 +4641,7 @@ export interface JSXElements {
                 onReloadCallback: ConstructorParameters<typeof FilesInput>[7];
                 errorCallback: ConstructorParameters<typeof FilesInput>[8];
                 useAppend: ConstructorParameters<typeof FilesInput>[9];
+                dontInjectRenderLoop: ConstructorParameters<typeof FilesInput>[10];
             },
             FilesInput
         >,
@@ -5924,6 +5972,10 @@ export interface JSXElements {
         >,
         any
     >;
+    frameGraphCascadedShadowGeneratorTask: React.DetailedHTMLProps<
+        BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphCascadedShadowGeneratorTask>, {}, FrameGraphCascadedShadowGeneratorTask>,
+        any
+    >;
     frameGraphCircleOfConfusionTask: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FrameGraphCircleOfConfusionTask>,
@@ -5970,6 +6022,19 @@ export interface JSXElements {
         >,
         any
     >;
+    frameGraphCullPass: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphCullPass>,
+            {
+                name: ConstructorParameters<typeof FrameGraphCullPass>[0];
+                parentTask: ConstructorParameters<typeof FrameGraphCullPass>[1];
+                context: ConstructorParameters<typeof FrameGraphCullPass>[2];
+                engine: ConstructorParameters<typeof FrameGraphCullPass>[3];
+            },
+            FrameGraphCullPass
+        >,
+        any
+    >;
     frameGraphDepthOfFieldTask: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FrameGraphDepthOfFieldTask>,
@@ -5984,6 +6049,17 @@ export interface JSXElements {
         >,
         any
     >;
+    frameGraphExecuteTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphExecuteTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphExecuteTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphExecuteTask>[1];
+            },
+            FrameGraphExecuteTask
+        >,
+        any
+    >;
     frameGraphExtractHighlightsTask: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FrameGraphExtractHighlightsTask>,
@@ -5993,6 +6069,17 @@ export interface JSXElements {
                 thinPostProcess: ConstructorParameters<typeof FrameGraphExtractHighlightsTask>[2];
             },
             FrameGraphExtractHighlightsTask
+        >,
+        any
+    >;
+    frameGraphGenerateMipMapsTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphGenerateMipMapsTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphGenerateMipMapsTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphGenerateMipMapsTask>[1];
+            },
+            FrameGraphGenerateMipMapsTask
         >,
         any
     >;
@@ -6081,6 +6168,18 @@ export interface JSXElements {
                 renderTargetDepth: ConstructorParameters<typeof FrameGraphRenderTarget>[3];
             },
             FrameGraphRenderTarget
+        >,
+        any
+    >;
+    frameGraphShadowGeneratorTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphShadowGeneratorTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphShadowGeneratorTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphShadowGeneratorTask>[1];
+                scene: ConstructorParameters<typeof FrameGraphShadowGeneratorTask>[2];
+            },
+            FrameGraphShadowGeneratorTask
         >,
         any
     >;
@@ -6786,6 +6885,23 @@ export interface JSXElements {
         >,
         any
     >;
+    getFloatData: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetFloatData>> & MeshProps,
+            {
+                data: Parameters<typeof GetFloatData>[0];
+                size: Parameters<typeof GetFloatData>[1];
+                type: Parameters<typeof GetFloatData>[2];
+                byteOffset: Parameters<typeof GetFloatData>[3];
+                byteStride: Parameters<typeof GetFloatData>[4];
+                normalized: Parameters<typeof GetFloatData>[5];
+                totalVertices: Parameters<typeof GetFloatData>[6];
+                forceCopy: Parameters<typeof GetFloatData>[7];
+            },
+            ReturnType<typeof GetFloatData>
+        >,
+        any
+    >;
     getFogState: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof GetFogState>> & MeshProps,
@@ -6914,6 +7030,16 @@ export interface JSXElements {
                 res: Parameters<typeof GetTransformedPosition>[2];
             },
             ReturnType<typeof GetTransformedPosition>
+        >,
+        any
+    >;
+    getTypeByteLength: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetTypeByteLength>> & MeshProps,
+            {
+                type: Parameters<typeof GetTypeByteLength>[0];
+            },
+            ReturnType<typeof GetTypeByteLength>
         >,
         any
     >;
@@ -7310,6 +7436,26 @@ export interface JSXElements {
                 nRaw: Parameters<typeof HufUncompress>[5];
             },
             ReturnType<typeof HufUncompress>
+        >,
+        any
+    >;
+    iblCdfGenerator: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<IblCdfGenerator>,
+            {
+                scene: ConstructorParameters<typeof IblCdfGenerator>[0];
+            },
+            IblCdfGenerator
+        >,
+        any
+    >;
+    iblCdfGeneratorSceneComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<IblCdfGeneratorSceneComponent>,
+            {
+                scene: ConstructorParameters<typeof IblCdfGeneratorSceneComponent>[0];
+            },
+            IblCdfGeneratorSceneComponent
         >,
         any
     >;
@@ -7863,6 +8009,16 @@ export interface JSXElements {
         >,
         any
     >;
+    loadIESData: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof LoadIESData>> & MeshProps,
+            {
+                uint8Array: Parameters<typeof LoadIESData>[0];
+            },
+            ReturnType<typeof LoadIESData>
+        >,
+        any
+    >;
     loadImage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadImage>> & MeshProps, {}, ReturnType<typeof LoadImage>>, any>;
     loadTextureFromTranscodeResult: React.DetailedHTMLProps<
         BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadTextureFromTranscodeResult>> & MeshProps, {}, ReturnType<typeof LoadTextureFromTranscodeResult>>,
@@ -8006,6 +8162,16 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof MatrixDeterminantBlock>[0];
             },
             MatrixDeterminantBlock
+        >,
+        any
+    >;
+    matrixSplitterBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MatrixSplitterBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof MatrixSplitterBlock>[0];
+            },
+            MatrixSplitterBlock
         >,
         any
     >;
@@ -8588,6 +8754,18 @@ export interface JSXElements {
         any
     >;
     nodeRenderGraphBuildState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphBuildState>, {}, NodeRenderGraphBuildState>, any>;
+    nodeRenderGraphCascadedShadowGeneratorBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphCascadedShadowGeneratorBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphCascadedShadowGeneratorBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphCascadedShadowGeneratorBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphCascadedShadowGeneratorBlock>[2];
+            },
+            NodeRenderGraphCascadedShadowGeneratorBlock
+        >,
+        any
+    >;
     nodeRenderGraphCircleOfConfusionPostProcessBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NodeRenderGraphCircleOfConfusionPostProcessBlock> & Clonable,
@@ -8674,6 +8852,18 @@ export interface JSXElements {
         >,
         any
     >;
+    nodeRenderGraphExecuteBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphExecuteBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphExecuteBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphExecuteBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphExecuteBlock>[2];
+            },
+            NodeRenderGraphExecuteBlock
+        >,
+        any
+    >;
     nodeRenderGraphExtractHighlightsPostProcessBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NodeRenderGraphExtractHighlightsPostProcessBlock> & Clonable,
@@ -8746,6 +8936,30 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof NodeRenderGraphOutputBlock>[2];
             },
             NodeRenderGraphOutputBlock
+        >,
+        any
+    >;
+    nodeRenderGraphResourceContainerBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphResourceContainerBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphResourceContainerBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphResourceContainerBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphResourceContainerBlock>[2];
+            },
+            NodeRenderGraphResourceContainerBlock
+        >,
+        any
+    >;
+    nodeRenderGraphShadowGeneratorBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphShadowGeneratorBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphShadowGeneratorBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphShadowGeneratorBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphShadowGeneratorBlock>[2];
+            },
+            NodeRenderGraphShadowGeneratorBlock
         >,
         any
     >;
@@ -9411,6 +9625,18 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof PhysicsBody>[3];
             },
             PhysicsBody
+        >,
+        any
+    >;
+    physicsCharacterController: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PhysicsCharacterController>,
+            {
+                position: ConstructorParameters<typeof PhysicsCharacterController>[0];
+                characterShapeOptions: ConstructorParameters<typeof PhysicsCharacterController>[1];
+                scene: ConstructorParameters<typeof PhysicsCharacterController>[2];
+            },
+            PhysicsCharacterController
         >,
         any
     >;
@@ -10297,6 +10523,7 @@ export interface JSXElements {
                 projectedLightTexture: Parameters<typeof PrepareUniformsAndSamplersForLight>[3];
                 uniformBuffersList: Parameters<typeof PrepareUniformsAndSamplersForLight>[4];
                 updateOnlyBuffersList: Parameters<typeof PrepareUniformsAndSamplersForLight>[5];
+                iesLightTexture: Parameters<typeof PrepareUniformsAndSamplersForLight>[6];
             },
             ReturnType<typeof PrepareUniformsAndSamplersForLight>
         >,
@@ -13772,6 +13999,7 @@ export interface JSXElements {
         any
     >;
     _HDRTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_HDRTextureLoader>, {}, _HDRTextureLoader>, any>;
+    _IESTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_IESTextureLoader>, {}, _IESTextureLoader>, any>;
     _InstancesBatch: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_InstancesBatch>, {}, _InstancesBatch>, any>;
     _KTXTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_KTXTextureLoader>, {}, _KTXTextureLoader>, any>;
     _MeshCollisionData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_MeshCollisionData>, {}, _MeshCollisionData>, any>;
@@ -13955,6 +14183,16 @@ export interface JSXElements {
                 yieldAfterMS: Parameters<typeof createYieldingScheduler>[0];
             },
             ReturnType<typeof createYieldingScheduler>
+        >,
+        any
+    >;
+    deepMerge: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof deepMerge>> & MeshProps,
+            {
+                objects: Parameters<typeof deepMerge>[0];
+            },
+            ReturnType<typeof deepMerge>
         >,
         any
     >;
