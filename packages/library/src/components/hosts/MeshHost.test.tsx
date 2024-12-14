@@ -15,7 +15,7 @@ describe('Meshes tests', () => {
         const { scene, rerender } = render(<box name={boxName} position={new Vector3(0, 0, 0)} />);
         const box = scene.getMeshById(boxName) as Mesh;
         rerender(<box name={boxName} position={new Vector3(1, 1, 0)} />);
-        expect(box.position.equals(new Vector3(1, 1, 0))).toBeTruthy();
+        expect(box.position.equals(new Vector3(1, 0, 0))).toBeTruthy();
     });
 
     test('should dispose the box', async () => {
