@@ -13,9 +13,9 @@ export default {
   },
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   transform: {
-    "^.+.tsx?$": ["ts-jest", { 
+    "^.+.tsx?$": ["ts-jest", {
       //tsconfig: './tsconfig.json',
       useESM: true
-     }],
+    }],
   },
 };
