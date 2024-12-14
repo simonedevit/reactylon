@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.0.7](https://github.com/simonedevit/reactylon/compare/v1.0.6...v1.0.7) (2024-12-14)
+
+
+### Chore
+
+* **general:** generate new declarations + lock react and react-dom to ^18 ([bbd3d0d](https://github.com/simonedevit/reactylon/commit/bbd3d0d105bae8c3f5d42bb46dfa9f1371527ff6))
+
 ## [1.0.6](https://github.com/simonedevit/reactylon/compare/v1.0.5...v1.0.6) (2024-12-14)
 
 
