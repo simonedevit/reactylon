@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.0.8](https://github.com/simonedevit/reactylon/compare/v1.0.7...v1.0.8) (2024-12-15)
+
+
+### Chore
+
+* **general:** fix context prop on native engine ([a384f75](https://github.com/simonedevit/reactylon/commit/a384f75341cac3219df0ee0ade5e0d650a322f46))
+
 ## [1.0.7](https://github.com/simonedevit/reactylon/compare/v1.0.6...v1.0.7) (2024-12-14)
 
 
