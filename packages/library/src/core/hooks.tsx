@@ -3,6 +3,7 @@ import { type Nullable, Engine, Scene, WebXRDefaultExperience } from '@babylonjs
 
 export type EngineContextType = {
     engine: Nullable<Engine>;
+    isMultipleCanvas: boolean;
     isMultipleScene: boolean;
 };
 
@@ -15,6 +16,7 @@ export type SceneContextType = EngineContextType & {
 
 export const SceneContext = createContext<SceneContextType>({
     engine: null,
+    isMultipleCanvas: false,
     isMultipleScene: false,
     scene: null,
     canvas: null,

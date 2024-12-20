@@ -18,7 +18,7 @@
 
 <br />
 
-Welcome to **Reactylon**, a powerful and intuitive rendering library built on top of Babylon.js, designed to simplify 3D development within React. This library allows developers to create full immersive experience in a declarative way, unlocking the full potential of React’s component-based architecture for interactive 3D applications.
+Welcome to **Reactylon**, a powerful multiplatform framework built on top of Babylon.js and React, designed to create interactive and immersive XR experiences. It allows developers to create full immersive experience in a declarative way, unlocking the full potential of React’s component-based architecture for interactive 3D applications.
 
 ## Key Features
 - **Declarative Syntax for Babylon.js**: Write 3D scenes in JSX, leveraging the power of declarative UI that React developers love, with seamless integration into the Babylon.js rendering engine.

@@ -7,6 +7,7 @@ import { Logger } from '@dvmstudios/reactylon-common';
 
 export type EngineProps = React.PropsWithChildren<{
     antialias?: boolean;
+    isMultipleCanvas?: boolean;
     engineOptions?: EngineOptions;
     adaptToDeviceRatio?: boolean;
     loader?: React.FC;
@@ -24,7 +25,16 @@ export type EngineProps = React.PropsWithChildren<{
 
 export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void;
 
-export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptToDeviceRatio, loader, canvasId = 'reactylon-canvas', _nullEngineOptions, ...rest }) => {
+export const Engine: React.FC<EngineProps> = ({
+    antialias,
+    engineOptions,
+    adaptToDeviceRatio,
+    loader,
+    canvasId = 'reactylon-canvas',
+    _nullEngineOptions,
+    isMultipleCanvas,
+    ...rest
+}) => {
     const [context, setContext] = useState<EngineContextType | null>(null);
     const engineRef = useRef<{
         engine: BabylonEngine;
@@ -39,18 +49,20 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
     useEffect(() => {
         async function initializeScene() {
             let canvas = null;
-            if (!isMultipleScene) {
+            if (!isMultipleCanvas) {
                 canvas = canvasRef.current;
             } else {
-                React.Children.forEach(rest.children, child => {
-                    if (React.isValidElement(child)) {
-                        if (!child.props.canvas) {
-                            Logger.error(
-                                `Engine - initializeScene - Each Scene component requires a corresponding canvas element. Ensure that you provide one canvas for every Scene you are using.`,
-                            );
+                if (isMultipleScene) {
+                    React.Children.forEach(rest.children, child => {
+                        if (React.isValidElement(child)) {
+                            if (!child.props.canvas) {
+                                Logger.error(
+                                    `Engine - initializeScene - Each Scene component requires a corresponding canvas element. Ensure that you provide one canvas for every Scene you are using.`,
+                                );
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 // fake canvas to work with multiple scenes (Babylon.js constraint)
                 canvas = document.createElement('canvas');
             }
@@ -81,7 +93,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
             engineRef.current.onResizeWindow = () => engine.resize();
             window.addEventListener('resize', engineRef.current.onResizeWindow);
 
-            setContext({ engine, isMultipleScene });
+            setContext({ engine, isMultipleCanvas: !!isMultipleCanvas, isMultipleScene });
         }
         initializeScene();
 
@@ -95,7 +107,7 @@ export const Engine: React.FC<EngineProps> = ({ antialias, engineOptions, adaptT
 
     return (
         <>
-            {!isMultipleScene ? <canvas id={canvasId} ref={canvasRef} /> : null}
+            {!isMultipleCanvas ? <canvas id={canvasId} ref={canvasRef} /> : null}
             {context ? (
                 <FiberProvider>
                     {React.Children.map(rest.children, (child: any) => {

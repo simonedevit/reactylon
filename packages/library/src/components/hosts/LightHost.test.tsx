@@ -1,4 +1,4 @@
-import { Color3, DirectionalLight, HemisphericLight, PointLight, Vector3 } from '@babylonjs/core';
+import { DirectionalLight, HemisphericLight, PointLight, Vector3 } from '@babylonjs/core';
 import { render } from '@utils/TestUtils';
 
 const lightName = 'light';

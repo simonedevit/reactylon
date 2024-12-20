@@ -19,6 +19,7 @@ export const NativeEngine: React.FC<NativeEngineProps> = ({ children, camera }) 
                         return React.cloneElement(child, {
                             _context: {
                                 engine,
+                                isMultipleCanvas: false,
                                 isMultipleScene: false,
                             },
                         });

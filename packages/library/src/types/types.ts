@@ -77,6 +77,7 @@ export type RootContainer = {
     engine: Engine;
     scene: Scene;
     canvas: HTMLCanvasElement;
+    isMultipleCanvas: boolean;
     isMultipleScene: boolean;
     xrExperience: Nullable<WebXRDefaultExperience>;
     metadata: {

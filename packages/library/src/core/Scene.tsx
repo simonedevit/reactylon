@@ -31,7 +31,7 @@ type SceneProps = React.PropsWithChildren<{
 export let activeScene: BabylonScene | null = null;
 
 export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }) => {
-    const { engine, isMultipleScene } = _context as EngineContextType;
+    const { engine, isMultipleCanvas, isMultipleScene } = _context as EngineContextType;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
     const isFirstRender = useRef(false);
 
@@ -75,33 +75,38 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     xrExperience = await scene.createDefaultXRExperienceAsync(xrDefaultExperienceOptions);
                 }
 
-                if (isMultipleScene) {
-                    // consumer is using scene.createDefaultCamera
-                    if (scene.activeCamera) {
-                        engine.registerView(canvas, scene.activeCamera as Camera);
-                    }
-
-                    scene.detachControl();
-
-                    scene.onNewCameraAddedObservable.add(camera => {
-                        // HACK: ensure that camera.dispose() is invoked on old camera before to unregister and register new canvas and camera
-                        setTimeout(() => {
-                            const view = (engine.views || []).find(view => view.target === canvas);
-                            if (view) {
-                                engine.unRegisterView(canvas);
-                            }
-                            engine.registerView(canvas, camera);
-                        }, 0);
-                    });
-
-                    canvas.onclick = () => {
-                        if (activeScene !== scene) {
-                            activeScene?.detachControl();
-                            engine.inputElement = canvas;
-                            scene.attachControl();
-                            activeScene = scene;
+                if (isMultipleCanvas) {
+                    if (isMultipleScene) {
+                        // consumer is using scene.createDefaultCamera
+                        if (scene.activeCamera) {
+                            engine.registerView(canvas, scene.activeCamera as Camera);
                         }
-                    };
+
+                        scene.detachControl();
+
+                        scene.onNewCameraAddedObservable.add(camera => {
+                            // HACK: ensure that camera.dispose() is invoked on old camera before to unregister and register new canvas and camera
+                            setTimeout(() => {
+                                const view = (engine.views || []).find(view => view.target === canvas);
+                                if (view) {
+                                    engine.unRegisterView(canvas);
+                                }
+                                engine.registerView(canvas, camera);
+                            }, 0);
+                        });
+
+                        canvas.onclick = () => {
+                            if (activeScene !== scene) {
+                                activeScene?.detachControl();
+                                engine.inputElement = canvas;
+                                scene.attachControl();
+                                activeScene = scene;
+                            }
+                        };
+                    } else {
+                        //TODO: implement logic for multiple canvases but single scene (for each camera -> engine.registerView(canvas, camera))
+                        //need linking camera and canvas (what about creating a new prop called "canvas" for camera elements?)
+                    }
                 }
 
                 /* --------------------------------------------------------------------------------------- */
@@ -111,6 +116,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     engine,
                     scene,
                     canvas,
+                    isMultipleCanvas,
                     isMultipleScene,
                     xrExperience,
                     metadata: {
@@ -121,7 +127,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 // Renders children with bridged context into a secondary renderer
                 Reactylon.render(
                     <Bridge>
-                        <SceneContext.Provider value={{ engine, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
+                        <SceneContext.Provider value={{ engine, isMultipleCanvas, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
                     </Bridge>,
                     rootContainer.current!,
                 );
@@ -143,7 +149,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 // Renders children with bridged context into a secondary renderer
                 Reactylon.render(
                     <Bridge>
-                        <SceneContext.Provider value={{ engine, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
+                        <SceneContext.Provider value={{ engine, isMultipleCanvas, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
                     </Bridge>,
                     rootContainer.current!,
                 );
