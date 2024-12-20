@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.0.9](https://github.com/simonedevit/reactylon/compare/v1.0.8...v1.0.9) (2024-12-20)
+
+
+### Bug Fixes
+
+* **general:** add isMultipleCanvas prop to handle multiple canvases ([7933ac5](https://github.com/simonedevit/reactylon/commit/7933ac5cfc148a7f6cc19540c5d9978e78f35e35))
+
 ## [1.0.8](https://github.com/simonedevit/reactylon/compare/v1.0.7...v1.0.8) (2024-12-15)
 
 
