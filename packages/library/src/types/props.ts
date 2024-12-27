@@ -121,6 +121,11 @@ export type AdvancedDynamicTextureProps = Either<CreateFullscreeUIOptions, Creat
 
 export type LightProps = Clonable;
 
+export type CameraProps = {
+    // only for multiple canvas and single scene
+    canvas?: HTMLCanvasElement;
+}
+
 export type WebXRCameraProps = {
     // not from XR default experience helper
     isManual?: boolean;

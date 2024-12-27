@@ -1,7 +1,7 @@
 import { parse } from 'acorn';
+import * as BabylonCore from '@babylonjs/core';
 
-//TODO: move it in a separate file (pay attention to module resolution due to "nodeNext")
-
+//TODO: move Logger in a separate file (pay attention to module resolution)
 export class Logger {
     static prefix: string = '[Reactylon]';
 
@@ -148,6 +148,27 @@ export enum BabylonPackages {
     'GUI',
 }
 
-export const CustomProps: Record<string, string> = {
+// specific properties of a single component
+export const AdditionalProps: Record<string, string> = {
     webXRCamera: ` & WebXRCameraProps`,
 };
+
+// specific properties for a category of components
+export function getAdditionalProps(jsxElementName: string, Class: any){
+    if (jsxElementName in AdditionalProps){
+        return AdditionalProps[jsxElementName];
+    }
+    //@ts-ignore - build phase - Property 'Material' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
+    if (Class.prototype instanceof BabylonCore.Material){
+        return ` & MaterialProps`;
+    }
+    //@ts-ignore - build phase - Property 'BaseTexture' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
+    if (Class.prototype instanceof BabylonCore.BaseTexture){
+        return ` & TextureProps`;
+    }
+    //@ts-ignore - build phase - Property 'Camera' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
+    if (Class.prototype instanceof BabylonCore.Camera){
+        return ` & CameraProps`;
+    }
+    return '';
+}

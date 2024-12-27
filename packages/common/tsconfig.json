@@ -4,8 +4,8 @@
         "outDir": "./build",
         "target": "es2019",
         "isolatedModules": false,
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
+        "module": "ESNext",
+        "moduleResolution": "Node",
         "declaration": false,
         "declarationDir": null
     },
