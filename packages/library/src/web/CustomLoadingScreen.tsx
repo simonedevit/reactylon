@@ -13,6 +13,7 @@ class CustomLoadingScreen implements ILoadingScreen {
      * @param renderingCanvas defines the canvas used to render the scene
      */
     constructor(renderingCanvas: HTMLCanvasElement, Loader: React.FC) {
+        this._resizeLoadingUI = this._resizeLoadingUI.bind(this);
         this._renderingCanvas = renderingCanvas;
         /* if (this._loadingDiv) {
             // Do not add a loading screen if there is already one
@@ -34,8 +35,10 @@ class CustomLoadingScreen implements ILoadingScreen {
             return;
         }
         this._loadingDiv.style.position = canvasPositioning === 'fixed' ? 'fixed' : 'absolute';
-        this._loadingDiv.style.left = canvasRect.left + 'px';
-        this._loadingDiv.style.top = canvasRect.top + 'px';
+        const scrollLeft = document.documentElement.scrollLeft;
+        const scrollTop = document.documentElement.scrollTop;
+        this._loadingDiv.style.left = canvasRect.left + scrollLeft + 'px';
+        this._loadingDiv.style.top = canvasRect.top + scrollTop + 'px';
         this._loadingDiv.style.width = canvasRect.width + 'px';
         this._loadingDiv.style.height = canvasRect.height + 'px';
     }
@@ -52,7 +55,7 @@ class CustomLoadingScreen implements ILoadingScreen {
     /**
      * Function called to hide the loading screen
      */
-    public hideLoadingUI() {
+    hideLoadingUI() {
         window.removeEventListener('resize', this._resizeLoadingUI);
         this._loadingDiv.style.display = 'none';
     }
