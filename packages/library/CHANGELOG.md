@@ -1,5 +1,25 @@
 # Reactylon - Changelog
 
+## [1.1.0](https://github.com/simonedevit/reactylon/compare/v1.0.9...v1.1.0) (2024-12-27)
+
+
+### Chore
+
+* **general:** generate new declarations ([68cb7b5](https://github.com/simonedevit/reactylon/commit/68cb7b5aa3eb3718c37c465f3b92179ef6cb0e7c))
+* **general:** remove props from metadata to avoid infinite loop ([b150279](https://github.com/simonedevit/reactylon/commit/b1502794db0615616624c35591e2a3f3f315f0a8))
+* **general:** centralize additional props generation ([bb7d775](https://github.com/simonedevit/reactylon/commit/bb7d775c112ca6cb54dfcb250dca5f3f0ab8f73b))
+
+
+### Features
+
+* **components:** multiple canvas with single scene [#6](https://github.com/simonedevit/reactylon/issues/6) ([eb91058](https://github.com/simonedevit/reactylon/commit/eb91058d15a4435628038e8e8dad90913cabe55f))
+
+
+### Bug Fixes
+
+* **components:** prevent loader misalignment with active scrollbar [#6](https://github.com/simonedevit/reactylon/issues/6) ([86b0198](https://github.com/simonedevit/reactylon/commit/86b0198e5f0d102f4af947611f29d792d84d1cda))
+* **general:** pass default canvas into context ([1dccd40](https://github.com/simonedevit/reactylon/commit/1dccd40fe2df853fe26a10352b4139931a79a717))
+
 ## [1.0.9](https://github.com/simonedevit/reactylon/compare/v1.0.8...v1.0.9) (2024-12-20)
 
 
