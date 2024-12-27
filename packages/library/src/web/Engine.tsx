@@ -111,7 +111,7 @@ export const Engine: React.FC<EngineProps> = ({
             {context ? (
                 <FiberProvider>
                     {React.Children.map(rest.children, (child: any) => {
-                        return React.cloneElement(child, { _context: context });
+                        return React.cloneElement(child, { _context: context, canvas: child.props.canvas || canvasRef.current });
                     })}
                 </FiberProvider>
             ) : null}
