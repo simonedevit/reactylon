@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from '../types/types';
-import { type MeshProps, type GuiProps, type Clonable, type WebXRCameraProps } from '../types/props';
+import { type MeshProps, type GuiProps, type Clonable, type WebXRCameraProps, type TextureProps, type MaterialProps, type CameraProps } from '../types/props';
 import { AbstractActionManager } from '@babylonjs/core';
 import { AbstractAssetContainer } from '@babylonjs/core';
 import { AbstractAssetTask } from '@babylonjs/core';
@@ -82,6 +82,7 @@ import { BindLogDepth } from '@babylonjs/core';
 import { BindMorphTargetParameters } from '@babylonjs/core';
 import { BindSceneUniformBuffer } from '@babylonjs/core';
 import { BindTextureMatrix } from '@babylonjs/core';
+import { BitArray } from '@babylonjs/core';
 import { BlackAndWhitePostProcess } from '@babylonjs/core';
 import { BloomEffect } from '@babylonjs/core';
 import { BloomMergePostProcess } from '@babylonjs/core';
@@ -274,6 +275,7 @@ import { DivideBlock } from '@babylonjs/core';
 import { DoNothingAction } from '@babylonjs/core';
 import { DotBlock } from '@babylonjs/core';
 import { DracoCompression } from '@babylonjs/core';
+import { DracoDecoder } from '@babylonjs/core';
 import { DrawWrapper } from '@babylonjs/core';
 import { DualShockPad } from '@babylonjs/core';
 import { DynamicFloat32Array } from '@babylonjs/core';
@@ -755,6 +757,7 @@ import { OctreeBlock } from '@babylonjs/core';
 import { OctreeSceneComponent } from '@babylonjs/core';
 import { OimoJSPlugin } from '@babylonjs/core';
 import { OneMinusBlock } from '@babylonjs/core';
+import { OptimizeIndices } from '@babylonjs/core';
 import { OutlineRenderer } from '@babylonjs/core';
 import { PBRAnisotropicConfiguration } from '@babylonjs/core';
 import { PBRBaseMaterial } from '@babylonjs/core';
@@ -1450,7 +1453,7 @@ export interface JSXElements {
                 target: ConstructorParameters<typeof AnaglyphArcRotateCamera>[4];
                 interaxialDistance: ConstructorParameters<typeof AnaglyphArcRotateCamera>[5];
                 scene: ConstructorParameters<typeof AnaglyphArcRotateCamera>[6];
-            },
+            } & CameraProps,
             AnaglyphArcRotateCamera
         >,
         any
@@ -1463,7 +1466,7 @@ export interface JSXElements {
                 position: ConstructorParameters<typeof AnaglyphFreeCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof AnaglyphFreeCamera>[2];
                 scene: ConstructorParameters<typeof AnaglyphFreeCamera>[3];
-            },
+            } & CameraProps,
             AnaglyphFreeCamera
         >,
         any
@@ -1476,7 +1479,7 @@ export interface JSXElements {
                 position: ConstructorParameters<typeof AnaglyphGamepadCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof AnaglyphGamepadCamera>[2];
                 scene: ConstructorParameters<typeof AnaglyphGamepadCamera>[3];
-            },
+            } & CameraProps,
             AnaglyphGamepadCamera
         >,
         any
@@ -1504,7 +1507,7 @@ export interface JSXElements {
                 position: ConstructorParameters<typeof AnaglyphUniversalCamera>[1];
                 interaxialDistance: ConstructorParameters<typeof AnaglyphUniversalCamera>[2];
                 scene: ConstructorParameters<typeof AnaglyphUniversalCamera>[3];
-            },
+            } & CameraProps,
             AnaglyphUniversalCamera
         >,
         any
@@ -1688,7 +1691,7 @@ export interface JSXElements {
                 radius: ConstructorParameters<typeof ArcFollowCamera>[3];
                 target: ConstructorParameters<typeof ArcFollowCamera>[4];
                 scene: ConstructorParameters<typeof ArcFollowCamera>[5];
-            },
+            } & CameraProps,
             ArcFollowCamera
         >,
         any
@@ -1704,7 +1707,7 @@ export interface JSXElements {
                 target: ConstructorParameters<typeof ArcRotateCamera>[4];
                 scene: ConstructorParameters<typeof ArcRotateCamera>[5];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof ArcRotateCamera>[6];
-            },
+            } & CameraProps,
             ArcRotateCamera
         >,
         any
@@ -1893,7 +1896,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof BackgroundMaterial>[0];
                 scene: ConstructorParameters<typeof BackgroundMaterial>[1];
                 forceGLSL: ConstructorParameters<typeof BackgroundMaterial>[2];
-            },
+            } & MaterialProps,
             BackgroundMaterial
         >,
         any
@@ -2089,6 +2092,16 @@ export interface JSXElements {
                 key: Parameters<typeof BindTextureMatrix>[2];
             },
             ReturnType<typeof BindTextureMatrix>
+        >,
+        any
+    >;
+    bitArray: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<BitArray>,
+            {
+                size: ConstructorParameters<typeof BitArray>[0];
+            },
+            BitArray
         >,
         any
     >;
@@ -2634,7 +2647,7 @@ export interface JSXElements {
                 url: ConstructorParameters<typeof ColorGradingTexture>[0];
                 sceneOrEngine: ConstructorParameters<typeof ColorGradingTexture>[1];
                 onLoad: ConstructorParameters<typeof ColorGradingTexture>[2];
-            },
+            } & TextureProps,
             ColorGradingTexture
         >,
         any
@@ -3412,6 +3425,7 @@ export interface JSXElements {
                 mimeType: Parameters<typeof CreateScreenshot>[4];
                 forceDownload: Parameters<typeof CreateScreenshot>[5];
                 quality: Parameters<typeof CreateScreenshot>[6];
+                useFill: Parameters<typeof CreateScreenshot>[7];
             },
             ReturnType<typeof CreateScreenshot>
         >,
@@ -3426,6 +3440,7 @@ export interface JSXElements {
                 size: Parameters<typeof CreateScreenshotAsync>[2];
                 mimeType: Parameters<typeof CreateScreenshotAsync>[3];
                 quality: Parameters<typeof CreateScreenshotAsync>[4];
+                useFill: Parameters<typeof CreateScreenshotAsync>[5];
             },
             ReturnType<typeof CreateScreenshotAsync>
         >,
@@ -3484,6 +3499,7 @@ export interface JSXElements {
                 height: Parameters<typeof CreateScreenshotWithResizeAsync>[3];
                 mimeType: Parameters<typeof CreateScreenshotWithResizeAsync>[4];
                 quality: Parameters<typeof CreateScreenshotWithResizeAsync>[5];
+                useFill: Parameters<typeof CreateScreenshotWithResizeAsync>[6];
             },
             ReturnType<typeof CreateScreenshotWithResizeAsync>
         >,
@@ -3700,7 +3716,7 @@ export interface JSXElements {
                 lodOffset: ConstructorParameters<typeof CubeTexture>[12];
                 loaderOptions: ConstructorParameters<typeof CubeTexture>[13];
                 useSRGBBuffer: ConstructorParameters<typeof CubeTexture>[14];
-            },
+            } & TextureProps,
             CubeTexture
         >,
         any
@@ -3772,7 +3788,7 @@ export interface JSXElements {
                 fallbackTexture: ConstructorParameters<typeof CustomProceduralTexture>[4];
                 generateMipMaps: ConstructorParameters<typeof CustomProceduralTexture>[5];
                 skipJson: ConstructorParameters<typeof CustomProceduralTexture>[6];
-            },
+            } & TextureProps,
             CustomProceduralTexture
         >,
         any
@@ -4118,7 +4134,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof DeviceOrientationCamera>[0];
                 position: ConstructorParameters<typeof DeviceOrientationCamera>[1];
                 scene: ConstructorParameters<typeof DeviceOrientationCamera>[2];
-            },
+            } & CameraProps,
             DeviceOrientationCamera
         >,
         any
@@ -4269,9 +4285,19 @@ export interface JSXElements {
         BabylonProps<
             ExcludeReadonlyAndPrivate<DracoCompression>,
             {
-                numWorkers: ConstructorParameters<typeof DracoCompression>[0];
+                numWorkersOrOptions: ConstructorParameters<typeof DracoCompression>[0];
             },
             DracoCompression
+        >,
+        any
+    >;
+    dracoDecoder: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DracoDecoder>,
+            {
+                configuration: ConstructorParameters<typeof DracoDecoder>[0];
+            },
+            DracoDecoder
         >,
         any
     >;
@@ -4319,7 +4345,7 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof DynamicTexture>[4];
                 format: ConstructorParameters<typeof DynamicTexture>[5];
                 invertY: ConstructorParameters<typeof DynamicTexture>[6];
-            },
+            } & TextureProps,
             DynamicTexture
         >,
         any
@@ -4494,7 +4520,7 @@ export interface JSXElements {
                 onLoad: ConstructorParameters<typeof EquiRectangularCubeTexture>[5];
                 onError: ConstructorParameters<typeof EquiRectangularCubeTexture>[6];
                 supersample: ConstructorParameters<typeof EquiRectangularCubeTexture>[7];
-            },
+            } & TextureProps,
             EquiRectangularCubeTexture
         >,
         any
@@ -5835,7 +5861,7 @@ export interface JSXElements {
                 position: ConstructorParameters<typeof FlyCamera>[1];
                 scene: ConstructorParameters<typeof FlyCamera>[2];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof FlyCamera>[3];
-            },
+            } & CameraProps,
             FlyCamera
         >,
         any
@@ -5871,7 +5897,7 @@ export interface JSXElements {
                 position: ConstructorParameters<typeof FollowCamera>[1];
                 scene: ConstructorParameters<typeof FollowCamera>[2];
                 lockedTarget: ConstructorParameters<typeof FollowCamera>[3];
-            },
+            } & CameraProps,
             FollowCamera
         >,
         any
@@ -6228,7 +6254,7 @@ export interface JSXElements {
                 position: ConstructorParameters<typeof FreeCamera>[1];
                 scene: ConstructorParameters<typeof FreeCamera>[2];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof FreeCamera>[3];
-            },
+            } & CameraProps,
             FreeCamera
         >,
         any
@@ -6395,7 +6421,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof GamepadCamera>[0];
                 position: ConstructorParameters<typeof GamepadCamera>[1];
                 scene: ConstructorParameters<typeof GamepadCamera>[2];
-            },
+            } & CameraProps,
             GamepadCamera
         >,
         any
@@ -6446,7 +6472,7 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof GaussianSplattingMaterial>[0];
                 scene: ConstructorParameters<typeof GaussianSplattingMaterial>[1];
-            },
+            } & MaterialProps,
             GaussianSplattingMaterial
         >,
         any
@@ -7183,7 +7209,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof GreasedLineSimpleMaterial>[0];
                 scene: ConstructorParameters<typeof GreasedLineSimpleMaterial>[1];
                 options: ConstructorParameters<typeof GreasedLineSimpleMaterial>[2];
-            },
+            } & MaterialProps,
             GreasedLineSimpleMaterial
         >,
         any
@@ -7223,7 +7249,7 @@ export interface JSXElements {
                 onLoad: ConstructorParameters<typeof HDRCubeTexture>[7];
                 onError: ConstructorParameters<typeof HDRCubeTexture>[8];
                 supersample: ConstructorParameters<typeof HDRCubeTexture>[9];
-            },
+            } & TextureProps,
             HDRCubeTexture
         >,
         any
@@ -7419,7 +7445,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof HtmlElementTexture>[0];
                 element: ConstructorParameters<typeof HtmlElementTexture>[1];
                 options: ConstructorParameters<typeof HtmlElementTexture>[2];
-            },
+            } & TextureProps,
             HtmlElementTexture
         >,
         any
@@ -8342,7 +8368,7 @@ export interface JSXElements {
                 type: ConstructorParameters<typeof MirrorTexture>[4];
                 samplingMode: ConstructorParameters<typeof MirrorTexture>[5];
                 generateDepthBuffer: ConstructorParameters<typeof MirrorTexture>[6];
-            },
+            } & TextureProps,
             MirrorTexture
         >,
         any
@@ -8443,7 +8469,7 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof MultiMaterial>[0];
                 scene: ConstructorParameters<typeof MultiMaterial>[1];
-            },
+            } & MaterialProps,
             MultiMaterial
         >,
         any
@@ -8487,7 +8513,7 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof MultiRenderTarget>[3];
                 options: ConstructorParameters<typeof MultiRenderTarget>[4];
                 textureNames: ConstructorParameters<typeof MultiRenderTarget>[5];
-            },
+            } & TextureProps,
             MultiRenderTarget
         >,
         any
@@ -8626,7 +8652,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof NodeMaterial>[0];
                 scene: ConstructorParameters<typeof NodeMaterial>[1];
                 options: ConstructorParameters<typeof NodeMaterial>[2];
-            },
+            } & MaterialProps,
             NodeMaterial
         >,
         any
@@ -9019,7 +9045,7 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof NoiseProceduralTexture>[2];
                 fallbackTexture: ConstructorParameters<typeof NoiseProceduralTexture>[3];
                 generateMipMaps: ConstructorParameters<typeof NoiseProceduralTexture>[4];
-            },
+            } & TextureProps,
             NoiseProceduralTexture
         >,
         any
@@ -9116,7 +9142,7 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof OcclusionMaterial>[0];
                 scene: ConstructorParameters<typeof OcclusionMaterial>[1];
-            },
+            } & MaterialProps,
             OcclusionMaterial
         >,
         any
@@ -9180,6 +9206,16 @@ export interface JSXElements {
         >,
         any
     >;
+    optimizeIndices: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof OptimizeIndices>> & MeshProps,
+            {
+                indices: Parameters<typeof OptimizeIndices>[0];
+            },
+            ReturnType<typeof OptimizeIndices>
+        >,
+        any
+    >;
     outlineRenderer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<OutlineRenderer>,
@@ -9208,7 +9244,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof PBRBaseMaterial>[0];
                 scene: ConstructorParameters<typeof PBRBaseMaterial>[1];
                 forceGLSL: ConstructorParameters<typeof PBRBaseMaterial>[2];
-            },
+            } & MaterialProps,
             PBRBaseMaterial
         >,
         any
@@ -9219,7 +9255,7 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof PBRBaseSimpleMaterial>[0];
                 scene: ConstructorParameters<typeof PBRBaseSimpleMaterial>[1];
-            },
+            } & MaterialProps,
             PBRBaseSimpleMaterial
         >,
         any
@@ -9253,7 +9289,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof PBRMaterial>[0];
                 scene: ConstructorParameters<typeof PBRMaterial>[1];
                 forceGLSL: ConstructorParameters<typeof PBRMaterial>[2];
-            },
+            } & MaterialProps,
             PBRMaterial
         >,
         any
@@ -9284,7 +9320,7 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof PBRMetallicRoughnessMaterial>[0];
                 scene: ConstructorParameters<typeof PBRMetallicRoughnessMaterial>[1];
-            },
+            } & MaterialProps,
             PBRMetallicRoughnessMaterial
         >,
         any
@@ -9306,7 +9342,7 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof PBRSpecularGlossinessMaterial>[0];
                 scene: ConstructorParameters<typeof PBRSpecularGlossinessMaterial>[1];
-            },
+            } & MaterialProps,
             PBRSpecularGlossinessMaterial
         >,
         any
@@ -10578,7 +10614,7 @@ export interface JSXElements {
                 generateMipMaps: ConstructorParameters<typeof ProceduralTexture>[5];
                 isCube: ConstructorParameters<typeof ProceduralTexture>[6];
                 textureType: ConstructorParameters<typeof ProceduralTexture>[7];
-            },
+            } & TextureProps,
             ProceduralTexture
         >,
         any
@@ -10613,7 +10649,7 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof PushMaterial>[1];
                 storeEffectOnSubMeshes: ConstructorParameters<typeof PushMaterial>[2];
                 forceGLSL: ConstructorParameters<typeof PushMaterial>[3];
-            },
+            } & MaterialProps,
             PushMaterial
         >,
         any
@@ -10708,7 +10744,7 @@ export interface JSXElements {
                 invertY: ConstructorParameters<typeof RawCubeTexture>[6];
                 samplingMode: ConstructorParameters<typeof RawCubeTexture>[7];
                 compression: ConstructorParameters<typeof RawCubeTexture>[8];
-            },
+            } & TextureProps,
             RawCubeTexture
         >,
         any
@@ -10728,7 +10764,7 @@ export interface JSXElements {
                 type: ConstructorParameters<typeof RawTexture>[8];
                 creationFlags: ConstructorParameters<typeof RawTexture>[9];
                 useSRGBBuffer: ConstructorParameters<typeof RawTexture>[10];
-            },
+            } & TextureProps,
             RawTexture
         >,
         any
@@ -10748,7 +10784,7 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof RawTexture2DArray>[8];
                 textureType: ConstructorParameters<typeof RawTexture2DArray>[9];
                 creationFlags: ConstructorParameters<typeof RawTexture2DArray>[10];
-            },
+            } & TextureProps,
             RawTexture2DArray
         >,
         any
@@ -10768,7 +10804,7 @@ export interface JSXElements {
                 samplingMode: ConstructorParameters<typeof RawTexture3D>[8];
                 textureType: ConstructorParameters<typeof RawTexture3D>[9];
                 creationFlags: ConstructorParameters<typeof RawTexture3D>[10];
-            },
+            } & TextureProps,
             RawTexture3D
         >,
         any
@@ -10967,7 +11003,7 @@ export interface JSXElements {
                 size: ConstructorParameters<typeof RefractionTexture>[1];
                 scene: ConstructorParameters<typeof RefractionTexture>[2];
                 generateMipMaps: ConstructorParameters<typeof RefractionTexture>[3];
-            },
+            } & TextureProps,
             RefractionTexture
         >,
         any
@@ -11048,7 +11084,7 @@ export interface JSXElements {
                 creationFlags: ConstructorParameters<typeof RenderTargetTexture>[14];
                 noColorAttachment: ConstructorParameters<typeof RenderTargetTexture>[15];
                 useSRGBBuffer: ConstructorParameters<typeof RenderTargetTexture>[16];
-            },
+            } & TextureProps,
             RenderTargetTexture
         >,
         any
@@ -11605,7 +11641,7 @@ export interface JSXElements {
                 shaderPath: ConstructorParameters<typeof ShaderMaterial>[2];
                 options: ConstructorParameters<typeof ShaderMaterial>[3];
                 storeEffectOnSubMeshes: ConstructorParameters<typeof ShaderMaterial>[4];
-            },
+            } & MaterialProps,
             ShaderMaterial
         >,
         any
@@ -12040,7 +12076,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof StandardMaterial>[0];
                 scene: ConstructorParameters<typeof StandardMaterial>[1];
                 forceGLSL: ConstructorParameters<typeof StandardMaterial>[2];
-            },
+            } & MaterialProps,
             StandardMaterial
         >,
         any
@@ -12115,7 +12151,7 @@ export interface JSXElements {
                 interaxialDistance: ConstructorParameters<typeof StereoscopicArcRotateCamera>[5];
                 isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicArcRotateCamera>[6];
                 scene: ConstructorParameters<typeof StereoscopicArcRotateCamera>[7];
-            },
+            } & CameraProps,
             StereoscopicArcRotateCamera
         >,
         any
@@ -12129,7 +12165,7 @@ export interface JSXElements {
                 interaxialDistance: ConstructorParameters<typeof StereoscopicFreeCamera>[2];
                 isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicFreeCamera>[3];
                 scene: ConstructorParameters<typeof StereoscopicFreeCamera>[4];
-            },
+            } & CameraProps,
             StereoscopicFreeCamera
         >,
         any
@@ -12143,7 +12179,7 @@ export interface JSXElements {
                 interaxialDistance: ConstructorParameters<typeof StereoscopicGamepadCamera>[2];
                 isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicGamepadCamera>[3];
                 scene: ConstructorParameters<typeof StereoscopicGamepadCamera>[4];
-            },
+            } & CameraProps,
             StereoscopicGamepadCamera
         >,
         any
@@ -12188,7 +12224,7 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[2];
                 distanceToProjectionPlane: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[3];
                 distanceBetweenEyes: ConstructorParameters<typeof StereoscopicScreenUniversalCamera>[4];
-            },
+            } & CameraProps,
             StereoscopicScreenUniversalCamera
         >,
         any
@@ -12202,7 +12238,7 @@ export interface JSXElements {
                 interaxialDistance: ConstructorParameters<typeof StereoscopicUniversalCamera>[2];
                 isStereoscopicSideBySide: ConstructorParameters<typeof StereoscopicUniversalCamera>[3];
                 scene: ConstructorParameters<typeof StereoscopicUniversalCamera>[4];
-            },
+            } & CameraProps,
             StereoscopicUniversalCamera
         >,
         any
@@ -12379,7 +12415,7 @@ export interface JSXElements {
                 position: ConstructorParameters<typeof TargetCamera>[1];
                 scene: ConstructorParameters<typeof TargetCamera>[2];
                 setActiveOnSceneIfNoneActive: ConstructorParameters<typeof TargetCamera>[3];
-            },
+            } & CameraProps,
             TargetCamera
         >,
         any
@@ -12437,7 +12473,7 @@ export interface JSXElements {
                 loaderOptions: ConstructorParameters<typeof Texture>[11];
                 creationFlags: ConstructorParameters<typeof Texture>[12];
                 forcedExtension: ConstructorParameters<typeof Texture>[13];
-            },
+            } & TextureProps,
             Texture
         >,
         any
@@ -12661,7 +12697,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof TouchCamera>[0];
                 position: ConstructorParameters<typeof TouchCamera>[1];
                 scene: ConstructorParameters<typeof TouchCamera>[2];
-            },
+            } & CameraProps,
             TouchCamera
         >,
         any
@@ -12837,7 +12873,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof UniversalCamera>[0];
                 position: ConstructorParameters<typeof UniversalCamera>[1];
                 scene: ConstructorParameters<typeof UniversalCamera>[2];
-            },
+            } & CameraProps,
             UniversalCamera
         >,
         any
@@ -12926,7 +12962,7 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof VRDeviceOrientationArcRotateCamera>[5];
                 compensateDistortion: ConstructorParameters<typeof VRDeviceOrientationArcRotateCamera>[6];
                 vrCameraMetrics: ConstructorParameters<typeof VRDeviceOrientationArcRotateCamera>[7];
-            },
+            } & CameraProps,
             VRDeviceOrientationArcRotateCamera
         >,
         any
@@ -12940,7 +12976,7 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof VRDeviceOrientationFreeCamera>[2];
                 compensateDistortion: ConstructorParameters<typeof VRDeviceOrientationFreeCamera>[3];
                 vrCameraMetrics: ConstructorParameters<typeof VRDeviceOrientationFreeCamera>[4];
-            },
+            } & CameraProps,
             VRDeviceOrientationFreeCamera
         >,
         any
@@ -12954,7 +12990,7 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof VRDeviceOrientationGamepadCamera>[2];
                 compensateDistortion: ConstructorParameters<typeof VRDeviceOrientationGamepadCamera>[3];
                 vrCameraMetrics: ConstructorParameters<typeof VRDeviceOrientationGamepadCamera>[4];
-            },
+            } & CameraProps,
             VRDeviceOrientationGamepadCamera
         >,
         any
@@ -13178,7 +13214,7 @@ export interface JSXElements {
                 settings: ConstructorParameters<typeof VideoTexture>[6];
                 onError: ConstructorParameters<typeof VideoTexture>[7];
                 format: ConstructorParameters<typeof VideoTexture>[8];
-            },
+            } & TextureProps,
             VideoTexture
         >,
         any
@@ -13224,7 +13260,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof VirtualJoysticksCamera>[0];
                 position: ConstructorParameters<typeof VirtualJoysticksCamera>[1];
                 scene: ConstructorParameters<typeof VirtualJoysticksCamera>[2];
-            },
+            } & CameraProps,
             VirtualJoysticksCamera
         >,
         any
@@ -13942,7 +13978,7 @@ export interface JSXElements {
                 depthStencilTexture: ConstructorParameters<typeof XRSpaceWarpRenderTarget>[1];
                 scene: ConstructorParameters<typeof XRSpaceWarpRenderTarget>[2];
                 size: ConstructorParameters<typeof XRSpaceWarpRenderTarget>[3];
-            },
+            } & TextureProps,
             XRSpaceWarpRenderTarget
         >,
         any

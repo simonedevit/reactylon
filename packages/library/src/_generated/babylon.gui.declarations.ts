@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from '../types/types';
-import { type MeshProps, type GuiProps, type Clonable, type WebXRCameraProps } from '../types/props';
+import { type MeshProps, type GuiProps, type Clonable, type WebXRCameraProps, type TextureProps, type MaterialProps, type CameraProps } from '../types/props';
 import { AbstractButton3D } from '@babylonjs/gui';
 import { AdvancedDynamicTexture } from '@babylonjs/gui';
 import { AdvancedDynamicTextureInstrumentation } from '@babylonjs/gui';
@@ -100,7 +100,8 @@ export interface JSXElements {
                 generateMipMaps: ConstructorParameters<typeof AdvancedDynamicTexture>[4];
                 samplingMode: ConstructorParameters<typeof AdvancedDynamicTexture>[5];
                 invertY: ConstructorParameters<typeof AdvancedDynamicTexture>[6];
-            } & GuiProps,
+            } & GuiProps &
+                TextureProps,
             AdvancedDynamicTexture
         >,
         any
@@ -234,7 +235,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof FluentBackplateMaterial>[0];
                 scene: ConstructorParameters<typeof FluentBackplateMaterial>[1];
-            } & GuiProps,
+            } & GuiProps &
+                MaterialProps,
             FluentBackplateMaterial
         >,
         any
@@ -245,7 +247,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof FluentButtonMaterial>[0];
                 scene: ConstructorParameters<typeof FluentButtonMaterial>[1];
-            } & GuiProps,
+            } & GuiProps &
+                MaterialProps,
             FluentButtonMaterial
         >,
         any
@@ -256,7 +259,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof FluentMaterial>[0];
                 scene: ConstructorParameters<typeof FluentMaterial>[1];
-            } & GuiProps,
+            } & GuiProps &
+                MaterialProps,
             FluentMaterial
         >,
         any
@@ -332,7 +336,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof HandleMaterial>[0];
                 scene: ConstructorParameters<typeof HandleMaterial>[1];
-            } & GuiProps,
+            } & GuiProps &
+                MaterialProps,
             HandleMaterial
         >,
         any
@@ -451,7 +456,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof MRDLBackplateMaterial>[0];
                 scene: ConstructorParameters<typeof MRDLBackplateMaterial>[1];
-            } & GuiProps,
+            } & GuiProps &
+                MaterialProps,
             MRDLBackplateMaterial
         >,
         any
@@ -462,7 +468,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof MRDLSliderBarMaterial>[0];
                 scene: ConstructorParameters<typeof MRDLSliderBarMaterial>[1];
-            } & GuiProps,
+            } & GuiProps &
+                MaterialProps,
             MRDLSliderBarMaterial
         >,
         any
@@ -473,7 +480,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof MRDLSliderThumbMaterial>[0];
                 scene: ConstructorParameters<typeof MRDLSliderThumbMaterial>[1];
-            } & GuiProps,
+            } & GuiProps &
+                MaterialProps,
             MRDLSliderThumbMaterial
         >,
         any
