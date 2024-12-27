@@ -27,7 +27,7 @@ function isParentNeeded(parentInstance: ComponentInstance, child: ComponentInsta
 
 // metadata.children contains the children of current instance, "metadata" attribute will be skipped from
 // deep copy of a mesh (during clone for instance), see more:
-// https://github.com/BabylonJS/Babylon.js/blob/master/packages/dev/core/src/Meshes/mesh.ts#L634
+// https://github.com/BabylonJS/Babylon.js/blob/master/packages/dev/core/src/Meshes/mesh.ts#L578 - _copySource
 
 function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
     // Append the child to the parent element

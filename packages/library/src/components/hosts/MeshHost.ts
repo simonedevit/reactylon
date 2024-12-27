@@ -65,7 +65,7 @@ export class MeshHost {
 
     static addChild(parentInstance: ComponentInstance<Mesh | HighlightLayer>, child: AugmentedMesh): void {
         if (parentInstance instanceof HighlightLayer) {
-            const { highlightLayer } = child.metadata.props;
+            const { highlightLayer } = child;
             if (highlightLayer) {
                 const { color, glowEmissiveOnly } = highlightLayer;
                 parentInstance.addMesh(child, color, glowEmissiveOnly);

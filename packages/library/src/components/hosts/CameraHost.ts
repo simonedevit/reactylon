@@ -22,7 +22,6 @@ export class CameraHost {
                     if (!webXRCamera.metadata) {
                         webXRCamera.metadata = {
                             babylonPackage: BabylonPackages.CORE,
-                            props,
                         };
                     }
 

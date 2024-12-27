@@ -7,7 +7,7 @@ import '../../index';
 import coreConstructors from '../../_generated/babylon.core.constructors';
 import { CoreHostProps } from '@props';
 
-const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'physicsAggregate', 'highlightLayer'];
+const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'physicsAggregate'];
 
 export class Host {
     static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps, rootContainer: RootContainer, cloneFn?: Function) {
@@ -52,7 +52,8 @@ export class Host {
         if (!element.metadata) {
             element.metadata = {
                 babylonPackage: BabylonPackages.CORE,
-                props,
+                /* it would be very useful setting all props into metadata attribute but it can throw an error in Inspector ("RangeError: Maximum call stack size exceeded") if metadata create a loop
+                https://github.com/BabylonJS/Babylon.js/blob/master/packages/dev/inspector/src/components/actionTabs/tabs/propertyGrids/metadata/metadataPropertyGridComponent.tsx#L197 - objectCanSafelyStringify */
             };
         }
 
