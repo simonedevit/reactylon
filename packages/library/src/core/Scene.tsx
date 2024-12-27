@@ -6,6 +6,7 @@ import { SceneContext, EngineContextType } from './hooks';
 import { RootContainer } from '@types';
 import Reactylon from '../reconciler';
 import { type ContextBridge, useContextBridge } from 'its-fine';
+import { type CameraProps } from '@props';
 
 type SceneProps = React.PropsWithChildren<{
     /**
@@ -58,15 +59,15 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     scene.enablePhysics(
                         physicsOptions?.gravity || new Vector3(0, -9.8, 0),
                         physicsOptions?.plugin ||
-                            new HavokPlugin(
-                                true,
-                                await HavokPhysics({
-                                    // TODO: serve .wasm file from your own server
-                                    locateFile: file => {
-                                        return `https://preview.babylonjs.com/havok/${file}`;
-                                    },
-                                }),
-                            ),
+                        new HavokPlugin(
+                            true,
+                            await HavokPhysics({
+                                // TODO: serve .wasm file from your own server
+                                locateFile: file => {
+                                    return `https://preview.babylonjs.com/havok/${file}`;
+                                },
+                            }),
+                        ),
                     );
                 }
                 let xrExperience = null;
@@ -104,8 +105,20 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                             }
                         };
                     } else {
-                        //TODO: implement logic for multiple canvases but single scene (for each camera -> engine.registerView(canvas, camera))
-                        //need linking camera and canvas (what about creating a new prop called "canvas" for camera elements?)
+                        scene.onNewCameraAddedObservable.add((camera) => {
+                            const augmentedCamera = camera as Camera & CameraProps;
+                            const canvas = augmentedCamera.canvas!;
+                            engine.registerView(canvas, camera);
+
+                            canvas.onclick = () => {
+                                if (scene.activeCamera !== camera) {
+                                    scene.activeCamera?.detachControl();
+                                    engine.inputElement = canvas;
+                                    scene.activeCamera = camera;
+                                    camera.attachControl();
+                                }
+                            }
+                        })
                     }
                 }
 
