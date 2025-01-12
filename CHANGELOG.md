@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.1.1](https://github.com/simonedevit/reactylon/compare/v1.1.0...v1.1.1) (2025-01-12)
+
+
+### Chore
+
+* **general:** change default behaviour for 3D gui manager ([4c2a697](https://github.com/simonedevit/reactylon/commit/4c2a69762aad761c1a3c92fe6db8ef724929978c))
+
 ## [1.1.0](https://github.com/simonedevit/reactylon/compare/v1.0.9...v1.1.0) (2024-12-27)
 
 
