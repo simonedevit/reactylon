@@ -6,7 +6,7 @@
     "scripts": {
         "start": "nodemon",
         "build": "bash build.sh",
-        "debug": "node --inspect-brk build/index.js"
+        "debug": "npm run build && node --inspect-brk build/index.js"
     },
     "devDependencies": {
         "@dvmstudios/reactylon-common": "*",

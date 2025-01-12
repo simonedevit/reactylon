@@ -1,25 +1,32 @@
 import React, { version } from 'react';
 import ReactReconciler, { FiberRoot } from 'react-reconciler';
-import * as BabylonCore from '@babylonjs/core';
-import * as BabylonGui from '@babylonjs/gui';
 import lodash from 'lodash';
-import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
+import { Material } from '@babylonjs/core/Materials/material.js';
+import { Light } from '@babylonjs/core/Lights/light.js';
+import { Camera } from '@babylonjs/core/Cameras/camera.js';
+import { BaseTexture } from '@babylonjs/core/Materials/Textures/baseTexture.js';
+import { HighlightLayer } from '@babylonjs/core/Layers/highlightLayer.js';
+import { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh.js';
+import { DynamicTexture } from '@babylonjs/core/Materials/Textures/dynamicTexture.js';
+import { Logger, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
 import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
 import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import { CoreHostProps, GuiHostProps } from '@props';
+import coreImportPaths from './_generated/babylon.core.imports';
+import guiImportPaths from './_generated/babylon.gui.imports';
 
 const { isEqualWith } = lodash;
 
 function isParentNeeded(parentInstance: ComponentInstance, child: ComponentInstance) {
-    if (child instanceof BabylonCore.Material) {
+    if (child instanceof Material) {
         return false;
     }
-    if (child instanceof BabylonCore.BaseTexture) {
+    if (child instanceof BaseTexture) {
         return false;
     }
-    if (parentInstance instanceof BabylonCore.HighlightLayer) {
+    if (parentInstance instanceof HighlightLayer) {
         return false;
     }
     return true;
@@ -45,7 +52,7 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
                     //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons have .setParent method
                     child.parent = parentInstance;
                 } else {
-                    if (parentInstance instanceof BabylonCore.HighlightLayer) {
+                    if (parentInstance instanceof HighlightLayer) {
                         // reactylon internal purpose for MeshHost
                         child.metadata.parent = parentInstance;
                     }
@@ -56,7 +63,7 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
 }
 
 function shouldDisposeMaterialsAndTextures(child: unknown) {
-    if (child instanceof BabylonCore.AbstractMesh) {
+    if (child instanceof AbstractMesh) {
         // no material (i.e. "default material")
         if (!child.material) {
             return false;
@@ -79,14 +86,14 @@ const reconciler = ReactReconciler<
     string,
     CoreHostProps | GuiHostProps,
     RootContainer,
-    ComponentInstance,
-    ComponentInstance,
-    ComponentInstance,
+    Promise<ComponentInstance>,
+    Promise<ComponentInstance>,
+    Promise<ComponentInstance>,
     unknown,
     unknown,
     unknown,
     UpdatePayload,
-    ComponentInstance,
+    Promise<ComponentInstance>,
     unknown,
     unknown
 >({
@@ -100,57 +107,56 @@ const reconciler = ReactReconciler<
      * This method happens in the render phase. It can (and usually should) mutate the node it has just created before returning it, but it must not modify any other nodes. It must not register any event handlers on the parent tree. This is because an instance being created doesn't guarantee it would
      * be placed in the tree — it could be left unused and later collected by GC. If you need to do something when an instance is definitely in the tree, look at commitMount instead.
      */
-    createInstance(type, props, rootContainer, hostContext, internalHandle) {
+
+    async createInstance(type, props, rootContainer, hostContext, internalHandle) {
         Logger.log(`createInstance - ${type}: ${props.name}`);
         let Class = null;
         let isBuilder = false;
         let babylonPackage: BabylonPackages = BabylonPackages.CORE;
-        const BabylonElement = capitalizeFirstLetter(type);
         // @babylonjs/gui
-        if (BabylonElement in BabylonGui || (type in ReversedCollidingComponents && type !== 'text3D' && type !== 'polygon3D')) {
+        if (type in guiImportPaths) {
             babylonPackage = BabylonPackages.GUI;
-            //@ts-ignore
-            Class = BabylonGui[BabylonElement] || BabylonGui[ReversedCollidingComponents[type]];
+            const [importPath] = guiImportPaths[type];
+            Class = (await importPath)[type];
         }
         // @babylonjs/core
         else {
-            const ResolvedBabylonElement = ReversedCollidingComponents[type] || BabylonElement;
             // MeshBuilder.Create
-            if (`Create${ResolvedBabylonElement}` in BabylonCore.MeshBuilder) {
-                //@ts-ignore
-                Class = BabylonCore.MeshBuilder[`Create${ResolvedBabylonElement}`];
+            const [importPath, isMeshBuilder] = coreImportPaths[type];
+            if (isMeshBuilder) {
+                const builder = `Create${capitalizeFirstLetter(type)}`;
+                Class = (await importPath)[builder];
                 isBuilder = true;
             } else {
                 // MeshBuilder.ExtrudePolygon
-                if (ResolvedBabylonElement === 'ExtrudePolygon') {
+                if (type === 'extrudePolygon') {
                     isBuilder = true;
                 }
-                //@ts-ignore
-                Class = BabylonCore[ResolvedBabylonElement];
+                Class = (await importPath)[type];
             }
         }
-        let createInstanceFn: Function;
 
+        let createInstanceFn: Function;
         switch (babylonPackage) {
             case BabylonPackages.CORE:
                 createInstanceFn = Host.createInstance;
                 if (isBuilder) {
                     createInstanceFn = MeshHost.createInstance;
-                } else if (Class.prototype instanceof BabylonCore.Material) {
+                } else if (Class.prototype instanceof Material) {
                     createInstanceFn = MaterialHost.createInstance;
-                } else if (Class.prototype instanceof BabylonCore.BaseTexture) {
+                } else if (Class.prototype instanceof BaseTexture) {
                     createInstanceFn = TextureHost.createInstance;
-                } else if (Class.prototype instanceof BabylonCore.Light) {
+                } else if (Class.prototype instanceof Light) {
                     createInstanceFn = LightHost.createInstance;
-                } else if (Class.prototype instanceof BabylonCore.Camera) {
+                } else if (Class.prototype instanceof Camera) {
                     createInstanceFn = CameraHost.createInstance;
-                } /* else if (Class.name === BabylonCore.TransformNode.name) {
+                } /* else if (Class.name === TransformNode.name) {
                     createInstanceFn = TransformNodeHost.createInstance;
                 }*/
                 break;
             case BabylonPackages.GUI:
                 createInstanceFn = GuiHost.createInstance;
-                if (Class.prototype instanceof BabylonCore.DynamicTexture) {
+                if (Class.prototype instanceof DynamicTexture) {
                     createInstanceFn = AdvancedDynamicTextureHost.createInstance;
                     isBuilder = true;
                 }
@@ -175,12 +181,14 @@ const reconciler = ReactReconciler<
      */
 
     appendInitialChild(parentInstance, child) {
-        // Log information about appending initial child to parent
-        Logger.group('appendInitialChild', [
-            [`parentInstance: ${parentInstance.name}`, parentInstance],
-            [`child: ${child.name}`, child],
-        ]);
-        addChild(parentInstance, child);
+        Promise.all([parentInstance, child]).then(([parentInstance, child]) => {
+            // Log information about appending initial child to parent
+            Logger.group('appendInitialChild', [
+                [`parentInstance: ${parentInstance.name}`, parentInstance],
+                [`child: ${child.name}`, child],
+            ]);
+            addChild(parentInstance, child);
+        });
     },
 
     /*
@@ -190,7 +198,7 @@ const reconciler = ReactReconciler<
      * If you don't want to do anything here, you should return false.
      */
     finalizeInitialChildren(instance, type, props, rootContainer, hostContext) {
-        Logger.log(`finalizeInitialChildren - ${type}: ${instance.name}`);
+        // Logger.log(`finalizeInitialChildren - ${type}: ${instance.name}`);
         return false;
     },
 
@@ -298,33 +306,37 @@ const reconciler = ReactReconciler<
      * Although this method currently runs in the commit phase, you still should not mutate any other nodes in it.If you need to do some additional work when a node is definitely connected to the visible tree, look at commitMount.
      */
     appendChild(parentInstance, child) {
-        // Log information about appending child to parent
-        Logger.group('appendChild', [
-            [`parentInstance: ${parentInstance.name}`, parentInstance],
-            [`child: ${child.name}`, child],
-        ]);
-        addChild(parentInstance, child);
+        Promise.all([parentInstance, child]).then(([parentInstance, child]) => {
+            // Log information about appending child to parent
+            Logger.group('appendChild', [
+                [`parentInstance: ${parentInstance.name}`, parentInstance],
+                [`child: ${child.name}`, child],
+            ]);
+            addChild(parentInstance, child);
+        });
     },
 
     /*
      * Same as appendChild, but for when a node is attached to the root container.This is useful if attaching to the root has a slightly different implementation, or if the root container nodes are of a different type than the rest of the tree.
      */
     appendChildToContainer(container, child) {
-        // Log information about appending child to container
-        Logger.group('appendChildToContainer', [
-            ['container', container],
-            [`child: ${child.name}`, child],
-        ]);
-        if (child) {
-            if (container) {
-                container.metadata.children.push(child);
-                // FIXME: should i add the parent also?
-                // child.parent = container
-            } else {
-                console.log('addend child with no root (createPortal only?)');
-                addChild(container, child);
+        Promise.all([container, child]).then(([container, child]) => {
+            // Log information about appending child to container
+            Logger.group('appendChildToContainer', [
+                ['container', container],
+                [`child: ${child.name}`, child],
+            ]);
+            if (child) {
+                if (container) {
+                    container.metadata.children.push(child);
+                    // FIXME: should i add the parent also?
+                    // child.parent = container
+                } else {
+                    console.log('addend child with no root (createPortal only?)');
+                    addChild(container, child);
+                }
             }
-        }
+        });
     },
 
     /*
@@ -332,28 +344,32 @@ const reconciler = ReactReconciler<
      * Note that React uses this method both for insertions and for reordering nodes.Similar to DOM, it is expected that you can call insertBefore to reposition an existing child.Do not mutate any other parts of the tree from it.
      */
     insertBefore(parentInstance, child, beforeChild) {
-        Logger.group('insertBefore', [
-            [`parentInstance: ${parentInstance.name}`, parentInstance],
-            [`child: ${child.name}`, child],
-            [`beforeChild: ${beforeChild.name}`, beforeChild],
-        ]);
-        const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
-        parentInstance.metadata.children.splice(index, 0, child);
-        child.handlers?.addChild?.(parentInstance, child);
+        Promise.all([parentInstance, child, beforeChild]).then(([parentInstance, child, beforeChild]) => {
+            Logger.group('insertBefore', [
+                [`parentInstance: ${parentInstance.name}`, parentInstance],
+                [`child: ${child.name}`, child],
+                [`beforeChild: ${beforeChild.name}`, beforeChild],
+            ]);
+            const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
+            parentInstance.metadata.children.splice(index, 0, child);
+            child.handlers?.addChild?.(parentInstance, child);
+        });
     },
 
     /*
      * Same as insertBefore, but for when a node is attached to the root container.This is useful if attaching to the root has a slightly different implementation, or if the root container nodes are of a different type than the rest of the tree.
      */
     insertInContainerBefore(container, child, beforeChild) {
-        Logger.group('insertInContainerBefore', [
-            ['container', container],
-            [`child: ${child.name}`, child],
-            [`beforeChild: ${beforeChild.name}`, beforeChild],
-        ]);
-        const index = container.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
-        container.metadata.children.splice(index, 0, child);
-        child.handlers?.addChild?.(container, child);
+        Promise.all([container, child, beforeChild]).then(([container, child, beforeChild]) => {
+            Logger.group('insertInContainerBefore', [
+                ['container', container],
+                [`child: ${child.name}`, child],
+                [`beforeChild: ${beforeChild.name}`, beforeChild],
+            ]);
+            const index = container.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
+            container.metadata.children.splice(index, 0, child);
+            child.handlers?.addChild?.(container, child);
+        });
     },
 
     /*
@@ -361,30 +377,34 @@ const reconciler = ReactReconciler<
      * React will only call it for the top - level node that is being removed.It is expected that garbage collection would take care of the whole subtree.You are not expected to traverse the child tree in it.
      */
     removeChild(parentInstance, child) {
-        Logger.group('removeChild', [
-            [`parentInstance: ${parentInstance.name}`, parentInstance],
-            [`child: ${child.name}`, child],
-        ]);
-        const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
-        parentInstance.metadata.children.splice(index, 1);
-        child.handlers?.removeChild?.(parentInstance, child);
-        const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
-        child.dispose?.(false, disposeMaterialsAndTextures);
+        Promise.all([parentInstance, child]).then(([parentInstance, child]) => {
+            Logger.group('removeChild', [
+                [`parentInstance: ${parentInstance.name}`, parentInstance],
+                [`child: ${child.name}`, child],
+            ]);
+            const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
+            parentInstance.metadata.children.splice(index, 1);
+            child.handlers?.removeChild?.(parentInstance, child);
+            const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
+            child.dispose?.(false, disposeMaterialsAndTextures);
+        });
     },
 
     /*
      * Same as removeChild, but for when a node is detached from the root container.This is useful if attaching to the root has a slightly different implementation, or if the root container nodes are of a different type than the rest of the tree.
      */
     removeChildFromContainer(container, child) {
-        Logger.group('removeChildFromContainer', [
-            ['container', container],
-            [`child: ${child.name}`, child],
-        ]);
-        const index = container.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
-        container.metadata.children.splice(index, 1);
-        child.handlers?.removeChild?.(container, child);
-        const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
-        child.dispose?.(false, disposeMaterialsAndTextures);
+        Promise.all([container, child]).then(([container, child]) => {
+            Logger.group('removeChildFromContainer', [
+                ['container', container],
+                [`child: ${child.name}`, child],
+            ]);
+            const index = container.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
+            container.metadata.children.splice(index, 1);
+            child.handlers?.removeChild?.(container, child);
+            const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
+            child.dispose?.(false, disposeMaterialsAndTextures);
+        });
     },
 
     /*
@@ -417,7 +437,8 @@ const reconciler = ReactReconciler<
      * as much as you can in prepareUpdate so that commitUpdate can be very fast and straightforward.
      */
 
-    prepareUpdate(instance, type, oldProps, newProps, rootContainer, hostContext) {
+    prepareUpdate(instanceNotPromise, type, oldProps, newProps, rootContainer, hostContext) {
+        const instance = instanceNotPromise as unknown as ComponentInstance;
         //TODO: exclude constructor props
         //FIXME: oldProps always !== newProps so how can i optimize equality process? Immutable data structure? Shallow comparison on what?
 
@@ -458,9 +479,10 @@ const reconciler = ReactReconciler<
     * that makes sense for your renderer. For example, the DOM renderer returns an update payload like [prop1, value1, prop2, value2, ...] from prepareUpdate, and that structure gets passed into commitUpdate.
     * Ideally, all the diffing and calculation should happen inside prepareUpdate so that commitUpdate can be fast and straightforward.
     * The internalHandle data soldPropstructure is meant to be opaque. If you bend the rules and rely on its internal fields, be aware that it may change significantly between versions. You're taking on additional maintenance risk by reading from it, and giving up all guarantees if you write something to it.
-    
+     
     */
-    commitUpdate(instance, updatePayload, type, prevProps, nextProps, internalHandle) {
+    commitUpdate(instanceNotPromise, updatePayload, type, prevProps, nextProps, internalHandle) {
+        const instance = instanceNotPromise as unknown as ComponentInstance;
         Logger.log(`commitUpdate - ${type}: ${instance.name}`);
         Object.entries(updatePayload)
             .filter(([key]) => key !== 'children' && key !== 'propertiesFrom')

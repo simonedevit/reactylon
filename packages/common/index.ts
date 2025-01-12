@@ -141,8 +141,6 @@ export const CollidingComponents: Record<string, string> = {
     Polygon: 'polygon3D',
 };
 
-export const ReversedCollidingComponents = Object.entries(CollidingComponents).reduce((acc, [key, value]) => ((acc[value] = key), acc), {} as Record<string, string>);
-
 export enum BabylonPackages {
     'CORE',
     'GUI',
@@ -154,20 +152,20 @@ export const AdditionalProps: Record<string, string> = {
 };
 
 // specific properties for a category of components
-export function getAdditionalProps(jsxElementName: string, Class: any){
-    if (jsxElementName in AdditionalProps){
+export function getAdditionalProps(jsxElementName: string, Class: any) {
+    if (jsxElementName in AdditionalProps) {
         return AdditionalProps[jsxElementName];
     }
     //@ts-ignore - build phase - Property 'Material' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
-    if (Class.prototype instanceof BabylonCore.Material){
+    if (Class.prototype instanceof BabylonCore.Material) {
         return ` & MaterialProps`;
     }
     //@ts-ignore - build phase - Property 'BaseTexture' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
-    if (Class.prototype instanceof BabylonCore.BaseTexture){
+    if (Class.prototype instanceof BabylonCore.BaseTexture) {
         return ` & TextureProps`;
     }
     //@ts-ignore - build phase - Property 'Camera' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
-    if (Class.prototype instanceof BabylonCore.Camera){
+    if (Class.prototype instanceof BabylonCore.Camera) {
         return ` & CameraProps`;
     }
     return '';
