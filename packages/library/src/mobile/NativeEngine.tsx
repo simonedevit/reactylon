@@ -1,5 +1,5 @@
 import { EngineView, useEngine } from '@babylonjs/react-native';
-import React from 'react';
+import React, { Children, cloneElement } from 'react';
 import { FiberProvider } from 'its-fine';
 import { Camera } from '@babylonjs/core';
 
@@ -15,8 +15,8 @@ export const NativeEngine: React.FC<NativeEngineProps> = ({ children, camera }) 
             <EngineView style={{ flex: 1 }} camera={camera} />
             {engine ? (
                 <FiberProvider>
-                    {React.Children.map<any, any>(children, child => {
-                        return React.cloneElement(child, {
+                    {Children.map<any, any>(children, child => {
+                        return cloneElement(child, {
                             _context: {
                                 engine,
                                 isMultipleCanvas: false,

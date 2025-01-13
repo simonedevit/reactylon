@@ -1,4 +1,4 @@
-import React, { useEffect, Children, useState, useRef } from 'react';
+import React, { useEffect, Children, useState, useRef, isValidElement, cloneElement } from 'react';
 import { Engine as BabylonEngine, NullEngine, type EngineOptions, Scene, EventState, type NullEngineOptions } from '@babylonjs/core';
 import CustomLoadingScreen from './CustomLoadingScreen';
 import { FiberProvider } from 'its-fine';
@@ -53,8 +53,8 @@ export const Engine: React.FC<EngineProps> = ({
                 canvas = canvasRef.current;
             } else {
                 if (isMultipleScene) {
-                    React.Children.forEach(rest.children, child => {
-                        if (React.isValidElement(child)) {
+                    Children.forEach(rest.children, child => {
+                        if (isValidElement(child)) {
                             if (!child.props.canvas) {
                                 Logger.error(
                                     `Engine - initializeScene - Each Scene component requires a corresponding canvas element. Ensure that you provide one canvas for every Scene you are using.`,
@@ -110,8 +110,8 @@ export const Engine: React.FC<EngineProps> = ({
             {!isMultipleCanvas ? <canvas id={canvasId} ref={canvasRef} /> : null}
             {context ? (
                 <FiberProvider>
-                    {React.Children.map(rest.children, (child: any) => {
-                        return React.cloneElement(child, { _context: context, canvas: child.props.canvas || canvasRef.current });
+                    {Children.map(rest.children, (child: any) => {
+                        return cloneElement(child, { _context: context, canvas: child.props.canvas || canvasRef.current });
                     })}
                 </FiberProvider>
             ) : null}
