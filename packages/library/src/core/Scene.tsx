@@ -31,7 +31,7 @@ type SceneProps = React.PropsWithChildren<{
 //FIXME: replace global var with a singleton Manager
 export let activeScene: BabylonScene | null = null;
 
-export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager = true, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }) => {
+export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }) => {
     const { engine, isMultipleCanvas, isMultipleScene } = _context as EngineContextType;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
     const isFirstRender = useRef(false);
@@ -59,15 +59,15 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     scene.enablePhysics(
                         physicsOptions?.gravity || new Vector3(0, -9.8, 0),
                         physicsOptions?.plugin ||
-                        new HavokPlugin(
-                            true,
-                            await HavokPhysics({
-                                // TODO: serve .wasm file from your own server
-                                locateFile: file => {
-                                    return `https://preview.babylonjs.com/havok/${file}`;
-                                },
-                            }),
-                        ),
+                            new HavokPlugin(
+                                true,
+                                await HavokPhysics({
+                                    // TODO: serve .wasm file from your own server
+                                    locateFile: file => {
+                                        return `https://preview.babylonjs.com/havok/${file}`;
+                                    },
+                                }),
+                            ),
                     );
                 }
                 let xrExperience = null;
@@ -105,7 +105,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                             }
                         };
                     } else {
-                        scene.onNewCameraAddedObservable.add((camera) => {
+                        scene.onNewCameraAddedObservable.add(camera => {
                             const augmentedCamera = camera as Camera & CameraProps;
                             const canvas = augmentedCamera.canvas!;
                             engine.registerView(canvas, camera);
@@ -117,8 +117,8 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                                     scene.activeCamera = camera;
                                     camera.attachControl();
                                 }
-                            }
-                        })
+                            };
+                        });
                     }
                 }
 
