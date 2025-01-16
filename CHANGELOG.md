@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.1.3](https://github.com/simonedevit/reactylon/compare/v1.1.2...v1.1.3) (2025-01-16)
+
+
+### Documentation
+
+* **general:** add contributing, code of conduct + update license [#11](https://github.com/simonedevit/reactylon/issues/11) ([05edbb2](https://github.com/simonedevit/reactylon/commit/05edbb22c4684435fbdaa631b25f5dbceef2fb7d))
+
 ## [1.1.2](https://github.com/simonedevit/reactylon/compare/v1.1.1...v1.1.2) (2025-01-13)
 
 
