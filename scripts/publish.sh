@@ -7,7 +7,7 @@ cp CHANGELOG.md ./build/CHANGELOG.md
 # copy the npmignore file to exclude stuff from publishing
 cp .npmignore ./build/.npmignore
 
-COPYRIGHT_TEXT="/* Copyright (c) 2024 Simone De Vittorio. */"
+COPYRIGHT_TEXT="/* Copyright (c) 2024-2025 Simone De Vittorio. */"
 FILE="./build/index.js"
 
 # prepend the copyright text to the file, using '#' as delimiter for sed

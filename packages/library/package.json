@@ -10,11 +10,10 @@
     },
     "scripts": {
         "init": "npm ci",
-        "start": "webpack serve --env isLogging=true",
+        "build:local": "bash ../../scripts/copy.sh && webpack serve --env isLogging=true",
+        "build": "webpack --env environment=PROD",
         "test": "NODE_OPTIONS=--experimental-vm-modules jest",
         "test:debug": "NODE_OPTIONS=--experimental-vm-modules node --inspect-brk ../../node_modules/.bin/jest",
-        "build:local": "webpack && bash ../../scripts/copy.sh",
-        "build": "webpack --env environment=PROD",
         "release": "npm run build && commit-and-tag-version && git push --follow-tags && bash ../../scripts/publish.sh"
     },
     "keywords": [],

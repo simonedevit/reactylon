@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2024 Simone De Vittorio.
+Copyright (c) 2024-2025 Simone De Vittorio.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
