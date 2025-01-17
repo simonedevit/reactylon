@@ -1,6 +1,6 @@
 {
     "name": "reactylon",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "description": "A powerful multiplatform framework built on Babylon.js and React, designed to create interactive and immersive 3D experiences.",
     "type": "module",
     "main": "./build/index.js",
@@ -10,11 +10,10 @@
     },
     "scripts": {
         "init": "npm ci",
-        "start": "webpack serve --env isLogging=true",
+        "build:local": "bash ../../scripts/copy.sh && webpack serve --env isLogging=true",
+        "build": "webpack --env environment=PROD",
         "test": "NODE_OPTIONS=--experimental-vm-modules jest",
         "test:debug": "NODE_OPTIONS=--experimental-vm-modules node --inspect-brk ../../node_modules/.bin/jest",
-        "build:local": "webpack --env isLogging=true && bash ../../scripts/copy.sh",
-        "build": "webpack --env environment=PROD",
         "release": "npm run build && commit-and-tag-version && git push --follow-tags && bash ../../scripts/publish.sh"
     },
     "keywords": [],
