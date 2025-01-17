@@ -122,6 +122,5 @@ If you have questions or need further assistance, feel free to:
 - Comment on an issue or pull request.
 - Send an email at contact@reactylon.com.
 
----
-<br>
+<hr/>
 By contributing, you agree that your contributions will be licensed under the same license as the project. Thank you for helping make <b>Reactylon</b> better! 🚀

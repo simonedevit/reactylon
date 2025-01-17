@@ -8,7 +8,7 @@
 </div>
 
 <div align="center">
-  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/simonedevit/reactylon">
+  <img alt="NPM Bundle Size" src="https://img.shields.io/bundlephobia/minzip/reactylon">
   <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/simonedevit/reactylon/build.yml?label=test%2Fbuild">
   <img alt="Sonar Cloud Quality Gate" src="https://sonarcloud.io/api/project_badges/measure?project=simonedevit_reactylon&metric=alert_status">
   <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fwww.reactylon.com&up_message=online&label=reactylon.com">
@@ -22,6 +22,8 @@ Welcome to **Reactylon**, a powerful multiplatform framework built on top of Bab
 
 ## Key Features
 - **Declarative Syntax for Babylon.js**: Write 3D scenes in JSX, leveraging the power of declarative UI that React developers love, with seamless integration into the Babylon.js rendering engine.
+
+- **Full TypeScript support**: Leveraging Babylon.js classes, the appropriate props for each Babylon.js entity are generated and utilized within their corresponding React components.
 
 - **Automatic Object Management**: No need to manually dispose of Babylon.js objects. Reactylon automatically handles the disposal of objects like meshes, cameras, and lights when their corresponding components are destroyed, ensuring efficient resource management and preventing memory leaks.
 
@@ -38,11 +40,14 @@ You can find the interactive Reactylon documentation on [reactylon.com](https://
 
 Check out the [Getting Started](https://www.reactylon.com/docs/getting-started) page for a quick overview.
 
-## Issues
-If you encounter any issues, please report them by opening an issue in the repository. We appreciate any feedback, bug reports, or suggestions for improvement.
+## Contributing
+We welcome contributions to improve and expand this project! To get started, please read [Contributing](CONTRIBUTING.md). This document provides all the necessary steps and best practices for submitting contributions.
+
+## Code of Conduct
+We expect all contributors to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). It outlines our standards for respectful and inclusive interactions within the project community.
 
 ## Support
-For any help or support, please reach me to contact@reactylon.com.
+For any help or support, please reach us to contact@reactylon.com.
 
 ## License
 Reactylon is licensed under the MIT License, with the inclusion of other dependencies licensed under separate terms:
