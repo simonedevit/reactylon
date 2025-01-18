@@ -144,7 +144,6 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     </Bridge>,
                     rootContainer.current!,
                 );
-
                 isFirstRender.current = true;
             }
         })();
@@ -156,31 +155,19 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
     }, []);
 
     useEffect(() => {
-        if (process.env.NODE_ENV === 'test') {
-            if (!isFirstRender.current) {
-                const { scene, xrExperience, canvas } = rootContainer.current!;
-                // Renders children with bridged context into a secondary renderer
-                Reactylon.render(
-                    <Bridge>
-                        <SceneContext.Provider value={{ engine, isMultipleCanvas, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
-                    </Bridge>,
-                    rootContainer.current!,
-                );
-            } else {
-                isFirstRender.current = false;
-            }
+        if (!isFirstRender.current) {
+            const { scene, xrExperience, canvas } = rootContainer.current!;
+            // Renders children with bridged context into a secondary renderer
+            Reactylon.render(
+                <Bridge>
+                    <SceneContext.Provider value={{ engine, isMultipleCanvas, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
+                </Bridge>,
+                rootContainer.current!,
+            );
+        } else {
+            isFirstRender.current = false;
         }
     });
 
     return null;
 };
-
-// USE IT ONLY IF YOU ARE UPDATING ON TOP (e.g. setting state) AND YOU NEED TO RE-RENDER PROVIDERS
-/*useEffect(() => {
-        Reactylon.render(
-            <Bridge>
-                <SceneContext.Provider value={{ engine, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
-            </Bridge>,
-            rootContainer.current,
-        );
-}, [yourDep]); */
