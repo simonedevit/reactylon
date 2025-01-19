@@ -1,5 +1,17 @@
 # Reactylon - Changelog
 
+## [1.1.5](https://github.com/simonedevit/reactylon/compare/v1.1.4...v1.1.5) (2025-01-19)
+
+
+### Build
+
+* **general:** add CHANGELOG.md on root in release commit ([9cc484e](https://github.com/simonedevit/reactylon/commit/9cc484e75e6418180dc305027bbef4d1eb054c02))
+
+
+### Documentation
+
+* **general:** copy CHANGELOG.md on root ([1fc24c9](https://github.com/simonedevit/reactylon/commit/1fc24c957fafed9c2b84914da17637dbb7fa2cdb))
+
 ## [1.1.4](https://github.com/simonedevit/reactylon/compare/v1.1.3...v1.1.4) (2025-01-19)
 
 

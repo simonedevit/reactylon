@@ -1,6 +1,6 @@
 {
     "name": "reactylon",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "description": "A powerful multiplatform framework built on Babylon.js and React, designed to create interactive and immersive 3D experiences.",
     "type": "module",
     "main": "./build/index.js",
