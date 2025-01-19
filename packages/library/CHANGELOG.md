@@ -1,5 +1,23 @@
 # Reactylon - Changelog
 
+## [1.1.4](https://github.com/simonedevit/reactylon/compare/v1.1.3...v1.1.4) (2025-01-19)
+
+
+### Build
+
+* **general:** remove 'serve' due to HMR incompatibility with ES6 module exports ([b1f57b5](https://github.com/simonedevit/reactylon/commit/b1f57b526708daeafe0c50053533c90f5ecba3ef))
+
+
+### Documentation
+
+* **general:** commit CHANGELOG.md in release commit ([eb860b3](https://github.com/simonedevit/reactylon/commit/eb860b304f163f23927e85ecd5cafcefe35b47cc))
+* **general:** link contributing and code of conduct ([b667dbd](https://github.com/simonedevit/reactylon/commit/b667dbd7585ae7e0534f08d15037d46db0c52b85))
+
+
+### Bug Fixes
+
+* **components:** propagate external changes to secondary renderer ([b036bd5](https://github.com/simonedevit/reactylon/commit/b036bd51e05d45a7fb9fba1ff0eaa9eedd24a2e8))
+
 ## [1.1.3](https://github.com/simonedevit/reactylon/compare/v1.1.2...v1.1.3) (2025-01-16)
 
 
