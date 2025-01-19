@@ -14,7 +14,7 @@
         "build": "webpack --env environment=PROD",
         "test": "NODE_OPTIONS=--experimental-vm-modules jest",
         "test:debug": "NODE_OPTIONS=--experimental-vm-modules node --inspect-brk ../../node_modules/.bin/jest",
-        "release": "npm run build && commit-and-tag-version && git push --follow-tags && bash ../../scripts/publish.sh"
+        "release": "npm run build && commit-and-tag-version --commit-all && git push --follow-tags && bash ../../scripts/publish.sh"
     },
     "keywords": [],
     "commit-and-tag-version": {
