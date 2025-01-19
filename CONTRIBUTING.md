@@ -72,7 +72,6 @@ Do you have a great idea or a request for a new feature? Please use [Discussions
         ```bash
         npm start
         ```
-    7. Now each changes that you do on Reactylon project, will be reflected on playground project.
 
 7. Test on plaground project.
 8. Go back on Reactylon project, write the integration tests and run them from the _packages/library_ directory using the command `npm run test`.
