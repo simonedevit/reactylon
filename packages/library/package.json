@@ -10,7 +10,7 @@
     },
     "scripts": {
         "init": "npm ci",
-        "build:local": "bash ../../scripts/copy.sh && webpack --env isLogging=true",
+        "build:local": "webpack --env isLogging=true && bash ../../scripts/copy.sh",
         "build": "webpack --env environment=PROD",
         "test": "NODE_OPTIONS=--experimental-vm-modules jest",
         "test:debug": "NODE_OPTIONS=--experimental-vm-modules node --inspect-brk ../../node_modules/.bin/jest",
