@@ -2,11 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Nullable, Camera } from '@babylonjs/core';
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
-import { SceneContext, EngineContextType } from './hooks';
+import { SceneContext, EngineStore, Store, createBabylonStore } from './store';
 import { RootContainer } from '@types';
 import Reactylon from '../reconciler';
 import { type ContextBridge, useContextBridge } from 'its-fine';
 import { type CameraProps } from '@props';
+import { type StoreApi } from 'zustand';
 
 type SceneProps = React.PropsWithChildren<{
     /**
@@ -25,16 +26,18 @@ type SceneProps = React.PropsWithChildren<{
      * @internal
      * This prop is only for internal use and should not be passed to this component.
      */
-    _context?: EngineContextType;
+    _context?: EngineStore;
 }>;
 
 //FIXME: replace global var with a singleton Manager
 export let activeScene: BabylonScene | null = null;
 
 export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }) => {
-    const { engine, isMultipleCanvas, isMultipleScene } = _context as EngineContextType;
+    const { engine, isMultipleCanvas, isMultipleScene } = _context as EngineStore;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
     const isFirstRender = useRef(false);
+
+    const store = useRef<StoreApi<Store>>();
 
     // Returns a bridged context provider that forwards context
     const Bridge: ContextBridge = useContextBridge();
@@ -125,13 +128,17 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 /* --------------------------------------------------------------------------------------- */
                 /* RECONCILER
                 ------------------------------------------------------------------------------------------ */
-                rootContainer.current = {
+                store.current = createBabylonStore({
                     engine,
                     scene,
                     canvas,
                     isMultipleCanvas,
                     isMultipleScene,
                     xrExperience,
+                });
+
+                rootContainer.current = {
+                    ...store.current.getState(),
                     metadata: {
                         children: [],
                     },
@@ -140,7 +147,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 // Renders children with bridged context into a secondary renderer
                 Reactylon.render(
                     <Bridge>
-                        <SceneContext.Provider value={{ engine, isMultipleCanvas, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
+                        <SceneContext.Provider value={store.current}>{children}</SceneContext.Provider>
                     </Bridge>,
                     rootContainer.current!,
                 );
@@ -156,16 +163,17 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
 
     useEffect(() => {
         if (!isFirstRender.current) {
-            const { scene, xrExperience, canvas } = rootContainer.current!;
-            // Renders children with bridged context into a secondary renderer
-            Reactylon.render(
-                <Bridge>
-                    <SceneContext.Provider value={{ engine, isMultipleCanvas, isMultipleScene, scene, xrExperience, canvas }}>{children}</SceneContext.Provider>
-                </Bridge>,
-                rootContainer.current!,
-            );
-        } else {
-            isFirstRender.current = false;
+            if (store.current) {
+                // Renders children with bridged context into a secondary renderer
+                Reactylon.render(
+                    <Bridge>
+                        <SceneContext.Provider value={store.current}>{children}</SceneContext.Provider>
+                    </Bridge>,
+                    rootContainer.current!,
+                );
+            } else {
+                isFirstRender.current = false;
+            }
         }
     });
 

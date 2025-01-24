@@ -76,7 +76,7 @@ export type UpdatePayload = {
 export type RootContainer = {
     engine: Engine;
     scene: Scene;
-    canvas: HTMLCanvasElement;
+    canvas: HTMLCanvasElement | WebGLRenderingContext;
     isMultipleCanvas: boolean;
     isMultipleScene: boolean;
     xrExperience: Nullable<WebXRDefaultExperience>;
