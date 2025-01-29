@@ -1,5 +1,22 @@
 # Reactylon - Changelog
 
+## [1.2.0](https://github.com/simonedevit/reactylon/compare/v1.1.5...v1.2.0) (2025-01-29)
+
+
+### Build
+
+* **general:** swap build:local instructions ([fd6baba](https://github.com/simonedevit/reactylon/commit/fd6baba05a18260e433b860ea7d5f94b247479c3))
+
+
+### Features
+
+* **general,components:** add zustand for store reactivity ([01355f6](https://github.com/simonedevit/reactylon/commit/01355f6fddbef681ec8aeb63b009f6ae0fc59231))
+
+
+### Bug Fixes
+
+* **general,components:** correct else statement ([6fa0235](https://github.com/simonedevit/reactylon/commit/6fa0235c1a7c13e3d787458fa51dff5cc46e2b06))
+
 ## [1.1.5](https://github.com/simonedevit/reactylon/compare/v1.1.4...v1.1.5) (2025-01-19)
 
 
