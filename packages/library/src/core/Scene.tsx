@@ -171,9 +171,9 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     </Bridge>,
                     rootContainer.current!,
                 );
-            } else {
-                isFirstRender.current = false;
             }
+        } else {
+            isFirstRender.current = false;
         }
     });
 

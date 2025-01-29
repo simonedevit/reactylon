@@ -13,7 +13,7 @@
         "build:local": "webpack --env isLogging=true && bash ../../scripts/copy.sh",
         "build": "webpack --env environment=PROD",
         "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-        "test:debug": "NODE_OPTIONS=--experimental-vm-modules node --inspect-brk ../../node_modules/.bin/jest",
+        "test:debug": "NODE_OPTIONS=--experimental-vm-modules node --inspect-brk ../../node_modules/.bin/jest --runInBand",
         "release": "npm run build && commit-and-tag-version --commit-all && git push --follow-tags && bash ../../scripts/publish.sh"
     },
     "keywords": [],
