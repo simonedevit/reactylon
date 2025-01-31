@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.2.1](https://github.com/simonedevit/reactylon/compare/v1.2.0...v1.2.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* **components,reconciler:** handle multiple loading screens + improve multiple canvases ([cdc590a](https://github.com/simonedevit/reactylon/commit/cdc590a67bf93deba52a0e4a64ea058892ef8310))
+
 ## [1.2.0](https://github.com/simonedevit/reactylon/compare/v1.1.5...v1.2.0) (2025-01-29)
 
 
