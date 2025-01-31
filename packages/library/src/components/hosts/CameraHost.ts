@@ -34,17 +34,17 @@ export class CameraHost {
         const camera = Host.createInstance(type, isBuilder, Class, props, rootContainer);
         camera.handlers = {};
 
-        const { isMultipleCanvas, isMultipleScene } = rootContainer;
+        const { isMultipleCanvas, isMultipleScene, canvas } = rootContainer;
         if (isMultipleCanvas) {
             const { engine, scene } = rootContainer;
-            const canvas = props.canvas!;
             if (isMultipleScene) {
                 const view = (engine.views || []).find(view => view.target === canvas);
                 if (view) {
-                    engine.unRegisterView(canvas);
+                    engine.unRegisterView(canvas as HTMLCanvasElement);
                 }
-                engine.registerView(canvas, camera);
+                engine.registerView(canvas as HTMLCanvasElement, camera);
             } else {
+                const canvas = props.canvas!;
                 engine.registerView(canvas, camera);
                 canvas.onclick = () => {
                     if (scene.activeCamera !== camera) {
