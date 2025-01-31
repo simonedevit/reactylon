@@ -1,5 +1,17 @@
 # Reactylon - Changelog
 
+## [1.2.2](https://github.com/simonedevit/reactylon/compare/v1.2.1...v1.2.2) (2025-01-31)
+
+
+### Bug Fixes
+
+* **reconciler:** get canvas from scene on multiple scenes ([7d37d8e](https://github.com/simonedevit/reactylon/commit/7d37d8eaaccef4b98c37f1ff1c63a62352d48c2a))
+
+
+### Test
+
+* **general:** mock react-dom/server ([77cf359](https://github.com/simonedevit/reactylon/commit/77cf3590bd75e513de91bad8e074d40449c212fd))
+
 ## [1.2.1](https://github.com/simonedevit/reactylon/compare/v1.2.0...v1.2.1) (2025-01-31)
 
 
