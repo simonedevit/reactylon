@@ -1,64 +1,180 @@
-import { ILoadingScreen } from '@babylonjs/core';
-import { createRoot } from 'react-dom/client';
+import { AbstractEngine, EngineStore, ILoadingScreen as BabylonILoadingScreen, Nullable, Observer } from '@babylonjs/core';
+import { renderToStaticMarkup } from 'react-dom/server';
 
-class CustomLoadingScreen implements ILoadingScreen {
-    //optional, but needed due to interface definitions
-    public loadingUIBackgroundColor: string;
-    public loadingUIText: string;
+type TransitionStyle = {
+    start: Partial<CSSStyleDeclaration>;
+    end: Partial<CSSStyleDeclaration>;
+};
+
+export type LoadingScreenOptions = {
+    component: React.FC;
+    animationStyle?: TransitionStyle;
+};
+
+class CustomLoadingScreen implements Pick<BabylonILoadingScreen, 'displayLoadingUI' | 'hideLoadingUI'> {
     private _loadingDiv: HTMLDivElement;
-    private _renderingCanvas: HTMLCanvasElement;
+
+    private _engine: Nullable<AbstractEngine>;
+    private _resizeObserver: Nullable<Observer<AbstractEngine>>;
+    private _isLoading: boolean;
+    /**
+     * Maps a loading `HTMLDivElement` to a tuple containing the associated `HTMLCanvasElement`
+     * and its `DOMRect` (or `null` if not yet available).
+     */
+    private _loadingDivToRenderingCanvasMap: Map<HTMLDivElement, [HTMLCanvasElement, DOMRect | null]> = new Map();
 
     /**
      * Creates a new loading screen rendering the React element in input
-     * @param renderingCanvas defines the canvas used to render the scene
+     * @param _renderingCanvas defines the canvas used to render the scene
+     * @param loader defines the custom React component to show
+     * @param _animationStyle the custom CSS styles applied at the beginning and end of the animation
      */
-    constructor(renderingCanvas: HTMLCanvasElement, Loader: React.FC) {
-        this._resizeLoadingUI = this._resizeLoadingUI.bind(this);
-        this._renderingCanvas = renderingCanvas;
-        /* if (this._loadingDiv) {
-            // Do not add a loading screen if there is already one
-            return;
-        } */
-        this._loadingDiv = document.createElement('div');
-        this._loadingDiv.id = 'loader';
-        this._loadingDiv.style.display = 'none';
-        document.body.appendChild(this._loadingDiv);
-        const loadingDiv = createRoot(this._loadingDiv);
-        loadingDiv.render(<Loader />);
-    }
-
-    // Resize
-    _resizeLoadingUI() {
-        const canvasRect = this._renderingCanvas.getBoundingClientRect();
-        const canvasPositioning = window.getComputedStyle(this._renderingCanvas).position;
-        if (!this._loadingDiv) {
-            return;
+    constructor(
+        private _renderingCanvas: HTMLCanvasElement,
+        Loader: React.FC,
+        private _animationStyle?: TransitionStyle,
+    ) {
+        const loadingDiv = document.createElement('div');
+        loadingDiv.id = 'loader';
+        loadingDiv.innerHTML = renderToStaticMarkup(<Loader />);
+        if (this._animationStyle) {
+            Object.assign(loadingDiv.style, this._animationStyle.start);
+        } else {
+            loadingDiv.style.transition = 'opacity 1s';
         }
-        this._loadingDiv.style.position = canvasPositioning === 'fixed' ? 'fixed' : 'absolute';
-        const scrollLeft = document.documentElement.scrollLeft;
-        const scrollTop = document.documentElement.scrollTop;
-        this._loadingDiv.style.left = canvasRect.left + scrollLeft + 'px';
-        this._loadingDiv.style.top = canvasRect.top + scrollTop + 'px';
-        this._loadingDiv.style.width = canvasRect.width + 'px';
-        this._loadingDiv.style.height = canvasRect.height + 'px';
+        loadingDiv.style.display = 'none';
+        this._loadingDiv = loadingDiv;
     }
-
     /**
      * Function called to display the loading screen
      */
-    displayLoadingUI() {
+    public displayLoadingUI(): void {
+        if (this._isLoading) {
+            // Do not add a loading screen if it is already loading
+            return;
+        }
+
+        this._isLoading = true;
+        // get current engine by rendering canvas
+        this._engine = EngineStore.Instances.find(engine => engine.getRenderingCanvas() === this._renderingCanvas) as AbstractEngine;
+
+        const canvases: Array<HTMLCanvasElement> = [];
+        const views = this._engine.views;
+        if (views?.length) {
+            for (const view of views) {
+                if (view.enabled) {
+                    canvases.push(view.target);
+                }
+            }
+        } else {
+            canvases.push(this._renderingCanvas);
+        }
+        canvases.forEach((canvas, index) => {
+            const clonedLoadingDiv = this._loadingDiv!.cloneNode(true) as HTMLDivElement;
+            clonedLoadingDiv.id += `-${index}`;
+            clonedLoadingDiv.style.display = 'block';
+            this._loadingDivToRenderingCanvasMap.set(clonedLoadingDiv, [canvas, null]);
+        });
+
         this._resizeLoadingUI();
-        window.addEventListener('resize', this._resizeLoadingUI);
-        this._loadingDiv.style.display = 'block';
+
+        this._resizeObserver = this._engine.onResizeObservable.add(() => {
+            this._resizeLoadingUI();
+        });
+
+        this._loadingDivToRenderingCanvasMap.forEach((_, loadingDiv) => {
+            document.body.appendChild(loadingDiv);
+        });
     }
 
     /**
      * Function called to hide the loading screen
      */
-    hideLoadingUI() {
-        window.removeEventListener('resize', this._resizeLoadingUI);
-        this._loadingDiv.style.display = 'none';
+    public hideLoadingUI(): void {
+        if (!this._isLoading) {
+            return;
+        }
+
+        let completedTransitions = 0;
+
+        const onTransitionEnd = (event: TransitionEvent) => {
+            const loadingDiv = event.target as HTMLDivElement;
+            // ensure that ending transition event is generated by one of the current loadingDivs
+            const isTransitionEndOnLoadingDiv = this._loadingDivToRenderingCanvasMap.has(loadingDiv);
+
+            if (isTransitionEndOnLoadingDiv) {
+                completedTransitions++;
+                loadingDiv.remove();
+
+                const allTransitionsCompleted = completedTransitions === this._loadingDivToRenderingCanvasMap.size;
+                if (allTransitionsCompleted) {
+                    window.removeEventListener('transitionend', onTransitionEnd);
+                    this._engine!.onResizeObservable.remove(this._resizeObserver);
+                    this._loadingDivToRenderingCanvasMap.clear();
+                    this._engine = null;
+                    this._isLoading = false;
+                }
+            }
+        };
+
+        this._loadingDivToRenderingCanvasMap.forEach((_, loadingDiv) => {
+            if (this._animationStyle) {
+                Object.assign(loadingDiv.style, this._animationStyle.end);
+            } else {
+                loadingDiv.style.opacity = '0';
+            }
+        });
+
+        window.addEventListener('transitionend', onTransitionEnd);
     }
+
+    /**
+     * Checks if the layout of the canvas has changed by comparing the current layout
+     * rectangle with the previous one.
+     *
+     * This function compares of the two `DOMRect` objects to determine if any of the layout dimensions have changed.
+     * If the layout has changed or if there is no previous layout (i.e., `previousCanvasRect` is `null`),
+     * it returns `true`. Otherwise, it returns `false`.
+     *
+     * @param previousCanvasRect defines the previously recorded `DOMRect` of the canvas, or `null` if no previous state exists.
+     * @param currentCanvasRect defines the current `DOMRect` of the canvas to compare against the previous layout.
+     * @returns `true` if the layout has changed, otherwise `false`.
+     */
+    private _isCanvasLayoutChanged(previousCanvasRect: DOMRect | null, currentCanvasRect: DOMRect) {
+        return (
+            !previousCanvasRect ||
+            previousCanvasRect.left !== currentCanvasRect.left ||
+            previousCanvasRect.top !== currentCanvasRect.top ||
+            previousCanvasRect.right !== currentCanvasRect.right ||
+            previousCanvasRect.bottom !== currentCanvasRect.bottom ||
+            previousCanvasRect.width !== currentCanvasRect.width ||
+            previousCanvasRect.height !== currentCanvasRect.height ||
+            previousCanvasRect.x !== currentCanvasRect.x ||
+            previousCanvasRect.y !== currentCanvasRect.y
+        );
+    }
+
+    // Resize
+    private _resizeLoadingUI = () => {
+        if (!this._isLoading) {
+            return;
+        }
+
+        this._loadingDivToRenderingCanvasMap.forEach(([canvas, previousCanvasRect], loadingDiv) => {
+            const currentCanvasRect = canvas.getBoundingClientRect();
+            if (this._isCanvasLayoutChanged(previousCanvasRect, currentCanvasRect)) {
+                const canvasPositioning = window.getComputedStyle(canvas).position;
+
+                loadingDiv.style.position = canvasPositioning === 'fixed' ? 'fixed' : 'absolute';
+                loadingDiv.style.left = currentCanvasRect.left + window.scrollX + 'px';
+                loadingDiv.style.top = currentCanvasRect.top + window.scrollY + 'px';
+                loadingDiv.style.width = currentCanvasRect.width + 'px';
+                loadingDiv.style.height = currentCanvasRect.height + 'px';
+
+                this._loadingDivToRenderingCanvasMap.set(loadingDiv, [canvas, currentCanvasRect]);
+            }
+        });
+    };
 }
 
 export default CustomLoadingScreen;

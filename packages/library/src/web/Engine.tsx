@@ -1,6 +1,6 @@
 import React, { useEffect, Children, useState, useRef, isValidElement, cloneElement } from 'react';
-import { Engine as BabylonEngine, NullEngine, type EngineOptions, Scene, EventState, type NullEngineOptions } from '@babylonjs/core';
-import CustomLoadingScreen from './CustomLoadingScreen';
+import { Engine as BabylonEngine, NullEngine, type EngineOptions, Scene, EventState, type NullEngineOptions, ILoadingScreen } from '@babylonjs/core';
+import CustomLoadingScreen, { type LoadingScreenOptions } from './CustomLoadingScreen';
 import { FiberProvider } from 'its-fine';
 import { type EngineStore } from '../core/store';
 import { Logger } from '@dvmstudios/reactylon-common';
@@ -10,7 +10,7 @@ export type EngineProps = React.PropsWithChildren<{
     isMultipleCanvas?: boolean;
     engineOptions?: EngineOptions;
     adaptToDeviceRatio?: boolean;
-    loader?: React.FC;
+    loadingScreenOptions?: LoadingScreenOptions;
     /**
      * This property is typically not required and has no effect when using multiple scenes.
      * @default 'reactylon-canvas'
@@ -29,7 +29,7 @@ export const Engine: React.FC<EngineProps> = ({
     antialias,
     engineOptions,
     adaptToDeviceRatio,
-    loader,
+    loadingScreenOptions,
     canvasId = 'reactylon-canvas',
     _nullEngineOptions,
     isMultipleCanvas,
@@ -70,8 +70,9 @@ export const Engine: React.FC<EngineProps> = ({
         /* ENGINE
         ------------------------------------------------------------------------------------------ */
         const engine = process.env.NODE_ENV === 'test' ? new NullEngine(_nullEngineOptions) : new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
-        if (loader) {
-            engine.loadingScreen = new CustomLoadingScreen(canvas as HTMLCanvasElement, loader);
+        if (loadingScreenOptions) {
+            const { component, animationStyle } = loadingScreenOptions;
+            engine.loadingScreen = new CustomLoadingScreen(canvas as HTMLCanvasElement, component, animationStyle) as unknown as ILoadingScreen;
         }
         engine.runRenderLoop(() => {
             const camera = engine!.activeView?.camera;

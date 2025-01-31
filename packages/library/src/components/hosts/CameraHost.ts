@@ -1,11 +1,11 @@
 import { ComponentInstance, RootContainer } from '@types';
 import { Host } from './Host';
-import { CoreHostProps, WebXRCameraProps } from '@props';
+import { CameraProps, CoreHostProps, WebXRCameraProps } from '@props';
 import { WebXRCamera } from '@babylonjs/core';
 import { BabylonPackages } from '@dvmstudios/reactylon-common';
 
 export class CameraHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<WebXRCameraProps>, rootContainer: RootContainer) {
+    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<WebXRCameraProps & CameraProps>, rootContainer: RootContainer) {
         if (Class.name === WebXRCamera.name) {
             const { isManual, ...rest } = props;
             // camera created by XR default experience
@@ -31,8 +31,32 @@ export class CameraHost {
                 }
             }
         }
-        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer);
-        element.handlers = {};
-        return element;
+        const camera = Host.createInstance(type, isBuilder, Class, props, rootContainer);
+        camera.handlers = {};
+
+        const { isMultipleCanvas, isMultipleScene } = rootContainer;
+        if (isMultipleCanvas) {
+            const { engine, scene } = rootContainer;
+            const canvas = props.canvas!;
+            if (isMultipleScene) {
+                const view = (engine.views || []).find(view => view.target === canvas);
+                if (view) {
+                    engine.unRegisterView(canvas);
+                }
+                engine.registerView(canvas, camera);
+            } else {
+                engine.registerView(canvas, camera);
+                canvas.onclick = () => {
+                    if (scene.activeCamera !== camera) {
+                        scene.activeCamera?.detachControl();
+                        engine.inputElement = canvas;
+                        scene.activeCamera = camera;
+                        camera.attachControl();
+                    }
+                };
+            }
+        }
+
+        return camera;
     }
 }

@@ -6,7 +6,6 @@ import { SceneContext, EngineStore, Store, createBabylonStore } from './store';
 import { RootContainer } from '@types';
 import Reactylon from '../reconciler';
 import { type ContextBridge, useContextBridge } from 'its-fine';
-import { type CameraProps } from '@props';
 import { type StoreApi } from 'zustand';
 
 type SceneProps = React.PropsWithChildren<{
@@ -85,19 +84,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                         if (scene.activeCamera) {
                             engine.registerView(canvas, scene.activeCamera as Camera);
                         }
-
                         scene.detachControl();
-
-                        scene.onNewCameraAddedObservable.add(camera => {
-                            // HACK: ensure that camera.dispose() is invoked on old camera before to unregister and register new canvas and camera
-                            setTimeout(() => {
-                                const view = (engine.views || []).find(view => view.target === canvas);
-                                if (view) {
-                                    engine.unRegisterView(canvas);
-                                }
-                                engine.registerView(canvas, camera);
-                            }, 0);
-                        });
 
                         canvas.onclick = () => {
                             if (activeScene !== scene) {
@@ -107,21 +94,6 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                                 activeScene = scene;
                             }
                         };
-                    } else {
-                        scene.onNewCameraAddedObservable.add(camera => {
-                            const augmentedCamera = camera as Camera & CameraProps;
-                            const canvas = augmentedCamera.canvas!;
-                            engine.registerView(canvas, camera);
-
-                            canvas.onclick = () => {
-                                if (scene.activeCamera !== camera) {
-                                    scene.activeCamera?.detachControl();
-                                    engine.inputElement = canvas;
-                                    scene.activeCamera = camera;
-                                    camera.attachControl();
-                                }
-                            };
-                        });
                     }
                 }
 
