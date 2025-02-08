@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Nullable, Camera } from '@babylonjs/core';
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
-import { SceneContext, EngineStore, Store, createBabylonStore } from './store';
-import { RootContainer } from '@types';
+import { SceneContext, Store, createBabylonStore } from './store';
+import { RootContainer, type EngineContext } from '@types';
 import Reactylon from '../reconciler';
 import { type ContextBridge, useContextBridge } from 'its-fine';
 import { type StoreApi } from 'zustand';
@@ -25,14 +25,14 @@ type SceneProps = React.PropsWithChildren<{
      * @internal
      * This prop is only for internal use and should not be passed to this component.
      */
-    _context?: EngineStore;
+    _context?: EngineContext;
 }>;
 
 //FIXME: replace global var with a singleton Manager
 export let activeScene: BabylonScene | null = null;
 
 export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }) => {
-    const { engine, isMultipleCanvas, isMultipleScene } = _context as EngineStore;
+    const { engine, isMultipleCanvas, isMultipleScene, disposeEngine } = _context as EngineContext;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
     const isFirstRender = useRef(false);
 
@@ -128,7 +128,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
         })();
 
         return () => {
-            Reactylon.unmount(rootContainer.current!);
+            Reactylon.unmount(rootContainer.current!, disposeEngine);
             rootContainer.current = null;
         };
     }, []);

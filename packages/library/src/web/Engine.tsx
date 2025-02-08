@@ -1,9 +1,9 @@
 import React, { useEffect, Children, useState, useRef, isValidElement, cloneElement } from 'react';
-import { Engine as BabylonEngine, NullEngine, type EngineOptions, Scene, EventState, type NullEngineOptions, ILoadingScreen } from '@babylonjs/core';
+import { Engine as BabylonEngine, NullEngine, type EngineOptions, type NullEngineOptions, ILoadingScreen } from '@babylonjs/core';
 import CustomLoadingScreen, { type LoadingScreenOptions } from './CustomLoadingScreen';
 import { FiberProvider } from 'its-fine';
-import { type EngineStore } from '../core/store';
 import { Logger } from '@dvmstudios/reactylon-common';
+import { EngineContext } from '@types';
 
 export type EngineProps = React.PropsWithChildren<{
     antialias?: boolean;
@@ -23,8 +23,6 @@ export type EngineProps = React.PropsWithChildren<{
     _nullEngineOptions?: NullEngineOptions;
 }>;
 
-export type OnFrameRenderFn = (eventData: Scene, eventState: EventState) => void;
-
 export const Engine: React.FC<EngineProps> = ({
     antialias,
     engineOptions,
@@ -35,7 +33,7 @@ export const Engine: React.FC<EngineProps> = ({
     isMultipleCanvas,
     ...rest
 }) => {
-    const [context, setContext] = useState<EngineStore | null>(null);
+    const [context, setContext] = useState<EngineContext | null>(null);
     const engineRef = useRef<{
         engine: BabylonEngine;
         onResizeWindow: () => void;
@@ -70,6 +68,7 @@ export const Engine: React.FC<EngineProps> = ({
         /* ENGINE
         ------------------------------------------------------------------------------------------ */
         const engine = process.env.NODE_ENV === 'test' ? new NullEngine(_nullEngineOptions) : new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
+        BabylonEngine.audioEngine!.useCustomUnlockedButton = true;
         if (loadingScreenOptions) {
             const { component, animationStyle } = loadingScreenOptions;
             engine.loadingScreen = new CustomLoadingScreen(canvas as HTMLCanvasElement, component, animationStyle) as unknown as ILoadingScreen;
@@ -93,14 +92,15 @@ export const Engine: React.FC<EngineProps> = ({
         engineRef.current.onResizeWindow = () => engine.resize();
         window.addEventListener('resize', engineRef.current.onResizeWindow);
 
-        setContext({ engine, isMultipleCanvas: !!isMultipleCanvas, isMultipleScene });
-
-        return () => {
-            if (engineRef.current.engine) {
+        setContext({
+            engine,
+            isMultipleCanvas: !!isMultipleCanvas,
+            isMultipleScene,
+            disposeEngine: () => {
                 window.removeEventListener('resize', engineRef.current.onResizeWindow);
                 engineRef.current.engine.dispose();
-            }
-        };
+            },
+        });
     }, []);
 
     return (

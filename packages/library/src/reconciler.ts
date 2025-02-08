@@ -4,7 +4,7 @@ import * as BabylonCore from '@babylonjs/core';
 import * as BabylonGui from '@babylonjs/gui';
 import lodash from 'lodash';
 import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
-import { type ComponentInstance, type UpdatePayload, type RootContainer } from '@types';
+import { type ComponentInstance, type UpdatePayload, type RootContainer, type EngineContext } from '@types';
 import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
@@ -319,9 +319,8 @@ const reconciler = ReactReconciler<
             if (container) {
                 container.metadata.children.push(child);
                 // FIXME: should i add the parent also?
-                // child.parent = container
             } else {
-                console.log('addend child with no root (createPortal only?)');
+                // INVESTIGATION: what kind of node is outside container?
                 addChild(container, child);
             }
         }
@@ -418,8 +417,8 @@ const reconciler = ReactReconciler<
      */
 
     prepareUpdate(instance, type, oldProps, newProps, rootContainer, hostContext) {
-        //TODO: exclude constructor props
-        //FIXME: oldProps always !== newProps so how can i optimize equality process? Immutable data structure? Shallow comparison on what?
+        //TODO: exclude constructor props (only if they are not also non-constructor props)
+        //TODO: fine tune ObjectUtils.isEqualCustomizer to avoid unnecessary rerenders
 
         //@ts-ignore
         const { children: _oldChildren, physicsAggregate: _oldPhysicsAggregate, ...oldPropsWihoutChildren } = oldProps;
@@ -538,14 +537,12 @@ const reconciler = ReactReconciler<
      */
     // waitForCommitToBeReady() { return null }
 
-    detachDeletedInstance(instance) {
-        /* empty */
-    },
+    detachDeletedInstance(instance) {},
 });
 
 type ReactylonType = {
     render: (element: React.ReactNode, rootContainer: RootContainer) => void;
-    unmount: (rootContainer: RootContainer) => void;
+    unmount: (rootContainer: RootContainer, disposeEngine: EngineContext['disposeEngine']) => void;
 };
 
 export const roots = new Map<any, FiberRoot>();
@@ -570,11 +567,16 @@ const Reactylon: ReactylonType = {
         reconciler.updateContainer(element, root, null, null);
     },
 
-    unmount(container: FiberRoot): void {
-        Logger.log('unmounted');
+    unmount(container: FiberRoot, disposeEngine): void {
+        Logger.log(`unmount - container unmounted`);
         const root = roots.get(container);
-        reconciler.updateContainer(null, root, null, null);
-        roots.delete(container);
+        reconciler.updateContainer(null, root, null, () => {
+            roots.delete(container);
+            if (roots.size === 0) {
+                // no more scenes so dispose the engine
+                disposeEngine?.();
+            }
+        });
     },
 };
 
