@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Nullable, Camera } from '@babylonjs/core';
+import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Nullable, Camera, Engine } from '@babylonjs/core';
 import { GUI3DManager } from '@babylonjs/gui';
 import HavokPhysics from '@babylonjs/havok';
 import { SceneContext, Store, createBabylonStore } from './store';
@@ -85,12 +85,34 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                             engine.registerView(canvas, scene.activeCamera as Camera);
                         }
                         scene.detachControl();
-
                         canvas.onclick = () => {
+                            if (!activeScene) {
+                                // disable audio on all scenes but no current
+                                engine.scenes.forEach(_scene => {
+                                    if (_scene !== scene) {
+                                        if (_scene.audioEnabled) {
+                                            _scene.audioEnabled = false;
+                                        }
+                                    }
+                                });
+                            }
                             if (activeScene !== scene) {
+                                if (activeScene?.audioEnabled) {
+                                    // disabled audio on previous scene
+                                    activeScene.audioEnabled = false;
+                                }
                                 activeScene?.detachControl();
                                 engine.inputElement = canvas;
                                 scene.attachControl();
+                                // set listener to camera position of current scene
+                                if (Engine.audioEngine) {
+                                    scene.audioEnabled = true;
+                                    const listener = Engine.audioEngine.audioContext?.listener;
+                                    if (listener) {
+                                        const camPos = scene.activeCamera!.position;
+                                        listener.setPosition(camPos.x, camPos.y, camPos.z);
+                                    }
+                                }
                                 activeScene = scene;
                             }
                         };
@@ -128,7 +150,10 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
         })();
 
         return () => {
-            Reactylon.unmount(rootContainer.current!, disposeEngine);
+            Reactylon.unmount(rootContainer.current!, () => {
+                activeScene = null;
+                disposeEngine();
+            });
             rootContainer.current = null;
         };
     }, []);
