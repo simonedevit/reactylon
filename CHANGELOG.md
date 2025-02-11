@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.3.1](https://github.com/simonedevit/reactylon/compare/v1.3.0...v1.3.1) (2025-02-11)
+
+
+### Bug Fixes
+
+* **components:** use Babylon.js audio button by default ([17fa5e3](https://github.com/simonedevit/reactylon/commit/17fa5e3d043dc98ed479bee1edc6f95490d18f12))
+
 ## [1.3.0](https://github.com/simonedevit/reactylon/compare/v1.2.2...v1.3.0) (2025-02-11)
 
 
