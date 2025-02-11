@@ -68,7 +68,6 @@ export const Engine: React.FC<EngineProps> = ({
         /* ENGINE
         ------------------------------------------------------------------------------------------ */
         const engine = process.env.NODE_ENV === 'test' ? new NullEngine(_nullEngineOptions) : new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
-        BabylonEngine.audioEngine!.useCustomUnlockedButton = true;
         if (loadingScreenOptions) {
             const { component, animationStyle } = loadingScreenOptions;
             engine.loadingScreen = new CustomLoadingScreen(canvas as HTMLCanvasElement, component, animationStyle) as unknown as ILoadingScreen;
