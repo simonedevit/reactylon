@@ -1,5 +1,17 @@
 # Reactylon - Changelog
 
+## [1.3.0](https://github.com/simonedevit/reactylon/compare/v1.2.2...v1.3.0) (2025-02-11)
+
+
+### Features
+
+* **general:** handle sound on multiple canvas and scenes ([8bdde2b](https://github.com/simonedevit/reactylon/commit/8bdde2b1bbbbab9ef459ab13677bd3a7ca74346c))
+
+
+### Bug Fixes
+
+* **general:** dispose engine after last scene removing ([7841ada](https://github.com/simonedevit/reactylon/commit/7841ada815202f72e98fe3de56f707b5338aa4e5))
+
 ## [1.2.2](https://github.com/simonedevit/reactylon/compare/v1.2.1...v1.2.2) (2025-01-31)
 
 
