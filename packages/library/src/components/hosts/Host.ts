@@ -7,7 +7,7 @@ import '../../index';
 import coreConstructors from '../../_generated/babylon.core.constructors';
 import { CoreHostProps } from '@props';
 
-const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'physicsAggregate'];
+const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom'];
 
 export class Host {
     static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps, rootContainer: RootContainer, cloneFn?: Function) {
@@ -48,7 +48,7 @@ export class Host {
             });
         }
 
-        // use metadata to store children in reconciler
+        // use metadata to store children in renderer
         if (!element.metadata) {
             element.metadata = {
                 babylonPackage: BabylonPackages.CORE,

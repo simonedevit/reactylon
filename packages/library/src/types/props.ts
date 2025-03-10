@@ -1,4 +1,4 @@
-import { ActionEvent, ActionManager, HighlightLayer, Node, Observable, PhysicsAggregate, Scene, StandardMaterial } from '@babylonjs/core';
+import { ActionEvent, ActionManager, HighlightLayer, Node, Observable, Scene, StandardMaterial } from '@babylonjs/core';
 import { type Either } from './types';
 import { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
 
@@ -124,7 +124,7 @@ export type LightProps = Clonable;
 export type CameraProps = {
     // only for multiple canvas and single scene
     canvas?: HTMLCanvasElement;
-}
+};
 
 export type WebXRCameraProps = {
     // not from XR default experience helper
@@ -138,16 +138,12 @@ export type MaterialProps = Partial<Clonable> & {
 // you don't need to add it to JSX namespace because it is dynamically done in generator (due to multitude of mesh components)
 export type MeshProps = Either<Clonable, Instanceable> &
     Triggerable & {
-        // add here other mesh props (e.g. "onDrag")
-        physicsAggregate?: {
-            type: ConstructorParameters<typeof PhysicsAggregate>[1];
-            _options: ConstructorParameters<typeof PhysicsAggregate>[2];
-        };
         // highlight layer props
         highlightLayer?: {
             color: Parameters<HighlightLayer['addMesh']>[1];
             glowEmissiveOnly?: Parameters<HighlightLayer['addMesh']>[2];
         };
+        // add here other mesh props (e.g. "onDrag")
     };
 
 export type GuiProps =

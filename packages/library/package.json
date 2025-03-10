@@ -35,7 +35,6 @@
     "peerDependencies": {
         "@babylonjs/core": "^7.40.2 ",
         "@babylonjs/gui": "^7.40.2 ",
-        "@babylonjs/havok": "^1.3.7",
         "@babylonjs/react-native": "^1.8.6",
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.3.1",

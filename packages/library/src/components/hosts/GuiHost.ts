@@ -81,7 +81,7 @@ export class GuiHost {
                 }
             });
 
-        // use metadata to store children in reconciler
+        // use metadata to store children in renderer
         if (!element.metadata) {
             element.metadata = {
                 babylonPackage: BabylonPackages.GUI,

@@ -54,7 +54,7 @@ export const Engine: React.FC<EngineProps> = ({
                     if (isValidElement(child)) {
                         if (!child.props.canvas) {
                             Logger.error(
-                                `Engine - initializeScene - Each Scene component requires a corresponding canvas element. Ensure that you provide one canvas for every Scene you are using.`,
+                                `Engine - initializeEngine - Each Scene component requires a corresponding canvas element. Ensure that you provide one canvas for every Scene you are using.`,
                             );
                         }
                     }

@@ -18,7 +18,7 @@ export class CameraHost {
                         (webXRCamera as ComponentInstance<any>)[key] = value;
                     });
 
-                    // use metadata to store children in reconciler
+                    // use metadata to store children in renderer
                     if (!webXRCamera.metadata) {
                         webXRCamera.metadata = {
                             babylonPackage: BabylonPackages.CORE,

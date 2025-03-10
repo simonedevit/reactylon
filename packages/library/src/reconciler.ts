@@ -4,7 +4,7 @@ import * as BabylonCore from '@babylonjs/core';
 import * as BabylonGui from '@babylonjs/gui';
 import lodash from 'lodash';
 import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
-import { type ComponentInstance, type UpdatePayload, type RootContainer, type EngineContext } from '@types';
+import { type ComponentInstance, type UpdatePayload, type RootContainer, type EngineContext, ComponentInstanceDependent } from '@types';
 import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
@@ -55,7 +55,24 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
     }
 }
 
-function shouldDisposeMaterialsAndTextures(child: unknown) {
+function removeChild(parentInstance: ComponentInstance, child: ComponentInstance) {
+    Logger.group('removeChild', [
+        [`parentInstance: ${parentInstance.name}`, parentInstance],
+        [`child: ${child.name}`, child],
+    ]);
+    // remove recursively children
+    if (child.metadata?.children) {
+        child.metadata.children.forEach((c: ComponentInstance) => removeChild(child, c));
+    }
+    const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
+    parentInstance.metadata.children.splice(index, 1);
+    child.handlers?.removeChild?.(parentInstance, child);
+    //const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
+    //child.dispose?.(false, disposeMaterialsAndTextures);
+    child.dispose?.();
+}
+
+/* function shouldDisposeMaterialsAndTextures(child: unknown) {
     if (child instanceof BabylonCore.AbstractMesh) {
         // no material (i.e. "default material")
         if (!child.material) {
@@ -72,7 +89,7 @@ function shouldDisposeMaterialsAndTextures(child: unknown) {
         }
     }
     return true;
-}
+} */
 
 // check methods execution's order: "reconciler.png" and https://blog.atulr.com/react-custom-renderer-2/)
 const reconciler = ReactReconciler<
@@ -122,7 +139,7 @@ const reconciler = ReactReconciler<
                 isBuilder = true;
             } else {
                 // MeshBuilder.ExtrudePolygon
-                if (ResolvedBabylonElement === 'ExtrudePolygon') {
+                if (ResolvedBabylonElement === 'ExtrudePolygon' || ResolvedBabylonElement === 'Mesh') {
                     isBuilder = true;
                 }
                 //@ts-ignore
@@ -144,7 +161,14 @@ const reconciler = ReactReconciler<
                     createInstanceFn = LightHost.createInstance;
                 } else if (Class.prototype instanceof BabylonCore.Camera) {
                     createInstanceFn = CameraHost.createInstance;
-                } /* else if (Class.name === BabylonCore.TransformNode.name) {
+                } else if (Class.name === BabylonCore.PhysicsAggregate.name) {
+                    return {
+                        isParentDependent: true,
+                        // @ts-ignore
+                        createInstanceFn: (transformNode: BabylonCore.TransformNode) => Host.createInstance(type, isBuilder, Class, { ...props, transformNode }, rootContainer),
+                    };
+                }
+                /* else if (Class.name === BabylonCore.TransformNode.name) {
                     createInstanceFn = TransformNodeHost.createInstance;
                 }*/
                 break;
@@ -174,7 +198,12 @@ const reconciler = ReactReconciler<
      * This method happens in the render phase.It can mutate parentInstance and child, but it must not modify any other nodes.It's called while the tree is still being built up and not connected to the actual tree on the screen.
      */
 
-    appendInitialChild(parentInstance, child) {
+    appendInitialChild(parentInstance, child: ComponentInstance<ComponentInstanceDependent>) {
+        // delayed instance creation until you have the parent
+        const { isParentDependent, createInstanceFn } = child;
+        if (isParentDependent) {
+            child = createInstanceFn(parentInstance);
+        }
         // Log information about appending initial child to parent
         Logger.group('appendInitialChild', [
             [`parentInstance: ${parentInstance.name}`, parentInstance],
@@ -360,15 +389,7 @@ const reconciler = ReactReconciler<
      * React will only call it for the top - level node that is being removed.It is expected that garbage collection would take care of the whole subtree.You are not expected to traverse the child tree in it.
      */
     removeChild(parentInstance, child) {
-        Logger.group('removeChild', [
-            [`parentInstance: ${parentInstance.name}`, parentInstance],
-            [`child: ${child.name}`, child],
-        ]);
-        const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
-        parentInstance.metadata.children.splice(index, 1);
-        child.handlers?.removeChild?.(parentInstance, child);
-        const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
-        child.dispose?.(false, disposeMaterialsAndTextures);
+        removeChild(parentInstance, child);
     },
 
     /*
@@ -379,11 +400,16 @@ const reconciler = ReactReconciler<
             ['container', container],
             [`child: ${child.name}`, child],
         ]);
+        // remove recursively children
+        if (child.metadata?.children) {
+            child.metadata.children.forEach((c: ComponentInstance) => removeChild(child, c));
+        }
         const index = container.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
         container.metadata.children.splice(index, 1);
         child.handlers?.removeChild?.(container, child);
-        const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
-        child.dispose?.(false, disposeMaterialsAndTextures);
+        //const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
+        //child.dispose?.(false, disposeMaterialsAndTextures);
+        child.dispose?.();
     },
 
     /*
@@ -421,9 +447,9 @@ const reconciler = ReactReconciler<
         //TODO: fine tune ObjectUtils.isEqualCustomizer to avoid unnecessary rerenders
 
         //@ts-ignore
-        const { children: _oldChildren, physicsAggregate: _oldPhysicsAggregate, ...oldPropsWihoutChildren } = oldProps;
+        const { children: _oldChildren, ...oldPropsWihoutChildren } = oldProps;
         //@ts-ignore
-        const { children: _newChildren, physicsAggregate: _newPhysicsAggregate, ...newPropsWihoutChildren } = newProps;
+        const { children: _newChildren, ...newPropsWihoutChildren } = newProps;
 
         const areSameProps = isEqualWith(oldPropsWihoutChildren, newPropsWihoutChildren, ObjectUtils.isEqualCustomizer);
         if (areSameProps) {

@@ -1,6 +1,6 @@
 import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { ActionEvent, ActionManager, ExecuteCodeAction, HighlightLayer, Mesh, PhysicsAggregate, Scene } from '@babylonjs/core';
+import { ActionEvent, ActionManager, ExecuteCodeAction, HighlightLayer, Mesh, Scene } from '@babylonjs/core';
 import { Triggerable, MeshTriggers, MeshProps, CoreHostProps } from '@props';
 
 function handleEvents(props: CoreHostProps<MeshProps>, scene: Scene) {
@@ -34,7 +34,7 @@ export class MeshHost {
     static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<MeshProps>, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
-        const { name, cloneFrom, instanceFrom, physicsAggregate } = props;
+        const { name, cloneFrom, instanceFrom } = props;
         const meshId = cloneFrom || instanceFrom;
         if (meshId) {
             cloneFn = () => {
@@ -50,9 +50,6 @@ export class MeshHost {
             };
         }
         const element = Host.createInstance(type, isBuilder, Class, props, rootContainer, cloneFn);
-        if (physicsAggregate) {
-            element.metadata.physicsAggregate = new PhysicsAggregate(element, physicsAggregate.type, physicsAggregate._options);
-        }
         element.actionManager = handleEvents(props, scene);
         element.handlers = {
             addChild: MeshHost.addChild,
@@ -74,10 +71,6 @@ export class MeshHost {
     }
 
     static removeChild(parentInstance: ComponentInstance, child: AugmentedMesh): void {
-        //FIXME: child.metadata is null. Does Babylon set it somewhere? Check it with new physic system (v2)
-        if (child.metadata && child.metadata.physicsAggregate) {
-            child.metadata.physicsAggregate.dispose();
-        }
         // you don't need, automatically done by Babylon.js when you dispose a mesh
         /*if (parentInstance instanceof HighlightLayer){
             parentInstance.removeMesh(child);

@@ -50,7 +50,7 @@ export type BabylonProps<Props, ConstructorProps, Element> = {
         children?: React.ReactNode;
     } & CommonProps<Element>;
 
-/* PROPS USED BY RECONCILER */
+/* PROPS USED BY RENDERER */
 
 export type ComponentInstance<T = unknown> = Partial<Clonable> &
     Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
@@ -69,6 +69,11 @@ export type ComponentInstance<T = unknown> = Partial<Clonable> &
             commitUpdate(instance: ComponentInstance<T>, updatePayload: UpdatePayload): void;
         }>;
     } & T;
+
+export type ComponentInstanceDependent = {
+    isParentDependent: boolean;
+    createInstanceFn: (...args: Array<unknown>) => any;
+};
 
 export type UpdatePayload = {
     [key: string]: unknown;

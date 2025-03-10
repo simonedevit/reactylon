@@ -1,11 +1,16 @@
 //@ts-nocheck
 import { type BabylonProps, type ExcludeReadonlyAndPrivate } from '../types/types';
 import { type MeshProps, type GuiProps, type Clonable, type WebXRCameraProps, type TextureProps, type MaterialProps, type CameraProps } from '../types/props';
+import { AbortError } from '@babylonjs/core';
 import { AbstractActionManager } from '@babylonjs/core';
 import { AbstractAssetContainer } from '@babylonjs/core';
 import { AbstractAssetTask } from '@babylonjs/core';
+import { AbstractAudioBus } from '@babylonjs/core';
+import { AbstractAudioNode } from '@babylonjs/core';
 import { AbstractEngine } from '@babylonjs/core';
 import { AbstractMesh } from '@babylonjs/core';
+import { AbstractNamedAudioNode } from '@babylonjs/core';
+import { AbstractSound } from '@babylonjs/core';
 import { AcquireNativeObjectAsync } from '@babylonjs/core';
 import { Action } from '@babylonjs/core';
 import { ActionEvent } from '@babylonjs/core';
@@ -36,6 +41,7 @@ import { AnimationGroupMask } from '@babylonjs/core';
 import { AnimationPropertiesOverride } from '@babylonjs/core';
 import { AnimationRange } from '@babylonjs/core';
 import { AnisotropyBlock } from '@babylonjs/core';
+import { AppendSceneAsync } from '@babylonjs/core';
 import { ApplyLut } from '@babylonjs/core';
 import { ApplyPostProcess } from '@babylonjs/core';
 import { Arc2 } from '@babylonjs/core';
@@ -48,13 +54,17 @@ import { ArcRotateCameraMouseWheelInput } from '@babylonjs/core';
 import { ArcRotateCameraPointersInput } from '@babylonjs/core';
 import { ArcRotateCameraVRDeviceOrientationInput } from '@babylonjs/core';
 import { ArcTan2Block } from '@babylonjs/core';
+import { AreIndices32Bits } from '@babylonjs/core';
+import { AreaLight } from '@babylonjs/core';
 import { AssetContainer } from '@babylonjs/core';
 import { AssetsManager } from '@babylonjs/core';
 import { AssetsProgressEvent } from '@babylonjs/core';
 import { AsyncLock } from '@babylonjs/core';
 import { AsyncLoop } from '@babylonjs/core';
 import { AttachToBoxBehavior } from '@babylonjs/core';
+import { AudioBus } from '@babylonjs/core';
 import { AudioEngine } from '@babylonjs/core';
+import { AudioEngineV2 } from '@babylonjs/core';
 import { AudioSceneComponent } from '@babylonjs/core';
 import { AutoReleaseWorkerPool } from '@babylonjs/core';
 import { AutoRotationBehavior } from '@babylonjs/core';
@@ -136,6 +146,8 @@ import { ColorSplitterBlock } from '@babylonjs/core';
 import { CombineAction } from '@babylonjs/core';
 import { CompleteGreasedLineColorTable } from '@babylonjs/core';
 import { CompleteGreasedLineWidthTable } from '@babylonjs/core';
+import { ComputeAlpha } from '@babylonjs/core';
+import { ComputeBeta } from '@babylonjs/core';
 import { ComputeEffect } from '@babylonjs/core';
 import { ComputeNormalsBlock } from '@babylonjs/core';
 import { ComputeShader } from '@babylonjs/core';
@@ -150,6 +162,9 @@ import { ContainerAssetTask } from '@babylonjs/core';
 import { ConvolutionPostProcess } from '@babylonjs/core';
 import { CopyFloatData } from '@babylonjs/core';
 import { CopyTextureToTexture } from '@babylonjs/core';
+import { CreateAlignedTypedArray } from '@babylonjs/core';
+import { CreateAudioBusAsync } from '@babylonjs/core';
+import { CreateAudioEngineAsync } from '@babylonjs/core';
 import { CreateBox } from '@babylonjs/core';
 import { CreateBoxVertexData } from '@babylonjs/core';
 import { CreateCapsule } from '@babylonjs/core';
@@ -177,11 +192,12 @@ import { CreateHotSpotQueryForPickingInfo } from '@babylonjs/core';
 import { CreateIcoSphere } from '@babylonjs/core';
 import { CreateIcoSphereVertexData } from '@babylonjs/core';
 import { CreateImageBitmapFromSource } from '@babylonjs/core';
-import { CreateImageDataArrayBufferViews } from '@babylonjs/core';
+import { CreateIrradianceImageDataArrayBufferViews } from '@babylonjs/core';
 import { CreateLathe } from '@babylonjs/core';
 import { CreateLineSystem } from '@babylonjs/core';
 import { CreateLineSystemVertexData } from '@babylonjs/core';
 import { CreateLines } from '@babylonjs/core';
+import { CreateMainAudioBusAsync } from '@babylonjs/core';
 import { CreatePickingRay } from '@babylonjs/core';
 import { CreatePickingRayInCameraSpace } from '@babylonjs/core';
 import { CreatePickingRayInCameraSpaceToRef } from '@babylonjs/core';
@@ -192,6 +208,7 @@ import { CreatePolygon } from '@babylonjs/core';
 import { CreatePolygonVertexData } from '@babylonjs/core';
 import { CreatePolyhedron } from '@babylonjs/core';
 import { CreatePolyhedronVertexData } from '@babylonjs/core';
+import { CreateRadianceImageDataArrayBufferViews } from '@babylonjs/core';
 import { CreateResizedCopy } from '@babylonjs/core';
 import { CreateRibbon } from '@babylonjs/core';
 import { CreateRibbonVertexData } from '@babylonjs/core';
@@ -201,8 +218,11 @@ import { CreateScreenshotUsingRenderTarget } from '@babylonjs/core';
 import { CreateScreenshotUsingRenderTargetAsync } from '@babylonjs/core';
 import { CreateScreenshotWithResizeAsync } from '@babylonjs/core';
 import { CreateSegmentedBoxVertexData } from '@babylonjs/core';
+import { CreateSoundAsync } from '@babylonjs/core';
+import { CreateSoundBufferAsync } from '@babylonjs/core';
 import { CreateSphere } from '@babylonjs/core';
 import { CreateSphereVertexData } from '@babylonjs/core';
+import { CreateStreamingSoundAsync } from '@babylonjs/core';
 import { CreateText } from '@babylonjs/core';
 import { CreateTextShapePaths } from '@babylonjs/core';
 import { CreateTiledBox } from '@babylonjs/core';
@@ -276,6 +296,7 @@ import { DoNothingAction } from '@babylonjs/core';
 import { DotBlock } from '@babylonjs/core';
 import { DracoCompression } from '@babylonjs/core';
 import { DracoDecoder } from '@babylonjs/core';
+import { DracoEncoder } from '@babylonjs/core';
 import { DrawWrapper } from '@babylonjs/core';
 import { DualShockPad } from '@babylonjs/core';
 import { DynamicFloat32Array } from '@babylonjs/core';
@@ -318,11 +339,13 @@ import { FlowGraphAbsBlock } from '@babylonjs/core';
 import { FlowGraphAcosBlock } from '@babylonjs/core';
 import { FlowGraphAcoshBlock } from '@babylonjs/core';
 import { FlowGraphAddBlock } from '@babylonjs/core';
+import { FlowGraphArrayIndexBlock } from '@babylonjs/core';
 import { FlowGraphAsinBlock } from '@babylonjs/core';
 import { FlowGraphAsinhBlock } from '@babylonjs/core';
 import { FlowGraphAtan2Block } from '@babylonjs/core';
 import { FlowGraphAtanBlock } from '@babylonjs/core';
 import { FlowGraphAtanhBlock } from '@babylonjs/core';
+import { FlowGraphBezierCurveEasingBlock } from '@babylonjs/core';
 import { FlowGraphBitwiseAndBlock } from '@babylonjs/core';
 import { FlowGraphBitwiseLeftShiftBlock } from '@babylonjs/core';
 import { FlowGraphBitwiseNotBlock } from '@babylonjs/core';
@@ -330,23 +353,29 @@ import { FlowGraphBitwiseOrBlock } from '@babylonjs/core';
 import { FlowGraphBitwiseRightShiftBlock } from '@babylonjs/core';
 import { FlowGraphBitwiseXorBlock } from '@babylonjs/core';
 import { FlowGraphBlock } from '@babylonjs/core';
+import { FlowGraphBooleanToFloat } from '@babylonjs/core';
+import { FlowGraphBooleanToInt } from '@babylonjs/core';
 import { FlowGraphBranchBlock } from '@babylonjs/core';
+import { FlowGraphCallCounterBlock } from '@babylonjs/core';
+import { FlowGraphCancelDelayBlock } from '@babylonjs/core';
 import { FlowGraphCeilBlock } from '@babylonjs/core';
 import { FlowGraphClampBlock } from '@babylonjs/core';
+import { FlowGraphCodeExecutionBlock } from '@babylonjs/core';
+import { FlowGraphCombineMatrix2DBlock } from '@babylonjs/core';
+import { FlowGraphCombineMatrix3DBlock } from '@babylonjs/core';
+import { FlowGraphCombineMatrixBlock } from '@babylonjs/core';
+import { FlowGraphCombineVector2Block } from '@babylonjs/core';
+import { FlowGraphCombineVector3Block } from '@babylonjs/core';
+import { FlowGraphCombineVector4Block } from '@babylonjs/core';
 import { FlowGraphConditionalDataBlock } from '@babylonjs/core';
 import { FlowGraphConnection } from '@babylonjs/core';
 import { FlowGraphConsoleLogBlock } from '@babylonjs/core';
 import { FlowGraphConstantBlock } from '@babylonjs/core';
 import { FlowGraphContext } from '@babylonjs/core';
-import { FlowGraphContextLogger } from '@babylonjs/core';
-import { FlowGraphCoordinateTransformBlock } from '@babylonjs/core';
+import { FlowGraphContextBlock } from '@babylonjs/core';
 import { FlowGraphCoordinator } from '@babylonjs/core';
 import { FlowGraphCosBlock } from '@babylonjs/core';
 import { FlowGraphCoshBlock } from '@babylonjs/core';
-import { FlowGraphCountLeadingZerosBlock } from '@babylonjs/core';
-import { FlowGraphCountOneBitsBlock } from '@babylonjs/core';
-import { FlowGraphCountTrailingZerosBlock } from '@babylonjs/core';
-import { FlowGraphCounterBlock } from '@babylonjs/core';
 import { FlowGraphCrossBlock } from '@babylonjs/core';
 import { FlowGraphCubeRootBlock } from '@babylonjs/core';
 import { FlowGraphDataConnection } from '@babylonjs/core';
@@ -357,66 +386,100 @@ import { FlowGraphDivideBlock } from '@babylonjs/core';
 import { FlowGraphDoNBlock } from '@babylonjs/core';
 import { FlowGraphDotBlock } from '@babylonjs/core';
 import { FlowGraphEBlock } from '@babylonjs/core';
-import { FlowGraphEqBlock } from '@babylonjs/core';
+import { FlowGraphEasingBlock } from '@babylonjs/core';
+import { FlowGraphEqualityBlock } from '@babylonjs/core';
+import { FlowGraphEventBlock } from '@babylonjs/core';
 import { FlowGraphExecutionBlock } from '@babylonjs/core';
 import { FlowGraphExpBlock } from '@babylonjs/core';
+import { FlowGraphExtractMatrix2DBlock } from '@babylonjs/core';
+import { FlowGraphExtractMatrix3DBlock } from '@babylonjs/core';
+import { FlowGraphExtractMatrixBlock } from '@babylonjs/core';
+import { FlowGraphExtractVector2Block } from '@babylonjs/core';
+import { FlowGraphExtractVector3Block } from '@babylonjs/core';
+import { FlowGraphExtractVector4Block } from '@babylonjs/core';
 import { FlowGraphFlipFlopBlock } from '@babylonjs/core';
+import { FlowGraphFloatToBoolean } from '@babylonjs/core';
+import { FlowGraphFloatToInt } from '@babylonjs/core';
 import { FlowGraphFloorBlock } from '@babylonjs/core';
 import { FlowGraphForLoopBlock } from '@babylonjs/core';
-import { FlowGraphFractBlock } from '@babylonjs/core';
+import { FlowGraphFractionBlock } from '@babylonjs/core';
+import { FlowGraphFunctionReferenceBlock } from '@babylonjs/core';
+import { FlowGraphGetAssetBlock } from '@babylonjs/core';
 import { FlowGraphGetPropertyBlock } from '@babylonjs/core';
 import { FlowGraphGetVariableBlock } from '@babylonjs/core';
 import { FlowGraphGreaterThanBlock } from '@babylonjs/core';
 import { FlowGraphGreaterThanOrEqualBlock } from '@babylonjs/core';
+import { FlowGraphIndexOfBlock } from '@babylonjs/core';
 import { FlowGraphInfBlock } from '@babylonjs/core';
-import { FlowGraphInterpolateBlock } from '@babylonjs/core';
+import { FlowGraphIntToBoolean } from '@babylonjs/core';
+import { FlowGraphIntToFloat } from '@babylonjs/core';
+import { FlowGraphInteger } from '@babylonjs/core';
+import { FlowGraphInterpolationBlock } from '@babylonjs/core';
 import { FlowGraphInvertMatrixBlock } from '@babylonjs/core';
-import { FlowGraphIsInfBlock } from '@babylonjs/core';
+import { FlowGraphIsInfinityBlock } from '@babylonjs/core';
 import { FlowGraphIsNanBlock } from '@babylonjs/core';
+import { FlowGraphJsonPointerParserBlock } from '@babylonjs/core';
+import { FlowGraphLeadingZerosBlock } from '@babylonjs/core';
 import { FlowGraphLengthBlock } from '@babylonjs/core';
 import { FlowGraphLessThanBlock } from '@babylonjs/core';
 import { FlowGraphLessThanOrEqualBlock } from '@babylonjs/core';
 import { FlowGraphLog10Block } from '@babylonjs/core';
 import { FlowGraphLog2Block } from '@babylonjs/core';
 import { FlowGraphLogBlock } from '@babylonjs/core';
-import { FlowGraphLogicAndBlock } from '@babylonjs/core';
-import { FlowGraphLogicNotBlock } from '@babylonjs/core';
-import { FlowGraphLogicOrBlock } from '@babylonjs/core';
-import { FlowGraphMatMulBlock } from '@babylonjs/core';
+import { FlowGraphLogger } from '@babylonjs/core';
+import { FlowGraphMathInterpolationBlock } from '@babylonjs/core';
+import { FlowGraphMatrix2D } from '@babylonjs/core';
+import { FlowGraphMatrix3D } from '@babylonjs/core';
+import { FlowGraphMatrixComposeBlock } from '@babylonjs/core';
+import { FlowGraphMatrixDecomposeBlock } from '@babylonjs/core';
+import { FlowGraphMatrixMultiplicationBlock } from '@babylonjs/core';
 import { FlowGraphMaxBlock } from '@babylonjs/core';
 import { FlowGraphMeshPickEventBlock } from '@babylonjs/core';
 import { FlowGraphMinBlock } from '@babylonjs/core';
+import { FlowGraphModuloBlock } from '@babylonjs/core';
 import { FlowGraphMultiGateBlock } from '@babylonjs/core';
 import { FlowGraphMultiplyBlock } from '@babylonjs/core';
 import { FlowGraphNaNBlock } from '@babylonjs/core';
-import { FlowGraphNegBlock } from '@babylonjs/core';
+import { FlowGraphNegationBlock } from '@babylonjs/core';
 import { FlowGraphNormalizeBlock } from '@babylonjs/core';
+import { FlowGraphOneBitsCounterBlock } from '@babylonjs/core';
+import { FlowGraphPathConverter } from '@babylonjs/core';
+import { FlowGraphPathConverterComponent } from '@babylonjs/core';
 import { FlowGraphPauseAnimationBlock } from '@babylonjs/core';
 import { FlowGraphPiBlock } from '@babylonjs/core';
 import { FlowGraphPlayAnimationBlock } from '@babylonjs/core';
-import { FlowGraphPowBlock } from '@babylonjs/core';
+import { FlowGraphPointerOutEventBlock } from '@babylonjs/core';
+import { FlowGraphPointerOverEventBlock } from '@babylonjs/core';
+import { FlowGraphPowerBlock } from '@babylonjs/core';
 import { FlowGraphRadToDegBlock } from '@babylonjs/core';
 import { FlowGraphRandomBlock } from '@babylonjs/core';
 import { FlowGraphReceiveCustomEventBlock } from '@babylonjs/core';
-import { FlowGraphRemainderBlock } from '@babylonjs/core';
 import { FlowGraphRotate2DBlock } from '@babylonjs/core';
 import { FlowGraphRotate3DBlock } from '@babylonjs/core';
+import { FlowGraphRoundBlock } from '@babylonjs/core';
 import { FlowGraphSaturateBlock } from '@babylonjs/core';
+import { FlowGraphSceneReadyEventBlock } from '@babylonjs/core';
+import { FlowGraphSceneTickEventBlock } from '@babylonjs/core';
 import { FlowGraphSendCustomEventBlock } from '@babylonjs/core';
 import { FlowGraphSequenceBlock } from '@babylonjs/core';
+import { FlowGraphSetDelayBlock } from '@babylonjs/core';
 import { FlowGraphSetPropertyBlock } from '@babylonjs/core';
 import { FlowGraphSetVariableBlock } from '@babylonjs/core';
 import { FlowGraphSignBlock } from '@babylonjs/core';
+import { FlowGraphSignalConnection } from '@babylonjs/core';
 import { FlowGraphSinBlock } from '@babylonjs/core';
 import { FlowGraphSinhBlock } from '@babylonjs/core';
-import { FlowGraphSqrtBlock } from '@babylonjs/core';
+import { FlowGraphSquareRootBlock } from '@babylonjs/core';
 import { FlowGraphStopAnimationBlock } from '@babylonjs/core';
 import { FlowGraphSubtractBlock } from '@babylonjs/core';
 import { FlowGraphSwitchBlock } from '@babylonjs/core';
 import { FlowGraphTanBlock } from '@babylonjs/core';
 import { FlowGraphTanhBlock } from '@babylonjs/core';
 import { FlowGraphThrottleBlock } from '@babylonjs/core';
-import { FlowGraphTimerBlock } from '@babylonjs/core';
+import { FlowGraphTrailingZerosBlock } from '@babylonjs/core';
+import { FlowGraphTransformBlock } from '@babylonjs/core';
+import { FlowGraphTransformCoordinatesBlock } from '@babylonjs/core';
+import { FlowGraphTransformCoordinatesSystemBlock } from '@babylonjs/core';
 import { FlowGraphTransposeBlock } from '@babylonjs/core';
 import { FlowGraphTruncBlock } from '@babylonjs/core';
 import { FlowGraphWaitAllBlock } from '@babylonjs/core';
@@ -456,8 +519,12 @@ import { FrameGraphExecuteTask } from '@babylonjs/core';
 import { FrameGraphExtractHighlightsTask } from '@babylonjs/core';
 import { FrameGraphGenerateMipMapsTask } from '@babylonjs/core';
 import { FrameGraphGeometryRendererTask } from '@babylonjs/core';
+import { FrameGraphGlowLayerTask } from '@babylonjs/core';
+import { FrameGraphHighlightLayerTask } from '@babylonjs/core';
 import { FrameGraphObjectRendererTask } from '@babylonjs/core';
 import { FrameGraphPass } from '@babylonjs/core';
+import { FrameGraphPassCubeTask } from '@babylonjs/core';
+import { FrameGraphPassTask } from '@babylonjs/core';
 import { FrameGraphPostProcessTask } from '@babylonjs/core';
 import { FrameGraphRenderContext } from '@babylonjs/core';
 import { FrameGraphRenderPass } from '@babylonjs/core';
@@ -466,6 +533,7 @@ import { FrameGraphShadowGeneratorTask } from '@babylonjs/core';
 import { FrameGraphTAAObjectRendererTask } from '@babylonjs/core';
 import { FrameGraphTask } from '@babylonjs/core';
 import { FrameGraphTextureManager } from '@babylonjs/core';
+import { FrameGraphUtilityLayerRendererTask } from '@babylonjs/core';
 import { FramingBehavior } from '@babylonjs/core';
 import { FreeCamera } from '@babylonjs/core';
 import { FreeCameraDeviceOrientationInput } from '@babylonjs/core';
@@ -531,10 +599,13 @@ import { GeometryTrigonometryBlock } from '@babylonjs/core';
 import { GetClass } from '@babylonjs/core';
 import { GetClassName } from '@babylonjs/core';
 import { GetDOMTextContent } from '@babylonjs/core';
+import { GetDataOutConnectionByUniqueId } from '@babylonjs/core';
 import { GetEnvInfo } from '@babylonjs/core';
 import { GetEnvironmentBRDFTexture } from '@babylonjs/core';
 import { GetExrHeader } from '@babylonjs/core';
+import { GetExtensionFromUrl } from '@babylonjs/core';
 import { GetFloatData } from '@babylonjs/core';
+import { GetFlowGraphAssetWithType } from '@babylonjs/core';
 import { GetFogState } from '@babylonjs/core';
 import { GetFontOffset } from '@babylonjs/core';
 import { GetForwardRay } from '@babylonjs/core';
@@ -544,11 +615,14 @@ import { GetIndividualParser } from '@babylonjs/core';
 import { GetInternalFormatFromBasisFormat } from '@babylonjs/core';
 import { GetParser } from '@babylonjs/core';
 import { GetPointsCount } from '@babylonjs/core';
+import { GetRegisteredSceneLoaderPluginMetadata } from '@babylonjs/core';
+import { GetSignalInConnectionByUniqueId } from '@babylonjs/core';
 import { GetTGAHeader } from '@babylonjs/core';
 import { GetTextureDataAsync } from '@babylonjs/core';
 import { GetTransformedPosition } from '@babylonjs/core';
 import { GetTypeByteLength } from '@babylonjs/core';
-import { GetTypeForDepthTexture } from '@babylonjs/core';
+import { GetTypedArrayConstructor } from '@babylonjs/core';
+import { GetTypedArrayData } from '@babylonjs/core';
 import { Gizmo } from '@babylonjs/core';
 import { GizmoManager } from '@babylonjs/core';
 import { GlowLayer } from '@babylonjs/core';
@@ -570,7 +644,6 @@ import { Halton2DSequence } from '@babylonjs/core';
 import { HandConstraintBehavior } from '@babylonjs/core';
 import { HandleFallbacksForShadows } from '@babylonjs/core';
 import { HardwareScalingOptimization } from '@babylonjs/core';
-import { HasStencilAspect } from '@babylonjs/core';
 import { HavokPlugin } from '@babylonjs/core';
 import { HeightToNormalBlock } from '@babylonjs/core';
 import { HemisphericLight } from '@babylonjs/core';
@@ -591,6 +664,8 @@ import { ImageProcessingBlock } from '@babylonjs/core';
 import { ImageProcessingConfiguration } from '@babylonjs/core';
 import { ImageProcessingPostProcess } from '@babylonjs/core';
 import { ImageSourceBlock } from '@babylonjs/core';
+import { ImportAnimationsAsync } from '@babylonjs/core';
+import { ImportMeshAsync } from '@babylonjs/core';
 import { IncrementValueAction } from '@babylonjs/core';
 import { InitializeCSG2Async } from '@babylonjs/core';
 import { InputBlock } from '@babylonjs/core';
@@ -611,7 +686,6 @@ import { InterpolateValueAction } from '@babylonjs/core';
 import { IntersectionInfo } from '@babylonjs/core';
 import { IsBase64DataUrl } from '@babylonjs/core';
 import { IsCSG2Ready } from '@babylonjs/core';
-import { IsDepthTexture } from '@babylonjs/core';
 import { IsDocumentAvailable } from '@babylonjs/core';
 import { IsFileURL } from '@babylonjs/core';
 import { IsNavigatorAvailable } from '@babylonjs/core';
@@ -621,6 +695,7 @@ import { KeyboardInfo } from '@babylonjs/core';
 import { KeyboardInfoPre } from '@babylonjs/core';
 import { KhronosTextureContainer } from '@babylonjs/core';
 import { KhronosTextureContainer2 } from '@babylonjs/core';
+import { LastCreatedAudioEngine } from '@babylonjs/core';
 import { Lattice } from '@babylonjs/core';
 import { LatticeBlock } from '@babylonjs/core';
 import { LatticePluginMaterial } from '@babylonjs/core';
@@ -638,17 +713,21 @@ import { LightGizmo } from '@babylonjs/core';
 import { LightInformationBlock } from '@babylonjs/core';
 import { LineEdgesRenderer } from '@babylonjs/core';
 import { LinesMesh } from '@babylonjs/core';
+import { LoadAssetContainerAsync } from '@babylonjs/core';
 import { LoadFile } from '@babylonjs/core';
 import { LoadFileError } from '@babylonjs/core';
 import { LoadIESData } from '@babylonjs/core';
 import { LoadImage } from '@babylonjs/core';
+import { LoadSceneAsync } from '@babylonjs/core';
 import { LoadTextureFromTranscodeResult } from '@babylonjs/core';
 import { LockConstraint } from '@babylonjs/core';
 import { LoopBlock } from '@babylonjs/core';
+import { MainAudioBus } from '@babylonjs/core';
 import { MapRangeBlock } from '@babylonjs/core';
 import { MappingBlock } from '@babylonjs/core';
 import { Material } from '@babylonjs/core';
 import { MaterialAnisotropicDefines } from '@babylonjs/core';
+import { MaterialBRDFDefines } from '@babylonjs/core';
 import { MaterialClearCoatDefines } from '@babylonjs/core';
 import { MaterialDefines } from '@babylonjs/core';
 import { MaterialDetailMapDefines } from '@babylonjs/core';
@@ -711,6 +790,7 @@ import { NodeMaterial } from '@babylonjs/core';
 import { NodeMaterialBlock } from '@babylonjs/core';
 import { NodeMaterialConnectionPoint } from '@babylonjs/core';
 import { NodeMaterialConnectionPointCustomObject } from '@babylonjs/core';
+import { NodeMaterialDebugBlock } from '@babylonjs/core';
 import { NodeMaterialDefines } from '@babylonjs/core';
 import { NodeMaterialTeleportInBlock } from '@babylonjs/core';
 import { NodeMaterialTeleportOutBlock } from '@babylonjs/core';
@@ -732,14 +812,19 @@ import { NodeRenderGraphExecuteBlock } from '@babylonjs/core';
 import { NodeRenderGraphExtractHighlightsPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphGenerateMipmapsBlock } from '@babylonjs/core';
 import { NodeRenderGraphGeometryRendererBlock } from '@babylonjs/core';
+import { NodeRenderGraphGlowLayerBlock } from '@babylonjs/core';
+import { NodeRenderGraphHighlightLayerBlock } from '@babylonjs/core';
 import { NodeRenderGraphInputBlock } from '@babylonjs/core';
 import { NodeRenderGraphObjectRendererBlock } from '@babylonjs/core';
 import { NodeRenderGraphOutputBlock } from '@babylonjs/core';
+import { NodeRenderGraphPassCubePostProcessBlock } from '@babylonjs/core';
+import { NodeRenderGraphPassPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphResourceContainerBlock } from '@babylonjs/core';
 import { NodeRenderGraphShadowGeneratorBlock } from '@babylonjs/core';
 import { NodeRenderGraphTAAObjectRendererBlock } from '@babylonjs/core';
 import { NodeRenderGraphTeleportInBlock } from '@babylonjs/core';
 import { NodeRenderGraphTeleportOutBlock } from '@babylonjs/core';
+import { NodeRenderGraphUtilityLayerRendererBlock } from '@babylonjs/core';
 import { NoiseBlock } from '@babylonjs/core';
 import { NoiseProceduralTexture } from '@babylonjs/core';
 import { NormalBlendBlock } from '@babylonjs/core';
@@ -760,6 +845,7 @@ import { OneMinusBlock } from '@babylonjs/core';
 import { OptimizeIndices } from '@babylonjs/core';
 import { OutlineRenderer } from '@babylonjs/core';
 import { PBRAnisotropicConfiguration } from '@babylonjs/core';
+import { PBRBRDFConfiguration } from '@babylonjs/core';
 import { PBRBaseMaterial } from '@babylonjs/core';
 import { PBRBaseSimpleMaterial } from '@babylonjs/core';
 import { PBRClearCoatConfiguration } from '@babylonjs/core';
@@ -773,8 +859,16 @@ import { PBRSpecularGlossinessMaterial } from '@babylonjs/core';
 import { PBRSubSurfaceConfiguration } from '@babylonjs/core';
 import { PadNumber } from '@babylonjs/core';
 import { Parse } from '@babylonjs/core';
+import { ParseBlockAsync } from '@babylonjs/core';
+import { ParseCoordinatorAsync } from '@babylonjs/core';
 import { ParseFloat16 } from '@babylonjs/core';
 import { ParseFloat32 } from '@babylonjs/core';
+import { ParseFlowGraph } from '@babylonjs/core';
+import { ParseFlowGraphAsync } from '@babylonjs/core';
+import { ParseFlowGraphBlockWithClassType } from '@babylonjs/core';
+import { ParseFlowGraphContext } from '@babylonjs/core';
+import { ParseGraphConnectionWithClassType } from '@babylonjs/core';
+import { ParseGraphDataConnection } from '@babylonjs/core';
 import { ParseInt32 } from '@babylonjs/core';
 import { ParseInt64 } from '@babylonjs/core';
 import { ParseNullTerminatedString } from '@babylonjs/core';
@@ -833,6 +927,7 @@ import { PlaneRotationGizmo } from '@babylonjs/core';
 import { PlayAnimationAction } from '@babylonjs/core';
 import { PlaySoundAction } from '@babylonjs/core';
 import { PointLight } from '@babylonjs/core';
+import { PointListBlock } from '@babylonjs/core';
 import { PointParticleEmitter } from '@babylonjs/core';
 import { PointerDragBehavior } from '@babylonjs/core';
 import { PointerInfo } from '@babylonjs/core';
@@ -866,6 +961,7 @@ import { PrepareAttributesForBones } from '@babylonjs/core';
 import { PrepareAttributesForInstances } from '@babylonjs/core';
 import { PrepareAttributesForMorphTargets } from '@babylonjs/core';
 import { PrepareAttributesForMorphTargetsInfluencers } from '@babylonjs/core';
+import { PrepareDefinesAndAttributesForMorphTargets } from '@babylonjs/core';
 import { PrepareDefinesForAttributes } from '@babylonjs/core';
 import { PrepareDefinesForBakedVertexAnimation } from '@babylonjs/core';
 import { PrepareDefinesForBones } from '@babylonjs/core';
@@ -907,6 +1003,7 @@ import { ReadFileError } from '@babylonjs/core';
 import { RecastJSCrowd } from '@babylonjs/core';
 import { RecastJSPlugin } from '@babylonjs/core';
 import { ReciprocalBlock } from '@babylonjs/core';
+import { RectAreaLight } from '@babylonjs/core';
 import { ReflectBlock } from '@babylonjs/core';
 import { ReflectionBlock } from '@babylonjs/core';
 import { ReflectionProbe } from '@babylonjs/core';
@@ -921,6 +1018,7 @@ import { RefractionTexture } from '@babylonjs/core';
 import { RegisterClass } from '@babylonjs/core';
 import { RegisterMaterialPlugin } from '@babylonjs/core';
 import { RegisterNativeTypeAsync } from '@babylonjs/core';
+import { RegisterSceneLoaderPlugin } from '@babylonjs/core';
 import { RegisterTargetForLateAnimationBinding } from '@babylonjs/core';
 import { RemapBlock } from '@babylonjs/core';
 import { RenderTargetTexture } from '@babylonjs/core';
@@ -1001,6 +1099,7 @@ import { SolidParticleSystem } from '@babylonjs/core';
 import { SolidParticleVertex } from '@babylonjs/core';
 import { Sound } from '@babylonjs/core';
 import { SoundTrack } from '@babylonjs/core';
+import { SpecularPowerToRoughness } from '@babylonjs/core';
 import { SphereBlock } from '@babylonjs/core';
 import { SphereDirectedParticleEmitter } from '@babylonjs/core';
 import { SphereParticleEmitter } from '@babylonjs/core';
@@ -1021,6 +1120,8 @@ import { StandardMaterialDefines } from '@babylonjs/core';
 import { StandardRenderingPipeline } from '@babylonjs/core';
 import { StartsWith } from '@babylonjs/core';
 import { StateCondition } from '@babylonjs/core';
+import { StaticSound } from '@babylonjs/core';
+import { StaticSoundBuffer } from '@babylonjs/core';
 import { StencilState } from '@babylonjs/core';
 import { StencilStateComposer } from '@babylonjs/core';
 import { StepBlock } from '@babylonjs/core';
@@ -1037,11 +1138,14 @@ import { StopSoundAction } from '@babylonjs/core';
 import { StorageBuffer } from '@babylonjs/core';
 import { StorageReadBlock } from '@babylonjs/core';
 import { StorageWriteBlock } from '@babylonjs/core';
+import { StreamingSound } from '@babylonjs/core';
 import { StringDictionary } from '@babylonjs/core';
 import { SubEmitter } from '@babylonjs/core';
 import { SubMesh } from '@babylonjs/core';
 import { SubSurfaceBlock } from '@babylonjs/core';
 import { SubSurfaceSceneComponent } from '@babylonjs/core';
+import { Subdivide } from '@babylonjs/core';
+import { SubdivideBlock } from '@babylonjs/core';
 import { SubtractBlock } from '@babylonjs/core';
 import { SurfaceMagnetismBehavior } from '@babylonjs/core';
 import { SwitchBooleanAction } from '@babylonjs/core';
@@ -1064,8 +1168,14 @@ import { ThinBloomEffect } from '@babylonjs/core';
 import { ThinBlurPostProcess } from '@babylonjs/core';
 import { ThinCircleOfConfusionPostProcess } from '@babylonjs/core';
 import { ThinDepthOfFieldEffect } from '@babylonjs/core';
+import { ThinEffectLayer } from '@babylonjs/core';
 import { ThinEngine } from '@babylonjs/core';
 import { ThinExtractHighlightsPostProcess } from '@babylonjs/core';
+import { ThinGlowBlurPostProcess } from '@babylonjs/core';
+import { ThinGlowLayer } from '@babylonjs/core';
+import { ThinHighlightLayer } from '@babylonjs/core';
+import { ThinPassCubePostProcess } from '@babylonjs/core';
+import { ThinPassPostProcess } from '@babylonjs/core';
 import { ThinRenderTargetTexture } from '@babylonjs/core';
 import { ThinTexture } from '@babylonjs/core';
 import { ToHalfFloat } from '@babylonjs/core';
@@ -1095,7 +1205,8 @@ import { UnregisterMaterialPlugin } from '@babylonjs/core';
 import { UploadContent } from '@babylonjs/core';
 import { UploadEnvLevelsAsync } from '@babylonjs/core';
 import { UploadEnvSpherical } from '@babylonjs/core';
-import { UploadLevelsAsync } from '@babylonjs/core';
+import { UploadIrradianceLevelsAsync } from '@babylonjs/core';
+import { UploadRadianceLevelsAsync } from '@babylonjs/core';
 import { UtilityLayerRenderer } from '@babylonjs/core';
 import { VRCameraMetrics } from '@babylonjs/core';
 import { VRDeviceOrientationArcRotateCamera } from '@babylonjs/core';
@@ -1199,8 +1310,12 @@ import { _CommonInit } from '@babylonjs/core';
 import { _DDSTextureLoader } from '@babylonjs/core';
 import { _ENVTextureLoader } from '@babylonjs/core';
 import { _ExrTextureLoader } from '@babylonjs/core';
+import { _GetAudioEngine } from '@babylonjs/core';
 import { _GetCompatibleTextureLoader } from '@babylonjs/core';
 import { _HDRTextureLoader } from '@babylonjs/core';
+import { _HasSpatialAudioListenerOptions } from '@babylonjs/core';
+import { _HasSpatialAudioOptions } from '@babylonjs/core';
+import { _HasStereoAudioOptions } from '@babylonjs/core';
 import { _IESTextureLoader } from '@babylonjs/core';
 import { _InstancesBatch } from '@babylonjs/core';
 import { _KTXTextureLoader } from '@babylonjs/core';
@@ -1210,11 +1325,18 @@ import { _PrimaryIsoTriangle } from '@babylonjs/core';
 import { _TGATextureLoader } from '@babylonjs/core';
 import { _TimeToken } from '@babylonjs/core';
 import { _UpdateRGBDAsync } from '@babylonjs/core';
+import { _WebAudioBus } from '@babylonjs/core';
+import { _WebAudioEngine } from '@babylonjs/core';
+import { _WebAudioMainBus } from '@babylonjs/core';
+import { _WebAudioStaticSound } from '@babylonjs/core';
+import { _WebAudioStaticSoundBuffer } from '@babylonjs/core';
+import { _WebAudioStreamingSound } from '@babylonjs/core';
 import { _injectLTSFileTools } from '@babylonjs/core';
 import { addClipPlaneUniforms } from '@babylonjs/core';
+import { addToBlockFactory } from '@babylonjs/core';
 import { allocateAndCopyTypedBuffer } from '@babylonjs/core';
-import { appendSceneAsync } from '@babylonjs/core';
 import { bindClipPlane } from '@babylonjs/core';
+import { blockFactory } from '@babylonjs/core';
 import { captureEquirectangularFromScene } from '@babylonjs/core';
 import { className } from '@babylonjs/core';
 import { computeMaxExtents } from '@babylonjs/core';
@@ -1231,19 +1353,18 @@ import { editableInPropertyPage } from '@babylonjs/core';
 import { expandToProperty } from '@babylonjs/core';
 import { extractMinAndMax } from '@babylonjs/core';
 import { extractMinAndMaxIndexed } from '@babylonjs/core';
+import { getAnimationTypeByFlowGraphType } from '@babylonjs/core';
 import { getDimensionsFromTextureSize } from '@babylonjs/core';
+import { getRichTypeByAnimationType } from '@babylonjs/core';
+import { getRichTypeByFlowGraphType } from '@babylonjs/core';
 import { getRichTypeFromValue } from '@babylonjs/core';
-import { importAnimationsAsync } from '@babylonjs/core';
 import { inlineScheduler } from '@babylonjs/core';
-import { loadAssetContainerAsync } from '@babylonjs/core';
-import { loadSceneAsync } from '@babylonjs/core';
 import { makeAsyncFunction } from '@babylonjs/core';
 import { makeSyncFunction } from '@babylonjs/core';
 import { nativeOverride } from '@babylonjs/core';
 import { normalizeEnvInfo } from '@babylonjs/core';
 import { prepareDefinesForClipPlanes } from '@babylonjs/core';
 import { prepareStringDefinesForClipPlanes } from '@babylonjs/core';
-import { registerSceneLoaderPlugin } from '@babylonjs/core';
 import { registerTextureLoader } from '@babylonjs/core';
 import { runCoroutine } from '@babylonjs/core';
 import { runCoroutineAsync } from '@babylonjs/core';
@@ -1270,6 +1391,16 @@ import { textureSizeIsObject } from '@babylonjs/core';
 import { unregisterTextureLoader } from '@babylonjs/core';
 
 export interface JSXElements {
+    abortError: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AbortError>,
+            {
+                message: ConstructorParameters<typeof AbortError>[0];
+            },
+            AbortError
+        >,
+        any
+    >;
     abstractActionManager: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractActionManager>, {}, AbstractActionManager>, any>;
     abstractAssetContainer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractAssetContainer>, {}, AbstractAssetContainer>, any>;
     abstractAssetTask: React.DetailedHTMLProps<
@@ -1279,6 +1410,28 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof AbstractAssetTask>[0];
             },
             AbstractAssetTask
+        >,
+        any
+    >;
+    abstractAudioBus: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AbstractAudioBus>,
+            {
+                name: ConstructorParameters<typeof AbstractAudioBus>[0];
+                engine: ConstructorParameters<typeof AbstractAudioBus>[1];
+            },
+            AbstractAudioBus
+        >,
+        any
+    >;
+    abstractAudioNode: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AbstractAudioNode>,
+            {
+                engine: ConstructorParameters<typeof AbstractAudioNode>[0];
+                nodeType: ConstructorParameters<typeof AbstractAudioNode>[1];
+            },
+            AbstractAudioNode
         >,
         any
     >;
@@ -1302,6 +1455,29 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof AbstractMesh>[1];
             },
             AbstractMesh
+        >,
+        any
+    >;
+    abstractNamedAudioNode: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AbstractNamedAudioNode>,
+            {
+                name: ConstructorParameters<typeof AbstractNamedAudioNode>[0];
+                engine: ConstructorParameters<typeof AbstractNamedAudioNode>[1];
+                nodeType: ConstructorParameters<typeof AbstractNamedAudioNode>[2];
+            },
+            AbstractNamedAudioNode
+        >,
+        any
+    >;
+    abstractSound: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AbstractSound>,
+            {
+                name: ConstructorParameters<typeof AbstractSound>[0];
+                engine: ConstructorParameters<typeof AbstractSound>[1];
+            },
+            AbstractSound
         >,
         any
     >;
@@ -1640,6 +1816,18 @@ export interface JSXElements {
         >,
         any
     >;
+    appendSceneAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof AppendSceneAsync>> & MeshProps,
+            {
+                source: Parameters<typeof AppendSceneAsync>[0];
+                scene: Parameters<typeof AppendSceneAsync>[1];
+                options: Parameters<typeof AppendSceneAsync>[2];
+            },
+            ReturnType<typeof AppendSceneAsync>
+        >,
+        any
+    >;
     applyLut: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof ApplyLut>> & MeshProps,
@@ -1740,6 +1928,31 @@ export interface JSXElements {
         >,
         any
     >;
+    areIndices32Bits: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof AreIndices32Bits>> & MeshProps,
+            {
+                indices: Parameters<typeof AreIndices32Bits>[0];
+                count: Parameters<typeof AreIndices32Bits>[1];
+                start: Parameters<typeof AreIndices32Bits>[2];
+                offset: Parameters<typeof AreIndices32Bits>[3];
+            },
+            ReturnType<typeof AreIndices32Bits>
+        >,
+        any
+    >;
+    areaLight: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AreaLight> & Clonable,
+            {
+                name: ConstructorParameters<typeof AreaLight>[0];
+                position: ConstructorParameters<typeof AreaLight>[1];
+                scene: ConstructorParameters<typeof AreaLight>[2];
+            },
+            AreaLight
+        >,
+        any
+    >;
     assetContainer: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AssetContainer>,
@@ -1796,6 +2009,17 @@ export interface JSXElements {
         >,
         any
     >;
+    audioBus: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AudioBus>,
+            {
+                name: ConstructorParameters<typeof AudioBus>[0];
+                engine: ConstructorParameters<typeof AudioBus>[1];
+            },
+            AudioBus
+        >,
+        any
+    >;
     audioEngine: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AudioEngine>,
@@ -1808,6 +2032,7 @@ export interface JSXElements {
         >,
         any
     >;
+    audioEngineV2: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AudioEngineV2>, {}, AudioEngineV2>, any>;
     audioSceneComponent: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AudioSceneComponent>,
@@ -2712,6 +2937,27 @@ export interface JSXElements {
         >,
         any
     >;
+    computeAlpha: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ComputeAlpha>> & MeshProps,
+            {
+                offset: Parameters<typeof ComputeAlpha>[0];
+            },
+            ReturnType<typeof ComputeAlpha>
+        >,
+        any
+    >;
+    computeBeta: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ComputeBeta>> & MeshProps,
+            {
+                verticalOffset: Parameters<typeof ComputeBeta>[0];
+                radius: Parameters<typeof ComputeBeta>[1];
+            },
+            ReturnType<typeof ComputeBeta>
+        >,
+        any
+    >;
     computeEffect: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ComputeEffect>,
@@ -2880,6 +3126,39 @@ export interface JSXElements {
                 isDepthTexture: ConstructorParameters<typeof CopyTextureToTexture>[1];
             },
             CopyTextureToTexture
+        >,
+        any
+    >;
+    alignedTypedArray: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateAlignedTypedArray>> & MeshProps,
+            {
+                type: Parameters<typeof CreateAlignedTypedArray>[0];
+                elementCount: Parameters<typeof CreateAlignedTypedArray>[1];
+            },
+            ReturnType<typeof CreateAlignedTypedArray>
+        >,
+        any
+    >;
+    audioBusAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateAudioBusAsync>> & MeshProps,
+            {
+                name: Parameters<typeof CreateAudioBusAsync>[0];
+                options: Parameters<typeof CreateAudioBusAsync>[1];
+                engine: Parameters<typeof CreateAudioBusAsync>[2];
+            },
+            ReturnType<typeof CreateAudioBusAsync>
+        >,
+        any
+    >;
+    audioEngineAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateAudioEngineAsync>> & MeshProps,
+            {
+                options: Parameters<typeof CreateAudioEngineAsync>[0];
+            },
+            ReturnType<typeof CreateAudioEngineAsync>
         >,
         any
     >;
@@ -3190,14 +3469,14 @@ export interface JSXElements {
         >,
         any
     >;
-    imageDataArrayBufferViews: React.DetailedHTMLProps<
+    irradianceImageDataArrayBufferViews: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateImageDataArrayBufferViews>> & MeshProps,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateIrradianceImageDataArrayBufferViews>> & MeshProps,
             {
-                data: Parameters<typeof CreateImageDataArrayBufferViews>[0];
-                info: Parameters<typeof CreateImageDataArrayBufferViews>[1];
+                data: Parameters<typeof CreateIrradianceImageDataArrayBufferViews>[0];
+                info: Parameters<typeof CreateIrradianceImageDataArrayBufferViews>[1];
             },
-            ReturnType<typeof CreateImageDataArrayBufferViews>
+            ReturnType<typeof CreateIrradianceImageDataArrayBufferViews>
         >,
         any
     >;
@@ -3244,6 +3523,18 @@ export interface JSXElements {
                 scene: Parameters<typeof CreateLines>[2];
             },
             ReturnType<typeof CreateLines>
+        >,
+        any
+    >;
+    mainAudioBusAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateMainAudioBusAsync>> & MeshProps,
+            {
+                name: Parameters<typeof CreateMainAudioBusAsync>[0];
+                options: Parameters<typeof CreateMainAudioBusAsync>[1];
+                engine: Parameters<typeof CreateMainAudioBusAsync>[2];
+            },
+            ReturnType<typeof CreateMainAudioBusAsync>
         >,
         any
     >;
@@ -3379,6 +3670,17 @@ export interface JSXElements {
         >,
         any
     >;
+    radianceImageDataArrayBufferViews: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateRadianceImageDataArrayBufferViews>> & MeshProps,
+            {
+                data: Parameters<typeof CreateRadianceImageDataArrayBufferViews>[0];
+                info: Parameters<typeof CreateRadianceImageDataArrayBufferViews>[1];
+            },
+            ReturnType<typeof CreateRadianceImageDataArrayBufferViews>
+        >,
+        any
+    >;
     resizedCopy: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof CreateResizedCopy>> & MeshProps,
@@ -3463,6 +3765,7 @@ export interface JSXElements {
                 useLayerMask: Parameters<typeof CreateScreenshotUsingRenderTarget>[10];
                 quality: Parameters<typeof CreateScreenshotUsingRenderTarget>[11];
                 customizeTexture: Parameters<typeof CreateScreenshotUsingRenderTarget>[12];
+                customDumpData: Parameters<typeof CreateScreenshotUsingRenderTarget>[13];
             },
             ReturnType<typeof CreateScreenshotUsingRenderTarget>
         >,
@@ -3484,6 +3787,7 @@ export interface JSXElements {
                 useLayerMask: Parameters<typeof CreateScreenshotUsingRenderTargetAsync>[9];
                 quality: Parameters<typeof CreateScreenshotUsingRenderTargetAsync>[10];
                 customizeTexture: Parameters<typeof CreateScreenshotUsingRenderTargetAsync>[11];
+                customDumpData: Parameters<typeof CreateScreenshotUsingRenderTargetAsync>[12];
             },
             ReturnType<typeof CreateScreenshotUsingRenderTargetAsync>
         >,
@@ -3515,6 +3819,31 @@ export interface JSXElements {
         >,
         any
     >;
+    soundAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateSoundAsync>> & MeshProps,
+            {
+                name: Parameters<typeof CreateSoundAsync>[0];
+                source: Parameters<typeof CreateSoundAsync>[1];
+                options: Parameters<typeof CreateSoundAsync>[2];
+                engine: Parameters<typeof CreateSoundAsync>[3];
+            },
+            ReturnType<typeof CreateSoundAsync>
+        >,
+        any
+    >;
+    soundBufferAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateSoundBufferAsync>> & MeshProps,
+            {
+                source: Parameters<typeof CreateSoundBufferAsync>[0];
+                options: Parameters<typeof CreateSoundBufferAsync>[1];
+                engine: Parameters<typeof CreateSoundBufferAsync>[2];
+            },
+            ReturnType<typeof CreateSoundBufferAsync>
+        >,
+        any
+    >;
     sphere: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof CreateSphere>> & MeshProps,
@@ -3534,6 +3863,19 @@ export interface JSXElements {
                 options: Parameters<typeof CreateSphereVertexData>[0];
             },
             ReturnType<typeof CreateSphereVertexData>
+        >,
+        any
+    >;
+    streamingSoundAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof CreateStreamingSoundAsync>> & MeshProps,
+            {
+                name: Parameters<typeof CreateStreamingSoundAsync>[0];
+                source: Parameters<typeof CreateStreamingSoundAsync>[1];
+                options: Parameters<typeof CreateStreamingSoundAsync>[2];
+                engine: Parameters<typeof CreateStreamingSoundAsync>[3];
+            },
+            ReturnType<typeof CreateStreamingSoundAsync>
         >,
         any
     >;
@@ -4301,6 +4643,16 @@ export interface JSXElements {
         >,
         any
     >;
+    dracoEncoder: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<DracoEncoder>,
+            {
+                configuration: ConstructorParameters<typeof DracoEncoder>[0];
+            },
+            DracoEncoder
+        >,
+        any
+    >;
     drawWrapper: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<DrawWrapper>,
@@ -4395,6 +4747,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof EffectLayer>[0];
                 scene: ConstructorParameters<typeof EffectLayer>[1];
                 forceGLSL: ConstructorParameters<typeof EffectLayer>[2];
+                thinEffectLayer: ConstructorParameters<typeof EffectLayer>[3];
             },
             EffectLayer
         >,
@@ -4750,6 +5103,16 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphArrayIndexBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphArrayIndexBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphArrayIndexBlock>[0];
+            },
+            FlowGraphArrayIndexBlock
+        >,
+        any
+    >;
     flowGraphAsinBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphAsinBlock>,
@@ -4797,6 +5160,16 @@ export interface JSXElements {
                 config: ConstructorParameters<typeof FlowGraphAtanhBlock>[0];
             },
             FlowGraphAtanhBlock
+        >,
+        any
+    >;
+    flowGraphBezierCurveEasingBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphBezierCurveEasingBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphBezierCurveEasingBlock>[0];
+            },
+            FlowGraphBezierCurveEasingBlock
         >,
         any
     >;
@@ -4870,6 +5243,26 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphBooleanToFloat: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphBooleanToFloat>,
+            {
+                config: ConstructorParameters<typeof FlowGraphBooleanToFloat>[0];
+            },
+            FlowGraphBooleanToFloat
+        >,
+        any
+    >;
+    flowGraphBooleanToInt: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphBooleanToInt>,
+            {
+                config: ConstructorParameters<typeof FlowGraphBooleanToInt>[0];
+            },
+            FlowGraphBooleanToInt
+        >,
+        any
+    >;
     flowGraphBranchBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphBranchBlock>,
@@ -4877,6 +5270,26 @@ export interface JSXElements {
                 config: ConstructorParameters<typeof FlowGraphBranchBlock>[0];
             },
             FlowGraphBranchBlock
+        >,
+        any
+    >;
+    flowGraphCallCounterBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCallCounterBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCallCounterBlock>[0];
+            },
+            FlowGraphCallCounterBlock
+        >,
+        any
+    >;
+    flowGraphCancelDelayBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCancelDelayBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCancelDelayBlock>[0];
+            },
+            FlowGraphCancelDelayBlock
         >,
         any
     >;
@@ -4897,6 +5310,76 @@ export interface JSXElements {
                 config: ConstructorParameters<typeof FlowGraphClampBlock>[0];
             },
             FlowGraphClampBlock
+        >,
+        any
+    >;
+    flowGraphCodeExecutionBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCodeExecutionBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCodeExecutionBlock>[0];
+            },
+            FlowGraphCodeExecutionBlock
+        >,
+        any
+    >;
+    flowGraphCombineMatrix2DBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCombineMatrix2DBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCombineMatrix2DBlock>[0];
+            },
+            FlowGraphCombineMatrix2DBlock
+        >,
+        any
+    >;
+    flowGraphCombineMatrix3DBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCombineMatrix3DBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCombineMatrix3DBlock>[0];
+            },
+            FlowGraphCombineMatrix3DBlock
+        >,
+        any
+    >;
+    flowGraphCombineMatrixBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCombineMatrixBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCombineMatrixBlock>[0];
+            },
+            FlowGraphCombineMatrixBlock
+        >,
+        any
+    >;
+    flowGraphCombineVector2Block: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCombineVector2Block>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCombineVector2Block>[0];
+            },
+            FlowGraphCombineVector2Block
+        >,
+        any
+    >;
+    flowGraphCombineVector3Block: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCombineVector3Block>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCombineVector3Block>[0];
+            },
+            FlowGraphCombineVector3Block
+        >,
+        any
+    >;
+    flowGraphCombineVector4Block: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphCombineVector4Block>,
+            {
+                config: ConstructorParameters<typeof FlowGraphCombineVector4Block>[0];
+            },
+            FlowGraphCombineVector4Block
         >,
         any
     >;
@@ -4952,23 +5435,13 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphContextLogger: React.DetailedHTMLProps<
+    flowGraphContextBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphContextLogger>,
+            ExcludeReadonlyAndPrivate<FlowGraphContextBlock>,
             {
-                _context: ConstructorParameters<typeof FlowGraphContextLogger>[0];
+                config: ConstructorParameters<typeof FlowGraphContextBlock>[0];
             },
-            FlowGraphContextLogger
-        >,
-        any
-    >;
-    flowGraphCoordinateTransformBlock: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphCoordinateTransformBlock>,
-            {
-                config: ConstructorParameters<typeof FlowGraphCoordinateTransformBlock>[0];
-            },
-            FlowGraphCoordinateTransformBlock
+            FlowGraphContextBlock
         >,
         any
     >;
@@ -5002,46 +5475,6 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphCountLeadingZerosBlock: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphCountLeadingZerosBlock>,
-            {
-                config: ConstructorParameters<typeof FlowGraphCountLeadingZerosBlock>[0];
-            },
-            FlowGraphCountLeadingZerosBlock
-        >,
-        any
-    >;
-    flowGraphCountOneBitsBlock: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphCountOneBitsBlock>,
-            {
-                config: ConstructorParameters<typeof FlowGraphCountOneBitsBlock>[0];
-            },
-            FlowGraphCountOneBitsBlock
-        >,
-        any
-    >;
-    flowGraphCountTrailingZerosBlock: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphCountTrailingZerosBlock>,
-            {
-                config: ConstructorParameters<typeof FlowGraphCountTrailingZerosBlock>[0];
-            },
-            FlowGraphCountTrailingZerosBlock
-        >,
-        any
-    >;
-    flowGraphCounterBlock: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphCounterBlock>,
-            {
-                config: ConstructorParameters<typeof FlowGraphCounterBlock>[0];
-            },
-            FlowGraphCounterBlock
-        >,
-        any
-    >;
     flowGraphCrossBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphCrossBlock>,
@@ -5070,6 +5503,8 @@ export interface JSXElements {
                 connectionType: ConstructorParameters<typeof FlowGraphDataConnection>[1];
                 ownerBlock: ConstructorParameters<typeof FlowGraphDataConnection>[2];
                 richType: ConstructorParameters<typeof FlowGraphDataConnection>[3];
+                _defaultValue: ConstructorParameters<typeof FlowGraphDataConnection>[4];
+                _optional: ConstructorParameters<typeof FlowGraphDataConnection>[5];
             },
             FlowGraphDataConnection
         >,
@@ -5145,16 +5580,27 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphEqBlock: React.DetailedHTMLProps<
+    flowGraphEasingBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphEqBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphEasingBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphEqBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphEasingBlock>[0];
             },
-            FlowGraphEqBlock
+            FlowGraphEasingBlock
         >,
         any
     >;
+    flowGraphEqualityBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphEqualityBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphEqualityBlock>[0];
+            },
+            FlowGraphEqualityBlock
+        >,
+        any
+    >;
+    flowGraphEventBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlowGraphEventBlock>, {}, FlowGraphEventBlock>, any>;
     flowGraphExecutionBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphExecutionBlock>,
@@ -5175,6 +5621,66 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphExtractMatrix2DBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphExtractMatrix2DBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphExtractMatrix2DBlock>[0];
+            },
+            FlowGraphExtractMatrix2DBlock
+        >,
+        any
+    >;
+    flowGraphExtractMatrix3DBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphExtractMatrix3DBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphExtractMatrix3DBlock>[0];
+            },
+            FlowGraphExtractMatrix3DBlock
+        >,
+        any
+    >;
+    flowGraphExtractMatrixBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphExtractMatrixBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphExtractMatrixBlock>[0];
+            },
+            FlowGraphExtractMatrixBlock
+        >,
+        any
+    >;
+    flowGraphExtractVector2Block: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphExtractVector2Block>,
+            {
+                config: ConstructorParameters<typeof FlowGraphExtractVector2Block>[0];
+            },
+            FlowGraphExtractVector2Block
+        >,
+        any
+    >;
+    flowGraphExtractVector3Block: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphExtractVector3Block>,
+            {
+                config: ConstructorParameters<typeof FlowGraphExtractVector3Block>[0];
+            },
+            FlowGraphExtractVector3Block
+        >,
+        any
+    >;
+    flowGraphExtractVector4Block: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphExtractVector4Block>,
+            {
+                config: ConstructorParameters<typeof FlowGraphExtractVector4Block>[0];
+            },
+            FlowGraphExtractVector4Block
+        >,
+        any
+    >;
     flowGraphFlipFlopBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphFlipFlopBlock>,
@@ -5182,6 +5688,26 @@ export interface JSXElements {
                 config: ConstructorParameters<typeof FlowGraphFlipFlopBlock>[0];
             },
             FlowGraphFlipFlopBlock
+        >,
+        any
+    >;
+    flowGraphFloatToBoolean: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphFloatToBoolean>,
+            {
+                config: ConstructorParameters<typeof FlowGraphFloatToBoolean>[0];
+            },
+            FlowGraphFloatToBoolean
+        >,
+        any
+    >;
+    flowGraphFloatToInt: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphFloatToInt>,
+            {
+                config: ConstructorParameters<typeof FlowGraphFloatToInt>[0];
+            },
+            FlowGraphFloatToInt
         >,
         any
     >;
@@ -5205,13 +5731,33 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphFractBlock: React.DetailedHTMLProps<
+    flowGraphFractionBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphFractBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphFractionBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphFractBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphFractionBlock>[0];
             },
-            FlowGraphFractBlock
+            FlowGraphFractionBlock
+        >,
+        any
+    >;
+    flowGraphFunctionReferenceBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphFunctionReferenceBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphFunctionReferenceBlock>[0];
+            },
+            FlowGraphFunctionReferenceBlock
+        >,
+        any
+    >;
+    flowGraphGetAssetBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphGetAssetBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphGetAssetBlock>[0];
+            },
+            FlowGraphGetAssetBlock
         >,
         any
     >;
@@ -5255,6 +5801,16 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphIndexOfBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphIndexOfBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphIndexOfBlock>[0];
+            },
+            FlowGraphIndexOfBlock
+        >,
+        any
+    >;
     flowGraphInfBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphInfBlock>,
@@ -5265,13 +5821,43 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphInterpolateBlock: React.DetailedHTMLProps<
+    flowGraphIntToBoolean: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphInterpolateBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphIntToBoolean>,
             {
-                config: ConstructorParameters<typeof FlowGraphInterpolateBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphIntToBoolean>[0];
             },
-            FlowGraphInterpolateBlock
+            FlowGraphIntToBoolean
+        >,
+        any
+    >;
+    flowGraphIntToFloat: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphIntToFloat>,
+            {
+                config: ConstructorParameters<typeof FlowGraphIntToFloat>[0];
+            },
+            FlowGraphIntToFloat
+        >,
+        any
+    >;
+    flowGraphInteger: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphInteger>,
+            {
+                value: ConstructorParameters<typeof FlowGraphInteger>[0];
+            },
+            FlowGraphInteger
+        >,
+        any
+    >;
+    flowGraphInterpolationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphInterpolationBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphInterpolationBlock>[0];
+            },
+            FlowGraphInterpolationBlock
         >,
         any
     >;
@@ -5285,13 +5871,13 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphIsInfBlock: React.DetailedHTMLProps<
+    flowGraphIsInfinityBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphIsInfBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphIsInfinityBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphIsInfBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphIsInfinityBlock>[0];
             },
-            FlowGraphIsInfBlock
+            FlowGraphIsInfinityBlock
         >,
         any
     >;
@@ -5302,6 +5888,26 @@ export interface JSXElements {
                 config: ConstructorParameters<typeof FlowGraphIsNanBlock>[0];
             },
             FlowGraphIsNanBlock
+        >,
+        any
+    >;
+    flowGraphJsonPointerParserBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphJsonPointerParserBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphJsonPointerParserBlock>[0];
+            },
+            FlowGraphJsonPointerParserBlock
+        >,
+        any
+    >;
+    flowGraphLeadingZerosBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphLeadingZerosBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphLeadingZerosBlock>[0];
+            },
+            FlowGraphLeadingZerosBlock
         >,
         any
     >;
@@ -5365,43 +5971,64 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphLogicAndBlock: React.DetailedHTMLProps<
+    flowGraphLogger: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlowGraphLogger>, {}, FlowGraphLogger>, any>;
+    flowGraphMathInterpolationBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphLogicAndBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphMathInterpolationBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphLogicAndBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphMathInterpolationBlock>[0];
             },
-            FlowGraphLogicAndBlock
+            FlowGraphMathInterpolationBlock
         >,
         any
     >;
-    flowGraphLogicNotBlock: React.DetailedHTMLProps<
+    flowGraphMatrix2D: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphLogicNotBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphMatrix2D>,
             {
-                config: ConstructorParameters<typeof FlowGraphLogicNotBlock>[0];
+                m: ConstructorParameters<typeof FlowGraphMatrix2D>[0];
             },
-            FlowGraphLogicNotBlock
+            FlowGraphMatrix2D
         >,
         any
     >;
-    flowGraphLogicOrBlock: React.DetailedHTMLProps<
+    flowGraphMatrix3D: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphLogicOrBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphMatrix3D>,
             {
-                config: ConstructorParameters<typeof FlowGraphLogicOrBlock>[0];
+                array: ConstructorParameters<typeof FlowGraphMatrix3D>[0];
             },
-            FlowGraphLogicOrBlock
+            FlowGraphMatrix3D
         >,
         any
     >;
-    flowGraphMatMulBlock: React.DetailedHTMLProps<
+    flowGraphMatrixComposeBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphMatMulBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphMatrixComposeBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphMatMulBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphMatrixComposeBlock>[0];
             },
-            FlowGraphMatMulBlock
+            FlowGraphMatrixComposeBlock
+        >,
+        any
+    >;
+    flowGraphMatrixDecomposeBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphMatrixDecomposeBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphMatrixDecomposeBlock>[0];
+            },
+            FlowGraphMatrixDecomposeBlock
+        >,
+        any
+    >;
+    flowGraphMatrixMultiplicationBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphMatrixMultiplicationBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphMatrixMultiplicationBlock>[0];
+            },
+            FlowGraphMatrixMultiplicationBlock
         >,
         any
     >;
@@ -5435,6 +6062,16 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphModuloBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphModuloBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphModuloBlock>[0];
+            },
+            FlowGraphModuloBlock
+        >,
+        any
+    >;
     flowGraphMultiGateBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphMultiGateBlock>,
@@ -5465,13 +6102,13 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphNegBlock: React.DetailedHTMLProps<
+    flowGraphNegationBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphNegBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphNegationBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphNegBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphNegationBlock>[0];
             },
-            FlowGraphNegBlock
+            FlowGraphNegationBlock
         >,
         any
     >;
@@ -5482,6 +6119,38 @@ export interface JSXElements {
                 config: ConstructorParameters<typeof FlowGraphNormalizeBlock>[0];
             },
             FlowGraphNormalizeBlock
+        >,
+        any
+    >;
+    flowGraphOneBitsCounterBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphOneBitsCounterBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphOneBitsCounterBlock>[0];
+            },
+            FlowGraphOneBitsCounterBlock
+        >,
+        any
+    >;
+    flowGraphPathConverter: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPathConverter>,
+            {
+                _context: ConstructorParameters<typeof FlowGraphPathConverter>[0];
+                _separator: ConstructorParameters<typeof FlowGraphPathConverter>[1];
+            },
+            FlowGraphPathConverter
+        >,
+        any
+    >;
+    flowGraphPathConverterComponent: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPathConverterComponent>,
+            {
+                path: ConstructorParameters<typeof FlowGraphPathConverterComponent>[0];
+                ownerBlock: ConstructorParameters<typeof FlowGraphPathConverterComponent>[1];
+            },
+            FlowGraphPathConverterComponent
         >,
         any
     >;
@@ -5515,13 +6184,33 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphPowBlock: React.DetailedHTMLProps<
+    flowGraphPointerOutEventBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphPowBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphPointerOutEventBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphPowBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphPointerOutEventBlock>[0];
             },
-            FlowGraphPowBlock
+            FlowGraphPointerOutEventBlock
+        >,
+        any
+    >;
+    flowGraphPointerOverEventBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPointerOverEventBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphPointerOverEventBlock>[0];
+            },
+            FlowGraphPointerOverEventBlock
+        >,
+        any
+    >;
+    flowGraphPowerBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphPowerBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphPowerBlock>[0];
+            },
+            FlowGraphPowerBlock
         >,
         any
     >;
@@ -5555,16 +6244,6 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphRemainderBlock: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphRemainderBlock>,
-            {
-                config: ConstructorParameters<typeof FlowGraphRemainderBlock>[0];
-            },
-            FlowGraphRemainderBlock
-        >,
-        any
-    >;
     flowGraphRotate2DBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphRotate2DBlock>,
@@ -5585,6 +6264,16 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphRoundBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphRoundBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphRoundBlock>[0];
+            },
+            FlowGraphRoundBlock
+        >,
+        any
+    >;
     flowGraphSaturateBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphSaturateBlock>,
@@ -5595,6 +6284,8 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphSceneReadyEventBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlowGraphSceneReadyEventBlock>, {}, FlowGraphSceneReadyEventBlock>, any>;
+    flowGraphSceneTickEventBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlowGraphSceneTickEventBlock>, {}, FlowGraphSceneTickEventBlock>, any>;
     flowGraphSendCustomEventBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphSendCustomEventBlock>,
@@ -5612,6 +6303,16 @@ export interface JSXElements {
                 config: ConstructorParameters<typeof FlowGraphSequenceBlock>[0];
             },
             FlowGraphSequenceBlock
+        >,
+        any
+    >;
+    flowGraphSetDelayBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphSetDelayBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphSetDelayBlock>[0];
+            },
+            FlowGraphSetDelayBlock
         >,
         any
     >;
@@ -5645,6 +6346,7 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphSignalConnection: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlowGraphSignalConnection>, {}, FlowGraphSignalConnection>, any>;
     flowGraphSinBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphSinBlock>,
@@ -5665,13 +6367,13 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphSqrtBlock: React.DetailedHTMLProps<
+    flowGraphSquareRootBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphSqrtBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphSquareRootBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphSqrtBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphSquareRootBlock>[0];
             },
-            FlowGraphSqrtBlock
+            FlowGraphSquareRootBlock
         >,
         any
     >;
@@ -5735,13 +6437,43 @@ export interface JSXElements {
         >,
         any
     >;
-    flowGraphTimerBlock: React.DetailedHTMLProps<
+    flowGraphTrailingZerosBlock: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<FlowGraphTimerBlock>,
+            ExcludeReadonlyAndPrivate<FlowGraphTrailingZerosBlock>,
             {
-                config: ConstructorParameters<typeof FlowGraphTimerBlock>[0];
+                config: ConstructorParameters<typeof FlowGraphTrailingZerosBlock>[0];
             },
-            FlowGraphTimerBlock
+            FlowGraphTrailingZerosBlock
+        >,
+        any
+    >;
+    flowGraphTransformBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphTransformBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphTransformBlock>[0];
+            },
+            FlowGraphTransformBlock
+        >,
+        any
+    >;
+    flowGraphTransformCoordinatesBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphTransformCoordinatesBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphTransformCoordinatesBlock>[0];
+            },
+            FlowGraphTransformCoordinatesBlock
+        >,
+        any
+    >;
+    flowGraphTransformCoordinatesSystemBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphTransformCoordinatesSystemBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphTransformCoordinatesSystemBlock>[0];
+            },
+            FlowGraphTransformCoordinatesSystemBlock
         >,
         any
     >;
@@ -6122,6 +6854,32 @@ export interface JSXElements {
         >,
         any
     >;
+    frameGraphGlowLayerTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphGlowLayerTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphGlowLayerTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphGlowLayerTask>[1];
+                scene: ConstructorParameters<typeof FrameGraphGlowLayerTask>[2];
+                options: ConstructorParameters<typeof FrameGraphGlowLayerTask>[3];
+            },
+            FrameGraphGlowLayerTask
+        >,
+        any
+    >;
+    frameGraphHighlightLayerTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphHighlightLayerTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphHighlightLayerTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphHighlightLayerTask>[1];
+                scene: ConstructorParameters<typeof FrameGraphHighlightLayerTask>[2];
+                options: ConstructorParameters<typeof FrameGraphHighlightLayerTask>[3];
+            },
+            FrameGraphHighlightLayerTask
+        >,
+        any
+    >;
     frameGraphObjectRendererTask: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FrameGraphObjectRendererTask>,
@@ -6130,6 +6888,7 @@ export interface JSXElements {
                 frameGraph: ConstructorParameters<typeof FrameGraphObjectRendererTask>[1];
                 scene: ConstructorParameters<typeof FrameGraphObjectRendererTask>[2];
                 options: ConstructorParameters<typeof FrameGraphObjectRendererTask>[3];
+                existingObjectRenderer: ConstructorParameters<typeof FrameGraphObjectRendererTask>[4];
             },
             FrameGraphObjectRendererTask
         >,
@@ -6144,6 +6903,30 @@ export interface JSXElements {
                 _context: ConstructorParameters<typeof FrameGraphPass>[2];
             },
             FrameGraphPass
+        >,
+        any
+    >;
+    frameGraphPassCubeTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphPassCubeTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphPassCubeTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphPassCubeTask>[1];
+                thinPostProcess: ConstructorParameters<typeof FrameGraphPassCubeTask>[2];
+            },
+            FrameGraphPassCubeTask
+        >,
+        any
+    >;
+    frameGraphPassTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphPassTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphPassTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphPassTask>[1];
+                thinPostProcess: ConstructorParameters<typeof FrameGraphPassTask>[2];
+            },
+            FrameGraphPassTask
         >,
         any
     >;
@@ -6242,6 +7025,19 @@ export interface JSXElements {
                 _scene: ConstructorParameters<typeof FrameGraphTextureManager>[2];
             },
             FrameGraphTextureManager
+        >,
+        any
+    >;
+    frameGraphUtilityLayerRendererTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphUtilityLayerRendererTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphUtilityLayerRendererTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphUtilityLayerRendererTask>[1];
+                scene: ConstructorParameters<typeof FrameGraphUtilityLayerRendererTask>[2];
+                handleEvents: ConstructorParameters<typeof FrameGraphUtilityLayerRendererTask>[3];
+            },
+            FrameGraphUtilityLayerRendererTask
         >,
         any
     >;
@@ -6886,6 +7682,17 @@ export interface JSXElements {
         >,
         any
     >;
+    getDataOutConnectionByUniqueId: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetDataOutConnectionByUniqueId>> & MeshProps,
+            {
+                blocks: Parameters<typeof GetDataOutConnectionByUniqueId>[0];
+                uniqueId: Parameters<typeof GetDataOutConnectionByUniqueId>[1];
+            },
+            ReturnType<typeof GetDataOutConnectionByUniqueId>
+        >,
+        any
+    >;
     getEnvInfo: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof GetEnvInfo>> & MeshProps,
@@ -6911,6 +7718,16 @@ export interface JSXElements {
         >,
         any
     >;
+    getExtensionFromUrl: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetExtensionFromUrl>> & MeshProps,
+            {
+                url: Parameters<typeof GetExtensionFromUrl>[0];
+            },
+            ReturnType<typeof GetExtensionFromUrl>
+        >,
+        any
+    >;
     getFloatData: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof GetFloatData>> & MeshProps,
@@ -6925,6 +7742,19 @@ export interface JSXElements {
                 forceCopy: Parameters<typeof GetFloatData>[7];
             },
             ReturnType<typeof GetFloatData>
+        >,
+        any
+    >;
+    getFlowGraphAssetWithType: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetFlowGraphAssetWithType>> & MeshProps,
+            {
+                assetsContext: Parameters<typeof GetFlowGraphAssetWithType>[0];
+                type: Parameters<typeof GetFlowGraphAssetWithType>[1];
+                index: Parameters<typeof GetFlowGraphAssetWithType>[2];
+                useIndexAsUniqueId: Parameters<typeof GetFlowGraphAssetWithType>[3];
+            },
+            ReturnType<typeof GetFlowGraphAssetWithType>
         >,
         any
     >;
@@ -7023,6 +7853,25 @@ export interface JSXElements {
         >,
         any
     >;
+    getRegisteredSceneLoaderPluginMetadata: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetRegisteredSceneLoaderPluginMetadata>> & MeshProps,
+            {},
+            ReturnType<typeof GetRegisteredSceneLoaderPluginMetadata>
+        >,
+        any
+    >;
+    getSignalInConnectionByUniqueId: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetSignalInConnectionByUniqueId>> & MeshProps,
+            {
+                blocks: Parameters<typeof GetSignalInConnectionByUniqueId>[0];
+                uniqueId: Parameters<typeof GetSignalInConnectionByUniqueId>[1];
+            },
+            ReturnType<typeof GetSignalInConnectionByUniqueId>
+        >,
+        any
+    >;
     getTGAHeader: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof GetTGAHeader>> & MeshProps,
@@ -7069,13 +7918,30 @@ export interface JSXElements {
         >,
         any
     >;
-    getTypeForDepthTexture: React.DetailedHTMLProps<
+    getTypedArrayConstructor: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof GetTypeForDepthTexture>> & MeshProps,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetTypedArrayConstructor>> & MeshProps,
             {
-                format: Parameters<typeof GetTypeForDepthTexture>[0];
+                componentType: Parameters<typeof GetTypedArrayConstructor>[0];
             },
-            ReturnType<typeof GetTypeForDepthTexture>
+            ReturnType<typeof GetTypedArrayConstructor>
+        >,
+        any
+    >;
+    getTypedArrayData: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof GetTypedArrayData>> & MeshProps,
+            {
+                data: Parameters<typeof GetTypedArrayData>[0];
+                size: Parameters<typeof GetTypedArrayData>[1];
+                type: Parameters<typeof GetTypedArrayData>[2];
+                byteOffset: Parameters<typeof GetTypedArrayData>[3];
+                byteStride: Parameters<typeof GetTypedArrayData>[4];
+                normalized: Parameters<typeof GetTypedArrayData>[5];
+                totalVertices: Parameters<typeof GetTypedArrayData>[6];
+                forceCopy: Parameters<typeof GetTypedArrayData>[7];
+            },
+            ReturnType<typeof GetTypedArrayData>
         >,
         any
     >;
@@ -7249,6 +8115,8 @@ export interface JSXElements {
                 onLoad: ConstructorParameters<typeof HDRCubeTexture>[7];
                 onError: ConstructorParameters<typeof HDRCubeTexture>[8];
                 supersample: ConstructorParameters<typeof HDRCubeTexture>[9];
+                prefilterIrradianceOnLoad: ConstructorParameters<typeof HDRCubeTexture>[10];
+                prefilterUsingCdf: ConstructorParameters<typeof HDRCubeTexture>[11];
             } & TextureProps,
             HDRCubeTexture
         >,
@@ -7318,16 +8186,6 @@ export interface JSXElements {
                 step: ConstructorParameters<typeof HardwareScalingOptimization>[2];
             },
             HardwareScalingOptimization
-        >,
-        any
-    >;
-    hasStencilAspect: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof HasStencilAspect>> & MeshProps,
-            {
-                format: Parameters<typeof HasStencilAspect>[0];
-            },
-            ReturnType<typeof HasStencilAspect>
         >,
         any
     >;
@@ -7469,7 +8327,7 @@ export interface JSXElements {
         BabylonProps<
             ExcludeReadonlyAndPrivate<IblCdfGenerator>,
             {
-                scene: ConstructorParameters<typeof IblCdfGenerator>[0];
+                sceneOrEngine: ConstructorParameters<typeof IblCdfGenerator>[0];
             },
             IblCdfGenerator
         >,
@@ -7554,6 +8412,30 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof ImageSourceBlock>[0];
             },
             ImageSourceBlock
+        >,
+        any
+    >;
+    importAnimationsAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ImportAnimationsAsync>> & MeshProps,
+            {
+                source: Parameters<typeof ImportAnimationsAsync>[0];
+                scene: Parameters<typeof ImportAnimationsAsync>[1];
+                options: Parameters<typeof ImportAnimationsAsync>[2];
+            },
+            ReturnType<typeof ImportAnimationsAsync>
+        >,
+        any
+    >;
+    importMeshAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ImportMeshAsync>> & MeshProps,
+            {
+                source: Parameters<typeof ImportMeshAsync>[0];
+                scene: Parameters<typeof ImportMeshAsync>[1];
+                options: Parameters<typeof ImportMeshAsync>[2];
+            },
+            ReturnType<typeof ImportMeshAsync>
         >,
         any
     >;
@@ -7750,16 +8632,6 @@ export interface JSXElements {
     >;
     isBase64DataUrl: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsBase64DataUrl>> & MeshProps, {}, ReturnType<typeof IsBase64DataUrl>>, any>;
     isCSG2Ready: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsCSG2Ready>> & MeshProps, {}, ReturnType<typeof IsCSG2Ready>>, any>;
-    isDepthTexture: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof IsDepthTexture>> & MeshProps,
-            {
-                format: Parameters<typeof IsDepthTexture>[0];
-            },
-            ReturnType<typeof IsDepthTexture>
-        >,
-        any
-    >;
     isDocumentAvailable: React.DetailedHTMLProps<
         BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IsDocumentAvailable>> & MeshProps, {}, ReturnType<typeof IsDocumentAvailable>>,
         any
@@ -7825,6 +8697,10 @@ export interface JSXElements {
             },
             KhronosTextureContainer2
         >,
+        any
+    >;
+    lastdAudioEngine: React.DetailedHTMLProps<
+        BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LastCreatedAudioEngine>> & MeshProps, {}, ReturnType<typeof LastCreatedAudioEngine>>,
         any
     >;
     lattice: React.DetailedHTMLProps<
@@ -8023,6 +8899,18 @@ export interface JSXElements {
         >,
         any
     >;
+    loadAssetContainerAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof LoadAssetContainerAsync>> & MeshProps,
+            {
+                source: Parameters<typeof LoadAssetContainerAsync>[0];
+                scene: Parameters<typeof LoadAssetContainerAsync>[1];
+                options: Parameters<typeof LoadAssetContainerAsync>[2];
+            },
+            ReturnType<typeof LoadAssetContainerAsync>
+        >,
+        any
+    >;
     loadFile: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadFile>> & MeshProps, {}, ReturnType<typeof LoadFile>>, any>;
     loadFileError: React.DetailedHTMLProps<
         BabylonProps<
@@ -8046,6 +8934,18 @@ export interface JSXElements {
         any
     >;
     loadImage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadImage>> & MeshProps, {}, ReturnType<typeof LoadImage>>, any>;
+    loadSceneAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof LoadSceneAsync>> & MeshProps,
+            {
+                source: Parameters<typeof LoadSceneAsync>[0];
+                engine: Parameters<typeof LoadSceneAsync>[1];
+                options: Parameters<typeof LoadSceneAsync>[2];
+            },
+            ReturnType<typeof LoadSceneAsync>
+        >,
+        any
+    >;
     loadTextureFromTranscodeResult: React.DetailedHTMLProps<
         BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadTextureFromTranscodeResult>> & MeshProps, {}, ReturnType<typeof LoadTextureFromTranscodeResult>>,
         any
@@ -8071,6 +8971,17 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof LoopBlock>[0];
             },
             LoopBlock
+        >,
+        any
+    >;
+    mainAudioBus: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<MainAudioBus>,
+            {
+                name: ConstructorParameters<typeof MainAudioBus>[0];
+                engine: ConstructorParameters<typeof MainAudioBus>[1];
+            },
+            MainAudioBus
         >,
         any
     >;
@@ -8108,6 +9019,7 @@ export interface JSXElements {
         any
     >;
     materialAnisotropicDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialAnisotropicDefines>, {}, MaterialAnisotropicDefines>, any>;
+    materialBRDFDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialBRDFDefines>, {}, MaterialBRDFDefines>, any>;
     materialClearCoatDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialClearCoatDefines>, {}, MaterialClearCoatDefines>, any>;
     materialDefines: React.DetailedHTMLProps<
         BabylonProps<
@@ -8238,11 +9150,11 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof Mesh>[0];
                 scene: ConstructorParameters<typeof Mesh>[1];
-                parent: ConstructorParameters<typeof Mesh>[2];
+                parentOrOptions: ConstructorParameters<typeof Mesh>[2];
                 source: ConstructorParameters<typeof Mesh>[3];
                 doNotCloneChildren: ConstructorParameters<typeof Mesh>[4];
                 clonePhysicsImpostor: ConstructorParameters<typeof Mesh>[5];
-            },
+            } & MeshProps,
             Mesh
         >,
         any
@@ -8664,6 +9576,7 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof NodeMaterialBlock>[0];
                 target: ConstructorParameters<typeof NodeMaterialBlock>[1];
                 isFinalMerger: ConstructorParameters<typeof NodeMaterialBlock>[2];
+                isFinalOutput: ConstructorParameters<typeof NodeMaterialBlock>[3];
             },
             NodeMaterialBlock
         >,
@@ -8692,6 +9605,16 @@ export interface JSXElements {
                 _blockName: ConstructorParameters<typeof NodeMaterialConnectionPointCustomObject>[4];
             },
             NodeMaterialConnectionPointCustomObject
+        >,
+        any
+    >;
+    nodeMaterialDebugBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeMaterialDebugBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeMaterialDebugBlock>[0];
+            },
+            NodeMaterialDebugBlock
         >,
         any
     >;
@@ -8927,6 +9850,39 @@ export interface JSXElements {
         >,
         any
     >;
+    nodeRenderGraphGlowLayerBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphGlowLayerBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[2];
+                ldrMerge: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[3];
+                layerTextureRatio: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[4];
+                layerTextureFixedSize: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[5];
+                layerTextureType: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[6];
+            },
+            NodeRenderGraphGlowLayerBlock
+        >,
+        any
+    >;
+    nodeRenderGraphHighlightLayerBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphHighlightLayerBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[2];
+                layerTextureRatio: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[3];
+                layerTextureFixedSize: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[4];
+                blurTextureSizeRatio: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[5];
+                isStroke: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[6];
+                layerTextureType: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[7];
+            },
+            NodeRenderGraphHighlightLayerBlock
+        >,
+        any
+    >;
     nodeRenderGraphInputBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NodeRenderGraphInputBlock> & Clonable,
@@ -8962,6 +9918,30 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof NodeRenderGraphOutputBlock>[2];
             },
             NodeRenderGraphOutputBlock
+        >,
+        any
+    >;
+    nodeRenderGraphPassCubePostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphPassCubePostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphPassCubePostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphPassCubePostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphPassCubePostProcessBlock>[2];
+            },
+            NodeRenderGraphPassCubePostProcessBlock
+        >,
+        any
+    >;
+    nodeRenderGraphPassPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphPassPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphPassPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphPassPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphPassPostProcessBlock>[2];
+            },
+            NodeRenderGraphPassPostProcessBlock
         >,
         any
     >;
@@ -9023,6 +10003,19 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof NodeRenderGraphTeleportOutBlock>[2];
             },
             NodeRenderGraphTeleportOutBlock
+        >,
+        any
+    >;
+    nodeRenderGraphUtilityLayerRendererBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphUtilityLayerRendererBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphUtilityLayerRendererBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphUtilityLayerRendererBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphUtilityLayerRendererBlock>[2];
+                handleEvents: ConstructorParameters<typeof NodeRenderGraphUtilityLayerRendererBlock>[3];
+            },
+            NodeRenderGraphUtilityLayerRendererBlock
         >,
         any
     >;
@@ -9237,6 +10230,17 @@ export interface JSXElements {
         >,
         any
     >;
+    pBRBRDFConfiguration: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PBRBRDFConfiguration>,
+            {
+                material: ConstructorParameters<typeof PBRBRDFConfiguration>[0];
+                addToPluginList: ConstructorParameters<typeof PBRBRDFConfiguration>[1];
+            },
+            PBRBRDFConfiguration
+        >,
+        any
+    >;
     pBRBaseMaterial: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<PBRBaseMaterial> & Clonable,
@@ -9372,6 +10376,28 @@ export interface JSXElements {
         >,
         any
     >;
+    parseBlockAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ParseBlockAsync>> & MeshProps,
+            {
+                serializationObject: Parameters<typeof ParseBlockAsync>[0];
+                parseOptions: Parameters<typeof ParseBlockAsync>[1];
+            },
+            ReturnType<typeof ParseBlockAsync>
+        >,
+        any
+    >;
+    parseCoordinatorAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ParseCoordinatorAsync>> & MeshProps,
+            {
+                serializedObject: Parameters<typeof ParseCoordinatorAsync>[0];
+                options: Parameters<typeof ParseCoordinatorAsync>[1];
+            },
+            ReturnType<typeof ParseCoordinatorAsync>
+        >,
+        any
+    >;
     parseFloat16: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof ParseFloat16>> & MeshProps,
@@ -9391,6 +10417,77 @@ export interface JSXElements {
                 offset: Parameters<typeof ParseFloat32>[1];
             },
             ReturnType<typeof ParseFloat32>
+        >,
+        any
+    >;
+    parseFlowGraph: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ParseFlowGraph>> & MeshProps,
+            {
+                serializationObject: Parameters<typeof ParseFlowGraph>[0];
+                options: Parameters<typeof ParseFlowGraph>[1];
+                resolvedClasses: Parameters<typeof ParseFlowGraph>[2];
+            },
+            ReturnType<typeof ParseFlowGraph>
+        >,
+        any
+    >;
+    parseFlowGraphAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ParseFlowGraphAsync>> & MeshProps,
+            {
+                serializationObject: Parameters<typeof ParseFlowGraphAsync>[0];
+                options: Parameters<typeof ParseFlowGraphAsync>[1];
+            },
+            ReturnType<typeof ParseFlowGraphAsync>
+        >,
+        any
+    >;
+    parseFlowGraphBlockWithClassType: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ParseFlowGraphBlockWithClassType>> & MeshProps,
+            {
+                serializationObject: Parameters<typeof ParseFlowGraphBlockWithClassType>[0];
+                parseOptions: Parameters<typeof ParseFlowGraphBlockWithClassType>[1];
+                classType: Parameters<typeof ParseFlowGraphBlockWithClassType>[2];
+            },
+            ReturnType<typeof ParseFlowGraphBlockWithClassType>
+        >,
+        any
+    >;
+    parseFlowGraphContext: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ParseFlowGraphContext>> & MeshProps,
+            {
+                serializationObject: Parameters<typeof ParseFlowGraphContext>[0];
+                options: Parameters<typeof ParseFlowGraphContext>[1];
+                rightHanded: Parameters<typeof ParseFlowGraphContext>[2];
+            },
+            ReturnType<typeof ParseFlowGraphContext>
+        >,
+        any
+    >;
+    parseGraphConnectionWithClassType: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ParseGraphConnectionWithClassType>> & MeshProps,
+            {
+                serializationObject: Parameters<typeof ParseGraphConnectionWithClassType>[0];
+                ownerBlock: Parameters<typeof ParseGraphConnectionWithClassType>[1];
+                classType: Parameters<typeof ParseGraphConnectionWithClassType>[2];
+            },
+            ReturnType<typeof ParseGraphConnectionWithClassType>
+        >,
+        any
+    >;
+    parseGraphDataConnection: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof ParseGraphDataConnection>> & MeshProps,
+            {
+                serializationObject: Parameters<typeof ParseGraphDataConnection>[0];
+                ownerBlock: Parameters<typeof ParseGraphDataConnection>[1];
+                classType: Parameters<typeof ParseGraphDataConnection>[2];
+            },
+            ReturnType<typeof ParseGraphDataConnection>
         >,
         any
     >;
@@ -9875,6 +10972,7 @@ export interface JSXElements {
             ExcludeReadonlyAndPrivate<PhysicsViewer>,
             {
                 scene: ConstructorParameters<typeof PhysicsViewer>[0];
+                size: ConstructorParameters<typeof PhysicsViewer>[1];
             },
             PhysicsViewer
         >,
@@ -10007,6 +11105,16 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof PointLight>[2];
             },
             PointLight
+        >,
+        any
+    >;
+    pointListBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<PointListBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof PointListBlock>[0];
+            },
+            PointListBlock
         >,
         any
     >;
@@ -10361,6 +11469,7 @@ export interface JSXElements {
                 attribs: Parameters<typeof PrepareAttributesForMorphTargets>[0];
                 mesh: Parameters<typeof PrepareAttributesForMorphTargets>[1];
                 defines: Parameters<typeof PrepareAttributesForMorphTargets>[2];
+                usePositionMorph: Parameters<typeof PrepareAttributesForMorphTargets>[3];
             },
             ReturnType<typeof PrepareAttributesForMorphTargets>
         >,
@@ -10375,6 +11484,25 @@ export interface JSXElements {
                 influencers: Parameters<typeof PrepareAttributesForMorphTargetsInfluencers>[2];
             },
             ReturnType<typeof PrepareAttributesForMorphTargetsInfluencers>
+        >,
+        any
+    >;
+    prepareDefinesAndAttributesForMorphTargets: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesAndAttributesForMorphTargets>> & MeshProps,
+            {
+                morphTargetManager: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[0];
+                defines: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[1];
+                attribs: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[2];
+                mesh: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[3];
+                usePositionMorph: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[4];
+                useNormalMorph: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[5];
+                useTangentMorph: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[6];
+                useUVMorph: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[7];
+                useUV2Morph: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[8];
+                useColorMorph: Parameters<typeof PrepareDefinesAndAttributesForMorphTargets>[9];
+            },
+            ReturnType<typeof PrepareDefinesAndAttributesForMorphTargets>
         >,
         any
     >;
@@ -10764,6 +11892,7 @@ export interface JSXElements {
                 type: ConstructorParameters<typeof RawTexture>[8];
                 creationFlags: ConstructorParameters<typeof RawTexture>[9];
                 useSRGBBuffer: ConstructorParameters<typeof RawTexture>[10];
+                waitDataToBeReady: ConstructorParameters<typeof RawTexture>[11];
             } & TextureProps,
             RawTexture
         >,
@@ -10874,6 +12003,20 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof ReciprocalBlock>[0];
             },
             ReciprocalBlock
+        >,
+        any
+    >;
+    rectAreaLight: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<RectAreaLight> & Clonable,
+            {
+                name: ConstructorParameters<typeof RectAreaLight>[0];
+                position: ConstructorParameters<typeof RectAreaLight>[1];
+                width: ConstructorParameters<typeof RectAreaLight>[2];
+                height: ConstructorParameters<typeof RectAreaLight>[3];
+                scene: ConstructorParameters<typeof RectAreaLight>[4];
+            },
+            RectAreaLight
         >,
         any
     >;
@@ -11041,6 +12184,16 @@ export interface JSXElements {
         >,
         any
     >;
+    registerSceneLoaderPlugin: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof RegisterSceneLoaderPlugin>> & MeshProps,
+            {
+                plugin: Parameters<typeof RegisterSceneLoaderPlugin>[0];
+            },
+            ReturnType<typeof RegisterSceneLoaderPlugin>
+        >,
+        any
+    >;
     registerTargetForLateAnimationBinding: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof RegisterTargetForLateAnimationBinding>> & MeshProps,
@@ -11199,6 +12352,7 @@ export interface JSXElements {
             {
                 typeName: ConstructorParameters<typeof RichType>[0];
                 defaultValue: ConstructorParameters<typeof RichType>[1];
+                animationType: ConstructorParameters<typeof RichType>[2];
             },
             RichType
         >,
@@ -11897,6 +13051,20 @@ export interface JSXElements {
         >,
         any
     >;
+    specularPowerToRoughness: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof SpecularPowerToRoughness>> & MeshProps,
+            {
+                specularPower: Parameters<typeof SpecularPowerToRoughness>[0];
+                p0: Parameters<typeof SpecularPowerToRoughness>[1];
+                p1: Parameters<typeof SpecularPowerToRoughness>[2];
+                p2: Parameters<typeof SpecularPowerToRoughness>[3];
+                p3: Parameters<typeof SpecularPowerToRoughness>[4];
+            },
+            ReturnType<typeof SpecularPowerToRoughness>
+        >,
+        any
+    >;
     sphereBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<SphereBlock> & Clonable,
@@ -12118,6 +13286,27 @@ export interface JSXElements {
         >,
         any
     >;
+    staticSound: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StaticSound>,
+            {
+                name: ConstructorParameters<typeof StaticSound>[0];
+                engine: ConstructorParameters<typeof StaticSound>[1];
+            },
+            StaticSound
+        >,
+        any
+    >;
+    staticSoundBuffer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StaticSoundBuffer>,
+            {
+                engine: ConstructorParameters<typeof StaticSoundBuffer>[0];
+            },
+            StaticSoundBuffer
+        >,
+        any
+    >;
     stencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StencilState>, {}, StencilState>, any>;
     stencilStateComposer: React.DetailedHTMLProps<
         BabylonProps<
@@ -12311,6 +13500,17 @@ export interface JSXElements {
         >,
         any
     >;
+    streamingSound: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<StreamingSound>,
+            {
+                name: ConstructorParameters<typeof StreamingSound>[0];
+                engine: ConstructorParameters<typeof StreamingSound>[1];
+            },
+            StreamingSound
+        >,
+        any
+    >;
     stringDictionary: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<StringDictionary>, {}, StringDictionary>, any>;
     subEmitter: React.DetailedHTMLProps<
         BabylonProps<
@@ -12357,6 +13557,28 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof SubSurfaceSceneComponent>[0];
             },
             SubSurfaceSceneComponent
+        >,
+        any
+    >;
+    subdivide: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof Subdivide>> & MeshProps,
+            {
+                vertexData: Parameters<typeof Subdivide>[0];
+                level: Parameters<typeof Subdivide>[1];
+                options: Parameters<typeof Subdivide>[2];
+            },
+            ReturnType<typeof Subdivide>
+        >,
+        any
+    >;
+    subdivideBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<SubdivideBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof SubdivideBlock>[0];
+            },
+            SubdivideBlock
         >,
         any
     >;
@@ -12606,6 +13828,20 @@ export interface JSXElements {
         >,
         any
     >;
+    thinEffectLayer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinEffectLayer>,
+            {
+                name: ConstructorParameters<typeof ThinEffectLayer>[0];
+                scene: ConstructorParameters<typeof ThinEffectLayer>[1];
+                forceGLSL: ConstructorParameters<typeof ThinEffectLayer>[2];
+                dontCheckIfReady: ConstructorParameters<typeof ThinEffectLayer>[3];
+                _additionalImportShadersAsync: ConstructorParameters<typeof ThinEffectLayer>[4];
+            },
+            ThinEffectLayer
+        >,
+        any
+    >;
     thinEngine: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ThinEngine>,
@@ -12628,6 +13864,70 @@ export interface JSXElements {
                 options: ConstructorParameters<typeof ThinExtractHighlightsPostProcess>[2];
             },
             ThinExtractHighlightsPostProcess
+        >,
+        any
+    >;
+    thinGlowBlurPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinGlowBlurPostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinGlowBlurPostProcess>[0];
+                engine: ConstructorParameters<typeof ThinGlowBlurPostProcess>[1];
+                direction: ConstructorParameters<typeof ThinGlowBlurPostProcess>[2];
+                kernel: ConstructorParameters<typeof ThinGlowBlurPostProcess>[3];
+                options: ConstructorParameters<typeof ThinGlowBlurPostProcess>[4];
+            },
+            ThinGlowBlurPostProcess
+        >,
+        any
+    >;
+    thinGlowLayer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinGlowLayer>,
+            {
+                name: ConstructorParameters<typeof ThinGlowLayer>[0];
+                scene: ConstructorParameters<typeof ThinGlowLayer>[1];
+                options: ConstructorParameters<typeof ThinGlowLayer>[2];
+                dontCheckIfReady: ConstructorParameters<typeof ThinGlowLayer>[3];
+            },
+            ThinGlowLayer
+        >,
+        any
+    >;
+    thinHighlightLayer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinHighlightLayer>,
+            {
+                name: ConstructorParameters<typeof ThinHighlightLayer>[0];
+                scene: ConstructorParameters<typeof ThinHighlightLayer>[1];
+                options: ConstructorParameters<typeof ThinHighlightLayer>[2];
+                dontCheckIfReady: ConstructorParameters<typeof ThinHighlightLayer>[3];
+            },
+            ThinHighlightLayer
+        >,
+        any
+    >;
+    thinPassCubePostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinPassCubePostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinPassCubePostProcess>[0];
+                engine: ConstructorParameters<typeof ThinPassCubePostProcess>[1];
+                options: ConstructorParameters<typeof ThinPassCubePostProcess>[2];
+            },
+            ThinPassCubePostProcess
+        >,
+        any
+    >;
+    thinPassPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinPassPostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinPassPostProcess>[0];
+                engine: ConstructorParameters<typeof ThinPassPostProcess>[1];
+                options: ConstructorParameters<typeof ThinPassPostProcess>[2];
+            },
+            ThinPassPostProcess
         >,
         any
     >;
@@ -12926,15 +14226,28 @@ export interface JSXElements {
         >,
         any
     >;
-    uploadLevelsAsync: React.DetailedHTMLProps<
+    uploadIrradianceLevelsAsync: React.DetailedHTMLProps<
         BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof UploadLevelsAsync>> & MeshProps,
+            ExcludeReadonlyAndPrivate<ReturnType<typeof UploadIrradianceLevelsAsync>> & MeshProps,
             {
-                texture: Parameters<typeof UploadLevelsAsync>[0];
-                imageData: Parameters<typeof UploadLevelsAsync>[1];
-                imageType: Parameters<typeof UploadLevelsAsync>[2];
+                mainTexture: Parameters<typeof UploadIrradianceLevelsAsync>[0];
+                imageData: Parameters<typeof UploadIrradianceLevelsAsync>[1];
+                size: Parameters<typeof UploadIrradianceLevelsAsync>[2];
+                imageType: Parameters<typeof UploadIrradianceLevelsAsync>[3];
             },
-            ReturnType<typeof UploadLevelsAsync>
+            ReturnType<typeof UploadIrradianceLevelsAsync>
+        >,
+        any
+    >;
+    uploadRadianceLevelsAsync: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof UploadRadianceLevelsAsync>> & MeshProps,
+            {
+                texture: Parameters<typeof UploadRadianceLevelsAsync>[0];
+                imageData: Parameters<typeof UploadRadianceLevelsAsync>[1];
+                imageType: Parameters<typeof UploadRadianceLevelsAsync>[2];
+            },
+            ReturnType<typeof UploadRadianceLevelsAsync>
         >,
         any
     >;
@@ -12944,6 +14257,7 @@ export interface JSXElements {
             {
                 originalScene: ConstructorParameters<typeof UtilityLayerRenderer>[0];
                 handleEvents: ConstructorParameters<typeof UtilityLayerRenderer>[1];
+                manualRender: ConstructorParameters<typeof UtilityLayerRenderer>[2];
             },
             UtilityLayerRenderer
         >,
@@ -14023,6 +15337,16 @@ export interface JSXElements {
     _DDSTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_DDSTextureLoader>, {}, _DDSTextureLoader>, any>;
     _ENVTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_ENVTextureLoader>, {}, _ENVTextureLoader>, any>;
     _ExrTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_ExrTextureLoader>, {}, _ExrTextureLoader>, any>;
+    _GetAudioEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof _GetAudioEngine>> & MeshProps,
+            {
+                engine: Parameters<typeof _GetAudioEngine>[0];
+            },
+            ReturnType<typeof _GetAudioEngine>
+        >,
+        any
+    >;
     _GetCompatibleTextureLoader: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof _GetCompatibleTextureLoader>> & MeshProps,
@@ -14035,6 +15359,36 @@ export interface JSXElements {
         any
     >;
     _HDRTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_HDRTextureLoader>, {}, _HDRTextureLoader>, any>;
+    _HasSpatialAudioListenerOptions: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof _HasSpatialAudioListenerOptions>> & MeshProps,
+            {
+                options: Parameters<typeof _HasSpatialAudioListenerOptions>[0];
+            },
+            ReturnType<typeof _HasSpatialAudioListenerOptions>
+        >,
+        any
+    >;
+    _HasSpatialAudioOptions: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof _HasSpatialAudioOptions>> & MeshProps,
+            {
+                options: Parameters<typeof _HasSpatialAudioOptions>[0];
+            },
+            ReturnType<typeof _HasSpatialAudioOptions>
+        >,
+        any
+    >;
+    _HasStereoAudioOptions: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof _HasStereoAudioOptions>> & MeshProps,
+            {
+                options: Parameters<typeof _HasStereoAudioOptions>[0];
+            },
+            ReturnType<typeof _HasStereoAudioOptions>
+        >,
+        any
+    >;
     _IESTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_IESTextureLoader>, {}, _IESTextureLoader>, any>;
     _InstancesBatch: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_InstancesBatch>, {}, _InstancesBatch>, any>;
     _KTXTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_KTXTextureLoader>, {}, _KTXTextureLoader>, any>;
@@ -14057,6 +15411,73 @@ export interface JSXElements {
         >,
         any
     >;
+    _WebAudioBus: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<_WebAudioBus>,
+            {
+                name: ConstructorParameters<typeof _WebAudioBus>[0];
+                engine: ConstructorParameters<typeof _WebAudioBus>[1];
+                options: ConstructorParameters<typeof _WebAudioBus>[2];
+            },
+            _WebAudioBus
+        >,
+        any
+    >;
+    _WebAudioEngine: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<_WebAudioEngine>,
+            {
+                options: ConstructorParameters<typeof _WebAudioEngine>[0];
+            },
+            _WebAudioEngine
+        >,
+        any
+    >;
+    _WebAudioMainBus: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<_WebAudioMainBus>,
+            {
+                name: ConstructorParameters<typeof _WebAudioMainBus>[0];
+                engine: ConstructorParameters<typeof _WebAudioMainBus>[1];
+            },
+            _WebAudioMainBus
+        >,
+        any
+    >;
+    _WebAudioStaticSound: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<_WebAudioStaticSound>,
+            {
+                name: ConstructorParameters<typeof _WebAudioStaticSound>[0];
+                engine: ConstructorParameters<typeof _WebAudioStaticSound>[1];
+                options: ConstructorParameters<typeof _WebAudioStaticSound>[2];
+            },
+            _WebAudioStaticSound
+        >,
+        any
+    >;
+    _WebAudioStaticSoundBuffer: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<_WebAudioStaticSoundBuffer>,
+            {
+                engine: ConstructorParameters<typeof _WebAudioStaticSoundBuffer>[0];
+            },
+            _WebAudioStaticSoundBuffer
+        >,
+        any
+    >;
+    _WebAudioStreamingSound: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<_WebAudioStreamingSound>,
+            {
+                name: ConstructorParameters<typeof _WebAudioStreamingSound>[0];
+                engine: ConstructorParameters<typeof _WebAudioStreamingSound>[1];
+                options: ConstructorParameters<typeof _WebAudioStreamingSound>[2];
+            },
+            _WebAudioStreamingSound
+        >,
+        any
+    >;
     _injectLTSFileTools: React.DetailedHTMLProps<
         BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _injectLTSFileTools>> & MeshProps, {}, ReturnType<typeof _injectLTSFileTools>>,
         any
@@ -14068,6 +15489,18 @@ export interface JSXElements {
                 uniforms: Parameters<typeof addClipPlaneUniforms>[0];
             },
             ReturnType<typeof addClipPlaneUniforms>
+        >,
+        any
+    >;
+    addToBlockFactory: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof addToBlockFactory>> & MeshProps,
+            {
+                module: Parameters<typeof addToBlockFactory>[0];
+                blockName: Parameters<typeof addToBlockFactory>[1];
+                factory: Parameters<typeof addToBlockFactory>[2];
+            },
+            ReturnType<typeof addToBlockFactory>
         >,
         any
     >;
@@ -14084,18 +15517,6 @@ export interface JSXElements {
         >,
         any
     >;
-    appendSceneAsync: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof appendSceneAsync>> & MeshProps,
-            {
-                source: Parameters<typeof appendSceneAsync>[0];
-                scene: Parameters<typeof appendSceneAsync>[1];
-                options: Parameters<typeof appendSceneAsync>[2];
-            },
-            ReturnType<typeof appendSceneAsync>
-        >,
-        any
-    >;
     bindClipPlane: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof bindClipPlane>> & MeshProps,
@@ -14105,6 +15526,16 @@ export interface JSXElements {
                 secondaryHolder: Parameters<typeof bindClipPlane>[2];
             },
             ReturnType<typeof bindClipPlane>
+        >,
+        any
+    >;
+    blockFactory: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof blockFactory>> & MeshProps,
+            {
+                blockName: Parameters<typeof blockFactory>[0];
+            },
+            ReturnType<typeof blockFactory>
         >,
         any
     >;
@@ -14284,6 +15715,16 @@ export interface JSXElements {
         >,
         any
     >;
+    getAnimationTypeByFlowGraphType: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof getAnimationTypeByFlowGraphType>> & MeshProps,
+            {
+                flowGraphType: Parameters<typeof getAnimationTypeByFlowGraphType>[0];
+            },
+            ReturnType<typeof getAnimationTypeByFlowGraphType>
+        >,
+        any
+    >;
     getDimensionsFromTextureSize: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof getDimensionsFromTextureSize>> & MeshProps,
@@ -14291,6 +15732,26 @@ export interface JSXElements {
                 size: Parameters<typeof getDimensionsFromTextureSize>[0];
             },
             ReturnType<typeof getDimensionsFromTextureSize>
+        >,
+        any
+    >;
+    getRichTypeByAnimationType: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof getRichTypeByAnimationType>> & MeshProps,
+            {
+                animationType: Parameters<typeof getRichTypeByAnimationType>[0];
+            },
+            ReturnType<typeof getRichTypeByAnimationType>
+        >,
+        any
+    >;
+    getRichTypeByFlowGraphType: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof getRichTypeByFlowGraphType>> & MeshProps,
+            {
+                flowGraphType: Parameters<typeof getRichTypeByFlowGraphType>[0];
+            },
+            ReturnType<typeof getRichTypeByFlowGraphType>
         >,
         any
     >;
@@ -14304,18 +15765,6 @@ export interface JSXElements {
         >,
         any
     >;
-    importAnimationsAsync: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof importAnimationsAsync>> & MeshProps,
-            {
-                source: Parameters<typeof importAnimationsAsync>[0];
-                scene: Parameters<typeof importAnimationsAsync>[1];
-                options: Parameters<typeof importAnimationsAsync>[2];
-            },
-            ReturnType<typeof importAnimationsAsync>
-        >,
-        any
-    >;
     inlineScheduler: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof inlineScheduler>> & MeshProps,
@@ -14325,30 +15774,6 @@ export interface JSXElements {
                 onError: Parameters<typeof inlineScheduler>[2];
             },
             ReturnType<typeof inlineScheduler>
-        >,
-        any
-    >;
-    loadAssetContainerAsync: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof loadAssetContainerAsync>> & MeshProps,
-            {
-                source: Parameters<typeof loadAssetContainerAsync>[0];
-                scene: Parameters<typeof loadAssetContainerAsync>[1];
-                options: Parameters<typeof loadAssetContainerAsync>[2];
-            },
-            ReturnType<typeof loadAssetContainerAsync>
-        >,
-        any
-    >;
-    loadSceneAsync: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof loadSceneAsync>> & MeshProps,
-            {
-                source: Parameters<typeof loadSceneAsync>[0];
-                engine: Parameters<typeof loadSceneAsync>[1];
-                options: Parameters<typeof loadSceneAsync>[2];
-            },
-            ReturnType<typeof loadSceneAsync>
         >,
         any
     >;
@@ -14419,16 +15844,6 @@ export interface JSXElements {
                 defines: Parameters<typeof prepareStringDefinesForClipPlanes>[2];
             },
             ReturnType<typeof prepareStringDefinesForClipPlanes>
-        >,
-        any
-    >;
-    registerSceneLoaderPlugin: React.DetailedHTMLProps<
-        BabylonProps<
-            ExcludeReadonlyAndPrivate<ReturnType<typeof registerSceneLoaderPlugin>> & MeshProps,
-            {
-                plugin: Parameters<typeof registerSceneLoaderPlugin>[0];
-            },
-            ReturnType<typeof registerSceneLoaderPlugin>
         >,
         any
     >;

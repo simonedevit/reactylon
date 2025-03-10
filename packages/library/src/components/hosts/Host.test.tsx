@@ -77,6 +77,21 @@ describe('Hosts tests', () => {
         expect(material).toBeNull();
     });
 
+    test('should dispose the parent and his children', async () => {
+        const boxName = 'box';
+        const boxChildrenName = `${boxName}-children`;
+        const { scene, unmount } = render(
+            <box name={boxName}>
+                <box name={boxChildrenName} />
+            </box>,
+        );
+        unmount();
+        const box = scene.getMeshById(boxName) as Mesh;
+        const boxChildren = scene.getMeshById(boxChildrenName) as Mesh;
+        expect(box).toBeNull();
+        expect(boxChildren).toBeNull();
+    });
+
     test('should invoke onCreate when the box has been created', async () => {
         const handleCreate = jest.fn();
         const boxName = 'box';

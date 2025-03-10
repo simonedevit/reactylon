@@ -28,8 +28,14 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
             path: path.resolve(__dirname, 'build'),
             publicPath: '/',
             filename: pathData => {
-                return pathData.runtime === 'index' ? 'index.js' : `${pathData.runtime}/index.js`;
+                if (['web', 'mobile'].includes(pathData.chunk?.name as string)) {
+                    return '[name]/index.js';
+                } else {
+                    return '[name].js';
+                }
             },
+            // dynamic imported chunks
+            // chunkFilename: '[name].dynamic-import.js',
             globalObject: 'globalThis', // Use globalThis instead of self
             library: {
                 type: 'module',
@@ -58,7 +64,7 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
                 },
             ],
         },
-        /* optimization: {
+        optimization: {
             moduleIds: 'deterministic',
             runtimeChunk: 'single',
             splitChunks: {
@@ -67,11 +73,17 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
                         test: /[\\/]node_modules[\\/]/,
                         name: 'vendors',
                         chunks: 'all',
+                        /*name: (module) => {
+                            const packageName = module.context.match(
+                              /[\\/]node_modules[\\/]((@[^\\/]+[\\/][^\\/]+)|([^\\/]+))([\\/]|$)/
+                            )[1];
+                            return `vendor.${packageName.replace('/', '.')}`;
+                        }*/
                     },
                 },
             },
-        },*/
-        externals: ['react', 'react-dom/client', /^@babylonjs\/*/, 'its-fine'],
+        },
+        externals: ['react', 'react-dom/server', /^@babylonjs\/*/, 'its-fine'],
         plugins: [
             new CleanWebpackPlugin(),
             // serve custom environment variable to application

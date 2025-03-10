@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, HavokPlugin, Vector3, Nullable, Camera, Engine } from '@babylonjs/core';
+import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, Nullable, Camera, Engine, Vector3 } from '@babylonjs/core';
 import { GUI3DManager } from '@babylonjs/gui';
-import HavokPhysics from '@babylonjs/havok';
 import { SceneContext, Store, createBabylonStore } from './store';
 import { RootContainer, type EngineContext } from '@types';
 import Reactylon from '../reconciler';
@@ -19,7 +18,7 @@ type SceneProps = React.PropsWithChildren<{
     xrDefaultExperienceOptions?: WebXRDefaultExperienceOptions;
     physicsOptions?: {
         gravity?: Parameters<BabylonScene['enablePhysics']>[0];
-        plugin?: Parameters<BabylonScene['enablePhysics']>[1];
+        plugin: Parameters<BabylonScene['enablePhysics']>[1];
     };
     /**
      * @internal
@@ -55,22 +54,10 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     gui3DManager: isGui3DManager ? new GUI3DManager(scene) : undefined,
                 };
                 onSceneReady?.(scene);
-
                 // enable physics
                 if (physicsOptions) {
-                    scene.enablePhysics(
-                        physicsOptions?.gravity || new Vector3(0, -9.8, 0),
-                        physicsOptions?.plugin ||
-                            new HavokPlugin(
-                                true,
-                                await HavokPhysics({
-                                    // TODO: serve .wasm file from your own server
-                                    locateFile: file => {
-                                        return `https://preview.babylonjs.com/havok/${file}`;
-                                    },
-                                }),
-                            ),
-                    );
+                    const { gravity, plugin } = physicsOptions;
+                    scene.enablePhysics(gravity || new Vector3(0, -9.8, 0), plugin);
                 }
                 let xrExperience = null;
                 // enable xr experience
@@ -120,7 +107,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 }
 
                 /* --------------------------------------------------------------------------------------- */
-                /* RECONCILER
+                /* RENDERER
                 ------------------------------------------------------------------------------------------ */
                 store.current = createBabylonStore({
                     engine,
