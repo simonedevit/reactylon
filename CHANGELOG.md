@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.4.0](https://github.com/simonedevit/reactylon/compare/v1.3.1...v1.4.0) (2025-03-10)
+
+
+### Features
+
+* **general:** add physics + improve build ([f2e4b78](https://github.com/simonedevit/reactylon/commit/f2e4b78955989f9f3fa267d3085ac52632a30314))
+
 ## [1.3.1](https://github.com/simonedevit/reactylon/compare/v1.3.0...v1.3.1) (2025-02-11)
 
 
