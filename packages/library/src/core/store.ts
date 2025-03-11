@@ -1,6 +1,7 @@
 import { createStore, StoreApi, useStore } from 'zustand';
-import { type Nullable, Engine, Scene, WebXRDefaultExperience } from '@babylonjs/core';
+import { type Nullable, Engine, HavokPlugin, Scene, WebXRDefaultExperience } from '@babylonjs/core';
 import { createContext, useContext } from 'react';
+import { IPhysicsEngine } from '@babylonjs/core/Physics/IPhysicsEngine';
 
 export type EngineStore = {
     engine: Engine;
@@ -12,6 +13,7 @@ export type Store = EngineStore & {
     scene: Scene;
     canvas: HTMLCanvasElement | WebGLRenderingContext;
     xrExperience: Nullable<WebXRDefaultExperience>;
+    physicsEngine: Nullable<IPhysicsEngine>;
     //sceneReady: boolean;
 };
 
@@ -67,3 +69,18 @@ export function useXrExperience<T>(selector: (xrExperience: WebXRDefaultExperien
 export function useXrExperience<T>(selector?: (xrExperience: WebXRDefaultExperience) => T): T | WebXRDefaultExperience {
     return useBabylonContext(state => (selector ? selector(state.xrExperience!) : state.xrExperience!));
 }
+
+/**
+ * Get the physics engine from the context.
+ */
+export function usePhysics(): IPhysicsEngine;
+export function usePhysics<T>(selector: (physicsEngine: IPhysicsEngine) => T): T;
+
+export function usePhysics<T>(selector?: (physicsEngine: IPhysicsEngine) => T): T | IPhysicsEngine {
+    return useBabylonContext(state => (selector ? selector(state.physicsEngine!) : state.physicsEngine!));
+}
+
+/**
+ * Get the Havok plugin from the context.
+ */
+export const useHavok = () => usePhysics(physicsEngine => physicsEngine.getPhysicsPlugin() as HavokPlugin);

@@ -116,6 +116,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                     isMultipleCanvas,
                     isMultipleScene,
                     xrExperience,
+                    physicsEngine: scene.getPhysicsEngine(),
                 });
 
                 rootContainer.current = {
