@@ -50,6 +50,11 @@ export class MeshHost {
             };
         }
         const element = Host.createInstance(type, isBuilder, Class, props, rootContainer, cloneFn);
+        // FIXME: Babylon.js clones the physics only for clones and not from instances so replicate logic also for instances
+        if (instanceFrom && scene.getPhysicsEngine()) {
+            const original = scene.getMeshById(instanceFrom) as Mesh;
+            original.physicsBody?.clone(element);
+        }
         element.actionManager = handleEvents(props, scene);
         element.handlers = {
             addChild: MeshHost.addChild,
