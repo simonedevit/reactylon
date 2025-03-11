@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.4.2](https://github.com/simonedevit/reactylon/compare/v1.4.1...v1.4.2) (2025-03-11)
+
+
+### Bug Fixes
+
+* **components:** add physics hooks ([844912b](https://github.com/simonedevit/reactylon/commit/844912bf5ff4b4ca96151d5f2d0cc740d075b4ba))
+
 ## [1.4.1](https://github.com/simonedevit/reactylon/compare/v1.4.0...v1.4.1) (2025-03-11)
 
 
