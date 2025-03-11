@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.4.3](https://github.com/simonedevit/reactylon/compare/v1.4.2...v1.4.3) (2025-03-11)
+
+
+### Bug Fixes
+
+* **reconciler:** treat mesh as class ([e8561fa](https://github.com/simonedevit/reactylon/commit/e8561faab1716895b59732b17be7ff3f04f40a43))
+
 ## [1.4.2](https://github.com/simonedevit/reactylon/compare/v1.4.1...v1.4.2) (2025-03-11)
 
 
