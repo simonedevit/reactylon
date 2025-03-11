@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.4.1](https://github.com/simonedevit/reactylon/compare/v1.4.0...v1.4.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* **reconciler:** clone physics also for instances ([3289cc6](https://github.com/simonedevit/reactylon/commit/3289cc6a7d38724d86e787106995d87ee7bef32f))
+
 ## [1.4.0](https://github.com/simonedevit/reactylon/compare/v1.3.1...v1.4.0) (2025-03-10)
 
 
