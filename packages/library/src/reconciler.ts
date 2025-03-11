@@ -139,7 +139,7 @@ const reconciler = ReactReconciler<
                 isBuilder = true;
             } else {
                 // MeshBuilder.ExtrudePolygon
-                if (ResolvedBabylonElement === 'ExtrudePolygon' || ResolvedBabylonElement === 'Mesh') {
+                if (ResolvedBabylonElement === 'ExtrudePolygon') {
                     isBuilder = true;
                 }
                 //@ts-ignore
