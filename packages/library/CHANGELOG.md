@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [1.4.4](https://github.com/simonedevit/reactylon/compare/v1.4.3...v1.4.4) (2025-03-11)
+
+
+### Bug Fixes
+
+* **reconciler:** create mesh with MeshHost ([452c369](https://github.com/simonedevit/reactylon/commit/452c36933ca7a93141df809629c97e1fe57cc182))
+
 ## [1.4.3](https://github.com/simonedevit/reactylon/compare/v1.4.2...v1.4.3) (2025-03-11)
 
 
