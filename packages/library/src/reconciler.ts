@@ -151,7 +151,7 @@ const reconciler = ReactReconciler<
         switch (babylonPackage) {
             case BabylonPackages.CORE:
                 createInstanceFn = Host.createInstance;
-                if (isBuilder) {
+                if (isBuilder || BabylonElement === 'Mesh') {
                     createInstanceFn = MeshHost.createInstance;
                 } else if (Class.prototype instanceof BabylonCore.Material) {
                     createInstanceFn = MaterialHost.createInstance;
