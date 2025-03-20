@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [2.0.0](https://github.com/simonedevit/reactylon/compare/v1.4.4...v2.0.0) (2025-03-20)
+
+
+### Chore
+
+* **general:** upgrade to react 19 ([1a65c19](https://github.com/simonedevit/reactylon/commit/1a65c19fd45f2e2a1cd5c990dc9c3c5a1c16df8f))
+
 ## [1.4.4](https://github.com/simonedevit/reactylon/compare/v1.4.3...v1.4.4) (2025-03-11)
 
 
