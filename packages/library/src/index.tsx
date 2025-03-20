@@ -1,21 +1,45 @@
 import { JSXElements as CoreJSXElements } from './_generated/babylon.core.declarations';
 import { JSXElements as GuiJSXElements } from './_generated/babylon.gui.declarations';
 import { AdvancedDynamicTextureProps } from './types/props';
+import type {} from 'react';
+import type {} from 'react/jsx-runtime';
+import type {} from 'react/jsx-dev-runtime';
 
+interface ReactylonCoreJSXElements extends Omit<CoreJSXElements, 'physicsAggregate'> {
+    physicsAggregate: Omit<CoreJSXElements['physicsAggregate'], 'transformNode'>; // omit transformNode because it will be automatically injected
+}
+
+interface ReactylonGuiJSXElements extends Omit<GuiJSXElements, 'advancedDynamicTexture'> {
+    advancedDynamicTexture: Omit<GuiJSXElements['advancedDynamicTexture'], 'name'> & AdvancedDynamicTextureProps;
+}
+
+interface ReactylonElements extends ReactylonCoreJSXElements, ReactylonGuiJSXElements {}
+
+// React 18
 declare global {
     namespace JSX {
-        // CORE
-        interface IntrinsicElements extends CoreJSXElements {
-            physicsAggregate: Omit<CoreJSXElements['physicsAggregate'], 'transformNode'>; // omit transformNode because it will be automatically injected
-            // add here other custom JSX elements
-        }
-        // GUI
-        interface IntrinsicElements extends GuiJSXElements {
-            advancedDynamicTexture: Omit<GuiJSXElements['advancedDynamicTexture'], 'name'> & AdvancedDynamicTextureProps;
-        }
+        interface IntrinsicElements extends ReactylonElements {}
+    }
+}
+
+// React 19
+declare module 'react' {
+    namespace JSX {
+        interface IntrinsicElements extends ReactylonElements {}
+    }
+}
+
+declare module 'react/jsx-runtime' {
+    namespace JSX {
+        interface IntrinsicElements extends ReactylonElements {}
+    }
+}
+
+declare module 'react/jsx-dev-runtime' {
+    namespace JSX {
+        interface IntrinsicElements extends ReactylonElements {}
     }
 }
 
 export * from './core';
-export { default as Reactylon } from './reconciler';
-export { BabylonElements } from './types/props';
+export { type BabylonElements } from './types/props';

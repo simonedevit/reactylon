@@ -22,3 +22,5 @@ yarn-error.log*
 
 # documentation
 /docs
+
+.DS_Store

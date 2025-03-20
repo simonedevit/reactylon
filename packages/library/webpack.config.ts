@@ -1,19 +1,23 @@
 import * as path from 'path';
 import { Configuration, EnvironmentPlugin, WebpackOptionsNormalized } from 'webpack';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import CopyPlugin from 'copy-webpack-plugin';
 
 interface EnvironmentVariable {
     environment: 'DEV' | 'PROD';
     isLogging: boolean;
+    isAnalyzer: boolean;
     //add here other custom environment variables
 }
 
 const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<WebpackOptionsNormalized, 'devServer'> => {
     const isProduction = env.environment === 'PROD';
     const isLogging = !!env.isLogging;
+    const isAnalyzer = !!env.isAnalyzer;
     console.log(`Mode: ${env.environment || 'DEV'}`);
     console.log(`Logging: ${isLogging ? 'Enabled' : 'Disabled'}`);
+    console.log(`Analyzer: ${isAnalyzer ? 'Enabled' : 'Disabled'}`);
     console.log();
 
     return {
@@ -25,6 +29,7 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
             mobile: './src/mobile/index.ts',
         },
         output: {
+            clean: true,
             path: path.resolve(__dirname, 'build'),
             publicPath: '/',
             filename: pathData => {
@@ -60,36 +65,39 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
                     use: {
                         loader: 'ts-loader',
                     },
-                    exclude: '/node_modules/',
+                    exclude: ['/node_modules/'],
                 },
             ],
         },
         optimization: {
             moduleIds: 'deterministic',
-            runtimeChunk: 'single',
+            /*runtimeChunk: 'single',
             splitChunks: {
                 cacheGroups: {
                     vendor: {
                         test: /[\\/]node_modules[\\/]/,
-                        name: 'vendors',
+                        //name: 'vendors',
                         chunks: 'all',
-                        /*name: (module) => {
+                        name: (module: any) => {
                             const packageName = module.context.match(
                               /[\\/]node_modules[\\/]((@[^\\/]+[\\/][^\\/]+)|([^\\/]+))([\\/]|$)/
                             )[1];
                             return `vendor.${packageName.replace('/', '.')}`;
-                        }*/
+                        }
                     },
                 },
-            },
+            }*/
         },
-        externals: ['react', 'react-dom/server', /^@babylonjs\/*/, 'its-fine'],
+        externals: [/^react$/, /^react\/.*/, 'react-reconciler', 'react-dom/server', /^@babylonjs\/*/, 'its-fine'],
         plugins: [
-            new CleanWebpackPlugin(),
             // serve custom environment variable to application
             new EnvironmentPlugin({
                 IS_LOGGING_ENABLED: isLogging,
             }),
+            new CopyPlugin({
+                patterns: [{ from: 'package.json', to: 'package.json' }],
+            }),
+            ...(isAnalyzer ? [new BundleAnalyzerPlugin()] : []),
         ],
     };
 };

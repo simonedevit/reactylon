@@ -1,20 +1,22 @@
 {
     "name": "reactylon",
-    "version": "1.4.4",
+    "version": "2.0.0-beta.2",
     "description": "A powerful multiplatform framework built on Babylon.js and React, designed to create interactive and immersive 3D experiences.",
     "type": "module",
-    "main": "./build/index.js",
-    "types": "./build/index.d.ts",
+    "main": "index.js",
+    "types": "index.d.ts",
     "repository": {
         "url": "https://github.com/simonedevit/reactylon.git"
     },
     "scripts": {
         "init": "npm ci",
-        "build:local": "webpack --env isLogging=true && bash ../../scripts/copy.sh",
+        "build:local": "webpack --env isLogging=true",
+        "build:local:analyze": "webpack --env isLogging=true --env isAnalyzer=true",
         "build": "webpack --env environment=PROD",
+        "build:analyze": "webpack --env environment=PROD --env isAnalyzer=true",
         "test": "NODE_OPTIONS=--experimental-vm-modules jest",
         "test:debug": "NODE_OPTIONS=--experimental-vm-modules node --inspect-brk ../../node_modules/.bin/jest --runInBand",
-        "release": "npm run build && commit-and-tag-version --commit-all && git push --follow-tags && bash ../../scripts/publish.sh"
+        "release": "npm run build && npm run test && commit-and-tag-version --commit-all && git push --follow-tags && bash ../../scripts/publish.sh"
     },
     "keywords": [],
     "commit-and-tag-version": {
@@ -29,17 +31,15 @@
         "acorn": "^8.11.3",
         "its-fine": "^1.2.5",
         "lodash": "^4.17.21",
-        "react-reconciler": "^0.29.2",
         "zustand": "^5.0.3"
     },
     "peerDependencies": {
         "@babylonjs/core": "^7.40.2 ",
         "@babylonjs/gui": "^7.40.2 ",
         "@babylonjs/react-native": "^1.8.6",
-        "@types/react": "^18.2.0",
-        "@types/react-dom": "^18.3.1",
-        "react": "^18.2.0",
-        "react-dom": "^18.3.1"
+        "react": "^18 || ^19",
+        "react-dom": "^18 || ^19",
+        "react-reconciler": "0.29.2 || 0.31.0"
     },
     "peerDependenciesMeta": {
         "react-dom": {
@@ -60,20 +60,24 @@
         "@types/acorn": "^6.0.0",
         "@types/jest": "^29.5.14",
         "@types/lodash": "^4.17.13",
-        "@types/react": "^18.3.12",
-        "@types/react-dom": "^18.0.7",
-        "@types/react-reconciler": "^0.28.8",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "@types/react-reconciler": "0.31.0",
         "@types/webpack": "^5.28.5",
-        "clean-webpack-plugin": "^4.0.0",
+        "@types/webpack-bundle-analyzer": "^4.7.0",
         "commit-and-tag-version": "^12.2.0",
+        "copy-webpack-plugin": "^13.0.0",
         "jest": "^29.7.0",
         "jest-environment-jsdom": "^29.7.0",
-        "react-dom": "^18.3.1",
+        "react": "^19",
+        "react-dom": "^19",
+        "react-reconciler": "0.31.0",
         "ts-jest": "^29.2.5",
         "ts-loader": "^9.4.1",
         "ts-node": "^10.9.2",
         "tsconfig-paths-webpack-plugin": "^4.1.0",
         "webpack": "^5.91.0",
+        "webpack-bundle-analyzer": "^4.10.2",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.0.4"
     },

@@ -37,9 +37,6 @@
         "tsc-files": "^1.1.4",
         "typescript": "^5.4.5"
     },
-    "overrides": {
-        "react-native": "0.76.5"
-    },
     "engines": {
         "node": "^22.11.0",
         "npm": "^10.9.0"

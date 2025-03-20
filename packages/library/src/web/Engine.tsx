@@ -4,6 +4,7 @@ import CustomLoadingScreen, { type LoadingScreenOptions } from './CustomLoadingS
 import { FiberProvider } from 'its-fine';
 import { Logger } from '@dvmstudios/reactylon-common';
 import { EngineContext } from '@types';
+import type { SceneProps } from '../core/Scene';
 
 export type EngineProps = React.PropsWithChildren<{
     antialias?: boolean;
@@ -23,7 +24,7 @@ export type EngineProps = React.PropsWithChildren<{
     _nullEngineOptions?: NullEngineOptions;
 }>;
 
-export const Engine: React.FC<EngineProps> = ({
+export const Engine = ({
     antialias,
     engineOptions,
     adaptToDeviceRatio,
@@ -32,7 +33,7 @@ export const Engine: React.FC<EngineProps> = ({
     _nullEngineOptions,
     isMultipleCanvas,
     ...rest
-}) => {
+}: EngineProps) => {
     const [context, setContext] = useState<EngineContext | null>(null);
     const engineRef = useRef<{
         engine: BabylonEngine;
@@ -51,7 +52,7 @@ export const Engine: React.FC<EngineProps> = ({
         } else {
             if (isMultipleScene) {
                 Children.forEach(rest.children, child => {
-                    if (isValidElement(child)) {
+                    if (isValidElement<SceneProps>(child)) {
                         if (!child.props.canvas) {
                             Logger.error(
                                 `Engine - initializeEngine - Each Scene component requires a corresponding canvas element. Ensure that you provide one canvas for every Scene you are using.`,

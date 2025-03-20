@@ -7,7 +7,7 @@ type NativeEngineProps = React.PropsWithChildren<{
     camera: Camera;
 }>;
 
-export const NativeEngine: React.FC<NativeEngineProps> = ({ children, camera }) => {
+export const NativeEngine = ({ children, camera }: NativeEngineProps) => {
     const engine = useEngine();
 
     return (

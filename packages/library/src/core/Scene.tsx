@@ -4,10 +4,10 @@ import { GUI3DManager } from '@babylonjs/gui';
 import { SceneContext, Store, createBabylonStore } from './store';
 import { RootContainer, type EngineContext } from '@types';
 import Reactylon from '../reconciler';
-import { type ContextBridge, useContextBridge } from 'its-fine';
+import { useContextBridge } from 'its-fine';
 import { type StoreApi } from 'zustand';
 
-type SceneProps = React.PropsWithChildren<{
+export type SceneProps = React.PropsWithChildren<{
     /**
      * This prop must be set only when you have multiple scenes.
      */
@@ -30,15 +30,16 @@ type SceneProps = React.PropsWithChildren<{
 //FIXME: replace global var with a singleton Manager
 export let activeScene: BabylonScene | null = null;
 
-export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneReady, isGui3DManager, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }) => {
+export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }: SceneProps) => {
     const { engine, isMultipleCanvas, isMultipleScene, disposeEngine } = _context as EngineContext;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
     const isFirstRender = useRef(false);
 
-    const store = useRef<StoreApi<Store>>();
+    const reconciler = useRef(Reactylon());
+    const store = useRef<StoreApi<Store>>(null);
 
     // Returns a bridged context provider that forwards context
-    const Bridge: ContextBridge = useContextBridge();
+    const Bridge = useContextBridge();
 
     useEffect(() => {
         (async () => {
@@ -127,7 +128,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
                 };
 
                 // Renders children with bridged context into a secondary renderer
-                Reactylon.render(
+                reconciler.current.render(
                     <Bridge>
                         <SceneContext.Provider value={store.current}>{children}</SceneContext.Provider>
                     </Bridge>,
@@ -138,7 +139,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
         })();
 
         return () => {
-            Reactylon.unmount(rootContainer.current!, () => {
+            reconciler.current.unmount(rootContainer.current!, () => {
                 activeScene = null;
                 disposeEngine();
             });
@@ -150,7 +151,7 @@ export const Scene: React.FC<SceneProps> = ({ children, sceneOptions, onSceneRea
         if (!isFirstRender.current) {
             if (store.current) {
                 // Renders children with bridged context into a secondary renderer
-                Reactylon.render(
+                reconciler.current.render(
                     <Bridge>
                         <SceneContext.Provider value={store.current}>{children}</SceneContext.Provider>
                     </Bridge>,

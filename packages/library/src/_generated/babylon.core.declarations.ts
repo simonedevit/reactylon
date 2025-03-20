@@ -379,6 +379,7 @@ import { FlowGraphCoshBlock } from '@babylonjs/core';
 import { FlowGraphCrossBlock } from '@babylonjs/core';
 import { FlowGraphCubeRootBlock } from '@babylonjs/core';
 import { FlowGraphDataConnection } from '@babylonjs/core';
+import { FlowGraphDataSwitchBlock } from '@babylonjs/core';
 import { FlowGraphDebounceBlock } from '@babylonjs/core';
 import { FlowGraphDegToRadBlock } from '@babylonjs/core';
 import { FlowGraphDeterminantBlock } from '@babylonjs/core';
@@ -505,10 +506,12 @@ import { FragCoordBlock } from '@babylonjs/core';
 import { FragDepthBlock } from '@babylonjs/core';
 import { FragmentOutputBlock } from '@babylonjs/core';
 import { FrameGraph } from '@babylonjs/core';
+import { FrameGraphAnaglyphTask } from '@babylonjs/core';
 import { FrameGraphBlackAndWhiteTask } from '@babylonjs/core';
 import { FrameGraphBloomTask } from '@babylonjs/core';
 import { FrameGraphBlurTask } from '@babylonjs/core';
 import { FrameGraphCascadedShadowGeneratorTask } from '@babylonjs/core';
+import { FrameGraphChromaticAberrationTask } from '@babylonjs/core';
 import { FrameGraphCircleOfConfusionTask } from '@babylonjs/core';
 import { FrameGraphClearTextureTask } from '@babylonjs/core';
 import { FrameGraphCopyToTextureTask } from '@babylonjs/core';
@@ -529,6 +532,7 @@ import { FrameGraphPostProcessTask } from '@babylonjs/core';
 import { FrameGraphRenderContext } from '@babylonjs/core';
 import { FrameGraphRenderPass } from '@babylonjs/core';
 import { FrameGraphRenderTarget } from '@babylonjs/core';
+import { FrameGraphSSRRenderingPipelineTask } from '@babylonjs/core';
 import { FrameGraphShadowGeneratorTask } from '@babylonjs/core';
 import { FrameGraphTAAObjectRendererTask } from '@babylonjs/core';
 import { FrameGraphTask } from '@babylonjs/core';
@@ -576,6 +580,7 @@ import { GeometryCurveBlock } from '@babylonjs/core';
 import { GeometryDesaturateBlock } from '@babylonjs/core';
 import { GeometryDistanceBlock } from '@babylonjs/core';
 import { GeometryDotBlock } from '@babylonjs/core';
+import { GeometryEaseBlock } from '@babylonjs/core';
 import { GeometryElbowBlock } from '@babylonjs/core';
 import { GeometryInfoBlock } from '@babylonjs/core';
 import { GeometryInputBlock } from '@babylonjs/core';
@@ -795,12 +800,14 @@ import { NodeMaterialDefines } from '@babylonjs/core';
 import { NodeMaterialTeleportInBlock } from '@babylonjs/core';
 import { NodeMaterialTeleportOutBlock } from '@babylonjs/core';
 import { NodeRenderGraph } from '@babylonjs/core';
+import { NodeRenderGraphAnaglyphPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphBlackAndWhitePostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphBlock } from '@babylonjs/core';
 import { NodeRenderGraphBloomPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphBlurPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphBuildState } from '@babylonjs/core';
 import { NodeRenderGraphCascadedShadowGeneratorBlock } from '@babylonjs/core';
+import { NodeRenderGraphChromaticAberrationPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphCircleOfConfusionPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphClearBlock } from '@babylonjs/core';
 import { NodeRenderGraphConnectionPoint } from '@babylonjs/core';
@@ -820,6 +827,7 @@ import { NodeRenderGraphOutputBlock } from '@babylonjs/core';
 import { NodeRenderGraphPassCubePostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphPassPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphResourceContainerBlock } from '@babylonjs/core';
+import { NodeRenderGraphSSRPostProcessBlock } from '@babylonjs/core';
 import { NodeRenderGraphShadowGeneratorBlock } from '@babylonjs/core';
 import { NodeRenderGraphTAAObjectRendererBlock } from '@babylonjs/core';
 import { NodeRenderGraphTeleportInBlock } from '@babylonjs/core';
@@ -1163,9 +1171,11 @@ import { TextureOptimization } from '@babylonjs/core';
 import { TexturePacker } from '@babylonjs/core';
 import { TexturePackerFrame } from '@babylonjs/core';
 import { TextureSampler } from '@babylonjs/core';
+import { ThinAnaglyphPostProcess } from '@babylonjs/core';
 import { ThinBlackAndWhitePostProcess } from '@babylonjs/core';
 import { ThinBloomEffect } from '@babylonjs/core';
 import { ThinBlurPostProcess } from '@babylonjs/core';
+import { ThinChromaticAberrationPostProcess } from '@babylonjs/core';
 import { ThinCircleOfConfusionPostProcess } from '@babylonjs/core';
 import { ThinDepthOfFieldEffect } from '@babylonjs/core';
 import { ThinEffectLayer } from '@babylonjs/core';
@@ -1313,6 +1323,7 @@ import { _ExrTextureLoader } from '@babylonjs/core';
 import { _GetAudioEngine } from '@babylonjs/core';
 import { _GetCompatibleTextureLoader } from '@babylonjs/core';
 import { _HDRTextureLoader } from '@babylonjs/core';
+import { _HasAudioAnalyzerOptions } from '@babylonjs/core';
 import { _HasSpatialAudioListenerOptions } from '@babylonjs/core';
 import { _HasSpatialAudioOptions } from '@babylonjs/core';
 import { _HasStereoAudioOptions } from '@babylonjs/core';
@@ -2032,7 +2043,16 @@ export interface JSXElements {
         >,
         any
     >;
-    audioEngineV2: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AudioEngineV2>, {}, AudioEngineV2>, any>;
+    audioEngineV2: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<AudioEngineV2>,
+            {
+                options: ConstructorParameters<typeof AudioEngineV2>[0];
+            },
+            AudioEngineV2
+        >,
+        any
+    >;
     audioSceneComponent: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<AudioSceneComponent>,
@@ -5510,6 +5530,16 @@ export interface JSXElements {
         >,
         any
     >;
+    flowGraphDataSwitchBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FlowGraphDataSwitchBlock>,
+            {
+                config: ConstructorParameters<typeof FlowGraphDataSwitchBlock>[0];
+            },
+            FlowGraphDataSwitchBlock
+        >,
+        any
+    >;
     flowGraphDebounceBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<FlowGraphDebounceBlock>,
@@ -6681,11 +6711,22 @@ export interface JSXElements {
         BabylonProps<
             ExcludeReadonlyAndPrivate<FrameGraph>,
             {
-                engine: ConstructorParameters<typeof FrameGraph>[0];
+                scene: ConstructorParameters<typeof FrameGraph>[0];
                 debugTextures: ConstructorParameters<typeof FrameGraph>[1];
-                scene: ConstructorParameters<typeof FrameGraph>[2];
             },
             FrameGraph
+        >,
+        any
+    >;
+    frameGraphAnaglyphTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphAnaglyphTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphAnaglyphTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphAnaglyphTask>[1];
+                thinPostProcess: ConstructorParameters<typeof FrameGraphAnaglyphTask>[2];
+            },
+            FrameGraphAnaglyphTask
         >,
         any
     >;
@@ -6707,12 +6748,11 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof FrameGraphBloomTask>[0];
                 frameGraph: ConstructorParameters<typeof FrameGraphBloomTask>[1];
-                engine: ConstructorParameters<typeof FrameGraphBloomTask>[2];
-                weight: ConstructorParameters<typeof FrameGraphBloomTask>[3];
-                kernel: ConstructorParameters<typeof FrameGraphBloomTask>[4];
-                threshold: ConstructorParameters<typeof FrameGraphBloomTask>[5];
-                hdr: ConstructorParameters<typeof FrameGraphBloomTask>[6];
-                bloomScale: ConstructorParameters<typeof FrameGraphBloomTask>[7];
+                weight: ConstructorParameters<typeof FrameGraphBloomTask>[2];
+                kernel: ConstructorParameters<typeof FrameGraphBloomTask>[3];
+                threshold: ConstructorParameters<typeof FrameGraphBloomTask>[4];
+                hdr: ConstructorParameters<typeof FrameGraphBloomTask>[5];
+                bloomScale: ConstructorParameters<typeof FrameGraphBloomTask>[6];
             },
             FrameGraphBloomTask
         >,
@@ -6732,6 +6772,18 @@ export interface JSXElements {
     >;
     frameGraphCascadedShadowGeneratorTask: React.DetailedHTMLProps<
         BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphCascadedShadowGeneratorTask>, {}, FrameGraphCascadedShadowGeneratorTask>,
+        any
+    >;
+    frameGraphChromaticAberrationTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphChromaticAberrationTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphChromaticAberrationTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphChromaticAberrationTask>[1];
+                thinPostProcess: ConstructorParameters<typeof FrameGraphChromaticAberrationTask>[2];
+            },
+            FrameGraphChromaticAberrationTask
+        >,
         any
     >;
     frameGraphCircleOfConfusionTask: React.DetailedHTMLProps<
@@ -6799,9 +6851,8 @@ export interface JSXElements {
             {
                 name: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[0];
                 frameGraph: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[1];
-                engine: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[2];
-                blurLevel: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[3];
-                hdr: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[4];
+                blurLevel: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[2];
+                hdr: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[3];
             },
             FrameGraphDepthOfFieldTask
         >,
@@ -6977,6 +7028,18 @@ export interface JSXElements {
                 renderTargetDepth: ConstructorParameters<typeof FrameGraphRenderTarget>[3];
             },
             FrameGraphRenderTarget
+        >,
+        any
+    >;
+    frameGraphSSRRenderingPipelineTask: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<FrameGraphSSRRenderingPipelineTask>,
+            {
+                name: ConstructorParameters<typeof FrameGraphSSRRenderingPipelineTask>[0];
+                frameGraph: ConstructorParameters<typeof FrameGraphSSRRenderingPipelineTask>[1];
+                textureType: ConstructorParameters<typeof FrameGraphSSRRenderingPipelineTask>[2];
+            },
+            FrameGraphSSRRenderingPipelineTask
         >,
         any
     >;
@@ -7448,6 +7511,16 @@ export interface JSXElements {
                 name: ConstructorParameters<typeof GeometryDotBlock>[0];
             },
             GeometryDotBlock
+        >,
+        any
+    >;
+    geometryEaseBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<GeometryEaseBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof GeometryEaseBlock>[0];
+            },
+            GeometryEaseBlock
         >,
         any
     >;
@@ -9651,6 +9724,18 @@ export interface JSXElements {
         >,
         any
     >;
+    nodeRenderGraphAnaglyphPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphAnaglyphPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphAnaglyphPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphAnaglyphPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphAnaglyphPostProcessBlock>[2];
+            },
+            NodeRenderGraphAnaglyphPostProcessBlock
+        >,
+        any
+    >;
     nodeRenderGraphBlackAndWhitePostProcessBlock: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<NodeRenderGraphBlackAndWhitePostProcessBlock> & Clonable,
@@ -9712,6 +9797,18 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof NodeRenderGraphCascadedShadowGeneratorBlock>[2];
             },
             NodeRenderGraphCascadedShadowGeneratorBlock
+        >,
+        any
+    >;
+    nodeRenderGraphChromaticAberrationPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphChromaticAberrationPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphChromaticAberrationPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphChromaticAberrationPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphChromaticAberrationPostProcessBlock>[2];
+            },
+            NodeRenderGraphChromaticAberrationPostProcessBlock
         >,
         any
     >;
@@ -9954,6 +10051,19 @@ export interface JSXElements {
                 scene: ConstructorParameters<typeof NodeRenderGraphResourceContainerBlock>[2];
             },
             NodeRenderGraphResourceContainerBlock
+        >,
+        any
+    >;
+    nodeRenderGraphSSRPostProcessBlock: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<NodeRenderGraphSSRPostProcessBlock> & Clonable,
+            {
+                name: ConstructorParameters<typeof NodeRenderGraphSSRPostProcessBlock>[0];
+                frameGraph: ConstructorParameters<typeof NodeRenderGraphSSRPostProcessBlock>[1];
+                scene: ConstructorParameters<typeof NodeRenderGraphSSRPostProcessBlock>[2];
+                textureType: ConstructorParameters<typeof NodeRenderGraphSSRPostProcessBlock>[3];
+            },
+            NodeRenderGraphSSRPostProcessBlock
         >,
         any
     >;
@@ -13763,6 +13873,18 @@ export interface JSXElements {
         any
     >;
     textureSampler: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextureSampler>, {}, TextureSampler>, any>;
+    thinAnaglyphPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinAnaglyphPostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinAnaglyphPostProcess>[0];
+                engine: ConstructorParameters<typeof ThinAnaglyphPostProcess>[1];
+                options: ConstructorParameters<typeof ThinAnaglyphPostProcess>[2];
+            },
+            ThinAnaglyphPostProcess
+        >,
+        any
+    >;
     thinBlackAndWhitePostProcess: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ThinBlackAndWhitePostProcess>,
@@ -13799,6 +13921,18 @@ export interface JSXElements {
                 options: ConstructorParameters<typeof ThinBlurPostProcess>[4];
             },
             ThinBlurPostProcess
+        >,
+        any
+    >;
+    thinChromaticAberrationPostProcess: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ThinChromaticAberrationPostProcess>,
+            {
+                name: ConstructorParameters<typeof ThinChromaticAberrationPostProcess>[0];
+                engine: ConstructorParameters<typeof ThinChromaticAberrationPostProcess>[1];
+                options: ConstructorParameters<typeof ThinChromaticAberrationPostProcess>[2];
+            },
+            ThinChromaticAberrationPostProcess
         >,
         any
     >;
@@ -15359,6 +15493,16 @@ export interface JSXElements {
         any
     >;
     _HDRTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_HDRTextureLoader>, {}, _HDRTextureLoader>, any>;
+    _HasAudioAnalyzerOptions: React.DetailedHTMLProps<
+        BabylonProps<
+            ExcludeReadonlyAndPrivate<ReturnType<typeof _HasAudioAnalyzerOptions>> & MeshProps,
+            {
+                options: Parameters<typeof _HasAudioAnalyzerOptions>[0];
+            },
+            ReturnType<typeof _HasAudioAnalyzerOptions>
+        >,
+        any
+    >;
     _HasSpatialAudioListenerOptions: React.DetailedHTMLProps<
         BabylonProps<
             ExcludeReadonlyAndPrivate<ReturnType<typeof _HasSpatialAudioListenerOptions>> & MeshProps,

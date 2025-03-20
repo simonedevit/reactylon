@@ -16,7 +16,7 @@ export class TextureHost {
     }
 
     static addChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {
-        const textureType = child.kind as JSX.IntrinsicElements['texture']['kind'];
+        const textureType = child.kind;
         if (textureType === 'detailMap') {
             (parentInstance as StandardMaterial | PBRMaterial).detailMap.texture = child;
         } else {
@@ -25,7 +25,7 @@ export class TextureHost {
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: AugmentedTexture): void { }
+    static removeChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {}
 
     static prepareUpdate(): UpdatePayload {
         return {};
