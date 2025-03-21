@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [2.0.1](https://github.com/simonedevit/reactylon/compare/v2.0.0...v2.0.1) (2025-03-21)
+
+
+### Chore
+
+* **reconciler:** enable suspense mode ([1ae541b](https://github.com/simonedevit/reactylon/commit/1ae541b1dea7c93d8aa23a01690709af62a75584))
+
 ## [2.0.0](https://github.com/simonedevit/reactylon/compare/v1.4.4...v2.0.0) (2025-03-20)
 
 
