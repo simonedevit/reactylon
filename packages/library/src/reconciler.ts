@@ -158,6 +158,8 @@ function createReconciler() {
         unknown
     >({
         supportsMutation: true,
+        //supportsPersistence: false,
+        //supportsHydration: false,
 
         /*
          * This method should return a newly created node. For example, the DOM renderer would call document.createElement(type) here and then set the properties from props.
@@ -340,17 +342,16 @@ function createReconciler() {
         /*
          * You can proxy this to setTimeout or its equivalent in your environment.
          */
-        // scheduleTimeout(fn, delay) { return null  },
-
+        scheduleTimeout: (typeof setTimeout === 'function' ? setTimeout : undefined) as any,
         /*
          * You can proxy this to clearTimeout or its equivalent in your environment.
          */
-        // cancelTimeout(id) { return null },
+        cancelTimeout: (typeof clearTimeout === 'function' ? clearTimeout : undefined) as any,
 
         /*
          * This is a property(not a function) that should be set to something that can never be a valid timeout ID.For example, you can set it to -1.
          */
-        // noTimeout: -1,
+        noTimeout: -1,
 
         /*
          * Set this to true to indicate that your renderer supports scheduleMicrotask.We use microtasks as part of our discrete event implementation in React DOM.If you're not sure if your renderer should support this, you probably should. The option to not implement scheduleMicrotask exists so that platforms with more control over user events, like React Native, can choose to use a different mechanism.
@@ -568,7 +569,9 @@ function createReconciler() {
         /*
          * This method should make the instance invisible without removing it from the tree.For example, it can apply visual styling to hide it.It is used by Suspense to hide the tree while the fallback is visible.
          */
-        // hideInstance(instance) { },
+        hideInstance(instance) {
+            //instance?.isVisible = false;
+        },
 
         /*
         Same as hideInstance, but for nodes created by createTextInstance.
@@ -578,7 +581,9 @@ function createReconciler() {
         /*
          * This method should make the instance visible, undoing what hideInstance did.
          */
-        // unhideInstance(instance, props) { },
+        unhideInstance(instance, props) {
+            //instance?.isVisible = true;
+        },
 
         /*
          * Same as unhideInstance, but for nodes created by createTextInstance.
@@ -610,19 +615,21 @@ function createReconciler() {
         /*
          * This method is called just before the commit phase.Use it to set up any necessary state while any Host Components that might suspend this commit are evaluated to determine if the commit must be suspended.
          */
-        // startSuspendingCommit() { return null  },
+        startSuspendingCommit() {},
 
         /*
          * This method is called after startSuspendingCommit for each Host Component that indicated it might suspend a commit.
          */
-        // suspendInstance(type, props) { return null  },
+        suspendInstance() {},
 
         /*
          * This method is called after all suspendInstance calls are complete.
          * Return null if the commit can happen immediately.
          * Return(initiateCommit: Function) => Function if the commit must be suspended.The argument to this callback will initiate the commit when called.The return value is a cancellation function that the Reconciler can use to abort the commit.
          */
-        // waitForCommitToBeReady() { return null }
+        waitForCommitToBeReady() {
+            return null;
+        },
 
         detachDeletedInstance(instance) {},
     });
