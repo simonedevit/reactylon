@@ -31,11 +31,12 @@
         "acorn": "^8.11.3",
         "its-fine": "^1.2.5",
         "lodash": "^4.17.21",
+        "suspend-react": "^0.1.3",
         "zustand": "^5.0.3"
     },
     "peerDependencies": {
-        "@babylonjs/core": "^7.40.2 ",
-        "@babylonjs/gui": "^7.40.2 ",
+        "@babylonjs/core": "^7.0.0 || ^8.0.0",
+        "@babylonjs/gui": "^7.0.0 || ^8.0.0",
         "@babylonjs/react-native": "^1.8.6",
         "react": "^18 || ^19",
         "react-dom": "^18 || ^19",

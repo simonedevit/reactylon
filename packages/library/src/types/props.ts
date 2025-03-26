@@ -19,6 +19,7 @@ export enum BabylonElements {
 /* Define here the custom props and add them in JSX namespace */
 
 export type CommonProps<T = unknown> = Partial<TransformProps> & {
+    binding?: T;
     onCreate?: (element: T) => void;
     scene?: Scene; // used for multiple scenes
     propertiesFrom?: Array<{

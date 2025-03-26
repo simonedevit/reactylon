@@ -7,12 +7,13 @@ import '../../index';
 import coreConstructors from '../../_generated/babylon.core.constructors';
 import { CoreHostProps } from '@props';
 
-const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom'];
+const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'binding'];
 
 export class Host {
     static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps, rootContainer: RootContainer, cloneFn?: Function) {
         let element: ComponentInstance<any>;
         let isCloned = false;
+        let isBinding = false;
 
         const scene = rootContainer.scene;
         const propsWithScene = { ...props, scene };
@@ -23,13 +24,18 @@ export class Host {
         if (cloneFn) {
             element = cloneFn();
             isCloned = true;
-        } else {
+        }
+        if (props.binding) {
+            element = props.binding;
+            isBinding = true;
+        }
+        if (!cloneFn && !isBinding) {
             element = isBuilder ? Class(...paramsValues) : new Class(...paramsValues);
         }
 
-        // set non-constructor props (set constructor props only if element is cloned)
+        // set non-constructor props (set constructor props only if element is cloned or binded)
         Object.keys(props)
-            .filter(propName => (isCloned ? true : !paramsNames.includes(propName)) && !excludedProps.includes(propName))
+            .filter(propName => (isCloned || isBinding ? true : !paramsNames.includes(propName)) && !excludedProps.includes(propName))
             .forEach(_key => {
                 const key = _key as keyof CoreHostProps;
                 const value = props[key];

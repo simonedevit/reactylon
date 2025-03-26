@@ -73,12 +73,12 @@ function removeChild(parentInstance: ComponentInstance, child: ComponentInstance
     const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
     parentInstance.metadata.children.splice(index, 1);
     child.handlers?.removeChild?.(parentInstance, child);
-    //const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
-    //child.dispose?.(false, disposeMaterialsAndTextures);
-    child.dispose?.();
+    const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
+    child.dispose?.(false, disposeMaterialsAndTextures);
+    //child.dispose?.();
 }
 
-/* function shouldDisposeMaterialsAndTextures(child: unknown) {
+function shouldDisposeMaterialsAndTextures(child: unknown) {
     if (child instanceof BabylonCore.AbstractMesh) {
         // no material (i.e. "default material")
         if (!child.material) {
@@ -95,32 +95,32 @@ function removeChild(parentInstance: ComponentInstance, child: ComponentInstance
         }
     }
     return true;
-} */
+}
 
 function prepareUpdate(instance: ComponentInstance, type: string, oldProps: CoreHostProps | GuiHostProps, newProps: CoreHostProps | GuiHostProps, internalHandle: any) {
     //TODO: exclude constructor props (only if they are not also non-constructor props)
     //TODO: fine tune ObjectUtils.isEqualCustomizer to avoid unnecessary rerenders
 
     //@ts-ignore
-    const { children: _oldChildren, ...oldPropsWihoutChildren } = oldProps;
+    const { children: _oldChildren, binding: _oldBinding, ...oldNeededProps } = oldProps;
     //@ts-ignore
-    const { children: _newChildren, ...newPropsWihoutChildren } = newProps;
-    const areSameProps = isEqualWith(oldPropsWihoutChildren, newPropsWihoutChildren, ObjectUtils.isEqualCustomizer);
+    const { children: _newChildren, binding: _newBinding, ...newNeededProps } = newProps;
+    const areSameProps = isEqualWith(oldNeededProps, newNeededProps, ObjectUtils.isEqualCustomizer);
     if (areSameProps) {
         Logger.log(`prepareUpdate (no changes) - ${type}: ${instance.name}`);
         // no need to update
         return null;
     }
     Logger.group(`prepareUpdate (changes) - ${type}: ${instance.name}`, [
-        ['oldProps', oldPropsWihoutChildren],
-        ['newProps', newPropsWihoutChildren],
+        ['oldProps', oldNeededProps],
+        ['newProps', newNeededProps],
     ]);
     let propertiesFromProps = {};
     // propertiesFromProps
-    if (newPropsWihoutChildren.propertiesFrom) {
+    if (newNeededProps.propertiesFrom) {
         // @ts-expect-error - get scene from internal _scene attribute because with new reconciler (0.31.0) you don't have rootContainer anymore
         const scene = instance._scene;
-        propertiesFromProps = newPropsWihoutChildren.propertiesFrom.reduce(
+        propertiesFromProps = newNeededProps.propertiesFrom.reduce(
             (props, { property, source, type }) => {
                 const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
                 props[property] = sourceElement[property];
@@ -129,8 +129,8 @@ function prepareUpdate(instance: ComponentInstance, type: string, oldProps: Core
             {} as Record<string, unknown>,
         );
     }
-    //TODO: return only changed props - should i remove propertiesFrom from newPropsWihoutChildren?
-    return { ...newPropsWihoutChildren, ...propertiesFromProps } as UpdatePayload;
+    //TODO: return only changed props - should i remove propertiesFrom from newNeededProps?
+    return { ...newNeededProps, ...propertiesFromProps } as UpdatePayload;
 }
 
 /**
@@ -304,7 +304,7 @@ function createReconciler() {
          */
         getChildHostContext(parentHostContext, type, rootContainer) {
             // return what you want to pass to immediate child
-            return null;
+            return {};
             /* return {
                 type: `${type}-custom-child`
             } */
@@ -470,9 +470,9 @@ function createReconciler() {
             const index = container.metadata.children.findIndex(item => item.uniqueId === child.uniqueId);
             container.metadata.children.splice(index, 1);
             child.handlers?.removeChild?.(container, child);
-            //const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
-            //child.dispose?.(false, disposeMaterialsAndTextures);
-            child.dispose?.();
+            const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
+            child.dispose?.(false, disposeMaterialsAndTextures);
+            //child.dispose?.();
         },
 
         /*
