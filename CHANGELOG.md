@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [2.1.0](https://github.com/simonedevit/reactylon/compare/v2.0.1...v2.1.0) (2025-03-26)
+
+
+### Features
+
+* **general:** handle model ([e6b05d1](https://github.com/simonedevit/reactylon/commit/e6b05d1c2f92df7311c7e21dd2dc067101a3391e))
+
 ## [2.0.1](https://github.com/simonedevit/reactylon/compare/v2.0.0...v2.0.1) (2025-03-21)
 
 
