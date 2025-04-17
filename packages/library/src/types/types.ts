@@ -1,9 +1,9 @@
 /* PROPS USED BY JSX ELEMENTS GENERATOR */
 
-import { Engine, Node, Nullable, Scene, WebXRDefaultExperience } from '@babylonjs/core';
+import type { Engine, Node, Nullable, Scene, WebXRDefaultExperience } from '@babylonjs/core';
 import { BabylonPackages } from '@dvmstudios/reactylon-common';
-import { Clonable, CommonProps } from './props';
-import { type EngineStore } from '../core/store';
+import type { Clonable, CommonProps } from './props';
+import type { EngineStore } from '../core/store';
 
 type Only<T, U> = {
     [P in keyof T]: T[P];

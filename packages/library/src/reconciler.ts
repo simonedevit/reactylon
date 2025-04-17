@@ -1,15 +1,15 @@
 import { version } from 'react';
-import ReactReconciler, { FiberRoot } from 'react-reconciler';
+import ReactReconciler, { type FiberRoot } from 'react-reconciler';
 import { DefaultEventPriority, NoEventPriority } from 'react-reconciler/constants';
-import * as BabylonCore from '@babylonjs/core';
-import * as BabylonGui from '@babylonjs/gui';
+import type { AbstractMesh } from '@babylonjs/core';
 import lodash from 'lodash';
-import { Logger, ReversedCollidingComponents, capitalizeFirstLetter, BabylonPackages } from '@dvmstudios/reactylon-common';
-import { type ComponentInstance, type UpdatePayload, type RootContainer, type EngineContext, ComponentInstanceDependent } from '@types';
+import { Logger, BabylonPackages, isInstanceOf, builders, CollidingComponents } from '@dvmstudios/reactylon-common';
+import type { ComponentInstance, UpdatePayload, RootContainer, EngineContext, ComponentInstanceDependent } from '@types';
 import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
-import { CoreHostProps, GuiHostProps } from '@props';
+import type { CoreHostProps, GuiHostProps } from '@props';
+import { inventory } from './core/inventory';
 
 const IS_REACT_19 = version.startsWith('19');
 
@@ -19,13 +19,13 @@ type EventPriority = any;
 const { isEqualWith } = lodash;
 
 function isParentNeeded(parentInstance: ComponentInstance, child: ComponentInstance) {
-    if (child instanceof BabylonCore.Material) {
+    if (isInstanceOf(child, 'Material')) {
         return false;
     }
-    if (child instanceof BabylonCore.BaseTexture) {
+    if (isInstanceOf(child, 'BaseTexture')) {
         return false;
     }
-    if (parentInstance instanceof BabylonCore.HighlightLayer) {
+    if (isInstanceOf(child, 'HighlightLayer')) {
         return false;
     }
     return true;
@@ -48,10 +48,14 @@ function addChild(parentInstance: ComponentInstance, child: ComponentInstance) {
             parentInstance.metadata.children.push(child);
             if (child.metadata.babylonPackage === BabylonPackages.CORE) {
                 if (isParentNeeded(parentInstance, child)) {
-                    //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons have .setParent method
-                    child.parent = parentInstance;
+                    try {
+                        //@ts-ignore - meshes, cameras, lights, transform nodes, skeletons have .setParent method
+                        child.parent = parentInstance;
+                    } catch {
+                        // FIXME: silent error - investigate (it happens in Highlightlayer doc example)
+                    }
                 } else {
-                    if (parentInstance instanceof BabylonCore.HighlightLayer) {
+                    if (isInstanceOf(parentInstance, 'HighlightLayer')) {
                         // reactylon internal purpose for MeshHost
                         child.metadata.parent = parentInstance;
                     }
@@ -78,8 +82,9 @@ function removeChild(parentInstance: ComponentInstance, child: ComponentInstance
     //child.dispose?.();
 }
 
-function shouldDisposeMaterialsAndTextures(child: unknown) {
-    if (child instanceof BabylonCore.AbstractMesh) {
+function shouldDisposeMaterialsAndTextures(_child: unknown) {
+    if (isInstanceOf(_child, 'AbstractMesh')) {
+        const child = _child as AbstractMesh;
         // no material (i.e. "default material")
         if (!child.material) {
             return false;
@@ -171,68 +176,45 @@ function createReconciler() {
          */
         createInstance(type, props, rootContainer, hostContext, internalHandle) {
             Logger.log(`createInstance - ${type}: ${props.name}`);
-            let Class = null;
-            let isBuilder = false;
-            let babylonPackage: BabylonPackages = BabylonPackages.CORE;
-            const BabylonElement = capitalizeFirstLetter(type);
-            // @babylonjs/gui
-            if (BabylonElement in BabylonGui || (type in ReversedCollidingComponents && type !== 'text3D' && type !== 'polygon3D')) {
-                babylonPackage = BabylonPackages.GUI;
-                //@ts-ignore
-                Class = BabylonGui[BabylonElement] || BabylonGui[ReversedCollidingComponents[type]];
+
+            const element = inventory.get(type);
+
+            if (!element) {
+                throw new Error(`${type} not found in inventory`);
             }
-            // @babylonjs/core
-            else {
-                const ResolvedBabylonElement = ReversedCollidingComponents[type] || BabylonElement;
-                // MeshBuilder.Create
-                if (`Create${ResolvedBabylonElement}` in BabylonCore.MeshBuilder) {
-                    //@ts-ignore
-                    Class = BabylonCore.MeshBuilder[`Create${ResolvedBabylonElement}`];
-                    isBuilder = true;
-                } else {
-                    // MeshBuilder.ExtrudePolygon
-                    if (ResolvedBabylonElement === 'ExtrudePolygon') {
-                        isBuilder = true;
-                    }
-                    //@ts-ignore
-                    Class = BabylonCore[ResolvedBabylonElement];
-                }
-            }
+
+            const [Class, babylonPackage] = element;
             let createInstanceFn: Function;
 
             switch (babylonPackage) {
                 case BabylonPackages.CORE:
                     createInstanceFn = Host.createInstance;
-                    if (isBuilder || BabylonElement === 'Mesh') {
+                    if (type === 'mesh' || type === 'extrudePolygon' || builders.includes(type) || builders.includes(CollidingComponents[type])) {
                         createInstanceFn = MeshHost.createInstance;
-                    } else if (Class.prototype instanceof BabylonCore.Material) {
+                    } else if (isInstanceOf(Class, 'Material', true)) {
                         createInstanceFn = MaterialHost.createInstance;
-                    } else if (Class.prototype instanceof BabylonCore.BaseTexture) {
+                    } else if (isInstanceOf(Class, 'BaseTexture', true)) {
                         createInstanceFn = TextureHost.createInstance;
-                    } else if (Class.prototype instanceof BabylonCore.Light) {
+                    } else if (isInstanceOf(Class, 'Light', true)) {
                         createInstanceFn = LightHost.createInstance;
-                    } else if (Class.prototype instanceof BabylonCore.Camera) {
+                    } else if (isInstanceOf(Class, 'Camera', true)) {
                         createInstanceFn = CameraHost.createInstance;
-                    } else if (Class.name === BabylonCore.PhysicsAggregate.name) {
+                    } else if (type === 'physicsAggregate') {
                         return {
                             isParentDependent: true,
                             // @ts-ignore
-                            createInstanceFn: (transformNode: BabylonCore.TransformNode) => Host.createInstance(type, isBuilder, Class, { ...props, transformNode }, rootContainer),
+                            createInstanceFn: (transformNode: TransformNode) => Host.createInstance(type, Class, { ...props, transformNode }, rootContainer),
                         };
                     }
-                    /* else if (Class.name === BabylonCore.TransformNode.name) {
-                        createInstanceFn = TransformNodeHost.createInstance;
-                    }*/
                     break;
                 case BabylonPackages.GUI:
                     createInstanceFn = GuiHost.createInstance;
-                    if (Class.prototype instanceof BabylonCore.DynamicTexture) {
+                    if (isInstanceOf(Class, 'DynamicTexture', true)) {
                         createInstanceFn = AdvancedDynamicTextureHost.createInstance;
-                        isBuilder = true;
                     }
                     break;
             }
-            return createInstanceFn(type, isBuilder, Class, props, rootContainer);
+            return createInstanceFn(type, Class, props, rootContainer);
         },
 
         /*

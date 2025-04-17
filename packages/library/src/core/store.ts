@@ -1,7 +1,7 @@
-import { createStore, StoreApi, useStore } from 'zustand';
-import { type Nullable, Engine, HavokPlugin, Scene, WebXRDefaultExperience } from '@babylonjs/core';
+import { createStore, type StoreApi, useStore } from 'zustand';
+import type { Nullable, Engine, HavokPlugin, Scene, WebXRDefaultExperience } from '@babylonjs/core';
 import { createContext, useContext } from 'react';
-import { IPhysicsEngine } from '@babylonjs/core/Physics/IPhysicsEngine';
+import type { IPhysicsEngine } from '@babylonjs/core/Physics/IPhysicsEngine';
 
 export type EngineStore = {
     engine: Engine;

@@ -1,13 +1,15 @@
-import { BabylonPackages, Logger } from '@dvmstudios/reactylon-common';
-import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import { BabylonPackages, Logger, invokeClassOrFunction, isInstanceOf } from '@dvmstudios/reactylon-common';
+import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import { type GuiHostProps, type GuiTriggerable, GuiTriggers } from '@props';
 import { TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
+import guiConstructors from '../../_generated/babylon.gui.constructors';
+import type { Vector2WithInfo, GUI3DManager, Control, Container, Button3D } from '@babylonjs/gui';
+import type { Observable } from '@babylonjs/core';
+
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
 import '../../index';
-import { Button3D, Container, Container3D, Control, GUI3DManager, HolographicButton, HolographicSlate, Vector2WithInfo } from '@babylonjs/gui';
-import { GuiHostProps, GuiTriggerable, GuiTriggers } from '@props';
-import { Observable, DynamicTexture, AbstractMesh } from '@babylonjs/core';
-import guiConstructors from '../../_generated/babylon.gui.constructors';
+import { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh.js';
 
 function handleEvents(props: GuiHostProps, element: any) {
     Object.entries(GuiTriggers).forEach(([_key, observableName]) => {
@@ -30,7 +32,7 @@ type GuiComponent = Pick<Container, 'addControl' | 'removeControl'> & GuiTrigger
 const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', ...Object.keys(GuiTriggers)];
 
 export class GuiHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: GuiHostProps, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
+    static createInstance(type: string, Class: any, props: GuiHostProps, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
         let element: ComponentInstance<any>;
         let isCloned = false;
         const scene = rootContainer.scene;
@@ -53,14 +55,14 @@ export class GuiHost {
             element = cloneFn();
             isCloned = true;
         } else {
-            element = isBuilder ? Class(...paramsValues) : new Class(...paramsValues);
+            element = invokeClassOrFunction(Class, paramsValues);
         }
 
         element.uniqueId = scene.getUniqueId();
 
         let anchor = null;
         // StackPanel3D, volumeBasedPanel, etc...
-        if (element instanceof Container3D || element instanceof HolographicSlate || element instanceof Button3D) {
+        if (isInstanceOf(element, 'Container3D') || isInstanceOf(element, 'HolographicSlate') || isInstanceOf(element, 'Button3D')) {
             const gui3DManager = scene.metadata.gui3DManager as GUI3DManager;
             gui3DManager.addControl(element);
             // @ts-ignore
@@ -103,11 +105,11 @@ export class GuiHost {
     }
 
     static addChild(parentInstance: ComponentInstance<GuiComponent>, child: ComponentInstance<Control>): void {
-        if (parentInstance instanceof DynamicTexture && child instanceof DynamicTexture) {
+        if (isInstanceOf(parentInstance, 'DynamicTexture') && isInstanceOf(child, 'DynamicTexture')) {
             Logger.error(`GUIHost - addChild - You cannot have an AdvancedDynamicTexture (i.e. ${child.name}) in an AdvancedDynamicTexture (i.e. ${parentInstance.name})`);
         }
-        if (parentInstance instanceof Button3D && !(parentInstance instanceof HolographicButton)) {
-            parentInstance.content = child;
+        if (isInstanceOf(parentInstance, 'Button3D') && !isInstanceOf(parentInstance, 'HolographicButton')) {
+            (parentInstance as unknown as Button3D).content = child;
         } else {
             // ensure that addControl function exists (parentInstance could be transformNode)
             parentInstance.addControl?.(child);

@@ -1,13 +1,14 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { CubeTexture, PBRMaterial, StandardMaterial, Texture } from '@babylonjs/core';
-import { CoreHostProps, TextureProps } from '@props';
+import type { PBRMaterial, StandardMaterial, CubeTexture, Texture } from '@babylonjs/core';
+import type { CoreHostProps, TextureProps } from '@props';
+import { isInstanceOf } from '@dvmstudios/reactylon-common';
 
 type AugmentedTexture = ComponentInstance<TextureProps & (Texture | CubeTexture)>;
 
 export class TextureHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<TextureProps>, rootContainer: RootContainer) {
-        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer);
+    static createInstance(type: string, Class: any, props: CoreHostProps<TextureProps>, rootContainer: RootContainer) {
+        const element = Host.createInstance(type, Class, props, rootContainer);
         element.handlers = {
             addChild: TextureHost.addChild,
             commitUpdate: TextureHost.commitUpdate,
@@ -34,9 +35,9 @@ export class TextureHost {
     static commitUpdate(instance: AugmentedTexture, updatePayload: UpdatePayload): void {
         const { url, rootUrl, extensionsOrOptions, src } = updatePayload;
         // TODO: check it, are you using it on consumer? Probably not so you can directly use else condition
-        if (instance instanceof CubeTexture) {
+        if (isInstanceOf(instance, 'CubeTexture')) {
             instance.updateURL(rootUrl as string, undefined, undefined, undefined, undefined, extensionsOrOptions as any);
-        } else if (instance instanceof Texture) {
+        } else if (isInstanceOf(instance, 'Texture')) {
             // texture || cubeTexture || videoTexture
             instance.updateURL((url || rootUrl || src) as string);
         }

@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
+import { render, type RenderOptions, type RenderResult } from '@testing-library/react';
 import { Engine } from '../web/Engine';
 import { Scene } from '../core/Scene';
-import { Scene as BabylonScene } from '@babylonjs/core';
+import type { Scene as BabylonScene } from '@babylonjs/core';
+import { NullEngine } from '@babylonjs/core/Engines/nullEngine.js';
 
 type WrapperProps = React.PropsWithChildren<{
     context: {
@@ -12,7 +13,7 @@ type WrapperProps = React.PropsWithChildren<{
 
 const Wrapper: React.FC<WrapperProps> = ({ children, context }) => {
     return (
-        <Engine antialias>
+        <Engine antialias _nullEngine={new NullEngine()}>
             <Scene
                 onSceneReady={scene => {
                     scene.createDefaultCameraOrLight(true, undefined);

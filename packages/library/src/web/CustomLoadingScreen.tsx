@@ -1,4 +1,5 @@
-import { AbstractEngine, EngineStore, ILoadingScreen as BabylonILoadingScreen, Nullable, Observer } from '@babylonjs/core';
+import type { AbstractEngine, ILoadingScreen as BabylonILoadingScreen, Nullable, Observer } from '@babylonjs/core';
+import { EngineStore } from '@babylonjs/core/Engines/engineStore.js';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 type TransitionStyle = {

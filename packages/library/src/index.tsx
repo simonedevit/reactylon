@@ -1,9 +1,10 @@
-import { JSXElements as CoreJSXElements } from './_generated/babylon.core.declarations';
-import { JSXElements as GuiJSXElements } from './_generated/babylon.gui.declarations';
-import { AdvancedDynamicTextureProps } from './types/props';
+import type { JSXElements as CoreJSXElements } from './_generated/babylon.core.declarations';
+import type { JSXElements as GuiJSXElements } from './_generated/babylon.gui.declarations';
+import type { AdvancedDynamicTextureProps } from './types/props';
 import type {} from 'react';
 import type {} from 'react/jsx-runtime';
 import type {} from 'react/jsx-dev-runtime';
+export { BabylonPackages, builders, CollidingComponents, ReversedCollidingComponents } from '@dvmstudios/reactylon-common';
 
 interface ReactylonCoreJSXElements extends Omit<CoreJSXElements, 'physicsAggregate'> {
     physicsAggregate: Omit<CoreJSXElements['physicsAggregate'], 'transformNode'>; // omit transformNode because it will be automatically injected
@@ -42,4 +43,4 @@ declare module 'react/jsx-dev-runtime' {
 }
 
 export * from './core';
-export { type BabylonElements } from './types/props';
+export type { BabylonElements } from './types/props';

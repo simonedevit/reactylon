@@ -1,7 +1,10 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { ActionEvent, ActionManager, ExecuteCodeAction, HighlightLayer, Mesh, Scene } from '@babylonjs/core';
-import { Triggerable, MeshTriggers, MeshProps, CoreHostProps } from '@props';
+import type { ActionEvent, Mesh, Scene, HighlightLayer } from '@babylonjs/core';
+import { ActionManager } from '@babylonjs/core/Actions/actionManager.js';
+import { ExecuteCodeAction } from '@babylonjs/core/Actions/directActions.js';
+import { type Triggerable, MeshTriggers, type MeshProps, type CoreHostProps } from '@props';
+import { isInstanceOf } from '@dvmstudios/reactylon-common';
 
 function handleEvents(props: CoreHostProps<MeshProps>, scene: Scene) {
     const isAtLeastOneTrigger = Object.keys(MeshTriggers).some(trigger => props[trigger as keyof Triggerable]);
@@ -31,7 +34,7 @@ function handleEvents(props: CoreHostProps<MeshProps>, scene: Scene) {
 type AugmentedMesh = ComponentInstance<MeshProps & Mesh>;
 
 export class MeshHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<MeshProps>, rootContainer: RootContainer) {
+    static createInstance(type: string, Class: any, props: CoreHostProps<MeshProps>, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
         const { name, cloneFrom, instanceFrom } = props;
@@ -49,9 +52,9 @@ export class MeshHost {
                 }
             };
         }
-        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer, cloneFn);
+        const element = Host.createInstance(type, Class, props, rootContainer, cloneFn);
         // FIXME: Babylon.js clones the physics only for clones and not from instances so replicate logic also for instances
-        if (instanceFrom && scene.getPhysicsEngine()) {
+        if (instanceFrom && scene.getPhysicsEngine?.()) {
             const original = scene.getMeshById(instanceFrom) as Mesh;
             original.physicsBody?.clone(element);
         }
@@ -66,21 +69,16 @@ export class MeshHost {
     }
 
     static addChild(parentInstance: ComponentInstance<Mesh | HighlightLayer>, child: AugmentedMesh): void {
-        if (parentInstance instanceof HighlightLayer) {
+        if (isInstanceOf(parentInstance, 'HighlightLayer')) {
             const { highlightLayer } = child;
             if (highlightLayer) {
                 const { color, glowEmissiveOnly } = highlightLayer;
-                parentInstance.addMesh(child, color, glowEmissiveOnly);
+                (parentInstance as HighlightLayer).addMesh(child, color, glowEmissiveOnly);
             }
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: AugmentedMesh): void {
-        // you don't need, automatically done by Babylon.js when you dispose a mesh
-        /*if (parentInstance instanceof HighlightLayer){
-            parentInstance.removeMesh(child);
-        }*/
-    }
+    static removeChild(parentInstance: ComponentInstance, child: AugmentedMesh): void {}
 
     static prepareUpdate(): UpdatePayload {
         return {};
@@ -88,7 +86,7 @@ export class MeshHost {
 
     static commitUpdate(instance: AugmentedMesh, updatePayload: UpdatePayload): void {
         const parent = instance.metadata.parent;
-        if (parent instanceof HighlightLayer) {
+        if (parent && isInstanceOf(parent, 'HighlightLayer')) {
             const highlightLayer = updatePayload.highlightLayer as MeshProps['highlightLayer'];
             if (highlightLayer) {
                 const { color, glowEmissiveOnly } = highlightLayer;

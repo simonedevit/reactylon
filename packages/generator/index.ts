@@ -8,10 +8,10 @@ import {
     getMeshProps,
     isClass,
     lowercaseFirstLetter,
-    CollidingComponents,
+    ReversedCollidingComponents,
     BabylonPackages,
     getGuiProps,
-    getAdditionalProps
+    getAdditionalProps,
 } from '@dvmstudios/reactylon-common';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -54,11 +54,11 @@ async function createJsxBabylonElements(index: string, babylonPackage: BabylonPa
         try {
             if (isClass(value)) {
                 const Class = value as Constructor<typeof value>;
-                const importStatement = `import { ${key} } from '${index}';`;
+                const importStatement = `import type { ${key} } from '${index}';`;
                 const ElementType = key;
                 let jsxElementName = lowercaseFirstLetter(key);
-                if (CollidingComponents[ElementType]) {
-                    jsxElementName = CollidingComponents[ElementType];
+                if (ReversedCollidingComponents[jsxElementName]) {
+                    jsxElementName = ReversedCollidingComponents[jsxElementName];
                 }
                 const [props, constructorArguments] = getConstructorProps(Class, key, true);
                 const ConstructorProps = props
@@ -89,11 +89,11 @@ ${props}
                         prefix = 'Extrude';
                     }*/
                     const Builder = value as Function;
-                    const importStatement = `import { ${key} } from '${index}';`;
+                    const importStatement = `import type { ${key} } from '${index}';`;
                     const keyWithoutPrefix = key.replace(prefix, '');
                     let jsxElementName = lowercaseFirstLetter(keyWithoutPrefix);
-                    if (CollidingComponents[keyWithoutPrefix]) {
-                        jsxElementName = CollidingComponents[keyWithoutPrefix];
+                    if (ReversedCollidingComponents[jsxElementName]) {
+                        jsxElementName = ReversedCollidingComponents[jsxElementName];
                     }
                     const [props, constructorArguments] = getConstructorProps(Builder, key, false);
                     const FunctionProps = props

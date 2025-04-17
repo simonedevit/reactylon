@@ -70,23 +70,10 @@ const config = (env: Partial<EnvironmentVariable>): Configuration & Pick<Webpack
             ],
         },
         optimization: {
+            sideEffects: false,
+            usedExports: true,
             moduleIds: 'deterministic',
-            /*runtimeChunk: 'single',
-            splitChunks: {
-                cacheGroups: {
-                    vendor: {
-                        test: /[\\/]node_modules[\\/]/,
-                        //name: 'vendors',
-                        chunks: 'all',
-                        name: (module: any) => {
-                            const packageName = module.context.match(
-                              /[\\/]node_modules[\\/]((@[^\\/]+[\\/][^\\/]+)|([^\\/]+))([\\/]|$)/
-                            )[1];
-                            return `vendor.${packageName.replace('/', '.')}`;
-                        }
-                    },
-                },
-            }*/
+            //runtimeChunk: 'single',
         },
         externals: [/^react$/, /^react\/.*/, 'react-reconciler', 'react-dom/server', /^@babylonjs\/*/, 'its-fine'],
         plugins: [

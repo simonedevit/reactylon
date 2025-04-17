@@ -1,12 +1,13 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { Material, Mesh, MultiMaterial } from '@babylonjs/core';
-import { type MeshProps, type MaterialProps, CoreHostProps } from '@props';
+import type { Material, Mesh, MultiMaterial } from '@babylonjs/core';
+import type { MeshProps, MaterialProps, CoreHostProps } from '@props';
+import { isInstanceOf } from '@dvmstudios/reactylon-common';
 
 type AugmentedMaterial = ComponentInstance<MaterialProps & Material>;
 
 export class MaterialHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<MaterialProps>, rootContainer: RootContainer) {
+    static createInstance(type: string, Class: any, props: CoreHostProps<MaterialProps>, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
         const { cloneFrom, assignTo } = props;
@@ -19,7 +20,7 @@ export class MaterialHost {
                 return original.clone(props.name);
             };
         }
-        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer, cloneFn);
+        const element = Host.createInstance(type, Class, props, rootContainer, cloneFn);
         if (assignTo) {
             assignTo.forEach(meshId => {
                 const mesh = scene.getMeshById(meshId);
@@ -36,10 +37,10 @@ export class MaterialHost {
     }
 
     static addChild(parentInstance: ComponentInstance<(Mesh & MeshProps) | MultiMaterial>, child: AugmentedMaterial): void {
-        if (parentInstance instanceof MultiMaterial) {
-            parentInstance.subMaterials.push(child);
+        if (isInstanceOf(parentInstance, 'MultiMaterial')) {
+            (parentInstance as MultiMaterial).subMaterials.push(child);
         } else {
-            parentInstance.material = child;
+            (parentInstance as Mesh).material = child;
         }
     }
 

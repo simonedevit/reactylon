@@ -1,16 +1,16 @@
-import { BabylonPackages } from '@dvmstudios/reactylon-common';
-import { ComponentInstance, RootContainer } from '@types';
+import { BabylonPackages, invokeClassOrFunction } from '@dvmstudios/reactylon-common';
+import type { ComponentInstance, RootContainer } from '@types';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
 import '../../index';
 import coreConstructors from '../../_generated/babylon.core.constructors';
-import { CoreHostProps } from '@props';
+import type { CoreHostProps } from '@props';
 
 const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'binding'];
 
 export class Host {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps, rootContainer: RootContainer, cloneFn?: Function) {
+    static createInstance(type: string, Class: any, props: CoreHostProps, rootContainer: RootContainer, cloneFn?: Function) {
         let element: ComponentInstance<any>;
         let isCloned = false;
         let isBinding = false;
@@ -30,7 +30,7 @@ export class Host {
             isBinding = true;
         }
         if (!cloneFn && !isBinding) {
-            element = isBuilder ? Class(...paramsValues) : new Class(...paramsValues);
+            element = invokeClassOrFunction(Class, paramsValues);
         }
 
         // set non-constructor props (set constructor props only if element is cloned or binded)

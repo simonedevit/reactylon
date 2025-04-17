@@ -1,12 +1,12 @@
-import { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
-import { CoreHostProps, LightProps } from '@props';
-import { Light } from '@babylonjs/core';
+import type { CoreHostProps, LightProps } from '@props';
+import type { Light } from '@babylonjs/core';
 
 type AugmentedLight = ComponentInstance<Light>;
 
 export class LightHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<LightProps>, rootContainer: RootContainer) {
+    static createInstance(type: string, Class: any, props: CoreHostProps<LightProps>, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const scene = rootContainer.scene;
         const { cloneFrom } = props;
@@ -19,7 +19,7 @@ export class LightHost {
                 return original.clone(props.name);
             };
         }
-        const element = Host.createInstance(type, isBuilder, Class, props, rootContainer, cloneFn);
+        const element = Host.createInstance(type, Class, props, rootContainer, cloneFn);
         element.handlers = {};
         return element;
     }

@@ -1,9 +1,10 @@
 import React, { useEffect, Children, useState, useRef, isValidElement, cloneElement } from 'react';
-import { Engine as BabylonEngine, NullEngine, type EngineOptions, type NullEngineOptions, ILoadingScreen } from '@babylonjs/core';
+import type { EngineOptions, NullEngine, ILoadingScreen } from '@babylonjs/core';
+import { Engine as BabylonEngine } from '@babylonjs/core/Engines/engine.js';
 import CustomLoadingScreen, { type LoadingScreenOptions } from './CustomLoadingScreen';
 import { FiberProvider } from 'its-fine';
 import { Logger } from '@dvmstudios/reactylon-common';
-import { EngineContext } from '@types';
+import type { EngineContext } from '@types';
 import type { SceneProps } from '../core/Scene';
 
 export type EngineProps = React.PropsWithChildren<{
@@ -21,7 +22,7 @@ export type EngineProps = React.PropsWithChildren<{
      * @internal
      * This prop is only for testing purpose and should not be passed to this component.
      */
-    _nullEngineOptions?: NullEngineOptions;
+    _nullEngine?: NullEngine;
 }>;
 
 export const Engine = ({
@@ -30,7 +31,7 @@ export const Engine = ({
     adaptToDeviceRatio,
     loadingScreenOptions,
     canvasId = 'reactylon-canvas',
-    _nullEngineOptions,
+    _nullEngine,
     isMultipleCanvas,
     ...rest
 }: EngineProps) => {
@@ -68,7 +69,7 @@ export const Engine = ({
         /* --------------------------------------------------------------------------------------- */
         /* ENGINE
         ------------------------------------------------------------------------------------------ */
-        const engine = process.env.NODE_ENV === 'test' ? new NullEngine(_nullEngineOptions) : new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
+        const engine = process.env.NODE_ENV === 'test' ? (_nullEngine as NullEngine) : new BabylonEngine(canvas, antialias, engineOptions, adaptToDeviceRatio);
         if (loadingScreenOptions) {
             const { component, animationStyle } = loadingScreenOptions;
             engine.loadingScreen = new CustomLoadingScreen(canvas as HTMLCanvasElement, component, animationStyle) as unknown as ILoadingScreen;

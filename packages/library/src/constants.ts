@@ -1,5 +1,5 @@
-import { Scene } from '@babylonjs/core';
-import { TransformKeys, BabylonElements } from '@props';
+import type { Scene } from '@babylonjs/core';
+import { type TransformKeys, BabylonElements } from '@props';
 
 export const BabylonElementsRetrievalMap: Record<BabylonElements, keyof Scene> = {
     [BabylonElements.MESH]: 'getMeshByName',

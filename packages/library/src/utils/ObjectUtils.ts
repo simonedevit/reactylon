@@ -1,4 +1,5 @@
-import { Vector3, Vector4 } from '@babylonjs/core';
+import type { Vector3, Vector4 } from '@babylonjs/core';
+import { isInstanceOf } from '@dvmstudios/reactylon-common';
 import lodash from 'lodash';
 
 const { get, setWith } = lodash;
@@ -13,11 +14,11 @@ export default class ObjectUtils {
     }
 
     static isEqualCustomizer(objValue: unknown, objOther: unknown) {
-        if (objValue instanceof Vector3 && objOther instanceof Vector3) {
-            return objValue.equals(objOther);
+        if (isInstanceOf(objValue, 'Vector3') && isInstanceOf(objOther, 'Vector3')) {
+            return (objValue as Vector3).equals(objOther as Vector3);
         }
-        if (objValue instanceof Vector4 && objOther instanceof Vector4) {
-            return objValue.equals(objOther);
+        if (isInstanceOf(objValue, 'Vector4') && isInstanceOf(objOther, 'Vector4')) {
+            return (objValue as Vector4).equals(objOther as Vector4);
         }
         return undefined;
     }

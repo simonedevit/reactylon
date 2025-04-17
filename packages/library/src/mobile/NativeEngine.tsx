@@ -1,7 +1,7 @@
 import { EngineView, useEngine } from '@babylonjs/react-native';
 import React, { Children, cloneElement } from 'react';
 import { FiberProvider } from 'its-fine';
-import { Camera } from '@babylonjs/core';
+import type { Camera } from '@babylonjs/core';
 
 type NativeEngineProps = React.PropsWithChildren<{
     camera: Camera;

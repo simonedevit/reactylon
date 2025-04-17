@@ -1,5 +1,7 @@
 import { parse } from 'acorn';
-import * as BabylonCore from '@babylonjs/core';
+import { Material } from '@babylonjs/core/Materials/material.js';
+import { BaseTexture } from '@babylonjs/core/Materials/Textures/baseTexture.js';
+import { Camera } from '@babylonjs/core/Cameras/camera.js';
 
 //TODO: move Logger in a separate file (pay attention to module resolution)
 export class Logger {
@@ -131,21 +133,109 @@ export function getGuiProps() {
     return ' & GuiProps';
 }
 
-// TIP: what about call them {name}-XR ?
 export const CollidingComponents: Record<string, string> = {
     // GUI
-    Button: 'button2D',
-    Image: 'image2D',
+    button2D: 'button',
+    image2D: 'image',
     // CORE
-    Text: 'text3D',
-    Polygon: 'polygon3D',
+    text3D: 'text',
+    polygon3D: 'polygon',
 };
+
+export const builders = [
+    'box',
+    'tiledBox',
+    'sphere',
+    'disc',
+    'icoSphere',
+    'ribbon',
+    'cylinder',
+    'torus',
+    'torusKnot',
+    'lineSystem',
+    'lines',
+    'dashedLines',
+    'lathe',
+    'tiledPlane',
+    'plane',
+    'ground',
+    'tiledGround',
+    'groundFromHeightMap',
+    'tube',
+    'polyhedron',
+    'geodesic',
+    'goldberg',
+    'decal',
+    'capsule',
+    'text',
+    'polygon',
+];
 
 export const ReversedCollidingComponents = Object.entries(CollidingComponents).reduce((acc, [key, value]) => ((acc[value] = key), acc), {} as Record<string, string>);
 
 export enum BabylonPackages {
-    'CORE',
-    'GUI',
+    CORE,
+    GUI,
+}
+
+/**
+ * Retrieves the names of all base classes in the prototype chain of a given target, including the current class.
+ *
+ * @param target - The object or class whose base classes are to be retrieved.
+ * @param isClass - Optional. A boolean indicating whether the target is a class (true) or an instance (false).
+ *                  If true, the method will attempt to call `getClassName` on the prototype of the target and its ancestors.
+ * @returns An array of strings representing the names of the base classes in the prototype chain.
+ */
+function getBaseClasses(target: any, isClass?: boolean): Array<string> {
+    const names = [];
+    if (isClass && target.prototype.getClassName) {
+        names.push(target.prototype.getClassName());
+    }
+    let parent = Object.getPrototypeOf(target);
+    while (parent) {
+        const classNameGetter = isClass ? parent.prototype?.getClassName : parent.getClassName;
+        if (classNameGetter) {
+            names.push(isClass ? classNameGetter.call(parent.prototype) : classNameGetter.call(parent));
+        }
+        parent = Object.getPrototypeOf(parent);
+    }
+    return names;
+}
+
+type BabylonBaseClass =
+    | 'Material'
+    | 'Mesh'
+    | 'DynamicTexture'
+    | 'AbstractMesh'
+    | 'Node'
+    | 'Camera'
+    | 'Light'
+    | 'BaseTexture'
+    | 'DynamicTexture'
+    | 'Texture'
+    | 'CubeTexture'
+    | 'HighlightLayer'
+    | 'Container3D'
+    | 'HolographicSlate'
+    | 'Button3D'
+    | 'MultiMaterial'
+    | 'HolographicButton'
+    | 'Vector3'
+    | 'Vector4'
+    | 'WebXRCamera';
+
+/**
+ * Checks if the target is an instance of a class with the specified class name.
+ * This method is used instead of the `instanceof` operator to avoid importing classes,
+ * helping to reduce the bundle size.
+ *
+ * @param target - The object or class to check.
+ * @param className - The name of the class to check against.
+ * @returns A boolean indicating whether the target is an instance of the specified class.
+ */
+export function isInstanceOf(target: any, className: BabylonBaseClass, isClass?: boolean): boolean {
+    const baseClasses = getBaseClasses(target, isClass);
+    return baseClasses.includes(className);
 }
 
 // specific properties of a single component
@@ -159,17 +249,30 @@ export function getAdditionalProps(jsxElementName: string, Class: any) {
     if (jsxElementName in AdditionalProps) {
         return AdditionalProps[jsxElementName];
     }
-    //@ts-ignore - build phase - Property 'Material' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
-    if (Class.prototype instanceof BabylonCore.Material) {
+    if (Class.prototype instanceof Material) {
         return ` & MaterialProps`;
     }
-    //@ts-ignore - build phase - Property 'BaseTexture' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
-    if (Class.prototype instanceof BabylonCore.BaseTexture) {
+    if (Class.prototype instanceof BaseTexture) {
         return ` & TextureProps`;
     }
-    //@ts-ignore - build phase - Property 'Camera' does not exist on type 'typeof import("... node_modules/@babylonjs/core/index", { with: { "resolution-mode": "import" } })'.
-    if (Class.prototype instanceof BabylonCore.Camera) {
+    if (Class.prototype instanceof Camera) {
         return ` & CameraProps`;
     }
     return '';
+}
+/**
+ * Invokes a function or class constructor based on the type of target provided.
+ *
+ * @param target - the function or constructor to invoke
+ * @param args - the arguments to pass to the function or constructor
+ * @returns the result of the function invocation or the constructed class instance
+ */
+export function invokeClassOrFunction(target: Function, args: any[]) {
+    if (typeof target === 'function' && target.prototype) {
+        // constructor
+        return Reflect.construct(target, args);
+    } else {
+        // function
+        return target(...args);
+    }
 }

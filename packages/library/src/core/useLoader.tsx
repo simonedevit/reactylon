@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { suspend, clear } from 'suspend-react';
-import { ImportMeshAsync, type ISceneLoaderAsyncResult, type ImportMeshOptions } from '@babylonjs/core';
+import type { ISceneLoaderAsyncResult, ImportMeshOptions } from '@babylonjs/core';
+import { ImportMeshAsync } from '@babylonjs/core/Loading/sceneLoader.js';
 import { useScene } from './store';
 
 function dispose(model: ISceneLoaderAsyncResult) {

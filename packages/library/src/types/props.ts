@@ -1,6 +1,7 @@
-import { ActionEvent, ActionManager, HighlightLayer, Node, Observable, Scene, StandardMaterial } from '@babylonjs/core';
-import { type Either } from './types';
-import { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
+import type { ActionEvent, HighlightLayer, Node, Observable, Scene, StandardMaterial } from '@babylonjs/core';
+import type { Either } from './types';
+import type { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
+import { ActionManager } from '@babylonjs/core/Actions/actionManager.js';
 
 type TransformType = 'position' | 'rotation' | 'scaling';
 type Axis = 'X' | 'Y' | 'Z';

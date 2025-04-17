@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { Scene as BabylonScene, SceneOptions, WebXRDefaultExperienceOptions, Nullable, Camera, Engine, Vector3 } from '@babylonjs/core';
-import { GUI3DManager } from '@babylonjs/gui';
-import { SceneContext, Store, createBabylonStore } from './store';
-import { RootContainer, type EngineContext } from '@types';
+import type { Nullable, Camera, SceneOptions, WebXRDefaultExperienceOptions } from '@babylonjs/core';
+import { Scene as BabylonScene } from '@babylonjs/core/scene.js';
+import { Engine } from '@babylonjs/core/Engines/engine.js';
+import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
+import { SceneContext, type Store, createBabylonStore } from './store';
+import type { RootContainer, EngineContext } from '@types';
 import Reactylon from '../reconciler';
 import { useContextBridge } from 'its-fine';
-import { type StoreApi } from 'zustand';
+import type { StoreApi } from 'zustand';
 
 export type SceneProps = React.PropsWithChildren<{
     /**
@@ -52,7 +54,7 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
                 const scene = new BabylonScene(engine, sceneOptions);
                 scene.metadata = {
                     ...scene.metadata,
-                    gui3DManager: isGui3DManager ? new GUI3DManager(scene) : undefined,
+                    gui3DManager: isGui3DManager ? new (await import('@babylonjs/gui/3D/gui3DManager.js')).GUI3DManager(scene) : undefined,
                 };
                 onSceneReady?.(scene);
                 // enable physics
@@ -117,7 +119,7 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
                     isMultipleCanvas,
                     isMultipleScene,
                     xrExperience,
-                    physicsEngine: scene.getPhysicsEngine(),
+                    physicsEngine: physicsOptions ? scene.getPhysicsEngine() : null,
                 });
 
                 rootContainer.current = {

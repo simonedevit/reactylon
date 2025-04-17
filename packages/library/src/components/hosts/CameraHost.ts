@@ -1,12 +1,11 @@
-import { ComponentInstance, RootContainer } from '@types';
+import type { ComponentInstance, RootContainer } from '@types';
 import { Host } from './Host';
-import { CameraProps, CoreHostProps, WebXRCameraProps } from '@props';
-import { WebXRCamera } from '@babylonjs/core';
-import { BabylonPackages } from '@dvmstudios/reactylon-common';
+import type { CameraProps, CoreHostProps, WebXRCameraProps } from '@props';
+import { BabylonPackages, isInstanceOf } from '@dvmstudios/reactylon-common';
 
 export class CameraHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: CoreHostProps<WebXRCameraProps & CameraProps>, rootContainer: RootContainer) {
-        if (Class.name === WebXRCamera.name) {
+    static createInstance(type: string, Class: any, props: CoreHostProps<WebXRCameraProps & CameraProps>, rootContainer: RootContainer) {
+        if (isInstanceOf(Class, 'WebXRCamera', true)) {
             const { isManual, ...rest } = props;
             // camera created by XR default experience
             if (!isManual) {
@@ -31,7 +30,7 @@ export class CameraHost {
                 }
             }
         }
-        const camera = Host.createInstance(type, isBuilder, Class, props, rootContainer);
+        const camera = Host.createInstance(type, Class, props, rootContainer);
         camera.handlers = {};
 
         const { isMultipleCanvas, isMultipleScene, canvas } = rootContainer;

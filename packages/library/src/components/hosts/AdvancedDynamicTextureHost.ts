@@ -1,17 +1,16 @@
-import { RootContainer } from '@types';
+import type { RootContainer } from '@types';
 import { GuiHost, type Params } from './GuiHost';
-import { AdvancedDynamicTexture } from '@babylonjs/gui';
-import { AdvancedDynamicTextureProps, GuiHostProps } from '@props';
+import type { AdvancedDynamicTextureProps, GuiHostProps } from '@props';
 
 const Builder = {
-    createFullscreenUI: AdvancedDynamicTexture.CreateFullscreenUI,
-    createForMesh: AdvancedDynamicTexture.CreateForMesh,
+    createFullscreenUI: 'CreateFullscreenUI',
+    createForMesh: 'CreateForMesh',
 };
 
 type BuilderProps = AdvancedDynamicTextureProps['createForMesh'] | AdvancedDynamicTextureProps['createFullscreenUI'];
 
 export class AdvancedDynamicTextureHost {
-    static createInstance(type: string, isBuilder: boolean, Class: any, props: GuiHostProps<AdvancedDynamicTextureProps>, rootContainer: RootContainer) {
+    static createInstance(type: string, Class: any, props: GuiHostProps<AdvancedDynamicTextureProps>, rootContainer: RootContainer) {
         let cloneFn = undefined;
         const { kind } = props;
         const scene = rootContainer.scene;
@@ -40,7 +39,7 @@ export class AdvancedDynamicTextureHost {
                 params.paramsValues.splice(2, 0, scene);
             }
         }
-        const element = GuiHost.createInstance(type, isBuilder, Builder[kind].bind(Class), props, rootContainer, cloneFn, params);
+        const element = GuiHost.createInstance(type, Class[Builder[kind]].bind(Class), props, rootContainer, cloneFn, params);
         return element;
     }
 }

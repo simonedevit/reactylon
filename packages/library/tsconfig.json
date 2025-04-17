@@ -5,11 +5,20 @@
         "outDir": "./build",
         "declaration": true,
         "declarationDir": "./build",
+        "verbatimModuleSyntax": true,
         "paths": {
-            "@types": ["src/types/types.ts"],
-            "@props": ["src/types/props.ts"],
-            "@utils/*": ["src/utils/*"],
-            "@constants": ["src/constants.ts"],
+            "@types": [
+                "src/types/types.ts"
+            ],
+            "@props": [
+                "src/types/props.ts"
+            ],
+            "@utils/*": [
+                "src/utils/*"
+            ],
+            "@constants": [
+                "src/constants.ts"
+            ],
         }
     },
     "ts-node": {
