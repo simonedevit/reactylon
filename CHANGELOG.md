@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.0.0](https://github.com/simonedevit/reactylon/compare/v2.1.0...v3.0.0) (2025-04-17)
+
+
+### Chore
+
+* **general:** add tree shaking support [#10](https://github.com/simonedevit/reactylon/issues/10) ([18d8ec2](https://github.com/simonedevit/reactylon/commit/18d8ec2d1ed7b77c362d2287617d2154a11a995b))
+
 ## [2.1.0](https://github.com/simonedevit/reactylon/compare/v2.0.1...v2.1.0) (2025-03-26)
 
 
