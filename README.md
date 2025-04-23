@@ -1,9 +1,4 @@
 <div align="center">
-  <a href="https://www.reactylon.com">
-    <picture>
-      <img alt="Reactylon logo" src="https://www.reactylon.com/logo.svg" height="170">
-    </picture>
-  </a>
   <h1>Reactylon</h1>
 </div>
 
@@ -16,6 +11,11 @@
   <img alt="NPM License" src="https://img.shields.io/npm/l/reactylon">
 </div>
 
+<br />
+  <a href="https://www.reactylon.com">
+      <img alt="Reactylon" src="https://i.imgur.com/T3BDMyv.png">
+  </a>
+<br />
 <br />
 
 Welcome to **Reactylon**, a powerful multiplatform framework built on top of Babylon.js and React, designed to create interactive and immersive XR experiences. It allows developers to create full immersive experience in a declarative way, unlocking the full potential of React’s component-based architecture for interactive 3D applications.
