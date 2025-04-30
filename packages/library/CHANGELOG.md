@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.0.2](https://github.com/simonedevit/reactylon/compare/v3.0.1...v3.0.2) (2025-04-30)
+
+
+### Chore
+
+* **general:** upgrade babylon packages ([ad5efdd](https://github.com/simonedevit/reactylon/commit/ad5efddce0aead33739bd848e40d780e637e02e2))
+
 ## [3.0.1](https://github.com/simonedevit/reactylon/compare/v3.0.0...v3.0.1) (2025-04-30)
 
 
