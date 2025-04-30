@@ -1,5 +1,17 @@
 # Reactylon - Changelog
 
+## [3.0.1](https://github.com/simonedevit/reactylon/compare/v3.0.0...v3.0.1) (2025-04-30)
+
+
+### Documentation
+
+* **general:** add front image ([b5687e6](https://github.com/simonedevit/reactylon/commit/b5687e6a84b5a4a52c65fefc5b5b66738d571793))
+
+
+### Bug Fixes
+
+* **components:** add equality function + key to invalidate cache on useModel ([51ee437](https://github.com/simonedevit/reactylon/commit/51ee437534501c9121a0a5af356963c5ba2823b5))
+
 ## [3.0.0](https://github.com/simonedevit/reactylon/compare/v2.1.0...v3.0.0) (2025-04-17)
 
 
