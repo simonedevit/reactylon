@@ -521,9 +521,11 @@ import type { FrameGraphCullPass } from '@babylonjs/core';
 import type { FrameGraphDepthOfFieldTask } from '@babylonjs/core';
 import type { FrameGraphExecuteTask } from '@babylonjs/core';
 import type { FrameGraphExtractHighlightsTask } from '@babylonjs/core';
+import type { FrameGraphFXAATask } from '@babylonjs/core';
 import type { FrameGraphGenerateMipMapsTask } from '@babylonjs/core';
 import type { FrameGraphGeometryRendererTask } from '@babylonjs/core';
 import type { FrameGraphGlowLayerTask } from '@babylonjs/core';
+import type { FrameGraphGrainTask } from '@babylonjs/core';
 import type { FrameGraphHighlightLayerTask } from '@babylonjs/core';
 import type { FrameGraphImageProcessingTask } from '@babylonjs/core';
 import type { FrameGraphObjectRendererTask } from '@babylonjs/core';
@@ -821,9 +823,11 @@ import type { NodeRenderGraphDepthOfFieldPostProcessBlock } from '@babylonjs/cor
 import type { NodeRenderGraphElbowBlock } from '@babylonjs/core';
 import type { NodeRenderGraphExecuteBlock } from '@babylonjs/core';
 import type { NodeRenderGraphExtractHighlightsPostProcessBlock } from '@babylonjs/core';
+import type { NodeRenderGraphFXAAPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphGenerateMipmapsBlock } from '@babylonjs/core';
 import type { NodeRenderGraphGeometryRendererBlock } from '@babylonjs/core';
 import type { NodeRenderGraphGlowLayerBlock } from '@babylonjs/core';
+import type { NodeRenderGraphGrainPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphHighlightLayerBlock } from '@babylonjs/core';
 import type { NodeRenderGraphImageProcessingPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphInputBlock } from '@babylonjs/core';
@@ -855,6 +859,7 @@ import type { OctreeBlock } from '@babylonjs/core';
 import type { OctreeSceneComponent } from '@babylonjs/core';
 import type { OimoJSPlugin } from '@babylonjs/core';
 import type { OneMinusBlock } from '@babylonjs/core';
+import type { OptimizeAnimations } from '@babylonjs/core';
 import type { OptimizeIndices } from '@babylonjs/core';
 import type { OutlineRenderer } from '@babylonjs/core';
 import type { PBRAnisotropicConfiguration } from '@babylonjs/core';
@@ -1034,6 +1039,7 @@ import type { RegisterNativeTypeAsync } from '@babylonjs/core';
 import type { RegisterSceneLoaderPlugin } from '@babylonjs/core';
 import type { RegisterTargetForLateAnimationBinding } from '@babylonjs/core';
 import type { RemapBlock } from '@babylonjs/core';
+import type { RemoveUnreferencedVerticesData } from '@babylonjs/core';
 import type { RenderTargetTexture } from '@babylonjs/core';
 import type { RenderTargetWrapper } from '@babylonjs/core';
 import type { RenderingGroup } from '@babylonjs/core';
@@ -1082,6 +1088,7 @@ import type { SetPositionsBlock } from '@babylonjs/core';
 import type { SetStateAction } from '@babylonjs/core';
 import type { SetTangentsBlock } from '@babylonjs/core';
 import type { SetToDefaultGaussianSplatting } from '@babylonjs/core';
+import type { SetToDefaultSFE } from '@babylonjs/core';
 import type { SetUVsBlock } from '@babylonjs/core';
 import type { SetValueAction } from '@babylonjs/core';
 import type { ShaderCodeInliner } from '@babylonjs/core';
@@ -1186,8 +1193,10 @@ import type { ThinDepthOfFieldEffect } from '@babylonjs/core';
 import type { ThinEffectLayer } from '@babylonjs/core';
 import type { ThinEngine } from '@babylonjs/core';
 import type { ThinExtractHighlightsPostProcess } from '@babylonjs/core';
+import type { ThinFXAAPostProcess } from '@babylonjs/core';
 import type { ThinGlowBlurPostProcess } from '@babylonjs/core';
 import type { ThinGlowLayer } from '@babylonjs/core';
+import type { ThinGrainPostProcess } from '@babylonjs/core';
 import type { ThinHighlightLayer } from '@babylonjs/core';
 import type { ThinImageProcessingPostProcess } from '@babylonjs/core';
 import type { ThinPassCubePostProcess } from '@babylonjs/core';
@@ -4047,6 +4056,12 @@ name: ConstructorParameters<typeof FrameGraphExtractHighlightsTask>[0];
     thinPostProcess: ConstructorParameters<typeof FrameGraphExtractHighlightsTask>[2];
     
     },FrameGraphExtractHighlightsTask>, any>;
+  frameGraphFXAATask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphFXAATask>, {
+name: ConstructorParameters<typeof FrameGraphFXAATask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphFXAATask>[1];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphFXAATask>[2];
+    
+    },FrameGraphFXAATask>, any>;
   frameGraphGenerateMipMapsTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphGenerateMipMapsTask>, {
 name: ConstructorParameters<typeof FrameGraphGenerateMipMapsTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphGenerateMipMapsTask>[1];
@@ -4066,6 +4081,12 @@ name: ConstructorParameters<typeof FrameGraphGlowLayerTask>[0];
     options: ConstructorParameters<typeof FrameGraphGlowLayerTask>[3];
     
     },FrameGraphGlowLayerTask>, any>;
+  frameGraphGrainTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphGrainTask>, {
+name: ConstructorParameters<typeof FrameGraphGrainTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphGrainTask>[1];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphGrainTask>[2];
+    
+    },FrameGraphGrainTask>, any>;
   frameGraphHighlightLayerTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphHighlightLayerTask>, {
 name: ConstructorParameters<typeof FrameGraphHighlightLayerTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphHighlightLayerTask>[1];
@@ -5523,6 +5544,12 @@ name: ConstructorParameters<typeof NodeRenderGraphExtractHighlightsPostProcessBl
     scene: ConstructorParameters<typeof NodeRenderGraphExtractHighlightsPostProcessBlock>[2];
     
     },NodeRenderGraphExtractHighlightsPostProcessBlock>, any>;
+  nodeRenderGraphFXAAPostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphFXAAPostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphFXAAPostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphFXAAPostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphFXAAPostProcessBlock>[2];
+    
+    },NodeRenderGraphFXAAPostProcessBlock>, any>;
   nodeRenderGraphGenerateMipmapsBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphGenerateMipmapsBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphGenerateMipmapsBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphGenerateMipmapsBlock>[1];
@@ -5546,6 +5573,12 @@ name: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[0];
     layerTextureType: ConstructorParameters<typeof NodeRenderGraphGlowLayerBlock>[6];
     
     },NodeRenderGraphGlowLayerBlock>, any>;
+  nodeRenderGraphGrainPostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphGrainPostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphGrainPostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphGrainPostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphGrainPostProcessBlock>[2];
+    
+    },NodeRenderGraphGrainPostProcessBlock>, any>;
   nodeRenderGraphHighlightLayerBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphHighlightLayerBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphHighlightLayerBlock>[1];
@@ -5724,6 +5757,11 @@ _useDeltaForWorldStep: ConstructorParameters<typeof OimoJSPlugin>[0];
 name: ConstructorParameters<typeof OneMinusBlock>[0];
     
     },OneMinusBlock>, any>;
+  optimizeAnimations: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof OptimizeAnimations>> & MeshProps, {
+        scene: Parameters<typeof OptimizeAnimations>[0];
+    options: Parameters<typeof OptimizeAnimations>[1];
+    
+            },ReturnType<typeof OptimizeAnimations>>, any>;
   optimizeIndices: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof OptimizeIndices>> & MeshProps, {
         indices: Parameters<typeof OptimizeIndices>[0];
     
@@ -6749,6 +6787,10 @@ name: ConstructorParameters<typeof RefractionTexture>[0];
 name: ConstructorParameters<typeof RemapBlock>[0];
     
     },RemapBlock>, any>;
+  removeUnreferencedVerticesData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RemoveUnreferencedVerticesData>> & MeshProps, {
+        meshes: Parameters<typeof RemoveUnreferencedVerticesData>[0];
+    
+            },ReturnType<typeof RemoveUnreferencedVerticesData>>, any>;
   renderTargetTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RenderTargetTexture> & Clonable, {
 name: ConstructorParameters<typeof RenderTargetTexture>[0];
     size: ConstructorParameters<typeof RenderTargetTexture>[1];
@@ -7017,6 +7059,10 @@ name: ConstructorParameters<typeof SetTangentsBlock>[0];
         nodeMaterial: Parameters<typeof SetToDefaultGaussianSplatting>[0];
     
             },ReturnType<typeof SetToDefaultGaussianSplatting>>, any>;
+  setToDefaultSFE: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof SetToDefaultSFE>> & MeshProps, {
+        nodeMaterial: Parameters<typeof SetToDefaultSFE>[0];
+    
+            },ReturnType<typeof SetToDefaultSFE>>, any>;
   setUVsBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SetUVsBlock> & Clonable, {
 name: ConstructorParameters<typeof SetUVsBlock>[0];
     
@@ -7614,6 +7660,12 @@ name: ConstructorParameters<typeof ThinExtractHighlightsPostProcess>[0];
     options: ConstructorParameters<typeof ThinExtractHighlightsPostProcess>[2];
     
     },ThinExtractHighlightsPostProcess>, any>;
+  thinFXAAPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinFXAAPostProcess>, {
+name: ConstructorParameters<typeof ThinFXAAPostProcess>[0];
+    engine: ConstructorParameters<typeof ThinFXAAPostProcess>[1];
+    options: ConstructorParameters<typeof ThinFXAAPostProcess>[2];
+    
+    },ThinFXAAPostProcess>, any>;
   thinGlowBlurPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinGlowBlurPostProcess>, {
 name: ConstructorParameters<typeof ThinGlowBlurPostProcess>[0];
     engine: ConstructorParameters<typeof ThinGlowBlurPostProcess>[1];
@@ -7629,6 +7681,12 @@ name: ConstructorParameters<typeof ThinGlowLayer>[0];
     dontCheckIfReady: ConstructorParameters<typeof ThinGlowLayer>[3];
     
     },ThinGlowLayer>, any>;
+  thinGrainPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinGrainPostProcess>, {
+name: ConstructorParameters<typeof ThinGrainPostProcess>[0];
+    engine: ConstructorParameters<typeof ThinGrainPostProcess>[1];
+    options: ConstructorParameters<typeof ThinGrainPostProcess>[2];
+    
+    },ThinGrainPostProcess>, any>;
   thinHighlightLayer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinHighlightLayer>, {
 name: ConstructorParameters<typeof ThinHighlightLayer>[0];
     scene: ConstructorParameters<typeof ThinHighlightLayer>[1];
