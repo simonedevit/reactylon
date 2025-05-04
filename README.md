@@ -1,4 +1,7 @@
 <div align="center">
+  <a href="https://www.reactylon.com">
+      <img height="170" alt="Reactylon" src="https://www.reactylon.com/logo.svg">
+  </a>
   <h1>Reactylon</h1>
 </div>
 
@@ -11,10 +14,6 @@
   <img alt="NPM License" src="https://img.shields.io/npm/l/reactylon">
 </div>
 
-<br />
-  <a href="https://www.reactylon.com">
-      <img alt="Reactylon" src="https://i.imgur.com/T3BDMyv.png">
-  </a>
 <br />
 <br />
 
