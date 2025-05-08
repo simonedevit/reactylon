@@ -1,5 +1,17 @@
 # Reactylon - Changelog
 
+## [3.0.3](https://github.com/simonedevit/reactylon/compare/v3.0.2...v3.0.3) (2025-05-08)
+
+
+### Documentation
+
+* **general:** swap front image with logo ([b8b6f6b](https://github.com/simonedevit/reactylon/commit/b8b6f6bb815c2e8bfdf6307534107d50c0ce1463))
+
+
+### Bug Fixes
+
+* **general:** execute onCreate model callback during same React render (not in async context) ([e052bc5](https://github.com/simonedevit/reactylon/commit/e052bc52a0d57d2683631a34c41f9ef983bc9387))
+
 ## [3.0.2](https://github.com/simonedevit/reactylon/compare/v3.0.1...v3.0.2) (2025-04-30)
 
 
