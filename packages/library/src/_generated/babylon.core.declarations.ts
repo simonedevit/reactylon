@@ -18,6 +18,7 @@ import type { ActionEvent } from '@babylonjs/core';
 import type { ActionManager } from '@babylonjs/core';
 import type { AddAnimationExtensions } from '@babylonjs/core';
 import type { AddBlock } from '@babylonjs/core';
+import type { AddClipPlaneUniforms } from '@babylonjs/core';
 import type { AddIndividualParser } from '@babylonjs/core';
 import type { AddParser } from '@babylonjs/core';
 import type { AddRayExtensions } from '@babylonjs/core';
@@ -63,6 +64,7 @@ import type { AssetsProgressEvent } from '@babylonjs/core';
 import type { AsyncLock } from '@babylonjs/core';
 import type { AsyncLoop } from '@babylonjs/core';
 import type { AttachToBoxBehavior } from '@babylonjs/core';
+import type { Attractor } from '@babylonjs/core';
 import type { AudioBus } from '@babylonjs/core';
 import type { AudioEngine } from '@babylonjs/core';
 import type { AudioEngineV2 } from '@babylonjs/core';
@@ -85,6 +87,7 @@ import type { BezierCurveEase } from '@babylonjs/core';
 import type { BiPlanarBlock } from '@babylonjs/core';
 import type { BinaryFileAssetTask } from '@babylonjs/core';
 import type { BindBonesParameters } from '@babylonjs/core';
+import type { BindClipPlane } from '@babylonjs/core';
 import type { BindFogParameters } from '@babylonjs/core';
 import type { BindLight } from '@babylonjs/core';
 import type { BindLightProperties } from '@babylonjs/core';
@@ -486,6 +489,7 @@ import type { FlowGraphTransposeBlock } from '@babylonjs/core';
 import type { FlowGraphTruncBlock } from '@babylonjs/core';
 import type { FlowGraphWaitAllBlock } from '@babylonjs/core';
 import type { FlowGraphWhileLoopBlock } from '@babylonjs/core';
+import type { FlowMap } from '@babylonjs/core';
 import type { FluidRenderer } from '@babylonjs/core';
 import type { FluidRendererSceneComponent } from '@babylonjs/core';
 import type { FluidRenderingObject } from '@babylonjs/core';
@@ -984,6 +988,7 @@ import type { PrepareDefinesForAttributes } from '@babylonjs/core';
 import type { PrepareDefinesForBakedVertexAnimation } from '@babylonjs/core';
 import type { PrepareDefinesForBones } from '@babylonjs/core';
 import type { PrepareDefinesForCamera } from '@babylonjs/core';
+import type { PrepareDefinesForClipPlanes } from '@babylonjs/core';
 import type { PrepareDefinesForFrameBoundValues } from '@babylonjs/core';
 import type { PrepareDefinesForLight } from '@babylonjs/core';
 import type { PrepareDefinesForLights } from '@babylonjs/core';
@@ -993,6 +998,7 @@ import type { PrepareDefinesForMorphTargets } from '@babylonjs/core';
 import type { PrepareDefinesForMultiview } from '@babylonjs/core';
 import type { PrepareDefinesForOIT } from '@babylonjs/core';
 import type { PrepareDefinesForPrePass } from '@babylonjs/core';
+import type { PrepareStringDefinesForClipPlanes } from '@babylonjs/core';
 import type { PrepareUniformsAndSamplersForLight } from '@babylonjs/core';
 import type { PrepareUniformsAndSamplersList } from '@babylonjs/core';
 import type { PressureObserverWrapper } from '@babylonjs/core';
@@ -1348,6 +1354,9 @@ import type { _KTXTextureLoader } from '@babylonjs/core';
 import type { _MeshCollisionData } from '@babylonjs/core';
 import type { _OcclusionDataStorage } from '@babylonjs/core';
 import type { _PrimaryIsoTriangle } from '@babylonjs/core';
+import type { _SetStereoscopicAnaglyphRigMode } from '@babylonjs/core';
+import type { _SetStereoscopicRigMode } from '@babylonjs/core';
+import type { _SetVrRigMode } from '@babylonjs/core';
 import type { _TGATextureLoader } from '@babylonjs/core';
 import type { _TimeToken } from '@babylonjs/core';
 import type { _UpdateRGBDAsync } from '@babylonjs/core';
@@ -1358,10 +1367,8 @@ import type { _WebAudioStaticSound } from '@babylonjs/core';
 import type { _WebAudioStaticSoundBuffer } from '@babylonjs/core';
 import type { _WebAudioStreamingSound } from '@babylonjs/core';
 import type { _injectLTSFileTools } from '@babylonjs/core';
-import type { addClipPlaneUniforms } from '@babylonjs/core';
 import type { addToBlockFactory } from '@babylonjs/core';
 import type { allocateAndCopyTypedBuffer } from '@babylonjs/core';
-import type { bindClipPlane } from '@babylonjs/core';
 import type { blockFactory } from '@babylonjs/core';
 import type { captureEquirectangularFromScene } from '@babylonjs/core';
 import type { className } from '@babylonjs/core';
@@ -1389,8 +1396,6 @@ import type { makeAsyncFunction } from '@babylonjs/core';
 import type { makeSyncFunction } from '@babylonjs/core';
 import type { nativeOverride } from '@babylonjs/core';
 import type { normalizeEnvInfo } from '@babylonjs/core';
-import type { prepareDefinesForClipPlanes } from '@babylonjs/core';
-import type { prepareStringDefinesForClipPlanes } from '@babylonjs/core';
 import type { registerTextureLoader } from '@babylonjs/core';
 import type { runCoroutine } from '@babylonjs/core';
 import type { runCoroutineAsync } from '@babylonjs/core';
@@ -1410,9 +1415,6 @@ import type { serializeAsVector2 } from '@babylonjs/core';
 import type { serializeAsVector3 } from '@babylonjs/core';
 import type { setAndStartTimer } from '@babylonjs/core';
 import type { setOpenGLOrientationForUV } from '@babylonjs/core';
-import type { setStereoscopicAnaglyphRigMode } from '@babylonjs/core';
-import type { setStereoscopicRigMode } from '@babylonjs/core';
-import type { setVRRigMode } from '@babylonjs/core';
 import type { textureSizeIsObject } from '@babylonjs/core';
 import type { unregisterTextureLoader } from '@babylonjs/core';
     
@@ -1487,6 +1489,10 @@ scene: ConstructorParameters<typeof ActionManager>[0];
 name: ConstructorParameters<typeof AddBlock>[0];
     
     },AddBlock>, any>;
+  addClipPlaneUniforms: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof AddClipPlaneUniforms>> & MeshProps, {
+        uniforms: Parameters<typeof AddClipPlaneUniforms>[0];
+    
+            },ReturnType<typeof AddClipPlaneUniforms>>, any>;
   addIndividualParser: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof AddIndividualParser>> & MeshProps, {
         name: Parameters<typeof AddIndividualParser>[0];
     parser: Parameters<typeof AddIndividualParser>[1];
@@ -1729,6 +1735,7 @@ iterations: ConstructorParameters<typeof AsyncLoop>[0];
 _ui: ConstructorParameters<typeof AttachToBoxBehavior>[0];
     
     },AttachToBoxBehavior>, any>;
+  attractor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Attractor>, {},Attractor>, any>;
   audioBus: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AudioBus>, {
 name: ConstructorParameters<typeof AudioBus>[0];
     engine: ConstructorParameters<typeof AudioBus>[1];
@@ -1841,6 +1848,12 @@ name: ConstructorParameters<typeof BinaryFileAssetTask>[0];
     prePassConfiguration: Parameters<typeof BindBonesParameters>[2];
     
             },ReturnType<typeof BindBonesParameters>>, any>;
+  bindClipPlane: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindClipPlane>> & MeshProps, {
+        effect: Parameters<typeof BindClipPlane>[0];
+    primaryHolder: Parameters<typeof BindClipPlane>[1];
+    secondaryHolder: Parameters<typeof BindClipPlane>[2];
+    
+            },ReturnType<typeof BindClipPlane>>, any>;
   bindFogParameters: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindFogParameters>> & MeshProps, {
         scene: Parameters<typeof BindFogParameters>[0];
     mesh: Parameters<typeof BindFogParameters>[1];
@@ -3892,6 +3905,12 @@ config: ConstructorParameters<typeof FlowGraphWaitAllBlock>[0];
 config: ConstructorParameters<typeof FlowGraphWhileLoopBlock>[0];
     
     },FlowGraphWhileLoopBlock>, any>;
+  flowMap: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FlowMap>, {
+width: ConstructorParameters<typeof FlowMap>[0];
+    height: ConstructorParameters<typeof FlowMap>[1];
+    data: ConstructorParameters<typeof FlowMap>[2];
+    
+    },FlowMap>, any>;
   fluidRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FluidRenderer>, {
 scene: ConstructorParameters<typeof FluidRenderer>[0];
     
@@ -6438,6 +6457,12 @@ actionManager: ConstructorParameters<typeof PredicateCondition>[0];
     defines: Parameters<typeof PrepareDefinesForCamera>[1];
     
             },ReturnType<typeof PrepareDefinesForCamera>>, any>;
+  prepareDefinesForClipPlanes: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForClipPlanes>> & MeshProps, {
+        primaryHolder: Parameters<typeof PrepareDefinesForClipPlanes>[0];
+    secondaryHolder: Parameters<typeof PrepareDefinesForClipPlanes>[1];
+    defines: Parameters<typeof PrepareDefinesForClipPlanes>[2];
+    
+            },ReturnType<typeof PrepareDefinesForClipPlanes>>, any>;
   prepareDefinesForFrameBoundValues: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForFrameBoundValues>> & MeshProps, {
         scene: Parameters<typeof PrepareDefinesForFrameBoundValues>[0];
     engine: Parameters<typeof PrepareDefinesForFrameBoundValues>[1];
@@ -6506,6 +6531,12 @@ actionManager: ConstructorParameters<typeof PredicateCondition>[0];
     canRenderToMRT: Parameters<typeof PrepareDefinesForPrePass>[2];
     
             },ReturnType<typeof PrepareDefinesForPrePass>>, any>;
+  prepareStringDefinesForClipPlanes: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareStringDefinesForClipPlanes>> & MeshProps, {
+        primaryHolder: Parameters<typeof PrepareStringDefinesForClipPlanes>[0];
+    secondaryHolder: Parameters<typeof PrepareStringDefinesForClipPlanes>[1];
+    defines: Parameters<typeof PrepareStringDefinesForClipPlanes>[2];
+    
+            },ReturnType<typeof PrepareStringDefinesForClipPlanes>>, any>;
   prepareUniformsAndSamplersForLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareUniformsAndSamplersForLight>> & MeshProps, {
         lightIndex: Parameters<typeof PrepareUniformsAndSamplersForLight>[0];
     uniformsList: Parameters<typeof PrepareUniformsAndSamplersForLight>[1];
@@ -8433,6 +8464,19 @@ id: ConstructorParameters<typeof Xbox360Pad>[0];
   _MeshCollisionData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_MeshCollisionData>, {},_MeshCollisionData>, any>;
   _OcclusionDataStorage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_OcclusionDataStorage>, {},_OcclusionDataStorage>, any>;
   _PrimaryIsoTriangle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_PrimaryIsoTriangle>, {},_PrimaryIsoTriangle>, any>;
+  _SetStereoscopicAnaglyphRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _SetStereoscopicAnaglyphRigMode>> & MeshProps, {
+        camera: Parameters<typeof _SetStereoscopicAnaglyphRigMode>[0];
+    
+            },ReturnType<typeof _SetStereoscopicAnaglyphRigMode>>, any>;
+  _SetStereoscopicRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _SetStereoscopicRigMode>> & MeshProps, {
+        camera: Parameters<typeof _SetStereoscopicRigMode>[0];
+    
+            },ReturnType<typeof _SetStereoscopicRigMode>>, any>;
+  _SetVrRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _SetVrRigMode>> & MeshProps, {
+        camera: Parameters<typeof _SetVrRigMode>[0];
+    rigParams: Parameters<typeof _SetVrRigMode>[1];
+    
+            },ReturnType<typeof _SetVrRigMode>>, any>;
   _TGATextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_TGATextureLoader>, {},_TGATextureLoader>, any>;
   _TimeToken: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_TimeToken>, {},_TimeToken>, any>;
   _UpdateRGBDAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _UpdateRGBDAsync>> & MeshProps, {
@@ -8475,10 +8519,6 @@ name: ConstructorParameters<typeof _WebAudioStreamingSound>[0];
     
     },_WebAudioStreamingSound>, any>;
   _injectLTSFileTools: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _injectLTSFileTools>> & MeshProps, {},ReturnType<typeof _injectLTSFileTools>>, any>;
-  addClipPlaneUniforms: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof addClipPlaneUniforms>> & MeshProps, {
-        uniforms: Parameters<typeof addClipPlaneUniforms>[0];
-    
-            },ReturnType<typeof addClipPlaneUniforms>>, any>;
   addToBlockFactory: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof addToBlockFactory>> & MeshProps, {
         module: Parameters<typeof addToBlockFactory>[0];
     blockName: Parameters<typeof addToBlockFactory>[1];
@@ -8492,12 +8532,6 @@ name: ConstructorParameters<typeof _WebAudioStreamingSound>[0];
     copyBuffer: Parameters<typeof allocateAndCopyTypedBuffer>[3];
     
             },ReturnType<typeof allocateAndCopyTypedBuffer>>, any>;
-  bindClipPlane: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof bindClipPlane>> & MeshProps, {
-        effect: Parameters<typeof bindClipPlane>[0];
-    primaryHolder: Parameters<typeof bindClipPlane>[1];
-    secondaryHolder: Parameters<typeof bindClipPlane>[2];
-    
-            },ReturnType<typeof bindClipPlane>>, any>;
   blockFactory: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof blockFactory>> & MeshProps, {
         blockName: Parameters<typeof blockFactory>[0];
     
@@ -8630,18 +8664,6 @@ name: ConstructorParameters<typeof _WebAudioStreamingSound>[0];
         info: Parameters<typeof normalizeEnvInfo>[0];
     
             },ReturnType<typeof normalizeEnvInfo>>, any>;
-  prepareDefinesForClipPlanes: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof prepareDefinesForClipPlanes>> & MeshProps, {
-        primaryHolder: Parameters<typeof prepareDefinesForClipPlanes>[0];
-    secondaryHolder: Parameters<typeof prepareDefinesForClipPlanes>[1];
-    defines: Parameters<typeof prepareDefinesForClipPlanes>[2];
-    
-            },ReturnType<typeof prepareDefinesForClipPlanes>>, any>;
-  prepareStringDefinesForClipPlanes: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof prepareStringDefinesForClipPlanes>> & MeshProps, {
-        primaryHolder: Parameters<typeof prepareStringDefinesForClipPlanes>[0];
-    secondaryHolder: Parameters<typeof prepareStringDefinesForClipPlanes>[1];
-    defines: Parameters<typeof prepareStringDefinesForClipPlanes>[2];
-    
-            },ReturnType<typeof prepareStringDefinesForClipPlanes>>, any>;
   registerTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof registerTextureLoader>> & MeshProps, {
         extension: Parameters<typeof registerTextureLoader>[0];
     loaderFactory: Parameters<typeof registerTextureLoader>[1];
@@ -8726,19 +8748,6 @@ name: ConstructorParameters<typeof _WebAudioStreamingSound>[0];
         value: Parameters<typeof setOpenGLOrientationForUV>[0];
     
             },ReturnType<typeof setOpenGLOrientationForUV>>, any>;
-  setStereoscopicAnaglyphRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof setStereoscopicAnaglyphRigMode>> & MeshProps, {
-        camera: Parameters<typeof setStereoscopicAnaglyphRigMode>[0];
-    
-            },ReturnType<typeof setStereoscopicAnaglyphRigMode>>, any>;
-  setStereoscopicRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof setStereoscopicRigMode>> & MeshProps, {
-        camera: Parameters<typeof setStereoscopicRigMode>[0];
-    
-            },ReturnType<typeof setStereoscopicRigMode>>, any>;
-  setVRRigMode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof setVRRigMode>> & MeshProps, {
-        camera: Parameters<typeof setVRRigMode>[0];
-    rigParams: Parameters<typeof setVRRigMode>[1];
-    
-            },ReturnType<typeof setVRRigMode>>, any>;
   textureSizeIsObject: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof textureSizeIsObject>> & MeshProps, {
         size: Parameters<typeof textureSizeIsObject>[0];
     

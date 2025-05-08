@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { suspend, clear } from 'suspend-react';
 import type { ISceneLoaderAsyncResult, ImportMeshOptions } from '@babylonjs/core';
 import { ImportMeshAsync } from '@babylonjs/core/Loading/sceneLoader.js';
@@ -31,23 +31,27 @@ export function useModel(
     key?: string,
 ): ISceneLoaderAsyncResult {
     const scene = useScene();
+    const _isOnCreateExecuted = useRef(false);
 
     const model = suspend(
         async () => {
             const result = await ImportMeshAsync(url, scene, options);
-            if (onCreate) {
-                onCreate(result);
-            }
             return result;
         },
         [url, scene, key],
         { equal: isEqual },
     );
 
+    if (onCreate && !_isOnCreateExecuted.current) {
+        onCreate(model);
+        _isOnCreateExecuted.current = true;
+    }
+
     useEffect(() => {
         return () => {
             dispose(model);
             clear([url, scene, options]);
+            _isOnCreateExecuted.current = false;
         };
     }, [url, scene, key]);
 
