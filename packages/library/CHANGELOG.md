@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.0.4](https://github.com/simonedevit/reactylon/compare/v3.0.3...v3.0.4) (2025-05-15)
+
+
+### Bug Fixes
+
+* **reconciler:** keep parent child relationship when move children ([c1213f6](https://github.com/simonedevit/reactylon/commit/c1213f695e48e30cd3ff00e9facb7ee449eb1953))
+
 ## [3.0.3](https://github.com/simonedevit/reactylon/compare/v3.0.2...v3.0.3) (2025-05-08)
 
 
