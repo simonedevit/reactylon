@@ -412,7 +412,7 @@ function createReconciler() {
             ]);
             const index = parentInstance.metadata.children.findIndex(item => item.uniqueId === beforeChild.uniqueId);
             parentInstance.metadata.children.splice(index, 0, child);
-            child.handlers?.addChild?.(parentInstance, child);
+            addChild?.(parentInstance, child);
         },
 
         /*
