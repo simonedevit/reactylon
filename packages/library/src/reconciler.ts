@@ -150,12 +150,10 @@ function instantiateBabylonEntity(instance: Instance, parent?: Instance) {
     instance.entity = createInstance(type, Class, { ...props, ...additionalProps }, rootContainer);
 }
 
-function mountBabylonEntity(parent: Instance | RootContainer, child: Instance, finalTree: { status: boolean }) {
+function mountBabylonEntity(parent: Instance | RootContainer, child: Instance, isReady?: boolean) {
     const isParentRootContainer = parent.name === ROOT_IDENTIFIER;
 
-    if (isParentRootContainer || finalTree.status) {
-        finalTree.status = true;
-
+    if (isParentRootContainer || isReady) {
         // special case for children that requires a parent to be instantiated
         if (EntitiesRequiringParent.has(child.type)) {
             const _parent = parent as Instance;
@@ -192,7 +190,7 @@ function mountBabylonEntity(parent: Instance | RootContainer, child: Instance, f
             }
         }
 
-        for (const currentChild of child.children) mountBabylonEntity(child, currentChild, finalTree);
+        for (const currentChild of child.children) mountBabylonEntity(child, currentChild, true);
     }
 }
 
@@ -204,9 +202,6 @@ function mountBabylonEntity(parent: Instance | RootContainer, child: Instance, f
  */
 function createReconciler() {
     let currentUpdatePriority: number = NoEventPriority;
-    const finalTree = {
-        status: false,
-    };
 
     return ReactReconciler<string, CoreHostProps | GuiHostProps, RootContainer, Instance, Instance, Instance, unknown, unknown, unknown, UpdatePayload, Instance, unknown, unknown>(
         {
@@ -258,7 +253,7 @@ function createReconciler() {
                     [`child: ${child.name}`, child],
                 ]);
                 parentInstance.children.push(child);
-                mountBabylonEntity(parentInstance, child, finalTree);
+                mountBabylonEntity(parentInstance, child);
             },
 
             /*
@@ -392,7 +387,7 @@ function createReconciler() {
                     [`child: ${child.name}`, child],
                 ]);
                 parentInstance.children.push(child);
-                mountBabylonEntity(parentInstance, child, finalTree);
+                mountBabylonEntity(parentInstance, child);
             },
 
             /*
@@ -404,7 +399,7 @@ function createReconciler() {
                     [`child: ${child.name}`, child],
                 ]);
                 container.children.push(child);
-                mountBabylonEntity(container, child, finalTree);
+                mountBabylonEntity(container, child);
             },
 
             /*
@@ -419,7 +414,7 @@ function createReconciler() {
                 ]);
                 const index = parentInstance.children.findIndex(item => item.entity!.uniqueId === beforeChild.entity!.uniqueId);
                 parentInstance.children.splice(index, 0, child);
-                mountBabylonEntity(parentInstance, child, finalTree);
+                mountBabylonEntity(parentInstance, child);
             },
 
             /*
@@ -433,7 +428,7 @@ function createReconciler() {
                 ]);
                 const index = container.children.findIndex(item => item.entity!.uniqueId === beforeChild.entity!.uniqueId);
                 container.children.splice(index, 0, child);
-                mountBabylonEntity(container, child, finalTree);
+                mountBabylonEntity(container, child);
             },
 
             /*
