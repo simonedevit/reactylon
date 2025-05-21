@@ -21,3 +21,6 @@ export const TransformKeysMap: TransformKeys = {
     scalingY: 'scaling.y',
     scalingZ: 'scaling.z',
 };
+
+// These entity types require a parent Babylon entity to be instantiated before themselves.
+export const EntitiesRequiringParent = new Set(['physicsAggregate']);

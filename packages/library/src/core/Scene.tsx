@@ -5,7 +5,7 @@ import { Engine } from '@babylonjs/core/Engines/engine.js';
 import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
 import { SceneContext, type Store, createBabylonStore } from './store';
 import type { RootContainer, EngineContext } from '@types';
-import Reactylon from '../reconciler';
+import Reactylon, { ROOT_IDENTIFIER } from '../reconciler';
 import { useContextBridge } from 'its-fine';
 import type { StoreApi } from 'zustand';
 
@@ -124,9 +124,8 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
 
                 rootContainer.current = {
                     ...store.current.getState(),
-                    metadata: {
-                        children: [],
-                    },
+                    name: ROOT_IDENTIFIER,
+                    children: [],
                 };
 
                 // Renders children with bridged context into a secondary renderer

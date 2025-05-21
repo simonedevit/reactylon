@@ -1,9 +1,9 @@
-import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import type { BabylonEntity, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import type { CoreHostProps, LightProps } from '@props';
 import type { Light } from '@babylonjs/core';
 
-type AugmentedLight = ComponentInstance<Light>;
+type AugmentedLight = BabylonEntity<Light>;
 
 export class LightHost {
     static createInstance(type: string, Class: any, props: CoreHostProps<LightProps>, rootContainer: RootContainer) {
@@ -24,9 +24,9 @@ export class LightHost {
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance, child: AugmentedLight): void {}
+    static addChild(parentInstance: BabylonEntity, child: AugmentedLight): void {}
 
-    static removeChild(parentInstance: ComponentInstance, child: AugmentedLight): void {}
+    static removeChild(parentInstance: BabylonEntity, child: AugmentedLight): void {}
 
     static prepareUpdate(): UpdatePayload {
         return {};

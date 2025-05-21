@@ -2,7 +2,7 @@
 
 import type { Engine, Node, Nullable, Scene, WebXRDefaultExperience } from '@babylonjs/core';
 import { BabylonPackages } from '@dvmstudios/reactylon-common';
-import type { Clonable, CommonProps } from './props';
+import type { CommonProps } from './props';
 import type { EngineStore } from '../core/store';
 
 type Only<T, U> = {
@@ -52,27 +52,26 @@ export type BabylonProps<Props, ConstructorProps, Element> = {
 
 /* PROPS USED BY RENDERER */
 
-export type ComponentInstance<T = unknown> = Partial<Clonable> &
-    Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
-        children?: any;
-        // use this field to skip cloning (see packages/library/src/reconciler.ts:22)
-        metadata: {
-            children: Array<ComponentInstance<T>>;
-            babylonPackage: BabylonPackages;
-            props?: any;
-            [key: string]: any;
-        };
-        handlers?: Partial<{
-            addChild(parentInstance: ComponentInstance<T> | RootContainer, child: ComponentInstance<T>): void;
-            removeChild(parentInstance: ComponentInstance<T> | RootContainer, child: ComponentInstance<T>): void;
-            prepareUpdate(): UpdatePayload;
-            commitUpdate(instance: ComponentInstance<T>, updatePayload: UpdatePayload): void;
-        }>;
-    } & T;
+export type BabylonEntity<T = unknown> = Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
+    parent?: unknown;
+    handlers?: Partial<{
+        addChild(parentInstance: BabylonEntity<T> | RootContainer, child: BabylonEntity<T>): void;
+        removeChild(parentInstance: BabylonEntity<T> | RootContainer, child: BabylonEntity<T>): void;
+        prepareUpdate(): UpdatePayload;
+        commitUpdate(instance: BabylonEntity<T>, updatePayload: UpdatePayload): void;
+    }>;
+} & T;
 
-export type ComponentInstanceDependent = {
-    isParentDependent: boolean;
-    createInstanceFn: (...args: Array<unknown>) => any;
+export type Instance = {
+    type: string;
+    props: any;
+    rootContainer: RootContainer;
+    babylonPackage: BabylonPackages | null;
+    entity: BabylonEntity | null;
+    parent: Instance | null;
+    children: Array<Instance>;
+    //handlers: any;
+    name: string;
 };
 
 export type UpdatePayload = {
@@ -86,10 +85,8 @@ export type RootContainer = {
     isMultipleCanvas: boolean;
     isMultipleScene: boolean;
     xrExperience: Nullable<WebXRDefaultExperience>;
-    metadata: {
-        children: Array<ComponentInstance>;
-        // [key: string]: string;
-    };
+    name: Symbol;
+    children: Array<Instance>;
 };
 
 export type EngineContext = EngineStore & {

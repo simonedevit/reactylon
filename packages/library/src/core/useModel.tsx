@@ -31,27 +31,29 @@ export function useModel(
     key?: string,
 ): ISceneLoaderAsyncResult {
     const scene = useScene();
-    const _isOnCreateExecuted = useRef(false);
+    const _isInitialized = useRef(false);
 
     const model = suspend(
         async () => {
             const result = await ImportMeshAsync(url, scene, options);
+            result.meshes.forEach(mesh => mesh.setEnabled(false));
             return result;
         },
         [url, scene, key],
         { equal: isEqual },
     );
 
-    if (onCreate && !_isOnCreateExecuted.current) {
-        onCreate(model);
-        _isOnCreateExecuted.current = true;
+    if (!_isInitialized.current) {
+        model.meshes.forEach(mesh => mesh.setEnabled(true));
+        onCreate?.(model);
+        _isInitialized.current = true;
     }
 
     useEffect(() => {
         return () => {
             dispose(model);
             clear([url, scene, options]);
-            _isOnCreateExecuted.current = false;
+            _isInitialized.current = false;
         };
     }, [url, scene, key]);
 

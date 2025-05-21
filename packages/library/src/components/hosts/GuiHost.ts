@@ -1,5 +1,5 @@
-import { BabylonPackages, Logger, invokeClassOrFunction, isInstanceOf } from '@dvmstudios/reactylon-common';
-import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import { Logger, invokeClassOrFunction, isInstanceOf } from '@dvmstudios/reactylon-common';
+import type { BabylonEntity, RootContainer, UpdatePayload } from '@types';
 import { type GuiHostProps, type GuiTriggerable, GuiTriggers } from '@props';
 import { TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
@@ -29,11 +29,11 @@ export type Params = {
 
 type GuiComponent = Pick<Container, 'addControl' | 'removeControl'> & GuiTriggerable;
 
-const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', ...Object.keys(GuiTriggers)];
+const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', 'ref', ...Object.keys(GuiTriggers)];
 
 export class GuiHost {
     static createInstance(type: string, Class: any, props: GuiHostProps, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
-        let element: ComponentInstance<any>;
+        let element = null;
         let isCloned = false;
         const scene = rootContainer.scene;
         const propsWithScene = { ...props, scene };
@@ -83,13 +83,6 @@ export class GuiHost {
                 }
             });
 
-        // use metadata to store children in renderer
-        if (!element.metadata) {
-            element.metadata = {
-                babylonPackage: BabylonPackages.GUI,
-            };
-        }
-
         // execute custom code as soon the object is created
         props.onCreate?.(element);
 
@@ -104,7 +97,7 @@ export class GuiHost {
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance<GuiComponent>, child: ComponentInstance<Control>): void {
+    static addChild(parentInstance: BabylonEntity<GuiComponent>, child: BabylonEntity<Control>): void {
         if (isInstanceOf(parentInstance, 'DynamicTexture') && isInstanceOf(child, 'DynamicTexture')) {
             Logger.error(`GUIHost - addChild - You cannot have an AdvancedDynamicTexture (i.e. ${child.name}) in an AdvancedDynamicTexture (i.e. ${parentInstance.name})`);
         }
@@ -116,7 +109,7 @@ export class GuiHost {
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance<GuiComponent>, child: ComponentInstance<Control>): void {
+    static removeChild(parentInstance: BabylonEntity<GuiComponent>, child: BabylonEntity<Control>): void {
         // ensure that removeControl function exists (parentInstance could be root)
         parentInstance.removeControl?.(child);
     }
@@ -125,5 +118,5 @@ export class GuiHost {
         return {};
     }
 
-    static commitUpdate(instance: ComponentInstance<Control>, updatePayload: UpdatePayload): void {}
+    static commitUpdate(instance: BabylonEntity<Control>, updatePayload: UpdatePayload): void {}
 }

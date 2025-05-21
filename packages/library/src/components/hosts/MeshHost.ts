@@ -1,4 +1,4 @@
-import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import type { BabylonEntity, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import type { ActionEvent, Mesh, Scene, HighlightLayer } from '@babylonjs/core';
 import { ActionManager } from '@babylonjs/core/Actions/actionManager.js';
@@ -31,7 +31,7 @@ function handleEvents(props: CoreHostProps<MeshProps>, scene: Scene) {
     return null;
 }
 
-type AugmentedMesh = ComponentInstance<MeshProps & Mesh>;
+type AugmentedMesh = BabylonEntity<MeshProps & Mesh>;
 
 export class MeshHost {
     static createInstance(type: string, Class: any, props: CoreHostProps<MeshProps>, rootContainer: RootContainer) {
@@ -68,7 +68,7 @@ export class MeshHost {
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance<Mesh | HighlightLayer>, child: AugmentedMesh): void {
+    static addChild(parentInstance: BabylonEntity<Mesh | HighlightLayer>, child: AugmentedMesh): void {
         if (isInstanceOf(parentInstance, 'HighlightLayer')) {
             const { highlightLayer } = child;
             if (highlightLayer) {
@@ -78,21 +78,21 @@ export class MeshHost {
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: AugmentedMesh): void {}
+    static removeChild(parentInstance: BabylonEntity, child: AugmentedMesh): void {}
 
     static prepareUpdate(): UpdatePayload {
         return {};
     }
 
     static commitUpdate(instance: AugmentedMesh, updatePayload: UpdatePayload): void {
-        const parent = instance.metadata.parent;
+        const parent = instance.parent;
         if (parent && isInstanceOf(parent, 'HighlightLayer')) {
             const highlightLayer = updatePayload.highlightLayer as MeshProps['highlightLayer'];
             if (highlightLayer) {
                 const { color, glowEmissiveOnly } = highlightLayer;
-                parent.addMesh(instance, color, glowEmissiveOnly);
+                (parent as unknown as HighlightLayer).addMesh(instance, color, glowEmissiveOnly);
             } else {
-                parent.removeMesh(instance);
+                (parent as unknown as HighlightLayer).removeMesh(instance);
             }
         }
     }

@@ -1,10 +1,10 @@
-import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import type { BabylonEntity, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import type { Material, Mesh, MultiMaterial } from '@babylonjs/core';
 import type { MeshProps, MaterialProps, CoreHostProps } from '@props';
 import { isInstanceOf } from '@dvmstudios/reactylon-common';
 
-type AugmentedMaterial = ComponentInstance<MaterialProps & Material>;
+type AugmentedMaterial = BabylonEntity<MaterialProps & Material>;
 
 export class MaterialHost {
     static createInstance(type: string, Class: any, props: CoreHostProps<MaterialProps>, rootContainer: RootContainer) {
@@ -36,7 +36,7 @@ export class MaterialHost {
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance<(Mesh & MeshProps) | MultiMaterial>, child: AugmentedMaterial): void {
+    static addChild(parentInstance: BabylonEntity<(Mesh & MeshProps) | MultiMaterial>, child: AugmentedMaterial): void {
         if (isInstanceOf(parentInstance, 'MultiMaterial')) {
             (parentInstance as MultiMaterial).subMaterials.push(child);
         } else {
@@ -44,7 +44,7 @@ export class MaterialHost {
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: AugmentedMaterial): void {}
+    static removeChild(parentInstance: BabylonEntity, child: AugmentedMaterial): void {}
 
     static prepareUpdate(): UpdatePayload {
         return {};

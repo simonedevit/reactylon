@@ -1,10 +1,10 @@
-import type { ComponentInstance, RootContainer, UpdatePayload } from '@types';
+import type { BabylonEntity, RootContainer, UpdatePayload } from '@types';
 import { Host } from './Host';
 import type { PBRMaterial, StandardMaterial, CubeTexture, Texture } from '@babylonjs/core';
 import type { CoreHostProps, TextureProps } from '@props';
 import { isInstanceOf } from '@dvmstudios/reactylon-common';
 
-type AugmentedTexture = ComponentInstance<TextureProps & (Texture | CubeTexture)>;
+type AugmentedTexture = BabylonEntity<TextureProps & (Texture | CubeTexture)>;
 
 export class TextureHost {
     static createInstance(type: string, Class: any, props: CoreHostProps<TextureProps>, rootContainer: RootContainer) {
@@ -16,7 +16,7 @@ export class TextureHost {
         return element;
     }
 
-    static addChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {
+    static addChild(parentInstance: BabylonEntity, child: AugmentedTexture): void {
         const textureType = child.kind;
         if (textureType === 'detailMap') {
             (parentInstance as StandardMaterial | PBRMaterial).detailMap.texture = child;
@@ -26,7 +26,7 @@ export class TextureHost {
         }
     }
 
-    static removeChild(parentInstance: ComponentInstance, child: AugmentedTexture): void {}
+    static removeChild(parentInstance: BabylonEntity, child: AugmentedTexture): void {}
 
     static prepareUpdate(): UpdatePayload {
         return {};

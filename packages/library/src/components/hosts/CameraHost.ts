@@ -1,4 +1,4 @@
-import type { ComponentInstance, RootContainer } from '@types';
+import type { RootContainer } from '@types';
 import { Host } from './Host';
 import type { CameraProps, CoreHostProps, WebXRCameraProps } from '@props';
 import { BabylonPackages, isInstanceOf } from '@dvmstudios/reactylon-common';
@@ -14,7 +14,8 @@ export class CameraHost {
                     Object.keys(rest).forEach(_key => {
                         const key = _key as keyof typeof props;
                         const value = props[key];
-                        (webXRCamera as ComponentInstance<any>)[key] = value;
+                        // @ts-ignore
+                        webXRCamera[key] = value;
                     });
 
                     // use metadata to store children in renderer

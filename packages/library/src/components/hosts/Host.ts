@@ -1,5 +1,5 @@
-import { BabylonPackages, invokeClassOrFunction } from '@dvmstudios/reactylon-common';
-import type { ComponentInstance, RootContainer } from '@types';
+import { invokeClassOrFunction } from '@dvmstudios/reactylon-common';
+import type { RootContainer } from '@types';
 import { BabylonElementsRetrievalMap, TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
@@ -7,11 +7,11 @@ import '../../index';
 import coreConstructors from '../../_generated/babylon.core.constructors';
 import type { CoreHostProps } from '@props';
 
-const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'binding'];
+const excludedProps = ['children', 'onCreate', 'assignTo', 'cloneFrom', 'instanceFrom', 'propertiesFrom', 'binding', 'ref'];
 
 export class Host {
     static createInstance(type: string, Class: any, props: CoreHostProps, rootContainer: RootContainer, cloneFn?: Function) {
-        let element: ComponentInstance<any>;
+        let element = null;
         let isCloned = false;
         let isBinding = false;
 
@@ -50,17 +50,8 @@ export class Host {
         if (props.propertiesFrom) {
             props.propertiesFrom.forEach(({ property, source, type }) => {
                 const sourceElement = scene[BabylonElementsRetrievalMap[type]](source);
-                element[property as keyof ComponentInstance] = sourceElement[property];
+                element[property] = sourceElement[property];
             });
-        }
-
-        // use metadata to store children in renderer
-        if (!element.metadata) {
-            element.metadata = {
-                babylonPackage: BabylonPackages.CORE,
-                /* it would be very useful setting all props into metadata attribute but it can throw an error in Inspector ("RangeError: Maximum call stack size exceeded") if metadata create a loop
-                https://github.com/BabylonJS/Babylon.js/blob/master/packages/dev/inspector/src/components/actionTabs/tabs/propertyGrids/metadata/metadataPropertyGridComponent.tsx#L197 - objectCanSafelyStringify */
-            };
         }
 
         // execute custom code as soon the object is created
