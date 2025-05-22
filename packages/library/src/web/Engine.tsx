@@ -39,7 +39,7 @@ export const Engine = ({
     const engineRef = useRef<{
         engine: BabylonEngine;
         onResizeWindow: () => void;
-    }>({ engine: {} as BabylonEngine, onResizeWindow: () => {} });
+    } | null>(null);
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -88,9 +88,10 @@ export const Engine = ({
                 }
             });
         });
-
-        engineRef.current.engine = engine;
-        engineRef.current.onResizeWindow = () => engine.resize();
+        engineRef.current = {
+            engine,
+            onResizeWindow: () => engine.resize(),
+        };
         window.addEventListener('resize', engineRef.current.onResizeWindow);
 
         setContext({
@@ -98,8 +99,9 @@ export const Engine = ({
             isMultipleCanvas: !!isMultipleCanvas,
             isMultipleScene,
             disposeEngine: () => {
-                window.removeEventListener('resize', engineRef.current.onResizeWindow);
-                engineRef.current.engine.dispose();
+                window.removeEventListener('resize', engineRef.current!.onResizeWindow);
+                engineRef.current!.engine.dispose();
+                engineRef.current = null;
             },
         });
     }, []);

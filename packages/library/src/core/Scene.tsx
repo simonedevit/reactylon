@@ -123,7 +123,7 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
                 });
 
                 rootContainer.current = {
-                    ...store.current.getState(),
+                    ...(store.current.getState() as any),
                     name: ROOT_IDENTIFIER,
                     children: [],
                 };
@@ -145,6 +145,15 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
                 disposeEngine();
             });
             rootContainer.current = null;
+            store.current!.setState({
+                engine: null,
+                scene: null,
+                canvas: null,
+                isMultipleCanvas: false,
+                isMultipleScene: false,
+                xrExperience: null,
+                physicsEngine: null,
+            });
         };
     }, []);
 

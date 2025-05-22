@@ -4,14 +4,14 @@ import { createContext, useContext } from 'react';
 import type { IPhysicsEngine } from '@babylonjs/core/Physics/IPhysicsEngine';
 
 export type EngineStore = {
-    engine: Engine;
+    engine: Nullable<Engine>;
     isMultipleCanvas: boolean;
     isMultipleScene: boolean;
 };
 
 export type Store = EngineStore & {
-    scene: Scene;
-    canvas: HTMLCanvasElement | WebGLRenderingContext;
+    scene: Nullable<Scene>;
+    canvas: Nullable<HTMLCanvasElement | WebGLRenderingContext>;
     xrExperience: Nullable<WebXRDefaultExperience>;
     physicsEngine: Nullable<IPhysicsEngine>;
     //sceneReady: boolean;
@@ -42,7 +42,7 @@ export function useEngine(): Engine;
 export function useEngine<T>(selector: (engine: Engine) => T): T;
 
 export function useEngine<T>(selector?: (engine: Engine) => T): T | Engine {
-    return useBabylonContext(state => (selector ? selector(state.engine) : state.engine));
+    return useBabylonContext(state => (selector ? selector(state.engine!) : state.engine!));
 }
 
 /**
@@ -52,7 +52,7 @@ export function useScene(): Scene;
 export function useScene<T>(selector: (scene: Scene) => T): T;
 
 export function useScene<T>(selector?: (scene: Scene) => T): T | Scene {
-    return useBabylonContext(state => (selector ? selector(state.scene) : state.scene));
+    return useBabylonContext(state => (selector ? selector(state.scene!) : state.scene!));
 }
 
 /**

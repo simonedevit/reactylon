@@ -35,7 +35,7 @@ function isParentNeeded(child: BabylonEntity) {
 
 function removeChild(parentInstance: Instance | RootContainer, child: Instance) {
     Logger.group('removeChild', [
-        [`parentInstance: ${parentInstance.name}`, parentInstance],
+        [`parentInstance: ${String(parentInstance.name)}`, parentInstance],
         [`child: ${child.name}`, child],
     ]);
     child.parent = null;
@@ -47,7 +47,6 @@ function removeChild(parentInstance: Instance | RootContainer, child: Instance) 
     child.entity.handlers?.removeChild?.(parentInstance, child);
     const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
     child.entity!.dispose?.(false, disposeMaterialsAndTextures);
-    //child.dispose?.();
 }
 
 function shouldDisposeMaterialsAndTextures(_child: unknown) {
@@ -172,7 +171,7 @@ function mountBabylonEntity(parent: Instance | RootContainer, child: Instance, i
                 instantiateBabylonEntity(_parent);
             }
 
-            // FIXME: decouple handlers with Babylon.js entity
+            // TODO: decouple handlers and Babylon.js entity
             child.entity!.handlers?.addChild?.(_parent.entity!, child.entity!);
             if (child.babylonPackage === BabylonPackages.CORE) {
                 if (isParentNeeded(child.entity!)) {
@@ -387,7 +386,7 @@ function createReconciler() {
                     [`child: ${child.name}`, child],
                 ]);
                 parentInstance.children.push(child);
-                mountBabylonEntity(parentInstance, child);
+                mountBabylonEntity(parentInstance, child, true);
             },
 
             /*
@@ -414,7 +413,7 @@ function createReconciler() {
                 ]);
                 const index = parentInstance.children.findIndex(item => item.entity!.uniqueId === beforeChild.entity!.uniqueId);
                 parentInstance.children.splice(index, 0, child);
-                mountBabylonEntity(parentInstance, child);
+                mountBabylonEntity(parentInstance, child, true);
             },
 
             /*

@@ -165,6 +165,8 @@ import type { ConeParticleEmitter } from '@babylonjs/core';
 import type { ContainerAssetTask } from '@babylonjs/core';
 import type { ConvolutionPostProcess } from '@babylonjs/core';
 import type { CopyFloatData } from '@babylonjs/core';
+import type { CopyMatrixToArray } from '@babylonjs/core';
+import type { CopyMatrixToRef } from '@babylonjs/core';
 import type { CopyTextureToTexture } from '@babylonjs/core';
 import type { CreateAlignedTypedArray } from '@babylonjs/core';
 import type { CreateAudioBusAsync } from '@babylonjs/core';
@@ -202,6 +204,7 @@ import type { CreateLineSystem } from '@babylonjs/core';
 import type { CreateLineSystemVertexData } from '@babylonjs/core';
 import type { CreateLines } from '@babylonjs/core';
 import type { CreateMainAudioBusAsync } from '@babylonjs/core';
+import type { CreateMicrophoneSoundSourceAsync } from '@babylonjs/core';
 import type { CreatePickingRay } from '@babylonjs/core';
 import type { CreatePickingRayInCameraSpace } from '@babylonjs/core';
 import type { CreatePickingRayInCameraSpaceToRef } from '@babylonjs/core';
@@ -224,6 +227,7 @@ import type { CreateScreenshotWithResizeAsync } from '@babylonjs/core';
 import type { CreateSegmentedBoxVertexData } from '@babylonjs/core';
 import type { CreateSoundAsync } from '@babylonjs/core';
 import type { CreateSoundBufferAsync } from '@babylonjs/core';
+import type { CreateSoundSourceAsync } from '@babylonjs/core';
 import type { CreateSphere } from '@babylonjs/core';
 import type { CreateSphereVertexData } from '@babylonjs/core';
 import type { CreateStreamingSoundAsync } from '@babylonjs/core';
@@ -532,6 +536,7 @@ import type { FrameGraphGlowLayerTask } from '@babylonjs/core';
 import type { FrameGraphGrainTask } from '@babylonjs/core';
 import type { FrameGraphHighlightLayerTask } from '@babylonjs/core';
 import type { FrameGraphImageProcessingTask } from '@babylonjs/core';
+import type { FrameGraphMotionBlurTask } from '@babylonjs/core';
 import type { FrameGraphObjectRendererTask } from '@babylonjs/core';
 import type { FrameGraphPass } from '@babylonjs/core';
 import type { FrameGraphPassCubeTask } from '@babylonjs/core';
@@ -673,6 +678,7 @@ import type { IblCdfGenerator } from '@babylonjs/core';
 import type { IblCdfGeneratorSceneComponent } from '@babylonjs/core';
 import type { IblShadowsRenderPipeline } from '@babylonjs/core';
 import type { IcoSphereBlock } from '@babylonjs/core';
+import type { IdentityMatrixToRef } from '@babylonjs/core';
 import type { ImageAssetTask } from '@babylonjs/core';
 import type { ImageProcessingBlock } from '@babylonjs/core';
 import type { ImageProcessingConfiguration } from '@babylonjs/core';
@@ -698,6 +704,8 @@ import type { InterleaveScalar } from '@babylonjs/core';
 import type { InternalTexture } from '@babylonjs/core';
 import type { InterpolateValueAction } from '@babylonjs/core';
 import type { IntersectionInfo } from '@babylonjs/core';
+import type { InvertMatrixToArray } from '@babylonjs/core';
+import type { InvertMatrixToRef } from '@babylonjs/core';
 import type { IridescenceBlock } from '@babylonjs/core';
 import type { IsBase64DataUrl } from '@babylonjs/core';
 import type { IsCSG2Ready } from '@babylonjs/core';
@@ -740,6 +748,7 @@ import type { LoopBlock } from '@babylonjs/core';
 import type { MainAudioBus } from '@babylonjs/core';
 import type { MapRangeBlock } from '@babylonjs/core';
 import type { MappingBlock } from '@babylonjs/core';
+import type { MarkAsDirty } from '@babylonjs/core';
 import type { Material } from '@babylonjs/core';
 import type { MaterialAnisotropicDefines } from '@babylonjs/core';
 import type { MaterialBRDFDefines } from '@babylonjs/core';
@@ -788,6 +797,8 @@ import type { MultiPickWithRay } from '@babylonjs/core';
 import type { MultiPointerScaleBehavior } from '@babylonjs/core';
 import type { MultiRenderTarget } from '@babylonjs/core';
 import type { MultiplyBlock } from '@babylonjs/core';
+import type { MultiplyMatricesToArray } from '@babylonjs/core';
+import type { MultiplyMatricesToRef } from '@babylonjs/core';
 import type { NLerpBlock } from '@babylonjs/core';
 import type { NativeDataStream } from '@babylonjs/core';
 import type { NativeEngine } from '@babylonjs/core';
@@ -835,6 +846,7 @@ import type { NodeRenderGraphGrainPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphHighlightLayerBlock } from '@babylonjs/core';
 import type { NodeRenderGraphImageProcessingPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphInputBlock } from '@babylonjs/core';
+import type { NodeRenderGraphMotionBlurPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphObjectRendererBlock } from '@babylonjs/core';
 import type { NodeRenderGraphOutputBlock } from '@babylonjs/core';
 import type { NodeRenderGraphPassCubePostProcessBlock } from '@babylonjs/core';
@@ -1072,6 +1084,7 @@ import type { SSRRenderingPipeline } from '@babylonjs/core';
 import type { ScaleBlock } from '@babylonjs/core';
 import type { ScaleGizmo } from '@babylonjs/core';
 import type { ScalingBlock } from '@babylonjs/core';
+import type { ScalingMatrixToRef } from '@babylonjs/core';
 import type { ScanData } from '@babylonjs/core';
 import type { Scene } from '@babylonjs/core';
 import type { SceneDepthBlock } from '@babylonjs/core';
@@ -1205,6 +1218,8 @@ import type { ThinGlowLayer } from '@babylonjs/core';
 import type { ThinGrainPostProcess } from '@babylonjs/core';
 import type { ThinHighlightLayer } from '@babylonjs/core';
 import type { ThinImageProcessingPostProcess } from '@babylonjs/core';
+import type { ThinMatrix } from '@babylonjs/core';
+import type { ThinMotionBlurPostProcess } from '@babylonjs/core';
 import type { ThinPassCubePostProcess } from '@babylonjs/core';
 import type { ThinPassPostProcess } from '@babylonjs/core';
 import type { ThinRenderTargetTexture } from '@babylonjs/core';
@@ -1221,6 +1236,7 @@ import type { TransformBlock } from '@babylonjs/core';
 import type { TransformFeedbackBoundingHelper } from '@babylonjs/core';
 import type { TransformNode } from '@babylonjs/core';
 import type { TranslationBlock } from '@babylonjs/core';
+import type { TranslationMatrixToRef } from '@babylonjs/core';
 import type { TriPlanarBlock } from '@babylonjs/core';
 import type { TrigonometryBlock } from '@babylonjs/core';
 import type { TwirlBlock } from '@babylonjs/core';
@@ -1363,6 +1379,7 @@ import type { _UpdateRGBDAsync } from '@babylonjs/core';
 import type { _WebAudioBus } from '@babylonjs/core';
 import type { _WebAudioEngine } from '@babylonjs/core';
 import type { _WebAudioMainBus } from '@babylonjs/core';
+import type { _WebAudioSoundSource } from '@babylonjs/core';
 import type { _WebAudioStaticSound } from '@babylonjs/core';
 import type { _WebAudioStaticSoundBuffer } from '@babylonjs/core';
 import type { _WebAudioStreamingSound } from '@babylonjs/core';
@@ -2320,6 +2337,17 @@ name: ConstructorParameters<typeof ConvolutionPostProcess>[0];
     output: Parameters<typeof CopyFloatData>[7];
     
             },ReturnType<typeof CopyFloatData>>, any>;
+  copyMatrixToArray: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CopyMatrixToArray>> & MeshProps, {
+        matrix: Parameters<typeof CopyMatrixToArray>[0];
+    array: Parameters<typeof CopyMatrixToArray>[1];
+    offset: Parameters<typeof CopyMatrixToArray>[2];
+    
+            },ReturnType<typeof CopyMatrixToArray>>, any>;
+  copyMatrixToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CopyMatrixToRef>> & MeshProps, {
+        matrix: Parameters<typeof CopyMatrixToRef>[0];
+    target: Parameters<typeof CopyMatrixToRef>[1];
+    
+            },ReturnType<typeof CopyMatrixToRef>>, any>;
   copyTextureToTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CopyTextureToTexture>, {
 engine: ConstructorParameters<typeof CopyTextureToTexture>[0];
     isDepthTexture: ConstructorParameters<typeof CopyTextureToTexture>[1];
@@ -2518,6 +2546,12 @@ engine: ConstructorParameters<typeof CopyTextureToTexture>[0];
     engine: Parameters<typeof CreateMainAudioBusAsync>[2];
     
             },ReturnType<typeof CreateMainAudioBusAsync>>, any>;
+  microphoneSoundSourceAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreateMicrophoneSoundSourceAsync>> & MeshProps, {
+        name: Parameters<typeof CreateMicrophoneSoundSourceAsync>[0];
+    options: Parameters<typeof CreateMicrophoneSoundSourceAsync>[1];
+    engine: Parameters<typeof CreateMicrophoneSoundSourceAsync>[2];
+    
+            },ReturnType<typeof CreateMicrophoneSoundSourceAsync>>, any>;
   pickingRay: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreatePickingRay>> & MeshProps, {
         scene: Parameters<typeof CreatePickingRay>[0];
     x: Parameters<typeof CreatePickingRay>[1];
@@ -2692,6 +2726,13 @@ engine: ConstructorParameters<typeof CopyTextureToTexture>[0];
     engine: Parameters<typeof CreateSoundBufferAsync>[2];
     
             },ReturnType<typeof CreateSoundBufferAsync>>, any>;
+  soundSourceAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreateSoundSourceAsync>> & MeshProps, {
+        name: Parameters<typeof CreateSoundSourceAsync>[0];
+    source: Parameters<typeof CreateSoundSourceAsync>[1];
+    options: Parameters<typeof CreateSoundSourceAsync>[2];
+    engine: Parameters<typeof CreateSoundSourceAsync>[3];
+    
+            },ReturnType<typeof CreateSoundSourceAsync>>, any>;
   sphere: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreateSphere>> & MeshProps, {
         name: Parameters<typeof CreateSphere>[0];
     options: Parameters<typeof CreateSphere>[1];
@@ -4119,6 +4160,12 @@ name: ConstructorParameters<typeof FrameGraphImageProcessingTask>[0];
     thinPostProcess: ConstructorParameters<typeof FrameGraphImageProcessingTask>[2];
     
     },FrameGraphImageProcessingTask>, any>;
+  frameGraphMotionBlurTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphMotionBlurTask>, {
+name: ConstructorParameters<typeof FrameGraphMotionBlurTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphMotionBlurTask>[1];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphMotionBlurTask>[2];
+    
+    },FrameGraphMotionBlurTask>, any>;
   frameGraphObjectRendererTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphObjectRendererTask>, {
 name: ConstructorParameters<typeof FrameGraphObjectRendererTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphObjectRendererTask>[1];
@@ -4841,6 +4888,10 @@ name: ConstructorParameters<typeof IblShadowsRenderPipeline>[0];
 name: ConstructorParameters<typeof IcoSphereBlock>[0];
     
     },IcoSphereBlock>, any>;
+  identityMatrixToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof IdentityMatrixToRef>> & MeshProps, {
+        result: Parameters<typeof IdentityMatrixToRef>[0];
+    
+            },ReturnType<typeof IdentityMatrixToRef>>, any>;
   imageAssetTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ImageAssetTask>, {
 name: ConstructorParameters<typeof ImageAssetTask>[0];
     url: ConstructorParameters<typeof ImageAssetTask>[1];
@@ -4967,6 +5018,16 @@ bu: ConstructorParameters<typeof IntersectionInfo>[0];
     distance: ConstructorParameters<typeof IntersectionInfo>[2];
     
     },IntersectionInfo>, any>;
+  invertMatrixToArray: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof InvertMatrixToArray>> & MeshProps, {
+        source: Parameters<typeof InvertMatrixToArray>[0];
+    target: Parameters<typeof InvertMatrixToArray>[1];
+    
+            },ReturnType<typeof InvertMatrixToArray>>, any>;
+  invertMatrixToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof InvertMatrixToRef>> & MeshProps, {
+        source: Parameters<typeof InvertMatrixToRef>[0];
+    target: Parameters<typeof InvertMatrixToRef>[1];
+    
+            },ReturnType<typeof InvertMatrixToRef>>, any>;
   iridescenceBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<IridescenceBlock> & Clonable, {
 name: ConstructorParameters<typeof IridescenceBlock>[0];
     
@@ -5145,6 +5206,10 @@ name: ConstructorParameters<typeof MapRangeBlock>[0];
 name: ConstructorParameters<typeof MappingBlock>[0];
     
     },MappingBlock>, any>;
+  markAsDirty: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof MarkAsDirty>> & MeshProps, {
+        matrix: Parameters<typeof MarkAsDirty>[0];
+    
+            },ReturnType<typeof MarkAsDirty>>, any>;
   material: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Material> & Clonable, {
 name: ConstructorParameters<typeof Material>[0];
     scene: ConstructorParameters<typeof Material>[1];
@@ -5364,6 +5429,20 @@ name: ConstructorParameters<typeof MultiRenderTarget>[0];
 name: ConstructorParameters<typeof MultiplyBlock>[0];
     
     },MultiplyBlock>, any>;
+  multiplyMatricesToArray: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof MultiplyMatricesToArray>> & MeshProps, {
+        a: Parameters<typeof MultiplyMatricesToArray>[0];
+    b: Parameters<typeof MultiplyMatricesToArray>[1];
+    output: Parameters<typeof MultiplyMatricesToArray>[2];
+    offset: Parameters<typeof MultiplyMatricesToArray>[3];
+    
+            },ReturnType<typeof MultiplyMatricesToArray>>, any>;
+  multiplyMatricesToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof MultiplyMatricesToRef>> & MeshProps, {
+        a: Parameters<typeof MultiplyMatricesToRef>[0];
+    b: Parameters<typeof MultiplyMatricesToRef>[1];
+    result: Parameters<typeof MultiplyMatricesToRef>[2];
+    offset: Parameters<typeof MultiplyMatricesToRef>[3];
+    
+            },ReturnType<typeof MultiplyMatricesToRef>>, any>;
   nLerpBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NLerpBlock> & Clonable, {
 name: ConstructorParameters<typeof NLerpBlock>[0];
     
@@ -5622,6 +5701,12 @@ name: ConstructorParameters<typeof NodeRenderGraphInputBlock>[0];
     type: ConstructorParameters<typeof NodeRenderGraphInputBlock>[3];
     
     },NodeRenderGraphInputBlock>, any>;
+  nodeRenderGraphMotionBlurPostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphMotionBlurPostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphMotionBlurPostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphMotionBlurPostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphMotionBlurPostProcessBlock>[2];
+    
+    },NodeRenderGraphMotionBlurPostProcessBlock>, any>;
   nodeRenderGraphObjectRendererBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphObjectRendererBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[1];
@@ -6980,6 +7065,13 @@ gizmoLayer: ConstructorParameters<typeof ScaleGizmo>[0];
 name: ConstructorParameters<typeof ScalingBlock>[0];
     
     },ScalingBlock>, any>;
+  scalingMatrixToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ScalingMatrixToRef>> & MeshProps, {
+        x: Parameters<typeof ScalingMatrixToRef>[0];
+    y: Parameters<typeof ScalingMatrixToRef>[1];
+    z: Parameters<typeof ScalingMatrixToRef>[2];
+    result: Parameters<typeof ScalingMatrixToRef>[3];
+    
+            },ReturnType<typeof ScalingMatrixToRef>>, any>;
   scanData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ScanData>> & MeshProps, {
         decoder: Parameters<typeof ScanData>[0];
     header: Parameters<typeof ScanData>[1];
@@ -7731,6 +7823,13 @@ name: ConstructorParameters<typeof ThinImageProcessingPostProcess>[0];
     options: ConstructorParameters<typeof ThinImageProcessingPostProcess>[2];
     
     },ThinImageProcessingPostProcess>, any>;
+  thinMatrix: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinMatrix>, {},ThinMatrix>, any>;
+  thinMotionBlurPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinMotionBlurPostProcess>, {
+name: ConstructorParameters<typeof ThinMotionBlurPostProcess>[0];
+    scene: ConstructorParameters<typeof ThinMotionBlurPostProcess>[1];
+    options: ConstructorParameters<typeof ThinMotionBlurPostProcess>[2];
+    
+    },ThinMotionBlurPostProcess>, any>;
   thinPassCubePostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinPassCubePostProcess>, {
 name: ConstructorParameters<typeof ThinPassCubePostProcess>[0];
     engine: ConstructorParameters<typeof ThinPassCubePostProcess>[1];
@@ -7811,6 +7910,13 @@ name: ConstructorParameters<typeof TransformNode>[0];
 name: ConstructorParameters<typeof TranslationBlock>[0];
     
     },TranslationBlock>, any>;
+  translationMatrixToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof TranslationMatrixToRef>> & MeshProps, {
+        x: Parameters<typeof TranslationMatrixToRef>[0];
+    y: Parameters<typeof TranslationMatrixToRef>[1];
+    z: Parameters<typeof TranslationMatrixToRef>[2];
+    result: Parameters<typeof TranslationMatrixToRef>[3];
+    
+            },ReturnType<typeof TranslationMatrixToRef>>, any>;
   triPlanarBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TriPlanarBlock> & Clonable, {
 name: ConstructorParameters<typeof TriPlanarBlock>[0];
     hideSourceZ: ConstructorParameters<typeof TriPlanarBlock>[1];
@@ -8502,6 +8608,13 @@ name: ConstructorParameters<typeof _WebAudioMainBus>[0];
     engine: ConstructorParameters<typeof _WebAudioMainBus>[1];
     
     },_WebAudioMainBus>, any>;
+  _WebAudioSoundSource: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_WebAudioSoundSource>, {
+name: ConstructorParameters<typeof _WebAudioSoundSource>[0];
+    webAudioNode: ConstructorParameters<typeof _WebAudioSoundSource>[1];
+    engine: ConstructorParameters<typeof _WebAudioSoundSource>[2];
+    options: ConstructorParameters<typeof _WebAudioSoundSource>[3];
+    
+    },_WebAudioSoundSource>, any>;
   _WebAudioStaticSound: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_WebAudioStaticSound>, {
 name: ConstructorParameters<typeof _WebAudioStaticSound>[0];
     engine: ConstructorParameters<typeof _WebAudioStaticSound>[1];
