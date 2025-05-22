@@ -1,5 +1,18 @@
 # Reactylon - Changelog
 
+## [3.0.5](https://github.com/simonedevit/reactylon/compare/v3.0.4...v3.0.5) (2025-05-22)
+
+
+### Chore
+
+* **reconciler:** fix mount on commit phase for deeper level child +  wip memory clean ([57e0300](https://github.com/simonedevit/reactylon/commit/57e0300684a1a3fd47dacccc86072db5e45f127d))
+* **reconciler:** delay instances creation when tree is ready ([a0384db](https://github.com/simonedevit/reactylon/commit/a0384db3d5ba09c2b843622ef92a74f5e9e440eb))
+
+
+### Bug Fixes
+
+* **reconciler:** keep generation on current top level child ([dd8bd7e](https://github.com/simonedevit/reactylon/commit/dd8bd7e3255e0a375e77ea41041c05536860120c))
+
 ## [3.0.4](https://github.com/simonedevit/reactylon/compare/v3.0.3...v3.0.4) (2025-05-15)
 
 
