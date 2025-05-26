@@ -12,6 +12,7 @@ export class TextureHost {
         element.handlers = {
             addChild: TextureHost.addChild,
             commitUpdate: TextureHost.commitUpdate,
+            removeChild: TextureHost.removeChild,
         };
         return element;
     }
