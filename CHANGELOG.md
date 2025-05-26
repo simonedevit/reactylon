@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.0.8](https://github.com/simonedevit/reactylon/compare/v3.0.7...v3.0.8) (2025-05-26)
+
+
+### Bug Fixes
+
+* **reconciler:** pass entity not instance ([3e17c9c](https://github.com/simonedevit/reactylon/commit/3e17c9ca74c7ca3d630cf771dcca18592229a1f5))
+
 ## [3.0.7](https://github.com/simonedevit/reactylon/compare/v3.0.6...v3.0.7) (2025-05-26)
 
 
