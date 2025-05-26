@@ -44,7 +44,7 @@ function removeChild(parentInstance: Instance | RootContainer, child: Instance) 
     const index = parentInstance.children.findIndex(item => item.entity!.uniqueId === child.entity!.uniqueId);
     parentInstance.children.splice(index, 1);
     //@ts-ignore
-    child.entity.handlers?.removeChild?.(parentInstance, child);
+    child.entity.handlers?.removeChild?.(parentInstance.entity, child.entity);
     const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
     child.entity!.dispose?.(false, disposeMaterialsAndTextures);
 }

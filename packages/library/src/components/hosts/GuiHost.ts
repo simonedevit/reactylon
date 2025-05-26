@@ -109,9 +109,10 @@ export class GuiHost {
         }
     }
 
-    static removeChild(parentInstance: BabylonEntity<GuiComponent>, child: BabylonEntity<Control>): void {
-        // ensure that removeControl function exists (parentInstance could be root)
-        parentInstance.removeControl?.(child);
+    static removeChild(parentInstance: BabylonEntity<GuiComponent> | undefined, child: BabylonEntity<Control>): void {
+        if (parentInstance) {
+            parentInstance.removeControl?.(child);
+        }
     }
 
     static prepareUpdate(): UpdatePayload {

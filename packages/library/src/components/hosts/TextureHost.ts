@@ -27,9 +27,9 @@ export class TextureHost {
         }
     }
 
-    static removeChild(parentInstance: BabylonEntity, child: AugmentedTexture): void {
+    static removeChild(parentInstance: BabylonEntity | undefined, child: AugmentedTexture): void {
         const textureType = child.kind;
-        if (textureType in parentInstance) {
+        if (parentInstance && textureType in parentInstance) {
             //@ts-ignore
             parentInstance[textureType] = null;
         }

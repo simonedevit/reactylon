@@ -56,7 +56,7 @@ export type BabylonEntity<T = unknown> = Pick<Node, 'name' | 'uniqueId' | 'dispo
     parent?: unknown;
     handlers?: Partial<{
         addChild(parentInstance: BabylonEntity<T> | RootContainer, child: BabylonEntity<T>): void;
-        removeChild(parentInstance: BabylonEntity<T> | RootContainer, child: BabylonEntity<T>): void;
+        removeChild(parentInstance: BabylonEntity<T> | undefined, child: BabylonEntity<T>): void;
         prepareUpdate(): UpdatePayload;
         commitUpdate(instance: BabylonEntity<T>, updatePayload: UpdatePayload): void;
     }>;
