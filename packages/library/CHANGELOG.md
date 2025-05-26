@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.0.7](https://github.com/simonedevit/reactylon/compare/v3.0.6...v3.0.7) (2025-05-26)
+
+
+### Bug Fixes
+
+* **reconciler:** add removeChild to handlers ([5bf1b12](https://github.com/simonedevit/reactylon/commit/5bf1b121788acd41dc1fbfcf5621ecd557ddcd90))
+
 ## [3.0.6](https://github.com/simonedevit/reactylon/compare/v3.0.5...v3.0.6) (2025-05-26)
 
 
