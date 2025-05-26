@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.0.6](https://github.com/simonedevit/reactylon/compare/v3.0.5...v3.0.6) (2025-05-26)
+
+
+### Bug Fixes
+
+* **reconciler:** unlink texture from material when dispose it ([fbdcb7e](https://github.com/simonedevit/reactylon/commit/fbdcb7eac108c7085fffc4a6b349d8763b765ba5))
+
 ## [3.0.5](https://github.com/simonedevit/reactylon/compare/v3.0.4...v3.0.5) (2025-05-22)
 
 
