@@ -53,3 +53,6 @@ Reactylon is licensed under the MIT License, with the inclusion of other depende
 
 - Babylon.js: Licensed under the Apache License, Version 2.0. For more details, visit the Babylon.js License.
 - React & React Native: Licensed under the MIT License. For more details, visit the React License.
+
+## Acknowledgements
+This project is tested with BrowserStack.
