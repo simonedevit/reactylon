@@ -1,6 +1,6 @@
-# MIT License
+MIT License
 
-Copyright (c) 2024-2025 Simone De Vittorio.
+Copyright (c) 2025 Simone De Vittorio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-
-## Additional Notice for Dependencies:
-
-This project uses Babylon.js, which is licensed under the Apache License, Version 2.0. For more information, please refer to [Babylon.js's License](https://github.com/BabylonJS/Babylon.js/blob/master/license.md).
-
-This project uses React and React Native, which is licensed under the MIT License. For more information, please refer to [React's License](https://github.com/facebook/react/blob/main/LICENSE) and [React Native's License](https://github.com/facebook/react-native/blob/main/LICENSE).
