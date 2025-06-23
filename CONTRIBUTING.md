@@ -48,26 +48,18 @@ Do you have a great idea or a request for a new feature? Please use [Discussions
         ```bash
         npx create-reactylon-app playground
         ```
-    3. Go into _tsconfig.json_ and add to the **compilerOptions** attribute:
-
-        ```json
-        "paths": {
-            "*": [
-              "node_modules/*"
-            ]
-        },
-        ```
-    4. Go into _webpack.config.ts_ and add to **resolve** attribute:
+    3. Go into _webpack.config.ts_ and add to **resolve** attribute:
 
          ```ts
         modules: [path.resolve(__dirname, 'node_modules'), 'node_modules']
          ```
-    5. Move on move _playground_ folder and symlink the Reactylon package by executing the command:
+    4. Move on _playground_ folder and symlink the Reactylon package by executing the command:
 
         ```bash
         cd playground && npm link reactylon
         ```
-    6. Start the live server by executing the command:
+    <a id='linking'></a>
+    5. Start the live server by executing the command:
 
         ```bash
         npm start
@@ -90,6 +82,9 @@ Do you have a great idea or a request for a new feature? Please use [Discussions
 <br/>
 
 (*) If you make changes to _packages/common_ or _packages/generator_, run `npm run build` in the respective directory.
+
+## Troubleshooting
+After [linking](#linking), if you are experiencing TypeScript errors on Reactylon JSX elements (e.g., ```Property 'box' does not exist on type 'JSX.IntrinsicElements'.ts(2339)```), it means that your `@types/react` version is mismatched with Reactylon's `@types/react` version. For module augmentation to work properly, both must use the same version of the library.  To fix this, make sure you have the same `@types/react` version installed in both your playground project and Reactylon. 
 
 ## Development Guidelines
 

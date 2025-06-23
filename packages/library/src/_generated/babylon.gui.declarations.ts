@@ -1,7 +1,7 @@
 
 //@ts-nocheck
-import { type BabylonProps, type ExcludeReadonlyAndPrivate } from '../types/types';
-import { type MeshProps, type GuiProps, type Clonable, type WebXRCameraProps, type TextureProps, type MaterialProps, type CameraProps } from '../types/props';
+import type { BabylonProps, ExcludeReadonlyAndPrivate } from '../types/types';
+import type { MeshProps, GuiProps, Clonable, WebXRCameraProps, TextureProps, MaterialProps, CameraProps } from '../types/props';
 import type { AbstractButton3D } from '@babylonjs/gui';
 import type { AdvancedDynamicTexture } from '@babylonjs/gui';
 import type { AdvancedDynamicTextureInstrumentation } from '@babylonjs/gui';
@@ -78,6 +78,7 @@ import type { Vector3WithInfo } from '@babylonjs/gui';
 import type { VirtualKeyboard } from '@babylonjs/gui';
 import type { VolumeBasedPanel } from '@babylonjs/gui';
 import type { XmlLoader } from '@babylonjs/gui';
+import type { RowProps, ColumnProps } from '../types/props';
     
 export interface JSXElements {
   abstractButton3D: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractButton3D>, {
@@ -418,4 +419,6 @@ name: ConstructorParameters<typeof VolumeBasedPanel>[0];
 parentClass: ConstructorParameters<typeof XmlLoader>[0];
     
     } & GuiProps,XmlLoader>, any>;
+  row: React.DetailedHTMLProps<RowProps, any>;
+  column: React.DetailedHTMLProps<ColumnProps, any>;
 }

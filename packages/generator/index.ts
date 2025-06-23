@@ -40,6 +40,16 @@ type JsxElementsInfo = {
     constructorArguments: Record<string, Array<string>>;
 };
 
+// special elements for Grid layout (these elements are not in BabylonJS)
+function createJsxGridElements(jsxElements: JsxElementsInfo) {
+    const importStatement = `import type { RowProps, ColumnProps } from '../types/props';`;
+    const rowDeclarationStatement = `row: React.DetailedHTMLProps<RowProps, any>;`;
+    const columnDeclarationStatement = `column: React.DetailedHTMLProps<ColumnProps, any>;`;
+
+    jsxElements.imports.push(importStatement);
+    jsxElements.declarations.push(rowDeclarationStatement, columnDeclarationStatement);
+}
+
 async function createJsxBabylonElements(index: string, babylonPackage: BabylonPackages): Promise<JsxElementsInfo> {
     const jsxElements: JsxElementsInfo = {
         imports: [],
@@ -119,6 +129,10 @@ ${props}
         }
     });
     //console.log('Total classes in error: ', classesInError);
+
+    if (babylonPackage === BabylonPackages.GUI) {
+        createJsxGridElements(jsxElements);
+    }
     return jsxElements;
 }
 
@@ -142,8 +156,8 @@ const packages = {
         const jsxElements = await createJsxBabylonElements(index, babylonPackage);
         const declarationsContent = `
 //@ts-nocheck
-import { type BabylonProps, type ExcludeReadonlyAndPrivate } from '../types/types';
-import { type MeshProps, type GuiProps, type Clonable, type WebXRCameraProps, type TextureProps, type MaterialProps, type CameraProps } from '../types/props';
+import type { BabylonProps, ExcludeReadonlyAndPrivate } from '../types/types';
+import type { MeshProps, GuiProps, Clonable, WebXRCameraProps, TextureProps, MaterialProps, CameraProps } from '../types/props';
 ${jsxElements.imports.join('\n')}
     
 export interface JSXElements {

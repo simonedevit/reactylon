@@ -5,7 +5,7 @@ import type { AbstractMesh } from '@babylonjs/core';
 import lodash from 'lodash';
 import { Logger, BabylonPackages, isInstanceOf, builders, CollidingComponents } from '@dvmstudios/reactylon-common';
 import type { UpdatePayload, RootContainer, EngineContext, Instance, BabylonEntity } from '@types';
-import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost /*, TransformNodeHost*/ } from './components/hosts';
+import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost, GridHost /*, TransformNodeHost*/ } from './components/hosts';
 import ObjectUtils from '@utils/ObjectUtils';
 import { BabylonElementsRetrievalMap, EntitiesRequiringParent, TransformKeysMap } from '@constants';
 import type { CoreHostProps, GuiHostProps } from '@props';
@@ -25,9 +25,6 @@ function isParentNeeded(child: BabylonEntity) {
         return false;
     }
     if (isInstanceOf(child, 'BaseTexture')) {
-        return false;
-    }
-    if (isInstanceOf(child, 'HighlightLayer')) {
         return false;
     }
     return true;
@@ -111,7 +108,15 @@ function instantiateBabylonEntity(instance: Instance, parent?: Instance) {
 
     const element = inventory.get(type);
     if (!element) {
-        throw new Error(`${type} not found in inventory`);
+        // row and column are not in the inventory because they are not Babylon.js entities
+        if (type === 'row' || type === 'column') {
+            instance.babylonPackage = BabylonPackages.GUI;
+            // @ts-ignore
+            instance.entity = GridHost.createInstance(type, null, props, rootContainer);
+            return;
+        } else {
+            throw new Error(`${type} not found in inventory`);
+        }
     }
 
     const [Class, babylonPackage] = element;
@@ -179,11 +184,6 @@ function mountBabylonEntity(parent: Instance | RootContainer, child: Instance, i
                         child.entity!.parent = _parent.entity;
                     } catch {
                         // silent error
-                    }
-                } else {
-                    if (isInstanceOf(_parent, 'HighlightLayer')) {
-                        // TODO: reactylon internal purpose for MeshHost
-                        child.entity!.parent = _parent.entity;
                     }
                 }
             }

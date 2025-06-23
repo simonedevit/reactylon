@@ -29,7 +29,7 @@ export type Params = {
 
 type GuiComponent = Pick<Container, 'addControl' | 'removeControl'> & GuiTriggerable;
 
-const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', 'ref', ...Object.keys(GuiTriggers)];
+const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', 'kind', 'createFullscreenUI', 'createForMesh', 'ref', ...Object.keys(GuiTriggers)];
 
 export class GuiHost {
     static createInstance(type: string, Class: any, props: GuiHostProps, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
@@ -104,8 +104,14 @@ export class GuiHost {
         if (isInstanceOf(parentInstance, 'Button3D') && !isInstanceOf(parentInstance, 'HolographicButton')) {
             (parentInstance as unknown as Button3D).content = child;
         } else {
-            // ensure that addControl function exists (parentInstance could be transformNode)
-            parentInstance.addControl?.(child);
+            // @ts-expect-error - linkedGrid is not a part of the Control interface, but it is used in Grid
+            const grid = parentInstance.linkedGrid;
+            if (grid && grid.addControl) {
+                grid.addControl(child, 0, 0);
+            } else {
+                // ensure that addControl function exists (parentInstance could be transformNode)
+                parentInstance.addControl?.(child);
+            }
         }
     }
 

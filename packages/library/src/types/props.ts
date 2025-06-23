@@ -1,6 +1,6 @@
 import type { ActionEvent, HighlightLayer, Node, Observable, Scene, StandardMaterial } from '@babylonjs/core';
 import type { Either } from './types';
-import type { AdvancedDynamicTexture, Vector2WithInfo } from '@babylonjs/gui';
+import type { AdvancedDynamicTexture, Grid, Vector2WithInfo } from '@babylonjs/gui';
 import { ActionManager } from '@babylonjs/core/Actions/actionManager.js';
 
 type TransformType = 'position' | 'rotation' | 'scaling';
@@ -117,7 +117,11 @@ type CreateForMeshOptions = {
     };
 };
 
-export type AdvancedDynamicTextureProps = Either<CreateFullscreeUIOptions, CreateForMeshOptions> & {
+type CreateForMeshProps = CreateForMeshOptions & {
+    name?: string;
+};
+
+export type AdvancedDynamicTextureProps = Either<CreateFullscreeUIOptions, CreateForMeshProps> & {
     kind: 'createFullscreenUI' | 'createForMesh';
 };
 
@@ -153,6 +157,23 @@ export type GuiProps =
     GuiTriggerable & {
         // add here other gui props
     };
+
+type WithChildren<T> = T & {
+    children?: React.ReactNode;
+};
+
+// Grid Layout Props
+export type RowProps = WithChildren<{
+    height: Parameters<Grid['addRowDefinition']>[0];
+    isPixel?: Parameters<Grid['addRowDefinition']>[1];
+}> &
+    GuiProps;
+
+export type ColumnProps = WithChildren<{
+    width: Parameters<Grid['addColumnDefinition']>[0];
+    isPixel?: Parameters<Grid['addColumnDefinition']>[1];
+}> &
+    GuiProps;
 
 // MinimalHostProps don't contain JSXElements[keyof JSXElements] to avoid long TypeScript checking times, but image it like it (useful representation for Host.ts and GuiHost.ts)
 type MinimalHostProps = CommonProps & Pick<Node, 'name'>;

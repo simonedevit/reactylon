@@ -1,5 +1,6 @@
 export { AdvancedDynamicTextureHost } from './AdvancedDynamicTextureHost';
 export { CameraHost } from './CameraHost';
+export { GridHost } from './GridHost';
 export { GuiHost } from './GuiHost';
 export { Host } from './Host';
 export { LightHost } from './LightHost';
