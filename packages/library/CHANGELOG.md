@@ -1,5 +1,18 @@
 # Reactylon - Changelog
 
+## [3.1.0](https://github.com/simonedevit/reactylon/compare/v3.0.8...v3.1.0) (2025-06-23)
+
+
+### Chore
+
+* **general:** change LICENSE.md ([1414d92](https://github.com/simonedevit/reactylon/commit/1414d92c04d785cc9a87280915e5a71acab26ebb))
+* **general:** add BrowserStack disclaimer ([2fcf052](https://github.com/simonedevit/reactylon/commit/2fcf05202654ffe2a5265525c42ac53762198b41))
+
+
+### Features
+
+* **reconciler:** add grid layout ([1ed134e](https://github.com/simonedevit/reactylon/commit/1ed134ecbacc1b03bc85d1bfad2ecb95ff5411af))
+
 ## [3.0.8](https://github.com/simonedevit/reactylon/compare/v3.0.7...v3.0.8) (2025-05-26)
 
 
