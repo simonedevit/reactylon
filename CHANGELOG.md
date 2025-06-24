@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.1.1](https://github.com/simonedevit/reactylon/compare/v3.1.0...v3.1.1) (2025-06-24)
+
+
+### Bug Fixes
+
+* **reconciler:** manage specular adding/removing ([46f81fb](https://github.com/simonedevit/reactylon/commit/46f81fbd7861b79aa69cbdc50f56820a6b3d1d52))
+
 ## [3.1.0](https://github.com/simonedevit/reactylon/compare/v3.0.8...v3.1.0) (2025-06-23)
 
 
