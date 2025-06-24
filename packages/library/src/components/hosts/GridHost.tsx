@@ -6,16 +6,8 @@ import { inventory } from '../../core/inventory';
 import type { Vector2WithInfo } from '@babylonjs/gui';
 import type { Observable } from '@babylonjs/core';
 
-type GridElement = {
-    type: 'row' | 'column';
-    index: number;
-    props: React.PropsWithChildren<RowProps | ColumnProps>;
-    linkedGrid: GridType;
-    parent: BabylonEntity<GridType> | GridElement;
-};
-
 type GridConstructor = {
-    new (...args: any[]): GridType;
+    new (...args: any[]): any;
 };
 
 function handleEvents(props: RowProps | ColumnProps, element: any) {
@@ -29,67 +21,75 @@ function handleEvents(props: RowProps | ColumnProps, element: any) {
     });
 }
 
-export class GridHost {
-    static createInstance(type: string, Class: any, props: RowProps | ColumnProps, rootContainer: RootContainer) {
-        const Grid = inventory.get('grid')?.[0] as GridConstructor;
-        const nestedGrid: GridType = new Grid();
+type AugmentedGrid = BabylonEntity<
+    GridType & {
+        type: 'row' | 'column';
+        props: RowProps | ColumnProps;
+        siblingIndex: number;
+    }
+>;
 
-        const element = {
-            linkedGrid: nestedGrid,
-            type,
-            index: -1,
-            props,
-            handlers: {
-                addChild: GridHost.addChild,
-                removeChild: GridHost.removeChild,
-                commitUpdate: GridHost.commitUpdate,
-            },
-            parent: null,
+export class GridHost {
+    static createInstance(type: 'row' | 'column', Class: any, props: RowProps | ColumnProps, rootContainer: RootContainer) {
+        const scene = rootContainer.scene;
+
+        const Grid = inventory.get('grid')?.[0] as GridConstructor;
+        const nestedGrid = new Grid();
+        nestedGrid.uniqueId = scene.getUniqueId();
+
+        nestedGrid.type = type;
+        nestedGrid.props = props;
+        nestedGrid.handlers = {
+            addChild: GridHost.addChild,
+            removeChild: GridHost.removeChild,
+            commitUpdate: GridHost.commitUpdate,
         };
+        nestedGrid.parent = null;
 
         handleEvents(props, nestedGrid);
-        return element;
+
+        return nestedGrid;
     }
 
-    static addChild(parentInstance: BabylonEntity<GridType> | GridElement, child: GridElement): void {
+    static addChild(parentInstance: AugmentedGrid | BabylonEntity<GridType>, child: AugmentedGrid, context: any): void {
         const { type, props } = child;
         const { isPixel } = props;
+        const { siblingIndex } = context;
 
-        const grid: GridType = (parentInstance as GridElement).linkedGrid ?? parentInstance;
-        const parentName = grid.name || 'grid';
+        const parentName = parentInstance.name || 'grid';
 
         if (type === 'row') {
             const { height } = props as RowProps;
-            grid.addRowDefinition(height, isPixel);
 
-            const rowIndex = grid.rowCount - 1;
-            child.linkedGrid.name = `${parentName}-row-${rowIndex}`;
-            grid.addControl(child.linkedGrid, rowIndex, 0);
+            parentInstance.addRowDefinition(height, isPixel);
 
-            child.index = rowIndex;
-        } else if (type === 'column') {
+            const rowIndex = siblingIndex;
+            child.name = `${parentName}-row-${rowIndex}`;
+            parentInstance.addControl(child, rowIndex, 0);
+        } else {
             const { width } = props as ColumnProps;
-            grid.addColumnDefinition(width, isPixel);
+            parentInstance.addColumnDefinition(width, isPixel);
 
-            const colIndex = grid.columnCount - 1;
-            child.linkedGrid.name = `${parentName}-col-${colIndex}`;
-            grid.addControl(child.linkedGrid, 0, colIndex);
-
-            child.index = colIndex;
+            const colIndex = siblingIndex;
+            child.name = `${parentName}-col-${colIndex}`;
+            parentInstance.addControl(child, 0, colIndex);
         }
 
-        // save parent to operate on it in commitUpdate
+        // info for in commitUpdate
         child.parent = parentInstance;
+        child.siblingIndex = siblingIndex;
     }
 
-    static removeChild(parentInstance: BabylonEntity<GridType> | GridElement, child: GridElement): void {
-        const { type, index } = child;
-        const grid: GridType = (parentInstance as GridElement).linkedGrid ?? parentInstance;
+    static removeChild(parentInstance: AugmentedGrid | BabylonEntity<GridType>, child: AugmentedGrid, context: any): void {
+        const { type } = child;
+        const { siblingIndex } = context;
+
+        parentInstance.removeControl(child);
 
         if (type === 'row') {
-            grid.removeRowDefinition(index);
+            parentInstance.removeRowDefinition(siblingIndex);
         } else if (type === 'column') {
-            grid.removeColumnDefinition(index);
+            parentInstance.removeColumnDefinition(siblingIndex);
         }
     }
 
@@ -97,18 +97,18 @@ export class GridHost {
         return {};
     }
 
-    static commitUpdate(instance: GridElement, updatePayload: UpdatePayload): void {
-        const { type, index, parent } = instance;
+    static commitUpdate(instance: AugmentedGrid, updatePayload: UpdatePayload): void {
+        const { type, siblingIndex, parent } = instance;
         const { isPixel } = updatePayload as RowProps | ColumnProps;
 
-        const grid: GridType = (parent as GridElement).linkedGrid ?? parent;
+        const grid = parent as AugmentedGrid | BabylonEntity<GridType>;
 
         if (type === 'row') {
             const { height } = updatePayload as RowProps;
-            grid.setRowDefinition(index, height, isPixel);
+            grid.setRowDefinition(siblingIndex, height, isPixel);
         } else if (type === 'column') {
             const { width } = updatePayload as ColumnProps;
-            grid.setColumnDefinition(index, width, isPixel);
+            grid.setColumnDefinition(siblingIndex, width, isPixel);
         }
     }
 }

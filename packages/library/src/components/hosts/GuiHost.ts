@@ -4,7 +4,7 @@ import { type GuiHostProps, type GuiTriggerable, GuiTriggers } from '@props';
 import { TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
 import guiConstructors from '../../_generated/babylon.gui.constructors';
-import type { Vector2WithInfo, GUI3DManager, Control, Container, Button3D } from '@babylonjs/gui';
+import type { Vector2WithInfo, GUI3DManager, Control, Container, Button3D, Grid } from '@babylonjs/gui';
 import type { Observable } from '@babylonjs/core';
 
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
@@ -104,10 +104,9 @@ export class GuiHost {
         if (isInstanceOf(parentInstance, 'Button3D') && !isInstanceOf(parentInstance, 'HolographicButton')) {
             (parentInstance as unknown as Button3D).content = child;
         } else {
-            // @ts-expect-error - linkedGrid is not a part of the Control interface, but it is used in Grid
-            const grid = parentInstance.linkedGrid;
-            if (grid && grid.addControl) {
-                grid.addControl(child, 0, 0);
+            // @ts-expect-error - type is not a part of Grid
+            if (parentInstance.type === 'row' || parentInstance.type === 'column') {
+                (parentInstance as Grid).addControl?.(child, 0, 0);
             } else {
                 // ensure that addControl function exists (parentInstance could be transformNode)
                 parentInstance.addControl?.(child);

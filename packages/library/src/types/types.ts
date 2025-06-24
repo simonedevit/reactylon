@@ -55,8 +55,8 @@ export type BabylonProps<Props, ConstructorProps, Element> = {
 export type BabylonEntity<T = unknown> = Pick<Node, 'name' | 'uniqueId' | 'dispose'> & {
     parent?: unknown;
     handlers?: Partial<{
-        addChild(parentInstance: BabylonEntity<T> | RootContainer, child: BabylonEntity<T>): void;
-        removeChild(parentInstance: BabylonEntity<T> | undefined, child: BabylonEntity<T>): void;
+        addChild(parentInstance: BabylonEntity<T> | RootContainer, child: BabylonEntity<T>, context?: any): void;
+        removeChild(parentInstance: BabylonEntity<T> | undefined, child: BabylonEntity<T>, context?: any): void;
         prepareUpdate(): UpdatePayload;
         commitUpdate(instance: BabylonEntity<T>, updatePayload: UpdatePayload): void;
     }>;

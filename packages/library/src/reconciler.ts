@@ -41,7 +41,7 @@ function removeChild(parentInstance: Instance | RootContainer, child: Instance) 
     const index = parentInstance.children.findIndex(item => item.entity!.uniqueId === child.entity!.uniqueId);
     parentInstance.children.splice(index, 1);
     //@ts-ignore
-    child.entity.handlers?.removeChild?.(parentInstance.entity, child.entity);
+    child.entity.handlers?.removeChild?.(parentInstance.entity, child.entity, { siblingIndex: index });
     const disposeMaterialsAndTextures = shouldDisposeMaterialsAndTextures(child);
     child.entity!.dispose?.(false, disposeMaterialsAndTextures);
 }
@@ -176,8 +176,15 @@ function mountBabylonEntity(parent: Instance | RootContainer, child: Instance, i
                 instantiateBabylonEntity(_parent);
             }
 
+            let siblingIndex = -1;
+            try {
+                siblingIndex = parent.children.findIndex(item => item.entity!.uniqueId === child.entity!.uniqueId);
+            } catch (error) {
+                // silent error
+            }
+
             // TODO: decouple handlers and Babylon.js entity
-            child.entity!.handlers?.addChild?.(_parent.entity!, child.entity!);
+            child.entity!.handlers?.addChild?.(_parent.entity!, child.entity!, { siblingIndex });
             if (child.babylonPackage === BabylonPackages.CORE) {
                 if (isParentNeeded(child.entity!)) {
                     try {
