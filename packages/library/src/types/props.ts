@@ -158,22 +158,16 @@ export type GuiProps =
         // add here other gui props
     };
 
-type WithChildren<T> = T & {
-    children?: React.ReactNode;
-};
-
 // Grid Layout Props
-export type RowProps = WithChildren<{
+export type RowProps = {
     height: Parameters<Grid['addRowDefinition']>[0];
     isPixel?: Parameters<Grid['addRowDefinition']>[1];
-}> &
-    GuiProps;
+} & GuiProps;
 
-export type ColumnProps = WithChildren<{
+export type ColumnProps = {
     width: Parameters<Grid['addColumnDefinition']>[0];
     isPixel?: Parameters<Grid['addColumnDefinition']>[1];
-}> &
-    GuiProps;
+} & GuiProps;
 
 // MinimalHostProps don't contain JSXElements[keyof JSXElements] to avoid long TypeScript checking times, but image it like it (useful representation for Host.ts and GuiHost.ts)
 type MinimalHostProps = CommonProps & Pick<Node, 'name'>;

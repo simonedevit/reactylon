@@ -29,6 +29,8 @@ type AugmentedGrid = BabylonEntity<
     }
 >;
 
+const excludedProps = ['children', 'ref', 'height', 'width', 'isPixel', ...Object.keys(GuiTriggers)];
+
 export class GridHost {
     static createInstance(type: 'row' | 'column', Class: any, props: RowProps | ColumnProps, rootContainer: RootContainer) {
         const scene = rootContainer.scene;
@@ -45,6 +47,15 @@ export class GridHost {
             commitUpdate: GridHost.commitUpdate,
         };
         nestedGrid.parent = null;
+
+        // mainly styling purpose
+        Object.keys(props)
+            .filter(propName => !excludedProps.includes(propName))
+            .forEach(_key => {
+                const key = _key as keyof (RowProps | ColumnProps);
+                const value = props[key];
+                nestedGrid[key] = value;
+            });
 
         handleEvents(props, nestedGrid);
 

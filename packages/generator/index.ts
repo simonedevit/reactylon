@@ -43,8 +43,8 @@ type JsxElementsInfo = {
 // special elements for Grid layout (these elements are not in BabylonJS)
 function createJsxGridElements(jsxElements: JsxElementsInfo) {
     const importStatement = `import type { RowProps, ColumnProps } from '../types/props';`;
-    const rowDeclarationStatement = `row: React.DetailedHTMLProps<RowProps, any>;`;
-    const columnDeclarationStatement = `column: React.DetailedHTMLProps<ColumnProps, any>;`;
+    const rowDeclarationStatement = `row: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Container>,RowProps,Grid>, any>;`;
+    const columnDeclarationStatement = `column: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Container>,ColumnProps,Grid>, any>;`;
 
     jsxElements.imports.push(importStatement);
     jsxElements.declarations.push(rowDeclarationStatement, columnDeclarationStatement);

@@ -419,6 +419,6 @@ name: ConstructorParameters<typeof VolumeBasedPanel>[0];
 parentClass: ConstructorParameters<typeof XmlLoader>[0];
     
     } & GuiProps,XmlLoader>, any>;
-  row: React.DetailedHTMLProps<RowProps, any>;
-  column: React.DetailedHTMLProps<ColumnProps, any>;
+  row: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Container>,RowProps,Grid>, any>;
+  column: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Container>,ColumnProps,Grid>, any>;
 }
