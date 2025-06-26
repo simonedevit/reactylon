@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.1.2](https://github.com/simonedevit/reactylon/compare/v3.1.1...v3.1.2) (2025-06-26)
+
+
+### Bug Fixes
+
+* **reconciler:** augment row/column with container props ([e2ebcbb](https://github.com/simonedevit/reactylon/commit/e2ebcbb6c78905a5c05ac7f98063ce3a63403aa9))
+
 ## [3.1.1](https://github.com/simonedevit/reactylon/compare/v3.1.0...v3.1.1) (2025-06-24)
 
 
