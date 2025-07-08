@@ -14,7 +14,7 @@ const ConstructorsMap: Record<string, Array<string>> = {
    control3D: ["name"],
    cylinderPanel: [],
    displayGrid: ["name"],
-   ellipse: ["name"],
+   ellipse2D: ["name"],
    fluentBackplateMaterial: ["name","scene"],
    fluentButtonMaterial: ["name","scene"],
    fluentMaterial: ["name","scene"],

@@ -142,7 +142,7 @@ name: ConstructorParameters<typeof Control3D>[0];
 name: ConstructorParameters<typeof DisplayGrid>[0];
     
     } & GuiProps,DisplayGrid>, any>;
-  ellipse: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Ellipse> & Clonable, {
+  ellipse2D: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Ellipse> & Clonable, {
 name: ConstructorParameters<typeof Ellipse>[0];
     
     } & GuiProps,Ellipse>, any>;

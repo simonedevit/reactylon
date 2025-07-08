@@ -137,6 +137,7 @@ export const CollidingComponents: Record<string, string> = {
     // GUI
     button2D: 'button',
     image2D: 'image',
+    ellipse2D: 'ellipse',
     // CORE
     text3D: 'text',
     polygon3D: 'polygon',
