@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.1.3](https://github.com/simonedevit/reactylon/compare/v3.1.2...v3.1.3) (2025-07-08)
+
+
+### Bug Fixes
+
+* **jsx-elements:** add ellipse2D component ([c6d28ad](https://github.com/simonedevit/reactylon/commit/c6d28ad8767f5ba17ccf7324ec252f455071de8d))
+
 ## [3.1.2](https://github.com/simonedevit/reactylon/compare/v3.1.1...v3.1.2) (2025-06-26)
 
 
