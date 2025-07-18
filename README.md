@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://www.reactylon.com">
-      <img height="170" alt="Reactylon" src="https://www.reactylon.com/logo.svg">
+      <img height="250" width="250" alt="Reactylon" src="https://www.reactylon.com/logo.svg">
   </a>
   <h1>Reactylon</h1>
 </div>
