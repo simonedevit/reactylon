@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.1.4](https://github.com/simonedevit/reactylon/compare/v3.1.3...v3.1.4) (2025-07-18)
+
+
+### Documentation
+
+* **general:** update logo's size ([f2f03f8](https://github.com/simonedevit/reactylon/commit/f2f03f803303d9bccd12bfa702b48faa4a49d895))
+
 ## [3.1.3](https://github.com/simonedevit/reactylon/compare/v3.1.2...v3.1.3) (2025-07-08)
 
 
