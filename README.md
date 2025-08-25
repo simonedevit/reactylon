@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://www.reactylon.com">
+  <a href="https://www.reactylon.com/docs">
       <img height="250" width="250" alt="Reactylon" src="https://www.reactylon.com/logo.svg">
   </a>
   <h1>Reactylon</h1>
@@ -35,7 +35,7 @@ Welcome to **Reactylon**, a powerful multiplatform framework built on top of Bab
 - **Enhanced React Integration**: Deep React integration allows for easy state management, component composition, and hooks, ensuring a seamless development experience that leverages React’s full power in 3D rendering.
 
 ## Documentation
-You can find the interactive Reactylon documentation on [reactylon.com](https://www.reactylon.com).
+You can find the interactive Reactylon documentation on [reactylon.com](https://www.reactylon.com/docs).
 
 Check out the [Getting Started](https://www.reactylon.com/docs/getting-started) page for a quick overview.
 
