@@ -1,5 +1,17 @@
 # Reactylon - Changelog
 
+## [3.1.5](https://github.com/simonedevit/reactylon/compare/v3.1.4...v3.1.5) (2025-08-30)
+
+
+### Chore
+
+* **general:** update dependencies ([016a2ff](https://github.com/simonedevit/reactylon/commit/016a2ff1a81a3c2d5808275ca8b6476c643b0a2a))
+
+
+### Documentation
+
+* **general:** redirect to doc page ([b898956](https://github.com/simonedevit/reactylon/commit/b898956d4e57064665b619eaf819ffdb17deaa31))
+
 ## [3.1.4](https://github.com/simonedevit/reactylon/compare/v3.1.3...v3.1.4) (2025-07-18)
 
 
