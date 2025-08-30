@@ -8,6 +8,7 @@ import type { AbstractAssetContainer } from '@babylonjs/core';
 import type { AbstractAssetTask } from '@babylonjs/core';
 import type { AbstractAudioBus } from '@babylonjs/core';
 import type { AbstractAudioNode } from '@babylonjs/core';
+import type { AbstractAudioOutNode } from '@babylonjs/core';
 import type { AbstractEngine } from '@babylonjs/core';
 import type { AbstractMesh } from '@babylonjs/core';
 import type { AbstractNamedAudioNode } from '@babylonjs/core';
@@ -24,8 +25,10 @@ import type { AddParser } from '@babylonjs/core';
 import type { AddRayExtensions } from '@babylonjs/core';
 import type { AdvancedTimer } from '@babylonjs/core';
 import type { AggregatorBlock } from '@babylonjs/core';
+import type { AlignAngleBlock } from '@babylonjs/core';
 import type { AlignBlock } from '@babylonjs/core';
 import type { AlphaState } from '@babylonjs/core';
+import type { AmbientOcclusionBlock } from '@babylonjs/core';
 import type { AmmoJSPlugin } from '@babylonjs/core';
 import type { AnaglyphArcRotateCamera } from '@babylonjs/core';
 import type { AnaglyphFreeCamera } from '@babylonjs/core';
@@ -83,6 +86,7 @@ import type { BaseCameraPointersInput } from '@babylonjs/core';
 import type { BaseParticleSystem } from '@babylonjs/core';
 import type { BaseSixDofDragBehavior } from '@babylonjs/core';
 import type { BaseTexture } from '@babylonjs/core';
+import type { BasicColorUpdateBlock } from '@babylonjs/core';
 import type { BasicPositionUpdateBlock } from '@babylonjs/core';
 import type { BasicSpriteUpdateBlock } from '@babylonjs/core';
 import type { BezierCurveEase } from '@babylonjs/core';
@@ -139,6 +143,8 @@ import type { ClipPlanesBlock } from '@babylonjs/core';
 import type { ClipboardInfo } from '@babylonjs/core';
 import type { CloudBlock } from '@babylonjs/core';
 import type { CloudPoint } from '@babylonjs/core';
+import type { ClusteredLightContainer } from '@babylonjs/core';
+import type { ClusteredLightingSceneComponent } from '@babylonjs/core';
 import type { Collider } from '@babylonjs/core';
 import type { Color3 } from '@babylonjs/core';
 import type { Color3Gradient } from '@babylonjs/core';
@@ -166,6 +172,7 @@ import type { ConditionalBlock } from '@babylonjs/core';
 import type { ConeDirectedParticleEmitter } from '@babylonjs/core';
 import type { ConeParticleEmitter } from '@babylonjs/core';
 import type { ContainerAssetTask } from '@babylonjs/core';
+import type { ConvertToNodeParticleSystemSetAsync } from '@babylonjs/core';
 import type { ConvolutionPostProcess } from '@babylonjs/core';
 import type { CopyFloatData } from '@babylonjs/core';
 import type { CopyMatrixToArray } from '@babylonjs/core';
@@ -248,6 +255,7 @@ import type { CreateTorusKnot } from '@babylonjs/core';
 import type { CreateTorusKnotVertexData } from '@babylonjs/core';
 import type { CreateTorusVertexData } from '@babylonjs/core';
 import type { CreateTube } from '@babylonjs/core';
+import type { CreateUtilityLayerRenderer } from '@babylonjs/core';
 import type { CrossBlock } from '@babylonjs/core';
 import type { CubeTexture } from '@babylonjs/core';
 import type { CubeTextureAssetTask } from '@babylonjs/core';
@@ -291,6 +299,7 @@ import type { DepthReducer } from '@babylonjs/core';
 import type { DepthRenderer } from '@babylonjs/core';
 import type { DepthRendererSceneComponent } from '@babylonjs/core';
 import type { DepthSortedParticle } from '@babylonjs/core';
+import type { DepthSourceBlock } from '@babylonjs/core';
 import type { DerivativeBlock } from '@babylonjs/core';
 import type { DesaturateBlock } from '@babylonjs/core';
 import type { DetailMapConfiguration } from '@babylonjs/core';
@@ -347,6 +356,8 @@ import type { FactorGradient } from '@babylonjs/core';
 import type { FadeInOutBehavior } from '@babylonjs/core';
 import type { FilesInput } from '@babylonjs/core';
 import type { FilterPostProcess } from '@babylonjs/core';
+import type { FindMainCamera } from '@babylonjs/core';
+import type { FindMainObjectRenderer } from '@babylonjs/core';
 import type { FixFlippedFaces } from '@babylonjs/core';
 import type { FlowGraph } from '@babylonjs/core';
 import type { FlowGraphAbsBlock } from '@babylonjs/core';
@@ -739,6 +750,7 @@ import type { LatticeBlock } from '@babylonjs/core';
 import type { LatticePluginMaterial } from '@babylonjs/core';
 import type { Layer } from '@babylonjs/core';
 import type { LayerSceneComponent } from '@babylonjs/core';
+import type { Lazy } from '@babylonjs/core';
 import type { LengthBlock } from '@babylonjs/core';
 import type { LensFlare } from '@babylonjs/core';
 import type { LensFlareSystem } from '@babylonjs/core';
@@ -775,6 +787,7 @@ import type { MaterialIridescenceDefines } from '@babylonjs/core';
 import type { MaterialPluginBase } from '@babylonjs/core';
 import type { MaterialPluginManager } from '@babylonjs/core';
 import type { MaterialSheenDefines } from '@babylonjs/core';
+import type { MaterialStencilState } from '@babylonjs/core';
 import type { MaterialSubSurfaceDefines } from '@babylonjs/core';
 import type { MathBlock } from '@babylonjs/core';
 import type { Matrix } from '@babylonjs/core';
@@ -794,6 +807,7 @@ import type { MeshDebugPluginMaterial } from '@babylonjs/core';
 import type { MeshExploder } from '@babylonjs/core';
 import type { MeshLODLevel } from '@babylonjs/core';
 import type { MeshParticleEmitter } from '@babylonjs/core';
+import type { MeshShapeBlock } from '@babylonjs/core';
 import type { MeshUVSpaceRenderer } from '@babylonjs/core';
 import type { MeshoptCompression } from '@babylonjs/core';
 import type { MinBlock } from '@babylonjs/core';
@@ -1063,7 +1077,6 @@ import type { Ragdoll } from '@babylonjs/core';
 import type { RandomBlock } from '@babylonjs/core';
 import type { RandomGUID } from '@babylonjs/core';
 import type { RandomNumberBlock } from '@babylonjs/core';
-import type { RandomRangeBlock } from '@babylonjs/core';
 import type { RawCubeTexture } from '@babylonjs/core';
 import type { RawTexture } from '@babylonjs/core';
 import type { RawTexture2DArray } from '@babylonjs/core';
@@ -1233,6 +1246,7 @@ import type { SystemBlock } from '@babylonjs/core';
 import type { TAARenderingPipeline } from '@babylonjs/core';
 import type { TBNBlock } from '@babylonjs/core';
 import type { TargetCamera } from '@babylonjs/core';
+import type { TargetedAnimation } from '@babylonjs/core';
 import type { TeleportInBlock } from '@babylonjs/core';
 import type { TeleportOutBlock } from '@babylonjs/core';
 import type { TestBase64DataUrl } from '@babylonjs/core';
@@ -1291,7 +1305,9 @@ import type { UniformBuffer } from '@babylonjs/core';
 import type { UniversalCamera } from '@babylonjs/core';
 import type { UnregisterAllMaterialPlugins } from '@babylonjs/core';
 import type { UnregisterMaterialPlugin } from '@babylonjs/core';
+import type { UpdateAgeBlock } from '@babylonjs/core';
 import type { UpdateAngleBlock } from '@babylonjs/core';
+import type { UpdateAttractorBlock } from '@babylonjs/core';
 import type { UpdateColorBlock } from '@babylonjs/core';
 import type { UpdateDirectionBlock } from '@babylonjs/core';
 import type { UpdateFlowMapBlock } from '@babylonjs/core';
@@ -1303,7 +1319,6 @@ import type { UploadEnvLevelsAsync } from '@babylonjs/core';
 import type { UploadEnvSpherical } from '@babylonjs/core';
 import type { UploadIrradianceLevelsAsync } from '@babylonjs/core';
 import type { UploadRadianceLevelsAsync } from '@babylonjs/core';
-import type { UtilityLayerRenderer } from '@babylonjs/core';
 import type { VRCameraMetrics } from '@babylonjs/core';
 import type { VRDeviceOrientationArcRotateCamera } from '@babylonjs/core';
 import type { VRDeviceOrientationFreeCamera } from '@babylonjs/core';
@@ -1505,6 +1520,12 @@ engine: ConstructorParameters<typeof AbstractAudioNode>[0];
     nodeType: ConstructorParameters<typeof AbstractAudioNode>[1];
     
     },AbstractAudioNode>, any>;
+  abstractAudioOutNode: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractAudioOutNode>, {
+name: ConstructorParameters<typeof AbstractAudioOutNode>[0];
+    engine: ConstructorParameters<typeof AbstractAudioOutNode>[1];
+    nodeType: ConstructorParameters<typeof AbstractAudioOutNode>[2];
+    
+    },AbstractAudioOutNode>, any>;
   abstractEngine: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AbstractEngine>, {
 antialias: ConstructorParameters<typeof AbstractEngine>[0];
     options: ConstructorParameters<typeof AbstractEngine>[1];
@@ -1582,11 +1603,22 @@ options: ConstructorParameters<typeof AdvancedTimer>[0];
 name: ConstructorParameters<typeof AggregatorBlock>[0];
     
     },AggregatorBlock>, any>;
+  alignAngleBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AlignAngleBlock> & Clonable, {
+name: ConstructorParameters<typeof AlignAngleBlock>[0];
+    
+    },AlignAngleBlock>, any>;
   alignBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AlignBlock> & Clonable, {
 name: ConstructorParameters<typeof AlignBlock>[0];
     
     },AlignBlock>, any>;
-  alphaState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AlphaState>, {},AlphaState>, any>;
+  alphaState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AlphaState>, {
+_supportBlendParametersPerTarget: ConstructorParameters<typeof AlphaState>[0];
+    
+    },AlphaState>, any>;
+  ambientOcclusionBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AmbientOcclusionBlock> & Clonable, {
+name: ConstructorParameters<typeof AmbientOcclusionBlock>[0];
+    
+    },AmbientOcclusionBlock>, any>;
   ammoJSPlugin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AmmoJSPlugin>, {
 _useDeltaForWorldStep: ConstructorParameters<typeof AmmoJSPlugin>[0];
     ammoInjection: ConstructorParameters<typeof AmmoJSPlugin>[1];
@@ -1892,6 +1924,10 @@ sceneOrEngine: ConstructorParameters<typeof BaseTexture>[0];
     internalTexture: ConstructorParameters<typeof BaseTexture>[1];
     
     },BaseTexture>, any>;
+  basicColorUpdateBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BasicColorUpdateBlock> & Clonable, {
+name: ConstructorParameters<typeof BasicColorUpdateBlock>[0];
+    
+    },BasicColorUpdateBlock>, any>;
   basicPositionUpdateBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<BasicPositionUpdateBlock> & Clonable, {
 name: ConstructorParameters<typeof BasicPositionUpdateBlock>[0];
     
@@ -2231,6 +2267,16 @@ particleIndex: ConstructorParameters<typeof CloudPoint>[0];
     pcs: ConstructorParameters<typeof CloudPoint>[4];
     
     },CloudPoint>, any>;
+  clusteredLightContainer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ClusteredLightContainer> & Clonable, {
+name: ConstructorParameters<typeof ClusteredLightContainer>[0];
+    lights: ConstructorParameters<typeof ClusteredLightContainer>[1];
+    scene: ConstructorParameters<typeof ClusteredLightContainer>[2];
+    
+    },ClusteredLightContainer>, any>;
+  clusteredLightingSceneComponent: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ClusteredLightingSceneComponent>, {
+scene: ConstructorParameters<typeof ClusteredLightingSceneComponent>[0];
+    
+    },ClusteredLightingSceneComponent>, any>;
   collider: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Collider>, {},Collider>, any>;
   color3: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Color3> & Clonable, {
 r: ConstructorParameters<typeof Color3>[0];
@@ -2376,6 +2422,11 @@ name: ConstructorParameters<typeof ContainerAssetTask>[0];
     extension: ConstructorParameters<typeof ContainerAssetTask>[4];
     
     },ContainerAssetTask>, any>;
+  convertToNodeParticleSystemSetAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ConvertToNodeParticleSystemSetAsync>> & MeshProps, {
+        name: Parameters<typeof ConvertToNodeParticleSystemSetAsync>[0];
+    particleSystems: Parameters<typeof ConvertToNodeParticleSystemSetAsync>[1];
+    
+            },ReturnType<typeof ConvertToNodeParticleSystemSetAsync>>, any>;
   convolutionPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ConvolutionPostProcess> & Clonable, {
 name: ConstructorParameters<typeof ConvolutionPostProcess>[0];
     kernel: ConstructorParameters<typeof ConvolutionPostProcess>[1];
@@ -2887,6 +2938,11 @@ name: ConstructorParameters<typeof CreateParticleBlock>[0];
     scene: Parameters<typeof CreateTube>[2];
     
             },ReturnType<typeof CreateTube>>, any>;
+  utilityLayerRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreateUtilityLayerRenderer>> & MeshProps, {
+        frameFraph: Parameters<typeof CreateUtilityLayerRenderer>[0];
+    handleEvents: Parameters<typeof CreateUtilityLayerRenderer>[1];
+    
+            },ReturnType<typeof CreateUtilityLayerRenderer>>, any>;
   crossBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CrossBlock> & Clonable, {
 name: ConstructorParameters<typeof CrossBlock>[0];
     
@@ -3109,6 +3165,10 @@ idx: ConstructorParameters<typeof DepthSortedParticle>[0];
     materialIndex: ConstructorParameters<typeof DepthSortedParticle>[3];
     
     },DepthSortedParticle>, any>;
+  depthSourceBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DepthSourceBlock> & Clonable, {
+name: ConstructorParameters<typeof DepthSourceBlock>[0];
+    
+    },DepthSourceBlock>, any>;
   derivativeBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DerivativeBlock> & Clonable, {
 name: ConstructorParameters<typeof DerivativeBlock>[0];
     
@@ -3416,6 +3476,14 @@ name: ConstructorParameters<typeof FilterPostProcess>[0];
     reusable: ConstructorParameters<typeof FilterPostProcess>[6];
     
     },FilterPostProcess>, any>;
+  findMainCamera: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof FindMainCamera>> & MeshProps, {
+        frameGraph: Parameters<typeof FindMainCamera>[0];
+    
+            },ReturnType<typeof FindMainCamera>>, any>;
+  findMainObjectRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof FindMainObjectRenderer>> & MeshProps, {
+        frameGraph: Parameters<typeof FindMainObjectRenderer>[0];
+    
+            },ReturnType<typeof FindMainObjectRenderer>>, any>;
   fixFlippedFaces: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof FixFlippedFaces>> & MeshProps, {
         positions: Parameters<typeof FixFlippedFaces>[0];
     indices: Parameters<typeof FixFlippedFaces>[1];
@@ -5209,6 +5277,10 @@ name: ConstructorParameters<typeof Layer>[0];
 scene: ConstructorParameters<typeof LayerSceneComponent>[0];
     
     },LayerSceneComponent>, any>;
+  lazy: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Lazy>, {
+factory: ConstructorParameters<typeof Lazy>[0];
+    
+    },Lazy>, any>;
   lengthBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<LengthBlock> & Clonable, {
 name: ConstructorParameters<typeof LengthBlock>[0];
     
@@ -5362,6 +5434,7 @@ material: ConstructorParameters<typeof MaterialPluginManager>[0];
     
     },MaterialPluginManager>, any>;
   materialSheenDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialSheenDefines>, {},MaterialSheenDefines>, any>;
+  materialStencilState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialStencilState>, {},MaterialStencilState>, any>;
   materialSubSurfaceDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MaterialSubSurfaceDefines>, {},MaterialSubSurfaceDefines>, any>;
   mathBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MathBlock> & Clonable, {
 name: ConstructorParameters<typeof MathBlock>[0];
@@ -5441,6 +5514,10 @@ distanceOrScreenCoverage: ConstructorParameters<typeof MeshLODLevel>[0];
 mesh: ConstructorParameters<typeof MeshParticleEmitter>[0];
     
     },MeshParticleEmitter>, any>;
+  meshShapeBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MeshShapeBlock> & Clonable, {
+name: ConstructorParameters<typeof MeshShapeBlock>[0];
+    
+    },MeshShapeBlock>, any>;
   meshUVSpaceRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MeshUVSpaceRenderer>, {
 mesh: ConstructorParameters<typeof MeshUVSpaceRenderer>[0];
     scene: ConstructorParameters<typeof MeshUVSpaceRenderer>[1];
@@ -5665,7 +5742,7 @@ name: ConstructorParameters<typeof NodeParticleConnectionPoint>[0];
     direction: ConstructorParameters<typeof NodeParticleConnectionPoint>[2];
     
     },NodeParticleConnectionPoint>, any>;
-  nodeParticleSystemSet: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeParticleSystemSet>, {
+  nodeParticleSystemSet: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeParticleSystemSet> & Clonable, {
 name: ConstructorParameters<typeof NodeParticleSystemSet>[0];
     
     },NodeParticleSystemSet>, any>;
@@ -6792,6 +6869,8 @@ actionManager: ConstructorParameters<typeof PredicateCondition>[0];
     alphaTest: Parameters<typeof PrepareDefinesForMisc>[5];
     defines: Parameters<typeof PrepareDefinesForMisc>[6];
     applyDecalAfterDetail: Parameters<typeof PrepareDefinesForMisc>[7];
+    useVertexPulling: Parameters<typeof PrepareDefinesForMisc>[8];
+    renderingMesh: Parameters<typeof PrepareDefinesForMisc>[9];
     
             },ReturnType<typeof PrepareDefinesForMisc>>, any>;
   prepareDefinesForMorphTargets: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForMorphTargets>> & MeshProps, {
@@ -6830,6 +6909,7 @@ actionManager: ConstructorParameters<typeof PredicateCondition>[0];
     uniformBuffersList: Parameters<typeof PrepareUniformsAndSamplersForLight>[4];
     updateOnlyBuffersList: Parameters<typeof PrepareUniformsAndSamplersForLight>[5];
     iesLightTexture: Parameters<typeof PrepareUniformsAndSamplersForLight>[6];
+    clusteredLightTextures: Parameters<typeof PrepareUniformsAndSamplersForLight>[7];
     
             },ReturnType<typeof PrepareUniformsAndSamplersForLight>>, any>;
   prepareUniformsAndSamplersList: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareUniformsAndSamplersList>> & MeshProps, {
@@ -6914,10 +6994,6 @@ name: ConstructorParameters<typeof RandomBlock>[0];
 name: ConstructorParameters<typeof RandomNumberBlock>[0];
     
     },RandomNumberBlock>, any>;
-  randomRangeBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RandomRangeBlock> & Clonable, {
-name: ConstructorParameters<typeof RandomRangeBlock>[0];
-    
-    },RandomRangeBlock>, any>;
   rawCubeTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RawCubeTexture> & Clonable, {
 scene: ConstructorParameters<typeof RawCubeTexture>[0];
     data: ConstructorParameters<typeof RawCubeTexture>[1];
@@ -7879,6 +7955,10 @@ name: ConstructorParameters<typeof TargetCamera>[0];
     setActiveOnSceneIfNoneActive: ConstructorParameters<typeof TargetCamera>[3];
     
     } & CameraProps,TargetCamera>, any>;
+  targetedAnimation: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TargetedAnimation>, {
+parent: ConstructorParameters<typeof TargetedAnimation>[0];
+    
+    },TargetedAnimation>, any>;
   teleportInBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TeleportInBlock> & Clonable, {
 name: ConstructorParameters<typeof TeleportInBlock>[0];
     
@@ -8184,6 +8264,7 @@ engine: ConstructorParameters<typeof UniformBuffer>[0];
     dynamic: ConstructorParameters<typeof UniformBuffer>[2];
     name: ConstructorParameters<typeof UniformBuffer>[3];
     forceNoUniformBuffer: ConstructorParameters<typeof UniformBuffer>[4];
+    trackUBOsInFrame: ConstructorParameters<typeof UniformBuffer>[5];
     
     },UniformBuffer>, any>;
   universalCamera: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UniversalCamera> & Clonable, {
@@ -8197,10 +8278,18 @@ name: ConstructorParameters<typeof UniversalCamera>[0];
         pluginName: Parameters<typeof UnregisterMaterialPlugin>[0];
     
             },ReturnType<typeof UnregisterMaterialPlugin>>, any>;
+  updateAgeBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UpdateAgeBlock> & Clonable, {
+name: ConstructorParameters<typeof UpdateAgeBlock>[0];
+    
+    },UpdateAgeBlock>, any>;
   updateAngleBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UpdateAngleBlock> & Clonable, {
 name: ConstructorParameters<typeof UpdateAngleBlock>[0];
     
     },UpdateAngleBlock>, any>;
+  updateAttractorBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UpdateAttractorBlock> & Clonable, {
+name: ConstructorParameters<typeof UpdateAttractorBlock>[0];
+    
+    },UpdateAttractorBlock>, any>;
   updateColorBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UpdateColorBlock> & Clonable, {
 name: ConstructorParameters<typeof UpdateColorBlock>[0];
     
@@ -8255,12 +8344,6 @@ name: ConstructorParameters<typeof UpdateSpriteCellIndexBlock>[0];
     imageType: Parameters<typeof UploadRadianceLevelsAsync>[2];
     
             },ReturnType<typeof UploadRadianceLevelsAsync>>, any>;
-  utilityLayerRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UtilityLayerRenderer>, {
-originalScene: ConstructorParameters<typeof UtilityLayerRenderer>[0];
-    handleEvents: ConstructorParameters<typeof UtilityLayerRenderer>[1];
-    manualRender: ConstructorParameters<typeof UtilityLayerRenderer>[2];
-    
-    },UtilityLayerRenderer>, any>;
   vRCameraMetrics: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<VRCameraMetrics>, {},VRCameraMetrics>, any>;
   vRDeviceOrientationArcRotateCamera: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<VRDeviceOrientationArcRotateCamera> & Clonable, {
 name: ConstructorParameters<typeof VRDeviceOrientationArcRotateCamera>[0];
@@ -8495,6 +8578,7 @@ resource: ConstructorParameters<typeof WebGPUDataBuffer>[0];
     },WebGPUDataBuffer>, any>;
   webGPUDrawContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGPUDrawContext>, {
 bufferManager: ConstructorParameters<typeof WebGPUDrawContext>[0];
+    _dummyIndexBuffer: ConstructorParameters<typeof WebGPUDrawContext>[1];
     
     },WebGPUDrawContext>, any>;
   webGPUEngine: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebGPUEngine>, {
@@ -8822,7 +8906,10 @@ id: ConstructorParameters<typeof Xbox360Pad>[0];
     
             },ReturnType<typeof _HasStereoAudioOptions>>, any>;
   _IESTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_IESTextureLoader>, {},_IESTextureLoader>, any>;
-  _InstancesBatch: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_InstancesBatch>, {},_InstancesBatch>, any>;
+  _InstancesBatch: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_InstancesBatch>, {
+parent: ConstructorParameters<typeof _InstancesBatch>[0];
+    
+    },_InstancesBatch>, any>;
   _KTXTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_KTXTextureLoader>, {},_KTXTextureLoader>, any>;
   _MeshCollisionData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_MeshCollisionData>, {},_MeshCollisionData>, any>;
   _OcclusionDataStorage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_OcclusionDataStorage>, {},_OcclusionDataStorage>, any>;
