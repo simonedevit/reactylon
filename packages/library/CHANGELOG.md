@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.2.0](https://github.com/simonedevit/reactylon/compare/v3.1.5...v3.2.0) (2025-10-02)
+
+
+### Chore
+
+* **components:** guard secondary render on store readiness to prevent async race ([ce65c3f](https://github.com/simonedevit/reactylon/commit/ce65c3fe4c33a0663c2268ca6d1f51744c56edc4))
+
 ## [3.1.5](https://github.com/simonedevit/reactylon/compare/v3.1.4...v3.1.5) (2025-08-30)
 
 
