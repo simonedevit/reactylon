@@ -35,8 +35,6 @@ export let activeScene: BabylonScene | null = null;
 export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }: SceneProps) => {
     const { engine, isMultipleCanvas, isMultipleScene, disposeEngine } = _context as EngineContext;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
-    const isFirstRender = useRef(false);
-
     const reconciler = useRef(Reactylon());
     const store = useRef<StoreApi<Store>>(null);
 
@@ -135,7 +133,6 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
                     </Bridge>,
                     rootContainer.current!,
                 );
-                isFirstRender.current = true;
             }
         })();
 
@@ -145,7 +142,7 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
                 disposeEngine();
             });
             rootContainer.current = null;
-            store.current!.setState({
+            store.current?.setState({
                 engine: null,
                 scene: null,
                 canvas: null,
@@ -158,19 +155,14 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
     }, []);
 
     useEffect(() => {
-        if (!isFirstRender.current) {
-            if (store.current) {
-                // Renders children with bridged context into a secondary renderer
-                reconciler.current.render(
-                    <Bridge>
-                        <SceneContext.Provider value={store.current}>{children}</SceneContext.Provider>
-                    </Bridge>,
-                    rootContainer.current!,
-                );
-            }
-        } else {
-            isFirstRender.current = false;
-        }
+        if (!store.current || !rootContainer.current) return;
+        // Renders children with bridged context into a secondary renderer
+        reconciler.current.render(
+            <Bridge>
+                <SceneContext.Provider value={store.current}>{children}</SceneContext.Provider>
+            </Bridge>,
+            rootContainer.current!,
+        );
     });
 
     return null;
