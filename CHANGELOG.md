@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.2.1](https://github.com/simonedevit/reactylon/compare/v3.2.0...v3.2.1) (2025-10-12)
+
+
+### Chore
+
+* **general:** add homepage section to npm package ([1de495b](https://github.com/simonedevit/reactylon/commit/1de495b2dff3ec6706601f1877c72bac7b21b626))
+
 ## [3.2.0](https://github.com/simonedevit/reactylon/compare/v3.1.5...v3.2.0) (2025-10-02)
 
 
