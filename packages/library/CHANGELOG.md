@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.3.0](https://github.com/simonedevit/reactylon/compare/v3.2.1...v3.3.0) (2025-10-18)
+
+
+### Features
+
+* **components:** add microgestures ([d483814](https://github.com/simonedevit/reactylon/commit/d483814447d3d56c1898a8b2cb2fd3be0b6a9a0f))
+
 ## [3.2.1](https://github.com/simonedevit/reactylon/compare/v3.2.0...v3.2.1) (2025-10-12)
 
 
