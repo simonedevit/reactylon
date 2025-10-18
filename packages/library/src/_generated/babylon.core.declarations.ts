@@ -95,6 +95,8 @@ import type { BinaryFileAssetTask } from '@babylonjs/core';
 import type { BindBonesParameters } from '@babylonjs/core';
 import type { BindClipPlane } from '@babylonjs/core';
 import type { BindFogParameters } from '@babylonjs/core';
+import type { BindIBLParameters } from '@babylonjs/core';
+import type { BindIBLSamplers } from '@babylonjs/core';
 import type { BindLight } from '@babylonjs/core';
 import type { BindLightProperties } from '@babylonjs/core';
 import type { BindLights } from '@babylonjs/core';
@@ -136,6 +138,7 @@ import type { CapsuleBlock } from '@babylonjs/core';
 import type { CascadedShadowGenerator } from '@babylonjs/core';
 import type { ChromaticAberrationPostProcess } from '@babylonjs/core';
 import type { CircleOfConfusionPostProcess } from '@babylonjs/core';
+import type { Clamp } from '@babylonjs/core';
 import type { ClampBlock } from '@babylonjs/core';
 import type { CleanGeometryBlock } from '@babylonjs/core';
 import type { ClearCoatBlock } from '@babylonjs/core';
@@ -232,6 +235,7 @@ import type { CreateRibbon } from '@babylonjs/core';
 import type { CreateRibbonVertexData } from '@babylonjs/core';
 import type { CreateScreenshot } from '@babylonjs/core';
 import type { CreateScreenshotAsync } from '@babylonjs/core';
+import type { CreateScreenshotForFrameGraphAsync } from '@babylonjs/core';
 import type { CreateScreenshotUsingRenderTarget } from '@babylonjs/core';
 import type { CreateScreenshotUsingRenderTargetAsync } from '@babylonjs/core';
 import type { CreateScreenshotWithResizeAsync } from '@babylonjs/core';
@@ -289,6 +293,8 @@ import type { DefaultKTX2DecoderOptions } from '@babylonjs/core';
 import type { DefaultLoadingScreen } from '@babylonjs/core';
 import type { DefaultRenderingPipeline } from '@babylonjs/core';
 import type { Deferred } from '@babylonjs/core';
+import type { DeltaAngle } from '@babylonjs/core';
+import type { Denormalize } from '@babylonjs/core';
 import type { DepthCullingState } from '@babylonjs/core';
 import type { DepthOfFieldBlurPostProcess } from '@babylonjs/core';
 import type { DepthOfFieldEffect } from '@babylonjs/core';
@@ -324,6 +330,7 @@ import type { DrawWrapper } from '@babylonjs/core';
 import type { DualShockPad } from '@babylonjs/core';
 import type { DynamicFloat32Array } from '@babylonjs/core';
 import type { DynamicTexture } from '@babylonjs/core';
+import type { EXRCubeTexture } from '@babylonjs/core';
 import type { EasingFunction } from '@babylonjs/core';
 import type { EdgesRenderer } from '@babylonjs/core';
 import type { Effect } from '@babylonjs/core';
@@ -339,6 +346,7 @@ import type { EndsWith } from '@babylonjs/core';
 import type { Engine } from '@babylonjs/core';
 import type { EngineInstrumentation } from '@babylonjs/core';
 import type { EnumerateFloatValues } from '@babylonjs/core';
+import type { EnvCubeTexture } from '@babylonjs/core';
 import type { EnvironmentHelper } from '@babylonjs/core';
 import type { EquiRectangularCubeTexture } from '@babylonjs/core';
 import type { EquiRectangularCubeTextureAssetTask } from '@babylonjs/core';
@@ -348,6 +356,7 @@ import type { ExitFullscreen } from '@babylonjs/core';
 import type { ExitPointerlock } from '@babylonjs/core';
 import type { ExponentialEase } from '@babylonjs/core';
 import type { ExternalTexture } from '@babylonjs/core';
+import type { ExtractAsInt } from '@babylonjs/core';
 import type { ExtractHighlightsPostProcess } from '@babylonjs/core';
 import type { ExtrudePolygon } from '@babylonjs/core';
 import type { ExtrudeShape } from '@babylonjs/core';
@@ -545,14 +554,18 @@ import type { FrameGraphCascadedShadowGeneratorTask } from '@babylonjs/core';
 import type { FrameGraphChromaticAberrationTask } from '@babylonjs/core';
 import type { FrameGraphCircleOfConfusionTask } from '@babylonjs/core';
 import type { FrameGraphClearTextureTask } from '@babylonjs/core';
+import type { FrameGraphColorCorrectionTask } from '@babylonjs/core';
 import type { FrameGraphContext } from '@babylonjs/core';
+import type { FrameGraphConvolutionTask } from '@babylonjs/core';
 import type { FrameGraphCopyToTextureTask } from '@babylonjs/core';
 import type { FrameGraphCullObjectsTask } from '@babylonjs/core';
 import type { FrameGraphCullPass } from '@babylonjs/core';
+import type { FrameGraphCustomPostProcessTask } from '@babylonjs/core';
 import type { FrameGraphDepthOfFieldTask } from '@babylonjs/core';
 import type { FrameGraphExecuteTask } from '@babylonjs/core';
 import type { FrameGraphExtractHighlightsTask } from '@babylonjs/core';
 import type { FrameGraphFXAATask } from '@babylonjs/core';
+import type { FrameGraphFilterTask } from '@babylonjs/core';
 import type { FrameGraphGenerateMipMapsTask } from '@babylonjs/core';
 import type { FrameGraphGeometryRendererTask } from '@babylonjs/core';
 import type { FrameGraphGlowLayerTask } from '@babylonjs/core';
@@ -569,10 +582,13 @@ import type { FrameGraphRenderContext } from '@babylonjs/core';
 import type { FrameGraphRenderPass } from '@babylonjs/core';
 import type { FrameGraphRenderTarget } from '@babylonjs/core';
 import type { FrameGraphSSRRenderingPipelineTask } from '@babylonjs/core';
+import type { FrameGraphScreenSpaceCurvatureTask } from '@babylonjs/core';
 import type { FrameGraphShadowGeneratorTask } from '@babylonjs/core';
+import type { FrameGraphSharpenTask } from '@babylonjs/core';
 import type { FrameGraphTAAObjectRendererTask } from '@babylonjs/core';
 import type { FrameGraphTask } from '@babylonjs/core';
 import type { FrameGraphTextureManager } from '@babylonjs/core';
+import type { FrameGraphTonemapTask } from '@babylonjs/core';
 import type { FrameGraphUtilityLayerRendererTask } from '@babylonjs/core';
 import type { FramingBehavior } from '@babylonjs/core';
 import type { FreeCamera } from '@babylonjs/core';
@@ -637,6 +653,8 @@ import type { GeometryTextureBlock } from '@babylonjs/core';
 import type { GeometryTextureFetchBlock } from '@babylonjs/core';
 import type { GeometryTransformBlock } from '@babylonjs/core';
 import type { GeometryTrigonometryBlock } from '@babylonjs/core';
+import type { GeospatialCamera } from '@babylonjs/core';
+import type { GeospatialCameraPointersInput } from '@babylonjs/core';
 import type { GetAngleBetweenQuaternions } from '@babylonjs/core';
 import type { GetClass } from '@babylonjs/core';
 import type { GetClassName } from '@babylonjs/core';
@@ -693,6 +711,9 @@ import type { HavokPlugin } from '@babylonjs/core';
 import type { HeightToNormalBlock } from '@babylonjs/core';
 import type { HemisphericLight } from '@babylonjs/core';
 import type { HemisphericParticleEmitter } from '@babylonjs/core';
+import type { Hermite } from '@babylonjs/core';
+import type { Hermite1stDerivative } from '@babylonjs/core';
+import type { HighestCommonFactor } from '@babylonjs/core';
 import type { HighlightLayer } from '@babylonjs/core';
 import type { HighlightsPostProcess } from '@babylonjs/core';
 import type { Hinge2Joint } from '@babylonjs/core';
@@ -700,6 +721,7 @@ import type { HingeConstraint } from '@babylonjs/core';
 import type { HingeJoint } from '@babylonjs/core';
 import type { HtmlElementTexture } from '@babylonjs/core';
 import type { HufUncompress } from '@babylonjs/core';
+import type { ILog2 } from '@babylonjs/core';
 import type { IblCdfGenerator } from '@babylonjs/core';
 import type { IblCdfGeneratorSceneComponent } from '@babylonjs/core';
 import type { IblShadowsRenderPipeline } from '@babylonjs/core';
@@ -708,6 +730,7 @@ import type { IdentityMatrixToRef } from '@babylonjs/core';
 import type { ImageAssetTask } from '@babylonjs/core';
 import type { ImageProcessingBlock } from '@babylonjs/core';
 import type { ImageProcessingConfiguration } from '@babylonjs/core';
+import type { ImageProcessingMixin } from '@babylonjs/core';
 import type { ImageProcessingPostProcess } from '@babylonjs/core';
 import type { ImageSourceBlock } from '@babylonjs/core';
 import type { ImportAnimationsAsync } from '@babylonjs/core';
@@ -730,6 +753,7 @@ import type { InterleaveScalar } from '@babylonjs/core';
 import type { InternalTexture } from '@babylonjs/core';
 import type { InterpolateValueAction } from '@babylonjs/core';
 import type { IntersectionInfo } from '@babylonjs/core';
+import type { InverseLerp } from '@babylonjs/core';
 import type { InvertMatrixToArray } from '@babylonjs/core';
 import type { InvertMatrixToRef } from '@babylonjs/core';
 import type { IridescenceBlock } from '@babylonjs/core';
@@ -756,6 +780,8 @@ import type { LensFlare } from '@babylonjs/core';
 import type { LensFlareSystem } from '@babylonjs/core';
 import type { LensFlareSystemSceneComponent } from '@babylonjs/core';
 import type { LensRenderingPipeline } from '@babylonjs/core';
+import type { Lerp } from '@babylonjs/core';
+import type { LerpAngle } from '@babylonjs/core';
 import type { LerpBlock } from '@babylonjs/core';
 import type { Light } from '@babylonjs/core';
 import type { LightBlock } from '@babylonjs/core';
@@ -764,6 +790,7 @@ import type { LightInformationBlock } from '@babylonjs/core';
 import type { LineEdgesRenderer } from '@babylonjs/core';
 import type { LinesMesh } from '@babylonjs/core';
 import type { LoadAssetContainerAsync } from '@babylonjs/core';
+import type { LoadAssetContainerFromSerializedScene } from '@babylonjs/core';
 import type { LoadFile } from '@babylonjs/core';
 import type { LoadFileError } from '@babylonjs/core';
 import type { LoadIESData } from '@babylonjs/core';
@@ -820,6 +847,8 @@ import type { MorphTargetManager } from '@babylonjs/core';
 import type { MorphTargetsBlock } from '@babylonjs/core';
 import type { MotionBlurPostProcess } from '@babylonjs/core';
 import type { MotorEnabledJoint } from '@babylonjs/core';
+import type { MoveTowards } from '@babylonjs/core';
+import type { MoveTowardsAngle } from '@babylonjs/core';
 import type { MultiMaterial } from '@babylonjs/core';
 import type { MultiPick } from '@babylonjs/core';
 import type { MultiPickWithRay } from '@babylonjs/core';
@@ -855,6 +884,7 @@ import type { NodeParticleConnectionPoint } from '@babylonjs/core';
 import type { NodeParticleSystemSet } from '@babylonjs/core';
 import type { NodeRenderGraph } from '@babylonjs/core';
 import type { NodeRenderGraphAnaglyphPostProcessBlock } from '@babylonjs/core';
+import type { NodeRenderGraphBasePostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphBlackAndWhitePostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphBlock } from '@babylonjs/core';
 import type { NodeRenderGraphBloomPostProcessBlock } from '@babylonjs/core';
@@ -864,7 +894,9 @@ import type { NodeRenderGraphCascadedShadowGeneratorBlock } from '@babylonjs/cor
 import type { NodeRenderGraphChromaticAberrationPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphCircleOfConfusionPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphClearBlock } from '@babylonjs/core';
+import type { NodeRenderGraphColorCorrectionPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphConnectionPoint } from '@babylonjs/core';
+import type { NodeRenderGraphConvolutionPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphCopyTextureBlock } from '@babylonjs/core';
 import type { NodeRenderGraphCullObjectsBlock } from '@babylonjs/core';
 import type { NodeRenderGraphDepthOfFieldPostProcessBlock } from '@babylonjs/core';
@@ -872,6 +904,7 @@ import type { NodeRenderGraphElbowBlock } from '@babylonjs/core';
 import type { NodeRenderGraphExecuteBlock } from '@babylonjs/core';
 import type { NodeRenderGraphExtractHighlightsPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphFXAAPostProcessBlock } from '@babylonjs/core';
+import type { NodeRenderGraphFilterPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphGenerateMipmapsBlock } from '@babylonjs/core';
 import type { NodeRenderGraphGeometryRendererBlock } from '@babylonjs/core';
 import type { NodeRenderGraphGlowLayerBlock } from '@babylonjs/core';
@@ -880,21 +913,25 @@ import type { NodeRenderGraphHighlightLayerBlock } from '@babylonjs/core';
 import type { NodeRenderGraphImageProcessingPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphInputBlock } from '@babylonjs/core';
 import type { NodeRenderGraphMotionBlurPostProcessBlock } from '@babylonjs/core';
-import type { NodeRenderGraphObjectRendererBlock } from '@babylonjs/core';
 import type { NodeRenderGraphOutputBlock } from '@babylonjs/core';
 import type { NodeRenderGraphPassCubePostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphPassPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphResourceContainerBlock } from '@babylonjs/core';
 import type { NodeRenderGraphSSRPostProcessBlock } from '@babylonjs/core';
+import type { NodeRenderGraphScreenSpaceCurvaturePostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphShadowGeneratorBlock } from '@babylonjs/core';
+import type { NodeRenderGraphSharpenPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphTAAObjectRendererBlock } from '@babylonjs/core';
 import type { NodeRenderGraphTeleportInBlock } from '@babylonjs/core';
 import type { NodeRenderGraphTeleportOutBlock } from '@babylonjs/core';
+import type { NodeRenderGraphTonemapPostProcessBlock } from '@babylonjs/core';
 import type { NodeRenderGraphUtilityLayerRendererBlock } from '@babylonjs/core';
 import type { NoiseBlock } from '@babylonjs/core';
 import type { NoiseProceduralTexture } from '@babylonjs/core';
 import type { NormalBlendBlock } from '@babylonjs/core';
+import type { Normalize } from '@babylonjs/core';
 import type { NormalizeBlock } from '@babylonjs/core';
+import type { NormalizeRadians } from '@babylonjs/core';
 import type { NormalizeVectorBlock } from '@babylonjs/core';
 import type { NullBlock } from '@babylonjs/core';
 import type { NullEngine } from '@babylonjs/core';
@@ -908,9 +945,12 @@ import type { OctreeBlock } from '@babylonjs/core';
 import type { OctreeSceneComponent } from '@babylonjs/core';
 import type { OimoJSPlugin } from '@babylonjs/core';
 import type { OneMinusBlock } from '@babylonjs/core';
+import type { OpenPBRMaterial } from '@babylonjs/core';
+import type { OpenPBRMaterialDefines } from '@babylonjs/core';
 import type { OptimizeAnimations } from '@babylonjs/core';
 import type { OptimizeIndices } from '@babylonjs/core';
 import type { OutlineRenderer } from '@babylonjs/core';
+import type { OutsideRange } from '@babylonjs/core';
 import type { PBRAnisotropicConfiguration } from '@babylonjs/core';
 import type { PBRBRDFConfiguration } from '@babylonjs/core';
 import type { PBRBaseMaterial } from '@babylonjs/core';
@@ -950,10 +990,12 @@ import type { ParticleConditionBlock } from '@babylonjs/core';
 import type { ParticleConverterBlock } from '@babylonjs/core';
 import type { ParticleDebugBlock } from '@babylonjs/core';
 import type { ParticleElbowBlock } from '@babylonjs/core';
+import type { ParticleFresnelBlock } from '@babylonjs/core';
 import type { ParticleGradientBlock } from '@babylonjs/core';
 import type { ParticleGradientValueBlock } from '@babylonjs/core';
 import type { ParticleInputBlock } from '@babylonjs/core';
 import type { ParticleLerpBlock } from '@babylonjs/core';
+import type { ParticleLocalVariableBlock } from '@babylonjs/core';
 import type { ParticleMathBlock } from '@babylonjs/core';
 import type { ParticleRampGradientBlock } from '@babylonjs/core';
 import type { ParticleRandomBlock } from '@babylonjs/core';
@@ -965,11 +1007,13 @@ import type { ParticleTextureBlock } from '@babylonjs/core';
 import type { ParticleTextureSourceBlock } from '@babylonjs/core';
 import type { ParticleTriggerBlock } from '@babylonjs/core';
 import type { ParticleTrigonometryBlock } from '@babylonjs/core';
+import type { ParticleVectorLengthBlock } from '@babylonjs/core';
 import type { PassCubePostProcess } from '@babylonjs/core';
 import type { PassPostProcess } from '@babylonjs/core';
 import type { Path2 } from '@babylonjs/core';
 import type { Path3D } from '@babylonjs/core';
 import type { PathCursor } from '@babylonjs/core';
+import type { PercentToRange } from '@babylonjs/core';
 import type { PerfCounter } from '@babylonjs/core';
 import type { PerformanceMonitor } from '@babylonjs/core';
 import type { PerformanceViewerCollector } from '@babylonjs/core';
@@ -1003,6 +1047,7 @@ import type { Pick } from '@babylonjs/core';
 import type { PickWithBoundingInfo } from '@babylonjs/core';
 import type { PickWithRay } from '@babylonjs/core';
 import type { PickingInfo } from '@babylonjs/core';
+import type { PingPong } from '@babylonjs/core';
 import type { PlaneBlock } from '@babylonjs/core';
 import type { PlaneDragGizmo } from '@babylonjs/core';
 import type { PlaneRotationGizmo } from '@babylonjs/core';
@@ -1051,6 +1096,7 @@ import type { PrepareDefinesForBones } from '@babylonjs/core';
 import type { PrepareDefinesForCamera } from '@babylonjs/core';
 import type { PrepareDefinesForClipPlanes } from '@babylonjs/core';
 import type { PrepareDefinesForFrameBoundValues } from '@babylonjs/core';
+import type { PrepareDefinesForIBL } from '@babylonjs/core';
 import type { PrepareDefinesForLight } from '@babylonjs/core';
 import type { PrepareDefinesForLights } from '@babylonjs/core';
 import type { PrepareDefinesForMergedUV } from '@babylonjs/core';
@@ -1060,6 +1106,8 @@ import type { PrepareDefinesForMultiview } from '@babylonjs/core';
 import type { PrepareDefinesForOIT } from '@babylonjs/core';
 import type { PrepareDefinesForPrePass } from '@babylonjs/core';
 import type { PrepareStringDefinesForClipPlanes } from '@babylonjs/core';
+import type { PrepareUniformLayoutForIBL } from '@babylonjs/core';
+import type { PrepareUniformsAndSamplersForIBL } from '@babylonjs/core';
 import type { PrepareUniformsAndSamplersForLight } from '@babylonjs/core';
 import type { PrepareUniformsAndSamplersList } from '@babylonjs/core';
 import type { PressureObserverWrapper } from '@babylonjs/core';
@@ -1077,6 +1125,8 @@ import type { Ragdoll } from '@babylonjs/core';
 import type { RandomBlock } from '@babylonjs/core';
 import type { RandomGUID } from '@babylonjs/core';
 import type { RandomNumberBlock } from '@babylonjs/core';
+import type { RandomRange } from '@babylonjs/core';
+import type { RangeToPercent } from '@babylonjs/core';
 import type { RawCubeTexture } from '@babylonjs/core';
 import type { RawTexture } from '@babylonjs/core';
 import type { RawTexture2DArray } from '@babylonjs/core';
@@ -1112,6 +1162,7 @@ import type { RenderTargetTexture } from '@babylonjs/core';
 import type { RenderTargetWrapper } from '@babylonjs/core';
 import type { RenderingGroup } from '@babylonjs/core';
 import type { RenderingManager } from '@babylonjs/core';
+import type { Repeat } from '@babylonjs/core';
 import type { ReplaceColorBlock } from '@babylonjs/core';
 import type { RequestFile } from '@babylonjs/core';
 import type { RequestFileError } from '@babylonjs/core';
@@ -1184,6 +1235,7 @@ import type { SmartArray } from '@babylonjs/core';
 import type { SmartArrayNoDuplicate } from '@babylonjs/core';
 import type { SmartFilterFragmentOutputBlock } from '@babylonjs/core';
 import type { SmartFilterTextureBlock } from '@babylonjs/core';
+import type { SmoothStep } from '@babylonjs/core';
 import type { SmoothStepBlock } from '@babylonjs/core';
 import type { SnapshotRenderingHelper } from '@babylonjs/core';
 import type { SolidParticle } from '@babylonjs/core';
@@ -1264,11 +1316,14 @@ import type { ThinBloomEffect } from '@babylonjs/core';
 import type { ThinBlurPostProcess } from '@babylonjs/core';
 import type { ThinChromaticAberrationPostProcess } from '@babylonjs/core';
 import type { ThinCircleOfConfusionPostProcess } from '@babylonjs/core';
+import type { ThinColorCorrectionPostProcess } from '@babylonjs/core';
+import type { ThinConvolutionPostProcess } from '@babylonjs/core';
 import type { ThinDepthOfFieldEffect } from '@babylonjs/core';
 import type { ThinEffectLayer } from '@babylonjs/core';
 import type { ThinEngine } from '@babylonjs/core';
 import type { ThinExtractHighlightsPostProcess } from '@babylonjs/core';
 import type { ThinFXAAPostProcess } from '@babylonjs/core';
+import type { ThinFilterPostProcess } from '@babylonjs/core';
 import type { ThinGlowBlurPostProcess } from '@babylonjs/core';
 import type { ThinGlowLayer } from '@babylonjs/core';
 import type { ThinGrainPostProcess } from '@babylonjs/core';
@@ -1279,8 +1334,12 @@ import type { ThinMotionBlurPostProcess } from '@babylonjs/core';
 import type { ThinPassCubePostProcess } from '@babylonjs/core';
 import type { ThinPassPostProcess } from '@babylonjs/core';
 import type { ThinRenderTargetTexture } from '@babylonjs/core';
+import type { ThinScreenSpaceCurvaturePostProcess } from '@babylonjs/core';
+import type { ThinSharpenPostProcess } from '@babylonjs/core';
 import type { ThinTexture } from '@babylonjs/core';
+import type { ThinTonemapPostProcess } from '@babylonjs/core';
 import type { ToHalfFloat } from '@babylonjs/core';
+import type { ToHex } from '@babylonjs/core';
 import type { TonemapPostProcess } from '@babylonjs/core';
 import type { TorusBlock } from '@babylonjs/core';
 import type { TouchCamera } from '@babylonjs/core';
@@ -1296,6 +1355,7 @@ import type { TranslationMatrixToRef } from '@babylonjs/core';
 import type { TriPlanarBlock } from '@babylonjs/core';
 import type { TrigonometryBlock } from '@babylonjs/core';
 import type { TwirlBlock } from '@babylonjs/core';
+import type { UVDefinesMixin } from '@babylonjs/core';
 import type { UncompressPIZ } from '@babylonjs/core';
 import type { UncompressPXR } from '@babylonjs/core';
 import type { UncompressRAW } from '@babylonjs/core';
@@ -1331,6 +1391,9 @@ import type { ValueCondition } from '@babylonjs/core';
 import type { Vector2 } from '@babylonjs/core';
 import type { Vector2ToFixed } from '@babylonjs/core';
 import type { Vector3 } from '@babylonjs/core';
+import type { Vector3Dot } from '@babylonjs/core';
+import type { Vector3FromFloatsToRef } from '@babylonjs/core';
+import type { Vector3ScaleToRef } from '@babylonjs/core';
 import type { Vector3ToFixed } from '@babylonjs/core';
 import type { Vector4 } from '@babylonjs/core';
 import type { Vector4ToFixed } from '@babylonjs/core';
@@ -1402,6 +1465,7 @@ import type { WebXRMeshDetector } from '@babylonjs/core';
 import type { WebXRMicrosoftMixedRealityController } from '@babylonjs/core';
 import type { WebXRMotionControllerTeleportation } from '@babylonjs/core';
 import type { WebXRNearInteraction } from '@babylonjs/core';
+import type { WebXROculusHandController } from '@babylonjs/core';
 import type { WebXROculusTouchMotionController } from '@babylonjs/core';
 import type { WebXRPlaneDetector } from '@babylonjs/core';
 import type { WebXRProfiledMotionController } from '@babylonjs/core';
@@ -1411,6 +1475,8 @@ import type { WebXRSpaceWarp } from '@babylonjs/core';
 import type { WebXRSpaceWarpRenderTargetTextureProvider } from '@babylonjs/core';
 import type { WebXRWalkingLocomotion } from '@babylonjs/core';
 import type { WeightedSound } from '@babylonjs/core';
+import type { WhenTextureReadyAsync } from '@babylonjs/core';
+import type { WithinEpsilon } from '@babylonjs/core';
 import type { WorkerPool } from '@babylonjs/core';
 import type { WorleyNoise3DBlock } from '@babylonjs/core';
 import type { XRSpaceWarpRenderTarget } from '@babylonjs/core';
@@ -1431,6 +1497,7 @@ import type { _HasStereoAudioOptions } from '@babylonjs/core';
 import type { _IESTextureLoader } from '@babylonjs/core';
 import type { _InstancesBatch } from '@babylonjs/core';
 import type { _KTXTextureLoader } from '@babylonjs/core';
+import type { _LoadScriptModuleAsync } from '@babylonjs/core';
 import type { _MeshCollisionData } from '@babylonjs/core';
 import type { _OcclusionDataStorage } from '@babylonjs/core';
 import type { _PrimaryIsoTriangle } from '@babylonjs/core';
@@ -1448,6 +1515,7 @@ import type { _WebAudioStaticSound } from '@babylonjs/core';
 import type { _WebAudioStaticSoundBuffer } from '@babylonjs/core';
 import type { _WebAudioStreamingSound } from '@babylonjs/core';
 import type { _injectLTSFileTools } from '@babylonjs/core';
+import type { addAccessorsForMaterialProperty } from '@babylonjs/core';
 import type { addToBlockFactory } from '@babylonjs/core';
 import type { allocateAndCopyTypedBuffer } from '@babylonjs/core';
 import type { blockFactory } from '@babylonjs/core';
@@ -1971,6 +2039,29 @@ name: ConstructorParameters<typeof BinaryFileAssetTask>[0];
     linearSpace: Parameters<typeof BindFogParameters>[3];
     
             },ReturnType<typeof BindFogParameters>>, any>;
+  bindIBLParameters: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindIBLParameters>> & MeshProps, {
+        scene: Parameters<typeof BindIBLParameters>[0];
+    defines: Parameters<typeof BindIBLParameters>[1];
+    ubo: Parameters<typeof BindIBLParameters>[2];
+    reflectionColor: Parameters<typeof BindIBLParameters>[3];
+    reflectionTexture: Parameters<typeof BindIBLParameters>[4];
+    realTimeFiltering: Parameters<typeof BindIBLParameters>[5];
+    supportTextureInfo: Parameters<typeof BindIBLParameters>[6];
+    supportLocalProjection: Parameters<typeof BindIBLParameters>[7];
+    usePBR: Parameters<typeof BindIBLParameters>[8];
+    supportSH: Parameters<typeof BindIBLParameters>[9];
+    useColor: Parameters<typeof BindIBLParameters>[10];
+    reflectionBlur: Parameters<typeof BindIBLParameters>[11];
+    
+            },ReturnType<typeof BindIBLParameters>>, any>;
+  bindIBLSamplers: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindIBLSamplers>> & MeshProps, {
+        scene: Parameters<typeof BindIBLSamplers>[0];
+    defines: Parameters<typeof BindIBLSamplers>[1];
+    ubo: Parameters<typeof BindIBLSamplers>[2];
+    reflectionTexture: Parameters<typeof BindIBLSamplers>[3];
+    realTimeFiltering: Parameters<typeof BindIBLSamplers>[4];
+    
+            },ReturnType<typeof BindIBLSamplers>>, any>;
   bindLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof BindLight>> & MeshProps, {
         light: Parameters<typeof BindLight>[0];
     lightIndex: Parameters<typeof BindLight>[1];
@@ -2234,6 +2325,12 @@ name: ConstructorParameters<typeof CircleOfConfusionPostProcess>[0];
     blockCompilation: ConstructorParameters<typeof CircleOfConfusionPostProcess>[8];
     
     },CircleOfConfusionPostProcess>, any>;
+  clamp: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Clamp>> & MeshProps, {
+        value: Parameters<typeof Clamp>[0];
+    min: Parameters<typeof Clamp>[1];
+    max: Parameters<typeof Clamp>[2];
+    
+            },ReturnType<typeof Clamp>>, any>;
   clampBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ClampBlock> & Clonable, {
 name: ConstructorParameters<typeof ClampBlock>[0];
     
@@ -2463,6 +2560,7 @@ name: ConstructorParameters<typeof ConvolutionPostProcess>[0];
   copyTextureToTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CopyTextureToTexture>, {
 engine: ConstructorParameters<typeof CopyTextureToTexture>[0];
     isDepthTexture: ConstructorParameters<typeof CopyTextureToTexture>[1];
+    sameSizeCopy: ConstructorParameters<typeof CopyTextureToTexture>[2];
     
     },CopyTextureToTexture>, any>;
   alignedTypedArray: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreateAlignedTypedArray>> & MeshProps, {
@@ -2771,6 +2869,7 @@ name: ConstructorParameters<typeof CreateParticleBlock>[0];
     forceDownload: Parameters<typeof CreateScreenshot>[5];
     quality: Parameters<typeof CreateScreenshot>[6];
     useFill: Parameters<typeof CreateScreenshot>[7];
+    clearWithSceneColor: Parameters<typeof CreateScreenshot>[8];
     
             },ReturnType<typeof CreateScreenshot>>, any>;
   screenshotAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreateScreenshotAsync>> & MeshProps, {
@@ -2780,8 +2879,24 @@ name: ConstructorParameters<typeof CreateParticleBlock>[0];
     mimeType: Parameters<typeof CreateScreenshotAsync>[3];
     quality: Parameters<typeof CreateScreenshotAsync>[4];
     useFill: Parameters<typeof CreateScreenshotAsync>[5];
+    clearWithSceneColor: Parameters<typeof CreateScreenshotAsync>[6];
+    forceDownload: Parameters<typeof CreateScreenshotAsync>[7];
     
             },ReturnType<typeof CreateScreenshotAsync>>, any>;
+  screenshotForFrameGraphAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreateScreenshotForFrameGraphAsync>> & MeshProps, {
+        frameGraph: Parameters<typeof CreateScreenshotForFrameGraphAsync>[0];
+    camera: Parameters<typeof CreateScreenshotForFrameGraphAsync>[1];
+    size: Parameters<typeof CreateScreenshotForFrameGraphAsync>[2];
+    mimeType: Parameters<typeof CreateScreenshotForFrameGraphAsync>[3];
+    samples: Parameters<typeof CreateScreenshotForFrameGraphAsync>[4];
+    antialiasing: Parameters<typeof CreateScreenshotForFrameGraphAsync>[5];
+    fileName: Parameters<typeof CreateScreenshotForFrameGraphAsync>[6];
+    quality: Parameters<typeof CreateScreenshotForFrameGraphAsync>[7];
+    customDumpData: Parameters<typeof CreateScreenshotForFrameGraphAsync>[8];
+    automaticDownload: Parameters<typeof CreateScreenshotForFrameGraphAsync>[9];
+    numberOfFramesToRender: Parameters<typeof CreateScreenshotForFrameGraphAsync>[10];
+    
+            },ReturnType<typeof CreateScreenshotForFrameGraphAsync>>, any>;
   screenshotUsingRenderTarget: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof CreateScreenshotUsingRenderTarget>> & MeshProps, {
         engine: Parameters<typeof CreateScreenshotUsingRenderTarget>[0];
     camera: Parameters<typeof CreateScreenshotUsingRenderTarget>[1];
@@ -2968,7 +3083,7 @@ rootUrl: ConstructorParameters<typeof CubeTexture>[0];
   cubeTextureAssetTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<CubeTextureAssetTask>, {
 name: ConstructorParameters<typeof CubeTextureAssetTask>[0];
     url: ConstructorParameters<typeof CubeTextureAssetTask>[1];
-    extensions: ConstructorParameters<typeof CubeTextureAssetTask>[2];
+    extensionsOrOptions: ConstructorParameters<typeof CubeTextureAssetTask>[2];
     noMipmap: ConstructorParameters<typeof CubeTextureAssetTask>[3];
     files: ConstructorParameters<typeof CubeTextureAssetTask>[4];
     prefiltered: ConstructorParameters<typeof CubeTextureAssetTask>[5];
@@ -3087,6 +3202,17 @@ name: ConstructorParameters<typeof DefaultRenderingPipeline>[0];
     
     },DefaultRenderingPipeline>, any>;
   deferred: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Deferred>, {},Deferred>, any>;
+  deltaAngle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof DeltaAngle>> & MeshProps, {
+        current: Parameters<typeof DeltaAngle>[0];
+    target: Parameters<typeof DeltaAngle>[1];
+    
+            },ReturnType<typeof DeltaAngle>>, any>;
+  denormalize: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Denormalize>> & MeshProps, {
+        normalized: Parameters<typeof Denormalize>[0];
+    min: Parameters<typeof Denormalize>[1];
+    max: Parameters<typeof Denormalize>[2];
+    
+            },ReturnType<typeof Denormalize>>, any>;
   depthCullingState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DepthCullingState>, {
 reset: ConstructorParameters<typeof DepthCullingState>[0];
     
@@ -3152,6 +3278,7 @@ scene: ConstructorParameters<typeof DepthRenderer>[0];
     samplingMode: ConstructorParameters<typeof DepthRenderer>[4];
     storeCameraSpaceZ: ConstructorParameters<typeof DepthRenderer>[5];
     name: ConstructorParameters<typeof DepthRenderer>[6];
+    existingRenderTargetTexture: ConstructorParameters<typeof DepthRenderer>[7];
     
     },DepthRenderer>, any>;
   depthRendererSceneComponent: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<DepthRendererSceneComponent>, {
@@ -3289,6 +3416,21 @@ name: ConstructorParameters<typeof DynamicTexture>[0];
     invertY: ConstructorParameters<typeof DynamicTexture>[6];
     
     } & TextureProps,DynamicTexture>, any>;
+  eXRCubeTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EXRCubeTexture> & Clonable, {
+url: ConstructorParameters<typeof EXRCubeTexture>[0];
+    sceneOrEngine: ConstructorParameters<typeof EXRCubeTexture>[1];
+    size: ConstructorParameters<typeof EXRCubeTexture>[2];
+    noMipmap: ConstructorParameters<typeof EXRCubeTexture>[3];
+    generateHarmonics: ConstructorParameters<typeof EXRCubeTexture>[4];
+    gammaSpace: ConstructorParameters<typeof EXRCubeTexture>[5];
+    prefilterOnLoad: ConstructorParameters<typeof EXRCubeTexture>[6];
+    onLoad: ConstructorParameters<typeof EXRCubeTexture>[7];
+    onError: ConstructorParameters<typeof EXRCubeTexture>[8];
+    supersample: ConstructorParameters<typeof EXRCubeTexture>[9];
+    prefilterIrradianceOnLoad: ConstructorParameters<typeof EXRCubeTexture>[10];
+    prefilterUsingCdf: ConstructorParameters<typeof EXRCubeTexture>[11];
+    
+    } & TextureProps,EXRCubeTexture>, any>;
   easingFunction: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EasingFunction>, {},EasingFunction>, any>;
   edgesRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EdgesRenderer>, {
 source: ConstructorParameters<typeof EdgesRenderer>[0];
@@ -3368,6 +3510,21 @@ engine: ConstructorParameters<typeof EngineInstrumentation>[0];
     callback: Parameters<typeof EnumerateFloatValues>[7];
     
             },ReturnType<typeof EnumerateFloatValues>>, any>;
+  envCubeTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EnvCubeTexture> & Clonable, {
+url: ConstructorParameters<typeof EnvCubeTexture>[0];
+    sceneOrEngine: ConstructorParameters<typeof EnvCubeTexture>[1];
+    size: ConstructorParameters<typeof EnvCubeTexture>[2];
+    noMipmap: ConstructorParameters<typeof EnvCubeTexture>[3];
+    generateHarmonics: ConstructorParameters<typeof EnvCubeTexture>[4];
+    gammaSpace: ConstructorParameters<typeof EnvCubeTexture>[5];
+    prefilterOnLoad: ConstructorParameters<typeof EnvCubeTexture>[6];
+    onLoad: ConstructorParameters<typeof EnvCubeTexture>[7];
+    onError: ConstructorParameters<typeof EnvCubeTexture>[8];
+    supersample: ConstructorParameters<typeof EnvCubeTexture>[9];
+    prefilterIrradianceOnLoad: ConstructorParameters<typeof EnvCubeTexture>[10];
+    prefilterUsingCdf: ConstructorParameters<typeof EnvCubeTexture>[11];
+    
+    } & TextureProps,EnvCubeTexture>, any>;
   environmentHelper: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EnvironmentHelper>, {
 options: ConstructorParameters<typeof EnvironmentHelper>[0];
     scene: ConstructorParameters<typeof EnvironmentHelper>[1];
@@ -3390,6 +3547,7 @@ name: ConstructorParameters<typeof EquiRectangularCubeTextureAssetTask>[0];
     size: ConstructorParameters<typeof EquiRectangularCubeTextureAssetTask>[2];
     noMipmap: ConstructorParameters<typeof EquiRectangularCubeTextureAssetTask>[3];
     gammaSpace: ConstructorParameters<typeof EquiRectangularCubeTextureAssetTask>[4];
+    superSample: ConstructorParameters<typeof EquiRectangularCubeTextureAssetTask>[5];
     
     },EquiRectangularCubeTextureAssetTask>, any>;
   eventState: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EventState>, {
@@ -3415,6 +3573,10 @@ exponent: ConstructorParameters<typeof ExponentialEase>[0];
 video: ConstructorParameters<typeof ExternalTexture>[0];
     
     },ExternalTexture>, any>;
+  extractAsInt: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtractAsInt>> & MeshProps, {
+        value: Parameters<typeof ExtractAsInt>[0];
+    
+            },ReturnType<typeof ExtractAsInt>>, any>;
   extractHighlightsPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ExtractHighlightsPostProcess> & Clonable, {
 name: ConstructorParameters<typeof ExtractHighlightsPostProcess>[0];
     options: ConstructorParameters<typeof ExtractHighlightsPostProcess>[1];
@@ -4246,12 +4408,25 @@ name: ConstructorParameters<typeof FrameGraphClearTextureTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphClearTextureTask>[1];
     
     },FrameGraphClearTextureTask>, any>;
+  frameGraphColorCorrectionTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphColorCorrectionTask>, {
+name: ConstructorParameters<typeof FrameGraphColorCorrectionTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphColorCorrectionTask>[1];
+    colorTableUrl: ConstructorParameters<typeof FrameGraphColorCorrectionTask>[2];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphColorCorrectionTask>[3];
+    
+    },FrameGraphColorCorrectionTask>, any>;
   frameGraphContext: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphContext>, {
 _engine: ConstructorParameters<typeof FrameGraphContext>[0];
     _textureManager: ConstructorParameters<typeof FrameGraphContext>[1];
     _scene: ConstructorParameters<typeof FrameGraphContext>[2];
     
     },FrameGraphContext>, any>;
+  frameGraphConvolutionTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphConvolutionTask>, {
+name: ConstructorParameters<typeof FrameGraphConvolutionTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphConvolutionTask>[1];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphConvolutionTask>[2];
+    
+    },FrameGraphConvolutionTask>, any>;
   frameGraphCopyToTextureTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphCopyToTextureTask>, {
 name: ConstructorParameters<typeof FrameGraphCopyToTextureTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphCopyToTextureTask>[1];
@@ -4270,6 +4445,12 @@ name: ConstructorParameters<typeof FrameGraphCullPass>[0];
     engine: ConstructorParameters<typeof FrameGraphCullPass>[3];
     
     },FrameGraphCullPass>, any>;
+  frameGraphCustomPostProcessTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphCustomPostProcessTask>, {
+name: ConstructorParameters<typeof FrameGraphCustomPostProcessTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphCustomPostProcessTask>[1];
+    options: ConstructorParameters<typeof FrameGraphCustomPostProcessTask>[2];
+    
+    },FrameGraphCustomPostProcessTask>, any>;
   frameGraphDepthOfFieldTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphDepthOfFieldTask>, {
 name: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphDepthOfFieldTask>[1];
@@ -4294,6 +4475,12 @@ name: ConstructorParameters<typeof FrameGraphFXAATask>[0];
     thinPostProcess: ConstructorParameters<typeof FrameGraphFXAATask>[2];
     
     },FrameGraphFXAATask>, any>;
+  frameGraphFilterTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphFilterTask>, {
+name: ConstructorParameters<typeof FrameGraphFilterTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphFilterTask>[1];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphFilterTask>[2];
+    
+    },FrameGraphFilterTask>, any>;
   frameGraphGenerateMipMapsTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphGenerateMipMapsTask>, {
 name: ConstructorParameters<typeof FrameGraphGenerateMipMapsTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphGenerateMipMapsTask>[1];
@@ -4396,12 +4583,24 @@ name: ConstructorParameters<typeof FrameGraphSSRRenderingPipelineTask>[0];
     textureType: ConstructorParameters<typeof FrameGraphSSRRenderingPipelineTask>[2];
     
     },FrameGraphSSRRenderingPipelineTask>, any>;
+  frameGraphScreenSpaceCurvatureTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphScreenSpaceCurvatureTask>, {
+name: ConstructorParameters<typeof FrameGraphScreenSpaceCurvatureTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphScreenSpaceCurvatureTask>[1];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphScreenSpaceCurvatureTask>[2];
+    
+    },FrameGraphScreenSpaceCurvatureTask>, any>;
   frameGraphShadowGeneratorTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphShadowGeneratorTask>, {
 name: ConstructorParameters<typeof FrameGraphShadowGeneratorTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphShadowGeneratorTask>[1];
     _scene: ConstructorParameters<typeof FrameGraphShadowGeneratorTask>[2];
     
     },FrameGraphShadowGeneratorTask>, any>;
+  frameGraphSharpenTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphSharpenTask>, {
+name: ConstructorParameters<typeof FrameGraphSharpenTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphSharpenTask>[1];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphSharpenTask>[2];
+    
+    },FrameGraphSharpenTask>, any>;
   frameGraphTAAObjectRendererTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphTAAObjectRendererTask>, {
 name: ConstructorParameters<typeof FrameGraphTAAObjectRendererTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphTAAObjectRendererTask>[1];
@@ -4420,6 +4619,12 @@ engine: ConstructorParameters<typeof FrameGraphTextureManager>[0];
     _scene: ConstructorParameters<typeof FrameGraphTextureManager>[2];
     
     },FrameGraphTextureManager>, any>;
+  frameGraphTonemapTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphTonemapTask>, {
+name: ConstructorParameters<typeof FrameGraphTonemapTask>[0];
+    frameGraph: ConstructorParameters<typeof FrameGraphTonemapTask>[1];
+    thinPostProcess: ConstructorParameters<typeof FrameGraphTonemapTask>[2];
+    
+    },FrameGraphTonemapTask>, any>;
   frameGraphUtilityLayerRendererTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<FrameGraphUtilityLayerRendererTask>, {
 name: ConstructorParameters<typeof FrameGraphUtilityLayerRendererTask>[0];
     frameGraph: ConstructorParameters<typeof FrameGraphUtilityLayerRendererTask>[1];
@@ -4706,6 +4911,14 @@ name: ConstructorParameters<typeof GeometryTransformBlock>[0];
 name: ConstructorParameters<typeof GeometryTrigonometryBlock>[0];
     
     },GeometryTrigonometryBlock>, any>;
+  geospatialCamera: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GeospatialCamera> & Clonable, {
+name: ConstructorParameters<typeof GeospatialCamera>[0];
+    scene: ConstructorParameters<typeof GeospatialCamera>[1];
+    options: ConstructorParameters<typeof GeospatialCamera>[2];
+    pickPredicate: ConstructorParameters<typeof GeospatialCamera>[3];
+    
+    } & CameraProps,GeospatialCamera>, any>;
+  geospatialCameraPointersInput: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<GeospatialCameraPointersInput>, {},GeospatialCameraPointersInput>, any>;
   getAngleBetweenQuaternions: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetAngleBetweenQuaternions>> & MeshProps, {
         q1: Parameters<typeof GetAngleBetweenQuaternions>[0];
     q2: Parameters<typeof GetAngleBetweenQuaternions>[1];
@@ -4854,9 +5067,8 @@ name: ConstructorParameters<typeof GeometryTrigonometryBlock>[0];
     type: Parameters<typeof GetTypedArrayData>[2];
     byteOffset: Parameters<typeof GetTypedArrayData>[3];
     byteStride: Parameters<typeof GetTypedArrayData>[4];
-    normalized: Parameters<typeof GetTypedArrayData>[5];
-    totalVertices: Parameters<typeof GetTypedArrayData>[6];
-    forceCopy: Parameters<typeof GetTypedArrayData>[7];
+    totalVertices: Parameters<typeof GetTypedArrayData>[5];
+    forceCopy: Parameters<typeof GetTypedArrayData>[6];
     
             },ReturnType<typeof GetTypedArrayData>>, any>;
   gizmo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Gizmo>, {
@@ -4959,7 +5171,10 @@ name: ConstructorParameters<typeof HDRCubeTextureAssetTask>[0];
     noMipmap: ConstructorParameters<typeof HDRCubeTextureAssetTask>[3];
     generateHarmonics: ConstructorParameters<typeof HDRCubeTextureAssetTask>[4];
     gammaSpace: ConstructorParameters<typeof HDRCubeTextureAssetTask>[5];
-    reserved: ConstructorParameters<typeof HDRCubeTextureAssetTask>[6];
+    prefilterOnLoad: ConstructorParameters<typeof HDRCubeTextureAssetTask>[6];
+    supersample: ConstructorParameters<typeof HDRCubeTextureAssetTask>[7];
+    prefilterIrradianceOnLoad: ConstructorParameters<typeof HDRCubeTextureAssetTask>[8];
+    prefilterUsingCdf: ConstructorParameters<typeof HDRCubeTextureAssetTask>[9];
     
     },HDRCubeTextureAssetTask>, any>;
   hDRFiltering: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HDRFiltering>, {
@@ -5010,6 +5225,27 @@ radius: ConstructorParameters<typeof HemisphericParticleEmitter>[0];
     directionRandomizer: ConstructorParameters<typeof HemisphericParticleEmitter>[2];
     
     },HemisphericParticleEmitter>, any>;
+  hermite: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Hermite>> & MeshProps, {
+        value1: Parameters<typeof Hermite>[0];
+    tangent1: Parameters<typeof Hermite>[1];
+    value2: Parameters<typeof Hermite>[2];
+    tangent2: Parameters<typeof Hermite>[3];
+    amount: Parameters<typeof Hermite>[4];
+    
+            },ReturnType<typeof Hermite>>, any>;
+  hermite1stDerivative: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Hermite1stDerivative>> & MeshProps, {
+        value1: Parameters<typeof Hermite1stDerivative>[0];
+    tangent1: Parameters<typeof Hermite1stDerivative>[1];
+    value2: Parameters<typeof Hermite1stDerivative>[2];
+    tangent2: Parameters<typeof Hermite1stDerivative>[3];
+    time: Parameters<typeof Hermite1stDerivative>[4];
+    
+            },ReturnType<typeof Hermite1stDerivative>>, any>;
+  highestCommonFactor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof HighestCommonFactor>> & MeshProps, {
+        a: Parameters<typeof HighestCommonFactor>[0];
+    b: Parameters<typeof HighestCommonFactor>[1];
+    
+            },ReturnType<typeof HighestCommonFactor>>, any>;
   highlightLayer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<HighlightLayer>, {
 name: ConstructorParameters<typeof HighlightLayer>[0];
     scene: ConstructorParameters<typeof HighlightLayer>[1];
@@ -5057,6 +5293,10 @@ name: ConstructorParameters<typeof HtmlElementTexture>[0];
     nRaw: Parameters<typeof HufUncompress>[5];
     
             },ReturnType<typeof HufUncompress>>, any>;
+  iLog2: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ILog2>> & MeshProps, {
+        value: Parameters<typeof ILog2>[0];
+    
+            },ReturnType<typeof ILog2>>, any>;
   iblCdfGenerator: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<IblCdfGenerator>, {
 sceneOrEngine: ConstructorParameters<typeof IblCdfGenerator>[0];
     
@@ -5090,6 +5330,10 @@ name: ConstructorParameters<typeof ImageProcessingBlock>[0];
     
     },ImageProcessingBlock>, any>;
   imageProcessingConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ImageProcessingConfiguration> & Clonable, {},ImageProcessingConfiguration>, any>;
+  imageProcessingMixin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ImageProcessingMixin>> & MeshProps, {
+        base: Parameters<typeof ImageProcessingMixin>[0];
+    
+            },ReturnType<typeof ImageProcessingMixin>>, any>;
   imageProcessingPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ImageProcessingPostProcess> & Clonable, {
 name: ConstructorParameters<typeof ImageProcessingPostProcess>[0];
     options: ConstructorParameters<typeof ImageProcessingPostProcess>[1];
@@ -5206,6 +5450,12 @@ bu: ConstructorParameters<typeof IntersectionInfo>[0];
     distance: ConstructorParameters<typeof IntersectionInfo>[2];
     
     },IntersectionInfo>, any>;
+  inverseLerp: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof InverseLerp>> & MeshProps, {
+        a: Parameters<typeof InverseLerp>[0];
+    b: Parameters<typeof InverseLerp>[1];
+    value: Parameters<typeof InverseLerp>[2];
+    
+            },ReturnType<typeof InverseLerp>>, any>;
   invertMatrixToArray: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof InvertMatrixToArray>> & MeshProps, {
         source: Parameters<typeof InvertMatrixToArray>[0];
     target: Parameters<typeof InvertMatrixToArray>[1];
@@ -5311,6 +5561,18 @@ name: ConstructorParameters<typeof LensRenderingPipeline>[0];
     cameras: ConstructorParameters<typeof LensRenderingPipeline>[4];
     
     },LensRenderingPipeline>, any>;
+  lerp: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Lerp>> & MeshProps, {
+        start: Parameters<typeof Lerp>[0];
+    end: Parameters<typeof Lerp>[1];
+    amount: Parameters<typeof Lerp>[2];
+    
+            },ReturnType<typeof Lerp>>, any>;
+  lerpAngle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LerpAngle>> & MeshProps, {
+        start: Parameters<typeof LerpAngle>[0];
+    end: Parameters<typeof LerpAngle>[1];
+    amount: Parameters<typeof LerpAngle>[2];
+    
+            },ReturnType<typeof LerpAngle>>, any>;
   lerpBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<LerpBlock> & Clonable, {
 name: ConstructorParameters<typeof LerpBlock>[0];
     
@@ -5355,6 +5617,12 @@ name: ConstructorParameters<typeof LinesMesh>[0];
     options: Parameters<typeof LoadAssetContainerAsync>[2];
     
             },ReturnType<typeof LoadAssetContainerAsync>>, any>;
+  loadAssetContainerFromSerializedScene: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadAssetContainerFromSerializedScene>> & MeshProps, {
+        scene: Parameters<typeof LoadAssetContainerFromSerializedScene>[0];
+    serializedScene: Parameters<typeof LoadAssetContainerFromSerializedScene>[1];
+    rootUrl: Parameters<typeof LoadAssetContainerFromSerializedScene>[2];
+    
+            },ReturnType<typeof LoadAssetContainerFromSerializedScene>>, any>;
   loadFile: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LoadFile>> & MeshProps, {},ReturnType<typeof LoadFile>>, any>;
   loadFileError: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<LoadFileError>, {
 message: ConstructorParameters<typeof LoadFileError>[0];
@@ -5485,6 +5753,8 @@ name: ConstructorParameters<typeof MeshAssetTask>[0];
     rootUrl: ConstructorParameters<typeof MeshAssetTask>[2];
     sceneFilename: ConstructorParameters<typeof MeshAssetTask>[3];
     extension: ConstructorParameters<typeof MeshAssetTask>[4];
+    fileName: ConstructorParameters<typeof MeshAssetTask>[5];
+    pluginOptions: ConstructorParameters<typeof MeshAssetTask>[6];
     
     },MeshAssetTask>, any>;
   meshAttributeExistsBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MeshAttributeExistsBlock> & Clonable, {
@@ -5591,6 +5861,18 @@ type: ConstructorParameters<typeof MotorEnabledJoint>[0];
     jointData: ConstructorParameters<typeof MotorEnabledJoint>[1];
     
     },MotorEnabledJoint>, any>;
+  moveTowards: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof MoveTowards>> & MeshProps, {
+        current: Parameters<typeof MoveTowards>[0];
+    target: Parameters<typeof MoveTowards>[1];
+    maxDelta: Parameters<typeof MoveTowards>[2];
+    
+            },ReturnType<typeof MoveTowards>>, any>;
+  moveTowardsAngle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof MoveTowardsAngle>> & MeshProps, {
+        current: Parameters<typeof MoveTowardsAngle>[0];
+    target: Parameters<typeof MoveTowardsAngle>[1];
+    maxDelta: Parameters<typeof MoveTowardsAngle>[2];
+    
+            },ReturnType<typeof MoveTowardsAngle>>, any>;
   multiMaterial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<MultiMaterial> & Clonable, {
 name: ConstructorParameters<typeof MultiMaterial>[0];
     scene: ConstructorParameters<typeof MultiMaterial>[1];
@@ -5758,6 +6040,12 @@ name: ConstructorParameters<typeof NodeRenderGraphAnaglyphPostProcessBlock>[0];
     scene: ConstructorParameters<typeof NodeRenderGraphAnaglyphPostProcessBlock>[2];
     
     },NodeRenderGraphAnaglyphPostProcessBlock>, any>;
+  nodeRenderGraphBasePostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphBasePostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphBasePostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphBasePostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphBasePostProcessBlock>[2];
+    
+    },NodeRenderGraphBasePostProcessBlock>, any>;
   nodeRenderGraphBlackAndWhitePostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphBlackAndWhitePostProcessBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphBlackAndWhitePostProcessBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphBlackAndWhitePostProcessBlock>[1];
@@ -5810,12 +6098,26 @@ name: ConstructorParameters<typeof NodeRenderGraphClearBlock>[0];
     scene: ConstructorParameters<typeof NodeRenderGraphClearBlock>[2];
     
     },NodeRenderGraphClearBlock>, any>;
+  nodeRenderGraphColorCorrectionPostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphColorCorrectionPostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphColorCorrectionPostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphColorCorrectionPostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphColorCorrectionPostProcessBlock>[2];
+    colorTableUrl: ConstructorParameters<typeof NodeRenderGraphColorCorrectionPostProcessBlock>[3];
+    
+    },NodeRenderGraphColorCorrectionPostProcessBlock>, any>;
   nodeRenderGraphConnectionPoint: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphConnectionPoint>, {
 name: ConstructorParameters<typeof NodeRenderGraphConnectionPoint>[0];
     ownerBlock: ConstructorParameters<typeof NodeRenderGraphConnectionPoint>[1];
     direction: ConstructorParameters<typeof NodeRenderGraphConnectionPoint>[2];
     
     },NodeRenderGraphConnectionPoint>, any>;
+  nodeRenderGraphConvolutionPostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphConvolutionPostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphConvolutionPostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphConvolutionPostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphConvolutionPostProcessBlock>[2];
+    kernel: ConstructorParameters<typeof NodeRenderGraphConvolutionPostProcessBlock>[3];
+    
+    },NodeRenderGraphConvolutionPostProcessBlock>, any>;
   nodeRenderGraphCopyTextureBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphCopyTextureBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphCopyTextureBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphCopyTextureBlock>[1];
@@ -5860,6 +6162,12 @@ name: ConstructorParameters<typeof NodeRenderGraphFXAAPostProcessBlock>[0];
     scene: ConstructorParameters<typeof NodeRenderGraphFXAAPostProcessBlock>[2];
     
     },NodeRenderGraphFXAAPostProcessBlock>, any>;
+  nodeRenderGraphFilterPostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphFilterPostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphFilterPostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphFilterPostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphFilterPostProcessBlock>[2];
+    
+    },NodeRenderGraphFilterPostProcessBlock>, any>;
   nodeRenderGraphGenerateMipmapsBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphGenerateMipmapsBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphGenerateMipmapsBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphGenerateMipmapsBlock>[1];
@@ -5871,6 +6179,7 @@ name: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[1];
     scene: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[2];
     doNotChangeAspectRatio: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[3];
+    enableClusteredLights: ConstructorParameters<typeof NodeRenderGraphGeometryRendererBlock>[4];
     
     },NodeRenderGraphGeometryRendererBlock>, any>;
   nodeRenderGraphGlowLayerBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphGlowLayerBlock> & Clonable, {
@@ -5919,13 +6228,6 @@ name: ConstructorParameters<typeof NodeRenderGraphMotionBlurPostProcessBlock>[0]
     scene: ConstructorParameters<typeof NodeRenderGraphMotionBlurPostProcessBlock>[2];
     
     },NodeRenderGraphMotionBlurPostProcessBlock>, any>;
-  nodeRenderGraphObjectRendererBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphObjectRendererBlock> & Clonable, {
-name: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[0];
-    frameGraph: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[1];
-    scene: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[2];
-    doNotChangeAspectRatio: ConstructorParameters<typeof NodeRenderGraphObjectRendererBlock>[3];
-    
-    },NodeRenderGraphObjectRendererBlock>, any>;
   nodeRenderGraphOutputBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphOutputBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphOutputBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphOutputBlock>[1];
@@ -5957,12 +6259,24 @@ name: ConstructorParameters<typeof NodeRenderGraphSSRPostProcessBlock>[0];
     textureType: ConstructorParameters<typeof NodeRenderGraphSSRPostProcessBlock>[3];
     
     },NodeRenderGraphSSRPostProcessBlock>, any>;
+  nodeRenderGraphScreenSpaceCurvaturePostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphScreenSpaceCurvaturePostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphScreenSpaceCurvaturePostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphScreenSpaceCurvaturePostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphScreenSpaceCurvaturePostProcessBlock>[2];
+    
+    },NodeRenderGraphScreenSpaceCurvaturePostProcessBlock>, any>;
   nodeRenderGraphShadowGeneratorBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphShadowGeneratorBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphShadowGeneratorBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphShadowGeneratorBlock>[1];
     scene: ConstructorParameters<typeof NodeRenderGraphShadowGeneratorBlock>[2];
     
     },NodeRenderGraphShadowGeneratorBlock>, any>;
+  nodeRenderGraphSharpenPostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphSharpenPostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphSharpenPostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphSharpenPostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphSharpenPostProcessBlock>[2];
+    
+    },NodeRenderGraphSharpenPostProcessBlock>, any>;
   nodeRenderGraphTAAObjectRendererBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphTAAObjectRendererBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphTAAObjectRendererBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphTAAObjectRendererBlock>[1];
@@ -5982,6 +6296,13 @@ name: ConstructorParameters<typeof NodeRenderGraphTeleportOutBlock>[0];
     scene: ConstructorParameters<typeof NodeRenderGraphTeleportOutBlock>[2];
     
     },NodeRenderGraphTeleportOutBlock>, any>;
+  nodeRenderGraphTonemapPostProcessBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphTonemapPostProcessBlock> & Clonable, {
+name: ConstructorParameters<typeof NodeRenderGraphTonemapPostProcessBlock>[0];
+    frameGraph: ConstructorParameters<typeof NodeRenderGraphTonemapPostProcessBlock>[1];
+    scene: ConstructorParameters<typeof NodeRenderGraphTonemapPostProcessBlock>[2];
+    operator: ConstructorParameters<typeof NodeRenderGraphTonemapPostProcessBlock>[3];
+    
+    },NodeRenderGraphTonemapPostProcessBlock>, any>;
   nodeRenderGraphUtilityLayerRendererBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NodeRenderGraphUtilityLayerRendererBlock> & Clonable, {
 name: ConstructorParameters<typeof NodeRenderGraphUtilityLayerRendererBlock>[0];
     frameGraph: ConstructorParameters<typeof NodeRenderGraphUtilityLayerRendererBlock>[1];
@@ -6005,10 +6326,20 @@ name: ConstructorParameters<typeof NoiseProceduralTexture>[0];
 name: ConstructorParameters<typeof NormalBlendBlock>[0];
     
     },NormalBlendBlock>, any>;
+  normalize: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Normalize>> & MeshProps, {
+        value: Parameters<typeof Normalize>[0];
+    min: Parameters<typeof Normalize>[1];
+    max: Parameters<typeof Normalize>[2];
+    
+            },ReturnType<typeof Normalize>>, any>;
   normalizeBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NormalizeBlock> & Clonable, {
 name: ConstructorParameters<typeof NormalizeBlock>[0];
     
     },NormalizeBlock>, any>;
+  normalizeRadians: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof NormalizeRadians>> & MeshProps, {
+        angle: Parameters<typeof NormalizeRadians>[0];
+    
+            },ReturnType<typeof NormalizeRadians>>, any>;
   normalizeVectorBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<NormalizeVectorBlock> & Clonable, {
 name: ConstructorParameters<typeof NormalizeVectorBlock>[0];
     
@@ -6073,6 +6404,16 @@ _useDeltaForWorldStep: ConstructorParameters<typeof OimoJSPlugin>[0];
 name: ConstructorParameters<typeof OneMinusBlock>[0];
     
     },OneMinusBlock>, any>;
+  openPBRMaterial: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<OpenPBRMaterial> & Clonable, {
+name: ConstructorParameters<typeof OpenPBRMaterial>[0];
+    scene: ConstructorParameters<typeof OpenPBRMaterial>[1];
+    forceGLSL: ConstructorParameters<typeof OpenPBRMaterial>[2];
+    
+    } & MaterialProps,OpenPBRMaterial>, any>;
+  openPBRMaterialDefines: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<OpenPBRMaterialDefines>, {
+externalProperties: ConstructorParameters<typeof OpenPBRMaterialDefines>[0];
+    
+    },OpenPBRMaterialDefines>, any>;
   optimizeAnimations: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof OptimizeAnimations>> & MeshProps, {
         scene: Parameters<typeof OptimizeAnimations>[0];
     options: Parameters<typeof OptimizeAnimations>[1];
@@ -6086,6 +6427,13 @@ name: ConstructorParameters<typeof OneMinusBlock>[0];
 scene: ConstructorParameters<typeof OutlineRenderer>[0];
     
     },OutlineRenderer>, any>;
+  outsideRange: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof OutsideRange>> & MeshProps, {
+        num: Parameters<typeof OutsideRange>[0];
+    min: Parameters<typeof OutsideRange>[1];
+    max: Parameters<typeof OutsideRange>[2];
+    epsilon: Parameters<typeof OutsideRange>[3];
+    
+            },ReturnType<typeof OutsideRange>>, any>;
   pBRAnisotropicConfiguration: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PBRAnisotropicConfiguration>, {
 material: ConstructorParameters<typeof PBRAnisotropicConfiguration>[0];
     addToPluginList: ConstructorParameters<typeof PBRAnisotropicConfiguration>[1];
@@ -6280,6 +6628,10 @@ name: ConstructorParameters<typeof ParticleDebugBlock>[0];
 name: ConstructorParameters<typeof ParticleElbowBlock>[0];
     
     },ParticleElbowBlock>, any>;
+  particleFresnelBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleFresnelBlock> & Clonable, {
+name: ConstructorParameters<typeof ParticleFresnelBlock>[0];
+    
+    },ParticleFresnelBlock>, any>;
   particleGradientBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleGradientBlock> & Clonable, {
 name: ConstructorParameters<typeof ParticleGradientBlock>[0];
     
@@ -6297,6 +6649,10 @@ name: ConstructorParameters<typeof ParticleInputBlock>[0];
 name: ConstructorParameters<typeof ParticleLerpBlock>[0];
     
     },ParticleLerpBlock>, any>;
+  particleLocalVariableBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleLocalVariableBlock> & Clonable, {
+name: ConstructorParameters<typeof ParticleLocalVariableBlock>[0];
+    
+    },ParticleLocalVariableBlock>, any>;
   particleMathBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleMathBlock> & Clonable, {
 name: ConstructorParameters<typeof ParticleMathBlock>[0];
     
@@ -6335,6 +6691,10 @@ name: ConstructorParameters<typeof ParticleTriggerBlock>[0];
 name: ConstructorParameters<typeof ParticleTrigonometryBlock>[0];
     
     },ParticleTrigonometryBlock>, any>;
+  particleVectorLengthBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleVectorLengthBlock> & Clonable, {
+name: ConstructorParameters<typeof ParticleVectorLengthBlock>[0];
+    
+    },ParticleVectorLengthBlock>, any>;
   passCubePostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PassCubePostProcess> & Clonable, {
 name: ConstructorParameters<typeof PassCubePostProcess>[0];
     options: ConstructorParameters<typeof PassCubePostProcess>[1];
@@ -6373,6 +6733,12 @@ path: ConstructorParameters<typeof Path3D>[0];
 _path: ConstructorParameters<typeof PathCursor>[0];
     
     },PathCursor>, any>;
+  percentToRange: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PercentToRange>> & MeshProps, {
+        percent: Parameters<typeof PercentToRange>[0];
+    min: Parameters<typeof PercentToRange>[1];
+    max: Parameters<typeof PercentToRange>[2];
+    
+            },ReturnType<typeof PercentToRange>>, any>;
   perfCounter: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PerfCounter>, {},PerfCounter>, any>;
   performanceMonitor: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PerformanceMonitor>, {
 frameSampleSize: ConstructorParameters<typeof PerformanceMonitor>[0];
@@ -6544,6 +6910,11 @@ scene: ConstructorParameters<typeof PhysicsViewer>[0];
     
             },ReturnType<typeof PickWithRay>>, any>;
   pickingInfo: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PickingInfo>, {},PickingInfo>, any>;
+  pingPong: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PingPong>> & MeshProps, {
+        tx: Parameters<typeof PingPong>[0];
+    length: Parameters<typeof PingPong>[1];
+    
+            },ReturnType<typeof PingPong>>, any>;
   planeBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<PlaneBlock> & Clonable, {
 name: ConstructorParameters<typeof PlaneBlock>[0];
     
@@ -6835,6 +7206,15 @@ actionManager: ConstructorParameters<typeof PredicateCondition>[0];
     useThinInstances: Parameters<typeof PrepareDefinesForFrameBoundValues>[6];
     
             },ReturnType<typeof PrepareDefinesForFrameBoundValues>>, any>;
+  prepareDefinesForIBL: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForIBL>> & MeshProps, {
+        scene: Parameters<typeof PrepareDefinesForIBL>[0];
+    reflectionTexture: Parameters<typeof PrepareDefinesForIBL>[1];
+    defines: Parameters<typeof PrepareDefinesForIBL>[2];
+    realTimeFiltering: Parameters<typeof PrepareDefinesForIBL>[3];
+    realTimeFilteringQuality: Parameters<typeof PrepareDefinesForIBL>[4];
+    forceSHInVertex: Parameters<typeof PrepareDefinesForIBL>[5];
+    
+            },ReturnType<typeof PrepareDefinesForIBL>>, any>;
   prepareDefinesForLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForLight>> & MeshProps, {
         scene: Parameters<typeof PrepareDefinesForLight>[0];
     mesh: Parameters<typeof PrepareDefinesForLight>[1];
@@ -6871,6 +7251,7 @@ actionManager: ConstructorParameters<typeof PredicateCondition>[0];
     applyDecalAfterDetail: Parameters<typeof PrepareDefinesForMisc>[7];
     useVertexPulling: Parameters<typeof PrepareDefinesForMisc>[8];
     renderingMesh: Parameters<typeof PrepareDefinesForMisc>[9];
+    setVertexOutputInvariant: Parameters<typeof PrepareDefinesForMisc>[10];
     
             },ReturnType<typeof PrepareDefinesForMisc>>, any>;
   prepareDefinesForMorphTargets: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareDefinesForMorphTargets>> & MeshProps, {
@@ -6901,6 +7282,21 @@ actionManager: ConstructorParameters<typeof PredicateCondition>[0];
     defines: Parameters<typeof PrepareStringDefinesForClipPlanes>[2];
     
             },ReturnType<typeof PrepareStringDefinesForClipPlanes>>, any>;
+  prepareUniformLayoutForIBL: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareUniformLayoutForIBL>> & MeshProps, {
+        ubo: Parameters<typeof PrepareUniformLayoutForIBL>[0];
+    supportTextureInfo: Parameters<typeof PrepareUniformLayoutForIBL>[1];
+    supportLocalProjection: Parameters<typeof PrepareUniformLayoutForIBL>[2];
+    usePBR: Parameters<typeof PrepareUniformLayoutForIBL>[3];
+    supportSH: Parameters<typeof PrepareUniformLayoutForIBL>[4];
+    useColor: Parameters<typeof PrepareUniformLayoutForIBL>[5];
+    
+            },ReturnType<typeof PrepareUniformLayoutForIBL>>, any>;
+  prepareUniformsAndSamplersForIBL: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareUniformsAndSamplersForIBL>> & MeshProps, {
+        uniformsList: Parameters<typeof PrepareUniformsAndSamplersForIBL>[0];
+    samplersList: Parameters<typeof PrepareUniformsAndSamplersForIBL>[1];
+    useSH: Parameters<typeof PrepareUniformsAndSamplersForIBL>[2];
+    
+            },ReturnType<typeof PrepareUniformsAndSamplersForIBL>>, any>;
   prepareUniformsAndSamplersForLight: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof PrepareUniformsAndSamplersForLight>> & MeshProps, {
         lightIndex: Parameters<typeof PrepareUniformsAndSamplersForLight>[0];
     uniformsList: Parameters<typeof PrepareUniformsAndSamplersForLight>[1];
@@ -6994,6 +7390,17 @@ name: ConstructorParameters<typeof RandomBlock>[0];
 name: ConstructorParameters<typeof RandomNumberBlock>[0];
     
     },RandomNumberBlock>, any>;
+  randomRange: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RandomRange>> & MeshProps, {
+        min: Parameters<typeof RandomRange>[0];
+    max: Parameters<typeof RandomRange>[1];
+    
+            },ReturnType<typeof RandomRange>>, any>;
+  rangeToPercent: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof RangeToPercent>> & MeshProps, {
+        number: Parameters<typeof RangeToPercent>[0];
+    min: Parameters<typeof RangeToPercent>[1];
+    max: Parameters<typeof RangeToPercent>[2];
+    
+            },ReturnType<typeof RangeToPercent>>, any>;
   rawCubeTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<RawCubeTexture> & Clonable, {
 scene: ConstructorParameters<typeof RawCubeTexture>[0];
     data: ConstructorParameters<typeof RawCubeTexture>[1];
@@ -7231,6 +7638,11 @@ index: ConstructorParameters<typeof RenderingGroup>[0];
 scene: ConstructorParameters<typeof RenderingManager>[0];
     
     },RenderingManager>, any>;
+  repeat: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Repeat>> & MeshProps, {
+        value: Parameters<typeof Repeat>[0];
+    length: Parameters<typeof Repeat>[1];
+    
+            },ReturnType<typeof Repeat>>, any>;
   replaceColorBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReplaceColorBlock> & Clonable, {
 name: ConstructorParameters<typeof ReplaceColorBlock>[0];
     
@@ -7596,6 +8008,12 @@ name: ConstructorParameters<typeof SmartFilterFragmentOutputBlock>[0];
 name: ConstructorParameters<typeof SmartFilterTextureBlock>[0];
     
     },SmartFilterTextureBlock>, any>;
+  smoothStep: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof SmoothStep>> & MeshProps, {
+        from: Parameters<typeof SmoothStep>[0];
+    to: Parameters<typeof SmoothStep>[1];
+    tx: Parameters<typeof SmoothStep>[2];
+    
+            },ReturnType<typeof SmoothStep>>, any>;
   smoothStepBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<SmoothStepBlock> & Clonable, {
 name: ConstructorParameters<typeof SmoothStepBlock>[0];
     
@@ -7993,7 +8411,7 @@ url: ConstructorParameters<typeof Texture>[0];
   textureAssetTask: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TextureAssetTask>, {
 name: ConstructorParameters<typeof TextureAssetTask>[0];
     url: ConstructorParameters<typeof TextureAssetTask>[1];
-    noMipmap: ConstructorParameters<typeof TextureAssetTask>[2];
+    noMipmapOrOptions: ConstructorParameters<typeof TextureAssetTask>[2];
     invertY: ConstructorParameters<typeof TextureAssetTask>[3];
     samplingMode: ConstructorParameters<typeof TextureAssetTask>[4];
     
@@ -8062,6 +8480,20 @@ name: ConstructorParameters<typeof ThinCircleOfConfusionPostProcess>[0];
     options: ConstructorParameters<typeof ThinCircleOfConfusionPostProcess>[2];
     
     },ThinCircleOfConfusionPostProcess>, any>;
+  thinColorCorrectionPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinColorCorrectionPostProcess>, {
+name: ConstructorParameters<typeof ThinColorCorrectionPostProcess>[0];
+    scene: ConstructorParameters<typeof ThinColorCorrectionPostProcess>[1];
+    colorTableUrl: ConstructorParameters<typeof ThinColorCorrectionPostProcess>[2];
+    options: ConstructorParameters<typeof ThinColorCorrectionPostProcess>[3];
+    
+    },ThinColorCorrectionPostProcess>, any>;
+  thinConvolutionPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinConvolutionPostProcess>, {
+name: ConstructorParameters<typeof ThinConvolutionPostProcess>[0];
+    engine: ConstructorParameters<typeof ThinConvolutionPostProcess>[1];
+    kernel: ConstructorParameters<typeof ThinConvolutionPostProcess>[2];
+    options: ConstructorParameters<typeof ThinConvolutionPostProcess>[3];
+    
+    },ThinConvolutionPostProcess>, any>;
   thinDepthOfFieldEffect: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinDepthOfFieldEffect>, {
 name: ConstructorParameters<typeof ThinDepthOfFieldEffect>[0];
     engine: ConstructorParameters<typeof ThinDepthOfFieldEffect>[1];
@@ -8097,6 +8529,12 @@ name: ConstructorParameters<typeof ThinFXAAPostProcess>[0];
     options: ConstructorParameters<typeof ThinFXAAPostProcess>[2];
     
     },ThinFXAAPostProcess>, any>;
+  thinFilterPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinFilterPostProcess>, {
+name: ConstructorParameters<typeof ThinFilterPostProcess>[0];
+    engine: ConstructorParameters<typeof ThinFilterPostProcess>[1];
+    options: ConstructorParameters<typeof ThinFilterPostProcess>[2];
+    
+    },ThinFilterPostProcess>, any>;
   thinGlowBlurPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinGlowBlurPostProcess>, {
 name: ConstructorParameters<typeof ThinGlowBlurPostProcess>[0];
     engine: ConstructorParameters<typeof ThinGlowBlurPostProcess>[1];
@@ -8156,22 +8594,44 @@ engine: ConstructorParameters<typeof ThinRenderTargetTexture>[0];
     options: ConstructorParameters<typeof ThinRenderTargetTexture>[2];
     
     },ThinRenderTargetTexture>, any>;
+  thinScreenSpaceCurvaturePostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinScreenSpaceCurvaturePostProcess>, {
+name: ConstructorParameters<typeof ThinScreenSpaceCurvaturePostProcess>[0];
+    engine: ConstructorParameters<typeof ThinScreenSpaceCurvaturePostProcess>[1];
+    options: ConstructorParameters<typeof ThinScreenSpaceCurvaturePostProcess>[2];
+    
+    },ThinScreenSpaceCurvaturePostProcess>, any>;
+  thinSharpenPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinSharpenPostProcess>, {
+name: ConstructorParameters<typeof ThinSharpenPostProcess>[0];
+    engine: ConstructorParameters<typeof ThinSharpenPostProcess>[1];
+    options: ConstructorParameters<typeof ThinSharpenPostProcess>[2];
+    
+    },ThinSharpenPostProcess>, any>;
   thinTexture: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinTexture>, {
 internalTexture: ConstructorParameters<typeof ThinTexture>[0];
     
     },ThinTexture>, any>;
+  thinTonemapPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ThinTonemapPostProcess>, {
+name: ConstructorParameters<typeof ThinTonemapPostProcess>[0];
+    engine: ConstructorParameters<typeof ThinTonemapPostProcess>[1];
+    options: ConstructorParameters<typeof ThinTonemapPostProcess>[2];
+    
+    },ThinTonemapPostProcess>, any>;
   toHalfFloat: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ToHalfFloat>> & MeshProps, {
         value: Parameters<typeof ToHalfFloat>[0];
     
             },ReturnType<typeof ToHalfFloat>>, any>;
+  toHex: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ToHex>> & MeshProps, {
+        i: Parameters<typeof ToHex>[0];
+    
+            },ReturnType<typeof ToHex>>, any>;
   tonemapPostProcess: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<TonemapPostProcess> & Clonable, {
 name: ConstructorParameters<typeof TonemapPostProcess>[0];
-    _operator: ConstructorParameters<typeof TonemapPostProcess>[1];
+    operator: ConstructorParameters<typeof TonemapPostProcess>[1];
     exposureAdjustment: ConstructorParameters<typeof TonemapPostProcess>[2];
     camera: ConstructorParameters<typeof TonemapPostProcess>[3];
     samplingMode: ConstructorParameters<typeof TonemapPostProcess>[4];
     engine: ConstructorParameters<typeof TonemapPostProcess>[5];
-    textureFormat: ConstructorParameters<typeof TonemapPostProcess>[6];
+    textureType: ConstructorParameters<typeof TonemapPostProcess>[6];
     reusable: ConstructorParameters<typeof TonemapPostProcess>[7];
     
     },TonemapPostProcess>, any>;
@@ -8238,6 +8698,10 @@ name: ConstructorParameters<typeof TrigonometryBlock>[0];
 name: ConstructorParameters<typeof TwirlBlock>[0];
     
     },TwirlBlock>, any>;
+  uVDefinesMixin: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UVDefinesMixin>> & MeshProps, {
+        base: Parameters<typeof UVDefinesMixin>[0];
+    
+            },ReturnType<typeof UVDefinesMixin>>, any>;
   uncompressPIZ: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof UncompressPIZ>> & MeshProps, {
         decoder: Parameters<typeof UncompressPIZ>[0];
     
@@ -8415,6 +8879,24 @@ x: ConstructorParameters<typeof Vector3>[0];
     z: ConstructorParameters<typeof Vector3>[2];
     
     },Vector3>, any>;
+  vector3Dot: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Vector3Dot>> & MeshProps, {
+        a: Parameters<typeof Vector3Dot>[0];
+    b: Parameters<typeof Vector3Dot>[1];
+    
+            },ReturnType<typeof Vector3Dot>>, any>;
+  vector3FromFloatsToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Vector3FromFloatsToRef>> & MeshProps, {
+        x: Parameters<typeof Vector3FromFloatsToRef>[0];
+    y: Parameters<typeof Vector3FromFloatsToRef>[1];
+    z: Parameters<typeof Vector3FromFloatsToRef>[2];
+    result: Parameters<typeof Vector3FromFloatsToRef>[3];
+    
+            },ReturnType<typeof Vector3FromFloatsToRef>>, any>;
+  vector3ScaleToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Vector3ScaleToRef>> & MeshProps, {
+        a: Parameters<typeof Vector3ScaleToRef>[0];
+    scale: Parameters<typeof Vector3ScaleToRef>[1];
+    result: Parameters<typeof Vector3ScaleToRef>[2];
+    
+            },ReturnType<typeof Vector3ScaleToRef>>, any>;
   vector3ToFixed: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof Vector3ToFixed>> & MeshProps, {
         vector: Parameters<typeof Vector3ToFixed>[0];
     decimalCount: Parameters<typeof Vector3ToFixed>[1];
@@ -8791,6 +9273,12 @@ _xrSessionManager: ConstructorParameters<typeof WebXRNearInteraction>[0];
     _options: ConstructorParameters<typeof WebXRNearInteraction>[1];
     
     },WebXRNearInteraction>, any>;
+  webXROculusHandController: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebXROculusHandController>, {
+scene: ConstructorParameters<typeof WebXROculusHandController>[0];
+    gamepadObject: ConstructorParameters<typeof WebXROculusHandController>[1];
+    handedness: ConstructorParameters<typeof WebXROculusHandController>[2];
+    
+    },WebXROculusHandController>, any>;
   webXROculusTouchMotionController: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WebXROculusTouchMotionController>, {
 scene: ConstructorParameters<typeof WebXROculusTouchMotionController>[0];
     gamepadObject: ConstructorParameters<typeof WebXROculusTouchMotionController>[1];
@@ -8842,6 +9330,16 @@ loop: ConstructorParameters<typeof WeightedSound>[0];
     weights: ConstructorParameters<typeof WeightedSound>[2];
     
     },WeightedSound>, any>;
+  whenTextureReadyAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof WhenTextureReadyAsync>> & MeshProps, {
+        texture: Parameters<typeof WhenTextureReadyAsync>[0];
+    
+            },ReturnType<typeof WhenTextureReadyAsync>>, any>;
+  withinEpsilon: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof WithinEpsilon>> & MeshProps, {
+        a: Parameters<typeof WithinEpsilon>[0];
+    b: Parameters<typeof WithinEpsilon>[1];
+    epsilon: Parameters<typeof WithinEpsilon>[2];
+    
+            },ReturnType<typeof WithinEpsilon>>, any>;
   workerPool: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<WorkerPool>, {
 workers: ConstructorParameters<typeof WorkerPool>[0];
     
@@ -8911,6 +9409,11 @@ parent: ConstructorParameters<typeof _InstancesBatch>[0];
     
     },_InstancesBatch>, any>;
   _KTXTextureLoader: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_KTXTextureLoader>, {},_KTXTextureLoader>, any>;
+  _LoadScriptModuleAsync: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _LoadScriptModuleAsync>> & MeshProps, {
+        scriptUrl: Parameters<typeof _LoadScriptModuleAsync>[0];
+    scriptId: Parameters<typeof _LoadScriptModuleAsync>[1];
+    
+            },ReturnType<typeof _LoadScriptModuleAsync>>, any>;
   _MeshCollisionData: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_MeshCollisionData>, {},_MeshCollisionData>, any>;
   _OcclusionDataStorage: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_OcclusionDataStorage>, {},_OcclusionDataStorage>, any>;
   _PrimaryIsoTriangle: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<_PrimaryIsoTriangle>, {},_PrimaryIsoTriangle>, any>;
@@ -8976,6 +9479,11 @@ name: ConstructorParameters<typeof _WebAudioStreamingSound>[0];
     
     },_WebAudioStreamingSound>, any>;
   _injectLTSFileTools: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof _injectLTSFileTools>> & MeshProps, {},ReturnType<typeof _injectLTSFileTools>>, any>;
+  addAccessorsForMaterialProperty: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof addAccessorsForMaterialProperty>> & MeshProps, {
+        setCallback: Parameters<typeof addAccessorsForMaterialProperty>[0];
+    targetKey: Parameters<typeof addAccessorsForMaterialProperty>[1];
+    
+            },ReturnType<typeof addAccessorsForMaterialProperty>>, any>;
   addToBlockFactory: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof addToBlockFactory>> & MeshProps, {
         module: Parameters<typeof addToBlockFactory>[0];
     blockName: Parameters<typeof addToBlockFactory>[1];
