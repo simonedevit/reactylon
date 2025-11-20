@@ -1,5 +1,17 @@
 # Reactylon - Changelog
 
+## [3.4.0](https://github.com/simonedevit/reactylon/compare/v3.3.0...v3.4.0) (2025-11-20)
+
+
+### Documentation
+
+* **general:** fix markdown syntax ([af31dae](https://github.com/simonedevit/reactylon/commit/af31dae7650cbbc2d1ef7ec6742c0e9402a8fd17))
+
+
+### Features
+
+* **general:** refresh dependencies to fix prototype pollution in js-yaml ([2042728](https://github.com/simonedevit/reactylon/commit/2042728fc80ce8a4c2f07b067e44a76a85979970))
+
 ## [3.3.0](https://github.com/simonedevit/reactylon/compare/v3.2.1...v3.3.0) (2025-10-18)
 
 
