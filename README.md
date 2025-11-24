@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://www.reactylon.com/docs">
-      <img height="250" width="250" alt="Reactylon" src="https://www.reactylon.com/logo.svg">
+      <img height="250" width="250" alt="Reactylon" src="./assets/logo.svg">
   </a>
   <h1>Reactylon</h1>
 </div>
@@ -17,7 +17,27 @@
 <br />
 <br />
 
-Welcome to **Reactylon**, a powerful multiplatform framework built on top of Babylon.js and React, designed to create interactive and immersive XR experiences. It allows developers to create full immersive experience in a declarative way, unlocking the full potential of React’s component-based architecture for interactive 3D applications.
+Welcome to **Reactylon**, a powerful multiplatform framework built on top of Babylon.js and React. It lets you build interactive 3D and XR applications using a fully declarative, component-based model that integrates seamlessly with React's architecture.
+
+## Getting Started
+
+### Installation
+
+The easiest way to get started is with the official `create-reactylon-app` CLI.
+
+It bootstraps a full React 19 project with a preconfigured Babylon.js engine, physics support, and a starter scene. No setup required.
+
+<p><img width="898" alt="Create Reactylon App" src="./assets/create-reactylon-app.gif"></p>
+
+```bash
+npx create-reactylon-app my-app
+```
+<br/>
+
+For a complete walkthrough, see the [Getting Started guide](https://www.reactylon.com/docs/getting-started).
+
+### Documentation
+You can explore the interactive Reactylon documentation on [reactylon.com](https://www.reactylon.com/docs), featuring **125+ live sandbox examples** you can open and edit directly in your browser.
 
 ## Key Features
 - **Declarative Syntax for Babylon.js**: Write 3D scenes in JSX, leveraging the power of declarative UI that React developers love, with seamless integration into the Babylon.js rendering engine.
@@ -34,10 +54,14 @@ Welcome to **Reactylon**, a powerful multiplatform framework built on top of Bab
 
 - **Enhanced React Integration**: Deep React integration allows for easy state management, component composition, and hooks, ensuring a seamless development experience that leverages React’s full power in 3D rendering.
 
-## Documentation
-You can find the interactive Reactylon documentation on [reactylon.com](https://www.reactylon.com/docs).
+## When should you use Reactylon?
 
-Check out the [Getting Started](https://www.reactylon.com/docs/getting-started) page for a quick overview.
+Use Reactylon if:
+
+- You want to build **3D or XR experiences** using React and JSX instead of imperative Babylon.js code.
+- You need **cross-platform** support (web, mobile, VR/AR/MR headsets) from a single codebase.
+- You care about **type safety, tree-shaking and performance** out of the box.
+- You prefer an **opinionated** layer that manages scene graph, resource disposal, and hierarchy for you.
 
 ## Contributing
 We welcome contributions to improve and expand this project! To get started, please read [Contributing](CONTRIBUTING.md). This document provides all the necessary steps and best practices for submitting contributions.
