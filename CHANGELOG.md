@@ -1,5 +1,13 @@
 # Reactylon - Changelog
 
+## [3.4.1](https://github.com/simonedevit/reactylon/compare/v3.4.0...v3.4.1) (2025-11-26)
+
+
+### Documentation
+
+* **general:** add ecosystem section ([b868037](https://github.com/simonedevit/reactylon/commit/b86803756242d4a2795eebf3f662d10e740c432e))
+* **general:** improve getting started flow ([48f70c5](https://github.com/simonedevit/reactylon/commit/48f70c566b09ce4f073cd31bfe5ca24bfa96ffa1))
+
 ## [3.4.0](https://github.com/simonedevit/reactylon/compare/v3.3.0...v3.4.0) (2025-11-20)
 
 
