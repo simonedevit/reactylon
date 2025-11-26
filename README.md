@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://www.reactylon.com/docs">
-      <img height="250" width="250" alt="Reactylon" src="./assets/logo.svg">
+      <img height="250" width="250" alt="Reactylon" src="https://github.com/simonedevit/reactylon/blob/main/assets/logo.svg?raw=true">
   </a>
   <h1>Reactylon</h1>
 </div>
@@ -27,7 +27,7 @@ The easiest way to get started is with the official `create-reactylon-app` CLI.
 
 It bootstraps a full React 19 project with a preconfigured Babylon.js engine, physics support, and a starter scene. No setup required.
 
-<p><img width="898" alt="Create Reactylon App" src="./assets/create-reactylon-app.gif"></p>
+<p><img width="898" alt="Create Reactylon App" src="https://github.com/simonedevit/reactylon/blob/main/assets/create-reactylon-app.gif?raw=true"></p>
 
 ```bash
 npx create-reactylon-app my-app
@@ -62,6 +62,10 @@ Use Reactylon if:
 - You need **cross-platform** support (web, mobile, VR/AR/MR headsets) from a single codebase.
 - You care about **type safety, tree-shaking and performance** out of the box.
 - You prefer an **opinionated** layer that manages scene graph, resource disposal, and hierarchy for you.
+
+## Ecosystem
+- `create-reactylon-app`: Zero-config CLI to scaffold a new Reactylon project with a simple scene.
+- `babel-plugin-reactylon`: Babel plugin that powers Reactylon's JSX-to-Babylon compilation, enabling ergonomic, declarative 3D/XR components while keeping the output fast and tree-shakeable.
 
 ## Contributing
 We welcome contributions to improve and expand this project! To get started, please read [Contributing](CONTRIBUTING.md). This document provides all the necessary steps and best practices for submitting contributions.
