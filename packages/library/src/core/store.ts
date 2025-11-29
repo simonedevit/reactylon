@@ -1,7 +1,9 @@
 import { createStore, type StoreApi, useStore } from 'zustand';
-import type { Nullable, Engine, HavokPlugin, Scene, WebXRDefaultExperience } from '@babylonjs/core';
+import type { Nullable, Engine as WebGLEngine, WebGPUEngine, HavokPlugin, Scene, WebXRDefaultExperience } from '@babylonjs/core';
 import { createContext, useContext } from 'react';
 import type { IPhysicsEngine } from '@babylonjs/core/Physics/IPhysicsEngine';
+
+export type Engine = WebGLEngine | WebGPUEngine;
 
 export type EngineStore = {
     engine: Nullable<Engine>;

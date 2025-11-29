@@ -13,7 +13,7 @@ type WrapperProps = React.PropsWithChildren<{
 
 const Wrapper: React.FC<WrapperProps> = ({ children, context }) => {
     return (
-        <Engine antialias _nullEngine={new NullEngine()}>
+        <Engine _nullEngine={new NullEngine()}>
             <Scene
                 onSceneReady={scene => {
                     scene.createDefaultCameraOrLight(true, undefined);

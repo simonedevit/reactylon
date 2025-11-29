@@ -1,8 +1,6 @@
 import type { Vector3, Vector4 } from '@babylonjs/core';
 import { isInstanceOf } from '@dvmstudios/reactylon-common';
-import lodash from 'lodash';
-
-const { get, setWith } = lodash;
+import { get, setWith } from 'lodash-es';
 
 export default class ObjectUtils {
     static set(object: any, path: string, value: any, customizer: any = Object) {

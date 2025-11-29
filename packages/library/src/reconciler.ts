@@ -2,7 +2,7 @@ import { version } from 'react';
 import ReactReconciler, { type FiberRoot } from 'react-reconciler';
 import { DefaultEventPriority, NoEventPriority } from 'react-reconciler/constants';
 import type { AbstractMesh } from '@babylonjs/core';
-import lodash from 'lodash';
+import { isEqualWith } from 'lodash-es';
 import { Logger, BabylonPackages, isInstanceOf, builders, CollidingComponents } from '@dvmstudios/reactylon-common';
 import type { UpdatePayload, RootContainer, EngineContext, Instance, BabylonEntity } from '@types';
 import { Host, MaterialHost, TextureHost, MeshHost, AdvancedDynamicTextureHost, GuiHost, LightHost, CameraHost, GridHost /*, TransformNodeHost*/ } from './components/hosts';
@@ -17,8 +17,6 @@ const IS_REACT_19 = version.startsWith('19');
 
 type CommitUpdateV19 = [Instance, string, CoreHostProps | GuiHostProps, CoreHostProps | GuiHostProps, any];
 type EventPriority = any;
-
-const { isEqualWith } = lodash;
 
 function isParentNeeded(child: BabylonEntity) {
     if (isInstanceOf(child, 'Material')) {

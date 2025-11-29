@@ -1,6 +1,6 @@
 /* PROPS USED BY JSX ELEMENTS GENERATOR */
 
-import type { Engine, Node, Nullable, Scene, WebXRDefaultExperience } from '@babylonjs/core';
+import type { Engine as WebGLEngine, WebGPUEngine, Node, Nullable, Scene, WebXRDefaultExperience } from '@babylonjs/core';
 import { BabylonPackages } from '@dvmstudios/reactylon-common';
 import type { CommonProps } from './props';
 import type { EngineStore } from '../core/store';
@@ -79,7 +79,7 @@ export type UpdatePayload = {
 };
 
 export type RootContainer = {
-    engine: Engine;
+    engine: WebGLEngine | WebGPUEngine;
     scene: Scene;
     canvas: HTMLCanvasElement | WebGLRenderingContext;
     isMultipleCanvas: boolean;

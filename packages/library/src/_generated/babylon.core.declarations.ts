@@ -794,6 +794,7 @@ import type { Light } from '@babylonjs/core';
 import type { LightBlock } from '@babylonjs/core';
 import type { LightGizmo } from '@babylonjs/core';
 import type { LightInformationBlock } from '@babylonjs/core';
+import type { LightingVolume } from '@babylonjs/core';
 import type { LineEdgesRenderer } from '@babylonjs/core';
 import type { LinesMesh } from '@babylonjs/core';
 import type { LoadAssetContainerAsync } from '@babylonjs/core';
@@ -5655,6 +5656,13 @@ gizmoLayer: ConstructorParameters<typeof LightGizmo>[0];
 name: ConstructorParameters<typeof LightInformationBlock>[0];
     
     },LightInformationBlock>, any>;
+  lightingVolume: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<LightingVolume>, {
+name: ConstructorParameters<typeof LightingVolume>[0];
+    scene: ConstructorParameters<typeof LightingVolume>[1];
+    shadowGenerator: ConstructorParameters<typeof LightingVolume>[2];
+    tesselation: ConstructorParameters<typeof LightingVolume>[3];
+    
+    },LightingVolume>, any>;
   lineEdgesRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<LineEdgesRenderer>, {
 source: ConstructorParameters<typeof LineEdgesRenderer>[0];
     epsilon: ConstructorParameters<typeof LineEdgesRenderer>[1];

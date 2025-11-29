@@ -791,6 +791,7 @@ const ConstructorsMap: Record<string, Array<string>> = {
    lightBlock: ["name"],
    lightGizmo: ["gizmoLayer"],
    lightInformationBlock: ["name"],
+   lightingVolume: ["name","scene","shadowGenerator","tesselation"],
    lineEdgesRenderer: ["source","epsilon","checkVerticesInsteadOfIndices"],
    linesMesh: ["name","scene","parent","source","doNotCloneChildren","useVertexColor","useVertexAlpha","material"],
    loadAssetContainerAsync: ["source","scene","options"],

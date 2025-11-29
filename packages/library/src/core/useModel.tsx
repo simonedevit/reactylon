@@ -3,7 +3,7 @@ import { suspend, clear } from 'suspend-react';
 import type { ISceneLoaderAsyncResult, ImportMeshOptions } from '@babylonjs/core';
 import { ImportMeshAsync } from '@babylonjs/core/Loading/sceneLoader.js';
 import { useScene } from './store';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash-es';
 
 function dispose(model: ISceneLoaderAsyncResult) {
     Object.values(model).forEach(attribute => {
