@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.5.0](https://github.com/simonedevit/reactylon/compare/v3.4.1...v3.5.0) (2025-11-29)
+
+
+### Features
+
+* **general:** add WebGPU support ([4e63a7f](https://github.com/simonedevit/reactylon/commit/4e63a7feeb904c1422ce75c529672681c039adb1))
+
 ## [3.4.1](https://github.com/simonedevit/reactylon/compare/v3.4.0...v3.4.1) (2025-11-26)
 
 
