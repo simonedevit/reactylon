@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.5.1](https://github.com/simonedevit/reactylon/compare/v3.5.0...v3.5.1) (2025-12-19)
+
+
+### Chore
+
+* **general:** add manual render loop + improve react rendering ([7a2e91e](https://github.com/simonedevit/reactylon/commit/7a2e91e9cf05eac846867e5aaee68c87d895e0c9))
+
 ## [3.5.0](https://github.com/simonedevit/reactylon/compare/v3.4.1...v3.5.0) (2025-11-29)
 
 
