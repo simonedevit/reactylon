@@ -8,6 +8,7 @@ import type { RootContainer, EngineContext } from '@types';
 import Reactylon, { ROOT_IDENTIFIER } from '../reconciler';
 import { useContextBridge } from 'its-fine';
 import type { StoreApi } from 'zustand';
+import { Logger } from '@dvmstudios/reactylon-common';
 
 export type SceneProps = React.PropsWithChildren<{
     /**
@@ -33,7 +34,7 @@ export type SceneProps = React.PropsWithChildren<{
 export let activeScene: BabylonScene | null = null;
 
 export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xrDefaultExperienceOptions, physicsOptions, _context, ...rest }: SceneProps) => {
-    const { engine, isMultipleCanvas, isMultipleScene, disposeEngine } = _context as EngineContext;
+    const { engine, isMultipleCanvas, isMultipleScene, disposeEngine, markSceneAsReady } = _context as EngineContext;
     const rootContainer = useRef<Nullable<RootContainer>>(null);
     const reconciler = useRef(Reactylon());
     const store = useRef<StoreApi<Store>>(null);
@@ -132,11 +133,22 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
                         <SceneContext.Provider value={store.current}>{children}</SceneContext.Provider>
                     </Bridge>,
                     rootContainer.current!,
+                    {
+                        onFirstCommit: () => {
+                            if (!scene.activeCamera) {
+                                Logger.warn(
+                                    'Scene - No active camera after first commit. If you use a declarative camera, ensure it becomes scene.activeCamera (or create one procedurally in onSceneReady).',
+                                );
+                            }
+                            markSceneAsReady?.();
+                        },
+                    },
                 );
             }
         })();
 
         return () => {
+            // the callback will be executed only if there are no more scenes
             reconciler.current.unmount(rootContainer.current!, () => {
                 activeScene = null;
                 disposeEngine();
@@ -163,7 +175,7 @@ export const Scene = ({ children, sceneOptions, onSceneReady, isGui3DManager, xr
             </Bridge>,
             rootContainer.current!,
         );
-    });
+    }, [children]);
 
     return null;
 };

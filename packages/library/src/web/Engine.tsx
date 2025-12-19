@@ -32,9 +32,37 @@ export type EngineProps = React.PropsWithChildren<{
      * This prop is only for testing purpose and should not be passed to this component.
      */
     _nullEngine?: NullEngine;
+    /**
+     * Overrides Reactylon's default render-loop scheduling.
+     *
+     * By default, Reactylon starts a continuous Babylon.js render loop via `engine.runRenderLoop(...)`
+     * once all scenes are marked as ready.
+     *
+     * When `manualRenderLoop` is provided, Reactylon will **not** call `engine.runRenderLoop`.
+     * Instead, it will invoke this callback exactly once at the moment the render loop would normally start.
+     *
+     * This is primarily intended for **tests** (deterministic stepping) or advanced integrations that
+     * require full control over scheduling.
+     *
+     * @param renderFrame A function that renders a single frame using Reactylon's internal rules
+     * (e.g., multi-scene view selection). Call it manually to step rendering deterministically.
+     * @param engine The Babylon.js engine instance. Optional; provided for advanced use-cases
+     * (e.g., starting/stopping a continuous loop manually).
+     *
+     */
+    manualRenderLoop?: (renderFrame: () => void, engine: WebGLEngine | WebGPUEngine) => void;
 }>;
 
-export const Engine = ({ engineOptions, loadingScreenOptions, canvasId = 'reactylon-canvas', _nullEngine, isMultipleCanvas, forceWebGL, ...rest }: EngineProps) => {
+export const Engine = ({
+    engineOptions,
+    loadingScreenOptions,
+    canvasId = 'reactylon-canvas',
+    _nullEngine,
+    isMultipleCanvas,
+    forceWebGL,
+    manualRenderLoop,
+    ...rest
+}: EngineProps) => {
     const [context, setContext] = useState<EngineContext | null>(null);
     const engineRef = useRef<{
         engine: WebGLEngine | WebGPUEngine;
@@ -44,6 +72,10 @@ export const Engine = ({ engineOptions, loadingScreenOptions, canvasId = 'reacty
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const children = Children.toArray(rest.children) as Array<React.ReactElement>;
+    const initialScenesRef = useRef(children.length);
+    const readyScenesRef = useRef(0);
+    const isRenderLoopStarted = useRef(false);
+
     const isMultipleScene = children.length > 1;
 
     useEffect(() => {
@@ -75,20 +107,36 @@ export const Engine = ({ engineOptions, loadingScreenOptions, canvasId = 'reacty
                 const { component, animationStyle } = loadingScreenOptions;
                 engine.loadingScreen = new CustomLoadingScreen(canvas as HTMLCanvasElement, component, animationStyle) as unknown as ILoadingScreen;
             }
-            engine.runRenderLoop(() => {
+            const renderFrame = () => {
                 const camera = engine!.activeView?.camera;
                 engine!.scenes.forEach(scene => {
-                    if (!scene.activeCamera) {
-                        // meantime you are setting a camera
-                        Logger.warn('Engine - runRenderLoop - Waiting for active camera...');
-                    }
-                    if (scene.cameras?.length > 0) {
+                    if (scene.activeCamera) {
                         if (!isMultipleScene || scene.activeCamera === camera) {
                             scene.render();
                         }
                     }
                 });
-            });
+            };
+
+            const startRenderLoop = () => {
+                if (isRenderLoopStarted.current) return;
+                isRenderLoopStarted.current = true;
+
+                if (manualRenderLoop) {
+                    manualRenderLoop(renderFrame, engine);
+                    return;
+                }
+                engine.runRenderLoop(renderFrame);
+            };
+
+            const markSceneAsReady = () => {
+                readyScenesRef.current += 1;
+                // start render loop only when all scenes are marked as ready
+                if (readyScenesRef.current >= initialScenesRef.current) {
+                    startRenderLoop();
+                }
+            };
+
             engineRef.current = {
                 engine,
                 onResizeWindow: () => engine.resize(),
@@ -99,6 +147,7 @@ export const Engine = ({ engineOptions, loadingScreenOptions, canvasId = 'reacty
                 engine,
                 isMultipleCanvas: !!isMultipleCanvas,
                 isMultipleScene,
+                markSceneAsReady,
                 disposeEngine: () => {
                     window.removeEventListener('resize', engineRef.current!.onResizeWindow);
                     engineRef.current!.engine.dispose();

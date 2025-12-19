@@ -617,24 +617,29 @@ function createReconciler() {
     );
 }
 
+type RenderCallbacks = {
+    onFirstCommit?: () => void;
+};
+
 type ReactylonHandler = {
-    render: (element: any, rootContainer: RootContainer) => void;
+    render: (element: any, rootContainer: RootContainer, callbacks?: RenderCallbacks) => void;
     unmount: (rootContainer: RootContainer, disposeEngine: EngineContext['disposeEngine']) => void;
 };
 
-export const roots = new Map<any, FiberRoot>();
+export const roots = new Map<any, { root: FiberRoot; didFirstCommit: boolean }>();
 
 const Reactylon = (): ReactylonHandler => {
     const reconciler = createReconciler();
     return {
-        render: (element, rootContainer) => {
-            let root = roots.get(rootContainer);
+        render: (element, rootContainer, callbacks) => {
+            let rootEntry = roots.get(rootContainer);
             // first render
-            if (!root) {
+            if (!rootEntry) {
                 // Create a container using the reconciler's createContainer method
                 // @ts-expect-error - @types/react-reconciler doesn't define new types (where for reconciler >= 0.31.0 arguments of createContainer are 10 and not 8)
-                root = reconciler.createContainer(rootContainer, false, null, false, null, '', console.error, console.error, console.error, null);
-                roots.set(rootContainer, root);
+                const root = reconciler.createContainer(rootContainer, false, null, false, null, '', console.error, console.error, console.error, null);
+                rootEntry = { root, didFirstCommit: false };
+                roots.set(rootContainer, rootEntry);
                 reconciler.injectIntoDevTools({
                     //findFiberByHostInstance: reconciler.findHostInstance,
                     bundleType: process.env.NODE_ENV === 'development' ? 1 : 0,
@@ -643,14 +648,20 @@ const Reactylon = (): ReactylonHandler => {
                 });
             }
             // Update the container with the specified component to trigger the rendering process
-            reconciler.updateContainer(element, root, null, null);
+            reconciler.updateContainer(element, rootEntry.root, null, () => {
+                if (!rootEntry.didFirstCommit) {
+                    rootEntry.didFirstCommit = true;
+                    callbacks?.onFirstCommit?.();
+                }
+            });
         },
 
-        unmount(container: FiberRoot, disposeEngine): void {
+        unmount(rootContainer: RootContainer, disposeEngine): void {
             Logger.log(`unmount - container unmounted`);
-            const root = roots.get(container);
-            reconciler.updateContainer(null, root, null, () => {
-                roots.delete(container);
+            const rootEntry = roots.get(rootContainer);
+            if (!rootEntry) return;
+            reconciler.updateContainer(null, rootEntry.root, null, () => {
+                roots.delete(rootContainer);
                 if (roots.size === 0) {
                     // no more scenes so dispose the engine
                     disposeEngine?.();

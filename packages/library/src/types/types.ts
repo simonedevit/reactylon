@@ -91,4 +91,5 @@ export type RootContainer = {
 
 export type EngineContext = EngineStore & {
     disposeEngine: () => void;
+    markSceneAsReady?: () => void;
 };
