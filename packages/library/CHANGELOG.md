@@ -1,5 +1,14 @@
 # Reactylon - Changelog
 
+## [3.5.2](https://github.com/simonedevit/reactylon/compare/v3.5.1...v3.5.2) (2026-01-01)
+
+
+### Chore
+
+* **general:** mitigate qs vulnerability ([41cf24b](https://github.com/simonedevit/reactylon/commit/41cf24bf7edd977b6d239e66048343144fd9eee3))
+* **general:** update license generation ([2aee88c](https://github.com/simonedevit/reactylon/commit/2aee88cd95d833c883e032ba57f09269a2ed43c6))
+* **general:** update copyright year ([09efc04](https://github.com/simonedevit/reactylon/commit/09efc042fb30eeabd6c14633fa9feff8cd6b1838))
+
 ## [3.5.1](https://github.com/simonedevit/reactylon/compare/v3.5.0...v3.5.1) (2025-12-19)
 
 
