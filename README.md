@@ -39,6 +39,8 @@ For a complete walkthrough, see the [Getting Started guide](https://www.reactylo
 ### Documentation
 You can explore the interactive Reactylon documentation on [reactylon.com](https://www.reactylon.com/docs), featuring **125+ live sandbox examples** you can open and edit directly in your browser.
 
+For deeper technical details (renderer internals, codegen pipeline, architecture notes), see the **technical documentation** on [Google Code Wiki](https://codewiki.google/github.com/simonedevit/reactylon).
+
 ## Key Features
 - **Declarative Syntax for Babylon.js**: Write 3D scenes in JSX, leveraging the power of declarative UI that React developers love, with seamless integration into the Babylon.js rendering engine.
 
