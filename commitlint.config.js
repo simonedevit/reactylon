@@ -20,6 +20,7 @@ const config = {
     extends: ['@commitlint/config-conventional'],
     rules: {
         'header-max-length': [2, 'always', 100],
+        'body-max-line-length': [2, 'always', 150],
         'type-enum': [2, 'always', types.map(({ type }) => type)],
         'scope-empty': [2, 'never'],
         'scope-enum': [2, 'always', scopes],
