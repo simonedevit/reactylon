@@ -25,6 +25,9 @@ function isParentNeeded(child: BabylonEntity) {
     if (isInstanceOf(child, 'BaseTexture')) {
         return false;
     }
+    if (isInstanceOf(child, 'HighlightLayer')) {
+        return false;
+    }
     return true;
 }
 

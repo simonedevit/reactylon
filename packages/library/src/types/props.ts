@@ -1,5 +1,5 @@
 import type { ActionEvent, HighlightLayer, Node, Observable, Scene, StandardMaterial } from '@babylonjs/core';
-import type { Either } from './types';
+import type { Either, BabylonEntity } from './types';
 import type { AdvancedDynamicTexture, Grid, Vector2WithInfo } from '@babylonjs/gui';
 import { ActionManager } from '@babylonjs/core/Actions/actionManager.js';
 
@@ -149,6 +149,7 @@ export type MeshProps = Either<Clonable, Instanceable> &
             color: Parameters<HighlightLayer['addMesh']>[1];
             glowEmissiveOnly?: Parameters<HighlightLayer['addMesh']>[2];
         };
+        highlightLayerParent?: BabylonEntity<HighlightLayer>;
         // add here other mesh props (e.g. "onDrag")
     };
 

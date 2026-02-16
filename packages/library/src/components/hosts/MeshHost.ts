@@ -72,6 +72,7 @@ export class MeshHost {
         if (isInstanceOf(parentInstance, 'HighlightLayer')) {
             const { highlightLayer } = child;
             if (highlightLayer) {
+                child.highlightLayerParent = parentInstance as BabylonEntity<HighlightLayer>;
                 const { color, glowEmissiveOnly } = highlightLayer;
                 (parentInstance as HighlightLayer).addMesh(child, color, glowEmissiveOnly);
             }
@@ -85,14 +86,14 @@ export class MeshHost {
     }
 
     static commitUpdate(instance: AugmentedMesh, updatePayload: UpdatePayload): void {
-        const parent = instance.parent;
+        const parent = instance.highlightLayerParent as BabylonEntity<HighlightLayer>;
         if (parent && isInstanceOf(parent, 'HighlightLayer')) {
             const highlightLayer = updatePayload.highlightLayer as MeshProps['highlightLayer'];
             if (highlightLayer) {
                 const { color, glowEmissiveOnly } = highlightLayer;
-                (parent as unknown as HighlightLayer).addMesh(instance, color, glowEmissiveOnly);
+                parent.addMesh(instance, color, glowEmissiveOnly);
             } else {
-                (parent as unknown as HighlightLayer).removeMesh(instance);
+                parent.removeMesh(instance);
             }
         }
     }
