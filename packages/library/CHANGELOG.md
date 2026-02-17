@@ -1,5 +1,27 @@
 # Reactylon - Changelog
 
+## [3.5.3](https://github.com/simonedevit/reactylon/compare/v3.5.2...v3.5.3) (2026-02-17)
+
+
+### Chore
+
+* **general:** increase body max line lenght of a commit message ([162a67d](https://github.com/simonedevit/reactylon/commit/162a67de29bd848648578672789c6554206c72e7))
+
+
+### Documentation
+
+* **general:** add link to technical documentation ([ec1ccc5](https://github.com/simonedevit/reactylon/commit/ec1ccc5fcea94395ff3f9736330ed714eae3c1c4))
+
+
+### Bug Fixes
+
+* **reconciler,components:** do not set highlight layer as a mesh parent ([bcaeb33](https://github.com/simonedevit/reactylon/commit/bcaeb33e915d74cafa1ef15ff1d1e5f31f9d9391))
+
+
+### Test
+
+* **components:** add highlight layer test ([c2c5e30](https://github.com/simonedevit/reactylon/commit/c2c5e30db807d884922ab3c67ba77b5490a6d262))
+
 ## [3.5.2](https://github.com/simonedevit/reactylon/compare/v3.5.1...v3.5.2) (2026-01-01)
 
 
