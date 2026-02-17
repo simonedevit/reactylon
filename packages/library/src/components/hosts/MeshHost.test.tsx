@@ -73,6 +73,7 @@ describe('Meshes tests', () => {
         );
         const highlightLayer = scene.getHighlightLayerByName(highlightLayerName) as HighlightLayer;
         const box = scene.getMeshById(boxName) as BabylonEntity<MeshProps & Mesh>;
+        expect(box.parent).toBeNull();
         expect(box.highlightLayerParent).toBeTruthy();
         expect(highlightLayer.hasMesh(box)).toBeTruthy();
     });

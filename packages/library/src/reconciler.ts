@@ -18,14 +18,14 @@ const IS_REACT_19 = version.startsWith('19');
 type CommitUpdateV19 = [Instance, string, CoreHostProps | GuiHostProps, CoreHostProps | GuiHostProps, any];
 type EventPriority = any;
 
-function isParentNeeded(child: BabylonEntity) {
+function isParentNeeded(child: BabylonEntity, parent: BabylonEntity) {
     if (isInstanceOf(child, 'Material')) {
         return false;
     }
     if (isInstanceOf(child, 'BaseTexture')) {
         return false;
     }
-    if (isInstanceOf(child, 'HighlightLayer')) {
+    if (isInstanceOf(parent, 'HighlightLayer')) {
         return false;
     }
     return true;
@@ -187,7 +187,7 @@ function mountBabylonEntity(parent: Instance | RootContainer, child: Instance, i
             // TODO: decouple handlers and Babylon.js entity
             child.entity!.handlers?.addChild?.(_parent.entity!, child.entity!, { siblingIndex });
             if (child.babylonPackage === BabylonPackages.CORE) {
-                if (isParentNeeded(child.entity!)) {
+                if (isParentNeeded(child.entity!, _parent.entity!)) {
                     try {
                         child.entity!.parent = _parent.entity;
                     } catch {
