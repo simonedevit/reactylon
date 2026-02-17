@@ -1,4 +1,6 @@
-import { ActionManager, Mesh, Vector3 } from '@babylonjs/core';
+import { ActionManager, Color3, HighlightLayer, Mesh, Vector3 } from '@babylonjs/core';
+import type { MeshProps } from '@props';
+import type { BabylonEntity } from '@types';
 import { render } from '@utils/TestUtils';
 import jest from 'jest-mock';
 
@@ -57,5 +59,21 @@ describe('Meshes tests', () => {
         const box = scene.getMeshById(boxName) as Mesh;
         const instanceBox = scene.getMeshByName(instanceBoxName) as Mesh;
         expect(instanceBox.position.equals(box.position)).toBeTruthy();
+    });
+
+    test('should create an highlight layer and add a mesh to it', async () => {
+        const highlightLayerName = 'hl';
+        const boxName = 'box';
+        const { scene } = render(
+            <>
+                <highlightLayer name={highlightLayerName}>
+                    <box name={boxName} highlightLayer={{ color: Color3.Yellow() }} />
+                </highlightLayer>
+            </>,
+        );
+        const highlightLayer = scene.getHighlightLayerByName(highlightLayerName) as HighlightLayer;
+        const box = scene.getMeshById(boxName) as BabylonEntity<MeshProps & Mesh>;
+        expect(box.highlightLayerParent).toBeTruthy();
+        expect(highlightLayer.hasMesh(box)).toBeTruthy();
     });
 });
