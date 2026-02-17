@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.5.4](https://github.com/simonedevit/reactylon/compare/v3.5.3...v3.5.4) (2026-02-17)
+
+
+### Bug Fixes
+
+* **reconciler:** fix parent logic on highlight layer ([fdb80f3](https://github.com/simonedevit/reactylon/commit/fdb80f3ab79974ab0c85418f73a52c562f3930aa))
+
 ## [3.5.3](https://github.com/simonedevit/reactylon/compare/v3.5.2...v3.5.3) (2026-02-17)
 
 
