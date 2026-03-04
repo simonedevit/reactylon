@@ -10,6 +10,7 @@ export default {
     '^@constants$': '<rootDir>/src/constants.ts',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1'
   },
+  watchman: false,
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   transform: {
     "^.+.tsx?$": ["ts-jest", {

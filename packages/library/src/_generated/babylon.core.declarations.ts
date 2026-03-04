@@ -1029,7 +1029,6 @@ import type { ParticleConverterBlock } from '@babylonjs/core';
 import type { ParticleDebugBlock } from '@babylonjs/core';
 import type { ParticleElbowBlock } from '@babylonjs/core';
 import type { ParticleFloatToIntBlock } from '@babylonjs/core';
-import type { ParticleFresnelBlock } from '@babylonjs/core';
 import type { ParticleGradientBlock } from '@babylonjs/core';
 import type { ParticleGradientValueBlock } from '@babylonjs/core';
 import type { ParticleInputBlock } from '@babylonjs/core';
@@ -1423,7 +1422,6 @@ import type { UpdateDirectionBlock } from '@babylonjs/core';
 import type { UpdateFlowMapBlock } from '@babylonjs/core';
 import type { UpdateNoiseBlock } from '@babylonjs/core';
 import type { UpdatePositionBlock } from '@babylonjs/core';
-import type { UpdateRemapBlock } from '@babylonjs/core';
 import type { UpdateScaleBlock } from '@babylonjs/core';
 import type { UpdateSizeBlock } from '@babylonjs/core';
 import type { UpdateSpriteCellIndexBlock } from '@babylonjs/core';
@@ -1866,6 +1864,7 @@ name: ConstructorParameters<typeof AnimationRange>[0];
 name: ConstructorParameters<typeof AnimatorAvatar>[0];
     rootNode: ConstructorParameters<typeof AnimatorAvatar>[1];
     _disposeResources: ConstructorParameters<typeof AnimatorAvatar>[2];
+    setAvatarName: ConstructorParameters<typeof AnimatorAvatar>[3];
     
     },AnimatorAvatar>, any>;
   anisotropyBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<AnisotropyBlock> & Clonable, {
@@ -2554,6 +2553,7 @@ baseName: ConstructorParameters<typeof ComputeEffect>[0];
     center: Parameters<typeof ComputeLookAtFromYawPitchToRef>[2];
     useRightHandedSystem: Parameters<typeof ComputeLookAtFromYawPitchToRef>[3];
     result: Parameters<typeof ComputeLookAtFromYawPitchToRef>[4];
+    calculateUpVectorFromPointToRef: Parameters<typeof ComputeLookAtFromYawPitchToRef>[5];
     
             },ReturnType<typeof ComputeLookAtFromYawPitchToRef>>, any>;
   computeNormalsBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ComputeNormalsBlock> & Clonable, {
@@ -2582,6 +2582,7 @@ parent: ConstructorParameters<typeof ComputeShaderParticleSystem>[0];
     useRightHandedSystem: Parameters<typeof ComputeYawPitchFromLookAtToRef>[2];
     currentYaw: Parameters<typeof ComputeYawPitchFromLookAtToRef>[3];
     result: Parameters<typeof ComputeYawPitchFromLookAtToRef>[4];
+    calculateUpVectorFromPointToRef: Parameters<typeof ComputeYawPitchFromLookAtToRef>[5];
     
             },ReturnType<typeof ComputeYawPitchFromLookAtToRef>>, any>;
   condition: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Condition>, {
@@ -6899,10 +6900,6 @@ name: ConstructorParameters<typeof ParticleElbowBlock>[0];
 name: ConstructorParameters<typeof ParticleFloatToIntBlock>[0];
     
     },ParticleFloatToIntBlock>, any>;
-  particleFresnelBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleFresnelBlock> & Clonable, {
-name: ConstructorParameters<typeof ParticleFresnelBlock>[0];
-    
-    },ParticleFresnelBlock>, any>;
   particleGradientBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ParticleGradientBlock> & Clonable, {
 name: ConstructorParameters<typeof ParticleGradientBlock>[0];
     
@@ -9100,10 +9097,6 @@ name: ConstructorParameters<typeof UpdateNoiseBlock>[0];
 name: ConstructorParameters<typeof UpdatePositionBlock>[0];
     
     },UpdatePositionBlock>, any>;
-  updateRemapBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UpdateRemapBlock> & Clonable, {
-name: ConstructorParameters<typeof UpdateRemapBlock>[0];
-    
-    },UpdateRemapBlock>, any>;
   updateScaleBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<UpdateScaleBlock> & Clonable, {
 name: ConstructorParameters<typeof UpdateScaleBlock>[0];
     
