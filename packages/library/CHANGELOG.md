@@ -1,5 +1,17 @@
 # Reactylon - Changelog
 
+## [3.5.6](https://github.com/simonedevit/reactylon/compare/v3.5.5...v3.5.6) (2026-03-24)
+
+
+### Chore
+
+* **general:** fix vulnerability issues + refresh deps ([4116a0d](https://github.com/simonedevit/reactylon/commit/4116a0d2123d3f6411848c05db765a93e9ff03e9))
+
+
+### Bug Fixes
+
+* **reconciler:** fix stale closure on event callbacks ([ccedd2c](https://github.com/simonedevit/reactylon/commit/ccedd2c7c7ac9627810618f3e42da80434709c3d))
+
 ## [3.5.5](https://github.com/simonedevit/reactylon/compare/v3.5.4...v3.5.5) (2026-03-04)
 
 
