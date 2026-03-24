@@ -342,6 +342,7 @@ import type { DynamicFloat32Array } from '@babylonjs/core';
 import type { DynamicTexture } from '@babylonjs/core';
 import type { EXRCubeTexture } from '@babylonjs/core';
 import type { EasingFunction } from '@babylonjs/core';
+import type { EcefFromLatLonAltToRef } from '@babylonjs/core';
 import type { EdgesRenderer } from '@babylonjs/core';
 import type { Effect } from '@babylonjs/core';
 import type { EffectFallbacks } from '@babylonjs/core';
@@ -370,6 +371,7 @@ import type { ExponentialEase } from '@babylonjs/core';
 import type { ExternalTexture } from '@babylonjs/core';
 import type { ExtractAsInt } from '@babylonjs/core';
 import type { ExtractHighlightsPostProcess } from '@babylonjs/core';
+import type { ExtrudeGeometryBlock } from '@babylonjs/core';
 import type { ExtrudePolygon } from '@babylonjs/core';
 import type { ExtrudeShape } from '@babylonjs/core';
 import type { ExtrudeShapeCustom } from '@babylonjs/core';
@@ -693,6 +695,7 @@ import type { GetFontOffset } from '@babylonjs/core';
 import type { GetForwardRay } from '@babylonjs/core';
 import type { GetForwardRayToRef } from '@babylonjs/core';
 import type { GetFullOffsetViewProjectionToRef } from '@babylonjs/core';
+import type { GetGaussianSplattingMaxPartCount } from '@babylonjs/core';
 import type { GetHotSpotToRef } from '@babylonjs/core';
 import type { GetIndividualParser } from '@babylonjs/core';
 import type { GetInternalFormatFromBasisFormat } from '@babylonjs/core';
@@ -794,6 +797,8 @@ import type { KeyboardInfoPre } from '@babylonjs/core';
 import type { KhronosTextureContainer } from '@babylonjs/core';
 import type { KhronosTextureContainer2 } from '@babylonjs/core';
 import type { LastCreatedAudioEngine } from '@babylonjs/core';
+import type { LatLonFromDegreesToRef } from '@babylonjs/core';
+import type { LatLonToNormalToRef } from '@babylonjs/core';
 import type { Lattice } from '@babylonjs/core';
 import type { LatticeBlock } from '@babylonjs/core';
 import type { LatticePluginMaterial } from '@babylonjs/core';
@@ -3560,6 +3565,12 @@ url: ConstructorParameters<typeof EXRCubeTexture>[0];
     
     } & TextureProps,EXRCubeTexture>, any>;
   easingFunction: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EasingFunction>, {},EasingFunction>, any>;
+  ecefFromLatLonAltToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof EcefFromLatLonAltToRef>> & MeshProps, {
+        latLonAlt: Parameters<typeof EcefFromLatLonAltToRef>[0];
+    ellipsoid: Parameters<typeof EcefFromLatLonAltToRef>[1];
+    result: Parameters<typeof EcefFromLatLonAltToRef>[2];
+    
+            },ReturnType<typeof EcefFromLatLonAltToRef>>, any>;
   edgesRenderer: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<EdgesRenderer>, {
 source: ConstructorParameters<typeof EdgesRenderer>[0];
     epsilon: ConstructorParameters<typeof EdgesRenderer>[1];
@@ -3718,6 +3729,10 @@ name: ConstructorParameters<typeof ExtractHighlightsPostProcess>[0];
     blockCompilation: ConstructorParameters<typeof ExtractHighlightsPostProcess>[7];
     
     },ExtractHighlightsPostProcess>, any>;
+  extrudeGeometryBlock: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ExtrudeGeometryBlock> & Clonable, {
+name: ConstructorParameters<typeof ExtrudeGeometryBlock>[0];
+    
+    },ExtrudeGeometryBlock>, any>;
   extrudePolygon: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof ExtrudePolygon>> & MeshProps, {
         name: Parameters<typeof ExtrudePolygon>[0];
     options: Parameters<typeof ExtrudePolygon>[1];
@@ -5178,6 +5193,10 @@ name: ConstructorParameters<typeof GeospatialCamera>[0];
     ref: Parameters<typeof GetFullOffsetViewProjectionToRef>[3];
     
             },ReturnType<typeof GetFullOffsetViewProjectionToRef>>, any>;
+  getGaussianSplattingMaxPartCount: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetGaussianSplattingMaxPartCount>> & MeshProps, {
+        engine: Parameters<typeof GetGaussianSplattingMaxPartCount>[0];
+    
+            },ReturnType<typeof GetGaussianSplattingMaxPartCount>>, any>;
   getHotSpotToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof GetHotSpotToRef>> & MeshProps, {
         mesh: Parameters<typeof GetHotSpotToRef>[0];
     hotSpotQuery: Parameters<typeof GetHotSpotToRef>[1];
@@ -5693,6 +5712,17 @@ engine: ConstructorParameters<typeof KhronosTextureContainer2>[0];
     
     },KhronosTextureContainer2>, any>;
   lastdAudioEngine: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LastCreatedAudioEngine>> & MeshProps, {},ReturnType<typeof LastCreatedAudioEngine>>, any>;
+  latLonFromDegreesToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LatLonFromDegreesToRef>> & MeshProps, {
+        lat: Parameters<typeof LatLonFromDegreesToRef>[0];
+    lon: Parameters<typeof LatLonFromDegreesToRef>[1];
+    result: Parameters<typeof LatLonFromDegreesToRef>[2];
+    
+            },ReturnType<typeof LatLonFromDegreesToRef>>, any>;
+  latLonToNormalToRef: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<ReturnType<typeof LatLonToNormalToRef>> & MeshProps, {
+        latLon: Parameters<typeof LatLonToNormalToRef>[0];
+    result: Parameters<typeof LatLonToNormalToRef>[1];
+    
+            },ReturnType<typeof LatLonToNormalToRef>>, any>;
   lattice: React.DetailedHTMLProps<BabylonProps<ExcludeReadonlyAndPrivate<Lattice>, {
 options: ConstructorParameters<typeof Lattice>[0];
     
