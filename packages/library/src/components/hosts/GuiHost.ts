@@ -5,19 +5,21 @@ import { TransformKeysMap } from '@constants';
 import ObjectUtils from '@utils/ObjectUtils';
 import guiConstructors from '../../_generated/babylon.gui.constructors';
 import type { Vector2WithInfo, GUI3DManager, Control, Container, Button3D, Grid } from '@babylonjs/gui';
-import type { Observable } from '@babylonjs/core';
+import type { Observable, EventState } from '@babylonjs/core';
 
 // required for git hook (otherwise it can't resolve the augmented JSXElements)
 import '../../index';
 import { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh.js';
 
-function handleEvents(props: GuiHostProps, element: any) {
+type AugmentedGuiElement = BabylonEntity<Control & GuiTriggerable> & {
+    _triggerCallbacks: Partial<Record<keyof typeof GuiTriggers, Parameters<Observable<Vector2WithInfo>['add']>[0]>>;
+};
+
+function handleEvents(element: AugmentedGuiElement) {
     Object.entries(GuiTriggers).forEach(([_key, observableName]) => {
-        const key = _key as keyof GuiTriggerable;
-        //TODO: handle addOnce
-        const handlerFn = props[key] as Parameters<Observable<Vector2WithInfo>['add']>[0];
-        if (handlerFn) {
-            element[observableName].add(handlerFn);
+        const key = _key as keyof typeof GuiTriggers;
+        if (element._triggerCallbacks[key]) {
+            (element as any)[observableName].add((evt: Vector2WithInfo, eventState: EventState) => element._triggerCallbacks[key]?.(evt, eventState));
         }
     });
 }
@@ -29,7 +31,7 @@ export type Params = {
 
 type GuiComponent = Pick<Container, 'addControl' | 'removeControl'> & GuiTriggerable;
 
-const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', 'kind', 'createFullscreenUI', 'createForMesh', 'ref', ...Object.keys(GuiTriggers)];
+const excludedProps = ['children', 'onCreate', 'cloneFrom', 'propertiesFrom', 'kind', 'createFullscreenUI', 'createForMesh', 'ref'];
 
 export class GuiHost {
     static createInstance(type: string, Class: any, props: GuiHostProps, rootContainer: RootContainer, cloneFn?: Function, params?: Params) {
@@ -86,12 +88,21 @@ export class GuiHost {
         // execute custom code as soon the object is created
         props.onCreate?.(element);
 
-        handleEvents(props, element);
+        element._triggerCallbacks = Object.keys(GuiTriggers).reduce(
+            (acc, trigger) => {
+                const key = trigger as keyof typeof GuiTriggers;
+                if (element[key]) acc[key] = element[key];
+                return acc;
+            },
+            {} as Partial<Record<keyof typeof GuiTriggers, Parameters<Observable<Vector2WithInfo>['add']>[0]>>,
+        );
+
+        handleEvents(element);
 
         element.handlers = {
             addChild: GuiHost.addChild,
             removeChild: GuiHost.removeChild,
-            // add here your custom handlers
+            commitUpdate: GuiHost.commitUpdate,
         };
 
         return element;
@@ -106,7 +117,7 @@ export class GuiHost {
         } else {
             // @ts-expect-error - type is not a part of Grid
             if (parentInstance.type === 'row' || parentInstance.type === 'column') {
-                (parentInstance as Grid).addControl?.(child, 0, 0);
+                (parentInstance as unknown as Grid).addControl?.(child, 0, 0);
             } else {
                 // ensure that addControl function exists (parentInstance could be transformNode)
                 parentInstance.addControl?.(child);
@@ -124,5 +135,12 @@ export class GuiHost {
         return {};
     }
 
-    static commitUpdate(instance: BabylonEntity<Control>, updatePayload: UpdatePayload): void {}
+    static commitUpdate(instance: AugmentedGuiElement, updatePayload: UpdatePayload): void {
+        Object.keys(GuiTriggers).forEach(trigger => {
+            const key = trigger as keyof typeof GuiTriggers;
+            if (key in updatePayload) {
+                instance._triggerCallbacks[key] = updatePayload[key] as Parameters<Observable<Vector2WithInfo>['add']>[0];
+            }
+        });
+    }
 }

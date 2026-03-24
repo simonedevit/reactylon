@@ -3,25 +3,27 @@ import { Host } from './Host';
 import type { ActionEvent, Mesh, Scene, HighlightLayer } from '@babylonjs/core';
 import { ActionManager } from '@babylonjs/core/Actions/actionManager.js';
 import { ExecuteCodeAction } from '@babylonjs/core/Actions/directActions.js';
-import { type Triggerable, MeshTriggers, type MeshProps, type CoreHostProps } from '@props';
+import { MeshTriggers, type MeshProps, type CoreHostProps } from '@props';
 import { isInstanceOf } from '@dvmstudios/reactylon-common';
 
-function handleEvents(props: CoreHostProps<MeshProps>, scene: Scene) {
-    const isAtLeastOneTrigger = Object.keys(MeshTriggers).some(trigger => props[trigger as keyof Triggerable]);
+type AugmentedMesh = BabylonEntity<MeshProps & Mesh> & {
+    _triggerCallbacks: Partial<Record<keyof typeof MeshTriggers, (evt: ActionEvent) => void>>;
+};
+
+function handleEvents(scene: Scene, instance: AugmentedMesh) {
+    const isAtLeastOneTrigger = Object.keys(MeshTriggers).some(trigger => instance._triggerCallbacks[trigger as keyof typeof MeshTriggers]);
     if (isAtLeastOneTrigger) {
         const actionManager = new ActionManager(scene);
         Object.entries(MeshTriggers).forEach(([_key, name]) => {
-            const key = _key as keyof Triggerable;
-            const handlerFn = props[key] as (evt: ActionEvent) => void;
-            if (handlerFn) {
-                const { intersectionMeshId } = props;
+            const key = _key as keyof typeof MeshTriggers;
+            if (instance._triggerCallbacks[key]) {
                 actionManager.registerAction(
                     new ExecuteCodeAction(
                         {
                             trigger: name,
-                            parameter: intersectionMeshId ? scene.getMeshById(intersectionMeshId) : undefined,
+                            parameter: instance.intersectionMeshId ? scene.getMeshById(instance.intersectionMeshId) : undefined,
                         },
-                        handlerFn,
+                        evt => instance._triggerCallbacks[key]?.(evt),
                     ),
                 );
             }
@@ -30,8 +32,6 @@ function handleEvents(props: CoreHostProps<MeshProps>, scene: Scene) {
     }
     return null;
 }
-
-type AugmentedMesh = BabylonEntity<MeshProps & Mesh>;
 
 export class MeshHost {
     static createInstance(type: string, Class: any, props: CoreHostProps<MeshProps>, rootContainer: RootContainer) {
@@ -58,12 +58,21 @@ export class MeshHost {
             const original = scene.getMeshById(instanceFrom) as Mesh;
             original.physicsBody?.clone(element);
         }
-        element.actionManager = handleEvents(props, scene);
+
+        element._triggerCallbacks = Object.keys(MeshTriggers).reduce(
+            (acc, trigger) => {
+                const key = trigger as keyof typeof MeshTriggers;
+                if (element[key]) acc[key] = element[key];
+                return acc;
+            },
+            {} as Partial<Record<keyof typeof MeshTriggers, (evt: ActionEvent) => void>>,
+        );
+
+        element.actionManager = handleEvents(scene, element);
         element.handlers = {
             addChild: MeshHost.addChild,
             commitUpdate: MeshHost.commitUpdate,
             removeChild: MeshHost.removeChild,
-            // add here your custom handlers for meshes
         };
         return element;
     }
@@ -86,6 +95,22 @@ export class MeshHost {
     }
 
     static commitUpdate(instance: AugmentedMesh, updatePayload: UpdatePayload): void {
+        // update trigger callbacks
+        Object.keys(MeshTriggers).forEach(trigger => {
+            const key = trigger as keyof typeof MeshTriggers;
+            if (key in updatePayload) {
+                instance._triggerCallbacks[key] = updatePayload[key] as (evt: ActionEvent) => void;
+            }
+        });
+
+        const structuralChange = updatePayload.intersectionMeshId !== instance.intersectionMeshId;
+        if (structuralChange) {
+            instance.intersectionMeshId = updatePayload.intersectionMeshId as string;
+            instance.actionManager?.dispose();
+            instance.actionManager = handleEvents(instance.getScene(), instance);
+        }
+
+        // highlight layer
         const parent = instance.highlightLayerParent as BabylonEntity<HighlightLayer>;
         if (parent && isInstanceOf(parent, 'HighlightLayer')) {
             const highlightLayer = updatePayload.highlightLayer as MeshProps['highlightLayer'];
