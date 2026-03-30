@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.5.7](https://github.com/simonedevit/reactylon/compare/v3.5.6...v3.5.7) (2026-03-30)
+
+
+### Chore
+
+* **general:** upgrade to babylonjs 9 ([8af7473](https://github.com/simonedevit/reactylon/commit/8af74739efef7ab1db11a3d1ff218f309f79e5d0))
+
 ## [3.5.6](https://github.com/simonedevit/reactylon/compare/v3.5.5...v3.5.6) (2026-03-24)
 
 
