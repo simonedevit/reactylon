@@ -1,5 +1,12 @@
 # Reactylon - Changelog
 
+## [3.5.8](https://github.com/simonedevit/reactylon/compare/v3.5.7...v3.5.8) (2026-05-14)
+
+
+### Chore
+
+* **general:** fix vulnerability issues ([8cadfd3](https://github.com/simonedevit/reactylon/commit/8cadfd3a7e24cb865bc3a00466459472ff1f9c05))
+
 ## [3.5.7](https://github.com/simonedevit/reactylon/compare/v3.5.6...v3.5.7) (2026-03-30)
 
 
