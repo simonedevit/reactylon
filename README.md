@@ -37,7 +37,7 @@ npx create-reactylon-app my-app
 import { Engine, Scene } from 'reactylon';
 
 const App = () => (
-    <Engine antialias>
+    <Engine>
         <Scene>
             <hemisphericLight name="light" intensity={0.8} />
             <box name="box" options={{ size: 2 }} positionY={1}>
