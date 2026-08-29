@@ -40,9 +40,7 @@ const App = () => (
     <Engine>
         <Scene>
             <hemisphericLight name="light" intensity={0.8} />
-            <box name="box" options={{ size: 2 }} positionY={1}>
-                <standardMaterial name="material" diffuseColor="#6420ff" />
-            </box>
+            <box name="box" options={{ size: 2 }} positionY={1} />
         </Scene>
     </Engine>
 );
